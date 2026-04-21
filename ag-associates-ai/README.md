@@ -115,12 +115,16 @@ ag-associates-ai/
 ├── database/
 │   └── init.sql               # Database initialization script
 ├── backend/
-│   ├── main.py                # FastAPI application
+│   ├── main.py                # FastAPI application with agent integration
+│   ├── agents.py              # LangGraph workflow (Aisha → Drafter → Auditor)
+│   ├── pdf_generator.py       # ReportLab PDF generation
 │   ├── config.py              # Configuration management
 │   ├── generate_embeddings.py # Embedding generation script
 │   ├── requirements.txt       # Python dependencies
 │   └── .env.example          # Environment variables template
-└── README.md
+├── output/                     # Generated agreements (PDF & Markdown)
+├── README.md
+└── LANGGRAPH_AGENTS.md        # Detailed agent documentation
 ```
 
 ## Environment Variables
@@ -147,17 +151,21 @@ Configure in `backend/.env`:
 - [x] FastAPI skeleton with webhook endpoints
 - [x] Embedding generation script
 
-### Day 2: Agent Workflows
-- [ ] LangGraph agent implementation (Intake → Draft → Audit)
-- [ ] RAG template retrieval integration
-- [ ] Multi-language support (English, Marathi, Hindi)
-- [ ] vLLM integration for document generation
+### Day 2: Agent Workflows ✅ COMPLETE
+- [x] LangGraph agent implementation (Aisha → Drafter → Auditor)
+- [x] RAG template retrieval integration
+- [x] PDF generation with ReportLab
+- [x] Conditional routing (audit pass/fail with revision loop)
+- [x] Multi-language support (English, Marathi, Hindi)
+- [x] vLLM integration for document generation
+- [x] New API endpoint: `/api/generate-agreement`
 
 ### Day 3: Frontend Dashboard
 - [ ] Next.js application setup
 - [ ] Real-time status dashboard
 - [ ] Glassmorphism UI design
 - [ ] Agent activity visualization
+- [ ] Document download functionality
 
 ## License
 

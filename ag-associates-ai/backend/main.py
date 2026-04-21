@@ -6,6 +6,7 @@ from psycopg2.extras import RealDictCursor
 from pgvector.psycopg2 import register_vector
 import numpy as np
 from config import get_database_url, EMBEDDING_DIMENSION
+from agents import process_rental_request
 
 app = FastAPI(
     title="AG Associates AI Backend",
@@ -21,6 +22,19 @@ class WebhookPayload(BaseModel):
     sender: str
     timestamp: Optional[str] = None
     metadata: Optional[Dict[str, Any]] = None
+
+class AgreementRequest(BaseModel):
+    """Request payload for generating a rental agreement"""
+    raw_input: str
+    sender: Optional[str] = "api_user"
+
+class WorkflowResponse(BaseModel):
+    """Response from the agent workflow"""
+    success: bool
+    document_path: Optional[str] = None
+    audit_passed: Optional[bool] = None
+    extracted_data: Optional[Dict[str, Any]] = None
+    error: Optional[str] = None
 
 class DashboardStatus(BaseModel):
     total_templates: int
@@ -51,15 +65,47 @@ async def whatsapp_webhook(payload: WebhookPayload):
         # Log the incoming webhook
         print(f"Received WhatsApp message from {payload.sender}: {payload.message[:100]}...")
         
-        # TODO: Trigger LangGraph agent workflow here
-        # For now, just acknowledge receipt
+        # Trigger LangGraph agent workflow
+        result = process_rental_request(
+            raw_input=payload.message,
+            sender=payload.sender
+        )
+        
         return {
-            "status": "received",
+            "status": "processed",
             "message_id": "msg_123456",
-            "sender": payload.sender
+            "sender": payload.sender,
+            "workflow_result": result
         }
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Webhook processing failed: {str(e)}")
+
+
+@app.post("/api/generate-agreement")
+async def generate_agreement(request: AgreementRequest) -> WorkflowResponse:
+    """
+    API endpoint to generate a rental agreement using the agent workflow
+    
+    This is the main entry point for triggering the Aisha -> Drafter -> Auditor pipeline
+    """
+    try:
+        result = process_rental_request(
+            raw_input=request.raw_input,
+            sender=request.sender
+        )
+        
+        return WorkflowResponse(
+            success=result.get("success", False),
+            document_path=result.get("document_path"),
+            audit_passed=result.get("audit_passed"),
+            extracted_data=result.get("extracted_data"),
+            error=result.get("error")
+        )
+    except Exception as e:
+        return WorkflowResponse(
+            success=False,
+            error=str(e)
+        )
 
 @app.get("/dashboard/status", response_model=DashboardStatus)
 async def dashboard_status():
