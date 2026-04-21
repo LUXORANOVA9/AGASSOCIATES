@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Activity, FileText, CheckCircle, Clock, Brain, Database, Zap } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -35,6 +35,7 @@ export default function Dashboard() {
   const [loading, setLoading] = useState(true);
   const [neslStatus, setNeslStatus] = useState<'idle' | 'processing' | 'filed'>('idle');
   const [transactionId, setTransactionId] = useState<string | null>(null);
+  const neslFiledForCycleRef = useRef(false);
 
   // Poll dashboard status every 3 seconds
   useEffect(() => {
@@ -57,7 +58,9 @@ export default function Dashboard() {
     return () => clearInterval(interval);
   }, []);
 
-  // Simulate workflow progression for demo
+  // Simulate workflow progression for demo.
+  // Uses recursive setTimeouts instead of setInterval so the post-cycle
+  // pause cannot overlap with the advancement tick and corrupt the reset.
   useEffect(() => {
     const workflowSteps: Array<WorkflowState['current_step']> = [
       'intake',
@@ -65,11 +68,22 @@ export default function Dashboard() {
       'auditing',
       'complete',
     ];
-    
+
+    const STEP_DELAY_MS = 4000;
+    const CYCLE_PAUSE_MS = 5000;
+
     let currentIndex = 0;
-    const progressInterval = setInterval(() => {
+    let cancelled = false;
+    let timeoutId: ReturnType<typeof setTimeout> | null = null;
+
+    const tick = () => {
+      if (cancelled) return;
+
       if (currentIndex < workflowSteps.length) {
         const step = workflowSteps[currentIndex];
+        if (step === 'intake') {
+          neslFiledForCycleRef.current = false;
+        }
         setWorkflow({
           current_step: step,
           progress: ((currentIndex + 1) / workflowSteps.length) * 100,
@@ -77,20 +91,29 @@ export default function Dashboard() {
           last_update: new Date().toISOString(),
         });
         currentIndex++;
+        timeoutId = setTimeout(tick, STEP_DELAY_MS);
       } else {
-        // Reset after completion for demo purposes
-        setTimeout(() => {
+        // Pause after completion, then restart the cycle from the beginning.
+        timeoutId = setTimeout(() => {
+          if (cancelled) return;
           currentIndex = 0;
-        }, 5000);
+          tick();
+        }, CYCLE_PAUSE_MS);
       }
-    }, 4000);
+    };
 
-    return () => clearInterval(progressInterval);
+    timeoutId = setTimeout(tick, STEP_DELAY_MS);
+
+    return () => {
+      cancelled = true;
+      if (timeoutId !== null) clearTimeout(timeoutId);
+    };
   }, []);
 
-  // Simulate NeSL filing
+  // Simulate NeSL filing once per workflow cycle.
   useEffect(() => {
-    if (workflow.current_step === 'complete') {
+    if (workflow.current_step === 'complete' && !neslFiledForCycleRef.current) {
+      neslFiledForCycleRef.current = true;
       simulateNeslFiling();
     }
   }, [workflow.current_step]);
@@ -250,7 +273,7 @@ export default function Dashboard() {
               initial={{ width: 0 }}
               animate={{ width: `${workflow.progress}%` }}
               transition={{ duration: 0.5 }}
-              className={`h-full ${getStepColor(workflow.current_step).split(' ')[0]}`}
+              className={`h-full ${getStatusColor(workflow.current_step).split(' ')[0]}`}
               style={{ backgroundColor: 'currentColor' }}
             />
           </div>
