@@ -36,6 +36,7 @@ export default function Dashboard() {
   const [neslStatus, setNeslStatus] = useState<'idle' | 'processing' | 'filed'>('idle');
   const [transactionId, setTransactionId] = useState<string | null>(null);
   const neslFiledForCycleRef = useRef(false);
+  const neslAbortRef = useRef<AbortController | null>(null);
 
   // Poll dashboard status every 3 seconds
   useEffect(() => {
@@ -110,13 +111,21 @@ export default function Dashboard() {
     };
   }, []);
 
-  // Simulate NeSL filing once per workflow cycle.
+  // Simulate NeSL filing once per workflow cycle. An AbortController cancels
+  // any still-in-flight request when the component unmounts or a new cycle
+  // begins, so overlapping calls cannot race and clobber each other's state.
   useEffect(() => {
     if (workflow.current_step === 'complete' && !neslFiledForCycleRef.current) {
       neslFiledForCycleRef.current = true;
       simulateNeslFiling();
     }
   }, [workflow.current_step]);
+
+  useEffect(() => {
+    return () => {
+      neslAbortRef.current?.abort();
+    };
+  }, []);
 
   const getAgentForStep = (step: WorkflowState['current_step']): string => {
     switch (step) {
@@ -130,15 +139,30 @@ export default function Dashboard() {
   };
 
   const simulateNeslFiling = async () => {
+    // Abort any previous in-flight request so its late response cannot
+    // overwrite the status for the current cycle.
+    neslAbortRef.current?.abort();
+    const controller = new AbortController();
+    neslAbortRef.current = controller;
+
     setNeslStatus('processing');
     try {
-      const response = await fetch(`${API_BASE_URL}/api/nesl/execute`, { method: 'POST' });
+      const response = await fetch(`${API_BASE_URL}/api/nesl/execute`, {
+        method: 'POST',
+        signal: controller.signal,
+      });
       if (response.ok) {
         const data = await response.json();
         setTransactionId(data.transaction_id);
         setNeslStatus('filed');
+      } else {
+        // fetch does not throw on HTTP errors; handle non-OK responses
+        // explicitly so neslStatus doesn't get stuck on 'processing'.
+        console.error('NeSL filing returned non-OK status:', response.status);
+        setNeslStatus('idle');
       }
     } catch (error) {
+      if ((error as Error).name === 'AbortError') return;
       console.error('NeSL filing failed:', error);
       setNeslStatus('idle');
     }
