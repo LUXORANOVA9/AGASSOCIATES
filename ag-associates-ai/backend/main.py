@@ -1,3 +1,4 @@
+import uuid
 import asyncio
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
@@ -172,6 +173,32 @@ async def list_templates(template_type: Optional[str] = None, language: Optional
         return {"templates": templates}
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Template listing failed: {str(e)}")
+
+
+@app.post("/api/nesl/execute")
+async def nesl_execute():
+    """
+    Mock NeSL (National e-Services Ltd) filing endpoint
+    Simulates filing the generated agreement with the government registry
+    
+    Returns a transaction ID after a simulated delay
+    """
+    try:
+        # Simulate processing delay (3 seconds as per roadmap)
+        await asyncio.sleep(3)
+        
+        # Generate a random transaction ID
+        transaction_id = f"NESL-{uuid.uuid4().hex[:12].upper()}"
+        
+        return {
+            "success": True,
+            "transaction_id": transaction_id,
+            "status": "filed",
+            "message": "Document successfully filed with NeSL registry"
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"NeSL filing failed: {str(e)}")
+
 
 if __name__ == "__main__":
     import uvicorn
