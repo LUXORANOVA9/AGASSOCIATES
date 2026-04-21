@@ -1,3 +1,4 @@
+import asyncio
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from typing import Optional, List, Dict, Any
@@ -65,10 +66,12 @@ async def whatsapp_webhook(payload: WebhookPayload):
         # Log the incoming webhook
         print(f"Received WhatsApp message from {payload.sender}: {payload.message[:100]}...")
         
-        # Trigger LangGraph agent workflow
-        result = process_rental_request(
+        # Trigger LangGraph agent workflow in a threadpool so we don't
+        # block the asyncio event loop on synchronous LLM/DB calls.
+        result = await asyncio.to_thread(
+            process_rental_request,
             raw_input=payload.message,
-            sender=payload.sender
+            sender=payload.sender,
         )
         
         return {
@@ -89,9 +92,12 @@ async def generate_agreement(request: AgreementRequest) -> WorkflowResponse:
     This is the main entry point for triggering the Aisha -> Drafter -> Auditor pipeline
     """
     try:
-        result = process_rental_request(
+        # Offload the blocking agent workflow to a worker thread to keep
+        # the FastAPI event loop responsive under concurrent load.
+        result = await asyncio.to_thread(
+            process_rental_request,
             raw_input=request.raw_input,
-            sender=request.sender
+            sender=request.sender,
         )
         
         return WorkflowResponse(
