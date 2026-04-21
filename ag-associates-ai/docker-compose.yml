@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  # PostgreSQL with pgvector extension
+  postgres:
+    image: pgvector/pgvector:pg16
+    container_name: ag_associates_postgres
+    environment:
+      POSTGRES_USER: ag_admin
+      POSTGRES_PASSWORD: secure_password_123
+      POSTGRES_DB: legal_templates_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - ag_network
+    restart: unless-stopped
+
+  # n8n for webhook orchestration
+  n8n:
+    image: n8n/n8n:latest
+    container_name: ag_associates_n8n
+    environment:
+      - N8N_HOST=localhost
+      - N8N_PORT=5678
+      - N8N_BASIC_AUTH_ACTIVE=true
+      - N8N_BASIC_AUTH_USER=admin
+      - N8N_BASIC_AUTH_PASSWORD=admin123
+    ports:
+      - "5678:5678"
+    volumes:
+      - n8n_data:/home/node/.n8n
+    networks:
+      - ag_network
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+  n8n_data:
+
+networks:
+  ag_network:
+    driver: bridge
