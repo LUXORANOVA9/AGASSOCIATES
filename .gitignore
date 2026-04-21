@@ -1,4 +1,3 @@
-```
 # Dependencies
 node_modules/
 
@@ -39,8 +38,8 @@ htmlcov/
 *.swp
 *.swo
 *.tmp
+*~
 
 # OS
 .DS_Store
 Thumbs.db
-```
