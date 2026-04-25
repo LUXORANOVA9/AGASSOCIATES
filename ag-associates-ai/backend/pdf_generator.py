@@ -21,9 +21,13 @@ class AgreementPDFGenerator:
     Generates professional PDF rental agreements from markdown content
     """
     
-    def __init__(self, output_dir: str = "/workspace/ag-associates-ai/output"):
-        self.output_dir = output_dir
-        os.makedirs(output_dir, exist_ok=True)
+    def __init__(self, output_dir: str = None):
+        if output_dir is None:
+            from config import OUTPUT_DIR
+            self.output_dir = OUTPUT_DIR
+        else:
+            self.output_dir = output_dir
+        os.makedirs(self.output_dir, exist_ok=True)
         
         # Initialize styles
         self.styles = getSampleStyleSheet()

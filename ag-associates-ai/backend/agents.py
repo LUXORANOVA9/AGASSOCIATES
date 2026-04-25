@@ -328,10 +328,11 @@ Generate the complete rental agreement document:
         
         # Ensure output directory exists
         import os
-        os.makedirs("/workspace/ag-associates-ai/output", exist_ok=True)
+        from config import OUTPUT_DIR
+        os.makedirs(OUTPUT_DIR, exist_ok=True)
         
         # Save markdown version
-        md_path = f"/workspace/ag-associates-ai/output/{pdf_filename}.md"
+        md_path = f"{OUTPUT_DIR}/{pdf_filename}.md"
         with open(md_path, 'w', encoding='utf-8') as f:
             f.write(result.content)
         
