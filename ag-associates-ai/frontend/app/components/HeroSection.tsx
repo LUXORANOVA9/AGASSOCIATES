@@ -1,18 +1,20 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import { ArrowDown } from 'lucide-react';
 
 const taglineWords = ['Building', 'Autonomous', 'AI', 'Workflows', 'for', 'Blitzscaling.'];
 
 export default function HeroSection() {
+  const reduceMotion = useReducedMotion();
+
   return (
     <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden blueprint-grid">
       {/* Ambient glow orbs */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <div className="absolute top-1/3 left-1/4 w-[500px] h-[500px] orb bg-accent-blue/8 animate-float" />
-        <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] orb bg-accent-purple/8 animate-float-delayed" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] orb bg-accent-amber/5 animate-float" style={{ animationDelay: '3s' }} />
+        <div className={`absolute top-1/3 left-1/4 w-[500px] h-[500px] orb bg-accent-blue/8 ${reduceMotion ? '' : 'animate-float'}`} />
+        <div className={`absolute bottom-1/4 right-1/4 w-[400px] h-[400px] orb bg-accent-purple/8 ${reduceMotion ? '' : 'animate-float-delayed'}`} />
+        <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] orb bg-accent-amber/5 ${reduceMotion ? '' : 'animate-float'}`} style={reduceMotion ? undefined : { animationDelay: '3s' }} />
       </div>
 
       {/* Decorative corner lines */}
@@ -28,8 +30,8 @@ export default function HeroSection() {
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full glass border border-accent-blue/20 text-sm font-medium text-gray-300 mb-10"
         >
-          <span className="relative flex h-2 w-2">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent-green opacity-75" />
+          <span className="relative flex h-2 w-2" aria-hidden="true">
+            <span className={`${reduceMotion ? '' : 'animate-ping'} absolute inline-flex h-full w-full rounded-full bg-accent-green opacity-75`} />
             <span className="relative inline-flex rounded-full h-2 w-2 bg-accent-green" />
           </span>
           Advocate · AI Systems Architect · Maharashtra
@@ -123,9 +125,10 @@ export default function HeroSection() {
         animate={{ opacity: 1 }}
         transition={{ delay: 2.2 }}
         className="absolute bottom-10 left-1/2 -translate-x-1/2"
+        aria-hidden="true"
       >
         <motion.div
-          animate={{ y: [0, 8, 0] }}
+          animate={reduceMotion ? {} : { y: [0, 8, 0] }}
           transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
           className="flex flex-col items-center gap-1 text-gray-600"
         >

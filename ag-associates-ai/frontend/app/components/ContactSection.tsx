@@ -11,20 +11,23 @@ const contactLinks = [
     value: 'contact@advaditya.com',
     href: 'mailto:contact@advaditya.com',
     primary: true,
+    placeholder: true, // TODO: replace with real address
   },
   {
     icon: MessageSquare,
     label: 'WhatsApp',
     value: 'Message on WhatsApp',
-    href: '#',
+    href: null,
     primary: false,
+    placeholder: true, // TODO: set real wa.me link
   },
   {
     icon: Linkedin,
     label: 'LinkedIn',
     value: 'Adv. Aditya Gade',
-    href: '#',
+    href: null,
     primary: false,
+    placeholder: true, // TODO: set real LinkedIn URL
   },
 ];
 
@@ -73,7 +76,9 @@ export default function ContactSection() {
               return (
                 <motion.a
                   key={link.label}
-                  href={link.href}
+                  href={link.href ?? undefined}
+                  aria-disabled={!link.href ? 'true' : undefined}
+                  onClick={!link.href ? (e) => e.preventDefault() : undefined}
                   initial={{ opacity: 0, y: 16 }}
                   animate={isInView ? { opacity: 1, y: 0 } : {}}
                   transition={{ delay: 0.3 + i * 0.08 }}
@@ -83,9 +88,9 @@ export default function ContactSection() {
                     link.primary
                       ? 'bg-gradient-to-r from-accent-blue to-accent-purple text-white shadow-lg shadow-accent-blue/20'
                       : 'glass border border-white/10 text-white hover:border-white/20'
-                  }`}
+                  } ${!link.href ? 'opacity-50 cursor-not-allowed' : ''}`}
                 >
-                  <Icon className="w-4.5 h-4.5" />
+                  <Icon className="w-5 h-5" />
                   {link.value}
                 </motion.a>
               );
