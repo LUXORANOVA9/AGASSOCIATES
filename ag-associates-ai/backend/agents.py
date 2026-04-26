@@ -82,25 +82,28 @@ def similarity_search(query: str, limit: int = 3) -> List[Dict[str, Any]]:
     """
     Perform similarity search in PostgreSQL to find relevant templates
     """
-    conn = get_db_connection()
-    cur = conn.cursor()
-    
     # Generate embedding for the query
     query_embedding = generate_embedding(query)
-    
-    # Perform vector similarity search
-    cur.execute("""
-        SELECT id, title, content, language, jurisdiction, 
-               1 - (embedding <=> %s::vector) as similarity
-        FROM legal_templates
-        ORDER BY embedding <=> %s::vector
-        LIMIT %s
-    """, (query_embedding, query_embedding, limit))
-    
-    results = cur.fetchall()
-    cur.close()
-    conn.close()
-    
+
+    conn = get_db_connection()
+    try:
+        cur = conn.cursor()
+        try:
+            # Perform vector similarity search
+            cur.execute("""
+                SELECT id, title, content, language, jurisdiction,
+                       1 - (embedding <=> %s::vector) as similarity
+                FROM legal_templates
+                ORDER BY embedding <=> %s::vector
+                LIMIT %s
+            """, (query_embedding, query_embedding, limit))
+
+            results = cur.fetchall()
+        finally:
+            cur.close()
+    finally:
+        conn.close()
+
     return [dict(row) for row in results]
 
 
@@ -253,18 +256,22 @@ def drafter_node(state: AgentState) -> AgentState:
         if not templates:
             # Fallback: get any Maharashtra rent agreement template
             conn = get_db_connection()
-            cur = conn.cursor()
-            cur.execute("""
-                SELECT id, title, content, language 
-                FROM legal_templates 
-                WHERE template_type = 'rent_agreement' 
-                AND jurisdiction = 'Maharashtra'
-                LIMIT 1
-            """)
-            fallback_templates = cur.fetchall()
-            cur.close()
-            conn.close()
-            
+            try:
+                cur = conn.cursor()
+                try:
+                    cur.execute("""
+                        SELECT id, title, content, language
+                        FROM legal_templates
+                        WHERE template_type = 'rent_agreement'
+                        AND jurisdiction = 'Maharashtra'
+                        LIMIT 1
+                    """)
+                    fallback_templates = cur.fetchall()
+                finally:
+                    cur.close()
+            finally:
+                conn.close()
+
             if fallback_templates:
                 templates = [dict(t) for t in fallback_templates]
             else:
@@ -473,7 +480,7 @@ def should_revise(state: AgentState) -> str:
     """
     Conditional edge: Decide whether to revise or finish
     """
-    if state['audit_passed'] and state['revision_count'] <= 3:
+    if state['audit_passed']:
         print("✅ Audit passed - proceeding to finish")
         return "finish"
     elif state['revision_count'] > 3:
@@ -574,9 +581,9 @@ def process_rental_request(raw_input: str, sender: str = "whatsapp_user") -> Dic
         
         # Summary
         print(f"\n📋 SUMMARY:")
-        print(f"   Tenant: {final_state.get('tenant_name', 'N/A')}")
-        print(f"   Property: {final_state.get('property_address', 'N/A')[:50]}...")
-        print(f"   Rent: {final_state.get('rent_amount', 'N/A')}")
+        print(f"   Tenant: {final_state.get('tenant_name') or 'N/A'}")
+        print(f"   Property: {(final_state.get('property_address') or 'N/A')[:50]}...")
+        print(f"   Rent: {final_state.get('rent_amount') or 'N/A'}")
         print(f"   Document: {final_state.get('pdf_path', 'Not generated')}")
         print(f"   Audit: {'PASSED' if final_state.get('audit_passed') else 'FAILED'}")
         print(f"   Revisions: {final_state.get('revision_count', 0)}")
