@@ -2,8 +2,9 @@ import type { Metadata } from 'next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'AG Associates AI - Dashboard',
-  description: 'Real-time AI agent workflow tracker for legal document generation',
+  title: 'Adv. Aditya Gade | Advocate & AI Systems Architect',
+  description: 'Building autonomous AI workflows for blitzscaling. Architected with the $7T Billion-Dollar Prompter Methodology.',
+  keywords: ['Aditya Gade', 'Advocate', 'AI Systems', 'LangGraph', 'Zero-Staff Enterprise', 'AG Associates'],
 }
 
 export default function RootLayout({
@@ -12,7 +13,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className="antialiased">
       <body>{children}</body>
     </html>
   )
