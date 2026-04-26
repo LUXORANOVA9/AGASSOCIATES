@@ -34,7 +34,7 @@ export default function NavBar() {
     >
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-3 group">
+        <Link href="/" aria-label="Adv. Aditya Gade — Home" className="flex items-center gap-3 group">
           <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-accent-blue to-accent-purple flex items-center justify-center text-white font-bold text-sm shadow-lg shadow-accent-blue/20 group-hover:shadow-accent-purple/30 transition-shadow">
             AG
           </div>
