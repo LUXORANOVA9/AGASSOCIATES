@@ -1,6 +1,8 @@
+import os
 import uuid
 import asyncio
 from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import Optional, List, Dict, Any
 import psycopg2
@@ -14,6 +16,21 @@ app = FastAPI(
     title="AG Associates AI Backend",
     description="Legal document generation API with RAG-powered templates",
     version="1.0.0"
+)
+
+# Allow the dashboard frontend (and any additional origins listed in
+# CORS_ALLOW_ORIGINS) to call this API from the browser. Without this the
+# Next.js dashboard at http://localhost:3000 cannot reach the API and every
+# request fails with a CORS preflight error.
+_default_cors_origins = ["http://localhost:3000", "http://127.0.0.1:3000"]
+_cors_env = os.getenv("CORS_ALLOW_ORIGINS", "")
+_extra_cors_origins = [o.strip() for o in _cors_env.split(",") if o.strip()]
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=_default_cors_origins + _extra_cors_origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 # Register pgvector
