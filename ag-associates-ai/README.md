@@ -25,6 +25,7 @@ A microservices-based AI system for automated legal document generation with RAG
 
 ```bash
 cd ag-associates-ai
+cp .env.example .env
 docker-compose up -d
 ```
 
@@ -111,6 +112,7 @@ GET http://localhost:8001/templates?template_type=rent_agreement&language=en
 
 ```
 ag-associates-ai/
+├── .env.example              # Root compose and integration variables
 ├── docker-compose.yml          # Docker services configuration
 ├── database/
 │   └── init.sql               # Database initialization script
@@ -122,6 +124,8 @@ ag-associates-ai/
 │   ├── generate_embeddings.py # Embedding generation script
 │   ├── requirements.txt       # Python dependencies
 │   └── .env.example          # Environment variables template
+├── frontend/
+│   └── .env.example          # Frontend runtime variables template
 ├── output/                     # Generated agreements (PDF & Markdown)
 ├── README.md
 └── LANGGRAPH_AGENTS.md        # Detailed agent documentation
@@ -129,18 +133,33 @@ ag-associates-ai/
 
 ## Environment Variables
 
-Configure in `backend/.env`:
+This project uses separate environment files for compose, backend, and frontend.
 
-- `DATABASE_HOST`: PostgreSQL host (default: localhost)
-- `DATABASE_PORT`: PostgreSQL port (default: 5432)
-- `DATABASE_NAME`: Database name (default: legal_templates_db)
-- `DATABASE_USER`: Database user (default: ag_admin)
-- `DATABASE_PASSWORD`: Database password
-- `LLM_BASE_URL`: vLLM endpoint (default: http://localhost:8000/v1)
-- `LLM_MODEL_NAME`: Model to use (default: qwen2.5-7b-instruct)
-- `EMBEDDING_MODEL_NAME`: Sentence transformer model
-- `API_HOST`: FastAPI bind host (default: 0.0.0.0)
-- `API_PORT`: FastAPI port (default: 8001)
+### Root compose variables (`.env`)
+
+Copy `ag-associates-ai/.env.example` to `ag-associates-ai/.env` before running Docker Compose.
+
+- `POSTGRES_USER`, `POSTGRES_PASSWORD`, `POSTGRES_DB`: PostgreSQL container credentials/database
+- `N8N_BASIC_AUTH_USER`, `N8N_BASIC_AUTH_PASSWORD`: n8n basic auth credentials
+- `N8N_HOST`, `WEBHOOK_URL`: n8n host and external webhook base URL
+- `WHATSAPP_ACCESS_TOKEN`, `WHATSAPP_PHONE_NUMBER_ID`, `WHATSAPP_BUSINESS_ACCOUNT_ID`, `WHATSAPP_VERIFY_TOKEN`: WhatsApp Cloud API and webhook settings
+
+### Backend variables (`backend/.env`)
+
+Copy `ag-associates-ai/backend/.env.example` to `ag-associates-ai/backend/.env`.
+
+- Database: `DATABASE_HOST`, `DATABASE_PORT`, `DATABASE_NAME`, `DATABASE_USER`, `DATABASE_PASSWORD`
+- LLM: `LLM_BASE_URL`, `LLM_MODEL_NAME`, `LLM_MOCK_MODE`
+- Embeddings: `EMBEDDING_MODEL_NAME`, `EMBEDDING_DIMENSION`
+- API/runtime: `API_HOST`, `API_PORT`, `CORS_ALLOWED_ORIGINS`, `LOG_LEVEL`, `OUTPUT_DIR`, `PDF_ENABLED`
+- NeSL mock endpoint: `NESL_MOCK_DELAY_SEC`
+
+### Frontend variables (`frontend/.env.local`)
+
+Copy `ag-associates-ai/frontend/.env.example` to `ag-associates-ai/frontend/.env.local`.
+
+- `NEXT_PUBLIC_API_URL`: Browser-facing API URL
+- `API_URL`: Server-side API URL for Next.js route handlers/components
 
 ## Development Roadmap
 
