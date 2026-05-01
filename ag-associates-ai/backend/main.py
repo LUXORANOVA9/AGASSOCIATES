@@ -1,19 +1,38 @@
 import uuid
 import asyncio
+import logging
 from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import Optional, List, Dict, Any
 import psycopg2
 from psycopg2.extras import RealDictCursor
 from pgvector.psycopg2 import register_vector
 import numpy as np
-from config import get_database_url, EMBEDDING_DIMENSION
+from config import (
+    get_database_url,
+    EMBEDDING_DIMENSION,
+    CORS_ALLOWED_ORIGINS,
+    LOG_LEVEL,
+    NESL_MOCK_DELAY_SEC,
+)
 from agents import process_rental_request
+
+logging.basicConfig(level=getattr(logging, LOG_LEVEL, logging.INFO))
 
 app = FastAPI(
     title="AG Associates AI Backend",
     description="Legal document generation API with RAG-powered templates",
     version="1.0.0"
+)
+
+# CORS — configured via CORS_ALLOWED_ORIGINS env var (comma-separated, or `*`).
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=CORS_ALLOWED_ORIGINS or ["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 # Register pgvector
@@ -184,9 +203,9 @@ async def nesl_execute():
     Returns a transaction ID after a simulated delay
     """
     try:
-        # Simulate processing delay (3 seconds as per roadmap)
-        await asyncio.sleep(3)
-        
+        # Simulate processing delay (configurable via NESL_MOCK_DELAY_SEC).
+        await asyncio.sleep(NESL_MOCK_DELAY_SEC)
+
         # Generate a random transaction ID
         transaction_id = f"NESL-{uuid.uuid4().hex[:12].upper()}"
         
