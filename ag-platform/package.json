@@ -13,10 +13,12 @@
     "build": "turbo build",
     "lint": "turbo lint",
     "type-check": "turbo type-check",
-    "clean": "turbo clean"
+    "clean": "turbo clean",
+    "test": "vitest run"
   },
   "devDependencies": {
     "turbo": "^2.3.0",
-    "typescript": "^5.4.0"
+    "typescript": "^5.4.0",
+    "vitest": "^1.4.0"
   }
 }

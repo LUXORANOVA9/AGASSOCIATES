@@ -1,5 +1,6 @@
 import express from 'express';
 import { pool } from '../db.ts';
+import { calculateBillableFee } from '../../lib/billing.ts';
 
 const router = express.Router();
 
@@ -46,8 +47,8 @@ router.post('/timesheets', async (req, res) => {
     );
     
     // Also update professional fee on the case if billable
-    if (is_billable && hourly_rate && duration_minutes) {
-        const addedFee = (duration_minutes / 60) * hourly_rate;
+    if (is_billable && hourly_rate && duration_minutes !== undefined) {
+        const addedFee = calculateBillableFee(duration_minutes, hourly_rate);
         await pool.query(
             `UPDATE cases SET professional_fee = professional_fee + $1 WHERE id = $2`,
             [addedFee, case_id]
