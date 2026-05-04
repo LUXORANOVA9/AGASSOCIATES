@@ -17,8 +17,8 @@ def generate_embeddings():
     
     # Connect to database
     print("Connecting to database...")
-    register_vector()
     conn = psycopg2.connect(get_database_url(), cursor_factory=RealDictCursor)
+    register_vector(conn)
     cur = conn.cursor()
     
     # Fetch templates without embeddings
