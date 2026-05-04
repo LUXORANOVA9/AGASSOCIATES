@@ -1,7 +1,7 @@
 import uuid
 import asyncio
 import logging
-from fastapi import FastAPI, HTTPException, UploadFile, File
+from fastapi import FastAPI, HTTPException, UploadFile, File, Depends
 import tempfile
 import os
 from fastapi.middleware.cors import CORSMiddleware
@@ -18,6 +18,7 @@ from config import (
 )
 from agents import process_rental_request
 from accountant_agent import accountant_agent
+from auth import get_current_user
 
 logging.basicConfig(level=getattr(logging, LOG_LEVEL, logging.INFO))
 
@@ -104,9 +105,10 @@ async def whatsapp_webhook(payload: WebhookPayload):
 
 
 @app.post("/api/generate-agreement")
-async def generate_agreement(request: AgreementRequest) -> WorkflowResponse:
+async def generate_agreement_api(request: AgreementRequest, user: dict = Depends(get_current_user)):
     """
-    API endpoint to generate a rental agreement using the agent workflow
+    Direct API endpoint to generate an agreement without going through WhatsApp.
+    Secured with Supabase Auth JWT.
     
     This is the main entry point for triggering the Aisha -> Drafter -> Auditor pipeline
     """
@@ -200,12 +202,10 @@ async def list_templates(template_type: Optional[str] = None, language: Optional
 
 
 @app.post("/api/nesl/execute")
-async def nesl_execute():
+async def nesl_execute(user: dict = Depends(get_current_user)):
     """
     Mock NeSL (National e-Services Ltd) filing endpoint
-    Simulates filing the generated agreement with the government registry
-    
-    Returns a transaction ID after a simulated delay
+    Secured with Supabase Auth JWT.
     """
     try:
         # Simulate processing delay (configurable via NESL_MOCK_DELAY_SEC).
@@ -224,10 +224,11 @@ async def nesl_execute():
         raise HTTPException(status_code=500, detail=f"NeSL filing failed: {str(e)}")
 
 @app.post("/api/reconcile-statement")
-async def reconcile_bank_statement(file: UploadFile = File(...)):
+async def reconcile_bank_statement(file: UploadFile = File(...), user: dict = Depends(get_current_user)):
     """
     Agent 6 (Accountant): Ingest bank statement PDF, extract text,
     parse UTRs and loan numbers using LLM, and return structured transactions.
+    Secured with Supabase Auth JWT.
     """
     if not file.filename.endswith('.pdf'):
         raise HTTPException(status_code=400, detail="Only PDF files are supported.")

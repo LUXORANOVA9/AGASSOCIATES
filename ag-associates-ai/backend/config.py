@@ -42,6 +42,9 @@ API_PORT = int(os.getenv("API_PORT", "8001"))
 CORS_ALLOWED_ORIGINS = _env_list("CORS_ALLOWED_ORIGINS", "http://localhost:3000")
 LOG_LEVEL = os.getenv("LOG_LEVEL", "INFO").upper()
 
+# Supabase Auth Configuration
+SUPABASE_JWT_SECRET = os.getenv("SUPABASE_JWT_SECRET", "")
+
 # NeSL mock filing
 NESL_MOCK_DELAY_SEC = float(os.getenv("NESL_MOCK_DELAY_SEC", "3"))
 
