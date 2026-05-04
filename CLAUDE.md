@@ -4,15 +4,25 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Repository Layout
 
-The repo root (`AGASSOCIATES/`) is a thin shell: its `README.md` is a placeholder and `package-lock.json` is empty. All real code lives under `ag-associates-ai/`, which is the actual project. When in doubt, treat `ag-associates-ai/` as the working root.
+The repo contains two major subsystems plus shared docs:
 
 ```
-ag-associates-ai/
-├── backend/       # FastAPI + LangGraph (Python)
-├── frontend/      # Next.js 15 App Router dashboard (TypeScript)
-├── database/      # init.sql for PostgreSQL + pgvector
-├── docker-compose.yml  # PostgreSQL (pgvector) + n8n
-└── output/        # Generated .md / .pdf agreements (created at runtime)
+AGASSOCIATES/
+├── ag-associates-ai/   # AI Document Pipeline (FastAPI + LangGraph + pgvector)
+│   ├── backend/        #   Python backend (agents.py, main.py, config.py, pdf_generator.py)
+│   ├── frontend/       #   Next.js 15 App Router dashboard
+│   ├── database/       #   init.sql for PostgreSQL + pgvector
+│   ├── docker-compose.yml  #   PostgreSQL (pgvector) + n8n
+│   └── output/         #   Generated .md / .pdf agreements (created at runtime)
+├── ag-platform/        # LegalTech Collaboration Platform (Turborepo + Supabase)
+│   ├── packages/       #   Shared packages (ai, db, types, ui)
+│   ├── src/            #   React components + Express backend
+│   ├── supabase/       #   Database migrations
+│   └── server.ts       #   Express entry point
+├── tasks/              # Task tracking + lessons learned
+├── CLAUDE.md           # This file
+├── CONTRIBUTING.md     # Contribution guide
+└── SECURITY.md         # Security policy
 ```
 
 ## Common Commands
@@ -94,7 +104,7 @@ Routing is via `should_revise()`: on fail, loops back to `drafter` up to 3 revis
 - Polls `GET /dashboard/status` every 3s for real metrics.
 - Runs a **simulated** workflow cycle locally (setTimeout chain, 4s/step, 5s pause) that drives the progress UI and fires `POST /api/nesl/execute` exactly once per cycle. The guards (`neslFiledForCycleRef`, `neslAbortRef`) exist to prevent overlapping calls — don't remove them.
 
-**Database (`database/init.sql`)** is auto-loaded by the `pgvector/pgvector:pg16` container on first start. Creates `legal_templates(id, title, content, template_type, jurisdiction, language, embedding vector(768), …)` with an `ivfflat` cosine index and seeds three Maharashtra rent-agreement templates (English, Marathi, Hindi) with `embedding = NULL`.
+**Database (`database/init.sql`)** is auto-loaded by the `pgvector/pgvector:pg16` container on first start. Creates `legal_templates(id, title, content, template_type, jurisdiction, language, embedding vector(384), …)` with an `ivfflat` cosine index and seeds three Maharashtra rent-agreement templates (English, Marathi, Hindi) with `embedding = NULL`.
 
 ## Key Conventions & Gotchas
 
@@ -105,11 +115,11 @@ Routing is via `should_revise()`: on fail, loops back to `drafter` up to 3 revis
 - **n8n-to-backend networking.** n8n runs in Docker; to reach the FastAPI host, it uses `http://host.docker.internal:8001` (see `N8N_WHATSAPP_SETUP.md`), not `localhost`.
 - **Frontend API base URL.** Configured via `NEXT_PUBLIC_API_URL` (default `http://localhost:8001`). Must be an env var — it's inlined at build time.
 - **Dependency versions are pinned and bleeding-edge.** `langchain==0.3.0.dev1`, `langgraph==1.0.10rc1`, `langchain-openai==1.1.14`. Older docs in `LANGGRAPH_AGENTS.md` cite different versions (0.0.29 / 0.1.0) — trust `requirements.txt`. Next.js is `15.5.15` with the App Router.
-- **No `.env.example` exists** despite the README referencing one. Environment variables (documented in `ag-associates-ai/README.md` and `DAY3_COMPLETE.md`) must be set manually or defaults in `config.py` will be used (including the checked-in password `secure_password_123`, which is dev-only).
+- **`.env.example` files exist** at both `ag-associates-ai/.env.example` (compose vars) and `ag-associates-ai/backend/.env.example` (backend vars). Copy and customize before running. Defaults in `config.py` include `secure_password_123` which is dev-only.
 
 ## Git Workflow
 
-- Active dev branch for Claude-driven work: `claude/add-claude-documentation-ULMdm`. Follow the "develop on the designated branch, commit, push" pattern described in the session instructions.
+- Use feature branches (`fix/...`, `feat/...`, `docs/...`) and open PRs. Avoid pushing directly to main.
 - CI: `.github/workflows/codeql.yml` runs CodeQL on `javascript-typescript` and `python` for pushes/PRs to `main` and weekly on a schedule. No other CI — lint/tests are not enforced.
 - The status markers in `ag-associates-ai/README.md` ("Day 1/2/3 ✅/❌") and the `DAY3_COMPLETE.md` / `LANGGRAPH_AGENTS.md` narratives describe the original 72-hour build roadmap. Treat them as historical context, not as a current TODO list.
 

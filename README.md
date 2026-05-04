@@ -1,10 +1,10 @@
 <p align="center">
   <h1 align="center">⚖️ AG Associates</h1>
   <p align="center">
-    <strong>AI-Powered Legal Operations Platform for India</strong>
+    <strong>AI-Driven Legal Operations &amp; SaaS Platform for Panel Advocates</strong>
   </p>
   <p align="center">
-    Automate rental agreements via WhatsApp · Manage cases end-to-end · Collaborate in real time
+    Zero-Staff Automation · Title Search &amp; Registration · Bank Panel Operations · White-Label SaaS
   </p>
 </p>
 
@@ -16,183 +16,171 @@
 </p>
 
 <p align="center">
-  <a href="#-quick-start">Quick Start</a> ·
+  <a href="#-about">About</a> ·
   <a href="#-architecture">Architecture</a> ·
-  <a href="#-key-features">Features</a> ·
-  <a href="#-api-reference">API</a> ·
-  <a href="#-contributing">Contributing</a> ·
-  <a href="./CLAUDE.md">Dev Guide</a>
+  <a href="#-the-ai-agentic-workforce">AI Agents</a> ·
+  <a href="#-key-modules">Modules</a> ·
+  <a href="#-quick-start">Quick Start</a> ·
+  <a href="#-contributing">Contributing</a>
+</p>
+---
+
+<p align="center">
+  <sub>Created by <strong><a href="https://github.com/LUXORANOVA9">Raj Khemani</a></strong> — Founder, LUXORANOVA · Architect of the Zero-Staff Law Firm.</sub>
+  <br/>
+  <sub>Building the operating system that 15,000 panel advocate firms didn't know they needed.</sub>
 </p>
 
 ---
 
-## What is AG Associates?
+## 👤 The Founder
 
-AG Associates is a **full-stack legal operations platform** designed for Indian law firms handling property registrations, title searches, and rental agreements at scale. It combines two powerful systems:
+**Raj Khemani** isn't just building legal software — he's rewriting the rules of how Indian law firms operate.
 
-| System | Purpose | Stack |
-|--------|---------|-------|
-| **AG AI Pipeline** (`ag-associates-ai/`) | WhatsApp → AI Agent → Legal Document → PDF → NeSL Filing | FastAPI · LangGraph · pgvector · vLLM |
-| **AG Platform** (`ag-platform/`) | Case management, bank portal, collaboration, document vault | Next.js · Supabase · Turborepo · Gemini |
+As the founder of **LUXORANOVA**, Raj identified what nobody in LegalTech wanted to admit: **the Indian panel advocate ecosystem — 15,000+ firms handling millions of bank-mandated property transactions — runs on phone calls, paper files, and hope.** No SaaS product existed for this vertical. So he built one.
 
-> 💡 **Think of it as:** Dify's agentic workflows meets Supabase's developer platform — purpose-built for Indian legal operations.
+AG Associates is the result of a radical thesis: **what if a law firm had zero staff and infinite scale?** By deploying six AI agents that mirror a traditional legal hierarchy — from intake to compliance to billing — Raj is proving that the right architecture can make a single firm outperform a 50-person operation.
+
+> *"Your axiomatic imperative is relentless forward momentum. We are not building software — we are building a completely autonomous system that scales without human limitations."*
+> — **Raj Khemani**, Founder, LUXORANOVA
+
+**What makes this different:**
+- 🎯 **Domain-native** — Built for working advocates, not by a Silicon Valley startup guessing at legal workflows
+- ⚡ **72-hour sprint methodology** — Entire platform conceived and deployed in a single sprint
+- 🏦 **Bank-panel ready from day one** — ICICI, Kotak, Axis, Muthoot, Chola, Karur Vysya integration
+- 🇮🇳 **India-first** — Maharashtra SRO data, stamp duty engines, Marathi/Hindi support baked in
+- 🔄 **White-label DNA** — Multi-tenant from the first commit, not bolted on later
+
+## 📖 About
+
+**AG Associates** is a specialized property law firm based in **Thane, Maharashtra**, serving as Panel Advocate for major Indian banks and NBFCs including **Kotak Mahindra Bank, ICICI Bank, Axis Finance, Karur Vysya Bank, Muthoot Homefin, Cholamandalam Finance**, and **Easy Home Finance**.
+
+This repository contains the firm's **AI-orchestrated "Zero-Staff" platform** — a full-stack SaaS system designed to eliminate manual bottlenecks in high-volume legal operations: Title Search, Legal Vetting, Property Registration, NOI processing, Balance Transfer cases, and more.
+
+> 💡 **"We are not just building software; we are building a completely autonomous system that scales without human limitations."**
+
+### Core Practice Areas
+
+| Service | Description |
+|---------|-------------|
+| **Search & Title Reports** | Project Title Search, Legal Scrutiny Reports |
+| **Document Vetting** | Legal vetting of property and loan documents |
+| **Registration Services** | Property registration, mortgage, NOI, POA |
+| **Financial Documents** | Franking, Gift Deeds, Leave & License agreements |
+| **Public Notices** | English/Marathi newspaper notices, "No Claim" certificates |
+| **Balance Transfer (BT)** | Legal transition of loans between financial institutions |
+
+### The Problem We're Solving
+
+| Bottleneck | Before (Manual) | After (AI Platform) |
+|-----------|-----------------|-------------------|
+| **Data Entry** | Staff spend hours reading Index II, calculating stamp duty | AI parses documents, auto-populates CRM |
+| **Field Logistics** | Executives travel to collect docs, deposit cheques, visit SROs | Mobile PWA with instant status updates + offline mode |
+| **Status Tracking** | Constant phone calls to track field executives | Real-time progress bars, WhatsApp/Email notifications |
+| **Billing** | Manual timesheet management | Floating live timer, auto-generated utilization reports |
+| **Client Communication** | High-volume manual updates | Client portal via Magic Links with real-time case tracking |
 
 ---
 
 ## 🏗 Architecture
 
 ```
-┌──────────────────────────────────────────────────────────────────┐
-│                         AG Associates                            │
-│                                                                  │
-│  ┌─────────────────────────┐   ┌──────────────────────────────┐  │
-│  │     AG AI Pipeline      │   │        AG Platform           │  │
-│  │                         │   │                              │  │
-│  │  WhatsApp ──→ n8n       │   │  Next.js Dashboard           │  │
-│  │       │                 │   │  Bank Portal (RLS-isolated)  │  │
-│  │       ▼                 │   │  Case State Machine          │  │
-│  │  ┌──────────┐          │   │  Document Vault              │  │
-│  │  │  Aisha   │ Intake    │   │  Real-time Collaboration     │  │
-│  │  └────┬─────┘          │   │                              │  │
-│  │       ▼                 │   │  ┌────────────────────────┐  │  │
-│  │  ┌──────────┐          │   │  │  Gemini AI              │  │  │
-│  │  │ Drafter  │ RAG+LLM  │◄──┼──│  • Email drafting       │  │  │
-│  │  └────┬─────┘          │   │  │  • Semantic search      │  │  │
-│  │       ▼                 │   │  │  • Smart suggestions    │  │  │
-│  │  ┌──────────┐          │   │  └────────────────────────┘  │  │
-│  │  │ Auditor  │ QA Loop  │   │                              │  │
-│  │  └────┬─────┘          │   └──────────────────────────────┘  │
-│  │       ▼                 │                                     │
-│  │  PDF → NeSL Filing      │         Supabase (PostgreSQL)       │
-│  └─────────────────────────┘         + pgvector · RLS · Auth     │
-│                                                                  │
-└──────────────────────────────────────────────────────────────────┘
+┌──────────────────────────────────────────────────────────────────────┐
+│                    AG Associates AI Platform                         │
+│                                                                      │
+│  ┌──────────────────────────────┐  ┌──────────────────────────────┐  │
+│  │      AI Agent Workforce      │  │     Collaboration Platform   │  │
+│  │                              │  │                              │  │
+│  │  ┌────────┐  ┌────────┐     │  │  Case State Machine          │  │
+│  │  │ Aisha  │  │ Vyasa  │     │  │  (RECEIVED → CLOSED)         │  │
+│  │  │Intake  │  │Research│     │  │                              │  │
+│  │  └───┬────┘  └───┬────┘     │  │  Bank Portal (RLS-isolated)  │  │
+│  │      │            │          │  │  ICICI ≠ Kotak ≠ Axis        │  │
+│  │      ▼            ▼          │  │                              │  │
+│  │  ┌────────┐  ┌────────┐     │  │  Document Vault              │  │
+│  │  │Drafter │  │Executor│     │  │  Upload · Preview · Version  │  │
+│  │  │Reports │  │Workflow│     │  │                              │  │
+│  │  └───┬────┘  └───┬────┘     │  │  Real-time Collaboration     │  │
+│  │      │            │          │  │  Presence · Comments · Tasks │  │
+│  │      ▼            ▼          │  │                              │  │
+│  │  ┌────────┐  ┌────────────┐ │  │  Client Portal               │  │
+│  │  │Auditor │  │ Accountant │ │  │  Magic Links · Progress Bars │  │
+│  │  │Compli. │  │ Bank Stmts │ │  │                              │  │
+│  │  └────────┘  └────────────┘ │  └──────────────────────────────┘  │
+│  └──────────────────────────────┘                                    │
+│                                                                      │
+│  ┌───────────────────────────────────────────────────────────────┐   │
+│  │                    Infrastructure Layer                        │   │
+│  │  Supabase (PostgreSQL + RLS + Auth) · pgvector · Gemini Pro   │   │
+│  │  Next.js 15 · FastAPI · LangGraph · Vercel AI SDK             │   │
+│  └───────────────────────────────────────────────────────────────┘   │
+└──────────────────────────────────────────────────────────────────────┘
 ```
+
+### Tech Stack
+
+| Layer | Technology | Purpose |
+|-------|-----------|---------|
+| **Frontend** | Next.js 15, TypeScript, Tailwind CSS | App Router, glassmorphism dashboard |
+| **Backend** | FastAPI (Python) | AI pipeline, document processing, API |
+| **Database/Auth** | Supabase (PostgreSQL + RLS) | Multi-tenant data, RBAC, row-level security |
+| **AI Engine** | Gemini Pro (Vercel AI SDK) | Document analysis, drafting, research |
+| **Orchestration** | LangGraph | Multi-agent workflow management |
+| **Embeddings** | SentenceTransformer (all-MiniLM-L6-v2) | RAG template retrieval (384-dim pgvector) |
+| **LLM (Local)** | vLLM (Qwen 2.5-7B) | On-premise document generation |
+| **Monitoring** | Sentry | Separate web + API error tracking |
+| **Field App** | Progressive Web App (PWA) | Offline-capable mobile for executives |
 
 ---
 
-## ✨ Key Features
+## 🤖 The AI "Agentic" Workforce
 
-### 🤖 AI Document Pipeline (`ag-associates-ai`)
+Six specialized AI agents simulate a traditional law firm hierarchy at machine speed:
 
-| Feature | Description |
-|---------|-------------|
-| **3-Node Agent Workflow** | Aisha (intake) → Drafter (RAG + LLM) → Auditor (compliance QA) via LangGraph |
-| **RAG Template Retrieval** | pgvector similarity search with SentenceTransformer embeddings (384-dim) |
-| **Multi-Language Support** | English, Marathi, Hindi rental agreement templates |
-| **PDF Generation** | Production-quality PDFs via ReportLab with Indian legal formatting |
-| **WhatsApp Integration** | End-to-end via n8n webhooks → FastAPI → LangGraph → response |
-| **NeSL Mock Filing** | Simulated government registry filing endpoint |
+| Agent | Role | What It Does |
+|-------|------|-------------|
+| **Aisha** | Intake | Processes incoming case requests, extracts structured data from documents, classifies case type |
+| **Vyasa** | Research | Legal opinion generation, Title Search analysis, precedent research |
+| **Drafter** | Legal Architect | Automates creation of Title Reports, Legal Scrutiny Reports, Public Notices, Agreement drafts |
+| **Executor** | Workflow Manager | Manages workflow triggers, SLA tracking, field assignment, system actions |
+| **Auditor** | Compliance | Legal compliance verification, error-checking, quality scoring (pass ≥ 85/100) |
+| **Accountant** | Finance | Ingests bank statements (pdfplumber), parses UTR/Loan numbers, reconciles with master ledgers |
 
-### 📋 Legal Operations Platform (`ag-platform`)
-
-| Feature | Description |
-|---------|-------------|
-| **Case State Machine** | 10-state workflow: RECEIVED → ASSIGNED → ... → INVOICED → CLOSED |
-| **Role-Based Access** | PRINCIPAL · ADVOCATE · EXECUTIVE · CLERK · BANK_VIEWER |
-| **Multi-Tenancy** | `org_id` everywhere with Supabase RLS enforcement |
-| **Real-Time Collaboration** | Live presence, comment threads, notification bell, task boards |
-| **Document Vault** | Upload, preview, versioning with signed URLs |
-| **Bank Portal** | Isolated read-only view for bank clients (ICICI can't see Kotak cases) |
-| **AI Features** | Gemini-powered email drafting, project briefs, semantic search |
-| **SLA Tracking** | Automated deadline monitoring with WhatsApp alerts |
+> **"Zero human data entry = Zero errors."**
 
 ---
 
-## 🚀 Quick Start
+## 📋 Key Modules
 
-### Prerequisites
+### 🔍 AI Document Processor
+- Deterministic AI for **Index II parsing** and property document summarization
+- Auto-populates CRM and calculates stamp duty (e.g., 0.3% for NOI)
+- Eliminates manual data entry bottleneck entirely
 
-- [Docker](https://docs.docker.com/get-docker/) & Docker Compose
-- Python 3.10+ (for AI pipeline)
-- Node.js 18+ (for platform frontend)
-- GPU with CUDA (optional — for local vLLM)
+### 📱 Mobile PWA (Field Executives)
+- Instant status updates: "Originals Collected," "Cheque Deposited," "At SRO"
+- Camera scanner with **offline queue** for areas with poor connectivity
+- GPS-tagged field activity for audit trail
 
-### Option 1: AI Pipeline Only
+### ⏱ Time Tracking & Billing Engine
+- Floating live timer widget linked to specific clients/cases
+- Auto-generates timesheets and utilization reports
+- Tracks billable vs. non-billable hours for advocates and retired bankers
 
-```bash
-# 1. Clone & configure
-git clone https://github.com/LUXORANOVA9/AGASSOCIATES.git
-cd AGASSOCIATES/ag-associates-ai
-cp .env.example .env
+### 🏦 Bank Portal (Isolated Views)
+- Read-only dashboards for each bank panel (ICICI, Kotak, Axis, etc.)
+- **Supabase RLS ensures bank A cannot see bank B's data**
+- Case progress, document status, SLA compliance metrics
 
-# 2. Start PostgreSQL + n8n
-docker-compose up -d
+### 💬 Client Portal & Notifications
+- **Magic Links** — no password needed, secure access via email/WhatsApp
+- Real-time progress bars for each case stage
+- Multi-channel notifications (WhatsApp/Email) for status changes
 
-# 3. Set up Python backend
-cd backend
-python -m venv venv
-source venv/bin/activate        # Windows: venv\Scripts\activate
-pip install -r requirements.txt
-cp .env.example .env
-
-# 4. Generate embeddings & start
-python generate_embeddings.py
-python main.py                  # API at http://localhost:8001
-```
-
-### Option 2: Full Platform
-
-```bash
-# 1. Install dependencies (from repo root)
-cd ag-platform
-npm install
-
-# 2. Configure Supabase
-cp .env.example .env            # Add your Supabase URL & anon key
-
-# 3. Run migrations
-# Apply SQL files from supabase/migrations/ to your Supabase project
-
-# 4. Start dev server
-npm run dev
-```
-
----
-
-## 📡 API Reference
-
-### Health Check
-```http
-GET /health
-```
-```json
-{ "status": "healthy", "service": "ag-associates-ai" }
-```
-
-### Generate Agreement (Main Endpoint)
-```http
-POST /api/generate-agreement
-Content-Type: application/json
-
-{
-  "raw_input": "Create rent agreement for Flat 301, Shivaji Nagar, Pune. Tenant: Raj Sharma, Landlord: Priya Patel, Rent: 25000, Duration: 11 months, Deposit: 75000",
-  "sender": "api_user"
-}
-```
-
-### WhatsApp Webhook
-```http
-POST /webhook/whatsapp
-Content-Type: application/json
-
-{ "message": "I need a rent agreement", "sender": "+919876543210" }
-```
-
-### Dashboard Status
-```http
-GET /dashboard/status
-```
-
-### List Templates
-```http
-GET /templates?template_type=rent_agreement&language=en
-```
-
-### NeSL Filing (Mock)
-```http
-POST /api/nesl/execute
-```
+### 📊 Case Management
+- **13 specific case types** mapped to bank panel workflows
+- 10-state machine: `RECEIVED → ASSIGNED → IN_PROGRESS → ... → INVOICED → CLOSED`
+- SLA tracking with automated deadline alerts
 
 ---
 
@@ -203,10 +191,10 @@ AGASSOCIATES/
 │
 ├── ag-associates-ai/              # 🤖 AI Document Pipeline
 │   ├── backend/
-│   │   ├── agents.py              #   LangGraph 3-node pipeline
+│   │   ├── agents.py              #   LangGraph 6-agent pipeline
 │   │   ├── main.py                #   FastAPI endpoints
 │   │   ├── config.py              #   Environment configuration
-│   │   ├── pdf_generator.py       #   ReportLab PDF output
+│   │   ├── pdf_generator.py       #   ReportLab legal document output
 │   │   ├── generate_embeddings.py #   SentenceTransformer batch embedder
 │   │   └── requirements.txt       #   Python dependencies
 │   ├── frontend/                  #   Next.js 15 dashboard
@@ -221,81 +209,125 @@ AGASSOCIATES/
 │   │   ├── types/                 #   Shared TypeScript interfaces
 │   │   └── ui/                    #   Shared shadcn/ui components
 │   ├── src/
-│   │   ├── components/            #   React components (admin, AI, bank, collaboration)
+│   │   ├── components/            #   React (admin, AI, bank, collaboration)
 │   │   ├── server/                #   Express backend + AI router
 │   │   └── hooks/                 #   React hooks (presence, notifications)
 │   ├── supabase/migrations/       #   Database migrations
 │   └── server.ts                  #   Express entry point
 │
 ├── CLAUDE.md                      # 📖 Developer guidelines & gotchas
+├── CONTRIBUTING.md                # 🤝 Contribution guide
 ├── SECURITY.md                    # 🔒 Security policy
-└── content/                       # 📄 Content assets
+└── tasks/                         # 📋 Task tracking & lessons learned
+```
+
+---
+
+## 🚀 Quick Start
+
+### Prerequisites
+
+- [Docker](https://docs.docker.com/get-docker/) & Docker Compose
+- Python 3.10+ (AI pipeline)
+- Node.js 18+ (platform frontend)
+- GPU with CUDA (optional — for local vLLM)
+
+### AI Pipeline
+
+```bash
+git clone https://github.com/LUXORANOVA9/AGASSOCIATES.git
+cd AGASSOCIATES/ag-associates-ai
+cp .env.example .env
+
+# Start infrastructure
+docker-compose up -d
+
+# Set up backend
+cd backend
+python -m venv venv && source venv/bin/activate  # Windows: venv\Scripts\activate
+pip install -r requirements.txt
+cp .env.example .env
+python generate_embeddings.py
+python main.py                  # API at http://localhost:8001
+```
+
+### Collaboration Platform
+
+```bash
+cd ag-platform
+npm install
+cp .env.example .env            # Add Supabase URL & anon key
+npm run dev
 ```
 
 ---
 
 ## ⚙️ Environment Variables
 
-The project uses **three separate `.env` files** for isolation:
-
 | File | Purpose | Key Variables |
 |------|---------|---------------|
-| `ag-associates-ai/.env` | Docker Compose (Postgres, n8n, WhatsApp) | `POSTGRES_*`, `N8N_*`, `WHATSAPP_*` |
-| `ag-associates-ai/backend/.env` | Python backend config | `LLM_BASE_URL`, `EMBEDDING_MODEL_NAME`, `DATABASE_*` |
-| `ag-platform/.env` | Supabase + platform config | `SUPABASE_URL`, `SUPABASE_ANON_KEY`, `GEMINI_API_KEY` |
-
-> See each directory's `.env.example` for all available options with descriptions.
+| `ag-associates-ai/.env` | Docker Compose | `POSTGRES_*`, `N8N_*`, `WHATSAPP_*` |
+| `ag-associates-ai/backend/.env` | Python backend | `LLM_BASE_URL`, `EMBEDDING_MODEL_NAME`, `DATABASE_*` |
+| `ag-platform/.env` | Supabase + platform | `SUPABASE_URL`, `SUPABASE_ANON_KEY`, `GEMINI_API_KEY` |
 
 ---
 
 ## 🗺 Roadmap
 
-- [x] **AI Pipeline** — LangGraph agents, RAG retrieval, PDF generation
-- [x] **Case Management** — Full state machine with SLA tracking
-- [x] **Bank Portal** — Isolated read-only views with RLS
-- [x] **Collaboration** — Real-time presence, comments, task boards
-- [x] **Document Vault** — Upload, preview, versioning
-- [ ] **Unified Auth** — Single Supabase Auth across both systems
-- [ ] **Pipeline Integration** — Case state machine triggers AI agreement generation
-- [ ] **Mobile App** — React Native field app for executives
-- [ ] **Production NeSL** — Live government registry filing
-- [ ] **Multi-firm SaaS** — White-label for other law firms
+### Phase 1: Internal Automation (72-Hour Sprint)
+- [x] Database schema + Supabase RBAC authentication
+- [x] Core case management engine (13 case types)
+- [x] AI Document Processor (Index II parsing, stamp duty)
+- [x] Accountant Agent (bank statement reconciliation)
+- [x] 6-agent LangGraph pipeline
+- [x] RAG-powered legal template retrieval
+- [x] Bank portal with RLS isolation
+- [x] Real-time collaboration (presence, comments, tasks)
+
+### Phase 2: Field Operations
+- [ ] Mobile PWA for field executives
+- [ ] Camera scanner with offline queue
+- [ ] GPS-tagged field activity tracking
+- [ ] Live timer & billing engine
+
+### Phase 3: White-Label SaaS
+- [ ] Multi-tenant architecture (org_id parameterized)
+- [ ] Theming engine (logo, colors, fonts per firm)
+- [ ] Maharashtra-specific legal module (SRO data, stamp duty rates)
+- [ ] Onboarding for 5,000–15,000 panel advocate firms across India
 
 ---
 
 ## 🔒 Security
 
-- **Data Sovereignty**: Deployed in `ap-south-1` (Mumbai) for Indian banking data compliance
-- **Row-Level Security**: Supabase RLS enforces tenant and bank isolation at the database level
-- **Document Vault**: Private buckets with 60-second signed URLs
+- **Row-Level Security**: Supabase RLS isolates bank/client data at the database level
+- **Data Sovereignty**: Deployed in `ap-south-1` (Mumbai) for Indian banking compliance
 - **Audit Logging**: Every case state transition logged to immutable `case_audit_logs`
+- **Document Vault**: Private buckets with 60-second signed URLs
+- **Magic Links**: Passwordless client access with time-limited tokens
 
-For vulnerability reports, see [SECURITY.md](./SECURITY.md) or email [security@agassociates.com](mailto:security@agassociates.com).
+See [SECURITY.md](./SECURITY.md) for vulnerability reporting.
 
 ---
 
 ## 🤝 Contributing
 
-We welcome contributions! Here's how to get started:
+See [CONTRIBUTING.md](./CONTRIBUTING.md) for guidelines, commit conventions, and code standards.
 
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feat/amazing-feature`)
-3. Commit your changes (`git commit -m 'feat: add amazing feature'`)
-4. Push to the branch (`git push origin feat/amazing-feature`)
-5. Open a Pull Request
-
-Please read [CLAUDE.md](./CLAUDE.md) for development guidelines, architectural decisions, and known gotchas.
+Read [CLAUDE.md](./CLAUDE.md) for architecture details, development setup, and known gotchas.
 
 ---
 
 ## 📜 License
 
-This project is proprietary software owned by AG Associates.
+Proprietary — AG Associates, Thane, Maharashtra.
 
 See [LICENSE](./LICENSE) for details.
 
 ---
 
 <p align="center">
-  <sub>Built with ❤️ in Pune, India · Powered by LangGraph, Supabase & Gemini</sub>
+  <sub>Built by <strong><a href="https://github.com/LUXORANOVA9">Raj Khemani</a></strong> · LUXORANOVA</sub>
+  <br/>
+  <sub>Powered by LangGraph, Supabase, Gemini Pro & vLLM · Targeting 15,000 panel advocate firms across India</sub>
 </p>

@@ -1,48 +1,56 @@
-# AG Associates AI — Document Generation Pipeline
+# AG Associates AI — Document Processing Pipeline
 
-> The AI brain of [AG Associates](../README.md). Receives natural-language requests via WhatsApp, extracts structured data, retrieves relevant legal templates via RAG, drafts documents with an LLM, audits them for compliance, and outputs production-ready PDFs.
+> The AI engine of [AG Associates](../README.md), a property law firm and Panel Advocate for major Indian banks and NBFCs. This pipeline processes legal documents — Title Reports, Legal Scrutiny Reports, NOI documents, Agreement drafts — through a multi-agent workflow powered by LangGraph.
 
 ---
 
 ## How It Works
 
 ```
-WhatsApp Message
+Incoming Case (WhatsApp / Bank Portal / API)
        │
        ▼
   n8n Webhook ──→ FastAPI /webhook/whatsapp
                         │
                         ▼
                 ┌───────────────┐
-                │  Aisha Node   │  Extracts: tenant, landlord, rent,
-                │  (Intake)     │  address, duration, deposit
+                │  Aisha        │  Extracts: case type, parties,
+                │  (Intake)     │  property details, bank, amounts
                 └───────┬───────┘
                         │
                         ▼
                 ┌───────────────┐
-                │ Drafter Node  │  pgvector similarity search → top template
-                │ (RAG + LLM)   │  LLM fills template with extracted data
+                │  Drafter      │  pgvector → best legal template
+                │  (RAG + LLM)  │  LLM fills template with case data
                 └───────┬───────┘
                         │
                         ▼
                 ┌───────────────┐
-                │ Auditor Node  │  Compliance check → pass or revise
-                │ (QA Loop)     │  Max 3 revision cycles
+                │  Auditor      │  Compliance check → pass or revise
+                │  (QA Loop)    │  Max 3 revision cycles
                 └───────┬───────┘
                         │
                         ▼
-                  PDF (ReportLab)
-                        │
-                        ▼
-                  NeSL Filing (mock)
+               PDF (ReportLab) → Document Vault
 ```
+
+### Full Agent Roster
+
+| Agent | Role | Current Status |
+|-------|------|---------------|
+| **Aisha** | Intake & data extraction | ✅ Implemented |
+| **Vyasa** | Research & legal opinion | 🔜 Planned |
+| **Drafter** | Report & document generation | ✅ Implemented |
+| **Executor** | Workflow triggers & field assignment | 🔜 Planned |
+| **Auditor** | Compliance verification | ✅ Implemented |
+| **Accountant** | Bank statement reconciliation | 🔜 Planned |
 
 ## Tech Stack
 
 | Component | Technology | Purpose |
 |-----------|-----------|---------|
 | **API** | FastAPI | Async endpoints, CORS, Pydantic validation |
-| **Orchestration** | LangGraph | 3-node stateful agent pipeline |
+| **Orchestration** | LangGraph | Multi-agent stateful pipeline |
 | **LLM** | vLLM (Qwen 2.5-7B) | Document drafting & compliance auditing |
 | **Embeddings** | SentenceTransformer (`all-MiniLM-L6-v2`) | 384-dim vectors for template retrieval |
 | **Vector DB** | PostgreSQL + pgvector | Similarity search on legal templates |
@@ -63,7 +71,7 @@ python -m venv venv && source venv/bin/activate
 pip install -r requirements.txt
 cp .env.example .env
 
-# 3. Generate embeddings
+# 3. Generate embeddings (one-time)
 python generate_embeddings.py
 
 # 4. Start (optional: start vLLM on port 8000 first)
@@ -75,10 +83,10 @@ python main.py    # → http://localhost:8001
 | Method | Path | Description |
 |--------|------|-------------|
 | `GET` | `/health` | Health check |
-| `POST` | `/webhook/whatsapp` | WhatsApp message intake |
-| `POST` | `/api/generate-agreement` | Direct agreement generation |
-| `GET` | `/dashboard/status` | Template count, system health |
-| `GET` | `/templates` | List templates (filterable) |
+| `POST` | `/webhook/whatsapp` | WhatsApp/n8n message intake |
+| `POST` | `/api/generate-agreement` | Direct document generation |
+| `GET` | `/dashboard/status` | System health, template count |
+| `GET` | `/templates` | List templates (filterable by type, language) |
 | `POST` | `/api/nesl/execute` | Mock NeSL government filing |
 
 ## Environment Variables
@@ -96,4 +104,4 @@ See [`backend/.env.example`](./backend/.env.example) for the full list. Key vari
 
 ## Development
 
-See [`CLAUDE.md`](../CLAUDE.md) in the repo root for architecture details, conventions, and known gotchas.
+See [`CLAUDE.md`](../CLAUDE.md) for architecture details, conventions, and known gotchas.
