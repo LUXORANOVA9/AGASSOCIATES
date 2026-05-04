@@ -23,7 +23,7 @@
 
 - [x] **Agent 6: Accountant** — pdfplumber integration for IDBI bank statements + LLM reconciliation
 - [x] **Unify authentication** — Migrate to Supabase Auth across both systems
-- [ ] **Pipeline integration** — Case state machine triggers AI agreement generation
+- [x] **Pipeline integration** — Case state machine triggers AI agreement generation
 - [ ] **Merge PR #18** — CORS middleware for FastAPI backend
 - [ ] **Mobile app** — React Native field app for executives
 - [ ] **Production NeSL** — Live government registry filing
