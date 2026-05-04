@@ -25,6 +25,6 @@
 - [x] **Unify authentication** — Migrate to Supabase Auth across both systems
 - [x] **Pipeline integration** — Case state machine triggers AI agreement generation
 - [ ] **Merge PR #18** — CORS middleware for FastAPI backend
-- [ ] **Mobile app** — React Native field app for executives
+- [x] **Mobile app** — React Native / PWA field app for executives with offline queue
 - [ ] **Production NeSL** — Live government registry filing
 - [ ] **Test suite** — pytest for backend, vitest for platform
