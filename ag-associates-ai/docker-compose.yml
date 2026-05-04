@@ -6,9 +6,9 @@ services:
     image: pgvector/pgvector:pg16
     container_name: ag_associates_postgres
     environment:
-      POSTGRES_USER: ag_admin
-      POSTGRES_PASSWORD: secure_password_123
-      POSTGRES_DB: legal_templates_db
+      POSTGRES_USER: ${POSTGRES_USER:-ag_admin}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-secure_password_123}
+      POSTGRES_DB: ${POSTGRES_DB:-legal_templates_db}
     ports:
       - "5432:5432"
     volumes:
@@ -23,11 +23,16 @@ services:
     image: n8n/n8n:latest
     container_name: ag_associates_n8n
     environment:
-      - N8N_HOST=localhost
+      - N8N_HOST=${N8N_HOST:-localhost}
       - N8N_PORT=5678
       - N8N_BASIC_AUTH_ACTIVE=true
-      - N8N_BASIC_AUTH_USER=admin
-      - N8N_BASIC_AUTH_PASSWORD=admin123
+      - N8N_BASIC_AUTH_USER=${N8N_BASIC_AUTH_USER:-admin}
+      - N8N_BASIC_AUTH_PASSWORD=${N8N_BASIC_AUTH_PASSWORD:-admin123}
+      - WEBHOOK_URL=${WEBHOOK_URL:-http://localhost:5678/}
+      - WHATSAPP_ACCESS_TOKEN=${WHATSAPP_ACCESS_TOKEN:-}
+      - WHATSAPP_PHONE_NUMBER_ID=${WHATSAPP_PHONE_NUMBER_ID:-}
+      - WHATSAPP_BUSINESS_ACCOUNT_ID=${WHATSAPP_BUSINESS_ACCOUNT_ID:-}
+      - WHATSAPP_VERIFY_TOKEN=${WHATSAPP_VERIFY_TOKEN:-}
     ports:
       - "5678:5678"
     volumes:
