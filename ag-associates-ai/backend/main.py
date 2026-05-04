@@ -18,6 +18,8 @@ from config import (
 )
 from agents import process_rental_request
 from accountant_agent import accountant_agent
+from vyasa_agent import vyasa_agent
+from executor_agent import executor_agent
 from auth import get_current_user
 
 logging.basicConfig(level=getattr(logging, LOG_LEVEL, logging.INFO))
@@ -36,6 +38,19 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+class AgreementRequest(BaseModel):
+    raw_input: str
+    sender: str
+
+class LegalQueryRequest(BaseModel):
+    case_details: Dict[str, Any]
+    query: str
+
+class CaseStateRequest(BaseModel):
+    case_state: Dict[str, Any]
+    timestamp: Optional[str] = None
+    metadata: Optional[Dict[str, Any]] = None
 
 class WebhookPayload(BaseModel):
     message: str
@@ -253,6 +268,36 @@ async def reconcile_bank_statement(file: UploadFile = File(...), user: dict = De
         
     except Exception as e:
         logging.error(f"Reconciliation error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.post("/api/research")
+async def vyasa_research(request: LegalQueryRequest, user: dict = Depends(get_current_user)):
+    """
+    Agent 2 (Vyasa): Generate legal opinion based on case facts.
+    Secured with Supabase Auth JWT.
+    """
+    try:
+        result = await asyncio.to_thread(vyasa_agent.generate_legal_opinion, request.case_details, request.query)
+        if not result.get("success"):
+            raise HTTPException(status_code=500, detail=result.get("error", "Unknown research error"))
+        return result
+    except Exception as e:
+        logging.error(f"Vyasa research error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.post("/api/execute")
+async def executor_action(request: CaseStateRequest, user: dict = Depends(get_current_user)):
+    """
+    Agent 4 (Executor): Determine the next workflow action for a case.
+    Secured with Supabase Auth JWT.
+    """
+    try:
+        result = await asyncio.to_thread(executor_agent.determine_next_action, request.case_state)
+        if not result.get("success"):
+            raise HTTPException(status_code=500, detail=result.get("error", "Unknown executor error"))
+        return result
+    except Exception as e:
+        logging.error(f"Executor routing error: {e}")
         raise HTTPException(status_code=500, detail=str(e))
 
 

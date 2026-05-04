@@ -39,9 +39,9 @@ Incoming Case (WhatsApp / Bank Portal / API)
 | Agent | Role | Current Status |
 |-------|------|---------------|
 | **Aisha** | Intake & data extraction | ✅ Implemented |
-| **Vyasa** | Research & legal opinion | 🔜 Planned |
+| **Vyasa** | Research & legal opinion | ✅ Implemented |
 | **Drafter** | Report & document generation | ✅ Implemented |
-| **Executor** | Workflow triggers & field assignment | 🔜 Planned |
+| **Executor** | Workflow triggers & field assignment | ✅ Implemented |
 | **Auditor** | Compliance verification | ✅ Implemented |
 | **Accountant** | Bank statement reconciliation | ✅ Implemented |
 
