@@ -25,12 +25,23 @@ app = FastAPI(
 _default_cors_origins = ["http://localhost:3000", "http://127.0.0.1:3000"]
 _cors_env = os.getenv("CORS_ALLOW_ORIGINS", "")
 _extra_cors_origins = [o.strip() for o in _cors_env.split(",") if o.strip()]
+
+# Refuse the wildcard origin: combined with allow_credentials=True it would
+# effectively allow any site to make authenticated cross-origin calls.
+if "*" in _extra_cors_origins:
+    raise RuntimeError(
+        "CORS_ALLOW_ORIGINS='*' is not permitted because credentials are "
+        "enabled. List explicit origins instead."
+    )
+
+_allowed_origins = sorted(set(_default_cors_origins + _extra_cors_origins))
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=_default_cors_origins + _extra_cors_origins,
+    allow_origins=_allowed_origins,
     allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
+    allow_methods=["GET", "POST", "OPTIONS"],
+    allow_headers=["Authorization", "Content-Type"],
 )
 
 # Register pgvector
