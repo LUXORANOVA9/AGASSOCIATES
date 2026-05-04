@@ -7,6 +7,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 import fs from "fs";
 import caseRoutes from "./src/server/routes/cases.ts";
+import timesheetRoutes from "./src/server/routes/timesheets.ts";
 
 // Load environment variables
 dotenv.config();
@@ -64,6 +65,7 @@ async function startServer() {
   });
 
   app.use("/api", caseRoutes);
+  app.use("/api", timesheetRoutes);
 
   app.use("/api/ai", aiLimiter, aiRoutes);
 

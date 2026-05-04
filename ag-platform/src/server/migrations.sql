@@ -115,6 +115,21 @@ CREATE TABLE IF NOT EXISTS case_timeline (
     created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );
 
+-- TIMESHEETS (P5: Billing Engine)
+CREATE TABLE IF NOT EXISTS timesheets (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    org_id UUID REFERENCES organizations(id) NOT NULL,
+    case_id UUID REFERENCES cases(id) ON DELETE CASCADE,
+    profile_id UUID REFERENCES profiles(id) NOT NULL,
+    task_description TEXT NOT NULL,
+    start_time TIMESTAMP WITH TIME ZONE NOT NULL,
+    end_time TIMESTAMP WITH TIME ZONE,
+    duration_minutes INTEGER,
+    is_billable BOOLEAN DEFAULT TRUE,
+    hourly_rate NUMERIC(10, 2),
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+
 -- TRIGGERS for updated_at
 CREATE OR REPLACE FUNCTION update_updated_at_column()
 RETURNS TRIGGER AS $$
