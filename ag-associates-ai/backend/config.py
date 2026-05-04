@@ -30,10 +30,10 @@ LLM_MOCK_MODE = _env_bool("LLM_MOCK_MODE", default=False)
 
 # Embedding Model Configuration
 EMBEDDING_MODEL_NAME = os.getenv("EMBEDDING_MODEL_NAME", "sentence-transformers/all-MiniLM-L6-v2")
-EMBEDDING_DIMENSION = int(os.getenv("EMBEDDING_DIMENSION", "768"))
+EMBEDDING_DIMENSION = int(os.getenv("EMBEDDING_DIMENSION", "384"))
 
 # PDF Generation Configuration
-OUTPUT_DIR = os.getenv("OUTPUT_DIR", "/workspace/ag-associates-ai/output")
+OUTPUT_DIR = os.getenv("OUTPUT_DIR", os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "output"))
 PDF_ENABLED = _env_bool("PDF_ENABLED", default=False)
 
 # API Configuration

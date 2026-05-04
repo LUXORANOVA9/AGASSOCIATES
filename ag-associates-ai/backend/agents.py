@@ -3,23 +3,18 @@ LangGraph Agent Workflow for AG Associates AI
 Implements the 3-node pipeline: Aisha -> Drafter -> Auditor
 """
 
-from typing import TypedDict, List, Dict, Any, Optional, Annotated
+from typing import TypedDict, List, Dict, Any, Optional
 from langgraph.graph import StateGraph, END
 from langchain_openai import ChatOpenAI
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import JsonOutputParser
-from langchain_core.messages import HumanMessage, SystemMessage
 import psycopg2
 from psycopg2.extras import RealDictCursor
 from pgvector.psycopg2 import register_vector
-import numpy as np
 import json
 import re
 from datetime import datetime
-from config import get_database_url, EMBEDDING_DIMENSION, LLM_MODEL_NAME, LLM_BASE_URL
-
-# Register pgvector for database operations
-register_vector()
+from config import get_database_url, EMBEDDING_MODEL_NAME, LLM_MODEL_NAME, LLM_BASE_URL
 
 
 class AgentState(TypedDict):
@@ -64,17 +59,30 @@ def get_db_connection():
         get_database_url(),
         cursor_factory=RealDictCursor
     )
+    register_vector(conn)
     return conn
+
+
+# Lazy-loaded SentenceTransformer — initialised on first call to avoid
+# import-time overhead and to keep startup fast when the backend is used
+# without any RAG queries (e.g. health checks).
+_embedding_model = None
+
+
+def _get_embedding_model():
+    global _embedding_model
+    if _embedding_model is None:
+        from sentence_transformers import SentenceTransformer
+        _embedding_model = SentenceTransformer(EMBEDDING_MODEL_NAME)
+    return _embedding_model
 
 
 def generate_embedding(text: str) -> List[float]:
     """
-    Generate embedding for a given text using local LLM
-    In production, use a dedicated embedding model
+    Generate a real vector embedding for the given text using SentenceTransformer.
     """
-    # For now, return a dummy embedding - in production use sentence-transformers or similar
-    # This is a placeholder that should be replaced with actual embedding generation
-    embedding = np.random.rand(EMBEDDING_DIMENSION).astype(np.float32)
+    model = _get_embedding_model()
+    embedding = model.encode(text)
     return embedding.tolist()
 
 
@@ -189,7 +197,7 @@ def aisha_intake_node(state: AgentState) -> AgentState:
         else:
             raise ValueError("Aisha did not return valid JSON")
         
-        state['errors'] = []
+        # Success — don't clear state['errors']; prior nodes may have added entries.
         
     except Exception as e:
         error_msg = f"Aisha intake failed: {str(e)}"
@@ -348,7 +356,7 @@ Generate the complete rental agreement document:
             print(f"   Markdown saved: {md_path}")
             state['pdf_path'] = md_path  # Fallback to markdown path
         
-        state['errors'] = []
+        # Success — don't clear state['errors']; prior nodes may have added entries.
         
     except Exception as e:
         error_msg = f"Drafter failed: {str(e)}"
@@ -460,7 +468,7 @@ Perform the quality audit and return JSON:
             for issue in issues[:3]:  # Show first 3 issues
                 print(f"   - {issue}")
         
-        state['errors'] = []
+        # Success — don't clear state['errors']; prior nodes may have added entries.
         
     except Exception as e:
         error_msg = f"Auditor failed: {str(e)}"

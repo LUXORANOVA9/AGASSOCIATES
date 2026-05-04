@@ -3,9 +3,9 @@ PDF Generator Module for AG Associates AI
 Converts markdown/text agreements to formatted PDF documents using ReportLab
 """
 
-from reportlab.lib import colors, styles, units
-from reportlab.lib.pagesizes import A4, letter
-from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle, PageBreak
+from reportlab.lib import colors
+from reportlab.lib.pagesizes import A4
+from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.lib.enums import TA_CENTER, TA_LEFT, TA_JUSTIFY
 from reportlab.pdfbase import pdfmetrics

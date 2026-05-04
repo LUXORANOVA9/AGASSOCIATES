@@ -7,11 +7,9 @@ from pydantic import BaseModel
 from typing import Optional, List, Dict, Any
 import psycopg2
 from psycopg2.extras import RealDictCursor
-from pgvector.psycopg2 import register_vector
-import numpy as np
+from pgvector.psycopg2 import register_vector as _register_vector
 from config import (
     get_database_url,
-    EMBEDDING_DIMENSION,
     CORS_ALLOWED_ORIGINS,
     LOG_LEVEL,
     NESL_MOCK_DELAY_SEC,
@@ -34,9 +32,6 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
-# Register pgvector
-register_vector()
 
 class WebhookPayload(BaseModel):
     message: str
@@ -69,6 +64,7 @@ def get_db_connection():
         get_database_url(),
         cursor_factory=RealDictCursor
     )
+    _register_vector(conn)
     return conn
 
 @app.get("/health")
@@ -139,16 +135,16 @@ async def dashboard_status():
     Real-time status endpoint for the frontend dashboard
     Shows agent activity, template count, and system health
     """
+    conn = None
     try:
         conn = get_db_connection()
         cur = conn.cursor()
-        
-        # Get total templates count
-        cur.execute("SELECT COUNT(*) as count FROM legal_templates")
-        total_templates = cur.fetchone()['count']
-        
-        cur.close()
-        conn.close()
+        try:
+            # Get total templates count
+            cur.execute("SELECT COUNT(*) as count FROM legal_templates")
+            total_templates = cur.fetchone()['count']
+        finally:
+            cur.close()
         
         # Mock active agents (will be replaced with actual LangGraph state)
         active_agents = 3
@@ -164,34 +160,40 @@ async def dashboard_status():
         )
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Dashboard status fetch failed: {str(e)}")
+    finally:
+        if conn is not None:
+            conn.close()
 
 @app.get("/templates")
 async def list_templates(template_type: Optional[str] = None, language: Optional[str] = None):
     """List available legal templates with optional filtering"""
+    conn = None
     try:
         conn = get_db_connection()
         cur = conn.cursor()
-        
-        query = "SELECT id, title, template_type, jurisdiction, language, created_at FROM legal_templates WHERE 1=1"
-        params = []
-        
-        if template_type:
-            query += " AND template_type = %s"
-            params.append(template_type)
-        
-        if language:
-            query += " AND language = %s"
-            params.append(language)
-        
-        cur.execute(query, params)
-        templates = cur.fetchall()
-        
-        cur.close()
-        conn.close()
+        try:
+            query = "SELECT id, title, template_type, jurisdiction, language, created_at FROM legal_templates WHERE 1=1"
+            params = []
+            
+            if template_type:
+                query += " AND template_type = %s"
+                params.append(template_type)
+            
+            if language:
+                query += " AND language = %s"
+                params.append(language)
+            
+            cur.execute(query, params)
+            templates = cur.fetchall()
+        finally:
+            cur.close()
         
         return {"templates": templates}
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Template listing failed: {str(e)}")
+    finally:
+        if conn is not None:
+            conn.close()
 
 
 @app.post("/api/nesl/execute")
