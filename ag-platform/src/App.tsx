@@ -41,6 +41,8 @@ function Navigation() {
   );
 }
 
+import { TimeTracker } from './components/collaboration/TimeTracker';
+
 function App() {
   return (
     <BrowserRouter>
@@ -54,6 +56,9 @@ function App() {
             <Route path="/bank/*" element={<BankPortal />} />
           </Routes>
         </main>
+        
+        {/* Global Floating Time Tracker for Advocates */}
+        <TimeTracker />
       </div>
     </BrowserRouter>
   );
