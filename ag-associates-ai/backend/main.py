@@ -1,8 +1,8 @@
 import uuid
 import asyncio
 import logging
-from fastapi import FastAPI, HTTPException, UploadFile, File, Depends
-import tempfile
+from fastapi import FastAPI, HTTPException, UploadFile, File, Depends, Request
+from fastapi.responses import JSONResponse
 import os
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
@@ -29,6 +29,50 @@ app = FastAPI(
     description="Legal document generation API with RAG-powered templates",
     version="1.0.0"
 )
+
+# Generate unique Request ID for telemetry
+@app.middleware("http")
+async def add_request_id(request: Request, call_next):
+    request_id = uuid.uuid4().hex
+    request.state.request_id = request_id
+    response = await call_next(request)
+    response.headers["X-Request-ID"] = request_id
+    return response
+
+# Step 5: Structured Error Responses
+class APIError(Exception):
+    def __init__(self, code: str, message: str, status_code: int = 400):
+        self.code = code
+        self.message = message
+        self.status_code = status_code
+
+@app.exception_handler(APIError)
+async def api_error_handler(request: Request, exc: APIError):
+    return JSONResponse(
+        status_code=exc.status_code,
+        content={
+            "error": {
+                "code": exc.code,
+                "message": exc.message,
+                "requestId": getattr(request.state, "request_id", "unknown")
+            }
+        }
+    )
+
+@app.exception_handler(Exception)
+async def global_exception_handler(request: Request, exc: Exception):
+    logging.error(f"System Error: {str(exc)} | Request ID: {getattr(request.state, 'request_id', 'unknown')}")
+    # Don't expose internal details
+    return JSONResponse(
+        status_code=500,
+        content={
+            "error": {
+                "code": "SYSTEM_ERROR",
+                "message": "An internal system error occurred. Please try again later.",
+                "requestId": getattr(request.state, "request_id", "unknown")
+            }
+        }
+    )
 
 # CORS — configured via CORS_ALLOWED_ORIGINS env var (comma-separated, or `*`).
 app.add_middleware(

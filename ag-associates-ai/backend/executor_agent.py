@@ -3,6 +3,7 @@ from langchain_openai import ChatOpenAI
 from langchain_core.prompts import ChatPromptTemplate
 import json
 from config import LLM_MODEL_NAME, LLM_BASE_URL
+from tenacity import retry, stop_after_attempt, wait_exponential
 import logging
 
 logger = logging.getLogger(__name__)
@@ -51,8 +52,12 @@ JSON Format:
         
         chain = prompt | self.llm
         
+        @retry(stop=stop_after_attempt(3), wait=wait_exponential(multiplier=1, min=2, max=10), reraise=True)
+        def invoke_with_retry():
+            return chain.invoke({"case_state": str(case_state)})
+        
         try:
-            response = chain.invoke({"case_state": str(case_state)})
+            response = invoke_with_retry()
             content = response.content.strip()
             
             # Clean JSON

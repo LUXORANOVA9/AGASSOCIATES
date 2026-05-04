@@ -13,6 +13,7 @@ from pgvector.psycopg2 import register_vector
 import json
 import re
 from datetime import datetime
+from tenacity import retry, stop_after_attempt, wait_exponential
 from config import get_database_url, EMBEDDING_MODEL_NAME, LLM_MODEL_NAME, LLM_BASE_URL
 
 
@@ -115,6 +116,15 @@ def similarity_search(query: str, limit: int = 3) -> List[Dict[str, Any]]:
 
 
 # ============================================================================
+# LLM RETRY UTILITY
+# ============================================================================
+
+@retry(stop=stop_after_attempt(3), wait=wait_exponential(multiplier=1, min=2, max=10), reraise=True)
+def invoke_llm_with_retry(chain, inputs):
+    return chain.invoke(inputs)
+
+
+# ============================================================================
 # NODE 1: AISHA (Intake Agent)
 # ============================================================================
 
@@ -179,7 +189,7 @@ def aisha_intake_node(state: AgentState) -> AgentState:
         # Run the chain
         chain = prompt | llm | parser
         
-        result = chain.invoke({"raw_input": state['raw_input']})
+        result = invoke_llm_with_retry(chain, {"raw_input": state['raw_input']})
         
         # Validate and store extracted data
         if isinstance(result, dict):
@@ -320,7 +330,7 @@ Generate the complete rental agreement document:
         extracted_str = json.dumps(state['extracted_json'], indent=2, ensure_ascii=False)
         
         # Generate the document
-        result = chain.invoke({
+        result = invoke_llm_with_retry(chain, {
             "extracted_data": extracted_str,
             "template_content": template_content
         })
@@ -447,7 +457,7 @@ Perform the quality audit and return JSON:
         extracted_str = json.dumps(state['extracted_json'], indent=2, ensure_ascii=False)
         
         # Run audit
-        result = chain.invoke({
+        result = invoke_llm_with_retry(chain, {
             "extracted_json": extracted_str,
             "drafted_document": state['drafted_document']
         })

@@ -4,6 +4,7 @@ import json
 from typing import Dict, List, Any, Optional
 from langchain_openai import ChatOpenAI
 from langchain_core.prompts import ChatPromptTemplate
+from tenacity import retry, stop_after_attempt, wait_exponential
 from config import LLM_MODEL_NAME, LLM_BASE_URL
 import logging
 
@@ -71,8 +72,12 @@ Example output format:
         
         chain = prompt | self.llm
         
+        @retry(stop=stop_after_attempt(3), wait=wait_exponential(multiplier=1, min=2, max=10), reraise=True)
+        def invoke_with_retry():
+            return chain.invoke({"raw_text": raw_text[:8000]}) # Limit context size
+        
         try:
-            response = chain.invoke({"raw_text": raw_text[:8000]}) # Limit context size
+            response = invoke_with_retry()
             # Clean up response to handle potential markdown formatting
             content = response.content.strip()
             if content.startswith("```json"):

@@ -117,18 +117,20 @@ This repository contains the firm's **AI-orchestrated "Zero-Staff" platform** �
 └──────────────────────────────────────────────────────────────────────┘
 ```
 
-### Tech Stack
+### Tech Stack & The G-Stack Advantage
+
+This platform is proudly engineered on the **G-Stack** (Google Stack), leveraging Google's premier AI and cloud infrastructure for unparalleled legal reasoning and scalability.
 
 | Layer | Technology | Purpose |
 |-------|-----------|---------|
+| **AI Reasoning (G-Stack)** | **Google Gemini Pro** | Complex legal document analysis, contract vetting, and precedent research |
+| **Development (G-Stack)** | **Google Antigravity** | Agentic AI pair programming used to architect the entire Zero-Staff platform |
 | **Frontend** | Next.js 15, TypeScript, Tailwind CSS | App Router, glassmorphism dashboard |
-| **Backend** | FastAPI (Python) | AI pipeline, document processing, API |
+| **Backend** | FastAPI (Python) & Express (Node.js) | AI pipeline, document processing, state machine API |
 | **Database/Auth** | Supabase (PostgreSQL + RLS) | Multi-tenant data, RBAC, row-level security |
-| **AI Engine** | Gemini Pro (Vercel AI SDK) | Document analysis, drafting, research |
 | **Orchestration** | LangGraph | Multi-agent workflow management |
-| **Embeddings** | SentenceTransformer (all-MiniLM-L6-v2) | RAG template retrieval (384-dim pgvector) |
-| **LLM (Local)** | vLLM (Qwen 2.5-7B) | On-premise document generation |
-| **Monitoring** | Sentry | Separate web + API error tracking |
+| **Embeddings** | SentenceTransformer (`all-MiniLM-L6-v2`) | RAG template retrieval (384-dim pgvector) |
+| **LLM (Local Backup)** | vLLM (Qwen 2.5-7B) | On-premise document generation (fallback) |
 | **Field App** | Progressive Web App (PWA) | Offline-capable mobile for executives |
 
 ---

@@ -1,6 +1,7 @@
 from typing import Dict, Any, List
 from langchain_openai import ChatOpenAI
 from langchain_core.prompts import ChatPromptTemplate
+from tenacity import retry, stop_after_attempt, wait_exponential
 from config import LLM_MODEL_NAME, LLM_BASE_URL
 import logging
 
@@ -45,11 +46,15 @@ Do not invent fake case laws. Rely strictly on established Indian property law p
         
         chain = prompt | self.llm
         
-        try:
-            response = chain.invoke({
+        @retry(stop=stop_after_attempt(3), wait=wait_exponential(multiplier=1, min=2, max=10), reraise=True)
+        def invoke_with_retry():
+            return chain.invoke({
                 "case_details": str(case_details),
                 "query": query
             })
+        
+        try:
+            response = invoke_with_retry()
             
             return {
                 "success": True,

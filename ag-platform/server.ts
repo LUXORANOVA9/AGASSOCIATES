@@ -6,6 +6,7 @@ import dotenv from "dotenv";
 import path from "path";
 import { fileURLToPath } from "url";
 import fs from "fs";
+import crypto from "crypto";
 import caseRoutes from "./src/server/routes/cases.ts";
 import timesheetRoutes from "./src/server/routes/timesheets.ts";
 
@@ -40,6 +41,13 @@ async function startServer() {
 
   app.use(cors());
   app.use(express.json());
+
+  // Step 5: Add Request ID
+  app.use((req, res, next) => {
+    req.headers['x-request-id'] = req.headers['x-request-id'] || crypto.randomUUID();
+    res.setHeader('X-Request-ID', req.headers['x-request-id']);
+    next();
+  });
 
   // Rate Limiting for AI Routes
   const aiLimiter = rateLimit({
@@ -85,6 +93,22 @@ async function startServer() {
       res.sendFile(path.join(distPath, "index.html"));
     });
   }
+
+  // Step 5: Global Structured Error Handler
+  app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
+    console.error(`System Error: ${err.message} | Request ID: ${req.headers['x-request-id']}`);
+    
+    const statusCode = err.status || 500;
+    const isClientError = statusCode >= 400 && statusCode < 500;
+    
+    res.status(statusCode).json({
+      error: {
+        code: isClientError ? err.code || 'BAD_REQUEST' : 'SYSTEM_ERROR',
+        message: isClientError ? err.message : 'An internal system error occurred. Please try again later.',
+        requestId: req.headers['x-request-id']
+      }
+    });
+  });
 
   app.listen(PORT, "0.0.0.0", () => {
     console.log(`Server running on http://localhost:${PORT}`);
