@@ -43,7 +43,7 @@ Incoming Case (WhatsApp / Bank Portal / API)
 | **Drafter** | Report & document generation | ✅ Implemented |
 | **Executor** | Workflow triggers & field assignment | 🔜 Planned |
 | **Auditor** | Compliance verification | ✅ Implemented |
-| **Accountant** | Bank statement reconciliation | 🔜 Planned |
+| **Accountant** | Bank statement reconciliation | ✅ Implemented |
 
 ## Tech Stack
 

@@ -1,7 +1,9 @@
 import uuid
 import asyncio
 import logging
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, UploadFile, File
+import tempfile
+import os
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import Optional, List, Dict, Any
@@ -15,6 +17,7 @@ from config import (
     NESL_MOCK_DELAY_SEC,
 )
 from agents import process_rental_request
+from accountant_agent import accountant_agent
 
 logging.basicConfig(level=getattr(logging, LOG_LEVEL, logging.INFO))
 
@@ -219,6 +222,37 @@ async def nesl_execute():
         }
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"NeSL filing failed: {str(e)}")
+
+@app.post("/api/reconcile-statement")
+async def reconcile_bank_statement(file: UploadFile = File(...)):
+    """
+    Agent 6 (Accountant): Ingest bank statement PDF, extract text,
+    parse UTRs and loan numbers using LLM, and return structured transactions.
+    """
+    if not file.filename.endswith('.pdf'):
+        raise HTTPException(status_code=400, detail="Only PDF files are supported.")
+        
+    try:
+        # Save uploaded file to a temporary location
+        with tempfile.NamedTemporaryFile(delete=False, suffix=".pdf") as temp_file:
+            content = await file.read()
+            temp_file.write(content)
+            temp_path = temp_file.name
+            
+        # Run the accountant agent in a separate thread since PDF parsing is blocking
+        result = await asyncio.to_thread(accountant_agent.reconcile, temp_path)
+        
+        # Clean up temp file
+        os.unlink(temp_path)
+        
+        if not result.get("success"):
+            raise HTTPException(status_code=500, detail=result.get("error", "Unknown parsing error"))
+            
+        return result
+        
+    except Exception as e:
+        logging.error(f"Reconciliation error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
 
 
 if __name__ == "__main__":
