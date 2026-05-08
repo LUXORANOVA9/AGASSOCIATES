@@ -58,7 +58,7 @@ export const FieldApp: React.FC = () => {
     const reader = new FileReader();
     reader.onloadend = () => {
       const newItem: QueueItem = {
-        id: Math.random().toString(36).substr(2, 9),
+        id: crypto.randomUUID(),
         caseId: selectedCaseId,
         timestamp: Date.now(),
         dataUrl: reader.result as string,
