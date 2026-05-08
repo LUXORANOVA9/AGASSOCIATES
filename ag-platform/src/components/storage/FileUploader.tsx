@@ -5,6 +5,9 @@ import { useDropzone } from "react-dropzone";
 import { UploadCloud, File, FileText, Image as ImageIcon, Video, XCircle, RefreshCw } from "lucide-react";
 import { uploadFileResumable } from "../../lib/storage/upload";
 import { UploadProgress } from "../../types/storage";
+import { getErrorMessage } from "../../utils/errorUtils";
+
+
 
 interface FileUploaderProps {
   organizationId: string;
@@ -53,8 +56,8 @@ export const FileUploader: React.FC<FileUploaderProps> = ({ organizationId, proj
       
       setUploads((prev) => ({ ...prev, [uploadId]: { ...prev[uploadId], status: "completed", progress: 100, id: record.id } }));
       if (onUploadComplete) onUploadComplete(record);
-    } catch (err: any) {
-      setUploads((prev) => ({ ...prev, [uploadId]: { ...prev[uploadId], status: "error", error: err.message } }));
+    } catch (err: unknown) {
+      setUploads((prev) => ({ ...prev, [uploadId]: { ...prev[uploadId], status: "error", error: getErrorMessage(err) } }));
     }
   };
 

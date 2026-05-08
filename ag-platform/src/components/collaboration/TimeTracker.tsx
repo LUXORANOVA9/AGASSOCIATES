@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Play, Square, Clock, Activity, ChevronUp, ChevronDown, Loader2, AlertCircle, CheckCircle2 } from 'lucide-react';
+import { getErrorMessage } from "../../utils/errorUtils";
+
+
 
 interface CaseOption {
   id: string;
@@ -99,9 +102,9 @@ export const TimeTracker: React.FC = () => {
         
         // Reset success state after 3s
         setTimeout(() => setSubmitState('idle'), 3000);
-      } catch (err: any) {
+      } catch (err: unknown) {
         setSubmitState('error');
-        setErrorMessage(err.message || 'Failed to sync timesheet.');
+        setErrorMessage(getErrorMessage(err) || 'Failed to sync timesheet.');
       }
     }
   };

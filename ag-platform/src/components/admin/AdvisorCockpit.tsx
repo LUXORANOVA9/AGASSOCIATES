@@ -2,6 +2,9 @@
 import { useState, useEffect } from 'react';
 import { MessageSquare, Send, AlertCircle, Loader2 } from 'lucide-react';
 import { Case, CaseStatus } from '../../types/domain';
+import { getErrorMessage } from "../../utils/errorUtils";
+
+
 
 export function AdvisorCockpit() {
   const [cases, setCases] = useState<Case[]>([]);
@@ -21,8 +24,8 @@ export function AdvisorCockpit() {
         } else {
           throw new Error('Invalid data format received');
         }
-      } catch (err: any) {
-        setError(err.message || 'An unexpected error occurred');
+      } catch (err: unknown) {
+        setError(getErrorMessage(err) || 'An unexpected error occurred');
         console.error('Failed to fetch cases', err);
       } finally {
         setLoading(false);

@@ -1,5 +1,8 @@
 import { useState } from "react";
 import { Sparkles, Plus, Loader2 } from "lucide-react";
+import { getErrorMessage } from "../../utils/errorUtils";
+
+
 
 interface SmartTaskSuggestionsProps {
   brief: string; // The project brief text
@@ -31,8 +34,8 @@ export function SmartTaskSuggestions({ brief, existingTasks, orgId, onAddTasks }
 
       const data = await res.json();
       setSuggestions(data.tasks || []);
-    } catch (err: any) {
-      setError(err.message || "Failed to load suggestions");
+    } catch (err: unknown) {
+      setError(getErrorMessage(err) || "Failed to load suggestions");
     } finally {
       setIsLoading(false);
     }
