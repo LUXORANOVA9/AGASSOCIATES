@@ -99,9 +99,9 @@ export const TimeTracker: React.FC = () => {
         
         // Reset success state after 3s
         setTimeout(() => setSubmitState('idle'), 3000);
-      } catch (err: any) {
+      } catch (err: unknown) {
         setSubmitState('error');
-        setErrorMessage(err.message || 'Failed to sync timesheet.');
+        setErrorMessage((err instanceof Error ? err.message : String(err)) || 'Failed to sync timesheet.');
       }
     }
   };
