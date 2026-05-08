@@ -95,7 +95,7 @@ async function startServer() {
   }
 
   // Step 5: Global Structured Error Handler
-  app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
+  app.use((err: unknown, req: express.Request, res: express.Response, next: express.NextFunction) => {
     console.error(`System Error: ${err.message} | Request ID: ${req.headers['x-request-id']}`);
     
     const statusCode = err.status || 500;
