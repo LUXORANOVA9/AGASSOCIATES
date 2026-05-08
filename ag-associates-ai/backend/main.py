@@ -1,9 +1,9 @@
 import uuid
 import asyncio
 import logging
+import os
 from fastapi import FastAPI, HTTPException, UploadFile, File, Depends, Request
 from fastapi.responses import JSONResponse
-import os
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import Optional, List, Dict, Any
@@ -74,13 +74,28 @@ async def global_exception_handler(request: Request, exc: Exception):
         }
     )
 
-# CORS — configured via CORS_ALLOWED_ORIGINS env var (comma-separated, or `*`).
+# CORS — configured via CORS_ALLOWED_ORIGINS env var (comma-separated).
+# Refuse wildcard origin when credentials are enabled for security.
+_default_cors_origins = ["http://localhost:3000", "http://127.0.0.1:3000"]
+_cors_env = os.getenv("CORS_ALLOWED_ORIGINS", "")
+_extra_cors_origins = [o.strip() for o in _cors_env.split(",") if o.strip()]
+
+# Refuse the wildcard origin: combined with allow_credentials=True it would
+# effectively allow any site to make authenticated cross-origin calls.
+if "*" in _extra_cors_origins:
+    raise RuntimeError(
+        "CORS_ALLOW_ORIGINS='*' is not permitted because credentials are "
+        "enabled. List explicit origins instead."
+    )
+
+_allowed_origins = sorted(set(_default_cors_origins + _extra_cors_origins))
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=CORS_ALLOWED_ORIGINS or ["*"],
+    allow_origins=_allowed_origins,
     allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
+    allow_methods=["GET", "POST", "OPTIONS"],
+    allow_headers=["Authorization", "Content-Type"],
 )
 
 class AgreementRequest(BaseModel):
