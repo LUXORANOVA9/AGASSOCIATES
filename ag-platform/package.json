@@ -17,10 +17,8 @@
     "test": "vitest run"
   },
   "devDependencies": {
-    "@types/react": "^19.2.14",
-    "@types/react-dom": "^19.2.3",
     "turbo": "^2.3.0",
-    "typescript": "^5.9.3",
+    "typescript": "^5.4.0",
     "vitest": "^1.4.0"
   }
 }
