@@ -1,6 +1,7 @@
 import pdfplumber
 import re
 import json
+import os
 from typing import Dict, List, Any, Optional
 from langchain_openai import ChatOpenAI
 from langchain_core.prompts import ChatPromptTemplate
@@ -27,13 +28,38 @@ class AccountantAgent:
         
     def extract_text_from_pdf(self, pdf_path: str) -> str:
         """Extract raw text from bank statement PDF."""
+        # Security constraints
+        if not os.path.isfile(pdf_path):
+            logger.error(f"File not found or is not a regular file: {pdf_path}")
+            raise ValueError(f"Invalid file path: {pdf_path}")
+
+        # Enforce max file size (10MB)
+        max_size = 10 * 1024 * 1024
+        if os.path.getsize(pdf_path) > max_size:
+            logger.error(f"File size exceeds limit for: {pdf_path}")
+            raise ValueError("File size exceeds 10MB limit")
+
+        # Enforce magic bytes check
+        try:
+            with open(pdf_path, 'rb') as f:
+                header = f.read(4)
+        except Exception as e:
+            logger.error(f"Failed to open file for magic bytes check {pdf_path}: {e}")
+            raise ValueError("Failed to read file")
+
+        if header != b'%PDF':
+            logger.error(f"Invalid magic bytes for: {pdf_path}")
+            raise ValueError("File is not a valid PDF")
+
         text = ""
         try:
             with pdfplumber.open(pdf_path) as pdf:
                 for page in pdf.pages:
                     extracted = page.extract_text()
                     if extracted:
-                        text += extracted + "\n"
+                        # Sanitize text
+                        sanitized = "".join(c for c in extracted if c.isprintable() or c in '\n\r\t')
+                        text += sanitized + "\n"
             return text
         except Exception as e:
             logger.error(f"Failed to read PDF {pdf_path}: {e}")
