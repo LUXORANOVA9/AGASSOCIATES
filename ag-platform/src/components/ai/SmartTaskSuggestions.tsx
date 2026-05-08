@@ -31,8 +31,8 @@ export function SmartTaskSuggestions({ brief, existingTasks, orgId, onAddTasks }
 
       const data = await res.json();
       setSuggestions(data.tasks || []);
-    } catch (err: any) {
-      setError(err.message || "Failed to load suggestions");
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : "Failed to load suggestions");
     } finally {
       setIsLoading(false);
     }

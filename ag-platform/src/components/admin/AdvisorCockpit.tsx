@@ -21,8 +21,8 @@ export function AdvisorCockpit() {
         } else {
           throw new Error('Invalid data format received');
         }
-      } catch (err: any) {
-        setError(err.message || 'An unexpected error occurred');
+      } catch (err: unknown) {
+        setError(err instanceof Error ? err.message : 'An unexpected error occurred');
         console.error('Failed to fetch cases', err);
       } finally {
         setLoading(false);
@@ -43,7 +43,7 @@ export function AdvisorCockpit() {
       } else {
         alert('Failed to update case status'); // Fallback for action failure
       }
-    } catch (err) {
+    } catch (err: unknown) {
       console.error('Failed to update status', err);
       alert('Network error while updating case status');
     }
