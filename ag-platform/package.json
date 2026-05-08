@@ -14,11 +14,14 @@
     "lint": "turbo lint",
     "type-check": "turbo type-check",
     "clean": "turbo clean",
-    "test": "vitest run"
+    "test": "vitest run --config ./vitest.config.ts"
   },
   "devDependencies": {
     "turbo": "^2.3.0",
     "typescript": "^5.4.0",
     "vitest": "^1.4.0"
+  },
+  "dependencies": {
+    "tus-js-client": "^4.3.1"
   }
 }
