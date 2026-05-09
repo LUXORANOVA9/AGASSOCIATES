@@ -1,15 +1,22 @@
 import { useState } from "react";
 import { Sparkles, Plus, Loader2 } from "lucide-react";
 
+export interface SuggestedTask {
+  title: string;
+  description: string;
+  priority?: 'High' | 'Medium' | 'Low';
+  estimatedHours?: number;
+}
+
 interface SmartTaskSuggestionsProps {
   brief: string; // The project brief text
-  existingTasks: any[]; // Existing task titles/descriptions
+  existingTasks: unknown[]; // Existing task titles/descriptions
   orgId: string;
-  onAddTasks: (tasks: any[]) => void;
+  onAddTasks: (tasks: SuggestedTask[]) => void;
 }
 
 export function SmartTaskSuggestions({ brief, existingTasks, orgId, onAddTasks }: SmartTaskSuggestionsProps) {
-  const [suggestions, setSuggestions] = useState<any[]>([]);
+  const [suggestions, setSuggestions] = useState<SuggestedTask[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -31,8 +38,8 @@ export function SmartTaskSuggestions({ brief, existingTasks, orgId, onAddTasks }
 
       const data = await res.json();
       setSuggestions(data.tasks || []);
-    } catch (err: any) {
-      setError(err.message || "Failed to load suggestions");
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Failed to load suggestions");
     } finally {
       setIsLoading(false);
     }
