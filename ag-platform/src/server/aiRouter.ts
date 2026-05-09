@@ -1,4 +1,4 @@
-import { Router } from "express";
+import { Router, Request, Response } from "express";
 import { streamText, generateText, generateObject, embed } from "ai";
 import { google } from "@ai-sdk/google";
 import { createClient } from "@supabase/supabase-js";
@@ -52,7 +52,7 @@ async function checkAndTrackTokens(orgId: string, tokensToConsume: number = 0) {
 }
 
 // 1. PROJECT BRIEF GENERATOR (Stream)
-router.post("/generate-brief", async (req, res) => {
+router.post("/generate-brief", async (req: Request, res: Response) => {
   try {
     const { project_name, client_name, scope_description, deliverables, orgId } = req.body;
     
@@ -79,9 +79,9 @@ Deliverables: ${deliverables ? deliverables.join(', ') : 'Not specified'}`;
 
     // Pipe directly to Express response
     result.pipeTextStreamToResponse(res);
-  } catch (err: any) {
+  } catch (err) {
     console.error(err);
-    if (err.message === "AI Quota Exceeded") {
+    if (err instanceof Error && err.message === "AI Quota Exceeded") {
        res.status(402).json({ error: "AI Quota Exceeded" });
     } else {
        res.status(500).json({ error: "Failed to generate brief" });
@@ -90,7 +90,7 @@ Deliverables: ${deliverables ? deliverables.join(', ') : 'Not specified'}`;
 });
 
 // 2. SMART TASK SUGGESTIONS
-router.post("/suggest-tasks", async (req, res) => {
+router.post("/suggest-tasks", async (req: Request, res: Response) => {
   try {
     const { brief, existingTasks, orgId } = req.body;
     await checkAndTrackTokens(orgId);
@@ -111,13 +111,13 @@ router.post("/suggest-tasks", async (req, res) => {
     });
 
     res.json({ tasks: result.object.tasks });
-  } catch (err: any) {
-    res.status(500).json({ error: err.message });
+  } catch (err) {
+    res.status(500).json({ error: err instanceof Error ? err.message : String(err) });
   }
 });
 
 // 3. CLIENT COMMUNICATION DRAFTING
-router.post("/draft-email", async (req, res) => {
+router.post("/draft-email", async (req: Request, res: Response) => {
   try {
     const { email_type, context_data, orgId } = req.body;
     await checkAndTrackTokens(orgId);
@@ -129,13 +129,13 @@ router.post("/draft-email", async (req, res) => {
     });
 
     res.json({ draft: result.text });
-  } catch (err: any) {
-    res.status(500).json({ error: err.message });
+  } catch (err) {
+    res.status(500).json({ error: err instanceof Error ? err.message : String(err) });
   }
 });
 
 // Resend dispatch logic
-router.post("/send-email", async (req, res) => {
+router.post("/send-email", async (req: Request, res: Response) => {
   try {
     const { to, subject, body } = req.body;
     const resend = getResendClient();
@@ -150,13 +150,13 @@ router.post("/send-email", async (req, res) => {
       return res.status(400).json({ error });
     }
     res.json({ success: true, data });
-  } catch (err: any) {
-    res.status(500).json({ error: err.message });
+  } catch (err) {
+    res.status(500).json({ error: err instanceof Error ? err.message : String(err) });
   }
 });
 
 // 4. INVOICE DESCRIPTION GENERATOR
-router.post("/invoice-line-item", async (req, res) => {
+router.post("/invoice-line-item", async (req: Request, res: Response) => {
   try {
     const { time_entries, project_name, orgId } = req.body;
     await checkAndTrackTokens(orgId);
@@ -175,13 +175,13 @@ router.post("/invoice-line-item", async (req, res) => {
     });
 
     res.json({ lineItems: result.object.lineItems });
-  } catch (err: any) {
-    res.status(500).json({ error: err.message });
+  } catch (err) {
+    res.status(500).json({ error: err instanceof Error ? err.message : String(err) });
   }
 });
 
 // 5. DOCUMENT SUMMARIZER
-router.post("/summarize-document", async (req, res) => {
+router.post("/summarize-document", async (req: Request, res: Response) => {
   try {
     const { extracted_text, orgId } = req.body;
     await checkAndTrackTokens(orgId);
@@ -198,15 +198,15 @@ router.post("/summarize-document", async (req, res) => {
     });
 
     res.json({ summary: result.object });
-  } catch (err: any) {
-    res.status(500).json({ error: err.message });
+  } catch (err) {
+    res.status(500).json({ error: err instanceof Error ? err.message : String(err) });
   }
 });
 
 // 6. SEMANTIC PROJECT SEARCH
 // Note: To ingest a project, we would compute its embedding when it is created.
 // Here we provide the search route and an ingest route.
-router.post("/search-projects", async (req, res) => {
+router.post("/search-projects", async (req: Request, res: Response) => {
   try {
     const { query, orgId } = req.body;
     
@@ -227,12 +227,12 @@ router.post("/search-projects", async (req, res) => {
     if (error) throw error;
 
     res.json({ results: matchedProjects });
-  } catch (err: any) {
-    res.status(500).json({ error: err.message });
+  } catch (err) {
+    res.status(500).json({ error: err instanceof Error ? err.message : String(err) });
   }
 });
 
-router.post("/ingest-project", async (req, res) => {
+router.post("/ingest-project", async (req: Request, res: Response) => {
   try {
     const { projectId, content, orgId } = req.body;
     await checkAndTrackTokens(orgId); // Account for ingestion
@@ -251,13 +251,13 @@ router.post("/ingest-project", async (req, res) => {
     if (error) throw error;
 
     res.json({ success: true });
-  } catch (err: any) {
-    res.status(500).json({ error: err.message });
+  } catch (err) {
+    res.status(500).json({ error: err instanceof Error ? err.message : String(err) });
   }
 });
 
 // 7. LEGAL DOCUMENT VETTING
-router.post("/vet-document", async (req, res) => {
+router.post("/vet-document", async (req: Request, res: Response) => {
   try {
     const { documentText, documentType, orgId } = req.body;
     
@@ -286,7 +286,7 @@ ${documentText}`;
     });
 
     res.json(result.object);
-  } catch (error: any) {
+  } catch (error) {
     console.error('AI Vetting error:', error);
     res.status(500).json({ error: 'Failed to vet document using AI' });
   }

@@ -17,8 +17,16 @@
     "test": "vitest run"
   },
   "devDependencies": {
+    "@ai-sdk/google": "^3.0.71",
+    "@types/express": "^5.0.6",
+    "@types/node": "^25.6.2",
+    "ai": "^6.0.177",
+    "autoprefixer": "^10.5.0",
+    "resend": "^6.12.3",
+    "tailwindcss": "^4.3.0",
     "turbo": "^2.3.0",
     "typescript": "^5.4.0",
-    "vitest": "^1.4.0"
+    "vitest": "^1.4.0",
+    "zod": "^4.4.3"
   }
 }
