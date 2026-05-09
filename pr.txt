@@ -1,0 +1,6 @@
+🧹 Fix code health issue in aiRouter.ts
+
+🎯 What: Removed the usage of `any` type in the `catch (err: any)` blocks in `ag-platform/src/server/aiRouter.ts`. Replaced `catch (err: any)` with `catch (err)` and safely extracted the error message using `err instanceof Error ? err.message : "Unknown error"`.
+💡 Why: Using `any` bypasses TypeScript's type checking, making the codebase more prone to runtime errors. Defining a strict and safer approach to error extraction improves the code readability and structural maintainability.
+✅ Verification: Ran `npx tsc --noEmit` and successfully verified there are no TS errors on the `src/server/aiRouter.ts`.
+✨ Result: The codebase now complies with TypeScript strict type checking for error variables inside try-catch blocks and is more consistent without altering any functionality.
