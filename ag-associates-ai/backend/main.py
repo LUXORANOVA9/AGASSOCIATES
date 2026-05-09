@@ -364,3 +364,30 @@ if __name__ == "__main__":
     import uvicorn
     from config import API_HOST, API_PORT
     uvicorn.run(app, host=API_HOST, port=API_PORT)
+
+class CaseStatusUpdate(BaseModel):
+    status: str
+    notes: Optional[str] = None
+
+@app.get("/api/cases")
+async def list_cases():
+    """Mock endpoint to return cases for the Kanban board"""
+    cases = [
+        {"id": "c1", "case_number": "AGA-2024-00123", "borrower_name": "Rahul Patil", "loan_amount": 5000000, "status": "RECEIVED", "case_type": "TITLE_SEARCH", "created_at": "2024-05-01T10:00:00Z"},
+        {"id": "c2", "case_number": "AGA-2024-00124", "borrower_name": "Sneha Sharma", "loan_amount": 7500000, "status": "ASSIGNED", "case_type": "MORTGAGE", "created_at": "2024-05-02T11:30:00Z"},
+        {"id": "c3", "case_number": "AGA-2024-00125", "borrower_name": "Amit Desai", "loan_amount": 12000000, "status": "IN_PROGRESS", "case_type": "FRANKING", "created_at": "2024-05-03T09:15:00Z"},
+        {"id": "c4", "case_number": "AGA-2024-00126", "borrower_name": "Priya Singh", "loan_amount": 3500000, "status": "QUALITY_CHECK", "case_type": "TITLE_SEARCH", "created_at": "2024-05-04T14:20:00Z"},
+        {"id": "c5", "case_number": "AGA-2024-00127", "borrower_name": "Vikram Joshi", "loan_amount": 9000000, "status": "REGISTERED", "case_type": "MORTGAGE", "created_at": "2024-05-05T16:45:00Z"}
+    ]
+    return cases
+
+@app.patch("/api/cases/{case_id}")
+async def update_case_status(case_id: str, payload: CaseStatusUpdate):
+    """Mock endpoint to update case status (e.g. from Kanban board)"""
+    # In a real app, this would update the database
+    return {"id": case_id, "status": payload.status, "message": "Status updated successfully"}
+
+@app.put("/api/cases/{case_id}/status")
+async def put_case_status(case_id: str, payload: CaseStatusUpdate):
+    """Mock endpoint for field app to update case status"""
+    return {"id": case_id, "status": payload.status, "message": "Status updated successfully"}
