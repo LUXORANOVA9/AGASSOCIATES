@@ -4,13 +4,13 @@ import React, { useCallback, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import { UploadCloud, File, FileText, Image as ImageIcon, Video, XCircle, RefreshCw } from "lucide-react";
 import { uploadFileResumable } from "../../lib/storage/upload";
-import { UploadProgress } from "../../types/storage";
+import { UploadProgress, FileRecord } from "../../types/storage";
 
 interface FileUploaderProps {
   organizationId: string;
   projectId?: string;
   bucketId: "org-assets" | "project-files";
-  onUploadComplete?: (fileData: any) => void;
+  onUploadComplete?: (fileData: FileRecord) => void;
 }
 
 const getFileIcon = (type: string) => {
@@ -53,8 +53,9 @@ export const FileUploader: React.FC<FileUploaderProps> = ({ organizationId, proj
       
       setUploads((prev) => ({ ...prev, [uploadId]: { ...prev[uploadId], status: "completed", progress: 100, id: record.id } }));
       if (onUploadComplete) onUploadComplete(record);
-    } catch (err: any) {
-      setUploads((prev) => ({ ...prev, [uploadId]: { ...prev[uploadId], status: "error", error: err.message } }));
+    } catch (err) {
+      const errorMessage = err instanceof Error ? err.message : String(err);
+      setUploads((prev) => ({ ...prev, [uploadId]: { ...prev[uploadId], status: "error", error: errorMessage } }));
     }
   };
 
