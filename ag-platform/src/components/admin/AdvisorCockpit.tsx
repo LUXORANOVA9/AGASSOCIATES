@@ -21,8 +21,8 @@ export function AdvisorCockpit() {
         } else {
           throw new Error('Invalid data format received');
         }
-      } catch (err: any) {
-        setError(err.message || 'An unexpected error occurred');
+      } catch (err: unknown) {
+        setError(err instanceof Error ? err.message : 'An unexpected error occurred');
         console.error('Failed to fetch cases', err);
       } finally {
         setLoading(false);

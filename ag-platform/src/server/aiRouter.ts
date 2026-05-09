@@ -79,9 +79,9 @@ Deliverables: ${deliverables ? deliverables.join(', ') : 'Not specified'}`;
 
     // Pipe directly to Express response
     result.pipeTextStreamToResponse(res);
-  } catch (err: any) {
+  } catch (err: unknown) {
     console.error(err);
-    if (err.message === "AI Quota Exceeded") {
+    if (err instanceof Error && err.message === "AI Quota Exceeded") {
        res.status(402).json({ error: "AI Quota Exceeded" });
     } else {
        res.status(500).json({ error: "Failed to generate brief" });
@@ -111,8 +111,8 @@ router.post("/suggest-tasks", async (req, res) => {
     });
 
     res.json({ tasks: result.object.tasks });
-  } catch (err: any) {
-    res.status(500).json({ error: err.message });
+  } catch (err: unknown) {
+    res.status(500).json({ error: err instanceof Error ? err.message : "Internal Server Error" });
   }
 });
 
@@ -129,8 +129,8 @@ router.post("/draft-email", async (req, res) => {
     });
 
     res.json({ draft: result.text });
-  } catch (err: any) {
-    res.status(500).json({ error: err.message });
+  } catch (err: unknown) {
+    res.status(500).json({ error: err instanceof Error ? err.message : "Internal Server Error" });
   }
 });
 
@@ -150,8 +150,8 @@ router.post("/send-email", async (req, res) => {
       return res.status(400).json({ error });
     }
     res.json({ success: true, data });
-  } catch (err: any) {
-    res.status(500).json({ error: err.message });
+  } catch (err: unknown) {
+    res.status(500).json({ error: err instanceof Error ? err.message : "Internal Server Error" });
   }
 });
 
@@ -175,8 +175,8 @@ router.post("/invoice-line-item", async (req, res) => {
     });
 
     res.json({ lineItems: result.object.lineItems });
-  } catch (err: any) {
-    res.status(500).json({ error: err.message });
+  } catch (err: unknown) {
+    res.status(500).json({ error: err instanceof Error ? err.message : "Internal Server Error" });
   }
 });
 
@@ -198,8 +198,8 @@ router.post("/summarize-document", async (req, res) => {
     });
 
     res.json({ summary: result.object });
-  } catch (err: any) {
-    res.status(500).json({ error: err.message });
+  } catch (err: unknown) {
+    res.status(500).json({ error: err instanceof Error ? err.message : "Internal Server Error" });
   }
 });
 
@@ -227,8 +227,8 @@ router.post("/search-projects", async (req, res) => {
     if (error) throw error;
 
     res.json({ results: matchedProjects });
-  } catch (err: any) {
-    res.status(500).json({ error: err.message });
+  } catch (err: unknown) {
+    res.status(500).json({ error: err instanceof Error ? err.message : "Internal Server Error" });
   }
 });
 
@@ -251,8 +251,8 @@ router.post("/ingest-project", async (req, res) => {
     if (error) throw error;
 
     res.json({ success: true });
-  } catch (err: any) {
-    res.status(500).json({ error: err.message });
+  } catch (err: unknown) {
+    res.status(500).json({ error: err instanceof Error ? err.message : "Internal Server Error" });
   }
 });
 
@@ -286,7 +286,7 @@ ${documentText}`;
     });
 
     res.json(result.object);
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('AI Vetting error:', error);
     res.status(500).json({ error: 'Failed to vet document using AI' });
   }
