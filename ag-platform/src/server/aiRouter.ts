@@ -1,4 +1,4 @@
-import { Router, Request, Response } from "express";
+import { Router } from "express";
 import { streamText, generateText, generateObject, embed } from "ai";
 import { google } from "@ai-sdk/google";
 import { createClient } from "@supabase/supabase-js";
@@ -52,7 +52,7 @@ async function checkAndTrackTokens(orgId: string, tokensToConsume: number = 0) {
 }
 
 // 1. PROJECT BRIEF GENERATOR (Stream)
-router.post("/generate-brief", async (req: Request, res: Response) => {
+router.post("/generate-brief", async (req: any, res: any) => {
   try {
     const { project_name, client_name, scope_description, deliverables, orgId } = req.body;
     
@@ -90,7 +90,7 @@ Deliverables: ${deliverables ? deliverables.join(', ') : 'Not specified'}`;
 });
 
 // 2. SMART TASK SUGGESTIONS
-router.post("/suggest-tasks", async (req: Request, res: Response) => {
+router.post("/suggest-tasks", async (req: any, res: any) => {
   try {
     const { brief, existingTasks, orgId } = req.body;
     await checkAndTrackTokens(orgId);
@@ -117,7 +117,7 @@ router.post("/suggest-tasks", async (req: Request, res: Response) => {
 });
 
 // 3. CLIENT COMMUNICATION DRAFTING
-router.post("/draft-email", async (req: Request, res: Response) => {
+router.post("/draft-email", async (req: any, res: any) => {
   try {
     const { email_type, context_data, orgId } = req.body;
     await checkAndTrackTokens(orgId);
@@ -135,7 +135,7 @@ router.post("/draft-email", async (req: Request, res: Response) => {
 });
 
 // Resend dispatch logic
-router.post("/send-email", async (req: Request, res: Response) => {
+router.post("/send-email", async (req: any, res: any) => {
   try {
     const { to, subject, body } = req.body;
     const resend = getResendClient();
@@ -156,7 +156,7 @@ router.post("/send-email", async (req: Request, res: Response) => {
 });
 
 // 4. INVOICE DESCRIPTION GENERATOR
-router.post("/invoice-line-item", async (req: Request, res: Response) => {
+router.post("/invoice-line-item", async (req: any, res: any) => {
   try {
     const { time_entries, project_name, orgId } = req.body;
     await checkAndTrackTokens(orgId);
@@ -181,7 +181,7 @@ router.post("/invoice-line-item", async (req: Request, res: Response) => {
 });
 
 // 5. DOCUMENT SUMMARIZER
-router.post("/summarize-document", async (req: Request, res: Response) => {
+router.post("/summarize-document", async (req: any, res: any) => {
   try {
     const { extracted_text, orgId } = req.body;
     await checkAndTrackTokens(orgId);
@@ -206,7 +206,7 @@ router.post("/summarize-document", async (req: Request, res: Response) => {
 // 6. SEMANTIC PROJECT SEARCH
 // Note: To ingest a project, we would compute its embedding when it is created.
 // Here we provide the search route and an ingest route.
-router.post("/search-projects", async (req: Request, res: Response) => {
+router.post("/search-projects", async (req: any, res: any) => {
   try {
     const { query, orgId } = req.body;
     
@@ -232,7 +232,7 @@ router.post("/search-projects", async (req: Request, res: Response) => {
   }
 });
 
-router.post("/ingest-project", async (req: Request, res: Response) => {
+router.post("/ingest-project", async (req: any, res: any) => {
   try {
     const { projectId, content, orgId } = req.body;
     await checkAndTrackTokens(orgId); // Account for ingestion
@@ -257,7 +257,7 @@ router.post("/ingest-project", async (req: Request, res: Response) => {
 });
 
 // 7. LEGAL DOCUMENT VETTING
-router.post("/vet-document", async (req: Request, res: Response) => {
+router.post("/vet-document", async (req: any, res: any) => {
   try {
     const { documentText, documentType, orgId } = req.body;
     
