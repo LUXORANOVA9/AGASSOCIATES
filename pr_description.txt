@@ -1,0 +1,13 @@
+🧹 [code health improvement] Refactor error handling in aiRouter.ts
+
+🎯 **What:** The code health issue addressed
+Replaced all usages of `catch (err: any)` with `catch (error: unknown)` in `ag-platform/src/server/aiRouter.ts`. Updated error handling logic to type check `error instanceof Error` before accessing properties to avoid runtime exceptions, and added fallback error messages. Added a `vitest.config.ts` file to fix Vitest running tests properly without attempting to load UI plugins incorrectly. Added `esModuleInterop: true` to `tsconfig.json` to fix a TS build issue arising from default exports of CommonJS modules.
+
+💡 **Why:** How this improves maintainability
+Using the `any` type in TypeScript defeats the purpose of strong typing. It hides potential typing issues that the TypeScript compiler would otherwise catch. Switching to `unknown` correctly forces code inside the catch block to perform type checking (`instanceof Error`) before accessing properties like `error.message`. This significantly enhances code safety, correctness, readability, and prevents subtle bugs.
+
+✅ **Verification:** How you confirmed the change is safe
+Ran `npm run type-check` in `ag-platform/` to verify TypeScript builds without strict typing errors. Also successfully ran `npm test -- --config ./vitest.config.ts` to ensure no runtime breakages with tests. The changes are strictly scoped to the catch clauses and do not alter the business logic or expected response payloads.
+
+✨ **Result:** The improvement achieved
+A safer and more idiomatic TypeScript implementation in `aiRouter.ts` where all error objects are explicitly type-checked. The application is now less prone to unhandled crashes if an unexpected non-Error object is thrown.

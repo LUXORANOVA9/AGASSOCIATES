@@ -4,7 +4,7 @@ import { google } from "@ai-sdk/google";
 import { createClient } from "@supabase/supabase-js";
 import { Resend } from "resend";
 import { z } from "zod";
-import dotenv from "dotenv";
+import * as dotenv from "dotenv";
 
 dotenv.config();
 
@@ -79,9 +79,9 @@ Deliverables: ${deliverables ? deliverables.join(', ') : 'Not specified'}`;
 
     // Pipe directly to Express response
     result.pipeTextStreamToResponse(res);
-  } catch (err: any) {
-    console.error(err);
-    if (err.message === "AI Quota Exceeded") {
+  } catch (error: unknown) {
+    console.error(error);
+    if (error instanceof Error && error.message === "AI Quota Exceeded") {
        res.status(402).json({ error: "AI Quota Exceeded" });
     } else {
        res.status(500).json({ error: "Failed to generate brief" });
@@ -111,8 +111,9 @@ router.post("/suggest-tasks", async (req, res) => {
     });
 
     res.json({ tasks: result.object.tasks });
-  } catch (err: any) {
-    res.status(500).json({ error: err.message });
+  } catch (error: unknown) {
+    const errorMessage = error instanceof Error ? error.message : "An unexpected error occurred";
+    res.status(500).json({ error: errorMessage });
   }
 });
 
@@ -129,8 +130,9 @@ router.post("/draft-email", async (req, res) => {
     });
 
     res.json({ draft: result.text });
-  } catch (err: any) {
-    res.status(500).json({ error: err.message });
+  } catch (error: unknown) {
+    const errorMessage = error instanceof Error ? error.message : "An unexpected error occurred";
+    res.status(500).json({ error: errorMessage });
   }
 });
 
@@ -150,8 +152,9 @@ router.post("/send-email", async (req, res) => {
       return res.status(400).json({ error });
     }
     res.json({ success: true, data });
-  } catch (err: any) {
-    res.status(500).json({ error: err.message });
+  } catch (error: unknown) {
+    const errorMessage = error instanceof Error ? error.message : "An unexpected error occurred";
+    res.status(500).json({ error: errorMessage });
   }
 });
 
@@ -175,8 +178,9 @@ router.post("/invoice-line-item", async (req, res) => {
     });
 
     res.json({ lineItems: result.object.lineItems });
-  } catch (err: any) {
-    res.status(500).json({ error: err.message });
+  } catch (error: unknown) {
+    const errorMessage = error instanceof Error ? error.message : "An unexpected error occurred";
+    res.status(500).json({ error: errorMessage });
   }
 });
 
@@ -198,8 +202,9 @@ router.post("/summarize-document", async (req, res) => {
     });
 
     res.json({ summary: result.object });
-  } catch (err: any) {
-    res.status(500).json({ error: err.message });
+  } catch (error: unknown) {
+    const errorMessage = error instanceof Error ? error.message : "An unexpected error occurred";
+    res.status(500).json({ error: errorMessage });
   }
 });
 
@@ -227,8 +232,9 @@ router.post("/search-projects", async (req, res) => {
     if (error) throw error;
 
     res.json({ results: matchedProjects });
-  } catch (err: any) {
-    res.status(500).json({ error: err.message });
+  } catch (error: unknown) {
+    const errorMessage = error instanceof Error ? error.message : "An unexpected error occurred";
+    res.status(500).json({ error: errorMessage });
   }
 });
 
@@ -251,8 +257,9 @@ router.post("/ingest-project", async (req, res) => {
     if (error) throw error;
 
     res.json({ success: true });
-  } catch (err: any) {
-    res.status(500).json({ error: err.message });
+  } catch (error: unknown) {
+    const errorMessage = error instanceof Error ? error.message : "An unexpected error occurred";
+    res.status(500).json({ error: errorMessage });
   }
 });
 
@@ -286,7 +293,7 @@ ${documentText}`;
     });
 
     res.json(result.object);
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('AI Vetting error:', error);
     res.status(500).json({ error: 'Failed to vet document using AI' });
   }
