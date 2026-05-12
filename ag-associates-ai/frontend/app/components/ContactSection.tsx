@@ -8,9 +8,10 @@ const contactLinks = [
   {
     icon: Mail,
     label: 'Email',
-    value: 'Adv.adityagade@gmail.com',
-    href: 'mailto:Adv.adityagade@gmail.com',
+    value: 'contact@advaditya.com',
+    href: 'mailto:contact@advaditya.com',
     primary: true,
+    placeholder: true, // TODO: replace with real address
   },
   {
     icon: MessageSquare,

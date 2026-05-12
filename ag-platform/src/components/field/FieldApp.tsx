@@ -60,7 +60,7 @@ export const FieldApp: React.FC = () => {
       // Generate a secure random 9-character alphanumeric string
       const array = new Uint8Array(18);
       crypto.getRandomValues(array);
-      const secureId = Array.from(array, byte => byte.toString(36)).join('').substr(0, 9);
+      const secureId = Array.from(array, byte => byte.toString(36)).join('').substring(0, 9);
 
       const newItem: QueueItem = {
         id: secureId,
