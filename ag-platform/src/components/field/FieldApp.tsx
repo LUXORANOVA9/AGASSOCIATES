@@ -57,8 +57,13 @@ export const FieldApp: React.FC = () => {
 
     const reader = new FileReader();
     reader.onloadend = () => {
+      // Generate a secure random 9-character alphanumeric string
+      const array = new Uint8Array(18);
+      crypto.getRandomValues(array);
+      const secureId = Array.from(array, byte => byte.toString(36)).join('').substr(0, 9);
+
       const newItem: QueueItem = {
-        id: crypto.randomUUID(),
+        id: secureId,
         caseId: selectedCaseId,
         timestamp: Date.now(),
         dataUrl: reader.result as string,
