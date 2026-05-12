@@ -1,0 +1,9 @@
+{
+  "name": "agassociates-root",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "cd ag-associates-ai/frontend && npm ci && npm run build && cd ../../ag-platform && npm ci && npm run build",
+    "test": "cd ag-platform && npm ci && npm run test"
+  }
+}
