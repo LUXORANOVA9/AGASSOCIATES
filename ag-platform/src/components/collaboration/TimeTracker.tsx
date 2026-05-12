@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Play, Square, Clock, Activity, ChevronUp, ChevronDown, Loader2, AlertCircle, CheckCircle2 } from 'lucide-react';
+import { Play, Square, Clock, ChevronUp, ChevronDown, Loader2, AlertCircle, CheckCircle2 } from 'lucide-react';
 
 interface CaseOption {
   id: string;
