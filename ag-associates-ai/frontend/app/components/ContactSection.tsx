@@ -16,9 +16,8 @@ const contactLinks = [
     icon: MessageSquare,
     label: 'WhatsApp',
     value: 'Message on WhatsApp',
-    href: null,
+    href: 'https://wa.me/919699218421',
     primary: false,
-    placeholder: true, // TODO: set real wa.me link
   },
   {
     icon: Linkedin,
