@@ -3,9 +3,9 @@ PDF Generator Module for AG Associates AI
 Converts markdown/text agreements to formatted PDF documents using ReportLab
 """
 
-from reportlab.lib import colors, styles, units
-from reportlab.lib.pagesizes import A4, letter
-from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle, PageBreak
+from reportlab.lib import colors
+from reportlab.lib.pagesizes import A4
+from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.lib.enums import TA_CENTER, TA_LEFT, TA_JUSTIFY
 from reportlab.pdfbase import pdfmetrics
@@ -21,9 +21,13 @@ class AgreementPDFGenerator:
     Generates professional PDF rental agreements from markdown content
     """
     
-    def __init__(self, output_dir: str = "/workspace/ag-associates-ai/output"):
-        self.output_dir = output_dir
-        os.makedirs(output_dir, exist_ok=True)
+    def __init__(self, output_dir: str = None):
+        if output_dir is None:
+            from config import OUTPUT_DIR
+            self.output_dir = OUTPUT_DIR
+        else:
+            self.output_dir = output_dir
+        os.makedirs(self.output_dir, exist_ok=True)
         
         # Initialize styles
         self.styles = getSampleStyleSheet()

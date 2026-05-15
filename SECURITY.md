@@ -2,20 +2,48 @@
 
 ## Supported Versions
 
-Use this section to tell people about which versions of your project are
-currently being supported with security updates.
-
-| Version | Supported          |
-| ------- | ------------------ |
-| 5.1.x   | :white_check_mark: |
-| 5.0.x   | :x:                |
-| 4.0.x   | :white_check_mark: |
-| < 4.0   | :x:                |
+| Version | Supported |
+|---------|-----------|
+| 1.0.x (current) | ✅ |
 
 ## Reporting a Vulnerability
 
-Use this section to tell people how to report a vulnerability.
+**Do not open a public GitHub issue for security vulnerabilities.**
 
-Tell them where to go, how often they can expect to get an update on a
-reported vulnerability, what to expect if the vulnerability is accepted or
-declined, etc.
+Instead, please report security issues via email to [security@agassociates.com](mailto:security@agassociates.com).
+
+### What to include
+
+- Description of the vulnerability
+- Steps to reproduce
+- Potential impact assessment
+- Suggested remediation (if any)
+
+### Response timeline
+
+| Stage | Timeline |
+|-------|----------|
+| Acknowledgment | Within 48 hours |
+| Initial assessment | Within 5 business days |
+| Fix released | Within 30 days (critical) |
+
+### Scope
+
+The following are in scope for security reports:
+
+- **AI Pipeline** (`ag-associates-ai/backend/`) — API endpoints, DB access, LLM interactions
+- **Platform** (`ag-platform/`) — Supabase RLS policies, authentication, file storage
+- **Infrastructure** — Docker configs, environment variable handling, credential management
+
+### Out of scope
+
+- Mock endpoints (`/api/nesl/execute`) — these simulate government filing and contain no real integrations
+- Frontend-only cosmetic issues
+
+## Security Measures
+
+- **Row-Level Security**: Supabase RLS enforces tenant and bank data isolation
+- **Signed URLs**: Document vault uses 60-second expiring signed URLs
+- **Credential Management**: All secrets via environment variables, never hardcoded in source
+- **Audit Logging**: Case state transitions logged to immutable `case_audit_logs` table
+- **Data Sovereignty**: Deployed in `ap-south-1` (Mumbai) for Indian banking compliance

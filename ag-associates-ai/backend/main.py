@@ -1,16 +1,28 @@
-import os
 import uuid
 import asyncio
-from fastapi import FastAPI, HTTPException
+import logging
+import os
+from fastapi import FastAPI, HTTPException, UploadFile, File, Depends, Request
+from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import Optional, List, Dict, Any
 import psycopg2
 from psycopg2.extras import RealDictCursor
-from pgvector.psycopg2 import register_vector
-import numpy as np
-from config import get_database_url, EMBEDDING_DIMENSION
+from pgvector.psycopg2 import register_vector as _register_vector
+from config import (
+    get_database_url,
+    CORS_ALLOWED_ORIGINS,
+    LOG_LEVEL,
+    NESL_MOCK_DELAY_SEC,
+)
 from agents import process_rental_request
+from accountant_agent import accountant_agent
+from vyasa_agent import vyasa_agent
+from executor_agent import executor_agent
+from auth import get_current_user
+
+logging.basicConfig(level=getattr(logging, LOG_LEVEL, logging.INFO))
 
 app = FastAPI(
     title="AG Associates AI Backend",
@@ -18,12 +30,54 @@ app = FastAPI(
     version="1.0.0"
 )
 
-# Allow the dashboard frontend (and any additional origins listed in
-# CORS_ALLOW_ORIGINS) to call this API from the browser. Without this the
-# Next.js dashboard at http://localhost:3000 cannot reach the API and every
-# request fails with a CORS preflight error.
+# Generate unique Request ID for telemetry
+@app.middleware("http")
+async def add_request_id(request: Request, call_next):
+    request_id = uuid.uuid4().hex
+    request.state.request_id = request_id
+    response = await call_next(request)
+    response.headers["X-Request-ID"] = request_id
+    return response
+
+# Step 5: Structured Error Responses
+class APIError(Exception):
+    def __init__(self, code: str, message: str, status_code: int = 400):
+        self.code = code
+        self.message = message
+        self.status_code = status_code
+
+@app.exception_handler(APIError)
+async def api_error_handler(request: Request, exc: APIError):
+    return JSONResponse(
+        status_code=exc.status_code,
+        content={
+            "error": {
+                "code": exc.code,
+                "message": exc.message,
+                "requestId": getattr(request.state, "request_id", "unknown")
+            }
+        }
+    )
+
+@app.exception_handler(Exception)
+async def global_exception_handler(request: Request, exc: Exception):
+    logging.error(f"System Error: {str(exc)} | Request ID: {getattr(request.state, 'request_id', 'unknown')}")
+    # Don't expose internal details
+    return JSONResponse(
+        status_code=500,
+        content={
+            "error": {
+                "code": "SYSTEM_ERROR",
+                "message": "An internal system error occurred. Please try again later.",
+                "requestId": getattr(request.state, "request_id", "unknown")
+            }
+        }
+    )
+
+# CORS — configured via CORS_ALLOWED_ORIGINS env var (comma-separated).
+# Refuse wildcard origin when credentials are enabled for security.
 _default_cors_origins = ["http://localhost:3000", "http://127.0.0.1:3000"]
-_cors_env = os.getenv("CORS_ALLOW_ORIGINS", "")
+_cors_env = os.getenv("CORS_ALLOWED_ORIGINS", "")
 _extra_cors_origins = [o.strip() for o in _cors_env.split(",") if o.strip()]
 
 # Refuse the wildcard origin: combined with allow_credentials=True it would
@@ -44,8 +98,18 @@ app.add_middleware(
     allow_headers=["Authorization", "Content-Type"],
 )
 
-# Register pgvector
-register_vector()
+class AgreementRequest(BaseModel):
+    raw_input: str
+    sender: str
+
+class LegalQueryRequest(BaseModel):
+    case_details: Dict[str, Any]
+    query: str
+
+class CaseStateRequest(BaseModel):
+    case_state: Dict[str, Any]
+    timestamp: Optional[str] = None
+    metadata: Optional[Dict[str, Any]] = None
 
 class WebhookPayload(BaseModel):
     message: str
@@ -78,6 +142,7 @@ def get_db_connection():
         get_database_url(),
         cursor_factory=RealDictCursor
     )
+    _register_vector(conn)
     return conn
 
 @app.get("/health")
@@ -114,9 +179,10 @@ async def whatsapp_webhook(payload: WebhookPayload):
 
 
 @app.post("/api/generate-agreement")
-async def generate_agreement(request: AgreementRequest) -> WorkflowResponse:
+async def generate_agreement_api(request: AgreementRequest, user: dict = Depends(get_current_user)):
     """
-    API endpoint to generate a rental agreement using the agent workflow
+    Direct API endpoint to generate an agreement without going through WhatsApp.
+    Secured with Supabase Auth JWT.
     
     This is the main entry point for triggering the Aisha -> Drafter -> Auditor pipeline
     """
@@ -148,16 +214,16 @@ async def dashboard_status():
     Real-time status endpoint for the frontend dashboard
     Shows agent activity, template count, and system health
     """
+    conn = None
     try:
         conn = get_db_connection()
         cur = conn.cursor()
-        
-        # Get total templates count
-        cur.execute("SELECT COUNT(*) as count FROM legal_templates")
-        total_templates = cur.fetchone()['count']
-        
-        cur.close()
-        conn.close()
+        try:
+            # Get total templates count
+            cur.execute("SELECT COUNT(*) as count FROM legal_templates")
+            total_templates = cur.fetchone()['count']
+        finally:
+            cur.close()
         
         # Mock active agents (will be replaced with actual LangGraph state)
         active_agents = 3
@@ -173,48 +239,52 @@ async def dashboard_status():
         )
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Dashboard status fetch failed: {str(e)}")
+    finally:
+        if conn is not None:
+            conn.close()
 
 @app.get("/templates")
 async def list_templates(template_type: Optional[str] = None, language: Optional[str] = None):
     """List available legal templates with optional filtering"""
+    conn = None
     try:
         conn = get_db_connection()
         cur = conn.cursor()
-        
-        query = "SELECT id, title, template_type, jurisdiction, language, created_at FROM legal_templates WHERE 1=1"
-        params = []
-        
-        if template_type:
-            query += " AND template_type = %s"
-            params.append(template_type)
-        
-        if language:
-            query += " AND language = %s"
-            params.append(language)
-        
-        cur.execute(query, params)
-        templates = cur.fetchall()
-        
-        cur.close()
-        conn.close()
+        try:
+            query = "SELECT id, title, template_type, jurisdiction, language, created_at FROM legal_templates WHERE 1=1"
+            params = []
+            
+            if template_type:
+                query += " AND template_type = %s"
+                params.append(template_type)
+            
+            if language:
+                query += " AND language = %s"
+                params.append(language)
+            
+            cur.execute(query, params)
+            templates = cur.fetchall()
+        finally:
+            cur.close()
         
         return {"templates": templates}
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Template listing failed: {str(e)}")
+    finally:
+        if conn is not None:
+            conn.close()
 
 
 @app.post("/api/nesl/execute")
-async def nesl_execute():
+async def nesl_execute(user: dict = Depends(get_current_user)):
     """
     Mock NeSL (National e-Services Ltd) filing endpoint
-    Simulates filing the generated agreement with the government registry
-    
-    Returns a transaction ID after a simulated delay
+    Secured with Supabase Auth JWT.
     """
     try:
-        # Simulate processing delay (3 seconds as per roadmap)
-        await asyncio.sleep(3)
-        
+        # Simulate processing delay (configurable via NESL_MOCK_DELAY_SEC).
+        await asyncio.sleep(NESL_MOCK_DELAY_SEC)
+
         # Generate a random transaction ID
         transaction_id = f"NESL-{uuid.uuid4().hex[:12].upper()}"
         
@@ -226,6 +296,68 @@ async def nesl_execute():
         }
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"NeSL filing failed: {str(e)}")
+
+@app.post("/api/reconcile-statement")
+async def reconcile_bank_statement(file: UploadFile = File(...), user: dict = Depends(get_current_user)):
+    """
+    Agent 6 (Accountant): Ingest bank statement PDF, extract text,
+    parse UTRs and loan numbers using LLM, and return structured transactions.
+    Secured with Supabase Auth JWT.
+    """
+    if not file.filename.endswith('.pdf'):
+        raise HTTPException(status_code=400, detail="Only PDF files are supported.")
+        
+    try:
+        # Save uploaded file to a temporary location
+        with tempfile.NamedTemporaryFile(delete=False, suffix=".pdf") as temp_file:
+            content = await file.read()
+            temp_file.write(content)
+            temp_path = temp_file.name
+            
+        # Run the accountant agent in a separate thread since PDF parsing is blocking
+        result = await asyncio.to_thread(accountant_agent.reconcile, temp_path)
+        
+        # Clean up temp file
+        os.unlink(temp_path)
+        
+        if not result.get("success"):
+            raise HTTPException(status_code=500, detail=result.get("error", "Unknown parsing error"))
+            
+        return result
+        
+    except Exception as e:
+        logging.error(f"Reconciliation error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.post("/api/research")
+async def vyasa_research(request: LegalQueryRequest, user: dict = Depends(get_current_user)):
+    """
+    Agent 2 (Vyasa): Generate legal opinion based on case facts.
+    Secured with Supabase Auth JWT.
+    """
+    try:
+        result = await asyncio.to_thread(vyasa_agent.generate_legal_opinion, request.case_details, request.query)
+        if not result.get("success"):
+            raise HTTPException(status_code=500, detail=result.get("error", "Unknown research error"))
+        return result
+    except Exception as e:
+        logging.error(f"Vyasa research error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.post("/api/execute")
+async def executor_action(request: CaseStateRequest, user: dict = Depends(get_current_user)):
+    """
+    Agent 4 (Executor): Determine the next workflow action for a case.
+    Secured with Supabase Auth JWT.
+    """
+    try:
+        result = await asyncio.to_thread(executor_agent.determine_next_action, request.case_state)
+        if not result.get("success"):
+            raise HTTPException(status_code=500, detail=result.get("error", "Unknown executor error"))
+        return result
+    except Exception as e:
+        logging.error(f"Executor routing error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
 
 
 if __name__ == "__main__":

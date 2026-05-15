@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS legal_templates (
     template_type VARCHAR(100),
     jurisdiction VARCHAR(100),
     language VARCHAR(50) DEFAULT 'en',
-    embedding vector(768),  -- Adjust dimension based on embedding model
+    embedding vector(384),  -- Matches all-MiniLM-L6-v2 output dimension
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
