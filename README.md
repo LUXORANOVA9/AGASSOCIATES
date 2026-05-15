@@ -256,7 +256,11 @@ The following secrets must also be created in **Google Cloud Secret Manager** (r
 
 | Secret Manager Secret | Description |
 |-----------------------|-------------|
-| `DATABASE_URL` | `postgresql://postgres:[PASSWORD]@db.[PROJECT-REF].supabase.co:5432/postgres` |
+| `DATABASE_HOST` | Database hostname (e.g., `db.[PROJECT-REF].supabase.co`) |
+| `DATABASE_PORT` | Database port (default: `5432`) |
+| `DATABASE_NAME` | Database name (e.g., `postgres`) |
+| `DATABASE_USER` | Database user (e.g., `postgres`) |
+| `DATABASE_PASSWORD` | Database password |
 | `LLM_BASE_URL` | LLM endpoint (e.g., `https://api.groq.com/openai/v1` or your vLLM URL) |
 | `LLM_MODEL_NAME` | Model name (e.g., `llama3-8b-8192`) |
 | `CORS_ALLOWED_ORIGINS` | Production frontend URL (e.g., `https://ag-associates.com`) |
