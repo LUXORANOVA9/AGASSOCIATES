@@ -1,0 +1,145 @@
+name: ag-prod
+
+x-restart: &restart
+  restart: unless-stopped
+
+x-logging: &logging
+  logging:
+    driver: json-file
+    options:
+      max-size: "10m"
+      max-file: "5"
+
+services:
+  caddy:
+    image: caddy:2-alpine
+    container_name: ag_caddy
+    <<: [*restart, *logging]
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    environment:
+      DOMAIN: ${DOMAIN}
+      ACME_EMAIL: ${ACME_EMAIL}
+      N8N_BASIC_AUTH_USER: ${N8N_BASIC_AUTH_USER}
+      N8N_BASIC_AUTH_PASSWORD_HASH: ${N8N_BASIC_AUTH_PASSWORD_HASH}
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - ./clerk-docs/dist:/srv/docs:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      - ag-platform
+      - ai-dashboard
+      - ai-backend
+      - n8n
+    networks: [ag_net]
+
+  postgres:
+    image: pgvector/pgvector:pg16
+    container_name: ag_postgres
+    <<: [*restart, *logging]
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+      - ./ag-associates-ai/database/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks: [ag_net]
+
+  ai-backend:
+    build:
+      context: ./ag-associates-ai/backend
+    image: ghcr.io/luxoranova9/ag-ai-backend:${IMAGE_TAG:-latest}
+    container_name: ag_ai_backend
+    <<: [*restart, *logging]
+    environment:
+      DATABASE_HOST: postgres
+      DATABASE_PORT: 5432
+      DATABASE_NAME: ${POSTGRES_DB}
+      DATABASE_USER: ${POSTGRES_USER}
+      DATABASE_PASSWORD: ${POSTGRES_PASSWORD}
+      LLM_BASE_URL: ${LLM_BASE_URL}
+      LLM_MODEL_NAME: ${LLM_MODEL_NAME}
+      LLM_API_KEY: ${LLM_API_KEY}
+      EMBEDDING_MODEL_NAME: sentence-transformers/all-MiniLM-L6-v2
+      EMBEDDING_DIMENSION: 384
+      OUTPUT_DIR: /app/output
+      PDF_ENABLED: "true"
+      CORS_ALLOWED_ORIGINS: https://app.${DOMAIN},https://dashboard.${DOMAIN}
+      SUPABASE_JWT_SECRET: ${SUPABASE_JWT_SECRET}
+    volumes:
+      - ag_output:/app/output
+    depends_on:
+      postgres: { condition: service_healthy }
+    networks: [ag_net]
+
+  ai-dashboard:
+    build:
+      context: ./ag-associates-ai/frontend
+    image: ghcr.io/luxoranova9/ag-ai-dashboard:${IMAGE_TAG:-latest}
+    container_name: ag_ai_dashboard
+    <<: [*restart, *logging]
+    environment:
+      NEXT_PUBLIC_API_URL: https://api.${DOMAIN}
+    depends_on: [ai-backend]
+    networks: [ag_net]
+
+  ag-platform:
+    build:
+      context: ./ag-platform
+    image: ghcr.io/luxoranova9/ag-platform:${IMAGE_TAG:-latest}
+    container_name: ag_platform
+    <<: [*restart, *logging]
+    environment:
+      PORT: 3001
+      DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
+      VITE_SUPABASE_URL: ${SUPABASE_URL}
+      VITE_SUPABASE_ANON_KEY: ${SUPABASE_ANON_KEY}
+      SUPABASE_SERVICE_ROLE_KEY: ${SUPABASE_SERVICE_ROLE_KEY}
+      GOOGLE_GENERATIVE_AI_API_KEY: ${GOOGLE_GENERATIVE_AI_API_KEY}
+      RESEND_API_KEY: ${RESEND_API_KEY}
+    depends_on:
+      postgres: { condition: service_healthy }
+    networks: [ag_net]
+
+  n8n:
+    image: n8nio/n8n:latest
+    container_name: ag_n8n
+    <<: [*restart, *logging]
+    environment:
+      N8N_HOST: n8n.${DOMAIN}
+      N8N_PORT: 5678
+      N8N_PROTOCOL: https
+      WEBHOOK_URL: https://n8n.${DOMAIN}/
+      N8N_TRUSTED_PROXIES: "*"
+      DB_TYPE: postgresdb
+      DB_POSTGRESDB_HOST: postgres
+      DB_POSTGRESDB_PORT: 5432
+      DB_POSTGRESDB_DATABASE: ${POSTGRES_DB}
+      DB_POSTGRESDB_USER: ${POSTGRES_USER}
+      DB_POSTGRESDB_PASSWORD: ${POSTGRES_PASSWORD}
+      GENERIC_TIMEZONE: Asia/Kolkata
+    volumes:
+      - n8n_data:/home/node/.n8n
+    depends_on:
+      postgres: { condition: service_healthy }
+    networks: [ag_net]
+
+volumes:
+  pg_data:
+  n8n_data:
+  caddy_data:
+  caddy_config:
+  ag_output:
+
+networks:
+  ag_net:
+    driver: bridge

@@ -1,0 +1,49 @@
+{
+	email {$ACME_EMAIL}
+	servers {
+		trusted_proxies static private_ranges
+	}
+}
+
+# AG Platform — LegalTech case management (Vite SPA + Express)
+app.{$DOMAIN} {
+	encode zstd gzip
+	reverse_proxy ag-platform:3001 {
+		health_uri /api/health
+		health_interval 30s
+	}
+}
+
+# AI Dashboard — Next.js status / workflow viewer
+dashboard.{$DOMAIN} {
+	encode zstd gzip
+	reverse_proxy ai-dashboard:3000
+}
+
+# AI Backend API — FastAPI agents
+api.{$DOMAIN} {
+	encode zstd gzip
+	reverse_proxy ai-backend:8001 {
+		health_uri /health
+		health_interval 30s
+	}
+}
+
+# n8n orchestration UI — protected by Caddy basicauth on top of n8n's own auth
+n8n.{$DOMAIN} {
+	encode zstd gzip
+	basic_auth {
+		{$N8N_BASIC_AUTH_USER} {$N8N_BASIC_AUTH_PASSWORD_HASH}
+	}
+	reverse_proxy n8n:5678
+}
+
+# Clerk-style docs site — pure static, served by Caddy directly from a mounted dir
+docs.{$DOMAIN} {
+	encode zstd gzip
+	root * /srv/docs
+	redir / /quickstart 301
+	try_files {path} {path}/ {path}.html /index.html
+	file_server
+	header /_public/* Cache-Control "public, max-age=31536000, immutable"
+}
