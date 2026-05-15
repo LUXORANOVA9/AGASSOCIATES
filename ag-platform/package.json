@@ -11,19 +11,41 @@
   "scripts": {
     "dev": "turbo dev",
     "build": "turbo build",
+    "start": "tsx server.ts",
     "lint": "turbo lint",
     "type-check": "turbo type-check",
     "clean": "turbo clean",
     "test": "vitest run --config ./vitest.config.ts"
   },
   "devDependencies": {
-    "autoprefixer": "^10.5.0",
-    "tailwindcss": "^4.3.0",
+    "@types/express": "^5.0.6",
+    "@types/node": "^25.6.2",
+    "@types/react-router-dom": "^5.3.3",
+    "tsx": "^4.21.0",
     "turbo": "^2.3.0",
     "typescript": "^5.4.0",
     "vitest": "^1.4.0"
   },
   "dependencies": {
-    "tus-js-client": "^4.3.1"
+    "@ai-sdk/google": "^3.0.71",
+    "@ai-sdk/react": "^3.0.179",
+    "@dnd-kit/core": "^6.3.1",
+    "@dnd-kit/sortable": "^10.0.0",
+    "@dnd-kit/utilities": "^3.2.2",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "ai": "^6.0.177",
+    "date-fns": "^4.1.0",
+    "express": "^5.2.1",
+    "lucide-react": "^1.14.0",
+    "react": "^19.2.6",
+    "react-dom": "^19.2.6",
+    "react-dropzone": "^15.0.0",
+    "react-markdown": "^10.1.0",
+    "react-pdf": "^10.4.1",
+    "react-router-dom": "^7.15.0",
+    "resend": "^6.12.3",
+    "tus-js-client": "^4.3.1",
+    "zod": "^4.4.3"
   }
 }

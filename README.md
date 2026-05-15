@@ -498,3 +498,14 @@ See [LICENSE](./LICENSE) for details.
   <br/>
   <sub>Powered by LangGraph, Supabase, Gemini Pro & vLLM · Targeting 15,000 panel advocate firms across India</sub>
 </p>
+---
+
+## Technical Update: Luxor9 AI-Driven Legal Factory Transition
+
+AG Associates is transitioning to a **"Zero-Staff" AI-driven operation** utilizing the Luxor9 platform to handle high volumes of home loan processing across India.
+
+### Key New Features
+
+*   **Banker's Eye Kanban Dashboard:** A real-time, drag-and-drop React interface providing Bank Managers and internal Advisors (like Adv. Aditya) with an instant overview of the legal pipeline (Intake -> OCR -> Validation -> Human Review -> IGR Ready).
+*   **Field Executive Mobile PWA:** A mobile-optimized application allowing field staff to instantly scan and upload draft challan photos directly from the Sub-Registrar Office (SRO) for immediate AI validation.
+*   **Multi-Agent AI Orchestration:** The backend connects to an "Intake Crew" using n8n and FastAPI to automate email parsing, OCR, and validation, ensuring 100% regulatory compliance before IGR submission.
