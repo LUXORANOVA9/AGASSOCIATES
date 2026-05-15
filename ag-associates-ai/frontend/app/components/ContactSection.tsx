@@ -8,16 +8,18 @@ const contactLinks = [
   {
     icon: Mail,
     label: 'Email',
-    value: 'Adv.adityagade@gmail.com',
-    href: 'mailto:Adv.adityagade@gmail.com',
+    value: 'contact@advaditya.com',
+    href: 'mailto:contact@advaditya.com',
     primary: true,
+    placeholder: true, // TODO: replace with real address
   },
   {
     icon: MessageSquare,
     label: 'WhatsApp',
     value: 'Message on WhatsApp',
-    href: 'https://wa.me/919699218421',
+    href: null,
     primary: false,
+    placeholder: true, // TODO: set real wa.me link
   },
   {
     icon: Linkedin,
