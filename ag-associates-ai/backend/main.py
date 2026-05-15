@@ -101,7 +101,7 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=_allowed_origins,
     allow_credentials=True,
-    allow_methods=["GET", "POST", "OPTIONS"],
+    allow_methods=["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
     allow_headers=["Authorization", "Content-Type"],
 )
 
@@ -355,7 +355,8 @@ async def reconcile_bank_statement(
 
     try:
         # Save uploaded file to a temporary location
-        with tempfile.NamedTemporaryFile(delete=False, suffix=".pdf") as temp_file:
+        _upload_dir = os.getenv("UPLOAD_TEMP_DIR", tempfile.gettempdir())
+        with tempfile.NamedTemporaryFile(delete=False, suffix=".pdf", dir=_upload_dir) as temp_file:
             content = await file.read()
             temp_file.write(content)
             temp_path = temp_file.name
@@ -433,7 +434,7 @@ class CaseStatusUpdate(BaseModel):
     notes: Optional[str] = None
 
 @app.get("/api/cases")
-async def list_cases():
+async def list_cases(user: dict = Depends(get_current_user)):
     """Mock endpoint to return cases for the Kanban board"""
     cases = [
         {"id": "c1", "case_number": "AGA-2024-00123", "borrower_name": "Rahul Patil", "loan_amount": 5000000, "status": "RECEIVED", "case_type": "TITLE_SEARCH", "created_at": "2024-05-01T10:00:00Z"},
@@ -445,12 +446,12 @@ async def list_cases():
     return cases
 
 @app.patch("/api/cases/{case_id}")
-async def update_case_status(case_id: str, payload: CaseStatusUpdate):
+async def update_case_status(case_id: str, payload: CaseStatusUpdate, user: dict = Depends(get_current_user)):
     """Mock endpoint to update case status (e.g. from Kanban board)"""
     # In a real app, this would update the database
     return {"id": case_id, "status": payload.status, "message": "Status updated successfully"}
 
 @app.put("/api/cases/{case_id}/status")
-async def put_case_status(case_id: str, payload: CaseStatusUpdate):
+async def put_case_status(case_id: str, payload: CaseStatusUpdate, user: dict = Depends(get_current_user)):
     """Mock endpoint for field app to update case status"""
     return {"id": case_id, "status": payload.status, "message": "Status updated successfully"}
