@@ -17,6 +17,8 @@
     "test": "vitest run --config ./vitest.config.ts"
   },
   "devDependencies": {
+    "autoprefixer": "^10.5.0",
+    "tailwindcss": "^4.3.0",
     "turbo": "^2.3.0",
     "typescript": "^5.4.0",
     "vitest": "^1.4.0"
