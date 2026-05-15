@@ -1,0 +1,32 @@
+{
+  "stale_warn_days": 14,
+  "auto_merge_method": "SQUASH",
+  "risk_tiers": {
+    "auto": ["code-health", "docs", "tests", "chore"],
+    "review_required": ["security", "feature", "performance"],
+    "size_gated": ["bugfix"]
+  },
+  "size_gate_max_changed_lines": 50,
+  "duplicate_similarity_threshold": 0.55,
+  "auto_rebase_enabled": true,
+  "meta_dashboard_repo": "luxoranova9/agassociates",
+  "peer_repos": ["luxoranova9/ag"],
+  "managed_labels": {
+    "security":            "b60205",
+    "code-health":         "5319e7",
+    "feature":             "0e8a16",
+    "bugfix":              "d93f0b",
+    "tests":               "fbca04",
+    "performance":         "1d76db",
+    "docs":                "0075ca",
+    "chore":               "cfd3d7",
+    "jules-bot":           "c5def5",
+    "keep-open":           "fef2c0",
+    "auto-merge-enabled":  "bfdadc",
+    "auto-merge-blocked":  "e4e669",
+    "stale-warned":        "e99695",
+    "likely-duplicate":    "f9d0c4",
+    "needs-rebase":        "fbca04",
+    "pr-dashboard":        "0366d6"
+  }
+}
