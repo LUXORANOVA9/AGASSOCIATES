@@ -130,6 +130,15 @@ Required **repo secrets** (Settings → Secrets and variables → Actions):
 | `VPS_SSH_KEY` | Private half of the SSH key you pasted into `/home/deploy/.ssh/authorized_keys` |
 | `VPS_PORT` | `22` (or your custom port) |
 | `PROD_DOMAIN` | e.g. `agassociates.example.com` |
+| `SUPABASE_ANON_KEY` | Supabase anon key (baked into ag-platform browser bundle at build time) |
+
+Required **repo variables** (same page, "Variables" tab):
+
+| Variable | Value |
+|---|---|
+| `SUPABASE_URL` | Supabase project URL (also build-baked into ag-platform) |
+
+> **Why both vars and secrets?** `NEXT_PUBLIC_*` and `VITE_*` env vars are inlined into the browser JS bundle at `docker build` time — they cannot be supplied at container start. CI must pass them as `--build-arg` to `docker build`. Repo Variables hold non-sensitive URLs; Secrets hold the anon key (which is technically public but kept in Secrets for rotation hygiene).
 
 The `clerk-docs` repo has its own `deploy.yml` that builds the static site with Bun and rsyncs `dist/` into `/srv/ag/clerk-docs/dist` on the VPS. Caddy serves it directly — no container rebuild needed.
 

@@ -32,10 +32,17 @@ jobs:
         include:
           - name: ag-ai-backend
             context: ag-associates-ai/backend
+            build_args: ""
           - name: ag-ai-dashboard
             context: ag-associates-ai/frontend
+            build_args: |
+              NEXT_PUBLIC_API_URL=https://api.${{ secrets.PROD_DOMAIN }}
           - name: ag-platform
             context: ag-platform
+            build_args: |
+              VITE_SUPABASE_URL=${{ vars.SUPABASE_URL }}
+              VITE_SUPABASE_ANON_KEY=${{ secrets.SUPABASE_ANON_KEY }}
+              VITE_API_BASE_URL=/api
     steps:
       - uses: actions/checkout@v4
 
@@ -53,6 +60,7 @@ jobs:
         with:
           context: ${{ matrix.context }}
           push: true
+          build-args: ${{ matrix.build_args }}
           tags: |
             ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/${{ matrix.name }}:latest
             ${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/${{ matrix.name }}:${{ github.sha }}

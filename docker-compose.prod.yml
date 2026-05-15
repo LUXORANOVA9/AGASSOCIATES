@@ -84,6 +84,8 @@ services:
   ai-dashboard:
     build:
       context: ./ag-associates-ai/frontend
+      args:
+        NEXT_PUBLIC_API_URL: https://api.${DOMAIN}
     image: ghcr.io/luxoranova9/ag-ai-dashboard:${IMAGE_TAG:-latest}
     container_name: ag_ai_dashboard
     <<: [*restart, *logging]
@@ -95,6 +97,10 @@ services:
   ag-platform:
     build:
       context: ./ag-platform
+      args:
+        VITE_SUPABASE_URL: ${SUPABASE_URL}
+        VITE_SUPABASE_ANON_KEY: ${SUPABASE_ANON_KEY}
+        VITE_API_BASE_URL: /api
     image: ghcr.io/luxoranova9/ag-platform:${IMAGE_TAG:-latest}
     container_name: ag_platform
     <<: [*restart, *logging]
