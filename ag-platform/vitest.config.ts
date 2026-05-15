@@ -9,8 +9,7 @@ export default defineConfig({
   },
   test: {
     environment: 'node',
-  },
-  css: {
-    postcss: false,
+    globals: true,
+    css: false,
   },
 })
