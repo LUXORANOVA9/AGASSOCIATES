@@ -106,9 +106,9 @@ describe('download.ts', () => {
         } as any;
       } else {
         // If we are in jsdom or similar
-        const createElementSpy = vi.spyOn(document, 'createElement');
-        const appendChildSpy = vi.spyOn(document.body, 'appendChild');
-        const removeChildSpy = vi.spyOn(document.body, 'removeChild');
+        vi.spyOn(document, 'createElement');
+        vi.spyOn(document.body, 'appendChild');
+        vi.spyOn(document.body, 'removeChild');
         // We'll rely on the real implementations or spys
       }
     });

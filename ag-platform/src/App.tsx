@@ -2,8 +2,9 @@ import { BrowserRouter, Routes, Route, Link, useLocation } from 'react-router-do
 import { MarketingLanding } from './components/home/MarketingLanding';
 import { ApplicantDashboard } from './components/applicant/ApplicantDashboard';
 import { AdvisorCockpit } from './components/admin/AdvisorCockpit';
+import { FieldApp } from './components/field/FieldApp';
 import { BankPortal } from './components/bank/BankPortal';
-import { Building2, UserCircle2, Briefcase, Landmark } from 'lucide-react';
+import { Building2, UserCircle2, Briefcase, Landmark, Smartphone } from 'lucide-react';
 
 function Navigation() {
   const location = useLocation();
@@ -33,6 +34,9 @@ function Navigation() {
         <Link to="/admin" className={getLinkStyle('/admin')}>
            <Briefcase size={16} /> Advisor
         </Link>
+        <Link to="/field" className={getLinkStyle('/field')}>
+           <Smartphone size={16} /> Field Ops
+        </Link>
         <Link to="/bank" className={getLinkStyle('/bank')}>
            <Landmark size={16} /> Bank Portal
         </Link>
@@ -53,6 +57,7 @@ function App() {
             <Route path="/" element={<MarketingLanding />} />
             <Route path="/applicant/*" element={<ApplicantDashboard />} />
             <Route path="/admin/*" element={<AdvisorCockpit />} />
+            <Route path="/field/*" element={<FieldApp />} />
             <Route path="/bank/*" element={<BankPortal />} />
           </Routes>
         </main>
