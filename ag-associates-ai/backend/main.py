@@ -98,10 +98,6 @@ app.add_middleware(
     allow_headers=["Authorization", "Content-Type"],
 )
 
-class AgreementRequest(BaseModel):
-    raw_input: str
-    sender: str
-
 class LegalQueryRequest(BaseModel):
     case_details: Dict[str, Any]
     query: str
