@@ -41,13 +41,13 @@ export function useLivePresence(projectId: string) {
       channel
         .on("presence", { event: "sync" }, () => {
           if (!isMounted) return;
-          const newState = channel.presenceState();
+          const newState = channel.presenceState<PresenceUser>();
           
           const uniqueUsers = new Map<string, PresenceUser>();
           Object.values(newState).forEach((presenceKeys) => {
-            presenceKeys.forEach((presence: any) => {
+            presenceKeys.forEach((presence) => {
               if (!uniqueUsers.has(presence.user_id)) {
-                uniqueUsers.set(presence.user_id, presence as PresenceUser);
+                uniqueUsers.set(presence.user_id, presence);
               }
             });
           });
