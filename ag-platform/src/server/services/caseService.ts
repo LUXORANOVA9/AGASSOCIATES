@@ -1,4 +1,5 @@
 
+import crypto from 'crypto';
 import { pool } from '../db.ts';
 import { Case, CaseStatus } from '../../types/domain.ts';
 
@@ -20,7 +21,8 @@ export const CaseService = {
     } = data;
     
     // Simple case number generator for now
-    const caseNumber = `AGA-${new Date().getFullYear()}-${Math.floor(Math.random() * 100000).toString().padStart(5, '0')}`;
+    const randomValue = crypto.randomInt(100000);
+    const caseNumber = `AGA-${new Date().getFullYear()}-${randomValue.toString().padStart(5, '0')}`;
 
     const res = await pool.query(
       `INSERT INTO cases (case_number, org_id, bank_id, case_type, borrower_name, loan_amount, professional_fee, sla_deadline)
