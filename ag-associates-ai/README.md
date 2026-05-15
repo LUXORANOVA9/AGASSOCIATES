@@ -88,6 +88,11 @@ python main.py    # → http://localhost:8001
 | `GET` | `/dashboard/status` | System health, template count |
 | `GET` | `/templates` | List templates (filterable by type, language) |
 | `POST` | `/api/nesl/execute` | Mock NeSL government filing |
+| `GET` | `/api/cases` | List cases for the Banker's Eye Kanban board |
+| `PATCH` | `/api/cases/{case_id}` | Update case status from Kanban drag-and-drop actions |
+| `PUT` | `/api/cases/{case_id}/status` | Update case status from the field executive app |
+
+> Note: All `/api/*` endpoints (except `/health` and `/webhook/whatsapp`) require a valid Supabase Auth JWT in the `Authorization` header.
 
 ## Environment Variables
 
@@ -101,6 +106,7 @@ See [`backend/.env.example`](./backend/.env.example) for the full list. Key vari
 | `EMBEDDING_DIMENSION` | `384` | Must match model output & `init.sql` |
 | `DATABASE_HOST` | `localhost` | PostgreSQL host |
 | `OUTPUT_DIR` | `../output` (relative) | Generated PDF/MD output directory |
+| `UPLOAD_TEMP_DIR` | System temp directory | Override temp directory used while processing uploaded PDFs |
 
 ## Development
 
