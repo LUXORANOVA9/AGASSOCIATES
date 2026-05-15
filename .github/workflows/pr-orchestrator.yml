@@ -1,0 +1,63 @@
+name: PR Orchestrator
+on:
+  schedule:
+    - cron: '0 6 * * *'
+  workflow_dispatch:
+  pull_request:
+    types: [opened, edited, synchronize, ready_for_review, reopened, labeled, unlabeled]
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+  actions: read
+  checks: read
+
+concurrency:
+  group: pr-orchestrator-${{ github.event_name }}
+  cancel-in-progress: false
+
+jobs:
+  orchestrate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout orchestration branch
+        uses: actions/checkout@v4
+        with:
+          ref: claude/index-orchestrate-prs-d6all
+          fetch-depth: 0
+
+      - name: Run orchestrator
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const orchestrate = require('./.github/scripts/pr-orchestrate.js');
+            await orchestrate({
+              github,
+              context,
+              core,
+              crossRepoToken: process.env.CROSS_REPO_TOKEN || null,
+            });
+        env:
+          CROSS_REPO_TOKEN: ${{ secrets.CROSS_REPO_TOKEN }}
+
+      - name: Commit refreshed dashboard files
+        run: |
+          set -e
+          git config user.name  "pr-orchestrator[bot]"
+          git config user.email "pr-orchestrator@users.noreply.github.com"
+          git add docs/PR_INDEX.md docs/PR_METRICS.csv 2>/dev/null || true
+          if git diff --cached --quiet; then
+            echo "No dashboard changes to commit."
+          else
+            git commit -m "chore(pr-orchestrator): refresh PR_INDEX.md & metrics"
+            for i in 1 2 3 4; do
+              if git push origin HEAD:claude/index-orchestrate-prs-d6all; then
+                exit 0
+              fi
+              sleep $((2 ** i))
+            done
+            echo "::error::push failed after 4 retries"
+            exit 1
+          fi
