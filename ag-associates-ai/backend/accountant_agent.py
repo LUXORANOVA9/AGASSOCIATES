@@ -1,12 +1,18 @@
 import pdfplumber
 import re
 import json
+import os
+import tempfile
 from typing import Dict, List, Any, Optional
 from langchain_openai import ChatOpenAI
 from langchain_core.prompts import ChatPromptTemplate
 from tenacity import retry, stop_after_attempt, wait_exponential
 from config import LLM_MODEL_NAME, LLM_BASE_URL
 import logging
+
+ALLOWED_UPLOAD_DIR = os.path.realpath(
+    os.getenv("UPLOAD_TEMP_DIR", tempfile.gettempdir())
+)
 
 logger = logging.getLogger(__name__)
 
@@ -27,13 +33,48 @@ class AccountantAgent:
         
     def extract_text_from_pdf(self, pdf_path: str) -> str:
         """Extract raw text from bank statement PDF."""
+        # Reject symlinks before resolving
+        if os.path.islink(pdf_path):
+            logger.error(f"Symlink rejected: {pdf_path}")
+            raise ValueError("Symlinks are not allowed")
+
+        # Canonicalize and restrict to allowed upload directory
+        canonical = os.path.realpath(pdf_path)
+        if not canonical.startswith(ALLOWED_UPLOAD_DIR + os.sep):
+            logger.error(f"Path outside allowed directory: {canonical}")
+            raise ValueError("File path is outside the allowed upload directory")
+
+        if not os.path.isfile(canonical):
+            logger.error(f"File not found or is not a regular file: {canonical}")
+            raise ValueError(f"Invalid file path: {canonical}")
+
+        # Enforce max file size (10MB)
+        max_size = 10 * 1024 * 1024
+        if os.path.getsize(canonical) > max_size:
+            logger.error(f"File size exceeds limit for: {canonical}")
+            raise ValueError("File size exceeds 10MB limit")
+
+        # Enforce magic bytes check
+        try:
+            with open(canonical, 'rb') as f:
+                header = f.read(4)
+        except Exception as e:
+            logger.error(f"Failed to open file for magic bytes check {canonical}: {e}")
+            raise ValueError("Failed to read file")
+
+        if header != b'%PDF':
+            logger.error(f"Invalid magic bytes for: {canonical}")
+            raise ValueError("File is not a valid PDF")
+
         text = ""
         try:
-            with pdfplumber.open(pdf_path) as pdf:
+            with pdfplumber.open(canonical) as pdf:
                 for page in pdf.pages:
                     extracted = page.extract_text()
                     if extracted:
-                        text += extracted + "\n"
+                        # Sanitize text
+                        sanitized = "".join(c for c in extracted if c.isprintable() or c in '\n\r\t')
+                        text += sanitized + "\n"
             return text
         except Exception as e:
             logger.error(f"Failed to read PDF {pdf_path}: {e}")
