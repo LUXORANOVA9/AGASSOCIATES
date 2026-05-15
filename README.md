@@ -285,6 +285,26 @@ npm run dev
 
 ---
 
+## 🔄 CI/CD Automation
+
+### Auto-Merge & Risk Tiers
+
+The PR Orchestrator classifies PRs into risk tiers that determine merge policy:
+
+| Tier | Categories | Policy |
+|------|-----------|--------|
+| **`auto`** | `code-health`, `docs`, `tests`, `chore` | Auto-merged after CI passes |
+| **`review_required`** | `security`, `feature`, `performance` | Requires human review |
+| **`size_gated`** | `bugfix` (max 50 changed lines) | Auto-merged if within size limit |
+
+### Development Workflow
+
+- **Trunk-based development** — branches should live no longer than 2–3 days.
+- **Conventional Commits** — use `feat:`, `fix:`, `docs:`, `chore:`, etc.
+- PR index is auto-generated at `docs/PR_INDEX.md`.
+
+---
+
 ## 🗺 Roadmap
 
 ### Phase 1: Internal Automation (72-Hour Sprint)
