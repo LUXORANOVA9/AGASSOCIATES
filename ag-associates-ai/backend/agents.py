@@ -3,6 +3,7 @@ LangGraph Agent Workflow for AG Associates AI
 Implements the 3-node pipeline: Aisha -> Drafter -> Auditor
 """
 
+import os
 from typing import TypedDict, List, Dict, Any, Optional
 from langgraph.graph import StateGraph, END
 from langchain_openai import ChatOpenAI
@@ -191,7 +192,7 @@ def aisha_intake_node(state: AgentState) -> AgentState:
         llm = ChatOpenAI(
             model=LLM_MODEL_NAME,
             openai_api_base=LLM_BASE_URL,
-            openai_api_key="not-needed",  # Local server doesn't need API key
+            openai_api_key=os.environ.get("LLM_API_KEY", "not-needed"),
             temperature=0.1
         )
         
@@ -473,7 +474,7 @@ def drafter_node(state: AgentState) -> AgentState:
         llm = ChatOpenAI(
             model=LLM_MODEL_NAME,
             openai_api_base=LLM_BASE_URL,
-            openai_api_key="not-needed",
+            openai_api_key=os.environ.get("LLM_API_KEY", "not-needed"),
             temperature=0.3
         )
         
@@ -606,7 +607,7 @@ def auditor_node(state: AgentState) -> AgentState:
         llm = ChatOpenAI(
             model=LLM_MODEL_NAME,
             openai_api_base=LLM_BASE_URL,
-            openai_api_key="not-needed",
+            openai_api_key=os.environ.get("LLM_API_KEY", "not-needed"),
             temperature=0.1
         )
         
