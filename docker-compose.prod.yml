@@ -105,9 +105,8 @@ services:
     container_name: ag_platform
     <<: [*restart, *logging]
     environment:
-      PORT: 3001
       DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
-      AI_BACKEND_URL: http://ai-backend:8001
+      AI_BACKEND_URL: http://ai-backend:8000
       VITE_SUPABASE_URL: ${SUPABASE_URL}
       VITE_SUPABASE_ANON_KEY: ${SUPABASE_ANON_KEY}
       SUPABASE_SERVICE_ROLE_KEY: ${SUPABASE_SERVICE_ROLE_KEY}

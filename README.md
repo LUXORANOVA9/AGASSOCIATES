@@ -126,7 +126,7 @@ This platform is proudly engineered on the **G-Stack** (Google Stack), leveragin
 | **AI Reasoning (G-Stack)** | **Google Gemini Pro** | Complex legal document analysis, contract vetting, and precedent research |
 | **Development (G-Stack)** | **Google Antigravity** | Agentic AI pair programming used to architect the entire Zero-Staff platform |
 | **Frontend** | Next.js 15, TypeScript, Tailwind CSS | App Router, glassmorphism dashboard |
-| **Backend** | FastAPI (Python) & Express (Node.js) | AI pipeline, document processing, state machine API |
+| **Backend** | Fastify (Node.js) & FastAPI (Python) | High-volume intake API, AI pipeline, document processing |
 | **Database/Auth** | Supabase (PostgreSQL + RLS) | Multi-tenant data, RBAC, row-level security |
 | **Orchestration** | LangGraph | Multi-agent workflow management |
 | **Embeddings** | SentenceTransformer (`all-MiniLM-L6-v2`) | RAG template retrieval (384-dim pgvector) |
@@ -154,10 +154,11 @@ Six specialized AI agents simulate a traditional law firm hierarchy at machine s
 
 ## 📋 Key Modules
 
-### 🔍 AI Document Processor
-- Deterministic AI for **Index II parsing** and property document summarization
-- Auto-populates CRM and calculates stamp duty (e.g., 0.3% for NOI)
-- Eliminates manual data entry bottleneck entirely
+### 🔍 Agent 1 (Intake Bot) API Gateway
+- High-performance **Fastify** gateway for bank-panel intake
+- **Zod-validated webhooks** for ICICI, Kotak, Axis, Muthoot, and HDFC
+- **Cross-System OTP Bridge**: Redis-backed broker connecting intake bot to the RPA Executor
+- Real-time **NOI Ticking Timebomb** dashboard with Redis caching
 
 ### 📱 Mobile PWA (Field Executives)
 - Instant status updates: "Originals Collected," "Cheque Deposited," "At SRO"
@@ -212,10 +213,10 @@ AGASSOCIATES/
 │   │   └── ui/                    #   Shared shadcn/ui components
 │   ├── src/
 │   │   ├── components/            #   React (admin, AI, bank, collaboration)
-│   │   ├── server/                #   Express backend + AI router
-│   │   └── hooks/                 #   React hooks (presence, notifications)
+│   ├── services/
+│   │   └── intake-api/            #   🚀 Fastify Intake Bot & OTP Bridge
 │   ├── supabase/migrations/       #   Database migrations
-│   └── server.ts                  #   Express entry point
+│   └── server.ts                  #   Next.js/Express entry point
 │
 ├── CLAUDE.md                      # 📖 Claude Code playbook (architecture, gotchas)
 ├── DEVIN_PLAYBOOK.md              # 🤖 Devin operational playbook (sandbox, PR rules)

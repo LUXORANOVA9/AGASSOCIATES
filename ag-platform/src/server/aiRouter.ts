@@ -79,10 +79,9 @@ Deliverables: ${deliverables ? deliverables.join(', ') : 'Not specified'}`;
 
     // Pipe directly to Express response
     result.pipeTextStreamToResponse(res);
-  } catch (err: unknown) {
+  } catch (err: any) {
     console.error(err);
-    const errorMessage = err instanceof Error ? err.message : String(err);
-    if (errorMessage === "AI Quota Exceeded") {
+    if (err.message === "AI Quota Exceeded") {
        res.status(402).json({ error: "AI Quota Exceeded" });
     } else {
        res.status(500).json({ error: "Failed to generate brief" });
@@ -112,9 +111,8 @@ router.post("/suggest-tasks", async (req, res) => {
     });
 
     res.json({ tasks: result.object.tasks });
-  } catch (err: unknown) {
-    const errorMessage = err instanceof Error ? err.message : String(err);
-    res.status(500).json({ error: errorMessage });
+  } catch (err: any) {
+    res.status(500).json({ error: err.message });
   }
 });
 
@@ -131,9 +129,8 @@ router.post("/draft-email", async (req, res) => {
     });
 
     res.json({ draft: result.text });
-  } catch (err: unknown) {
-    const errorMessage = err instanceof Error ? err.message : String(err);
-    res.status(500).json({ error: errorMessage });
+  } catch (err: any) {
+    res.status(500).json({ error: err.message });
   }
 });
 
@@ -153,9 +150,8 @@ router.post("/send-email", async (req, res) => {
       return res.status(400).json({ error });
     }
     res.json({ success: true, data });
-  } catch (err: unknown) {
-    const errorMessage = err instanceof Error ? err.message : String(err);
-    res.status(500).json({ error: errorMessage });
+  } catch (err: any) {
+    res.status(500).json({ error: err.message });
   }
 });
 
@@ -179,9 +175,8 @@ router.post("/invoice-line-item", async (req, res) => {
     });
 
     res.json({ lineItems: result.object.lineItems });
-  } catch (err: unknown) {
-    const errorMessage = err instanceof Error ? err.message : String(err);
-    res.status(500).json({ error: errorMessage });
+  } catch (err: any) {
+    res.status(500).json({ error: err.message });
   }
 });
 
@@ -203,9 +198,8 @@ router.post("/summarize-document", async (req, res) => {
     });
 
     res.json({ summary: result.object });
-  } catch (err: unknown) {
-    const errorMessage = err instanceof Error ? err.message : String(err);
-    res.status(500).json({ error: errorMessage });
+  } catch (err: any) {
+    res.status(500).json({ error: err.message });
   }
 });
 
@@ -233,9 +227,8 @@ router.post("/search-projects", async (req, res) => {
     if (error) throw error;
 
     res.json({ results: matchedProjects });
-  } catch (err: unknown) {
-    const errorMessage = err instanceof Error ? err.message : String(err);
-    res.status(500).json({ error: errorMessage });
+  } catch (err: any) {
+    res.status(500).json({ error: err.message });
   }
 });
 
@@ -258,9 +251,8 @@ router.post("/ingest-project", async (req, res) => {
     if (error) throw error;
 
     res.json({ success: true });
-  } catch (err: unknown) {
-    const errorMessage = err instanceof Error ? err.message : String(err);
-    res.status(500).json({ error: errorMessage });
+  } catch (err: any) {
+    res.status(500).json({ error: err.message });
   }
 });
 
@@ -294,7 +286,7 @@ ${documentText}`;
     });
 
     res.json(result.object);
-  } catch (error: unknown) {
+  } catch (error: any) {
     console.error('AI Vetting error:', error);
     res.status(500).json({ error: 'Failed to vet document using AI' });
   }

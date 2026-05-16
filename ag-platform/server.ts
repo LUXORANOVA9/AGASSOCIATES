@@ -18,7 +18,6 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 // We'll import AI API routes from another file to keep it clean
 import aiRoutes from "./src/server/aiRouter.ts";
 import { pool } from "./src/server/db.ts";
-import { sanitize } from "./src/server/utils/logger.ts";
 
 async function runMigrations() {
   try {
@@ -97,8 +96,7 @@ async function startServer() {
 
   // Step 5: Global Structured Error Handler
   app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
-    const sanitizedMessage = sanitize(err.message);
-    console.error(`System Error: ${sanitizedMessage} | Request ID: ${req.headers['x-request-id']}`);
+    console.error(`System Error: ${err.message} | Request ID: ${req.headers['x-request-id']}`);
     
     const statusCode = err.status || 500;
     const isClientError = statusCode >= 400 && statusCode < 500;
