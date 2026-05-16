@@ -32,7 +32,7 @@ async function runMigrations() {
 
 async function startServer() {
   const app = express();
-  const PORT = 3000;
+  const PORT = parseInt(process.env.PORT || "3001", 10);
 
   await runMigrations();
 

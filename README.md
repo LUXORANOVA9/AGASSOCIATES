@@ -218,10 +218,20 @@ AGASSOCIATES/
 │   ├── supabase/migrations/       #   Database migrations
 │   └── server.ts                  #   Next.js/Express entry point
 │
-├── CLAUDE.md                      # 📖 Developer guidelines & gotchas
+├── CLAUDE.md                      # 📖 Claude Code playbook (architecture, gotchas)
+├── DEVIN_PLAYBOOK.md              # 🤖 Devin operational playbook (sandbox, PR rules)
+├── DEPLOYMENT_PLAYBOOK.md         # 🚀 Production rollout checklist
 ├── CONTRIBUTING.md                # 🤝 Contribution guide
 ├── SECURITY.md                    # 🔒 Security policy
-└── tasks/                         # 📋 Task tracking & lessons learned
+├── .github/
+│   ├── workflows/                 # ⚙️ CI + PR Orchestrator + Category Guard
+│   ├── scripts/pr-orchestrate.js  #   Orchestration logic (labels, auto-merge, dashboard)
+│   ├── orchestrator.config.json   #   Risk tiers, thresholds, repo lists
+│   └── labeler-rules.json         #   PR title → category regex map
+├── docs/
+│   ├── PR_INDEX.md                # 📋 Live PR dashboard (regenerated daily)
+│   └── PR_METRICS.csv             # 📈 PR backlog metrics, one row per orchestrator run
+└── tasks/                         # 📋 Task tracking & shared agent lessons (lessons.md)
 ```
 
 ---
@@ -317,7 +327,26 @@ See [SECURITY.md](./SECURITY.md) for vulnerability reporting.
 
 See [CONTRIBUTING.md](./CONTRIBUTING.md) for guidelines, commit conventions, and code standards.
 
-Read [CLAUDE.md](./CLAUDE.md) for architecture details, development setup, and known gotchas.
+### AI Agent Playbooks
+
+This codebase is built by — and welcomes contributions from — multiple AI engineering agents working alongside humans. Each has its own operational playbook:
+
+| Agent | Playbook | What it covers |
+|-------|----------|---------------|
+| **Claude Code** | [`CLAUDE.md`](./CLAUDE.md) | Architecture, dev commands, repo-specific gotchas, workflow orchestration rules |
+| **Devin** (Cognition Labs) | [`DEVIN_PLAYBOOK.md`](./DEVIN_PLAYBOOK.md) | Sandbox bootstrap, branch/PR conventions, risk-tiered auto-merge rules, verification bar, Slack/Knowledge usage |
+| **Jules** (Google) | _(uses the same conventions as Devin — see [`DEVIN_PLAYBOOK.md`](./DEVIN_PLAYBOOK.md) §3–5)_ | Same branch prefixes, same category labels, same risk tiers |
+
+PR orchestration is automated — see [`docs/PR_INDEX.md`](./docs/PR_INDEX.md) and the pinned **PR Orchestration Dashboard** issue for live state. Configuration lives in [`.github/orchestrator.config.json`](./.github/orchestrator.config.json).
+
+### Engineering Guidelines
+
+Domain-specific conventions are split across topic files:
+
+- [`GIT_GUIDELINES.md`](./GIT_GUIDELINES.md) · [`TDD_GUIDELINES.md`](./TDD_GUIDELINES.md) · [`REFACTORING_GUIDELINES.md`](./REFACTORING_GUIDELINES.md)
+- [`ERROR_HANDLING_GUIDELINES.md`](./ERROR_HANDLING_GUIDELINES.md) · [`HALLUCINATION_MITIGATION_GUIDELINES.md`](./HALLUCINATION_MITIGATION_GUIDELINES.md)
+- [`FRONTEND_UI_GUIDELINES.md`](./FRONTEND_UI_GUIDELINES.md) · [`RAG_AND_MEMORY_GUIDELINES.md`](./RAG_AND_MEMORY_GUIDELINES.md)
+- [`GOAL_DRIVEN_EXECUTION_GUIDELINES.md`](./GOAL_DRIVEN_EXECUTION_GUIDELINES.md) · [`DEPLOYMENT_PLAYBOOK.md`](./DEPLOYMENT_PLAYBOOK.md)
 
 ---
 

@@ -35,8 +35,11 @@ router.put('/cases/:id/status', async (req, res) => {
         // Forward the frontend's JWT token to the AI Backend for P2 Auth Unification
         const authHeader = req.headers.authorization || '';
         
-        // Asynchronously trigger the AI document generation
-        fetch('http://127.0.0.1:8001/api/generate-agreement', {
+        // Asynchronously trigger the AI document generation.
+        // AI_BACKEND_URL points at the in-network FastAPI service in prod
+        // (`http://ai-backend:8001`); falls back to local dev URL otherwise.
+        const aiBackend = process.env.AI_BACKEND_URL || 'http://127.0.0.1:8001';
+        fetch(`${aiBackend}/api/generate-agreement`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
