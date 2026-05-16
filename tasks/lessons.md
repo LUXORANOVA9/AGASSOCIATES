@@ -12,6 +12,8 @@
 
 - **Always `try/finally` for database connections**: Any endpoint that opens a DB connection must close it in a `finally` block — even if an exception occurs. Without this, connections leak under error conditions.
 
+- **Deleting a backend route silently breaks the frontend**: `/api/nesl/execute` was removed from `main.py` but stayed in `CLAUDE.md`, `README.md`, `DAY3_COMPLETE.md`, `config.py` (`NESL_MOCK_DELAY_SEC`), and the dashboard's `simulateNeslFiling()` fetch. Result: every workflow cycle 404'd silently because the frontend swallowed the non-OK status. When deleting a route, grep the whole repo (including frontend + docs) for the path and either restore or update all call sites.
+
 ## Process Patterns
 
 - **Don't push directly to main**: Create a feature branch (`fix/...`, `feat/...`, `docs/...`) and open a PR. This creates an audit trail and allows review.

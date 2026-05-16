@@ -87,7 +87,7 @@ python main.py    # → http://localhost:8001
 | `POST` | `/api/generate-agreement` | Direct document generation |
 | `GET` | `/dashboard/status` | System health, template count |
 | `GET` | `/templates` | List templates (filterable by type, language) |
-| `POST` | `/api/nesl/execute` | Mock NeSL government filing |
+| `POST` | `/api/nesl/execute` | NeSL government filing (mock by default; flip `NESL_USE_MOCK=false` for prod stub). Persisted to `nesl_filings`. |
 
 ## Environment Variables
 
