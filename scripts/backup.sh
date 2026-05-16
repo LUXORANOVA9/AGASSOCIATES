@@ -12,7 +12,18 @@ set -euo pipefail
 
 cd "$(dirname "$0")/.."
 ENV_FILE="${ENV_FILE:-/srv/ag/.env}"
-[[ -f "$ENV_FILE" ]] && set -a && . "$ENV_FILE" && set +a
+
+# Parse only the variables this script needs, without shell-sourcing.
+# Sourcing the file would expand `$` inside values like the bcrypt-format
+# N8N_BASIC_AUTH_PASSWORD_HASH (`$2a$14$...`) and abort under `set -u`.
+if [[ -f "$ENV_FILE" ]]; then
+  while IFS='=' read -r key val; do
+    [[ -z "$key" || "$key" == \#* ]] && continue
+    val="${val#\"}"; val="${val%\"}"
+    val="${val#\'}"; val="${val%\'}"
+    export "$key=$val"
+  done < <(grep -E '^(RESTIC_|B2_|POSTGRES_)[A-Z_]+=' "$ENV_FILE" 2>/dev/null || true)
+fi
 
 : "${RESTIC_REPOSITORY:?RESTIC_REPOSITORY not set}"
 : "${RESTIC_PASSWORD:?RESTIC_PASSWORD not set}"

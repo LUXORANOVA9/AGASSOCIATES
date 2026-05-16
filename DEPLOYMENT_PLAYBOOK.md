@@ -63,17 +63,23 @@ docker run --rm caddy:2 caddy hash-password --plaintext 'your-n8n-password'
 As the `deploy` user:
 
 ```bash
-cd /srv/ag
-docker compose --env-file .env up -d --build
-docker compose logs -f
+cd /srv/ag/repo
+docker compose --env-file /srv/ag/.env up -d --build
+docker compose --env-file /srv/ag/.env logs -f
 ```
+
+> **Why `cd /srv/ag/repo`?** Compose resolves relative build contexts (e.g.
+> `./ag-platform`, `./ag-associates-ai/backend`,
+> `./ag-associates-ai/database/init.sql`) from the parent of the first
+> compose file. Running compose from anywhere else would fail with
+> "build context not found".
 
 Caddy will request Let's Encrypt certs for all five hostnames. First boot takes ~3 minutes (Sentence-Transformer model download is baked into the image so /api/generate-agreement is fast on first hit).
 
 ### 1.8 Seed RAG templates
 
 ```bash
-docker compose exec ai-backend python generate_embeddings.py
+docker compose --env-file /srv/ag/.env exec ai-backend python generate_embeddings.py
 ```
 
 This populates the `vector(384)` column in the `legal_templates` table for the three seeded Maharashtra rent agreement templates.
@@ -148,8 +154,9 @@ Pin the previous SHA in `/srv/ag/.env`:
 
 ```bash
 echo "IMAGE_TAG=<previous-sha>" >> /srv/ag/.env
-docker compose --env-file .env pull
-docker compose --env-file .env up -d
+cd /srv/ag/repo
+docker compose --env-file /srv/ag/.env pull
+docker compose --env-file /srv/ag/.env up -d
 ```
 
 Remove the override once verified.
@@ -194,7 +201,7 @@ Supabase Cloud has its own automated daily backups (Pro tier) — on free tier, 
 | Restart one service | `docker compose restart ag-platform` |
 | Apply DB migrations after schema change | `docker compose exec postgres psql -U $POSTGRES_USER -d $POSTGRES_DB -f /docker-entrypoint-initdb.d/init.sql` |
 | Re-seed RAG templates | `docker compose exec ai-backend python generate_embeddings.py` |
-| Rotate a secret | edit `/srv/ag/.env`, then `docker compose --env-file .env up -d` |
+| Rotate a secret | edit `/srv/ag/.env`, then `cd /srv/ag/repo && docker compose --env-file /srv/ag/.env up -d` |
 | See Caddy's certificate state | `docker compose exec caddy ls /data/caddy/certificates` |
 
 ---

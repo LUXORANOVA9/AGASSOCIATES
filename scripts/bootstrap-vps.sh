@@ -75,8 +75,6 @@ if [[ ! -f "$SRV_DIR/.env" ]]; then
   chown "$DEPLOY_USER:$DEPLOY_USER" "$SRV_DIR/.env"
   echo ">>> Edit $SRV_DIR/.env and fill in every REPLACE_WITH_* value before continuing."
 fi
-ln -sf "$SRV_DIR/repo/docker-compose.prod.yml" "$SRV_DIR/docker-compose.yml"
-ln -sf "$SRV_DIR/repo/Caddyfile"               "$SRV_DIR/Caddyfile"
 
 log "7/8 Pre-pulling base images to warm the layer cache"
 sudo -u "$DEPLOY_USER" docker pull caddy:2-alpine || true
@@ -100,7 +98,7 @@ cat <<EOF
   3. Point DNS A records to this VPS for:
        app.<domain>  dashboard.<domain>  api.<domain>  n8n.<domain>  docs.<domain>
   4. As $DEPLOY_USER:
-       cd $SRV_DIR && docker compose --env-file .env up -d --build
+       cd $SRV_DIR/repo && docker compose --env-file $SRV_DIR/.env up -d --build
   5. After the stack is healthy, confirm:
        curl -sf https://api.<domain>/health
 

@@ -84,10 +84,9 @@ jobs:
             cd /srv/ag/repo
             git fetch origin main
             git reset --hard origin/main
-            cd /srv/ag
             export IMAGE_TAG=${{ github.sha }}
-            docker compose --env-file .env pull
-            docker compose --env-file .env up -d --remove-orphans
+            docker compose --env-file /srv/ag/.env pull
+            docker compose --env-file /srv/ag/.env up -d --remove-orphans
             docker image prune -f
 
       - name: Smoke test API health
