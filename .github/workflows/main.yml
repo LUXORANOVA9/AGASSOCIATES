@@ -1,1 +1,84 @@
+name: CI
 
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  pre-commit:
+    name: Pre-commit hooks
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - uses: pre-commit/action@v3.0.1
+
+  ag-associates-ai-frontend:
+    name: ag-associates-ai / frontend
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ag-associates-ai/frontend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+          cache-dependency-path: ag-associates-ai/frontend/package-lock.json
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run build
+
+  ag-associates-ai-backend:
+    name: ag-associates-ai / backend
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ag-associates-ai/backend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: ag-associates-ai/backend/requirements.txt
+      - run: pip install ruff
+      - run: ruff check .
+      - run: ruff format --check .
+      - name: Validate requirements.txt installs
+        run: pip install --dry-run -r requirements.txt
+
+  ag-platform:
+    name: ag-platform / turbo
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ag-platform
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+          cache-dependency-path: ag-platform/package-lock.json
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run type-check
+      - run: npm test
+      - run: npm run build
