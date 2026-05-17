@@ -1,5 +1,6 @@
 import { useCallback } from 'react';
 import { FlatList, RefreshControl, View } from 'react-native';
+import { useRouter } from 'expo-router';
 import { useAssignedCases } from '../../hooks/useCases';
 import { useRealtimeCases } from '../../hooks/useRealtimeCases';
 import { CaseListItem } from '../../components/cases/CaseListItem';
@@ -8,12 +9,14 @@ import { EmptyState, ErrorState, SkeletonList } from '../../components/ui';
 // Thin orchestrator: subscribe to realtime, wire query state to UI primitives,
 // render the list. All business logic lives in hooks/, all UI in components/.
 export default function Dashboard() {
+    const router = useRouter();
     const { data, isPending, isError, refetch, isRefetching } = useAssignedCases();
     useRealtimeCases();
 
-    // Phase 2 wires this to router.push(`/cases/${id}`). For now the dashboard
-    // is read-only and tapping is a no-op so we don't ship a broken navigation.
-    const onItemPress = useCallback((_id: string) => {}, []);
+    const onItemPress = useCallback(
+        (id: string) => router.push(`/cases/${id}` as never),
+        [router],
+    );
 
     if (isPending) {
         return (

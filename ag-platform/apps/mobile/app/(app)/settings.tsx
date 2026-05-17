@@ -17,6 +17,23 @@ export default function Settings() {
                     <Row label="Organization" value={orgId ?? '—'} />
                 </Section>
 
+                <Section title="Tools">
+                    <Link href="/scanner" asChild>
+                        <Pressable className="py-3">
+                            <Text className="text-indigo-700 text-sm">Scan a document</Text>
+                        </Pressable>
+                    </Link>
+                    {__DEV__ && (
+                        <Link href={'/debug/queue' as never} asChild>
+                            <Pressable className="py-3">
+                                <Text className="text-indigo-700 text-sm">
+                                    Mutation queue (dev)
+                                </Text>
+                            </Pressable>
+                        </Link>
+                    )}
+                </Section>
+
                 <Section title="About">
                     <Row label="App version" value={version} />
                     <Link href="/privacy" asChild>
