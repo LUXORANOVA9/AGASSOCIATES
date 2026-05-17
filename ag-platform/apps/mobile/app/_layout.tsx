@@ -11,12 +11,14 @@ import { ErrorBoundary } from '../components/ui';
 import { queryClient, queryPersister } from '../lib/queryClient';
 import { useAuthStore } from '../lib/stores/useAuthStore';
 import { initSentry } from '../lib/sentry';
+import { configureNotifications } from '../lib/notifications';
 
 export default function RootLayout() {
     const initialise = useAuthStore((s) => s.initialise);
 
     useEffect(() => {
         initSentry();
+        configureNotifications();
         initialise();
     }, [initialise]);
 

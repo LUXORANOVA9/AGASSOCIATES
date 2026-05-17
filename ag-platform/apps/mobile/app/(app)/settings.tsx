@@ -23,6 +23,13 @@ export default function Settings() {
                             <Text className="text-indigo-700 text-sm">Scan a document</Text>
                         </Pressable>
                     </Link>
+                    <Link href="/activity" asChild>
+                        <Pressable className="py-3">
+                            <Text className="text-indigo-700 text-sm">
+                                Activity &amp; route
+                            </Text>
+                        </Pressable>
+                    </Link>
                     {__DEV__ && (
                         <Link href={'/debug/queue' as never} asChild>
                             <Pressable className="py-3">

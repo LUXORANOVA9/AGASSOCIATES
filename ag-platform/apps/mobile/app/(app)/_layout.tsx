@@ -2,20 +2,24 @@ import { Redirect, Stack } from 'expo-router';
 import { ActivityIndicator, View } from 'react-native';
 import { useAuthStore } from '../../lib/stores/useAuthStore';
 import { useMutationQueue } from '../../hooks/useMutationQueue';
+import { useOnDutyTracker } from '../../hooks/useOnDutyTracker';
+import { usePushRegistration } from '../../hooks/usePushRegistration';
 import { OfflineIndicator } from '../../components/system/OfflineIndicator';
 
-// Auth guard for everything under /(app). Mounts the mutation queue exactly
-// once and renders the OfflineIndicator so connectivity + queue depth are
-// always visible.
+// Auth guard for everything under /(app). Mounts the singletons that need
+// to be active for the entire authenticated session:
+//   - useMutationQueue:   FIFO drain on reconnect
+//   - useOnDutyTracker:   GPS sampling while toggled on duty
+//   - usePushRegistration: register Expo push token on signed-in launch
 export default function AppLayout() {
     const { initialised, user } = useAuthStore((s) => ({
         initialised: s.initialised,
         user: s.user,
     }));
 
-    // The queue hook MUST mount once on the auth-protected tree so it has
-    // access to QueryClient and only runs for signed-in users.
     useMutationQueue();
+    useOnDutyTracker();
+    usePushRegistration();
 
     if (!initialised) {
         return (
@@ -38,6 +42,7 @@ export default function AppLayout() {
             >
                 <Stack.Screen name="dashboard" options={{ title: 'My Cases' }} />
                 <Stack.Screen name="scanner" options={{ title: 'Scan' }} />
+                <Stack.Screen name="activity" options={{ title: 'Activity' }} />
                 <Stack.Screen
                     name="cases/[caseId]"
                     options={{ title: 'Case' }}
