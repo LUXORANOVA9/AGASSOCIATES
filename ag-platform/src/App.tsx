@@ -7,6 +7,8 @@ import { BankPortal } from './components/bank/BankPortal';
 import { LoginPage } from './components/auth/LoginPage';
 import { ProtectedRoute } from './components/auth/ProtectedRoute';
 import { WorkforceControl } from './components/admin/WorkforceControl';
+import { PrivacyPolicy } from './components/privacy/PrivacyPolicy';
+import { ErrorBoundary } from './components/ui';
 import { useAuthStore } from './store/useAuthStore';
 import { Building2, UserCircle2, Briefcase, Landmark, LogOut } from 'lucide-react';
 import { TimeTracker } from './components/collaboration/TimeTracker';
@@ -67,44 +69,53 @@ function App() {
   }, [initializeAuth]);
 
   return (
-    <BrowserRouter>
-      <div className="min-h-screen bg-slate-50 flex flex-col font-sans text-slate-900">
-        <Navigation />
-        <main className="flex-1 flex flex-col w-full">
-          <Routes>
-            <Route path="/" element={<MarketingLanding />} />
-            <Route path="/login" element={<LoginPage />} />
-            
-            <Route path="/applicant/*" element={
-              <ProtectedRoute allowedRoles={['applicant', 'admin']}>
-                <ApplicantDashboard />
-              </ProtectedRoute>
-            } />
-            
-            <Route path="/admin/*" element={
-              <ProtectedRoute allowedRoles={['admin']}>
-                <Routes>
-                  <Route index element={<AdvisorCockpit />} />
-                  <Route path="workforce" element={<WorkforceControl />} />
-                </Routes>
-              </ProtectedRoute>
-            } />
-            
-            <Route path="/bank/*" element={
-              <ProtectedRoute allowedRoles={['staff', 'admin']}>
-                <BankPortal />
-              </ProtectedRoute>
-            } />
+    <ErrorBoundary>
+      <BrowserRouter>
+        <div className="min-h-screen bg-slate-50 flex flex-col font-sans text-slate-900">
+          <Navigation />
+          <main className="flex-1 flex flex-col w-full">
+            <Routes>
+              <Route path="/" element={<MarketingLanding />} />
+              <Route path="/login" element={<LoginPage />} />
+              <Route path="/privacy" element={<PrivacyPolicy />} />
 
-            {/* Catch-all redirect */}
-            <Route path="*" element={<Navigate to="/" replace />} />
-          </Routes>
-        </main>
-        
-        {/* Global Floating Time Tracker for Advocates */}
-        <TimeTracker />
-      </div>
-    </BrowserRouter>
+              <Route path="/applicant/*" element={
+                <ProtectedRoute allowedRoles={['applicant', 'admin']}>
+                  <ApplicantDashboard />
+                </ProtectedRoute>
+              } />
+
+              <Route path="/admin/*" element={
+                <ProtectedRoute allowedRoles={['admin']}>
+                  <Routes>
+                    <Route index element={<AdvisorCockpit />} />
+                    <Route path="workforce" element={<WorkforceControl />} />
+                  </Routes>
+                </ProtectedRoute>
+              } />
+
+              <Route path="/bank/*" element={
+                <ProtectedRoute allowedRoles={['staff', 'admin']}>
+                  <BankPortal />
+                </ProtectedRoute>
+              } />
+
+              {/* Catch-all redirect */}
+              <Route path="*" element={<Navigate to="/" replace />} />
+            </Routes>
+          </main>
+
+          <footer className="border-t border-slate-200 bg-white py-3 px-6 text-center text-xs text-slate-500">
+            <Link to="/privacy" className="hover:text-indigo-700 hover:underline">
+              Privacy Policy
+            </Link>
+          </footer>
+
+          {/* Global Floating Time Tracker for Advocates */}
+          <TimeTracker />
+        </div>
+      </BrowserRouter>
+    </ErrorBoundary>
   );
 }
 
