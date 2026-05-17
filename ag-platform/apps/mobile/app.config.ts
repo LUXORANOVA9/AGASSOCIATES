@@ -50,7 +50,22 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
             'POST_NOTIFICATIONS',
         ],
     },
-    plugins: ['expo-router'],
+    plugins: [
+        'expo-router',
+        [
+            'expo-location',
+            {
+                locationAlwaysAndWhenInUsePermission:
+                    'AG Associates tags case status updates and document captures with your location while you are on duty.',
+            },
+        ],
+        [
+            'expo-notifications',
+            {
+                color: '#4f46e5',
+            },
+        ],
+    ],
     experiments: {
         typedRoutes: true,
     },
