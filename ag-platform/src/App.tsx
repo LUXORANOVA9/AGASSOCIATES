@@ -8,10 +8,19 @@ import { LoginPage } from './components/auth/LoginPage';
 import { ProtectedRoute } from './components/auth/ProtectedRoute';
 import { WorkforceControl } from './components/admin/WorkforceControl';
 import { PrivacyPolicy } from './components/privacy/PrivacyPolicy';
-import { ErrorBoundary } from './components/ui';
+import { ErrorBoundary, withErrorBoundary } from './components/ui';
 import { useAuthStore } from './store/useAuthStore';
 import { Building2, UserCircle2, Briefcase, Landmark, LogOut } from 'lucide-react';
 import { TimeTracker } from './components/collaboration/TimeTracker';
+
+// Per-route ErrorBoundary wrappers. ApplicantDashboard already exports a
+// boundary-wrapped component; the rest get boundaries here so a render
+// error in one route doesn't take down the navigation header. Root
+// ErrorBoundary below stays as the final safety net.
+const SafeAdvisorCockpit = withErrorBoundary(AdvisorCockpit);
+const SafeBankPortal = withErrorBoundary(BankPortal);
+const SafeWorkforceControl = withErrorBoundary(WorkforceControl);
+const SafeMarketingLanding = withErrorBoundary(MarketingLanding);
 
 function Navigation() {
   const location = useLocation();
@@ -75,7 +84,7 @@ function App() {
           <Navigation />
           <main className="flex-1 flex flex-col w-full">
             <Routes>
-              <Route path="/" element={<MarketingLanding />} />
+              <Route path="/" element={<SafeMarketingLanding />} />
               <Route path="/login" element={<LoginPage />} />
               <Route path="/privacy" element={<PrivacyPolicy />} />
 
@@ -88,15 +97,15 @@ function App() {
               <Route path="/admin/*" element={
                 <ProtectedRoute allowedRoles={['admin']}>
                   <Routes>
-                    <Route index element={<AdvisorCockpit />} />
-                    <Route path="workforce" element={<WorkforceControl />} />
+                    <Route index element={<SafeAdvisorCockpit />} />
+                    <Route path="workforce" element={<SafeWorkforceControl />} />
                   </Routes>
                 </ProtectedRoute>
               } />
 
               <Route path="/bank/*" element={
                 <ProtectedRoute allowedRoles={['staff', 'admin']}>
-                  <BankPortal />
+                  <SafeBankPortal />
                 </ProtectedRoute>
               } />
 

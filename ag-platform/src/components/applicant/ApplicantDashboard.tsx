@@ -1,41 +1,75 @@
-import { useState, useEffect } from 'react';
-import { CheckCircle2, Circle, UploadCloud, FileText, Loader2 } from 'lucide-react';
+import { useCallback, useEffect, useState } from 'react';
+import { CheckCircle2, Circle, UploadCloud, FileText } from 'lucide-react';
 import { Case } from '../../types/domain';
+import {
+  EmptyState,
+  ErrorState,
+  SkeletonList,
+  withErrorBoundary,
+} from '../ui';
 
-export function ApplicantDashboard() {
+function ApplicantDashboardInner() {
   const [activeCase, setActiveCase] = useState<Case | null>(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  const fetchCases = useCallback(async () => {
+    setLoading(true);
+    setError(null);
+    try {
+      const res = await fetch('/api/cases');
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const data = await res.json();
+      // Just grab the first active case for demo purposes
+      if (Array.isArray(data) && data.length > 0) {
+        setActiveCase(data[0]);
+      } else {
+        setActiveCase(null);
+      }
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Unknown error');
+    } finally {
+      setLoading(false);
+    }
+  }, []);
 
   useEffect(() => {
-    async function fetchCases() {
-      try {
-        const res = await fetch('/api/cases');
-        const data = await res.json();
-        // Just grab the first active case for demo purposes
-        if (Array.isArray(data) && data.length > 0) {
-          setActiveCase(data[0]);
-        }
-      } catch (err) {
-        console.error('Failed to fetch cases', err);
-      } finally {
-        setLoading(false);
-      }
-    }
-    fetchCases();
-  }, []);
+    void fetchCases();
+  }, [fetchCases]);
 
   if (loading) {
     return (
-      <div className="flex-1 flex items-center justify-center p-12">
-        <Loader2 className="animate-spin text-indigo-600" size={32} />
+      <div className="flex-1 p-6">
+        <div className="max-w-4xl w-full mx-auto">
+          <SkeletonList rows={3} />
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="flex-1 p-6">
+        <div className="max-w-4xl w-full mx-auto">
+          <ErrorState
+            title="Couldn't load your application"
+            message="Check your connection and try again."
+            onRetry={() => void fetchCases()}
+          />
+        </div>
       </div>
     );
   }
 
   if (!activeCase) {
     return (
-      <div className="flex-1 flex items-center justify-center p-12 text-slate-500">
-        No active applications found.
+      <div className="flex-1 p-6">
+        <div className="max-w-4xl w-full mx-auto">
+          <EmptyState
+            title="No active applications found"
+            message="When you start a home loan application, it'll appear here."
+          />
+        </div>
       </div>
     );
   }
@@ -128,10 +162,12 @@ export function ApplicantDashboard() {
 function Milestone({ title, active, completed }: { step: number, title: string, active: boolean, completed: boolean }) {
   return (
     <div className={`flex flex-col items-center gap-2 ${active || completed ? 'text-indigo-700' : 'text-slate-400'}`}>
-      {completed ? <CheckCircle2 className="text-indigo-600 bg-white" size={24} /> : 
-       active ? <Circle className="text-indigo-600 fill-indigo-50" size={24} /> : 
+      {completed ? <CheckCircle2 className="text-indigo-600 bg-white" size={24} /> :
+       active ? <Circle className="text-indigo-600 fill-indigo-50" size={24} /> :
        <Circle className="text-slate-300" size={24} />}
       <span className="text-xs font-semibold uppercase tracking-wider text-center">{title}</span>
     </div>
   );
 }
+
+export const ApplicantDashboard = withErrorBoundary(ApplicantDashboardInner);
