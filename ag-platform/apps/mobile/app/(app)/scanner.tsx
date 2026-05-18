@@ -9,13 +9,14 @@ import {
     EmptyState,
     ErrorState,
     SkeletonList,
+    withErrorBoundary,
 } from '../../components/ui';
 
 // Two responsibilities, kept separate via sub-components: choose a case to
 // attach the capture to, then capture + see the queue. Picking-the-case UX
 // is a simple top-of-list selector; Phase 3 will swap in a "current case"
 // concept tied to the active route.
-export default function Scanner() {
+function Scanner() {
     const casesQuery = useAssignedCases();
     const [activeCaseId, setActiveCaseId] = useState<string | undefined>();
     const { capture, busy, lastError } = useDocumentCapture();
@@ -105,4 +106,6 @@ function CaseSelector({ casesQuery, activeCaseId, onSelect }: CaseSelectorProps)
         </View>
     );
 }
+
+export default withErrorBoundary(Scanner);
 

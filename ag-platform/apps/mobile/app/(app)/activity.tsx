@@ -2,9 +2,14 @@ import { ScrollView, Text, View } from 'react-native';
 import { useTodayActivity } from '../../hooks/useTodayActivity';
 import { ActivityToggle } from '../../components/activity/ActivityToggle';
 import { RouteMap } from '../../components/activity/RouteMap';
-import { EmptyState, ErrorState, SkeletonList } from '../../components/ui';
+import {
+    EmptyState,
+    ErrorState,
+    SkeletonList,
+    withErrorBoundary,
+} from '../../components/ui';
 
-export default function Activity() {
+function Activity() {
     const { data, isPending, isError, refetch } = useTodayActivity();
 
     return (
@@ -38,3 +43,5 @@ export default function Activity() {
         </ScrollView>
     );
 }
+
+export default withErrorBoundary(Activity);
