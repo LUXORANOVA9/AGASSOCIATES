@@ -1,3 +1,4 @@
+import { describe, it, expect } from 'vitest';
 import { drainQueue, MAX_ATTEMPTS } from '../lib/queue/drain';
 import type { DrainResult, Mutation } from '../lib/queue/types';
 
