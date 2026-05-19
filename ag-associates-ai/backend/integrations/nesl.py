@@ -105,3 +105,15 @@ def get_nesl_client() -> NeslClient:
         return MockNeslClient()
     logger.info("NeSL client: using ProductionNeslClient")
     return ProductionNeslClient()
+
+
+async def shutdown_nesl_client() -> None:
+    """Close any cached ProductionNeslClient — call on FastAPI shutdown."""
+    if get_nesl_client.cache_info().currsize == 0:
+        return
+    try:
+        client = get_nesl_client()
+    except Exception:
+        return
+    if isinstance(client, ProductionNeslClient):
+        await client.aclose()

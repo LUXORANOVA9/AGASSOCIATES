@@ -8,6 +8,7 @@ if importlib.util.find_spec("sentry_sdk"):
     import sentry_sdk
 from fastapi import FastAPI, Header, HTTPException, status
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
 from typing import Dict, Any, Optional
 from voice.voice_api import router as voice_router
 from workforce import workforce_router
@@ -20,10 +21,11 @@ from integrations.nesl import (
     NeslFilingRequest,
     NeslFilingResult,
     get_nesl_client,
+    shutdown_nesl_client,
 )
 import psycopg2
 from psycopg2.extras import Json
-from config import get_database_url
+from config import get_database_url, NESL_USE_MOCK
 
 
 
@@ -75,6 +77,11 @@ app.include_router(playground_router)
 @app.on_event("shutdown")
 async def _shutdown_playground():
     await _playground_sm.shutdown()
+
+
+@app.on_event("shutdown")
+async def _shutdown_nesl():
+    await shutdown_nesl_client()
 
 # 4. Health Check Endpoint (For Vercel/Docker probing)
 @app.post("/webhooks/whatsapp", tags=["Ingestion"])
@@ -248,6 +255,38 @@ def _persist_nesl_filing(
         conn.close()
 
 
+def _persist_nesl_failure(req: NeslFilingRequest, error: str) -> None:
+    """Audit a failed NeSL filing attempt. Blocking — call via asyncio.to_thread."""
+    import uuid
+    transaction_id = f"NESL-FAILED-{uuid.uuid4().hex[:12].upper()}"
+    provider = "mock" if NESL_USE_MOCK else "production"
+    conn = psycopg2.connect(get_database_url())
+    try:
+        with conn.cursor() as cur:
+            cur.execute(
+                """
+                INSERT INTO nesl_filings (
+                    transaction_id, status, provider,
+                    document_id, case_id, org_id,
+                    request, error
+                ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
+                """,
+                (
+                    transaction_id,
+                    "failed",
+                    provider,
+                    req.document_id,
+                    req.case_id,
+                    req.org_id,
+                    Json(req.model_dump(mode="json")),
+                    error,
+                ),
+            )
+        conn.commit()
+    finally:
+        conn.close()
+
+
 @app.post("/api/nesl/execute", tags=["NeSL"])
 async def nesl_execute(req: Optional[NeslFilingRequest] = None):
     """
@@ -263,24 +302,34 @@ async def nesl_execute(req: Optional[NeslFilingRequest] = None):
     logger = logging.getLogger("uvicorn.error")
 
     payload = req or NeslFilingRequest()
-    client = get_nesl_client()
+
+    async def _audit_failure(error_message: str) -> None:
+        try:
+            await asyncio.to_thread(_persist_nesl_failure, payload, error_message)
+        except Exception:
+            logger.exception("Failed to persist NeSL failure audit row")
 
     try:
+        client = get_nesl_client()
         result = await client.file(payload)
     except NotImplementedError as e:
         logger.warning("NeSL production client not configured: %s", e)
-        return {
+        body = {
             "success": False,
             "error": "NeSL production client not configured",
             "detail": str(e) if not IS_PRODUCTION else "Configuration error",
         }
+        await _audit_failure(f"{body['error']}: {e}")
+        return JSONResponse(status_code=502, content=body)
     except Exception as e:
         logger.exception("NeSL filing failed")
-        return {
+        body = {
             "success": False,
             "error": "NeSL filing failed",
             "detail": str(e) if not IS_PRODUCTION else "An unexpected error occurred",
         }
+        await _audit_failure(f"{body['error']}: {e}")
+        return JSONResponse(status_code=502, content=body)
 
     try:
         await asyncio.to_thread(_persist_nesl_filing, result, payload)
