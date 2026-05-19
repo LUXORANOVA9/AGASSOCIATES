@@ -40,18 +40,9 @@ export default function AppLayout() {
                     headerTitleStyle: { fontWeight: '600' },
                 }}
             >
-                <Stack.Screen name="dashboard" options={{ title: 'My Cases' }} />
-                <Stack.Screen name="scanner" options={{ title: 'Scan' }} />
-                <Stack.Screen name="activity" options={{ title: 'Activity' }} />
-                <Stack.Screen
-                    name="cases/[caseId]"
-                    options={{ title: 'Case' }}
-                />
-                <Stack.Screen name="settings" options={{ title: 'Settings' }} />
-                <Stack.Screen
-                    name="debug/queue"
-                    options={{ title: 'Queue (dev)' }}
-                />
+                <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+                <Stack.Screen name="cases/[caseId]" options={{ title: 'Case' }} />
+                <Stack.Screen name="debug/queue" options={{ title: 'Queue (dev)' }} />
             </Stack>
         </View>
     );
