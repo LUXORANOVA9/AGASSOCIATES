@@ -102,12 +102,12 @@ export const FileUploader: React.FC<FileUploaderProps> = ({ organizationId, proj
               </div>
               <div>
                 {upload.status === 'error' && (
-                  <button onClick={() => startUpload(upload.file, id)} className="p-1 hover:bg-gray-100 rounded-md">
+                  <button onClick={() => startUpload(upload.file, id)} className="p-1 hover:bg-gray-100 rounded-md" aria-label={`Retry upload ${upload.file.name}`}>
                     <RefreshCw className="w-4 h-4 text-gray-500" />
                   </button>
                 )}
                 {['uploading', 'pending'].includes(upload.status) && (
-                   <button className="p-1 hover:bg-red-50 text-red-500 rounded-md">
+                   <button className="p-1 hover:bg-red-50 text-red-500 rounded-md" aria-label={`Cancel upload ${upload.file.name}`}>
                    <XCircle className="w-4 h-4" />
                  </button>
                 )}
