@@ -2,6 +2,7 @@ import uuid
 import asyncio
 import logging
 import os
+import tempfile
 from fastapi import FastAPI, HTTPException, UploadFile, File, Depends, Request
 from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
@@ -208,12 +209,8 @@ async def generate_agreement_api(request: AgreementRequest, user: dict = Depends
             error=str(e)
         )
 
-@app.get("/dashboard/status", response_model=DashboardStatus)
-async def dashboard_status():
-    """
-    Real-time status endpoint for the frontend dashboard
-    Shows agent activity, template count, and system health
-    """
+def _get_dashboard_status_sync():
+    """Synchronous database call for dashboard status"""
     conn = None
     try:
         conn = get_db_connection()
@@ -221,9 +218,22 @@ async def dashboard_status():
         try:
             # Get total templates count
             cur.execute("SELECT COUNT(*) as count FROM legal_templates")
-            total_templates = cur.fetchone()['count']
+            return cur.fetchone()['count']
         finally:
             cur.close()
+    finally:
+        if conn is not None:
+            conn.close()
+
+@app.get("/dashboard/status", response_model=DashboardStatus)
+async def dashboard_status():
+    """
+    Real-time status endpoint for the frontend dashboard
+    Shows agent activity, template count, and system health
+    """
+    try:
+        # Offload the blocking DB query to a worker thread to keep the event loop responsive.
+        total_templates = await asyncio.to_thread(_get_dashboard_status_sync)
         
         # Mock active agents (will be replaced with actual LangGraph state)
         active_agents = 3
@@ -239,13 +249,9 @@ async def dashboard_status():
         )
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Dashboard status fetch failed: {str(e)}")
-    finally:
-        if conn is not None:
-            conn.close()
 
-@app.get("/templates")
-async def list_templates(template_type: Optional[str] = None, language: Optional[str] = None):
-    """List available legal templates with optional filtering"""
+def _list_templates_sync(template_type: Optional[str] = None, language: Optional[str] = None):
+    """Synchronous database call for template listing"""
     conn = None
     try:
         conn = get_db_connection()
@@ -263,16 +269,26 @@ async def list_templates(template_type: Optional[str] = None, language: Optional
                 params.append(language)
             
             cur.execute(query, params)
-            templates = cur.fetchall()
+            return cur.fetchall()
         finally:
             cur.close()
-        
-        return {"templates": templates}
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Template listing failed: {str(e)}")
     finally:
         if conn is not None:
             conn.close()
+
+@app.get("/templates")
+async def list_templates(template_type: Optional[str] = None, language: Optional[str] = None):
+    """List available legal templates with optional filtering"""
+    try:
+        # Offload the blocking DB query to a worker thread to keep the event loop responsive.
+        templates = await asyncio.to_thread(
+            _list_templates_sync,
+            template_type=template_type,
+            language=language
+        )
+        return {"templates": templates}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Template listing failed: {str(e)}")
 
 
 @app.post("/api/nesl/execute")
