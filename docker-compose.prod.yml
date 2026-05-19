@@ -73,7 +73,8 @@ services:
       EMBEDDING_DIMENSION: 384
       OUTPUT_DIR: /app/output
       PDF_ENABLED: "true"
-      CORS_ALLOWED_ORIGINS: https://app.${DOMAIN},https://dashboard.${DOMAIN}
+      CORS_EXTRA_ORIGINS: ${CORS_EXTRA_ORIGINS:-https://app.${DOMAIN},https://dashboard.${DOMAIN}}
+      N8N_WEBHOOK_KEY: ${N8N_WEBHOOK_KEY}
       SUPABASE_JWT_SECRET: ${SUPABASE_JWT_SECRET}
     volumes:
       - ag_output:/app/output
