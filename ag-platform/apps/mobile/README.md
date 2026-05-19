@@ -4,21 +4,38 @@ Expo + Expo Router + Supabase + TanStack Query. Replaces the web PWA at
 `ag-platform/src/components/field/FieldApp.tsx` with a real iOS / Android
 app.
 
-## Phase 1 scope (this commit)
+## Phase 1 scope
 
 - Expo SDK 52 + NativeWind v4 + TypeScript strict
-- Supabase auth (magic links) with `AsyncStorage` session persistence
+- Supabase auth (magic links) with **encrypted MMKV** session persistence
+  (JWT lives in an MMKV instance keyed by a 256-bit random secret in iOS
+  Keychain / Android Keystore — see `lib/mmkv.ts`)
 - Auth-guarded `/(app)` route group
 - Read-only assigned-cases dashboard with:
-  - TanStack Query + AsyncStorage-backed cache
+  - TanStack Query + sync MMKV-backed cache
   - Pull-to-refresh, skeleton / empty / error states
   - Supabase Realtime subscription on `cases` rows where
     `executive_id = auth.uid()`
 - Settings screen, in-app privacy stub linking to the canonical web policy
 - Root `ErrorBoundary`, Sentry init (no-op without DSN)
 
-Phase 2 adds the camera, offline mutation queue, and status updates.
-Phase 3 adds GPS + push.
+Phase 2 adds the camera, offline mutation queue (also on MMKV), and status
+updates. Phase 3 adds GPS + push.
+
+## Storage layer
+
+| Concern | Backing store | Why |
+|---|---|---|
+| Mutation queue | MMKV (sync, unencrypted) | OS-kill-safe writes; replay on cold start has no race against the drain loop |
+| Duty toggle / query cache | MMKV (sync, unencrypted) | Non-sensitive, sync hydrate prevents render flicker |
+| Supabase session JWT | MMKV (AES-encrypted) | Encryption key persisted in OS keystore via `expo-secure-store`; a forensic dump of the MMKV file alone does not yield a usable JWT |
+| Auth scaffolding (role, orgId) | MMKV (sync, unencrypted) | Already non-sensitive; used to render an optimistic shell while the real session rehydrates |
+
+The mobile app no longer depends on `@react-native-async-storage/async-storage`.
+First-cohort installs only — there is no AsyncStorage → MMKV migration shim
+because the app has not shipped a stable build yet. If a TestFlight / internal
+APK build is ever signed off and then receives this change, add a one-shot
+read-from-AsyncStorage-and-seed step in `lib/mmkv.ts`.
 
 ## Run locally
 

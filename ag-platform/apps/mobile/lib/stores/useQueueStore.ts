@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { zustandMmkvStorage } from '../storage/zustandAdapter';
 import type { Mutation, MutationStatus } from '../queue/types';
 
 interface QueueState {
@@ -47,7 +47,7 @@ export const useQueueStore = create<QueueState>()(
         }),
         {
             name: 'ag-mobile-mutation-queue-v1',
-            storage: createJSONStorage(() => AsyncStorage),
+            storage: createJSONStorage(() => zustandMmkvStorage),
         },
     ),
 );

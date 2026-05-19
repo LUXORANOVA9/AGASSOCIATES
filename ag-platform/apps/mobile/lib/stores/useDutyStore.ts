@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { zustandMmkvStorage } from '../storage/zustandAdapter';
 
 // "On duty" is a deliberate, user-toggled state. GPS sampling only runs
 // while it's true. Persisted so a crash mid-shift doesn't silently turn
@@ -24,7 +24,7 @@ export const useDutyStore = create<DutyState>()(
         }),
         {
             name: 'ag-mobile-duty-v1',
-            storage: createJSONStorage(() => AsyncStorage),
+            storage: createJSONStorage(() => zustandMmkvStorage),
         },
     ),
 );

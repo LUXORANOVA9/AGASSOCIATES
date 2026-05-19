@@ -1,6 +1,19 @@
 import { QueryClient } from '@tanstack/react-query';
-import { createAsyncStoragePersister } from '@tanstack/query-async-storage-persister';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { createSyncStoragePersister } from '@tanstack/query-sync-storage-persister';
+import { storage } from './mmkv';
+
+// Sync MMKV bridge for TanStack Query persistence. The cache is non-critical
+// (loss degrades to a one-session cache, not data loss) but sync writes
+// avoid the promise churn of the previous AsyncStorage persister.
+const querySyncStorage = {
+    getItem: (key: string) => storage.getString(key) ?? null,
+    setItem: (key: string, value: string) => {
+        storage.set(key, value);
+    },
+    removeItem: (key: string) => {
+        storage.delete(key);
+    },
+};
 
 export const queryClient = new QueryClient({
     defaultOptions: {
@@ -13,15 +26,14 @@ export const queryClient = new QueryClient({
             refetchOnWindowFocus: false,
         },
         mutations: {
-            // Phase 2 will route writes through useMutationQueue; the QC
-            // defaults stay conservative until then.
+            // Writes go through useMutationQueue, not React Query retries.
             retry: 0,
         },
     },
 });
 
-export const queryPersister = createAsyncStoragePersister({
-    storage: AsyncStorage,
+export const queryPersister = createSyncStoragePersister({
+    storage: querySyncStorage,
     key: 'ag-mobile-rq-cache-v1',
     throttleTime: 1000,
 });
