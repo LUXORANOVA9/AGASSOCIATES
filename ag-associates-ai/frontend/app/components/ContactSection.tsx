@@ -8,16 +8,18 @@ const contactLinks = [
   {
     icon: Mail,
     label: 'Email',
-    value: 'Adv.adityagade@gmail.com',
-    href: 'mailto:Adv.adityagade@gmail.com',
+    value: 'contact@advaditya.com',
+    href: 'mailto:contact@advaditya.com',
     primary: true,
+    placeholder: true, // TODO: replace with real address
   },
   {
     icon: MessageSquare,
     label: 'WhatsApp',
     value: 'Message on WhatsApp',
-    href: 'https://wa.me/919699218421',
+    href: null,
     primary: false,
+    placeholder: true, // TODO: set real wa.me link
   },
   {
     icon: Linkedin,
@@ -77,6 +79,8 @@ export default function ContactSection() {
                   href={link.href ?? undefined}
                   aria-disabled={!link.href ? 'true' : undefined}
                   onClick={!link.href ? (e) => e.preventDefault() : undefined}
+                  tabIndex={!link.href ? -1 : undefined}
+                  aria-hidden={!link.href ? 'true' : undefined}
                   initial={{ opacity: 0, y: 16 }}
                   animate={isInView ? { opacity: 1, y: 0 } : {}}
                   transition={{ delay: 0.3 + i * 0.08 }}
@@ -86,7 +90,7 @@ export default function ContactSection() {
                     link.primary
                       ? 'bg-gradient-to-r from-accent-blue to-accent-purple text-white shadow-lg shadow-accent-blue/20'
                       : 'glass border border-white/10 text-white hover:border-white/20'
-                  } ${!link.href ? 'opacity-50 cursor-not-allowed' : ''}`}
+                  } ${!link.href ? 'opacity-50 cursor-not-allowed focus:outline-none' : 'focus-visible:ring-2 focus-visible:ring-accent-blue focus-visible:ring-offset-2 focus-visible:ring-offset-gray-900 focus-visible:outline-none'}`}
                 >
                   <Icon className="w-5 h-5" />
                   {link.value}
@@ -104,7 +108,7 @@ export default function ContactSection() {
           >
             <a
               href="/dashboard"
-              className="inline-flex items-center gap-2 text-gray-500 hover:text-accent-blue transition-colors duration-200 text-sm font-medium group"
+              className="inline-flex items-center gap-2 text-gray-500 hover:text-accent-blue transition-colors duration-200 text-sm font-medium group rounded-md focus-visible:ring-2 focus-visible:ring-accent-blue focus-visible:ring-offset-4 focus-visible:ring-offset-gray-900 focus-visible:outline-none"
             >
               View the live AG Associates AI Dashboard
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
