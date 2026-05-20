@@ -7,13 +7,20 @@ from reportlab.lib import colors
 from reportlab.lib.pagesizes import A4
 from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
-from reportlab.lib.enums import TA_CENTER, TA_LEFT, TA_JUSTIFY
-from reportlab.pdfbase import pdfmetrics
-from reportlab.pdfbase.ttfonts import TTFont
+from reportlab.lib.enums import TA_CENTER, TA_JUSTIFY
 import os
 from datetime import datetime
 from typing import Optional
 import re
+
+
+# ⚡ Pre-compiled regexes for faster string manipulation during PDF generation
+# By combining the header regexes and pre-compiling all of them, we avoid
+# the overhead of parsing regex strings on every `_clean_markdown` call.
+_RE_HEADER = re.compile(r'^#{1,3}\s+(.+)$', flags=re.MULTILINE)
+_RE_BOLD = re.compile(r'\*\*(.+?)\*\*')
+_RE_ITALIC = re.compile(r'\*(.+?)\*')
+_RE_UNDER = re.compile(r'__(.+?)__')
 
 
 class AgreementPDFGenerator:
@@ -79,17 +86,17 @@ class AgreementPDFGenerator:
             spaceAfter=50
         ))
     
-    def _clean_markdown(self, text: str) -> str:
+    @staticmethod
+    def _clean_markdown(text: str) -> str:
         """Clean markdown formatting for ReportLab"""
+        # ⚡ Optimization: Use pre-compiled regexes to reduce overhead
         # Remove markdown headers and convert to plain text with spacing
-        text = re.sub(r'^### (.+)$', r'\1', text, flags=re.MULTILINE)
-        text = re.sub(r'^## (.+)$', r'\1', text, flags=re.MULTILINE)
-        text = re.sub(r'^# (.+)$', r'\1', text, flags=re.MULTILINE)
+        text = _RE_HEADER.sub(r'\1', text)
         
         # Remove bold/italic markers
-        text = re.sub(r'\*\*(.+?)\*\*', r'\1', text)
-        text = re.sub(r'\*(.+?)\*', r'\1', text)
-        text = re.sub(r'__(.+?)__', r'\1', text)
+        text = _RE_BOLD.sub(r'\1', text)
+        text = _RE_ITALIC.sub(r'\1', text)
+        text = _RE_UNDER.sub(r'\1', text)
         
         # Escape special characters for ReportLab
         text = text.replace('&', '&amp;')
@@ -105,7 +112,6 @@ class AgreementPDFGenerator:
         flowables = []
         lines = content.split('\n')
         
-        current_section = None
         current_paragraph = []
         
         for line in lines:
@@ -127,9 +133,8 @@ class AgreementPDFGenerator:
                     flowables.append(Paragraph(para_text, self.styles['BodyJustified']))
                     current_paragraph = []
                 
-                section_title = self._clean_markdown(line[3:].strip())
+                section_title = AgreementPDFGenerator._clean_markdown(line[3:].strip())
                 flowables.append(Paragraph(section_title, self.styles['SectionHeader']))
-                current_section = section_title
                 continue
             
             if line.startswith('##'):
@@ -138,9 +143,8 @@ class AgreementPDFGenerator:
                     flowables.append(Paragraph(para_text, self.styles['BodyJustified']))
                     current_paragraph = []
                 
-                section_title = self._clean_markdown(line[2:].strip())
+                section_title = AgreementPDFGenerator._clean_markdown(line[2:].strip())
                 flowables.append(Paragraph(section_title, self.styles['SectionHeader']))
-                current_section = section_title
                 continue
             
             if line.startswith('#'):
@@ -149,13 +153,13 @@ class AgreementPDFGenerator:
                     flowables.append(Paragraph(para_text, self.styles['BodyJustified']))
                     current_paragraph = []
                 
-                title = self._clean_markdown(line[1:].strip())
+                title = AgreementPDFGenerator._clean_markdown(line[1:].strip())
                 flowables.append(Paragraph(title, self.styles['AgreementTitle']))
                 flowables.append(Spacer(1, 20))
                 continue
             
             # Regular paragraph text
-            cleaned_line = self._clean_markdown(line)
+            cleaned_line = AgreementPDFGenerator._clean_markdown(line)
             current_paragraph.append(cleaned_line)
         
         # Add any remaining paragraph

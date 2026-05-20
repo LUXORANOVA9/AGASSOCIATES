@@ -25,6 +25,10 @@ export function useMutationQueue() {
     const queryClient = useQueryClient();
 
     const draining = useRef(false);
+    // Always holds the latest drain closure so the retry timer doesn't
+    // capture a stale one after a dependency change.
+    const drainRef = useRef<() => Promise<void>>(async () => {});
+    const retryTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
     const drain = useCallback(async () => {
         if (draining.current) return;
@@ -32,6 +36,10 @@ export function useMutationQueue() {
         const snapshot = useQueueStore.getState().items;
         if (!snapshot.some((i) => i.status === 'pending')) return;
         draining.current = true;
+        if (retryTimerRef.current) {
+            clearTimeout(retryTimerRef.current);
+            retryTimerRef.current = null;
+        }
         try {
             await drainQueue(snapshot, {
                 execute: (m) => execute(m),
@@ -44,8 +52,17 @@ export function useMutationQueue() {
                     queryClient.invalidateQueries({ queryKey: ['case'] });
                     queryClient.invalidateQueries({ queryKey: ['case-documents'] });
                 },
-                onRetry: (eventId, lastError, attempts) =>
-                    markStatus(eventId, 'pending', { lastError, attempts }),
+                onRetry: (eventId, lastError, attempts) => {
+                    markStatus(eventId, 'pending', { lastError, attempts });
+                    // Re-trigger drain after exponential backoff. Without this,
+                    // items stay stuck in 'pending' because items.length is
+                    // unchanged by the status flip and the useEffect won't fire.
+                    const backoffMs = Math.min(30_000, 2_000 * 2 ** (attempts - 1));
+                    retryTimerRef.current = setTimeout(
+                        () => void drainRef.current(),
+                        backoffMs,
+                    );
+                },
                 onFail: (eventId, lastError, attempts) =>
                     markStatus(eventId, 'failed', { lastError, attempts }),
             });
@@ -54,9 +71,21 @@ export function useMutationQueue() {
         }
     }, [online, markStatus, remove, markFlushed, queryClient]);
 
+    // Keep drainRef current so the retry timer always calls the latest closure.
+    useEffect(() => {
+        drainRef.current = drain;
+    }, [drain]);
+
     useEffect(() => {
         void drain();
     }, [drain, items.length, online]);
+
+    // Clean up any pending retry timer on unmount.
+    useEffect(() => {
+        return () => {
+            if (retryTimerRef.current) clearTimeout(retryTimerRef.current);
+        };
+    }, []);
 
     return { enqueue, items, online };
 }
