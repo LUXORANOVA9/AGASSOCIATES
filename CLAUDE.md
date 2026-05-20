@@ -136,7 +136,7 @@ Routing is via `should_revise()`: on fail, loops back to `drafter` up to 3 revis
 - `POST /api/generate-agreement` — direct API entry (`AgreementRequest` → `WorkflowResponse`)
 - `GET /dashboard/status` — counts templates, returns mocked `active_agents=3` and stub activities
 - `GET /templates` — lists templates, filters by `template_type` and `language`
-- `POST /api/nesl/execute` — **mock** government filing; sleeps 3s and returns a random `NESL-…` transaction ID
+- `POST /api/nesl/execute` — NeSL government filing. Body is an optional `NeslFilingRequest` (`document_id`, `document_path`, `case_id`, `org_id`, `metadata`); response is a `NeslFilingResult` (`transaction_id`, `status`, `provider`, `filed_at`, `message`). Routes through `MockNeslClient` when `NESL_USE_MOCK=true` (default) or `ProductionNeslClient` (currently a stub pending NeSL sandbox credentials/spec). Every attempt is persisted to `nesl_filings`. Implementation in `backend/integrations/nesl.py`.
 
 **Frontend (`frontend/app/page.tsx`)** is a single-page dashboard (`'use client'`). It does two independent things:
 - Polls `GET /dashboard/status` every 3s for real metrics.

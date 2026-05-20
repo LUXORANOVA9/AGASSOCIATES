@@ -8,6 +8,7 @@ if importlib.util.find_spec("sentry_sdk"):
     import sentry_sdk
 from fastapi import FastAPI, Header, HTTPException, status
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
 from typing import Dict, Any, Optional
 from voice.voice_api import router as voice_router
 from workforce import workforce_router
@@ -16,6 +17,15 @@ from playground import playground_router, session_manager as _playground_sm
 from pydantic import BaseModel
 from controller_agent import UnifiedController
 from agents import process_rental_request
+from integrations.nesl import (
+    NeslFilingRequest,
+    NeslFilingResult,
+    get_nesl_client,
+    shutdown_nesl_client,
+)
+import psycopg2
+from psycopg2.extras import Json
+from config import get_database_url, NESL_USE_MOCK
 
 
 
@@ -67,6 +77,11 @@ app.include_router(playground_router)
 @app.on_event("shutdown")
 async def _shutdown_playground():
     await _playground_sm.shutdown()
+
+
+@app.on_event("shutdown")
+async def _shutdown_nesl():
+    await shutdown_nesl_client()
 
 # 4. Health Check Endpoint (For Vercel/Docker probing)
 @app.post("/webhooks/whatsapp", tags=["Ingestion"])
@@ -196,6 +211,133 @@ async def unified_chat(request: UnifiedChatRequest):
         import logging
         logging.getLogger(__name__).error(f"Unified Controller error: {e}")
         raise HTTPException(status_code=500, detail=str(e))
+
+
+# ============================================================================
+# NeSL FILING
+# ============================================================================
+# Frontend (frontend/app/dashboard/page.tsx) POSTs to this endpoint at the end
+# of every workflow cycle. Body is currently empty; NeslFilingRequest fields
+# are all optional so an empty body still validates.
+# TODO: gate this endpoint with _verify_n8n_key before flipping to a
+# production client — see integrations/nesl.py for the prod stub.
+
+def _persist_nesl_filing(
+    result: NeslFilingResult,
+    req: NeslFilingRequest,
+) -> None:
+    """Write a NeSL filing audit row. Blocking — call via asyncio.to_thread."""
+    conn = psycopg2.connect(get_database_url())
+    try:
+        with conn.cursor() as cur:
+            cur.execute(
+                """
+                INSERT INTO nesl_filings (
+                    transaction_id, status, provider,
+                    document_id, case_id, org_id,
+                    request, response
+                ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
+                ON CONFLICT (transaction_id) DO NOTHING
+                """,
+                (
+                    result.transaction_id,
+                    result.status,
+                    result.provider,
+                    req.document_id,
+                    req.case_id,
+                    req.org_id,
+                    Json(req.model_dump(mode="json")),
+                    Json(result.model_dump(mode="json")),
+                ),
+            )
+        conn.commit()
+    finally:
+        conn.close()
+
+
+def _persist_nesl_failure(req: NeslFilingRequest, error: str) -> None:
+    """Audit a failed NeSL filing attempt. Blocking — call via asyncio.to_thread."""
+    import uuid
+    transaction_id = f"NESL-FAILED-{uuid.uuid4().hex[:12].upper()}"
+    provider = "mock" if NESL_USE_MOCK else "production"
+    conn = psycopg2.connect(get_database_url())
+    try:
+        with conn.cursor() as cur:
+            cur.execute(
+                """
+                INSERT INTO nesl_filings (
+                    transaction_id, status, provider,
+                    document_id, case_id, org_id,
+                    request, error
+                ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
+                """,
+                (
+                    transaction_id,
+                    "failed",
+                    provider,
+                    req.document_id,
+                    req.case_id,
+                    req.org_id,
+                    Json(req.model_dump(mode="json")),
+                    error,
+                ),
+            )
+        conn.commit()
+    finally:
+        conn.close()
+
+
+@app.post("/api/nesl/execute", tags=["NeSL"])
+async def nesl_execute(req: Optional[NeslFilingRequest] = None):
+    """
+    File the latest generated agreement with the NeSL registry.
+
+    In dev (`NESL_USE_MOCK=true`, default) this sleeps `NESL_MOCK_DELAY_SEC`
+    seconds and returns a fake `NESL-XXXXXXXXXXXX` transaction id. In
+    production it routes to `ProductionNeslClient`, which is a stub until
+    NeSL sandbox credentials + spec are wired in.
+    """
+    import asyncio
+    import logging
+    logger = logging.getLogger("uvicorn.error")
+
+    payload = req or NeslFilingRequest()
+
+    async def _audit_failure(error_message: str) -> None:
+        try:
+            await asyncio.to_thread(_persist_nesl_failure, payload, error_message)
+        except Exception:
+            logger.exception("Failed to persist NeSL failure audit row")
+
+    try:
+        client = get_nesl_client()
+        result = await client.file(payload)
+    except NotImplementedError as e:
+        logger.warning("NeSL production client not configured: %s", e)
+        body = {
+            "success": False,
+            "error": "NeSL production client not configured",
+            "detail": str(e) if not IS_PRODUCTION else "Configuration error",
+        }
+        await _audit_failure(f"{body['error']}: {e}")
+        return JSONResponse(status_code=502, content=body)
+    except Exception as e:
+        logger.exception("NeSL filing failed")
+        body = {
+            "success": False,
+            "error": "NeSL filing failed",
+            "detail": str(e) if not IS_PRODUCTION else "An unexpected error occurred",
+        }
+        await _audit_failure(f"{body['error']}: {e}")
+        return JSONResponse(status_code=502, content=body)
+
+    try:
+        await asyncio.to_thread(_persist_nesl_filing, result, payload)
+    except Exception:
+        # Persistence failure must not hide a successful upstream filing.
+        logger.exception("NeSL filing persisted to upstream but DB write failed")
+
+    return result.model_dump(mode="json")
 
 
 if __name__ == "__main__":

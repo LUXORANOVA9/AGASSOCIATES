@@ -60,3 +60,23 @@ CREATE TRIGGER update_legal_templates_updated_at
     BEFORE UPDATE ON legal_templates
     FOR EACH ROW
     EXECUTE FUNCTION update_updated_at_column();
+
+-- Audit log of every NeSL filing attempt (mock or production).
+CREATE TABLE IF NOT EXISTS nesl_filings (
+    id SERIAL PRIMARY KEY,
+    transaction_id TEXT UNIQUE NOT NULL,
+    status TEXT NOT NULL,
+    provider TEXT NOT NULL,
+    document_id TEXT,
+    case_id TEXT,
+    org_id TEXT,
+    request JSONB,
+    response JSONB,
+    error TEXT,
+    created_at TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+
+CREATE INDEX IF NOT EXISTS nesl_filings_org_created_idx
+    ON nesl_filings (org_id, created_at DESC);
+CREATE INDEX IF NOT EXISTS nesl_filings_case_idx
+    ON nesl_filings (case_id);

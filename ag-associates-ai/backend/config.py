@@ -45,8 +45,12 @@ LOG_LEVEL = os.getenv("LOG_LEVEL", "INFO").upper()
 # Supabase Auth Configuration
 SUPABASE_JWT_SECRET = os.getenv("SUPABASE_JWT_SECRET", "")
 
-# NeSL mock filing
+# NeSL filing
 NESL_MOCK_DELAY_SEC = float(os.getenv("NESL_MOCK_DELAY_SEC", "3"))
+NESL_USE_MOCK = _env_bool("NESL_USE_MOCK", default=True)
+NESL_API_BASE_URL = os.getenv("NESL_API_BASE_URL", "")
+NESL_API_KEY = os.getenv("NESL_API_KEY", "")
+NESL_REQUEST_TIMEOUT_SEC = float(os.getenv("NESL_REQUEST_TIMEOUT_SEC", "30"))
 
 
 def get_database_url():
