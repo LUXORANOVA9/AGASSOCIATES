@@ -76,12 +76,20 @@ if [[ ! -f "$SRV_DIR/.env" ]]; then
   echo ">>> Edit $SRV_DIR/.env and fill in every value before continuing."
 fi
 
-log "7/8 Pre-pulling base images to warm the layer cache"
+log "7/8 Installing GitHub Actions self-hosted runner"
+if [[ -z "${GH_PAT:-}" ]]; then
+  echo ">>> WARNING: GH_PAT not set. Skipping self-hosted runner setup."
+  echo ">>> To set up later: sudo -u $DEPLOY_USER bash $SRV_DIR/repo/scripts/setup-runner.sh <github-pat>"
+else
+  bash "$SRV_DIR/repo/scripts/setup-runner.sh" "$GH_PAT" "$DEPLOY_USER"
+fi
+
+log "8/8 Pre-pulling base images to warm the layer cache"
 sudo -u "$DEPLOY_USER" docker pull caddy:2-alpine || true
 sudo -u "$DEPLOY_USER" docker pull pgvector/pgvector:pg16 || true
 sudo -u "$DEPLOY_USER" docker pull n8nio/n8n:latest || true
 
-log "8/8 Installing nightly backup cron"
+log "9/9 Installing nightly backup cron"
 install -m 0755 "$SRV_DIR/repo/scripts/backup.sh" /usr/local/sbin/ag-backup
 cat >/etc/cron.d/ag-backup <<EOF
 # AG Associates nightly backup
@@ -93,13 +101,13 @@ EOF
 log "Done. Next steps:"
 cat <<EOF
 
-  1. Paste your CI deploy SSH public key into /home/$DEPLOY_USER/.ssh/authorized_keys
-  2. Edit $SRV_DIR/.env  (mode 0600) and replace every REPLACE_WITH_* value
-   3. Point DNS A records to this VPS for:
-        app.<domain>  dashboard.<domain>  api.<domain>  n8n.<domain>  docs.<domain>  intake.<domain>
-  4. As $DEPLOY_USER:
-       cd $SRV_DIR/repo && docker compose --env-file $SRV_DIR/.env up -d --build
-  5. After the stack is healthy, confirm:
+  1. Edit $SRV_DIR/.env  (mode 0600) and replace every value
+  2. Point DNS A records to this VPS for:
+       app.<domain>  dashboard.<domain>  api.<domain>  n8n.<domain>  docs.<domain>  intake.<domain>
+  3. Verify the self-hosted runner is online:
+       https://github.com/$REPO_URL/settings/actions/runners
+  4. Push to main → GitHub Actions deploys directly on this VPS via self-hosted runner
+  5. After first deploy, confirm:
        curl -sf https://api.<domain>/health
 
 EOF
