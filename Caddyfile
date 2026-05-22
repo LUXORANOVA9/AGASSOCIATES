@@ -29,6 +29,15 @@ api.{$DOMAIN} {
 	}
 }
 
+# Intake API — SMS webhook, OTP bridge, bank intake
+intake.{$DOMAIN} {
+	encode zstd gzip
+	reverse_proxy intake-api:3002 {
+		health_uri /health
+		health_interval 30s
+	}
+}
+
 # n8n orchestration UI — protected by Caddy basicauth on top of n8n's own auth
 n8n.{$DOMAIN} {
 	encode zstd gzip

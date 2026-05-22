@@ -16,7 +16,7 @@ Hetzner CCX23 or equivalent (4 vCPU, 16 GB RAM, NVMe, ~€30/mo) running **Ubunt
 
 ### 1.2 Domain + DNS
 
-Register a domain (Cloudflare Registrar, Porkbun, etc.). Create five **A records** pointing to the VPS IPv4:
+Register a domain (Cloudflare Registrar, Porkbun, etc.). Create **six A records** pointing to the VPS IPv4:
 
 | Subdomain | Service |
 |---|---|
@@ -25,6 +25,7 @@ Register a domain (Cloudflare Registrar, Porkbun, etc.). Create five **A records
 | `api.<domain>` | FastAPI agents |
 | `n8n.<domain>` | n8n orchestrator |
 | `docs.<domain>` | Static docs site |
+| `intake.<domain>` | NOI workflow intake API (OTP bridge) |
 
 If you front Cloudflare, set proxy to **DNS-only (gray cloud)** for the initial Let's Encrypt handshake — switch to proxied after the first cert issues.
 
@@ -74,15 +75,25 @@ docker compose --env-file /srv/ag/.env logs -f
 > compose file. Running compose from anywhere else would fail with
 > "build context not found".
 
-Caddy will request Let's Encrypt certs for all five hostnames. First boot takes ~3 minutes (Sentence-Transformer model download is baked into the image so /api/generate-agreement is fast on first hit).
+Caddy will request Let's Encrypt certs for all six hostnames. First boot takes ~3 minutes.
 
-### 1.8 Seed RAG templates
+### 1.8 Seed RAG templates (optional — RAG gracefully degrades without this)
 
 ```bash
 docker compose --env-file /srv/ag/.env exec ai-backend python generate_embeddings.py
 ```
 
-This populates the `vector(384)` column in the `legal_templates` table for the three seeded Maharashtra rent agreement templates.
+This populates the `vector(384)` column in the `legal_templates` table for the three seeded Maharashtra rent agreement templates. RAG is optional in production; if `sentence-transformers` is not installed in the image, `generate_embedding()` returns a zero vector and the drafter falls back to the default template.
+
+### 1.9 Seed a test NOI case (optional)
+
+```bash
+curl -sf -X POST https://api.<domain>/api/noi/seed \
+  -H 'Content-Type: application/json' \
+  -d '{"case_id":"TEST-001","loan_amount":5000000,"borrower_name":"Test Borrower","property_address":"123 Test Lane, Mumbai","bank_name":"ICICI"}'
+```
+
+This creates a case in the NOI state machine. Check its status at `GET /api/noi/status/TEST-001`.
 
 ---
 
@@ -93,8 +104,8 @@ Run from your laptop. All must pass before declaring launch:
 ```bash
 DOMAIN=agassociates.example.com
 
-dig +short app.$DOMAIN dashboard.$DOMAIN api.$DOMAIN n8n.$DOMAIN docs.$DOMAIN
-# → all five must resolve to the VPS IP
+dig +short app.$DOMAIN dashboard.$DOMAIN api.$DOMAIN n8n.$DOMAIN docs.$DOMAIN intake.$DOMAIN
+# → all six must resolve to the VPS IP
 
 curl -sf https://api.$DOMAIN/health
 # → {"status":"ok"}
@@ -113,6 +124,15 @@ curl -sf -X POST https://api.$DOMAIN/api/generate-agreement \
   -H 'Content-Type: application/json' \
   -d '{"raw_input":"Rental agreement between Ramesh and Suresh for ₹15000/month at 12 MG Road, Thane."}'
 # → JSON with success:true and a PDF path
+
+# NOI workflow smoke test:
+curl -sf -X POST https://api.$DOMAIN/api/noi/seed \
+  -H 'Content-Type: application/json' \
+  -d '{"case_id":"SMOKE-001","loan_amount":5000000,"borrower_name":"Smoke Test","property_address":"1 Test Road","bank_name":"HDFC"}'
+# → {"status":"ok","case_id":"SMOKE-001"}
+
+curl -sf https://api.$DOMAIN/api/noi/status/SMOKE-001
+# → {"case_id":"SMOKE-001","status":"DOCUMENTS_RECEIVED",...}
 ```
 
 In the browser, open `https://app.$DOMAIN`, sign in via magic link, create a case scoped to `bank=ICICI`. Sign out, sign in as a user from a different bank; confirm the ICICI case is NOT visible (RLS check).
@@ -123,9 +143,10 @@ In the browser, open `https://app.$DOMAIN`, sign in via magic link, create a cas
 
 `.github/workflows/deploy.yml` runs on every push to `main` that touches code:
 
-1. Builds three images: `ag-ai-backend`, `ag-ai-dashboard`, `ag-platform`. Pushes to `ghcr.io/luxoranova9/<name>:latest` and `:<sha>`.
-2. SSHes into the VPS as `deploy`, pulls the new images, `docker compose up -d --remove-orphans`.
-3. Smoke-tests `https://api.<domain>/health` — fails the workflow if non-200.
+1. Builds **six images** in parallel: `ag-ai-backend`, `ag-ai-dashboard`, `ag-platform`, `intake-api`, `telegram-bot`, `email-intake`. Pushes to `ghcr.io/luxoranova9/<name>:latest` and `:<sha>`.
+2. Creates/updates the `intake.<domain>` DNS A record on Cloudflare.
+3. SSHes into the VPS as `deploy`, pulls the new images, `docker compose -f docker-compose.prod.yml up -d --remove-orphans`.
+4. Smoke-tests `https://api.<domain>/health` — fails the workflow if non-200.
 
 Required **repo secrets** (Settings → Secrets and variables → Actions):
 
@@ -137,6 +158,7 @@ Required **repo secrets** (Settings → Secrets and variables → Actions):
 | `VPS_PORT` | `22` (or your custom port) |
 | `PROD_DOMAIN` | e.g. `agassociates.example.com` |
 | `SUPABASE_ANON_KEY` | Supabase anon key (baked into ag-platform browser bundle at build time) |
+| `CLOUDFLARE_API_TOKEN` | Cloudflare API token with DNS edit permission (for `intake.<domain>` A record) |
 
 Required **repo variables** (same page, "Variables" tab):
 
@@ -144,7 +166,10 @@ Required **repo variables** (same page, "Variables" tab):
 |---|---|
 | `SUPABASE_URL` | Supabase project URL (also build-baked into ag-platform) |
 
-> **Why both vars and secrets?** `NEXT_PUBLIC_*` and `VITE_*` env vars are inlined into the browser JS bundle at `docker build` time — they cannot be supplied at container start. CI must pass them as `--build-arg` to `docker build`. Repo Variables hold non-sensitive URLs; Secrets hold the anon key (which is technically public but kept in Secrets for rotation hygiene).
+> **Why both vars and secrets?** `NEXT_PUBLIC_*` and `VITE_*` env vars are inlined into the browser JS bundle at `docker build` time — they cannot be supplied at container start. CI must pass them as `--build-arg` to `docker build`. Repo Variables hold non-sensitive URLs; Secrets hold sensitive keys like `SUPABASE_ANON_KEY` and `CLOUDFLARE_API_TOKEN`.
+
+> **Secrets for NOI workflow services** (set in `/srv/ag/.env` on the VPS, not in CI):
+> Ensure `REDIS_PASSWORD`, `N8N_WEBHOOK_KEY`, `JWT_SECRET`, `TELEGRAM_BOT_TOKEN`, `EMAIL_IMAP_*` are filled in. These are consumed at container runtime, not at build time.
 
 The `clerk-docs` repo has its own `deploy.yml` that builds the static site with Bun and rsyncs `dist/` into `/srv/ag/clerk-docs/dist` on the VPS. Caddy serves it directly — no container rebuild needed.
 
@@ -203,6 +228,12 @@ Supabase Cloud has its own automated daily backups (Pro tier) — on free tier, 
 | Re-seed RAG templates | `docker compose exec ai-backend python generate_embeddings.py` |
 | Rotate a secret | edit `/srv/ag/.env`, then `cd /srv/ag/repo && docker compose --env-file /srv/ag/.env up -d` |
 | See Caddy's certificate state | `docker compose exec caddy ls /data/caddy/certificates` |
+| Check NOI case status | `curl -sf https://api.<domain>/api/noi/status/<case_id>` |
+| Seed a NOI test case | `curl -sf -X POST https://api.<domain>/api/noi/seed -H 'Content-Type: application/json' -d '{"case_id":"TEST-001","loan_amount":5000000,"borrower_name":"Test","property_address":"Addr","bank_name":"ICICI"}'` |
+| Advance NOI workflow | `curl -sf -X POST https://api.<domain>/api/noi/webhook -H 'Content-Type: application/json' -d '{"case_id":"TEST-001","event":"challan_paid"}'` |
+| Tail telegram-bot logs | `docker compose logs -f telegram-bot` |
+| Tail intake-api logs | `docker compose logs -f intake-api` |
+| Tail email-intake logs | `docker compose logs -f email-intake` |
 
 ---
 
@@ -222,7 +253,7 @@ The mock `/api/nesl/execute` endpoint returns a stub transaction ID. To wire up 
 Use this path when you cross ~1k concurrent users or need multi-region HA. Original 72-hour-sprint checklist:
 
 1. **Database & Auth (Supabase):** create production project; run `ag-platform/src/server/migrations.sql`; enable `pgvector`; configure providers.
-2. **AI Backend on Google Cloud Run:** `docker build -t gcr.io/$PROJECT_ID/ag-ai-backend ./ag-associates-ai/backend`, push, deploy with the env vars from `.env.production.example` (DATABASE_URL pointing at Supabase, SUPABASE_JWT_SECRET, LLM_BASE_URL, CORS_ALLOWED_ORIGINS).
+2. **AI Backend on Google Cloud Run:** `docker build -t gcr.io/$PROJECT_ID/ag-ai-backend ./ag-associates-ai/backend`, push, deploy with the env vars from `.env.example` (DATABASE_URL pointing at Supabase, SUPABASE_JWT_SECRET, LLM_BASE_URL, CORS_ALLOWED_ORIGINS).
 3. **Frontend on Vercel/Cloudflare Pages:** point at `ag-platform/`, set `VITE_*` env vars; for the AI dashboard point at `ag-associates-ai/frontend/`.
 4. **n8n:** deploy as a Cloud Run job or use n8n Cloud; update HTTP Request nodes to `https://<backend-url>/api/...`.
 5. **Pre-flight:** JWT bridge test, offline-queue test on the Field App, WhatsApp webhook handshake to n8n.

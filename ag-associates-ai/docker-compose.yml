@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   # PostgreSQL with pgvector extension
   postgres:
@@ -7,7 +5,7 @@ services:
     container_name: ag_associates_postgres
     environment:
       POSTGRES_USER: ${POSTGRES_USER:-ag_admin}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-secure_password_123}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-change_me}
       POSTGRES_DB: ${POSTGRES_DB:-legal_templates_db}
     ports:
       - "5432:5432"
@@ -18,9 +16,26 @@ services:
       - ag_network
     restart: unless-stopped
 
+  # Redis for OTP bridge and state management (required for NOI workflow)
+  redis:
+    image: redis:7-alpine
+    container_name: ag_associates_redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - ag_network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
   # n8n for webhook orchestration
   n8n:
-    image: n8n/n8n:latest
+    image: n8nio/n8n:latest
     container_name: ag_associates_n8n
     environment:
       - N8N_HOST=${N8N_HOST:-localhost}
@@ -40,10 +55,73 @@ services:
     networks:
       - ag_network
     restart: unless-stopped
+    depends_on:
+      redis:
+        condition: service_healthy
+
+  # FastAPI backend with AI pipeline + RPA (NOI workflow)
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: ag_associates_backend
+    ports:
+      - "8000:8000"
+    environment:
+      # Database
+      DATABASE_HOST: postgres
+      DATABASE_PORT: 5432
+      DATABASE_NAME: ${POSTGRES_DB:-legal_templates_db}
+      DATABASE_USER: ${POSTGRES_USER:-ag_admin}
+      DATABASE_PASSWORD: ${POSTGRES_PASSWORD:-change_me}
+      DATABASE_URL: postgresql://${POSTGRES_USER:-ag_admin}:${POSTGRES_PASSWORD:-change_me}@postgres:5432/${POSTGRES_DB:-legal_templates_db}
+      # LLM
+      LLM_BASE_URL: ${LLM_BASE_URL:-http://host.docker.internal:8000/v1}
+      LLM_MODEL_NAME: ${LLM_MODEL_NAME:-qwen2.5-7b-instruct}
+      LLM_MOCK_MODE: ${LLM_MOCK_MODE:-false}
+      # Embedding
+      EMBEDDING_MODEL_NAME: ${EMBEDDING_MODEL_NAME:-sentence-transformers/all-MiniLM-L6-v2}
+      EMBEDDING_DIMENSION: ${EMBEDDING_DIMENSION:-384}
+      # Redis (NOI workflow OTP bridge)
+      REDIS_URL: redis://redis:6379
+      REDIS_PASSWORD: ${REDIS_PASSWORD:-}
+      # Supabase (case tracking, NOI status)
+      SUPABASE_URL: ${SUPABASE_URL:-}
+      SUPABASE_SERVICE_ROLE_KEY: ${SUPABASE_SERVICE_ROLE_KEY:-}
+      # Auth / webhook
+      N8N_WEBHOOK_KEY: ${N8N_WEBHOOK_KEY:-}
+      JWT_SECRET: ${JWT_SECRET:-}
+      # Google Sheets
+      GOOGLE_SERVICE_ACCOUNT_JSON: ${GOOGLE_SERVICE_ACCOUNT_JSON:-}
+      # Monitoring
+      SENTRY_DSN: ${SENTRY_DSN:-}
+      ENVIRONMENT: ${ENVIRONMENT:-production}
+      # App config
+      CORS_ALLOWED_ORIGINS: ${CORS_ALLOWED_ORIGINS:-http://localhost:3000,https://luxor9-legalos.vercel.app}
+      OUTPUT_DIR: /app/output
+      PDF_ENABLED: ${PDF_ENABLED:-false}
+    volumes:
+      - backend_output:/app/output
+    networks:
+      - ag_network
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_started
+      redis:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://127.0.0.1:8000/health"]
+      interval: 30s
+      timeout: 5s
+      start_period: 20s
+      retries: 3
 
 volumes:
   postgres_data:
   n8n_data:
+  redis_data:
+  backend_output:
 
 networks:
   ag_network:

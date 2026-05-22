@@ -21,7 +21,8 @@ export interface CreateCaseParams {
   org_id: string;
   bank_name: 'ICICI' | 'Kotak' | 'Axis' | 'Muthoot' | 'HDFC';
   case_type: string;
-  status?: string;
+  case_status: string;
+  noi_status?: string;
 }
 
 export async function createCase(params: CreateCaseParams) {

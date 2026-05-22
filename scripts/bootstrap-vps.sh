@@ -70,10 +70,10 @@ if [[ ! -d "$SRV_DIR/repo/.git" ]]; then
   sudo -u "$DEPLOY_USER" git clone "$REPO_URL" "$SRV_DIR/repo"
 fi
 if [[ ! -f "$SRV_DIR/.env" ]]; then
-  cp "$SRV_DIR/repo/.env.production.example" "$SRV_DIR/.env"
+  cp "$SRV_DIR/repo/.env.example" "$SRV_DIR/.env"
   chmod 600 "$SRV_DIR/.env"
   chown "$DEPLOY_USER:$DEPLOY_USER" "$SRV_DIR/.env"
-  echo ">>> Edit $SRV_DIR/.env and fill in every REPLACE_WITH_* value before continuing."
+  echo ">>> Edit $SRV_DIR/.env and fill in every value before continuing."
 fi
 
 log "7/8 Pre-pulling base images to warm the layer cache"
@@ -95,8 +95,8 @@ cat <<EOF
 
   1. Paste your CI deploy SSH public key into /home/$DEPLOY_USER/.ssh/authorized_keys
   2. Edit $SRV_DIR/.env  (mode 0600) and replace every REPLACE_WITH_* value
-  3. Point DNS A records to this VPS for:
-       app.<domain>  dashboard.<domain>  api.<domain>  n8n.<domain>  docs.<domain>
+   3. Point DNS A records to this VPS for:
+        app.<domain>  dashboard.<domain>  api.<domain>  n8n.<domain>  docs.<domain>  intake.<domain>
   4. As $DEPLOY_USER:
        cd $SRV_DIR/repo && docker compose --env-file $SRV_DIR/.env up -d --build
   5. After the stack is healthy, confirm:

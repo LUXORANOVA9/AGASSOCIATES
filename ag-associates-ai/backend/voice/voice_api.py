@@ -13,6 +13,7 @@ from __future__ import annotations
 import logging
 import os
 import secrets
+import sys
 import shutil
 import uuid
 from typing import Optional
@@ -127,6 +128,30 @@ def _process_transcript(
     default_risk = _risk_of(tool_name)
 
     if not tool_name:
+        # Fall through to unified Aisha for natural-language queries
+        try:
+            sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
+            from aisha_core import handle_message as aisha_handle
+            aisha_result = aisha_handle(
+                transcript,
+                platform="voice",
+                platform_identity=user_id,
+                display_name=user_id,
+            )
+            command_id = audit.log_command(
+                user_id=user_id, transcript=transcript, detected_language=None,
+                decision={"fallback": "aisha_core"}, risk="low", status="aisha_fallback",
+                result={"aisha_response": aisha_result.get("response", "")},
+                audio_s3_key=audio_s3_key,
+            )
+            return {
+                "success": True, "command_id": command_id, "transcript": transcript,
+                "routing": {"fallback": "aisha_core", "aisha_intent": aisha_result.get("intent")},
+                "execution": {"executed": True, "aisha_response": aisha_result.get("response")},
+            }
+        except Exception as aisha_exc:
+            logger.warning("Aisha core fallback also failed: %s", aisha_exc)
+
         command_id = audit.log_command(
             user_id=user_id, transcript=transcript, detected_language=None,
             decision=decision, risk=default_risk, status="unrouted",
