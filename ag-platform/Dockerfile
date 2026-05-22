@@ -1,5 +1,5 @@
 # Stage 1: Dependencies
-FROM node:20-bookworm-slim AS deps
+FROM node:22-bookworm-slim AS deps
 RUN apt-get update \
  && apt-get upgrade -y \
  && apt-get install -y --no-install-recommends libc6 \
@@ -10,7 +10,7 @@ COPY packages ./packages
 RUN npm install --no-audit --no-fund
 
 # Stage 2: Build
-FROM node:20-bookworm-slim AS builder
+FROM node:22-bookworm-slim AS builder
 WORKDIR /app
 # Vite inlines these into the browser bundle at build time. Pass via
 # `docker build --build-arg VITE_*=...` or via `build.args` in compose.
@@ -26,7 +26,7 @@ COPY . .
 RUN npm run build
 
 # Stage 3: Runtime
-FROM node:20-bookworm-slim AS runner
+FROM node:22-bookworm-slim AS runner
 RUN apt-get update \
  && apt-get upgrade -y \
  && apt-get install -y --no-install-recommends wget \
