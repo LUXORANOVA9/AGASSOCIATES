@@ -33,6 +33,8 @@ services:
       - ag-platform
       - ai-dashboard
       - ai-backend
+      - intake-api
+      - telegram-bot
       - n8n
     networks: [ag_net]
 
@@ -51,6 +53,22 @@ services:
       test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
       interval: 10s
       timeout: 5s
+      retries: 5
+    networks: [ag_net]
+
+  redis:
+    image: redis:7-alpine
+    container_name: ag_redis
+    <<: [*restart, *logging]
+    command: ["redis-server", "--requirepass", "${REDIS_PASSWORD}"]
+    environment:
+      REDIS_PASSWORD: ${REDIS_PASSWORD}
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "-a", "${REDIS_PASSWORD}", "ping"]
+      interval: 10s
+      timeout: 3s
       retries: 5
     networks: [ag_net]
 
@@ -75,10 +93,25 @@ services:
       PDF_ENABLED: "true"
       CORS_ALLOWED_ORIGINS: https://app.${DOMAIN},https://dashboard.${DOMAIN}
       SUPABASE_JWT_SECRET: ${SUPABASE_JWT_SECRET}
+      REDIS_URL: redis://:${REDIS_PASSWORD}@redis:6379
+      SUPABASE_URL: ${SUPABASE_URL}
+      SUPABASE_SERVICE_ROLE_KEY: ${SUPABASE_SERVICE_ROLE_KEY}
+      N8N_WEBHOOK_KEY: ${N8N_WEBHOOK_KEY}
+      JWT_SECRET: ${JWT_SECRET}
+      ENVIRONMENT: ${ENVIRONMENT:-production}
+      LLM_MOCK_MODE: ${LLM_MOCK_MODE:-false}
+      SENTRY_DSN: ${SENTRY_DSN:-}
     volumes:
       - ag_output:/app/output
     depends_on:
       postgres: { condition: service_healthy }
+      redis: { condition: service_healthy }
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://127.0.0.1:8000/health"]
+      interval: 30s
+      timeout: 5s
+      start_period: 20s
+      retries: 3
     networks: [ag_net]
 
   ai-dashboard:
@@ -139,12 +172,70 @@ services:
       postgres: { condition: service_healthy }
     networks: [ag_net]
 
+  # ── NOI Automation Services ──────────────────────────────────────────
+
+  intake-api:
+    build:
+      context: ./ag-platform/services/intake-api
+    image: ghcr.io/luxoranova9/intake-api:${IMAGE_TAG:-latest}
+    ports:
+      - "3002:3002"
+    container_name: ag_intake_api
+    <<: [*restart, *logging]
+    environment:
+      NODE_ENV: production
+      PORT: 3002
+      REDIS_URL: redis://:${REDIS_PASSWORD}@redis:6379
+      SUPABASE_URL: ${SUPABASE_URL}
+      SUPABASE_SERVICE_ROLE_KEY: ${SUPABASE_SERVICE_ROLE_KEY}
+    depends_on:
+      redis: { condition: service_healthy }
+    networks: [ag_net]
+
+  telegram-bot:
+    build:
+      context: ./ag-associates-ai/backend/telegram_bot
+    image: ghcr.io/luxoranova9/telegram-bot:${IMAGE_TAG:-latest}
+    container_name: ag_telegram_bot
+    <<: [*restart, *logging]
+    environment:
+      TELEGRAM_BOT_TOKEN: ${TELEGRAM_BOT_TOKEN}
+      REDIS_URL: redis://:${REDIS_PASSWORD}@redis:6379
+      TELEGRAM_BOT_PORT: 3003
+    depends_on:
+      redis: { condition: service_healthy }
+    networks: [ag_net]
+
+  email-intake:
+    build:
+      context: ./ag-associates-ai/backend/email_intake
+    image: ghcr.io/luxoranova9/email-intake:${IMAGE_TAG:-latest}
+    container_name: ag_email_intake
+    <<: [*restart, *logging]
+    environment:
+      EMAIL_IMAP_HOST: ${EMAIL_IMAP_HOST}
+      EMAIL_IMAP_PORT: ${EMAIL_IMAP_PORT:-993}
+      EMAIL_IMAP_USER: ${EMAIL_IMAP_USER}
+      EMAIL_IMAP_PASS: ${EMAIL_IMAP_PASS}
+      SUPABASE_URL: ${SUPABASE_URL}
+      SUPABASE_SERVICE_ROLE_KEY: ${SUPABASE_SERVICE_ROLE_KEY}
+      LLM_BASE_URL: http://ai-backend:8000/v1
+      LLM_MODEL_NAME: ${LLM_MODEL_NAME}
+      LLM_API_KEY: ${LLM_API_KEY}
+      REDIS_URL: redis://:${REDIS_PASSWORD}@redis:6379
+      EMAIL_POLL_INTERVAL: ${EMAIL_POLL_INTERVAL:-60}
+      EMAIL_INTAKE_PORT: 3004
+    depends_on:
+      redis: { condition: service_healthy }
+    networks: [ag_net]
+
 volumes:
   pg_data:
   n8n_data:
   caddy_data:
   caddy_config:
   ag_output:
+  redis_data:
 
 networks:
   ag_net:

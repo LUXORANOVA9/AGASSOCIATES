@@ -1,8 +1,9 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import { Activity, FileText, CheckCircle, Clock, Brain, Database, Zap } from 'lucide-react';
+import { Activity, FileText, CheckCircle, Clock, Brain, Database, Zap, MessageSquare, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import AishaChat from '../components/AishaChat';
 
 interface DashboardStatus {
   total_templates: number;
@@ -35,6 +36,7 @@ export default function Dashboard() {
   const [loading, setLoading] = useState(true);
   const [neslStatus, setNeslStatus] = useState<'idle' | 'processing' | 'filed'>('idle');
   const [transactionId, setTransactionId] = useState<string | null>(null);
+  const [chatOpen, setChatOpen] = useState(false);
   const neslFiledForCycleRef = useRef(false);
   const neslAbortRef = useRef<AbortController | null>(null);
 
@@ -402,6 +404,43 @@ export default function Dashboard() {
           )}
         </div>
       </motion.div>
+
+      {/* Chat toggle button */}
+      <motion.button
+        initial={{ scale: 0 }}
+        animate={{ scale: 1 }}
+        transition={{ delay: 1, type: 'spring', stiffness: 300 }}
+        onClick={() => setChatOpen(!chatOpen)}
+        className={`fixed bottom-6 right-6 z-40 p-4 rounded-2xl shadow-2xl transition-all ${
+          chatOpen
+            ? 'bg-red-500/20 border border-red-500/30 rotate-90'
+            : 'bg-accent-purple/20 border border-accent-purple/30 hover:bg-accent-purple/30'
+        }`}
+      >
+        {chatOpen ? (
+          <X className="w-6 h-6 text-red-400" />
+        ) : (
+          <MessageSquare className="w-6 h-6 text-accent-purple" />
+        )}
+      </motion.button>
+
+      {/* Chat panel */}
+      <AnimatePresence>
+        {chatOpen && (
+          <>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 bg-black/40 backdrop-blur-sm z-40"
+              onClick={() => setChatOpen(false)}
+            />
+            <div className="fixed bottom-6 right-6 z-50">
+              <AishaChat onClose={() => setChatOpen(false)} />
+            </div>
+          </>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

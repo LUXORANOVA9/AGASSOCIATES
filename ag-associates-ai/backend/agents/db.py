@@ -6,7 +6,10 @@ import psycopg2
 from pgvector.psycopg2 import register_vector
 from psycopg2.extras import RealDictCursor
 
-from config import EMBEDDING_MODEL_NAME, get_database_url
+from config import EMBEDDING_MODEL_NAME, EMBEDDING_DIMENSION, get_database_url
+
+import logging
+logger = logging.getLogger(__name__)
 
 
 def get_db_connection():
@@ -25,14 +28,23 @@ _embedding_model = None
 def _get_embedding_model():
     global _embedding_model
     if _embedding_model is None:
-        from sentence_transformers import SentenceTransformer
-        _embedding_model = SentenceTransformer(EMBEDDING_MODEL_NAME)
-    return _embedding_model
+        try:
+            from sentence_transformers import SentenceTransformer
+            _embedding_model = SentenceTransformer(EMBEDDING_MODEL_NAME)
+        except ImportError:
+            logger.warning(
+                "sentence-transformers not installed; RAG disabled. "
+                "Install it for vector similarity search."
+            )
+            _embedding_model = False
+    return _embedding_model if _embedding_model is not False else None
 
 
 def generate_embedding(text: str) -> List[float]:
-    """Generate a real vector embedding via SentenceTransformer."""
+    """Generate a vector embedding. Returns zero vector if model unavailable."""
     model = _get_embedding_model()
+    if model is None:
+        return [0.0] * EMBEDDING_DIMENSION
     embedding = model.encode(text)
     return embedding.tolist()
 
