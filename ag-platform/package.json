@@ -23,6 +23,7 @@
     "@ag/db": "*",
     "@ag/types": "*",
     "@ag/ui": "*",
+    "ai": "^6.0.172",
     "@supabase/supabase-js": "^2.40.0",
     "clsx": "^2.1.0",
     "cors": "^2.8.5",
