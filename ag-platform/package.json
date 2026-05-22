@@ -25,6 +25,7 @@
     "@ag/ui": "*",
     "ai": "^6.0.172",
     "@ai-sdk/google": "^1.0.0",
+    "resend": "^4.0.0",
     "@supabase/supabase-js": "^2.40.0",
     "clsx": "^2.1.0",
     "cors": "^2.8.5",
