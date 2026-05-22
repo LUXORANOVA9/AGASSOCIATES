@@ -39,12 +39,12 @@ jobs:
           - name: ag-ai-dashboard
             context: ag-associates-ai/frontend
             build_args: |
-              NEXT_PUBLIC_API_URL=https://api.${{ secrets.PROD_DOMAIN }}
+              NEXT_PUBLIC_API_URL=https://api.${{ vars.PROD_DOMAIN }}
           - name: ag-platform
             context: ag-platform
             build_args: |
               VITE_SUPABASE_URL=${{ vars.SUPABASE_URL }}
-              VITE_SUPABASE_ANON_KEY=${{ secrets.SUPABASE_ANON_KEY }}
+              VITE_SUPABASE_ANON_KEY=${{ vars.SUPABASE_ANON_KEY }}
               VITE_API_BASE_URL=/api
           - name: intake-api
             context: ag-platform/services/intake-api
