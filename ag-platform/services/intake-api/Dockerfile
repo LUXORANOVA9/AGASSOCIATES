@@ -1,13 +1,13 @@
 FROM node:22-alpine AS deps
 WORKDIR /app
-COPY package.json package-lock.json ./
-RUN npm ci --omit=dev
+COPY package.json ./
+RUN npm install --omit=dev
 
 FROM node:22-alpine AS builder
 WORKDIR /app
-COPY package.json package-lock.json tsconfig.json ./
+COPY package.json tsconfig.json ./
 COPY src ./src
-RUN npm ci && npm run build
+RUN npm install && npm run build
 
 FROM node:22-alpine AS runner
 WORKDIR /app
