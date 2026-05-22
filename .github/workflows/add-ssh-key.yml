@@ -1,0 +1,12 @@
+name: Add SSH Key
+on: workflow_dispatch
+jobs:
+  add-key:
+    runs-on: self-hosted
+    steps:
+      - run: |
+          KEY="ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFBdZMtB65G0IIVz3MGIA4LeelHHo0zSOq7P5BdnoW6I luxor9@luxor9-Victus-by-HP-Laptop-16-d0xxx"
+          echo "$KEY" >> /home/deploy/.ssh/authorized_keys
+          chmod 600 /home/deploy/.ssh/authorized_keys
+          chown deploy:deploy /home/deploy/.ssh/authorized_keys
+          echo "Key added"
