@@ -1,4 +1,4 @@
-name: Fix SSH Access
+name: Fix SSH and Deploy
 on: workflow_dispatch
 jobs:
   fix:
@@ -7,20 +7,51 @@ jobs:
     - run: |
         set -ex
         id deploy || useradd -m deploy
-        mkdir -p ~deploy/.ssh
-        echo 'ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILa+pYqBIW5s4nYrmZrESiJmtJfodfI+aeSP8BcYo6Xj rajkhemani24@gmail.com' >> ~deploy/.ssh/authorized_keys
-        echo 'ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFBdZMtB65G0IIVz3MGIA4LeelHHo0zSOq7P5BdnoW6I luxor9@luxor9-Victus-by-HP-Laptop-16-d0xxx' >> ~deploy/.ssh/authorized_keys
-        mkdir -p /root/.ssh
-        cat ~deploy/.ssh/authorized_keys >> /root/.ssh/authorized_keys
-        chmod 600 /root/.ssh/authorized_keys
-        chmod 600 ~deploy/.ssh/authorized_keys
+        mkdir -p ~deploy/.ssh /root/.ssh
+        cat > ~deploy/.ssh/authorized_keys << 'KEYS'
+ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILa+pYqBIW5s4nYrmZrESiJmtJfodfI+aeSP8BcYo6Xj rajkhemani24@gmail.com
+ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFBdZMtB65G0IIVz3MGIA4LeelHHo0zSOq7P5BdnoW6I luxor9@luxor9-Victus-by-HP-Laptop-16-d0xxx
+KEYS
+        cp ~deploy/.ssh/authorized_keys /root/.ssh/authorized_keys
+        chmod 600 /root/.ssh/authorized_keys ~deploy/.ssh/authorized_keys
         chown -R deploy:deploy ~deploy/.ssh
         usermod -aG docker deploy
-    - run: systemctl list-units --type=service --all | grep -i ssh || true
+        systemctl enable ssh 2>/dev/null || true
+        systemctl start ssh 2>/dev/null || true
+
     - run: |
         set -ex
-        systemctl enable ssh 2>/dev/null || true
-        systemctl enable sshd 2>/dev/null || true
-        systemctl start ssh 2>/dev/null || systemctl start sshd 2>/dev/null || (test -f /usr/sbin/sshd && /usr/sbin/sshd)
-        systemctl status ssh 2>/dev/null || systemctl status sshd 2>/dev/null || ps aux | grep sshd
-        ss -tlnp | grep 22 || true
+        if [ ! -f /srv/ag/.env ]; then
+          mkdir -p /srv/ag
+          PW1=$(openssl rand -hex 16)
+          PW2=$(openssl rand -hex 16)
+          JWT=$(openssl rand -hex 64)
+          NWK=$(openssl rand -hex 32)
+          cat > /srv/ag/.env << EOF
+DOMAIN=advadiityagade.com
+ACME_EMAIL=rajkhemani24@gmail.com
+POSTGRES_USER=agadmin
+POSTGRES_PASSWORD=$PW1
+POSTGRES_DB=agdb
+REDIS_PASSWORD=$PW2
+LLM_BASE_URL=https://api.groq.com/openai/v1
+LLM_MODEL_NAME=llama-3.3-70b-versatile
+LLM_MOCK_MODE=true
+SUPABASE_URL=https://kglqdihggncxkwwsgguw.supabase.co
+SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtnbHFkaWhnZ25jeGt3d3NnZ3V3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc0MDEzMDUsImV4cCI6MjA5Mjk3NzMwNX0.fFnHP2GAZcXEDpeI58uxYYwO5UliQFKG65I5plX01MA
+JWT_SECRET=$JWT
+N8N_WEBHOOK_KEY=$NWK
+ENVIRONMENT=production
+IMAGE_TAG=latest
+EOF
+          chmod 600 /srv/ag/.env
+          echo "Created /srv/ag/.env"
+        fi
+
+    - run: |
+        set -ex
+        cd /home/luxor9/actions-runner/_work/AGASSOCIATES/AGASSOCIATES
+        docker compose -f docker-compose.prod.yml --env-file /srv/ag/.env build
+        docker compose -f docker-compose.prod.yml --env-file /srv/ag/.env up -d --remove-orphans
+        docker image prune -f
+        docker compose -f docker-compose.prod.yml ps
