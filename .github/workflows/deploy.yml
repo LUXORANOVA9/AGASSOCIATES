@@ -110,3 +110,4 @@ ENVEOF
           echo "API failed to become healthy"; exit 1
 # dummy comment to trigger deploy
 
+# trigger PR deploy
