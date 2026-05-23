@@ -26,5 +26,5 @@
 - [x] **Pipeline integration** — Case state machine triggers AI agreement generation
 - [x] **Merge PR #18** — CORS middleware for FastAPI backend
 - [x] **Mobile app** — React Native / PWA field app for executives with offline queue
-- [ ] **Production NeSL** — Live government registry filing
+- [x] **Production NeSL** — Dual-mode client (API/RPA/mock), restored endpoint, configurable selectors, docker-compose + .env integration
 - [x] **Time tracking** — Floating timer widget + billing engine

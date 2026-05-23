@@ -1,0 +1,13 @@
+{
+  "*.{ts,tsx,js,jsx}": [
+    "eslint --fix",
+    "prettier --write"
+  ],
+  "*.py": [
+    "ruff check --fix",
+    "ruff format"
+  ],
+  "*.{json,yaml,yml,md}": [
+    "prettier --write"
+  ]
+}

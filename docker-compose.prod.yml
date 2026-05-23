@@ -101,8 +101,19 @@ services:
       ENVIRONMENT: ${ENVIRONMENT:-production}
       LLM_MOCK_MODE: ${LLM_MOCK_MODE:-false}
       SENTRY_DSN: ${SENTRY_DSN:-}
+      # NeSL / IGR e-filing
+      NESL_API_KEY: ${NESL_API_KEY:-}
+      NESL_API_BASE_URL: ${NESL_API_BASE_URL:-https://api.nesl.co.in/v1}
+      NESL_CLIENT_ID: ${NESL_CLIENT_ID:-}
+      NESL_CLIENT_SECRET: ${NESL_CLIENT_SECRET:-}
+      NESL_MOCK_DELAY_SEC: ${NESL_MOCK_DELAY_SEC:-3}
+      IGR_PORTAL_URL: ${IGR_PORTAL_URL:-}
+      IGR_PORTAL_USERNAME: ${IGR_PORTAL_USERNAME:-}
+      IGR_PORTAL_PASSWORD: ${IGR_PORTAL_PASSWORD:-}
+      GRAS_PORTAL_URL: ${GRAS_PORTAL_URL:-}
     volumes:
       - ag_output:/app/output
+      - ag_documents:/srv/ag/documents
     depends_on:
       postgres: { condition: service_healthy }
       redis: { condition: service_healthy }
@@ -236,6 +247,7 @@ volumes:
   caddy_config:
   ag_output:
   redis_data:
+  ag_documents:
 
 networks:
   ag_net:

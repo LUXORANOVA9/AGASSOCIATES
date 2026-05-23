@@ -57,16 +57,24 @@ export default function NavBar() {
           ))}
         </div>
 
-        {/* CTA */}
-        <motion.a
-          href="/dashboard"
-          whileHover={{ scale: 1.04 }}
-          whileTap={{ scale: 0.96 }}
-          className="flex items-center gap-2 px-4 py-2 rounded-lg border border-accent-blue/40 text-accent-blue text-sm font-medium hover:bg-accent-blue/10 hover:border-accent-blue/60 transition-all duration-200"
-        >
-          <span>Live Dashboard</span>
-          <ExternalLink className="w-3.5 h-3.5" />
-        </motion.a>
+        {/* CTA buttons */}
+        <div className="flex items-center gap-3">
+          <Link
+            href="/noi-cases"
+            className="hidden sm:flex items-center gap-1.5 text-gray-500 hover:text-gold transition-colors duration-200 text-sm font-medium"
+          >
+            NOI Pipeline
+          </Link>
+          <motion.a
+            href="/dashboard"
+            whileHover={{ scale: 1.04 }}
+            whileTap={{ scale: 0.96 }}
+            className="flex items-center gap-2 px-4 py-2 rounded-lg border border-accent-blue/40 text-accent-blue text-sm font-medium hover:bg-accent-blue/10 hover:border-accent-blue/60 transition-all duration-200"
+          >
+            <span>Live Dashboard</span>
+            <ExternalLink className="w-3.5 h-3.5" />
+          </motion.a>
+        </div>
       </div>
     </motion.nav>
   );

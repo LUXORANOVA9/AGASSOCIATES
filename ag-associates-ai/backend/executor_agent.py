@@ -1,5 +1,6 @@
 import asyncio
 import json
+import os
 import re
 from datetime import datetime
 from decimal import Decimal, InvalidOperation, ROUND_HALF_UP
@@ -14,11 +15,35 @@ class GrasRPAExecutor:
     Agent 5: The Executor (RPA & API Operations)
     Uses Playwright to completely eliminate human data-entry errors (e.g. extra zeros)
     and handles OTP bottlenecks automatically.
+
+    All GRAS portal selectors are configurable via env vars (GRAS_SEL_*) so the
+    automation survives portal DOM changes without code modifications.
     """
     
     def __init__(self):
-        self.portal_url = "https://gras.mahakosh.gov.in/echallan/"
-        self.otp_storage = {} # Temporary in-memory store for OTPs keyed by case_id
+        self.portal_url = os.environ.get(
+            "GRAS_PORTAL_URL",
+            "https://gras.mahakosh.gov.in/echallan/",
+        )
+        self.otp_storage = {}
+        self._load_selectors()
+
+    def _load_selectors(self):
+        """Load GRAS portal selectors from env vars with defaults."""
+        self.sel = {
+            "pay_without_reg": os.environ.get("GRAS_SEL_PAY_WO_REG", "text=Pay Without Registration"),
+            "department_input": os.environ.get("GRAS_SEL_DEPT", "input[name='department']"),
+            "purpose_select": os.environ.get("GRAS_SEL_PURPOSE", "select[name='purpose']"),
+            "stamp_duty_input": os.environ.get("GRAS_SEL_STAMP_DUTY", "input[name='stamp_duty_amount']"),
+            "payee_name_input": os.environ.get("GRAS_SEL_PAYEE", "input[name='payee_name']"),
+            "property_address_input": os.environ.get("GRAS_SEL_PROP_ADDR", "input[name='property_address']"),
+            "generate_otp_button": os.environ.get("GRAS_SEL_GEN_OTP", "button[id='generate_otp']"),
+            "otp_input": os.environ.get("GRAS_SEL_OTP_INPUT", "input[id='otp_input']"),
+            "otp_verify_button": os.environ.get("GRAS_SEL_OTP_VERIFY", "button[id='verify_otp']"),
+            "submit_button": os.environ.get("GRAS_SEL_SUBMIT", "button[id='submit_challan']"),
+            "success_indicator": os.environ.get("GRAS_SEL_SUCCESS", "div.success-challan-generated"),
+            "grn_span": os.environ.get("GRAS_SEL_GRN", "span#grn_number"),
+        }
 
     async def generate_mtr6_challan(self, case_id: str, extracted_data: Dict[str, Any]) -> Dict[str, Any]:
         """
@@ -59,39 +84,33 @@ class GrasRPAExecutor:
                 # 2. Navigate to portal
                 logger.info("🌐 [EXECUTOR] Navigating to GRAS Portal...")
                 await page.goto(self.portal_url)
-                
-                # NOTE: The below selectors are placeholders for the actual GRAS portal DOM
-                # await page.click("text=Pay Without Registration")
-                # await page.fill("input[name='department']", "Inspector General of Registration")
-                # await page.fill("input[name='stamp_duty_amount']", str(stamp_duty))
-                # await page.fill("input[name='payee_name']", tenant_name)
+
+                await page.click(self.sel["pay_without_reg"])
+                await page.fill(self.sel["department_input"], "Inspector General of Registration")
+                await page.fill(self.sel["stamp_duty_input"], str(stamp_duty))
+                await page.fill(self.sel["payee_name_input"], tenant_name)
 
                 # 3. OTP Bottleneck Resolution
                 logger.info("📲 [EXECUTOR] Reached OTP Verification Stage.")
-                # Trigger OTP generation on the portal
-                # await page.click("button[id='generate_otp']")
-                
-                # Now we WAIT for the OTP to hit our webhook instead of bothering Aditya
-                # The webhook will populate self.otp_storage[case_id]
+                await page.click(self.sel["generate_otp_button"])
+
                 otp_code = await self.wait_for_otp(case_id, timeout_seconds=120)
 
                 if not otp_code:
                     return {"success": False, "error": "OTP Timeout. Staff did not need to interrupt, system will retry."}
 
                 logger.info(f"✅ [EXECUTOR] Received OTP asynchronously. Submitting...")
-                # await page.fill("input[id='otp_input']", otp_code)
-                # await page.click("button[id='verify_otp']")
+                await page.fill(self.sel["otp_input"], otp_code)
+                await page.click(self.sel["otp_verify_button"])
 
                 # 4. Final Submission
-                # await page.click("button[id='submit_challan']")
-                # await page.wait_for_selector("div.success-challan-generated")
-
-                # Fetch the generated GRN number
-                # grn_number = await page.inner_text("span#grn_number")
+                await page.click(self.sel["submit_button"])
+                await page.wait_for_selector(self.sel["success_indicator"])
+                grn_number = await page.inner_text(self.sel["grn_span"])
 
                 return {
                     "success": True,
-                    "grn_number": "MHR00000012345", # Mock for now
+                    "grn_number": grn_number,
                     "amount_paid": stamp_duty,
                     "agent": "Executor"
                 }
@@ -177,26 +196,23 @@ class GrasRPAExecutor:
                 logger.info("🌐 [EXECUTOR] Navigating to GRAS Portal for NOI...")
                 await page.goto(self.portal_url)
 
-                # NOTE: GRAS portal selectors — uncomment and adjust for production
-                # await page.click("text=Pay Without Registration")
-                # await page.fill("input[name='department']", "Inspector General of Registration")
-                # await page.select_option("select[name='purpose']", "Intimation Mortgage")
-                # await page.fill("input[name='stamp_duty_amount']", str(stamp_duty))
-                # await page.fill("input[name='payee_name']", borrower_name)
-                # await page.fill("input[name='property_address']", property_address[:100])
+                await page.click(self.sel["pay_without_reg"])
+                await page.fill(self.sel["department_input"], "Inspector General of Registration")
+                await page.select_option(self.sel["purpose_select"], "Intimation Mortgage")
+                await page.fill(self.sel["stamp_duty_input"], str(stamp_duty))
+                await page.fill(self.sel["payee_name_input"], borrower_name)
+                await page.fill(self.sel["property_address_input"], property_address[:100])
 
                 otp_code = await self.wait_for_otp(case_id, timeout_seconds=120)
                 if not otp_code:
                     return {"success": False, "error": "OTP Timeout"}
 
                 logger.info(f"✅ [EXECUTOR] OTP received, submitting NOI challan...")
-                # await page.fill("input[id='otp_input']", otp_code)
-                # await page.click("button[id='verify_otp']")
-                # await page.click("button[id='submit_challan']")
-                # await page.wait_for_selector("div.success")
-                # grn = await page.inner_text("span#grn_number")
-
-                grn = f"NOI{case_id[-6:]}{datetime.now().strftime('%y%m%d%H%M')}"
+                await page.fill(self.sel["otp_input"], otp_code)
+                await page.click(self.sel["otp_verify_button"])
+                await page.click(self.sel["submit_button"])
+                await page.wait_for_selector(self.sel["success_indicator"])
+                grn = await page.inner_text(self.sel["grn_span"])
 
                 await self._publish_otp_request(case_id, "gras")
                 await self._store_challan_result(case_id, grn, stamp_duty)

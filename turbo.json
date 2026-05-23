@@ -1,0 +1,37 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "ui": "tui",
+  "tasks": {
+    "build": {
+      "dependsOn": ["^build"],
+      "inputs": ["$TURBO_DEFAULT$", ".env*"],
+      "outputs": [".next/**", "!.next/cache/**", "dist/**", "build/**"]
+    },
+    "dev": {
+      "cache": false,
+      "persistent": true
+    },
+    "lint": {
+      "dependsOn": ["^build"]
+    },
+    "type-check": {
+      "dependsOn": ["^build"]
+    },
+    "test": {},
+    "clean": {
+      "cache": false
+    },
+    "python-lint": {
+      "cache": false,
+      "inputs": ["ag-associates-ai/backend/**/*.py"]
+    },
+    "python-format": {
+      "cache": false,
+      "inputs": ["ag-associates-ai/backend/**/*.py"]
+    },
+    "python-test": {
+      "cache": false,
+      "inputs": ["ag-associates-ai/backend/**/*.py"]
+    }
+  }
+}

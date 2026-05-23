@@ -204,6 +204,16 @@ RESEND_API_KEY=
 ENVIRONMENT=production
 LLM_MOCK_MODE=false
 IMAGE_TAG=latest
+# NeSL / IGR E-Filing (mock mode until credentials acquired)
+NESL_API_KEY=
+NESL_API_BASE_URL=https://api.nesl.co.in/v1
+NESL_CLIENT_ID=
+NESL_CLIENT_SECRET=
+NESL_MOCK_DELAY_SEC=3
+IGR_PORTAL_URL=https://igrmaharashtra.gov.in/efiling/
+IGR_PORTAL_USERNAME=
+IGR_PORTAL_PASSWORD=
+GRAS_PORTAL_URL=https://gras.mahakosh.gov.in/echallan/
 ENVEOF
 chmod 600 /srv/ag/.env
 chown deploy:deploy /srv/ag/.env"

@@ -1,0 +1,17 @@
+{
+  "name": "AG Associates Field",
+  "short_name": "AG Field",
+  "description": "NOI case management for field executives — scan challans, track cases, stay compliant with Section 89B SLA.",
+  "start_url": "/noi-mobile",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#000000",
+  "theme_color": "#c9a84c",
+  "icons": [
+    { "src": "/icon-192.svg", "type": "image/svg+xml", "sizes": "192x192" },
+    { "src": "/icon-512.svg", "type": "image/svg+xml", "sizes": "512x512" }
+  ],
+  "categories": ["business", "productivity"],
+  "lang": "en-IN",
+  "dir": "ltr"
+}

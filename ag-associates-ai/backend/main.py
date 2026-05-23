@@ -8,7 +8,7 @@ import importlib.util
 sentry_sdk = None
 if importlib.util.find_spec("sentry_sdk"):
     import sentry_sdk
-from fastapi import FastAPI, Header, HTTPException, status, Response
+from fastapi import FastAPI, Header, HTTPException, status, Response, Request
 from fastapi.middleware.cors import CORSMiddleware
 from typing import Dict, Any, Optional
 from pydantic import BaseModel, Field
@@ -20,6 +20,7 @@ from controller_agent import UnifiedController
 from agents import process_rental_request
 from aisha_core import handle_message as aisha_handle_message, ensure_tables
 from conversation_store import resolve_user
+from nesl_client import NeslClient
 
 
 
@@ -464,6 +465,63 @@ async def unified_chat(request: UnifiedChatRequest):
         import logging
         logging.getLogger(__name__).error(f"Unified Controller error: {e}")
         raise HTTPException(status_code=500, detail=str(e))
+
+
+# ============================================================================
+# NeSL E-FILING ENDPOINT (National e-Services Ltd)
+# ============================================================================
+
+_nesl_client = None
+
+def _get_nesl_client() -> NeslClient:
+    global _nesl_client
+    if _nesl_client is None:
+        _nesl_client = NeslClient()
+    return _nesl_client
+
+class NeslExecuteResponse(BaseModel):
+    success: bool
+    transaction_id: Optional[str] = None
+    filing_reference: Optional[str] = None
+    message: Optional[str] = None
+    error: Optional[str] = None
+    mode: Optional[str] = None
+
+@app.post("/api/nesl/execute", tags=["NeSL"])
+async def nesl_execute(request: Request):
+    """File document with NeSL government registry.
+
+    Accepts empty body (frontend legacy /dashboard cycles) or JSON with
+    case_id/document_type.  Three modes auto-selected by env config:
+      1. API  — authenticated NeSL REST calls (needs NESL_API_KEY)
+      2. RPA  — Playwright IGR portal automation (needs IGR_PORTAL_USERNAME/PASSWORD)
+      3. Mock — simulated filing with configurable delay (NESL_MOCK_DELAY_SEC)
+    """
+    try:
+        client = _get_nesl_client()
+        case_id = None
+        doc_type = "INTIMATION_MORTGAGE"
+        try:
+            body = await request.json()
+            if isinstance(body, dict):
+                case_id = body.get("case_id") or case_id
+                doc_type = body.get("document_type") or doc_type
+        except Exception:
+            pass
+
+        result = await client.execute(case_id=case_id, document_type=doc_type)
+        return NeslExecuteResponse(
+            success=result.get("success", False),
+            transaction_id=result.get("transaction_id"),
+            filing_reference=result.get("filing_reference"),
+            message=result.get("message"),
+            error=result.get("error"),
+            mode=result.get("mode", "mock"),
+        )
+    except Exception as e:
+        import logging
+        logging.getLogger(__name__).error(f"NeSL execution error: {e}")
+        return NeslExecuteResponse(success=False, error=str(e))
 
 
 # ============================================================================
