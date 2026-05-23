@@ -1,5 +1,8 @@
 name: Deploy to Production VPS
-on: workflow_dispatch
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
 permissions:
   contents: read
   packages: write
@@ -13,6 +16,6 @@ jobs:
     runs-on: self-hosted
     steps:
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
-      - run: echo "OK" && docker compose -f $COMPOSE_FILE --env-file /dev/null build
+      - run: docker compose -f $COMPOSE_FILE --env-file /dev/null build
       - run: docker compose -f $COMPOSE_FILE --env-file /dev/null up -d --remove-orphans
       - run: docker compose -f $COMPOSE_FILE ps
