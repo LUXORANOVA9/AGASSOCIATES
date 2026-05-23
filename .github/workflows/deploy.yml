@@ -33,19 +33,36 @@ jobs:
   build:
     runs-on: self-hosted
     steps:
-      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+      - uses: actions/checkout@v4
 
-      - name: Ensure deploy user and SSH access
+      - name: Check firewall
         run: |
-          id deploy 2>/dev/null || useradd -m -s /bin/bash deploy
-          mkdir -p /home/deploy/.ssh
-          echo "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFBdZMtB65G0IIVz3MGIA4LeelHHo0zSOq7P5BdnoW6I luxor9@luxor9-Victus-by-HP-Laptop-16-d0xxx" >> /home/deploy/.ssh/authorized_keys
-          chmod 600 /home/deploy/.ssh/authorized_keys
-          chown -R deploy:deploy /home/deploy/.ssh
-          usermod -aG docker deploy
-          systemctl restart sshd 2>/dev/null || service ssh restart 2>/dev/null || echo "sshd restart attempted"
+          echo "=== Firewall check ==="
+          iptables -L -n 2>/dev/null || echo "no iptables"
+          ufw status 2>/dev/null || echo "no ufw"
+          nft list ruleset 2>/dev/null | head -20 || echo "no nft"
+          echo "=== SSH status ==="
+          systemctl status ssh 2>/dev/null | head -5 || echo "ssh service check failed"
+          ss -tlnp | grep 22 || echo "port 22 not listening"
+          echo "=== Hetzner firewall API ==="
+          curl -sf https://api.hetzner.cloud/v1/firewalls 2>/dev/null | python3 -m json.tool 2>/dev/null || echo "API key not configured"
 
-      - name: Ensure /srv/ag/.env exists
+      - name: Fix SSH
+        run: |
+          set -ex
+          mkdir -p /root/.ssh /home/deploy/.ssh
+          cat > /root/.ssh/authorized_keys << 'KEYS'
+ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILa+pYqBIW5s4nYrmZrESiJmtJfodfI+aeSP8BcYo6Xj rajkhemani24@gmail.com
+ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFBdZMtB65G0IIVz3MGIA4LeelHHo0zSOq7P5BdnoW6I luxor9@luxor9-Victus-by-HP-Laptop-16-d0xxx
+KEYS
+          cp /root/.ssh/authorized_keys /home/deploy/.ssh/authorized_keys
+          chmod 600 /root/.ssh/authorized_keys /home/deploy/.ssh/authorized_keys
+          chown -R deploy:deploy /home/deploy/.ssh
+          systemctl enable ssh
+          systemctl restart ssh
+          systemctl is-active ssh
+
+      - name: Create env file
         run: |
           if [ ! -f /srv/ag/.env ]; then
             PW1=$(openssl rand -base64 32 | tr -dc 'a-zA-Z0-9' | head -c 32)
@@ -53,7 +70,7 @@ jobs:
             JWT=$(openssl rand -hex 64)
             NWK=$(openssl rand -hex 32)
             mkdir -p /srv/ag
-            cat > /srv/ag/.env << ENVEOF
+            cat > /srv/ag/.env << EOF
 DOMAIN=advadiityagade.com
 ACME_EMAIL=rajkhemani24@gmail.com
 POSTGRES_USER=agadmin
@@ -72,42 +89,38 @@ N8N_BASIC_AUTH_PASSWORD_HASH=admin
 ENVIRONMENT=production
 IMAGE_TAG=latest
 NESL_MOCK_DELAY_SEC=3
-ENVEOF
+EOF
             chmod 600 /srv/ag/.env
             echo "Created /srv/ag/.env with auto-generated secrets"
+          else
+            echo "/srv/ag/.env already exists"
           fi
 
-      - name: Build all services
-        run: |
-          docker compose -f ${{ env.COMPOSE_FILE }} --env-file ${{ env.ENV_FILE }} build
+      - name: Build
+        run: docker compose -f $COMPOSE_FILE --env-file $ENV_FILE build
 
-      - name: Push images to GHCR (backup)
+      - name: Push to GHCR
         continue-on-error: true
         run: |
           echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
-          images="ag-ai-backend ag-ai-dashboard ag-platform intake-api telegram-bot email-intake"
-          for img in $images; do
-            full="${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/$img"
-            docker tag "$full:latest" "$full:${{ github.sha }}"
-            docker push "$full:latest"
-            docker push "$full:${{ github.sha }}"
+          for img in ag-ai-backend ag-ai-dashboard ag-platform intake-api telegram-bot email-intake; do
+            docker tag ghcr.io/luxoranova9/$img:latest ghcr.io/luxoranova9/$img:${{ github.sha }}
+            docker push ghcr.io/luxoranova9/$img:latest
+            docker push ghcr.io/luxoranova9/$img:${{ github.sha }}
           done
 
-      - name: Deploy stack
+      - name: Deploy
         run: |
-          docker compose -f ${{ env.COMPOSE_FILE }} --env-file ${{ env.ENV_FILE }} up -d --remove-orphans
+          docker compose -f $COMPOSE_FILE --env-file $ENV_FILE up -d --remove-orphans
           docker image prune -f
 
       - name: Smoke test
         run: |
-          DOMAIN=$(grep ^DOMAIN= /srv/ag/.env | cut -d= -f2)
+          sleep 15
           for i in 1 2 3 4 5 6; do
-            if curl -sf -H "Host: api.$DOMAIN" http://127.0.0.1/health >/dev/null 2>&1; then
+            if curl -sf http://127.0.0.1/health 2>/dev/null; then
               echo "API healthy"; exit 0
             fi
-            echo "waiting for API ($i/6)…"; sleep 10
+            echo "waiting ($i/6)..."; sleep 10
           done
-          echo "API failed to become healthy"; exit 1
-# dummy comment to trigger deploy
-
-# trigger PR deploy
+          echo "API not healthy"; docker compose -f $COMPOSE_FILE ps; exit 1
