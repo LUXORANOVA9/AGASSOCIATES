@@ -1,0 +1,35 @@
+name: Fix SSH Access
+on: workflow_dispatch
+jobs:
+  fix:
+    runs-on: self-hosted
+    steps:
+    - run: |
+        set -ex
+        id deploy || useradd -m deploy
+        mkdir -p ~deploy/.ssh
+        echo 'ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILa+pYqBIW5s4nYrmZrESiJmtJfodfI+aeSP8BcYo6Xj rajkhemani24@gmail.com' >> ~deploy/.ssh/authorized_keys
+        echo 'ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFBdZMtB65G0IIVz3MGIA4LeelHHo0zSOq7P5BdnoW6I luxor9@luxor9-Victus-by-HP-Laptop-16-d0xxx' >> ~deploy/.ssh/authorized_keys
+        
+        # Also add to root
+        mkdir -p /root/.ssh
+        cat ~deploy/.ssh/authorized_keys >> /root/.ssh/authorized_keys
+        chmod 600 /root/.ssh/authorized_keys
+        chmod 600 ~deploy/.ssh/authorized_keys
+        chown -R deploy:deploy ~deploy/.ssh
+        usermod -aG docker deploy
+
+    - run: |
+        set -ex
+        # Check what SSH service exists
+        systemctl list-units --type=service --all | grep -i ssh || true
+        ls -la /etc/ssh/sshd_config 2>/dev/null && cat /etc/ssh/ssh_config 2>/dev/null | head -5 || true
+
+    - run: |
+        set -ex
+        # Try all possible SSH service names
+        systemctl enable ssh 2>/dev/null || true
+        systemctl enable sshd 2>/dev/null || true
+        systemctl start ssh 2>/dev/null || systemctl start sshd 2>/dev/null || /usr/sbin/sshd -D &
+        systemctl status ssh 2>/dev/null || systemctl status sshd 2>/dev/null || ps aux | grep sshd
+        ss -tlnp | grep 22 || true
