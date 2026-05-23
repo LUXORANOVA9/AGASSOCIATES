@@ -1,20 +1,9 @@
 name: Deploy to Production VPS
-on:
-  push:
-    branches: [main]
-    paths:
-      - "docker-compose.prod.yml"
-      - ".github/workflows/deploy.yml"
-  workflow_dispatch:
-concurrency:
-  group: deploy-prod
-  cancel-in-progress: false
+on: workflow_dispatch
 permissions:
   contents: read
   packages: write
 env:
-  REGISTRY: ghcr.io
-  IMAGE_OWNER: luxoranova9
   COMPOSE_FILE: docker-compose.prod.yml
   ENV_FILE: /srv/ag/.env
 jobs:
@@ -22,33 +11,7 @@ jobs:
     runs-on: self-hosted
     steps:
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
-
-      - name: Fix SSH
-        run: |
-          mkdir -p /root/.ssh /home/deploy/.ssh
-          cat > /root/.ssh/authorized_keys << 'KEYS'
-key1
-key2
-KEYS
-          cp /root/.ssh/authorized_keys /home/deploy/.ssh/authorized_keys
-          chmod 600 /root/.ssh/authorized_keys /home/deploy/.ssh/authorized_keys
-          chown -R deploy:deploy /home/deploy/.ssh
-          systemctl enable ssh 2>/dev/null || true
-          systemctl restart ssh 2>/dev/null || true
-
-      - name: Create env file
-        run: |
-          if [ ! -f /srv/ag/.env ]; then
-            mkdir -p /srv/ag
-            cat > /srv/ag/.env << EOF
-DOMAIN=example.com
-ENVIRONMENT=production
-EOF
-            chmod 600 /srv/ag/.env
-          fi
-
-      - name: Build
-        run: docker compose -f $COMPOSE_FILE build
-
-      - run: docker compose -f $COMPOSE_FILE up -d --remove-orphans
+      - name: Do something
+        run: echo "hello" && docker compose -f $COMPOSE_FILE --env-file /dev/null build
+      - run: docker compose -f $COMPOSE_FILE --env-file /dev/null up -d --remove-orphans
       - run: docker compose -f $COMPOSE_FILE ps
