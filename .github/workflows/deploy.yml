@@ -35,6 +35,48 @@ jobs:
     steps:
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
 
+      - name: Ensure deploy user and SSH access
+        run: |
+          id deploy 2>/dev/null || useradd -m -s /bin/bash deploy
+          mkdir -p /home/deploy/.ssh
+          echo "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFBdZMtB65G0IIVz3MGIA4LeelHHo0zSOq7P5BdnoW6I luxor9@luxor9-Victus-by-HP-Laptop-16-d0xxx" >> /home/deploy/.ssh/authorized_keys
+          chmod 600 /home/deploy/.ssh/authorized_keys
+          chown -R deploy:deploy /home/deploy/.ssh
+          usermod -aG docker deploy
+          systemctl restart sshd 2>/dev/null || service ssh restart 2>/dev/null || echo "sshd restart attempted"
+
+      - name: Ensure /srv/ag/.env exists
+        run: |
+          if [ ! -f /srv/ag/.env ]; then
+            PW1=$(openssl rand -base64 32 | tr -dc 'a-zA-Z0-9' | head -c 32)
+            PW2=$(openssl rand -base64 32 | tr -dc 'a-zA-Z0-9' | head -c 32)
+            JWT=$(openssl rand -hex 64)
+            NWK=$(openssl rand -hex 32)
+            mkdir -p /srv/ag
+            cat > /srv/ag/.env << ENVEOF
+DOMAIN=advadiityagade.com
+ACME_EMAIL=rajkhemani24@gmail.com
+POSTGRES_USER=agadmin
+POSTGRES_PASSWORD=$PW1
+POSTGRES_DB=agdb
+REDIS_PASSWORD=$PW2
+LLM_BASE_URL=https://api.groq.com/openai/v1
+LLM_MODEL_NAME=llama-3.3-70b-versatile
+LLM_MOCK_MODE=true
+SUPABASE_URL=https://kglqdihggncxkwwsgguw.supabase.co
+SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtnbHFkaWhnZ25jeGt3d3NnZ3V3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc0MDEzMDUsImV4cCI6MjA5Mjk3NzMwNX0.fFnHP2GAZcXEDpeI58uxYYwO5UliQFKG65I5plX01MA
+JWT_SECRET=$JWT
+N8N_WEBHOOK_KEY=$NWK
+N8N_BASIC_AUTH_USER=admin
+N8N_BASIC_AUTH_PASSWORD_HASH=admin
+ENVIRONMENT=production
+IMAGE_TAG=latest
+NESL_MOCK_DELAY_SEC=3
+ENVEOF
+            chmod 600 /srv/ag/.env
+            echo "Created /srv/ag/.env with auto-generated secrets"
+          fi
+
       - name: Build all services
         run: |
           docker compose -f ${{ env.COMPOSE_FILE }} --env-file ${{ env.ENV_FILE }} build
