@@ -1,11 +1,14 @@
 import { useState, useEffect } from 'react';
-import { Send, AlertCircle, Loader2 } from 'lucide-react';
-import { Case, CaseStatus } from '../../types/domain';
+import { Send, AlertCircle, Loader2, AlertTriangle, CheckCircle, UserCheck } from 'lucide-react';
+import { Case, CaseStatus, HITLTask } from '../../types/domain';
 
 export function AdvisorCockpit() {
   const [cases, setCases] = useState<Case[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [view, setView] = useState<'kanban' | 'hitl'>('kanban');
+  const [hitlTasks, setHitlTasks] = useState<HITLTask[]>([]);
+  const [hitlLoading, setHitlLoading] = useState(false);
 
   useEffect(() => {
     async function fetchCases() {
@@ -36,6 +39,60 @@ export function AdvisorCockpit() {
 
     fetchCases();
   }, []);
+
+  const fetchHITL = async () => {
+    try {
+      setHitlLoading(true);
+      const res = await fetch('/api/hitl/tasks');
+      if (res.ok) {
+        const data = await res.json();
+        setHitlTasks(data.tasks ?? []);
+      }
+    } catch {
+      // Silently fail — HITL isn't critical for the main view
+    } finally {
+      setHitlLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    if (view === 'hitl') {
+      fetchHITL();
+      const interval = setInterval(fetchHITL, 15000);
+      return () => clearInterval(interval);
+    }
+  }, [view]);
+
+  const claimTask = async (taskId: string) => {
+    try {
+      const res = await fetch(`/api/hitl/tasks/${taskId}/claim`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ claimed_by: 'cockpit_user' }),
+      });
+      if (res.ok) {
+        const data = await res.json();
+        setHitlTasks(prev => prev.map(t => t.id === taskId ? data.task : t));
+      }
+    } catch {
+      alert('Failed to claim task');
+    }
+  };
+
+  const completeTask = async (taskId: string) => {
+    try {
+      const res = await fetch(`/api/hitl/tasks/${taskId}/complete`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ notes: 'Manually resolved via cockpit' }),
+      });
+      if (res.ok) {
+        setHitlTasks(prev => prev.filter(t => t.id !== taskId));
+      }
+    } catch {
+      alert('Failed to complete task');
+    }
+  };
 
   const updateCaseStatus = async (id: string, newStatus: CaseStatus) => {
     // Optimistic update
@@ -99,7 +156,27 @@ export function AdvisorCockpit() {
             <h1 className="text-2xl font-serif font-bold text-slate-900">Legal Ops Pipeline (Banker's Eye)</h1>
             <p className="text-sm text-slate-500 mt-1">Real-time Kanban View</p>
           </div>
-          <div className="flex gap-4">
+          <div className="flex items-center gap-3">
+            <div className="flex bg-slate-200 rounded-lg p-0.5">
+              <button
+                onClick={() => setView('kanban')}
+                className={`px-3 py-1.5 text-sm font-medium rounded-md transition ${view === 'kanban' ? 'bg-white text-slate-900 shadow-sm' : 'text-slate-600 hover:text-slate-800'}`}
+              >
+                Kanban
+              </button>
+              <button
+                onClick={() => setView('hitl')}
+                className={`px-3 py-1.5 text-sm font-medium rounded-md transition flex items-center gap-1.5 ${view === 'hitl' ? 'bg-white text-slate-900 shadow-sm' : 'text-slate-600 hover:text-slate-800'}`}
+              >
+                <AlertTriangle size={14} />
+                HITL Queue
+                {hitlTasks.filter(t => t.status === 'PENDING').length > 0 && (
+                  <span className="bg-amber-500 text-white text-xs px-1.5 py-0.5 rounded-full font-bold">
+                    {hitlTasks.filter(t => t.status === 'PENDING').length}
+                  </span>
+                )}
+              </button>
+            </div>
             <div className="flex items-center gap-2 bg-white px-4 py-2 rounded-lg border border-slate-200" aria-label={`${cases.length} active cases`}>
               <span className="text-2xl font-mono font-bold text-slate-900">{cases.length}</span>
               <span className="text-xs text-slate-500 font-medium uppercase leading-tight">Active<br/>Cases</span>
@@ -107,7 +184,66 @@ export function AdvisorCockpit() {
           </div>
         </header>
 
-        {/* Kanban Board */}
+        {view === 'hitl' ? (
+          <section className="flex-1 overflow-y-auto" aria-label="HITL Queue">
+            <div className="space-y-3">
+              {hitlLoading && hitlTasks.length === 0 && (
+                <div className="flex items-center justify-center py-12">
+                  <Loader2 className="animate-spin text-indigo-600" size={24} />
+                </div>
+              )}
+              {!hitlLoading && hitlTasks.length === 0 && (
+                <div className="text-center py-12 text-slate-400">
+                  <CheckCircle size={48} className="mx-auto mb-3 text-emerald-400" />
+                  <p className="text-lg font-medium">No pending HITL tasks</p>
+                  <p className="text-sm mt-1">All RPA portals are operating normally</p>
+                </div>
+              )}
+              {hitlTasks.map(task => (
+                <div key={task.id} className="bg-white p-4 rounded-xl border border-amber-200 shadow-sm">
+                  <div className="flex items-start justify-between mb-3">
+                    <div>
+                      <div className="flex items-center gap-2 mb-1">
+                        <span className={`text-xs font-bold px-2 py-0.5 rounded-full uppercase ${task.status === 'PENDING' ? 'bg-amber-100 text-amber-700' : 'bg-blue-100 text-blue-700'}`}>
+                          {task.status}
+                        </span>
+                        <span className="text-xs font-mono bg-slate-100 text-slate-600 px-2 py-0.5 rounded">{task.portal}</span>
+                        <span className="text-xs font-mono text-slate-500">{task.case_id}</span>
+                      </div>
+                      <p className="text-sm font-medium text-slate-900 mt-1">{task.reason}</p>
+                      {task.claimed_by && (
+                        <p className="text-xs text-slate-500 mt-1">Claimed by: {task.claimed_by}</p>
+                      )}
+                    </div>
+                    <div className="flex gap-2 shrink-0">
+                      {task.status === 'PENDING' && (
+                        <button
+                          onClick={() => claimTask(task.id)}
+                          className="flex items-center gap-1 bg-indigo-600 hover:bg-indigo-700 text-white text-xs px-3 py-1.5 rounded-lg transition"
+                        >
+                          <UserCheck size={14} /> Claim
+                        </button>
+                      )}
+                      {task.status === 'CLAIMED' && (
+                        <button
+                          onClick={() => completeTask(task.id)}
+                          className="flex items-center gap-1 bg-emerald-600 hover:bg-emerald-700 text-white text-xs px-3 py-1.5 rounded-lg transition"
+                        >
+                          <CheckCircle size={14} /> Complete
+                        </button>
+                      )}
+                    </div>
+                  </div>
+                  {task.payload && Object.keys(task.payload).length > 0 && (
+                    <pre className="text-xs text-slate-500 bg-slate-50 p-2 rounded border border-slate-100 overflow-x-auto max-h-32">
+                      {JSON.stringify(task.payload, null, 2)}
+                    </pre>
+                  )}
+                </div>
+              ))}
+            </div>
+          </section>
+        ) : (
         <section className="flex-1 flex gap-6 overflow-x-auto pb-4" aria-label="Case Pipeline Columns">
            {/* Column 1: Intake */}
            <div className="min-w-[320px] max-w-[320px] flex flex-col bg-slate-100 rounded-xl p-3 border border-slate-200">
@@ -204,12 +340,14 @@ export function AdvisorCockpit() {
              </div>
            </div>
         </section>
+        )}
       </div>
     </main>
   );
 }
 
-function CaseCard({ kase, onUpdateStatus }: { kase: Case, onUpdateStatus: (id: string, status: CaseStatus) => void }) {
+
+function CaseCard({ kase, onUpdateStatus }: { kase: Case; onUpdateStatus: (id: string, status: CaseStatus) => void }) {
   const isUrgent = kase.sla_deadline && new Date(kase.sla_deadline) < new Date();
   
   const handleNextStatus = () => {
