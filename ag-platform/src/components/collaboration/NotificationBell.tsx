@@ -14,6 +14,8 @@ export const NotificationBell: React.FC = () => {
       <button 
         onClick={() => setIsOpen(!isOpen)}
         className="relative p-2 rounded-full hover:bg-gray-100 transition text-gray-600"
+        aria-label="Notifications"
+        aria-expanded={isOpen}
       >
         <Bell className="w-5 h-5" />
         {unreadCount > 0 && (
@@ -69,6 +71,7 @@ export const NotificationBell: React.FC = () => {
                          onClick={(e) => { e.stopPropagation(); markAsRead(notif.id); }}
                          className="flex-shrink-0 text-blue-500 hover:bg-blue-100 p-1 rounded-full h-fit mt-1"
                          title="Mark as read"
+                         aria-label="Mark as read"
                        >
                          <Check className="w-3 h-3" />
                        </button>
