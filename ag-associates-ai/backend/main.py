@@ -125,7 +125,8 @@ class AgreementRequest(BaseModel):
 
 @app.post("/api/generate-agreement", tags=["AI"])
 async def generate_agreement(
-    request: AgreementRequest, 
+    request: AgreementRequest,
+    auth: AuthContext = Depends(require_permission("agreement.generate")),
     x_org_id: Optional[str] = Header(default=None, alias="X-Org-ID"),
     x_api_key: Optional[str] = Header(default=None, alias="x-api-key")
 ):
@@ -196,7 +197,7 @@ if not IS_PRODUCTION:
 # ============================================================================
 
 @app.get("/dashboard/status", tags=["Dashboard"])
-async def dashboard_status():
+async def dashboard_status(auth: AuthContext = Depends(require_permission("dashboard.view"))):
     """Returns dashboard metrics: template count, active agents, recent activities."""
     import psycopg2
     from config import get_database_url
@@ -224,7 +225,7 @@ async def dashboard_status():
 
 
 @app.get("/templates", tags=["Dashboard"])
-async def list_templates(template_type: Optional[str] = None, language: Optional[str] = None):
+async def list_templates(auth: AuthContext = Depends(require_permission("dashboard.view")), template_type: Optional[str] = None, language: Optional[str] = None):
     """List legal templates with optional filters."""
     import psycopg2
     from config import get_database_url
@@ -272,6 +273,7 @@ class AishaChatResponse(BaseModel):
 @app.post("/api/aisha/chat", tags=["Aisha"])
 async def aisha_chat(
     request: AishaChatRequest,
+    auth: AuthContext = Depends(require_permission("aisha.chat")),
     x_api_key: Optional[str] = Header(default=None, alias="x-api-key"),
     x_user_id: Optional[str] = Header(default=None, alias="x-user-id"),
 ):
@@ -382,7 +384,7 @@ def _escape_twiml(text: str) -> str:
 
 
 @app.post("/api/aisha/voice-text", tags=["Aisha"])
-async def aisha_voice_text(payload: Dict[str, Any]):
+async def aisha_voice_text(payload: Dict[str, Any], auth: AuthContext = Depends(require_permission("aisha.chat"))):
     """
     Accept transcribed text from voice platforms (V.O.X., web mic, Twilio Voice
     STT, WhatsApp voice notes) and return a response with optional TTS audio.
@@ -422,7 +424,7 @@ async def aisha_voice_text(payload: Dict[str, Any]):
 from fastapi.responses import StreamingResponse
 
 @app.get("/api/aisha/chat/{conversation_id}/stream", tags=["Aisha"])
-async def aisha_chat_stream(conversation_id: str, after_id: int = 0):
+async def aisha_chat_stream(conversation_id: str, after_id: int = 0, auth: AuthContext = Depends(require_permission("aisha.chat"))):
     """SSE endpoint for web chat widget — streams new messages."""
     from conversation_store import get_messages
     import asyncio
@@ -452,7 +454,7 @@ class UnifiedChatRequest(BaseModel):
     conversation_id: Optional[str] = None
 
 @app.post("/api/unified/chat", tags=["AI"])
-async def unified_chat(request: UnifiedChatRequest):
+async def unified_chat(request: UnifiedChatRequest, auth: AuthContext = Depends(require_permission("ai.chat"))):
     """
     Experimental endpoint for the Unified Workforce Controller.
     Uses OpenAI Conversations API and MCP tools.
@@ -490,7 +492,7 @@ class NeslExecuteResponse(BaseModel):
     mode: Optional[str] = None
 
 @app.post("/api/nesl/execute", tags=["NeSL"])
-async def nesl_execute(request: Request):
+async def nesl_execute(request: Request, auth: AuthContext = Depends(require_permission("nesl.execute"))):
     """File document with NeSL government registry.
 
     Accepts empty body (frontend legacy /dashboard cycles) or JSON with
@@ -665,14 +667,14 @@ class HITLCompleteRequest(BaseModel):
 
 
 @app.get("/api/hitl/tasks", tags=["HITL"])
-async def hitl_list_tasks():
+async def hitl_list_tasks(auth: AuthContext = Depends(require_permission("hitl.view"))):
     """List pending HITL tasks (circuit breaker fallbacks requiring human action)."""
     tasks = await hitl_queue.list_pending()
     return {"success": True, "tasks": tasks, "count": len(tasks)}
 
 
 @app.post("/api/hitl/tasks/{task_id}/claim", tags=["HITL"])
-async def hitl_claim_task(task_id: str, req: HITLClaimRequest):
+async def hitl_claim_task(task_id: str, req: HITLClaimRequest, auth: AuthContext = Depends(require_permission("hitl.manage"))):
     """Claim a HITL task for manual processing."""
     task = await hitl_queue.claim_task(task_id, req.claimed_by)
     if task is None:
@@ -681,7 +683,7 @@ async def hitl_claim_task(task_id: str, req: HITLClaimRequest):
 
 
 @app.post("/api/hitl/tasks/{task_id}/complete", tags=["HITL"])
-async def hitl_complete_task(task_id: str, req: HITLCompleteRequest):
+async def hitl_complete_task(task_id: str, req: HITLCompleteRequest, auth: AuthContext = Depends(require_permission("hitl.manage"))):
     """Mark a HITL task as completed."""
     task = await hitl_queue.complete_task(task_id, req.notes)
     if task is None:
@@ -690,7 +692,7 @@ async def hitl_complete_task(task_id: str, req: HITLCompleteRequest):
 
 
 @app.get("/api/circuit-breakers", tags=["HITL"])
-async def circuit_breaker_status():
+async def circuit_breaker_status(auth: AuthContext = Depends(require_permission("hitl.view"))):
     """Get status of all RPA circuit breakers."""
     results = {}
     for name, breaker in breakers.items():

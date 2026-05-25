@@ -96,13 +96,32 @@ RPA_PERMISSIONS = [
     Permission("rpa.view_logs", "View RPA execution logs", Role.EXECUTIVE.value),
 ]
 
+HITL_PERMISSIONS = [
+    Permission("hitl.view", "View HITL tasks and circuit breaker status", Role.CLERK.value),
+    Permission("hitl.manage", "Claim and complete HITL tasks", Role.EXECUTIVE.value),
+]
+
+AI_PERMISSIONS = [
+    Permission("aisha.chat", "Chat with Aisha across platforms", Role.CLERK.value),
+    Permission("ai.chat", "Use unified AI chat endpoint", Role.CLERK.value),
+    Permission("agreement.generate", "Generate legal agreements", Role.EXECUTIVE.value),
+]
+
+DASHBOARD_PERMISSIONS = [
+    Permission("dashboard.view", "View dashboard metrics and templates", Role.CLERK.value),
+]
+
+NON_RPA_PERMISSIONS = [
+    Permission("nesl.execute", "Execute NeSL e-filing", Role.ADVOCATE.value),
+]
+
 REPORT_PERMISSIONS = [
     Permission("reports.view_dashboard", "View main dashboard", Role.CLERK.value),
     Permission("reports.view_analytics", "View advanced analytics", Role.ADVOCATE.value),
     Permission("reports.export", "Export case data", Role.ADVOCATE.value),
 ]
 
-ALL_PERMISSIONS = FIRM_PERMISSIONS + CASE_PERMISSIONS + NOI_PERMISSIONS + COMMS_PERMISSIONS + RPA_PERMISSIONS + REPORT_PERMISSIONS
+ALL_PERMISSIONS = FIRM_PERMISSIONS + CASE_PERMISSIONS + NOI_PERMISSIONS + COMMS_PERMISSIONS + RPA_PERMISSIONS + HITL_PERMISSIONS + AI_PERMISSIONS + DASHBOARD_PERMISSIONS + NON_RPA_PERMISSIONS + REPORT_PERMISSIONS
 
 PERMISSION_MAP: dict[str, Permission] = {p.code: p for p in ALL_PERMISSIONS}
 
