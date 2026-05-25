@@ -1,5 +1,7 @@
 # AG Associates — Production Deployment Playbook
 
+> **Note:** See also the [README.md](./README.md#-cicd-automation) *CI/CD Automation* section for auto-merge policies and development workflow conventions.
+
 **Target architecture:** one Linux VPS, Docker Compose, Caddy reverse proxy with auto-TLS, Supabase Cloud for Auth, Groq/Gemini for LLM.
 
 Optimized for: lowest cost, fastest path to "live", full orchestration (CI deploys, automated backups). RTO ≈ 1 hour from a restic snapshot.
