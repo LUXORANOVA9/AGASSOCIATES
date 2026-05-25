@@ -25,8 +25,8 @@ jobs:
             context: ./ag-platform
             dockerfile: ./ag-platform/Dockerfile
           - name: intake-api
-            context: ./ag-associates-ai/backend/intake_api
-            dockerfile: ./ag-associates-ai/backend/intake_api/Dockerfile
+            context: ./ag-platform/services/intake-api
+            dockerfile: ./ag-platform/services/intake-api/Dockerfile
           - name: telegram-bot
             context: ./ag-associates-ai/backend/telegram_bot
             dockerfile: ./ag-associates-ai/backend/telegram_bot/Dockerfile
@@ -36,13 +36,13 @@ jobs:
     steps:
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
       - name: Log in to GHCR
-        uses: docker/login-action@9780b0c442fbb1117ed29e0efdff1e18412f7567
+        uses: docker/login-action@650006c6eb7dba73a995cc03b0b2d7f5ca915bee
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GH_PAT }}
       - name: Build & Push
-        uses: docker/build-push-action@ca877d9245402d1537745e0e356eab47c3520991
+        uses: docker/build-push-action@f9f3042f7e2789586610d6e8b85c8f03e5195baf
         with:
           context: ${{ matrix.service.context }}
           file: ${{ matrix.service.dockerfile }}
