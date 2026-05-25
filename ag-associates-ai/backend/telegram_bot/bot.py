@@ -1,4 +1,4 @@
-"""Telegram Bot — OTP bridge + Aisha chat interface.
+"""Telegram Bot — OTP bridge + Aisha chat interface + Voice support.
 
 Staff commands:
   /start       — Register staff handle
@@ -10,7 +10,8 @@ Staff commands:
   /aisha       — Toggle Aisha chat mode
   /aisha <msg> — Send a message to Aisha directly
 
-In chat mode, all messages are forwarded to Aisha for processing.
+In chat mode, all text and voice messages are forwarded to Aisha.
+Voice messages are transcribed via Groq Whisper before being sent to Aisha.
 """
 
 import os
@@ -36,6 +37,8 @@ REDIS_PASSWORD = os.environ.get("REDIS_PASSWORD", "")
 BOT_PORT = int(os.environ.get("TELEGRAM_BOT_PORT", "3003"))
 AISHA_API_URL = os.environ.get("AISHA_API_URL", "http://localhost:8001/api/aisha/chat")
 AISHA_API_KEY = os.environ.get("N8N_WEBHOOK_KEY", "")
+LLM_API_KEY = os.environ.get("LLM_API_KEY", "")
+LLM_BASE_URL = os.environ.get("LLM_BASE_URL", "https://api.groq.com/openai/v1")
 
 OTP_TTL_SECONDS = 300  # 5 min
 
@@ -166,7 +169,64 @@ async def aisha_message_handler(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
         await update.message.reply_text("❌ Aisha is unavailable right now. Please try again later.")
 
 
-# ── OTP handlers ─────────────────────────────────────────────────────────
+# ── Voice message handler ────────────────────────────────────────────────
+
+async def _transcribe_voice(audio_bytes: bytes, filename: str = "voice.ogg") -> Optional[str]:
+    """Transcribe voice audio using Groq Whisper API."""
+    import httpx
+    try:
+        async with httpx.AsyncClient(timeout=60.0) as client:
+            files = {"file": (filename, audio_bytes, "audio/ogg")}
+            data = {"model": "whisper-large-v3", "language": "en"}
+            resp = await client.post(
+                f"{LLM_BASE_URL}/audio/transcriptions",
+                files=files,
+                data=data,
+                headers={"Authorization": f"Bearer {LLM_API_KEY}"},
+            )
+            if resp.status_code != 200:
+                logger.error("Whisper API error %s: %s", resp.status_code, resp.text[:200])
+                return None
+            return resp.json().get("text", "").strip()
+    except Exception as e:
+        logger.error("Voice transcription failed: %s", e)
+        return None
+
+
+async def voice_handler(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
+    """Handle voice messages — transcribe then forward to Aisha."""
+    chat_id = update.effective_chat.id
+    if not _is_aisha_mode(chat_id):
+        return
+
+    voice = update.message.voice
+    if not voice:
+        return
+
+    await update.message.reply_chat_action("typing")
+
+    voice_file = await ctx.bot.get_file(voice.file_id)
+    audio_bytes = await voice_file.download_as_bytearray()
+
+    transcribed = await _transcribe_voice(bytes(audio_bytes))
+    if not transcribed:
+        await update.message.reply_text("🎙️ Sorry, I couldn't understand your voice message. Please try again or type your message.")
+        return
+
+    await update.message.reply_text(f"🎙️ <i>Heard:</i> {transcribed}", parse_mode="HTML")
+
+    username = update.effective_user.username or str(chat_id)
+    response = await _call_aisha_api(transcribed, chat_id, username)
+
+    if response:
+        if len(response) > 4000:
+            for i in range(0, len(response), 4000):
+                chunk = response[i:i + 4000]
+                await update.message.reply_text(chunk, parse_mode="HTML")
+        else:
+            await update.message.reply_text(response, parse_mode="HTML")
+    else:
+        await update.message.reply_text("❌ Aisha is unavailable right now. Please try again later.")
 
 async def start(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
     """Register staff member and link to their chat."""
@@ -427,6 +487,7 @@ def main():
     app.add_handler(CommandHandler("cancel", cancel))
 
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, aisha_message_handler))
+    app.add_handler(MessageHandler(filters.VOICE, voice_handler))
     app.add_handler(CallbackQueryHandler(button_callback))
 
     app.bot_data["application"] = app
@@ -439,7 +500,7 @@ def main():
         logger.info("No webhook URL set — starting polling mode")
 
     logger.info("Telegram Bot started — Aisha mode available")
-    app.run_polling(allowed_updates=["message", "callback_query"])
+    app.run_polling(allowed_updates=["message", "callback_query", "voice"])
 
 
 if __name__ == "__main__":

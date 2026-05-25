@@ -246,6 +246,8 @@ services:
       TELEGRAM_BOT_PORT: 3003
       AISHA_API_URL: http://ai-backend:8000/api/aisha/chat
       N8N_WEBHOOK_KEY: ${N8N_WEBHOOK_KEY}
+      LLM_API_KEY: ${LLM_API_KEY}
+      LLM_BASE_URL: https://api.groq.com/openai/v1
     depends_on:
       redis: { condition: service_healthy }
       ai-backend: { condition: service_healthy }
