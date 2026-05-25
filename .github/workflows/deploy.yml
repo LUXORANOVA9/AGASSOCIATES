@@ -1,17 +1,74 @@
-name: Deploy to Production VPS
-on: workflow_dispatch
+name: Deploy
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
 permissions:
   contents: read
   packages: write
-env:
-  COMPOSE_FILE: docker-compose.prod.yml
-  ENV_FILE: /srv/ag/.env
+
 jobs:
-  build:
-    runs-on: self-hosted
+  build-and-push:
+    name: Build & Push Images
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        service:
+          - name: ag-ai-backend
+            context: ./ag-associates-ai/backend
+            dockerfile: ./ag-associates-ai/backend/Dockerfile
+          - name: ag-ai-dashboard
+            context: ./ag-associates-ai/frontend
+            dockerfile: ./ag-associates-ai/frontend/Dockerfile
+          - name: ag-platform
+            context: ./ag-platform
+            dockerfile: ./ag-platform/Dockerfile
+          - name: intake-api
+            context: ./ag-associates-ai/backend/intake_api
+            dockerfile: ./ag-associates-ai/backend/intake_api/Dockerfile
+          - name: telegram-bot
+            context: ./ag-associates-ai/backend/telegram_bot
+            dockerfile: ./ag-associates-ai/backend/telegram_bot/Dockerfile
+          - name: email-intake
+            context: ./ag-associates-ai/backend/email_intake
+            dockerfile: ./ag-associates-ai/backend/email_intake/Dockerfile
     steps:
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
-      - name: Do something
-        run: echo "hello" && docker compose -f $COMPOSE_FILE --env-file /dev/null build
-      - run: docker compose -f $COMPOSE_FILE --env-file /dev/null up -d --remove-orphans
-      - run: docker compose -f $COMPOSE_FILE ps
+      - name: Log in to GHCR
+        uses: docker/login-action@9780b0c442fbb1117ed29e0efdff1e18412f7567
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GH_PAT }}
+      - name: Build & Push
+        uses: docker/build-push-action@ca877d9245402d1537745e0e356eab47c3520991
+        with:
+          context: ${{ matrix.service.context }}
+          file: ${{ matrix.service.dockerfile }}
+          push: true
+          tags: ghcr.io/luxoranova9/${{ matrix.service.name }}:latest,ghcr.io/luxoranova9/${{ matrix.service.name }}:${{ github.sha }}
+          cache-from: type=registry,ref=ghcr.io/luxoranova9/${{ matrix.service.name }}:latest
+          cache-to: type=inline
+
+  deploy:
+    name: Deploy to VPS
+    needs: build-and-push
+    runs-on: ag-prod-runner
+    steps:
+      - run: |
+          set -e
+          cd /home/luxor9/AGASSOCIATES
+          git pull origin main
+          docker compose -f docker-compose.prod.yml --env-file /srv/ag/.env pull
+          docker compose -f docker-compose.prod.yml --env-file /srv/ag/.env up -d --remove-orphans
+          docker compose -f /home/luxor9/AGASSOCIATES/docker-compose.prod.yml ps
+          for i in 1 2 3 4 5 6; do
+            if curl -sf http://127.0.0.1/health; then
+              echo "API healthy"
+              exit 0
+            fi
+            sleep 10
+          done
+          echo "API not healthy"
+          exit 1

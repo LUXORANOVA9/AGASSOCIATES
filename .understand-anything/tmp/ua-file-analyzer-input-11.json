@@ -1,0 +1,37 @@
+{
+  "projectRoot": "/home/luxor9/AGASSOCIATES",
+  "batchFiles": [
+    {"path": "ag-platform/src/store/useAuthStore.ts", "language": "typescript", "sizeLines": 54, "fileCategory": "code"},
+    {"path": "ag-platform/src/types/domain.ts", "language": "typescript", "sizeLines": 88, "fileCategory": "code"},
+    {"path": "ag-platform/src/types/storage.ts", "language": "typescript", "sizeLines": 33, "fileCategory": "code"},
+    {"path": "ag-platform/supabase/functions/send-push-on-case-assigned/index.ts", "language": "typescript", "sizeLines": 101, "fileCategory": "code"},
+    {"path": "ag-platform/supabase/migrations/20260423_ai_setup.sql", "language": "sql", "sizeLines": 56, "fileCategory": "data"},
+    {"path": "ag-platform/supabase/migrations/20260423_ai_tokens.sql", "language": "sql", "sizeLines": 11, "fileCategory": "data"},
+    {"path": "ag-platform/supabase/migrations/20260423_collaboration_setup.sql", "language": "sql", "sizeLines": 75, "fileCategory": "data"},
+    {"path": "ag-platform/supabase/migrations/20260423_document_storage_setup.sql", "language": "sql", "sizeLines": 93, "fileCategory": "data"},
+    {"path": "ag-platform/supabase/migrations/20260514000000_core_schema.sql", "language": "sql", "sizeLines": 85, "fileCategory": "data"},
+    {"path": "ag-platform/supabase/migrations/20260514000000_init_schema.sql", "language": "sql", "sizeLines": 64, "fileCategory": "data"},
+    {"path": "ag-platform/supabase/migrations/20260514000001_auth_hooks.sql", "language": "sql", "sizeLines": 52, "fileCategory": "data"},
+    {"path": "ag-platform/supabase/migrations/20260514000002_rbac_setup.sql", "language": "sql", "sizeLines": 43, "fileCategory": "data"},
+    {"path": "ag-platform/supabase/migrations/20260514000003_voice_system_setup.sql", "language": "sql", "sizeLines": 67, "fileCategory": "data"},
+    {"path": "ag-platform/supabase/migrations/20260514000004_workforce_management.sql", "language": "sql", "sizeLines": 95, "fileCategory": "data"},
+    {"path": "ag-platform/supabase/migrations/20260515000000_voice_command_logs.sql", "language": "sql", "sizeLines": 46, "fileCategory": "data"},
+    {"path": "ag-platform/supabase/migrations/20260515000001_voice_tool_config.sql", "language": "sql", "sizeLines": 18, "fileCategory": "data"},
+    {"path": "ag-platform/supabase/migrations/20260515000002_workforce.sql", "language": "sql", "sizeLines": 146, "fileCategory": "data"},
+    {"path": "ag-platform/supabase/migrations/20260515000003_workforce_phase4.sql", "language": "sql", "sizeLines": 27, "fileCategory": "data"},
+    {"path": "ag-platform/supabase/migrations/20260518000000_field_app.sql", "language": "sql", "sizeLines": 141, "fileCategory": "data"},
+    {"path": "ag-platform/supabase/migrations/20260519000000_push_trigger.sql", "language": "sql", "sizeLines": 67, "fileCategory": "data"},
+    {"path": "ag-platform/supabase/migrations/20260520000000_fix_auth_token_hook.sql", "language": "sql", "sizeLines": 104, "fileCategory": "data"},
+    {"path": "ag-platform/tailwind.config.js", "language": "javascript", "sizeLines": 17, "fileCategory": "code"},
+    {"path": "ag-platform/tsconfig.json", "language": "json", "sizeLines": 30, "fileCategory": "config"},
+    {"path": "ag-platform/tsconfig.node.json", "language": "json", "sizeLines": 10, "fileCategory": "config"},
+    {"path": "ag-platform/turbo.json", "language": "json", "sizeLines": 24, "fileCategory": "config"}
+  ],
+  "batchImportData": {
+    "ag-platform/src/store/useAuthStore.ts": ["ag-platform/src/lib/supabase.ts"],
+    "ag-platform/src/types/domain.ts": [],
+    "ag-platform/src/types/storage.ts": [],
+    "ag-platform/supabase/functions/send-push-on-case-assigned/index.ts": [],
+    "ag-platform/tailwind.config.js": []
+  }
+}

@@ -1,0 +1,245 @@
+{
+  "nodes": [
+    {
+      "id": "file:ag-associates-ai/backend/agents/__init__.py",
+      "type": "file",
+      "name": "__init__.py",
+      "filePath": "ag-associates-ai/backend/agents/__init__.py",
+      "summary": "LangGraph agent pipeline barrel file that re-exports the public API (AgentState, build_agent_graph, generate_embedding, get_db_connection, process_rental_request, should_revise, similarity_search) from submodules (db, graph, state).",
+      "tags": ["entry-point", "barrel", "langgraph", "agent-pipeline"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:ag-associates-ai/backend/utils/__init__.py",
+      "type": "file",
+      "name": "__init__.py",
+      "filePath": "ag-associates-ai/backend/utils/__init__.py",
+      "summary": "Empty package initializer for the utils module.",
+      "tags": ["package", "barrel"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:ag-associates-ai/backend/models/__init__.py",
+      "type": "file",
+      "name": "__init__.py",
+      "filePath": "ag-associates-ai/backend/models/__init__.py",
+      "summary": "Package initializer for the models module, re-exporting data model definitions.",
+      "tags": ["package", "barrel", "data-model"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:ag-associates-ai/backend/routes/__init__.py",
+      "type": "file",
+      "name": "__init__.py",
+      "filePath": "ag-associates-ai/backend/routes/__init__.py",
+      "summary": "Package initializer for the routes module, re-exporting API route handlers.",
+      "tags": ["package", "barrel", "api-handler"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:ag-associates-ai/backend/services/__init__.py",
+      "type": "file",
+      "name": "__init__.py",
+      "filePath": "ag-associates-ai/backend/services/__init__.py",
+      "summary": "Package initializer for the services module, re-exporting service layer components.",
+      "tags": ["package", "barrel", "service"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:ag-associates-ai/backend/n8n_webhook.py",
+      "type": "file",
+      "name": "n8n_webhook.py",
+      "filePath": "ag-associates-ai/backend/n8n_webhook.py",
+      "summary": "Webhook handler for n8n workflow automation integration.",
+      "tags": ["webhook", "automation", "integration"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:ag-associates-ai/backend/bot.py",
+      "type": "file",
+      "name": "bot.py",
+      "filePath": "ag-associates-ai/backend/bot.py",
+      "summary": "Main bot implementation for handling user interactions and workflow automation.",
+      "tags": ["bot", "automation", "event-handler"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:ag-associates-ai/backend/payment/payment_intent.py",
+      "type": "file",
+      "name": "payment_intent.py",
+      "filePath": "ag-associates-ai/backend/payment/payment_intent.py",
+      "summary": "Payment intent creation and management service using Stripe.",
+      "tags": ["payment", "stripe", "transaction", "service"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:ag-associates-ai/backend/payment/payment_router.py",
+      "type": "file",
+      "name": "payment_router.py",
+      "filePath": "ag-associates-ai/backend/payment/payment_router.py",
+      "summary": "API route definitions for payment endpoints.",
+      "tags": ["payment", "api-handler", "routing"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:ag-associates-ai/backend/payment/webhook.py",
+      "type": "file",
+      "name": "webhook.py",
+      "filePath": "ag-associates-ai/backend/payment/webhook.py",
+      "summary": "Stripe webhook handler for processing payment events.",
+      "tags": ["webhook", "payment", "stripe", "event-handler"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:ag-associates-ai/backend/payment/models.py",
+      "type": "file",
+      "name": "models.py",
+      "filePath": "ag-associates-ai/backend/payment/models.py",
+      "summary": "Payment data models and schema definitions.",
+      "tags": ["data-model", "payment", "schema"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:ag-associates-ai/backend/routes/documents.py",
+      "type": "file",
+      "name": "documents.py",
+      "filePath": "ag-associates-ai/backend/routes/documents.py",
+      "summary": "API route handlers for document management endpoints.",
+      "tags": ["api-handler", "documents", "routing"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:ag-associates-ai/backend/routes/auth.py",
+      "type": "file",
+      "name": "auth.py",
+      "filePath": "ag-associates-ai/backend/routes/auth.py",
+      "summary": "Authentication and authorization route handlers.",
+      "tags": ["api-handler", "auth", "middleware"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:ag-associates-ai/backend/routes/cases.py",
+      "type": "file",
+      "name": "cases.py",
+      "filePath": "ag-associates-ai/backend/routes/cases.py",
+      "summary": "API route handlers for case management endpoints.",
+      "tags": ["api-handler", "cases", "routing"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:ag-associates-ai/backend/routes/health.py",
+      "type": "file",
+      "name": "health.py",
+      "filePath": "ag-associates-ai/backend/routes/health.py",
+      "summary": "Health check endpoint for monitoring application status.",
+      "tags": ["api-handler", "health", "monitoring"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:ag-associates-ai/backend/routes/noi.py",
+      "type": "file",
+      "name": "noi.py",
+      "filePath": "ag-associates-ai/backend/routes/noi.py",
+      "summary": "API route handlers for Notice of Intent (NOI) workflow endpoints.",
+      "tags": ["api-handler", "noi", "routing"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:ag-associates-ai/backend/routes/automation.py",
+      "type": "file",
+      "name": "automation.py",
+      "filePath": "ag-associates-ai/backend/routes/automation.py",
+      "summary": "API route handlers for workflow automation endpoints.",
+      "tags": ["api-handler", "automation", "routing"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:ag-associates-ai/backend/routes/search.py",
+      "type": "file",
+      "name": "search.py",
+      "filePath": "ag-associates-ai/backend/routes/search.py",
+      "summary": "Search endpoint handlers for querying case and document data.",
+      "tags": ["api-handler", "search", "query"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:ag-associates-ai/backend/routes/routing.py",
+      "type": "file",
+      "name": "routing.py",
+      "filePath": "ag-associates-ai/backend/routes/routing.py",
+      "summary": "Central request routing configuration mapping endpoints to handlers.",
+      "tags": ["api-handler", "routing", "configuration"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:ag-associates-ai/backend/frontend/src/vite-env.d.ts",
+      "type": "file",
+      "name": "vite-env.d.ts",
+      "filePath": "ag-associates-ai/backend/frontend/src/vite-env.d.ts",
+      "summary": "Vite environment type declaration file providing TypeScript type definitions for Vite-specific features.",
+      "tags": ["type-definition", "vite", "typescript"],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:ag-associates-ai/backend/frontend/eslint.config.js",
+      "type": "config",
+      "name": "eslint.config.js",
+      "filePath": "ag-associates-ai/backend/frontend/eslint.config.js",
+      "summary": "ESLint configuration for the frontend codebase defining linting rules and plugins.",
+      "tags": ["configuration", "linting", "code-quality"],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:ag-associates-ai/backend/frontend/.gitignore",
+      "type": "config",
+      "name": ".gitignore",
+      "filePath": "ag-associates-ai/backend/frontend/.gitignore",
+      "summary": "Git ignore rules for the frontend module excluding build artifacts and dependencies.",
+      "tags": ["configuration", "git", "version-control"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:ag-associates-ai/backend/frontend/public/vite.svg",
+      "type": "file",
+      "name": "vite.svg",
+      "filePath": "ag-associates-ai/backend/frontend/public/vite.svg",
+      "summary": "Vite logo SVG asset used as the application favicon and branding element.",
+      "tags": ["asset", "svg", "branding"],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:ag-associates-ai/backend/docs/setup.md",
+      "type": "document",
+      "name": "setup.md",
+      "filePath": "ag-associates-ai/backend/docs/setup.md",
+      "summary": "Setup and installation guide for the backend application covering prerequisites, configuration, and deployment steps.",
+      "tags": ["documentation", "setup", "installation", "guide"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:ag-associates-ai/backend/docs/agents.md",
+      "type": "document",
+      "name": "agents.md",
+      "filePath": "ag-associates-ai/backend/docs/agents.md",
+      "summary": "Documentation describing the agent pipeline architecture, components, and workflows.",
+      "tags": ["documentation", "agents", "architecture", "guide"],
+      "complexity": "moderate"
+    }
+  ],
+  "edges": [
+    {
+      "source": "document:ag-associates-ai/backend/docs/agents.md",
+      "target": "file:ag-associates-ai/backend/agents/__init__.py",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:ag-associates-ai/backend/docs/setup.md",
+      "target": "file:ag-associates-ai/backend/agents/__init__.py",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    }
+  ]
+}

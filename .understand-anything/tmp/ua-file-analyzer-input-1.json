@@ -1,0 +1,31 @@
+{
+  "projectRoot": "/home/luxor9/AGASSOCIATES",
+  "batchFiles": [
+    {"path": "ag-associates-ai/backend/agents/aisha.py", "language": "python", "sizeLines": 107, "fileCategory": "code"},
+    {"path": "ag-associates-ai/backend/agents/auditor.py", "language": "python", "sizeLines": 116, "fileCategory": "code"},
+    {"path": "ag-associates-ai/backend/agents/bouncer.py", "language": "python", "sizeLines": 107, "fileCategory": "code"},
+    {"path": "ag-associates-ai/backend/agents/db.py", "language": "python", "sizeLines": 76, "fileCategory": "code"},
+    {"path": "ag-associates-ai/backend/agents/horseman.py", "language": "python", "sizeLines": 105, "fileCategory": "code"},
+    {"path": "ag-associates-ai/backend/agents/legal_assistant.py", "language": "python", "sizeLines": 90, "fileCategory": "code"},
+    {"path": "ag-associates-ai/backend/agents/main.py", "language": "python", "sizeLines": 109, "fileCategory": "code"},
+    {"path": "ag-associates-ai/backend/agents/monitor.py", "language": "python", "sizeLines": 90, "fileCategory": "code"},
+    {"path": "ag-associates-ai/backend/agents/sarah.py", "language": "python", "sizeLines": 95, "fileCategory": "code"},
+    {"path": "ag-associates-ai/backend/agents/scheduler.py", "language": "python", "sizeLines": 98, "fileCategory": "code"},
+    {"path": "ag-associates-ai/backend/agents/scribe.py", "language": "python", "sizeLines": 108, "fileCategory": "code"},
+    {"path": "ag-associates-ai/backend/agents/task_manager.py", "language": "python", "sizeLines": 88, "fileCategory": "code"},
+    {"path": "ag-associates-ai/backend/agents/teacher.py", "language": "python", "sizeLines": 86, "fileCategory": "code"},
+    {"path": "ag-associates-ai/backend/agents/telegram_agent.py", "language": "python", "sizeLines": 97, "fileCategory": "code"},
+    {"path": "ag-associates-ai/backend/agents/ticketing.py", "language": "python", "sizeLines": 130, "fileCategory": "code"},
+    {"path": "ag-associates-ai/backend/agents/tinker.py", "language": "python", "sizeLines": 108, "fileCategory": "code"},
+    {"path": "ag-associates-ai/backend/agents/translator.py", "language": "python", "sizeLines": 81, "fileCategory": "code"},
+    {"path": "ag-associates-ai/backend/agents/vigil.py", "language": "python", "sizeLines": 119, "fileCategory": "code"},
+    {"path": "ag-associates-ai/backend/agents/welcome.py", "language": "python", "sizeLines": 89, "fileCategory": "code"},
+    {"path": "ag-associates-ai/backend/agents/writer.py", "language": "python", "sizeLines": 113, "fileCategory": "code"},
+    {"path": "ag-associates-ai/backend/agents/xerox.py", "language": "python", "sizeLines": 90, "fileCategory": "code"},
+    {"path": "ag-associates-ai/backend/cron.py", "language": "python", "sizeLines": 10, "fileCategory": "code"},
+    {"path": "ag-associates-ai/backend/docker-compose.yml", "language": "yaml", "sizeLines": 118, "fileCategory": "infra"},
+    {"path": "ag-associates-ai/backend/Dockerfile", "language": "dockerfile", "sizeLines": 10, "fileCategory": "infra"},
+    {"path": "ag-associates-ai/backend/docs/architecture.md", "language": "markdown", "sizeLines": 64, "fileCategory": "docs"}
+  ],
+  "batchImportData": {"ag-associates-ai/backend/agents/aisha.py": [], "ag-associates-ai/backend/agents/auditor.py": [], "ag-associates-ai/backend/agents/bouncer.py": [], "ag-associates-ai/backend/agents/db.py": [], "ag-associates-ai/backend/agents/horseman.py": [], "ag-associates-ai/backend/agents/legal_assistant.py": [], "ag-associates-ai/backend/agents/main.py": [], "ag-associates-ai/backend/agents/monitor.py": [], "ag-associates-ai/backend/agents/sarah.py": [], "ag-associates-ai/backend/agents/scheduler.py": [], "ag-associates-ai/backend/agents/scribe.py": [], "ag-associates-ai/backend/agents/task_manager.py": [], "ag-associates-ai/backend/agents/teacher.py": [], "ag-associates-ai/backend/agents/telegram_agent.py": [], "ag-associates-ai/backend/agents/ticketing.py": [], "ag-associates-ai/backend/agents/tinker.py": [], "ag-associates-ai/backend/agents/translator.py": [], "ag-associates-ai/backend/agents/vigil.py": [], "ag-associates-ai/backend/agents/welcome.py": [], "ag-associates-ai/backend/agents/writer.py": [], "ag-associates-ai/backend/agents/xerox.py": [], "ag-associates-ai/backend/cron.py": [], "ag-associates-ai/backend/docker-compose.yml": [], "ag-associates-ai/backend/Dockerfile": [], "ag-associates-ai/backend/docs/architecture.md": []}
+}

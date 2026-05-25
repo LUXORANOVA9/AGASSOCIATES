@@ -388,9 +388,11 @@ async def sms_webhook_handler(request_body: dict, app: Application):
 
 # ── Health endpoint ──────────────────────────────────────────────────────
 
-async def health_check():
+def run_health_check():
+    """Run health check in a separate thread to avoid blocking asyncio."""
     import http.server
     import socketserver
+    import threading
 
     class HealthHandler(http.server.BaseHTTPRequestHandler):
         def do_GET(self):
@@ -398,20 +400,26 @@ async def health_check():
             self.end_headers()
             self.wfile.write(b'{"status":"ok"}')
 
-    with socketserver.TCPServer(("0.0.0.0", BOT_PORT), HealthHandler) as httpd:
-        httpd.serve_forever()
+        def log_message(self, format, *args):
+            pass
+
+    httpd = socketserver.TCPServer(("0.0.0.0", BOT_PORT), HealthHandler)
+    httpd.serve_forever()
 
 
 # ── Main ─────────────────────────────────────────────────────────────────
 
-async def main():
+def main():
     if not TELEGRAM_BOT_TOKEN:
         logger.error("TELEGRAM_BOT_TOKEN not set")
         return
 
+    import threading
+    health_thread = threading.Thread(target=run_health_check, daemon=True)
+    health_thread.start()
+
     app = Application.builder().token(TELEGRAM_BOT_TOKEN).build()
 
-    # Register handlers (order matters: commands before catch-all)
     app.add_handler(CommandHandler("start", start))
     app.add_handler(CommandHandler("aisha", aisha_command))
     app.add_handler(CommandHandler("otp", request_otp))
@@ -425,16 +433,14 @@ async def main():
 
     webhook_url = os.environ.get("TELEGRAM_WEBHOOK_URL", "")
     if webhook_url:
-        await app.bot.set_webhook(url=webhook_url)
+        app.bot.set_webhook(url=webhook_url)
         logger.info("Telegram webhook set to %s", webhook_url)
     else:
         logger.info("No webhook URL set — starting polling mode")
 
-    asyncio.create_task(health_check())
-
     logger.info("Telegram Bot started — Aisha mode available")
-    await app.run_polling(allowed_updates=["message", "callback_query"])
+    app.run_polling(allowed_updates=["message", "callback_query"])
 
 
 if __name__ == "__main__":
-    asyncio.run(main())
+    main()

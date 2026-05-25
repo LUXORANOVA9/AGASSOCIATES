@@ -1,0 +1,471 @@
+{
+  "nodes": [
+    {
+      "id": "file:prototype/noi-dashboard/index.html",
+      "type": "file",
+      "name": "index.html",
+      "filePath": "prototype/noi-dashboard/index.html",
+      "summary": "HTML shell that mounts the React NOI Dashboard prototype with a dark-themed layout.",
+      "tags": ["markup", "entry-point", "prototype"],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:prototype/noi-dashboard/package.json",
+      "type": "config",
+      "name": "package.json",
+      "filePath": "prototype/noi-dashboard/package.json",
+      "summary": "Vite + React + Tailwind project configuration for the NOI Dashboard prototype with build and dev scripts.",
+      "tags": ["configuration", "prototype", "build-system"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:prototype/noi-dashboard/postcss.config.js",
+      "type": "file",
+      "name": "postcss.config.js",
+      "filePath": "prototype/noi-dashboard/postcss.config.js",
+      "summary": "PostCSS configuration enabling Tailwind CSS and autoprefixer for the prototype.",
+      "tags": ["configuration", "build-system", "css"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:prototype/noi-dashboard/src/App.tsx",
+      "type": "file",
+      "name": "App.tsx",
+      "filePath": "prototype/noi-dashboard/src/App.tsx",
+      "summary": "Main RBAC dashboard prototype with role-based pipeline views, org chart, automation panel, and keyboard-switchable role variants.",
+      "tags": ["prototype", "rbac", "dashboard", "component"],
+      "complexity": "complex",
+      "languageNotes": "Single-file React component using useState/useEffect/useCallback with a comprehensive RBAC permission model."
+    },
+    {
+      "id": "file:prototype/noi-dashboard/src/index.css",
+      "type": "file",
+      "name": "index.css",
+      "filePath": "prototype/noi-dashboard/src/index.css",
+      "summary": "Tailwind CSS with custom dark theme including gold accent colors and glass-morphism utility classes.",
+      "tags": ["stylesheet", "tailwind", "theme", "prototype"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:prototype/noi-dashboard/src/main.tsx",
+      "type": "file",
+      "name": "main.tsx",
+      "filePath": "prototype/noi-dashboard/src/main.tsx",
+      "summary": "React entry point that renders the App component into the DOM root element.",
+      "tags": ["entry-point", "react", "prototype"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:prototype/noi-dashboard/tailwind.config.js",
+      "type": "file",
+      "name": "tailwind.config.js",
+      "filePath": "prototype/noi-dashboard/tailwind.config.js",
+      "summary": "Tailwind CSS configuration scoped to the prototype source files with custom color palette.",
+      "tags": ["configuration", "tailwind", "css", "prototype"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:prototype/noi-dashboard/vite.config.ts",
+      "type": "file",
+      "name": "vite.config.ts",
+      "filePath": "prototype/noi-dashboard/vite.config.ts",
+      "summary": "Vite build configuration using the React plugin for fast HMR development.",
+      "tags": ["configuration", "build-system", "vite"],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:RAG_AND_MEMORY_GUIDELINES.md",
+      "type": "document",
+      "name": "RAG_AND_MEMORY_GUIDELINES.md",
+      "filePath": "RAG_AND_MEMORY_GUIDELINES.md",
+      "summary": "Comprehensive guide on RAG pipeline design and memory system architecture with 5-step process and common pitfalls.",
+      "tags": ["documentation", "rag", "memory", "guidelines"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:README.md",
+      "type": "document",
+      "name": "README.md",
+      "filePath": "README.md",
+      "summary": "Project overview covering architecture, AI workforce, key modules, quick start, environment setup, and roadmap for the AG Associates legal platform.",
+      "tags": ["documentation", "entry-point", "overview", "architecture"],
+      "complexity": "complex"
+    },
+    {
+      "id": "document:REFACTORING_GUIDELINES.md",
+      "type": "document",
+      "name": "REFACTORING_GUIDELINES.md",
+      "filePath": "REFACTORING_GUIDELINES.md",
+      "summary": "Step-by-step refactoring process emphasizing safety nets, micro-steps, and behavior preservation.",
+      "tags": ["documentation", "refactoring", "guidelines"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "config:render.yaml",
+      "type": "config",
+      "name": "render.yaml",
+      "filePath": "render.yaml",
+      "summary": "Render.com infrastructure-as-code defining a web service and PostgreSQL database for production deployment.",
+      "tags": ["infrastructure", "deployment", "configuration", "render"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:scripts/backup.sh",
+      "type": "file",
+      "name": "backup.sh",
+      "filePath": "scripts/backup.sh",
+      "summary": "Nightly backup script dumping Postgres, archiving n8n and ag_output volumes, then pushing encrypted restic snapshots to remote storage.",
+      "tags": ["script", "backup", "infrastructure", "automation"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:scripts/bootstrap-vps.sh",
+      "type": "file",
+      "name": "bootstrap-vps.sh",
+      "filePath": "scripts/bootstrap-vps.sh",
+      "summary": "Idempotent VPS bootstrap script installing Docker, configuring firewall, creating deploy user, cloning repo, and setting up self-hosted runner.",
+      "tags": ["script", "infrastructure", "provisioning", "automation"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:scripts/provision.sh",
+      "type": "file",
+      "name": "provision.sh",
+      "filePath": "scripts/provision.sh",
+      "summary": "Full production provisioning orchestrator creating Hetzner VPS, configuring Cloudflare DNS, writing .env, and triggering CI deploy.",
+      "tags": ["script", "infrastructure", "provisioning", "automation"],
+      "complexity": "complex",
+      "languageNotes": "Orchestrates Hetzner Cloud API, Cloudflare API, and GitHub Actions API in a single bash script with SSH-based remote execution."
+    },
+    {
+      "id": "file:scripts/setup-runner.sh",
+      "type": "file",
+      "name": "setup-runner.sh",
+      "filePath": "scripts/setup-runner.sh",
+      "summary": "Downloads, configures, and registers a GitHub Actions self-hosted runner on the VPS as a systemd service.",
+      "tags": ["script", "ci-cd", "infrastructure", "automation"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:scripts/setup-telegram-bot.sh",
+      "type": "file",
+      "name": "setup-telegram-bot.sh",
+      "filePath": "scripts/setup-telegram-bot.sh",
+      "summary": "Interactive script guiding the user through Telegram bot creation via @BotFather and extracting environment variables.",
+      "tags": ["script", "telegram", "configuration", "automation"],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:SECURITY.md",
+      "type": "document",
+      "name": "SECURITY.md",
+      "filePath": "SECURITY.md",
+      "summary": "Security policy detailing supported versions, vulnerability reporting process, response timeline, and security measures.",
+      "tags": ["documentation", "security", "policy"],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:tasks/lessons.md",
+      "type": "document",
+      "name": "lessons.md",
+      "filePath": "tasks/lessons.md",
+      "summary": "Running log of bug patterns, process patterns, and production patterns learned during development.",
+      "tags": ["documentation", "lessons", "development"],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:tasks/todo.md",
+      "type": "document",
+      "name": "todo.md",
+      "filePath": "tasks/todo.md",
+      "summary": "Task tracking with completed items and upcoming priorities for the AG Associates project.",
+      "tags": ["documentation", "tasks", "planning"],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:TDD_GUIDELINES.md",
+      "type": "document",
+      "name": "TDD_GUIDELINES.md",
+      "filePath": "TDD_GUIDELINES.md",
+      "summary": "Test-driven development guidelines with the red-green-refactor cycle, coverage checks, and common rationalizations.",
+      "tags": ["documentation", "tdd", "testing", "guidelines"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "config:turbo.json",
+      "type": "config",
+      "name": "turbo.json",
+      "filePath": "turbo.json",
+      "summary": "Turborepo pipeline configuration defining build, dev, lint, and typecheck task dependencies and caching.",
+      "tags": ["configuration", "monorepo", "build-system", "turbo"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:prototype/noi-dashboard/src/App.tsx:roleHasPermission",
+      "type": "function",
+      "name": "roleHasPermission",
+      "filePath": "prototype/noi-dashboard/src/App.tsx",
+      "lineRange": [36, 45],
+      "summary": "Checks if a role has a specific permission, supporting wildcard domain.all patterns.",
+      "tags": ["rbac", "permission", "utility"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:prototype/noi-dashboard/src/App.tsx:RoleSwitcher",
+      "type": "function",
+      "name": "RoleSwitcher",
+      "filePath": "prototype/noi-dashboard/src/App.tsx",
+      "lineRange": [99, 112],
+      "summary": "Renders a button group for switching between RBAC roles with visual highlighting of the active role.",
+      "tags": ["component", "rbac", "ui"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:prototype/noi-dashboard/src/App.tsx:RbacSidebar",
+      "type": "function",
+      "name": "RbacSidebar",
+      "filePath": "prototype/noi-dashboard/src/App.tsx",
+      "lineRange": [116, 178],
+      "summary": "Sidebar showing team hierarchy, role switcher, current user card, and permission domain summary.",
+      "tags": ["component", "rbac", "sidebar", "ui"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:prototype/noi-dashboard/src/App.tsx:PipelineSection",
+      "type": "function",
+      "name": "PipelineSection",
+      "filePath": "prototype/noi-dashboard/src/App.tsx",
+      "lineRange": [180, 251],
+      "summary": "Kanban-style pipeline view with per-step columns, action buttons, and role-based access control.",
+      "tags": ["component", "pipeline", "kanban", "ui"],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:prototype/noi-dashboard/src/App.tsx:OrgChartPanel",
+      "type": "function",
+      "name": "OrgChartPanel",
+      "filePath": "prototype/noi-dashboard/src/App.tsx",
+      "lineRange": [253, 287],
+      "summary": "Tree-style organizational hierarchy panel with online indicators and case counts per staff member.",
+      "tags": ["component", "org-chart", "hierarchy", "ui"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:prototype/noi-dashboard/src/App.tsx:AutomationPanel",
+      "type": "function",
+      "name": "AutomationPanel",
+      "filePath": "prototype/noi-dashboard/src/App.tsx",
+      "lineRange": [289, 318],
+      "summary": "Panel showing AI agent statuses with role-restricted visibility and active case counts.",
+      "tags": ["component", "automation", "ai-agents", "ui"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:prototype/noi-dashboard/src/App.tsx:RbacDashboard",
+      "type": "function",
+      "name": "RbacDashboard",
+      "filePath": "prototype/noi-dashboard/src/App.tsx",
+      "lineRange": [320, 375],
+      "summary": "Main dashboard layout composing sidebar, pipeline, and right panel with role-based permission cards.",
+      "tags": ["component", "dashboard", "rbac", "layout"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:prototype/noi-dashboard/src/App.tsx:Switcher",
+      "type": "function",
+      "name": "Switcher",
+      "filePath": "prototype/noi-dashboard/src/App.tsx",
+      "lineRange": [378, 413],
+      "summary": "Keyboard-accessible prototype variant switcher navigating between RBAC role views via arrow keys.",
+      "tags": ["component", "navigation", "prototype", "ui"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:prototype/noi-dashboard/src/App.tsx:App",
+      "type": "function",
+      "name": "App",
+      "filePath": "prototype/noi-dashboard/src/App.tsx",
+      "lineRange": [416, 439],
+      "summary": "Root component managing URL-based variant state and rendering the appropriate RBAC dashboard view.",
+      "tags": ["component", "entry-point", "root", "prototype"],
+      "complexity": "moderate"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:prototype/noi-dashboard/src/main.tsx",
+      "target": "file:prototype/noi-dashboard/src/App.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:prototype/noi-dashboard/src/App.tsx",
+      "target": "function:prototype/noi-dashboard/src/App.tsx:roleHasPermission",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:prototype/noi-dashboard/src/App.tsx",
+      "target": "function:prototype/noi-dashboard/src/App.tsx:RoleSwitcher",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:prototype/noi-dashboard/src/App.tsx",
+      "target": "function:prototype/noi-dashboard/src/App.tsx:RbacSidebar",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:prototype/noi-dashboard/src/App.tsx",
+      "target": "function:prototype/noi-dashboard/src/App.tsx:PipelineSection",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:prototype/noi-dashboard/src/App.tsx",
+      "target": "function:prototype/noi-dashboard/src/App.tsx:OrgChartPanel",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:prototype/noi-dashboard/src/App.tsx",
+      "target": "function:prototype/noi-dashboard/src/App.tsx:AutomationPanel",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:prototype/noi-dashboard/src/App.tsx",
+      "target": "function:prototype/noi-dashboard/src/App.tsx:RbacDashboard",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:prototype/noi-dashboard/src/App.tsx",
+      "target": "function:prototype/noi-dashboard/src/App.tsx:Switcher",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:prototype/noi-dashboard/src/App.tsx",
+      "target": "function:prototype/noi-dashboard/src/App.tsx:App",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:prototype/noi-dashboard/src/App.tsx",
+      "target": "function:prototype/noi-dashboard/src/App.tsx:App",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "config:prototype/noi-dashboard/package.json",
+      "target": "file:prototype/noi-dashboard/src/App.tsx",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "file:prototype/noi-dashboard/tailwind.config.js",
+      "target": "file:prototype/noi-dashboard/src/index.css",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "file:prototype/noi-dashboard/postcss.config.js",
+      "target": "file:prototype/noi-dashboard/src/index.css",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "file:prototype/noi-dashboard/vite.config.ts",
+      "target": "file:prototype/noi-dashboard/src/main.tsx",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "document:README.md",
+      "target": "file:prototype/noi-dashboard/src/App.tsx",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:RAG_AND_MEMORY_GUIDELINES.md",
+      "target": "document:README.md",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:REFACTORING_GUIDELINES.md",
+      "target": "document:README.md",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:TDD_GUIDELINES.md",
+      "target": "document:README.md",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:SECURITY.md",
+      "target": "document:README.md",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:tasks/lessons.md",
+      "target": "document:README.md",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:tasks/todo.md",
+      "target": "document:README.md",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "config:render.yaml",
+      "target": "file:prototype/noi-dashboard/src/App.tsx",
+      "type": "deploys",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "config:turbo.json",
+      "target": "file:prototype/noi-dashboard/vite.config.ts",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:turbo.json",
+      "target": "file:prototype/noi-dashboard/tailwind.config.js",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    }
+  ]
+}

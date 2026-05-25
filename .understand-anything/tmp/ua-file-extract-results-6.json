@@ -1,0 +1,1640 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 25,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "ag-platform/apps/mobile/eas.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 25,
+      "nonEmptyLines": 25,
+      "sections": [
+        {
+          "heading": "cli",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "build",
+          "level": 1,
+          "line": 6
+        },
+        {
+          "heading": "submit",
+          "level": 1,
+          "line": 22
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 3
+      }
+    },
+    {
+      "path": "ag-platform/apps/mobile/global.css",
+      "language": "css",
+      "fileCategory": "markup",
+      "totalLines": 3,
+      "nonEmptyLines": 3,
+      "metrics": {}
+    },
+    {
+      "path": "ag-platform/apps/mobile/hooks/useAuth.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 44,
+      "nonEmptyLines": 39,
+      "functions": [
+        {
+          "name": "useAuth",
+          "startLine": 5,
+          "endLine": 14,
+          "params": []
+        },
+        {
+          "name": "useSendMagicLink",
+          "startLine": 21,
+          "endLine": 44,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "useAuth",
+          "line": 5,
+          "isDefault": false
+        },
+        {
+          "name": "useSendMagicLink",
+          "line": 21,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "useAuth",
+          "callee": "useAuthStore",
+          "lineNumber": 6
+        },
+        {
+          "caller": "useSendMagicLink",
+          "callee": "useState",
+          "lineNumber": 22
+        },
+        {
+          "caller": "useSendMagicLink",
+          "callee": "useState",
+          "lineNumber": 23
+        },
+        {
+          "caller": "useSendMagicLink",
+          "callee": "useState",
+          "lineNumber": 24
+        },
+        {
+          "caller": "useSendMagicLink",
+          "callee": "useCallback",
+          "lineNumber": 26
+        },
+        {
+          "caller": "useSendMagicLink",
+          "callee": "setSending",
+          "lineNumber": 27
+        },
+        {
+          "caller": "useSendMagicLink",
+          "callee": "setError",
+          "lineNumber": 28
+        },
+        {
+          "caller": "useSendMagicLink",
+          "callee": "supabase.auth.signInWithOtp",
+          "lineNumber": 30
+        },
+        {
+          "caller": "useSendMagicLink",
+          "callee": "setSent",
+          "lineNumber": 35
+        },
+        {
+          "caller": "useSendMagicLink",
+          "callee": "setError",
+          "lineNumber": 37
+        },
+        {
+          "caller": "useSendMagicLink",
+          "callee": "setSending",
+          "lineNumber": 39
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 2,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "ag-platform/apps/mobile/hooks/useCase.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 45,
+      "nonEmptyLines": 40,
+      "functions": [
+        {
+          "name": "fetchCase",
+          "startLine": 11,
+          "endLine": 19,
+          "params": [
+            "caseId"
+          ]
+        },
+        {
+          "name": "fetchCaseDocuments",
+          "startLine": 21,
+          "endLine": 29,
+          "params": [
+            "caseId"
+          ]
+        },
+        {
+          "name": "useCase",
+          "startLine": 31,
+          "endLine": 37,
+          "params": [
+            "caseId"
+          ]
+        },
+        {
+          "name": "useCaseDocuments",
+          "startLine": 39,
+          "endLine": 45,
+          "params": [
+            "caseId"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "useCase",
+          "line": 31,
+          "isDefault": false
+        },
+        {
+          "name": "useCaseDocuments",
+          "line": 39,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "fetchCase",
+          "callee": "supabase\n        .from('cases')\n        .select(CASE_COLS)\n        .eq('id', caseId)\n        .single",
+          "lineNumber": 12
+        },
+        {
+          "caller": "fetchCase",
+          "callee": "supabase\n        .from('cases')\n        .select(CASE_COLS)\n        .eq",
+          "lineNumber": 12
+        },
+        {
+          "caller": "fetchCase",
+          "callee": "supabase\n        .from('cases')\n        .select",
+          "lineNumber": 12
+        },
+        {
+          "caller": "fetchCase",
+          "callee": "supabase\n        .from",
+          "lineNumber": 12
+        },
+        {
+          "caller": "fetchCaseDocuments",
+          "callee": "supabase\n        .from('documents')\n        .select(DOC_COLS)\n        .eq('case_id', caseId)\n        .order",
+          "lineNumber": 22
+        },
+        {
+          "caller": "fetchCaseDocuments",
+          "callee": "supabase\n        .from('documents')\n        .select(DOC_COLS)\n        .eq",
+          "lineNumber": 22
+        },
+        {
+          "caller": "fetchCaseDocuments",
+          "callee": "supabase\n        .from('documents')\n        .select",
+          "lineNumber": 22
+        },
+        {
+          "caller": "fetchCaseDocuments",
+          "callee": "supabase\n        .from",
+          "lineNumber": 22
+        },
+        {
+          "caller": "useCase",
+          "callee": "useQuery",
+          "lineNumber": 32
+        },
+        {
+          "caller": "useCase",
+          "callee": "fetchCase",
+          "lineNumber": 34
+        },
+        {
+          "caller": "useCase",
+          "callee": "Boolean",
+          "lineNumber": 35
+        },
+        {
+          "caller": "useCaseDocuments",
+          "callee": "useQuery",
+          "lineNumber": 40
+        },
+        {
+          "caller": "useCaseDocuments",
+          "callee": "fetchCaseDocuments",
+          "lineNumber": 42
+        },
+        {
+          "caller": "useCaseDocuments",
+          "callee": "Boolean",
+          "lineNumber": 43
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 2,
+        "functionCount": 4,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "ag-platform/apps/mobile/hooks/useCases.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 45,
+      "nonEmptyLines": 40,
+      "functions": [
+        {
+          "name": "fetchAssignedCases",
+          "startLine": 23,
+          "endLine": 31,
+          "params": [
+            "userId"
+          ]
+        },
+        {
+          "name": "casesQueryKey",
+          "startLine": 33,
+          "endLine": 35,
+          "params": [
+            "userId",
+            "orgId"
+          ]
+        },
+        {
+          "name": "useAssignedCases",
+          "startLine": 37,
+          "endLine": 45,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "casesQueryKey",
+          "line": 33,
+          "isDefault": false
+        },
+        {
+          "name": "useAssignedCases",
+          "line": 37,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "fetchAssignedCases",
+          "callee": "supabase\n        .from('cases')\n        .select(SELECT_COLS)\n        .eq('executive_id', userId)\n        .order",
+          "lineNumber": 24
+        },
+        {
+          "caller": "fetchAssignedCases",
+          "callee": "supabase\n        .from('cases')\n        .select(SELECT_COLS)\n        .eq",
+          "lineNumber": 24
+        },
+        {
+          "caller": "fetchAssignedCases",
+          "callee": "supabase\n        .from('cases')\n        .select",
+          "lineNumber": 24
+        },
+        {
+          "caller": "fetchAssignedCases",
+          "callee": "supabase\n        .from",
+          "lineNumber": 24
+        },
+        {
+          "caller": "useAssignedCases",
+          "callee": "useAuthStore",
+          "lineNumber": 38
+        },
+        {
+          "caller": "useAssignedCases",
+          "callee": "useAuthStore",
+          "lineNumber": 39
+        },
+        {
+          "caller": "useAssignedCases",
+          "callee": "useQuery",
+          "lineNumber": 40
+        },
+        {
+          "caller": "useAssignedCases",
+          "callee": "casesQueryKey",
+          "lineNumber": 41
+        },
+        {
+          "caller": "useAssignedCases",
+          "callee": "fetchAssignedCases",
+          "lineNumber": 42
+        },
+        {
+          "caller": "useAssignedCases",
+          "callee": "Boolean",
+          "lineNumber": 43
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 2,
+        "functionCount": 3,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "ag-platform/apps/mobile/hooks/useDocumentCapture.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 96,
+      "nonEmptyLines": 89,
+      "functions": [
+        {
+          "name": "useDocumentCapture",
+          "startLine": 24,
+          "endLine": 96,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "useDocumentCapture",
+          "line": 24,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "useDocumentCapture",
+          "callee": "useQueueStore",
+          "lineNumber": 25
+        },
+        {
+          "caller": "useDocumentCapture",
+          "callee": "useAuthStore",
+          "lineNumber": 26
+        },
+        {
+          "caller": "useDocumentCapture",
+          "callee": "useAuthStore",
+          "lineNumber": 27
+        },
+        {
+          "caller": "useDocumentCapture",
+          "callee": "useState",
+          "lineNumber": 28
+        },
+        {
+          "caller": "useDocumentCapture",
+          "callee": "useState",
+          "lineNumber": 29
+        },
+        {
+          "caller": "useDocumentCapture",
+          "callee": "useCallback",
+          "lineNumber": 31
+        },
+        {
+          "caller": "useDocumentCapture",
+          "callee": "setLastError",
+          "lineNumber": 34
+        },
+        {
+          "caller": "useDocumentCapture",
+          "callee": "setBusy",
+          "lineNumber": 37
+        },
+        {
+          "caller": "useDocumentCapture",
+          "callee": "setLastError",
+          "lineNumber": 38
+        },
+        {
+          "caller": "useDocumentCapture",
+          "callee": "ImagePicker.requestCameraPermissionsAsync",
+          "lineNumber": 40
+        },
+        {
+          "caller": "useDocumentCapture",
+          "callee": "setLastError",
+          "lineNumber": 42
+        },
+        {
+          "caller": "useDocumentCapture",
+          "callee": "ImagePicker.launchCameraAsync",
+          "lineNumber": 45
+        },
+        {
+          "caller": "useDocumentCapture",
+          "callee": "Crypto.randomUUID",
+          "lineNumber": 53
+        },
+        {
+          "caller": "useDocumentCapture",
+          "callee": "FileSystem.makeDirectoryAsync(persistedDir, {\n                    intermediates: true,\n                }).catch",
+          "lineNumber": 55
+        },
+        {
+          "caller": "useDocumentCapture",
+          "callee": "FileSystem.makeDirectoryAsync",
+          "lineNumber": 55
+        },
+        {
+          "caller": "useDocumentCapture",
+          "callee": "FileSystem.copyAsync",
+          "lineNumber": 59
+        },
+        {
+          "caller": "useDocumentCapture",
+          "callee": "new Date().toISOString",
+          "lineNumber": 64
+        },
+        {
+          "caller": "useDocumentCapture",
+          "callee": "enqueue",
+          "lineNumber": 83
+        },
+        {
+          "caller": "useDocumentCapture",
+          "callee": "setLastError",
+          "lineNumber": 86
+        },
+        {
+          "caller": "useDocumentCapture",
+          "callee": "setBusy",
+          "lineNumber": 89
+        }
+      ],
+      "metrics": {
+        "importCount": 3,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "ag-platform/apps/mobile/hooks/useMutationQueue.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 98,
+      "nonEmptyLines": 89,
+      "functions": [
+        {
+          "name": "useMutationQueue",
+          "startLine": 18,
+          "endLine": 89,
+          "params": []
+        },
+        {
+          "name": "execute",
+          "startLine": 91,
+          "endLine": 98,
+          "params": [
+            "m"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "useMutationQueue",
+          "line": 18,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "useMutationQueue",
+          "callee": "useQueueStore",
+          "lineNumber": 19
+        },
+        {
+          "caller": "useMutationQueue",
+          "callee": "useQueueStore",
+          "lineNumber": 20
+        },
+        {
+          "caller": "useMutationQueue",
+          "callee": "useQueueStore",
+          "lineNumber": 21
+        },
+        {
+          "caller": "useMutationQueue",
+          "callee": "useQueueStore",
+          "lineNumber": 22
+        },
+        {
+          "caller": "useMutationQueue",
+          "callee": "useOnlineStatus",
+          "lineNumber": 23
+        },
+        {
+          "caller": "useMutationQueue",
+          "callee": "useQueryClient",
+          "lineNumber": 24
+        },
+        {
+          "caller": "useMutationQueue",
+          "callee": "useRef",
+          "lineNumber": 26
+        },
+        {
+          "caller": "useMutationQueue",
+          "callee": "useRef",
+          "lineNumber": 29
+        },
+        {
+          "caller": "useMutationQueue",
+          "callee": "useRef",
+          "lineNumber": 30
+        },
+        {
+          "caller": "useMutationQueue",
+          "callee": "useCallback",
+          "lineNumber": 32
+        },
+        {
+          "caller": "useMutationQueue",
+          "callee": "useQueueStore.getState",
+          "lineNumber": 35
+        },
+        {
+          "caller": "useMutationQueue",
+          "callee": "snapshot.some",
+          "lineNumber": 36
+        },
+        {
+          "caller": "useMutationQueue",
+          "callee": "clearTimeout",
+          "lineNumber": 39
+        },
+        {
+          "caller": "useMutationQueue",
+          "callee": "drainQueue",
+          "lineNumber": 43
+        },
+        {
+          "caller": "useMutationQueue",
+          "callee": "execute",
+          "lineNumber": 44
+        },
+        {
+          "caller": "useMutationQueue",
+          "callee": "markStatus",
+          "lineNumber": 46
+        },
+        {
+          "caller": "useMutationQueue",
+          "callee": "remove",
+          "lineNumber": 48
+        },
+        {
+          "caller": "useMutationQueue",
+          "callee": "queryClient.invalidateQueries",
+          "lineNumber": 49
+        },
+        {
+          "caller": "useMutationQueue",
+          "callee": "queryClient.invalidateQueries",
+          "lineNumber": 50
+        },
+        {
+          "caller": "useMutationQueue",
+          "callee": "queryClient.invalidateQueries",
+          "lineNumber": 51
+        },
+        {
+          "caller": "useMutationQueue",
+          "callee": "markStatus",
+          "lineNumber": 54
+        },
+        {
+          "caller": "useMutationQueue",
+          "callee": "Math.min",
+          "lineNumber": 58
+        },
+        {
+          "caller": "useMutationQueue",
+          "callee": "setTimeout",
+          "lineNumber": 59
+        },
+        {
+          "caller": "useMutationQueue",
+          "callee": "drainRef.current",
+          "lineNumber": 60
+        },
+        {
+          "caller": "useMutationQueue",
+          "callee": "markStatus",
+          "lineNumber": 65
+        },
+        {
+          "caller": "useMutationQueue",
+          "callee": "useEffect",
+          "lineNumber": 73
+        },
+        {
+          "caller": "useMutationQueue",
+          "callee": "useEffect",
+          "lineNumber": 77
+        },
+        {
+          "caller": "useMutationQueue",
+          "callee": "drain",
+          "lineNumber": 78
+        },
+        {
+          "caller": "useMutationQueue",
+          "callee": "useEffect",
+          "lineNumber": 82
+        },
+        {
+          "caller": "useMutationQueue",
+          "callee": "clearTimeout",
+          "lineNumber": 84
+        },
+        {
+          "caller": "execute",
+          "callee": "applyStatusUpdate",
+          "lineNumber": 94
+        },
+        {
+          "caller": "execute",
+          "callee": "applyDocumentUpload",
+          "lineNumber": 96
+        }
+      ],
+      "metrics": {
+        "importCount": 6,
+        "exportCount": 1,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "ag-platform/apps/mobile/hooks/useOnDutyTracker.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 101,
+      "nonEmptyLines": 90,
+      "functions": [
+        {
+          "name": "useOnDutyTracker",
+          "startLine": 24,
+          "endLine": 73,
+          "params": []
+        },
+        {
+          "name": "flush",
+          "startLine": 75,
+          "endLine": 85,
+          "params": [
+            "bufferRef"
+          ]
+        },
+        {
+          "name": "teardown",
+          "startLine": 87,
+          "endLine": 101,
+          "params": [
+            "subscriptionRef",
+            "flushTimerRef",
+            "bufferRef",
+            "_executiveId",
+            "_orgId"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "useOnDutyTracker",
+          "line": 24,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "useOnDutyTracker",
+          "callee": "useDutyStore",
+          "lineNumber": 25
+        },
+        {
+          "caller": "useOnDutyTracker",
+          "callee": "useAuthStore",
+          "lineNumber": 26
+        },
+        {
+          "caller": "useOnDutyTracker",
+          "callee": "useAuthStore",
+          "lineNumber": 27
+        },
+        {
+          "caller": "useOnDutyTracker",
+          "callee": "useRef",
+          "lineNumber": 29
+        },
+        {
+          "caller": "useOnDutyTracker",
+          "callee": "useRef",
+          "lineNumber": 30
+        },
+        {
+          "caller": "useOnDutyTracker",
+          "callee": "useRef",
+          "lineNumber": 31
+        },
+        {
+          "caller": "useOnDutyTracker",
+          "callee": "useEffect",
+          "lineNumber": 33
+        },
+        {
+          "caller": "useOnDutyTracker",
+          "callee": "teardown",
+          "lineNumber": 35
+        },
+        {
+          "caller": "useOnDutyTracker",
+          "callee": "(async () => {\n            const perm = await Location.requestForegroundPermissionsAsync();\n            if (!perm.granted || cancelled) return;\n\n            subscriptionRef.current = await Location.watchPositionAsync(\n                {\n                    accuracy: Location.Accuracy.Balanced,\n                    distanceInterval: DISTANCE_INTERVAL_M,\n                    timeInterval: TIME_INTERVAL_MS,\n                },\n                (loc) => {\n                    bufferRef.current.push({\n                        client_event_id: Crypto.randomUUID(),\n                        executive_id: executiveId,\n                        org_id: orgId,\n                        recorded_at: new Date(loc.timestamp).toISOString(),\n                        lat: loc.coords.latitude,\n                        lon: loc.coords.longitude,\n                        accuracy_m: loc.coords.accuracy ?? null,\n                    });\n                },\n            );\n\n            flushTimerRef.current = setInterval(() => {\n                void flush(bufferRef);\n            }, FLUSH_INTERVAL_MS);\n        })",
+          "lineNumber": 40
+        },
+        {
+          "caller": "useOnDutyTracker",
+          "callee": "Location.requestForegroundPermissionsAsync",
+          "lineNumber": 41
+        },
+        {
+          "caller": "useOnDutyTracker",
+          "callee": "Location.watchPositionAsync",
+          "lineNumber": 44
+        },
+        {
+          "caller": "useOnDutyTracker",
+          "callee": "bufferRef.current.push",
+          "lineNumber": 51
+        },
+        {
+          "caller": "useOnDutyTracker",
+          "callee": "Crypto.randomUUID",
+          "lineNumber": 52
+        },
+        {
+          "caller": "useOnDutyTracker",
+          "callee": "new Date(loc.timestamp).toISOString",
+          "lineNumber": 55
+        },
+        {
+          "caller": "useOnDutyTracker",
+          "callee": "setInterval",
+          "lineNumber": 63
+        },
+        {
+          "caller": "useOnDutyTracker",
+          "callee": "flush",
+          "lineNumber": 64
+        },
+        {
+          "caller": "useOnDutyTracker",
+          "callee": "teardown",
+          "lineNumber": 70
+        },
+        {
+          "caller": "flush",
+          "callee": "flushActivityBatch",
+          "lineNumber": 80
+        },
+        {
+          "caller": "teardown",
+          "callee": "subscriptionRef.current?.remove",
+          "lineNumber": 94
+        },
+        {
+          "caller": "teardown",
+          "callee": "clearInterval",
+          "lineNumber": 97
+        },
+        {
+          "caller": "teardown",
+          "callee": "flush",
+          "lineNumber": 100
+        }
+      ],
+      "metrics": {
+        "importCount": 3,
+        "exportCount": 1,
+        "functionCount": 3,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "ag-platform/apps/mobile/hooks/useOnlineStatus.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 13,
+      "nonEmptyLines": 12,
+      "functions": [
+        {
+          "name": "useOnlineStatus",
+          "startLine": 4,
+          "endLine": 13,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "useOnlineStatus",
+          "line": 4,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "useOnlineStatus",
+          "callee": "useState",
+          "lineNumber": 5
+        },
+        {
+          "caller": "useOnlineStatus",
+          "callee": "useEffect",
+          "lineNumber": 6
+        },
+        {
+          "caller": "useOnlineStatus",
+          "callee": "NetInfo.addEventListener",
+          "lineNumber": 7
+        },
+        {
+          "caller": "useOnlineStatus",
+          "callee": "setOnline",
+          "lineNumber": 8
+        },
+        {
+          "caller": "useOnlineStatus",
+          "callee": "Boolean",
+          "lineNumber": 8
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "ag-platform/apps/mobile/hooks/usePushRegistration.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 71,
+      "nonEmptyLines": 60,
+      "functions": [
+        {
+          "name": "usePushRegistration",
+          "startLine": 15,
+          "endLine": 71,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "usePushRegistration",
+          "line": 15,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "usePushRegistration",
+          "callee": "useAuthStore",
+          "lineNumber": 16
+        },
+        {
+          "caller": "usePushRegistration",
+          "callee": "useAuthStore",
+          "lineNumber": 17
+        },
+        {
+          "caller": "usePushRegistration",
+          "callee": "useEffect",
+          "lineNumber": 19
+        },
+        {
+          "caller": "usePushRegistration",
+          "callee": "(async () => {\n            const perm = await Notifications.getPermissionsAsync();\n            let status = perm.status;\n            if (status !== 'granted') {\n                const ask = await Notifications.requestPermissionsAsync();\n                status = ask.status;\n            }\n            if (status !== 'granted' || cancelled) return;\n\n            if (Platform.OS === 'android') {\n                await Notifications.setNotificationChannelAsync(ANDROID_CHANNEL, {\n                    name: 'Default',\n                    importance: Notifications.AndroidImportance.HIGH,\n                });\n            }\n\n            const projectId =\n                Constants.expoConfig?.extra?.eas?.projectId ??\n                (Constants.easConfig as { projectId?: string } | undefined)?.projectId;\n            if (!projectId) return; // EAS not initialised yet; skip silently in dev\n\n            const tokenResult = await Notifications.getExpoPushTokenAsync({\n                projectId,\n            });\n            if (cancelled) return;\n\n            const deviceId =\n                Constants.deviceId ??\n                Constants.sessionId ??\n                `${Platform.OS}-${Date.now()}`;\n\n            await upsertPushToken({\n                user_id: userId,\n                org_id: orgId,\n                expo_push_token: tokenResult.data,\n                device_id: deviceId,\n                platform: Platform.OS === 'ios' ? 'ios' : 'android',\n                app_version: Constants.expoConfig?.version ?? null,\n            });\n        })().catch",
+          "lineNumber": 23
+        },
+        {
+          "caller": "usePushRegistration",
+          "callee": "(async () => {\n            const perm = await Notifications.getPermissionsAsync();\n            let status = perm.status;\n            if (status !== 'granted') {\n                const ask = await Notifications.requestPermissionsAsync();\n                status = ask.status;\n            }\n            if (status !== 'granted' || cancelled) return;\n\n            if (Platform.OS === 'android') {\n                await Notifications.setNotificationChannelAsync(ANDROID_CHANNEL, {\n                    name: 'Default',\n                    importance: Notifications.AndroidImportance.HIGH,\n                });\n            }\n\n            const projectId =\n                Constants.expoConfig?.extra?.eas?.projectId ??\n                (Constants.easConfig as { projectId?: string } | undefined)?.projectId;\n            if (!projectId) return; // EAS not initialised yet; skip silently in dev\n\n            const tokenResult = await Notifications.getExpoPushTokenAsync({\n                projectId,\n            });\n            if (cancelled) return;\n\n            const deviceId =\n                Constants.deviceId ??\n                Constants.sessionId ??\n                `${Platform.OS}-${Date.now()}`;\n\n            await upsertPushToken({\n                user_id: userId,\n                org_id: orgId,\n                expo_push_token: tokenResult.data,\n                device_id: deviceId,\n                platform: Platform.OS === 'ios' ? 'ios' : 'android',\n                app_version: Constants.expoConfig?.version ?? null,\n            });\n        })",
+          "lineNumber": 23
+        },
+        {
+          "caller": "usePushRegistration",
+          "callee": "Notifications.getPermissionsAsync",
+          "lineNumber": 24
+        },
+        {
+          "caller": "usePushRegistration",
+          "callee": "Notifications.requestPermissionsAsync",
+          "lineNumber": 27
+        },
+        {
+          "caller": "usePushRegistration",
+          "callee": "Notifications.setNotificationChannelAsync",
+          "lineNumber": 33
+        },
+        {
+          "caller": "usePushRegistration",
+          "callee": "Notifications.getExpoPushTokenAsync",
+          "lineNumber": 44
+        },
+        {
+          "caller": "usePushRegistration",
+          "callee": "Date.now",
+          "lineNumber": 52
+        },
+        {
+          "caller": "usePushRegistration",
+          "callee": "upsertPushToken",
+          "lineNumber": 54
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "ag-platform/apps/mobile/hooks/useRealtimeCases.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 39,
+      "nonEmptyLines": 36,
+      "functions": [
+        {
+          "name": "useRealtimeCases",
+          "startLine": 10,
+          "endLine": 39,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "useRealtimeCases",
+          "line": 10,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "useRealtimeCases",
+          "callee": "useAuthStore",
+          "lineNumber": 11
+        },
+        {
+          "caller": "useRealtimeCases",
+          "callee": "useAuthStore",
+          "lineNumber": 12
+        },
+        {
+          "caller": "useRealtimeCases",
+          "callee": "useQueryClient",
+          "lineNumber": 13
+        },
+        {
+          "caller": "useRealtimeCases",
+          "callee": "useEffect",
+          "lineNumber": 15
+        },
+        {
+          "caller": "useRealtimeCases",
+          "callee": "supabase\n            .channel(`cases:executive:${userId}`)\n            .on(\n                'postgres_changes',\n                {\n                    event: '*',\n                    schema: 'public',\n                    table: 'cases',\n                    filter: `executive_id=eq.${userId}`,\n                },\n                () => {\n                    queryClient.invalidateQueries({\n                        queryKey: casesQueryKey(userId, orgId),\n                    });\n                },\n            )\n            .subscribe",
+          "lineNumber": 17
+        },
+        {
+          "caller": "useRealtimeCases",
+          "callee": "supabase\n            .channel(`cases:executive:${userId}`)\n            .on",
+          "lineNumber": 17
+        },
+        {
+          "caller": "useRealtimeCases",
+          "callee": "supabase\n            .channel",
+          "lineNumber": 17
+        },
+        {
+          "caller": "useRealtimeCases",
+          "callee": "queryClient.invalidateQueries",
+          "lineNumber": 28
+        },
+        {
+          "caller": "useRealtimeCases",
+          "callee": "casesQueryKey",
+          "lineNumber": 29
+        },
+        {
+          "caller": "useRealtimeCases",
+          "callee": "supabase.removeChannel",
+          "lineNumber": 36
+        }
+      ],
+      "metrics": {
+        "importCount": 3,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "ag-platform/apps/mobile/hooks/useStatusUpdate.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 81,
+      "nonEmptyLines": 76,
+      "functions": [
+        {
+          "name": "useStatusUpdate",
+          "startLine": 23,
+          "endLine": 81,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "useStatusUpdate",
+          "line": 23,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "useStatusUpdate",
+          "callee": "useQueueStore",
+          "lineNumber": 24
+        },
+        {
+          "caller": "useStatusUpdate",
+          "callee": "useAuthStore",
+          "lineNumber": 25
+        },
+        {
+          "caller": "useStatusUpdate",
+          "callee": "useAuthStore",
+          "lineNumber": 26
+        },
+        {
+          "caller": "useStatusUpdate",
+          "callee": "useQueryClient",
+          "lineNumber": 27
+        },
+        {
+          "caller": "useStatusUpdate",
+          "callee": "useCallback",
+          "lineNumber": 29
+        },
+        {
+          "caller": "useStatusUpdate",
+          "callee": "Crypto.randomUUID",
+          "lineNumber": 34
+        },
+        {
+          "caller": "useStatusUpdate",
+          "callee": "new Date().toISOString",
+          "lineNumber": 35
+        },
+        {
+          "caller": "useStatusUpdate",
+          "callee": "enqueue",
+          "lineNumber": 54
+        },
+        {
+          "caller": "useStatusUpdate",
+          "callee": "queryClient.setQueryData",
+          "lineNumber": 57
+        },
+        {
+          "caller": "useStatusUpdate",
+          "callee": "queryClient.setQueriesData",
+          "lineNumber": 62
+        },
+        {
+          "caller": "useStatusUpdate",
+          "callee": "Array.isArray",
+          "lineNumber": 63
+        },
+        {
+          "caller": "useStatusUpdate",
+          "callee": "prev.map",
+          "lineNumber": 64
+        }
+      ],
+      "metrics": {
+        "importCount": 3,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "ag-platform/apps/mobile/hooks/useTodayActivity.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 31,
+      "nonEmptyLines": 29,
+      "functions": [
+        {
+          "name": "fetchTodayActivity",
+          "startLine": 6,
+          "endLine": 21,
+          "params": [
+            "executiveId"
+          ]
+        },
+        {
+          "name": "useTodayActivity",
+          "startLine": 23,
+          "endLine": 31,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "useTodayActivity",
+          "line": 23,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "fetchTodayActivity",
+          "callee": "start.setHours",
+          "lineNumber": 10
+        },
+        {
+          "caller": "fetchTodayActivity",
+          "callee": "supabase\n        .from('field_activity_logs')\n        .select(\n            'id, client_event_id, executive_id, org_id, recorded_at, lat, lon, accuracy_m, battery_pct, created_at',\n        )\n        .eq('executive_id', executiveId)\n        .gte('recorded_at', start.toISOString())\n        .order",
+          "lineNumber": 11
+        },
+        {
+          "caller": "fetchTodayActivity",
+          "callee": "supabase\n        .from('field_activity_logs')\n        .select(\n            'id, client_event_id, executive_id, org_id, recorded_at, lat, lon, accuracy_m, battery_pct, created_at',\n        )\n        .eq('executive_id', executiveId)\n        .gte",
+          "lineNumber": 11
+        },
+        {
+          "caller": "fetchTodayActivity",
+          "callee": "supabase\n        .from('field_activity_logs')\n        .select(\n            'id, client_event_id, executive_id, org_id, recorded_at, lat, lon, accuracy_m, battery_pct, created_at',\n        )\n        .eq",
+          "lineNumber": 11
+        },
+        {
+          "caller": "fetchTodayActivity",
+          "callee": "supabase\n        .from('field_activity_logs')\n        .select",
+          "lineNumber": 11
+        },
+        {
+          "caller": "fetchTodayActivity",
+          "callee": "supabase\n        .from",
+          "lineNumber": 11
+        },
+        {
+          "caller": "fetchTodayActivity",
+          "callee": "start.toISOString",
+          "lineNumber": 17
+        },
+        {
+          "caller": "useTodayActivity",
+          "callee": "useAuthStore",
+          "lineNumber": 24
+        },
+        {
+          "caller": "useTodayActivity",
+          "callee": "useQuery",
+          "lineNumber": 25
+        },
+        {
+          "caller": "useTodayActivity",
+          "callee": "fetchTodayActivity",
+          "lineNumber": 27
+        },
+        {
+          "caller": "useTodayActivity",
+          "callee": "Boolean",
+          "lineNumber": 28
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 1,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "ag-platform/apps/mobile/lib/env.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 32,
+      "nonEmptyLines": 28,
+      "functions": [
+        {
+          "name": "read",
+          "startLine": 14,
+          "endLine": 24,
+          "params": [
+            "key",
+            "required"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "env",
+          "line": 26,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "ag-platform/apps/mobile/lib/notifications.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 17,
+      "nonEmptyLines": 15,
+      "functions": [
+        {
+          "name": "configureNotifications",
+          "startLine": 7,
+          "endLine": 17,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "configureNotifications",
+          "line": 7,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "configureNotifications",
+          "callee": "Notifications.setNotificationHandler",
+          "lineNumber": 9
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "ag-platform/apps/mobile/lib/queryClient.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 27,
+      "nonEmptyLines": 25,
+      "exports": [
+        {
+          "name": "queryClient",
+          "line": 5,
+          "isDefault": false
+        },
+        {
+          "name": "queryPersister",
+          "line": 23,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 2,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "ag-platform/apps/mobile/lib/queue/drain.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 59,
+      "nonEmptyLines": 53,
+      "functions": [
+        {
+          "name": "drainQueue",
+          "startLine": 21,
+          "endLine": 57,
+          "params": [
+            "snapshot",
+            "cb"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "drainQueue",
+          "line": 21,
+          "isDefault": false
+        },
+        {
+          "name": "MAX_ATTEMPTS",
+          "line": 59,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "drainQueue",
+          "callee": "snapshot.filter",
+          "lineNumber": 25
+        },
+        {
+          "caller": "drainQueue",
+          "callee": "cb.onAttempt",
+          "lineNumber": 28
+        },
+        {
+          "caller": "drainQueue",
+          "callee": "cb.execute",
+          "lineNumber": 31
+        },
+        {
+          "caller": "drainQueue",
+          "callee": "String",
+          "lineNumber": 35
+        },
+        {
+          "caller": "drainQueue",
+          "callee": "cb.onSuccess",
+          "lineNumber": 41
+        },
+        {
+          "caller": "drainQueue",
+          "callee": "cb.onFail",
+          "lineNumber": 48
+        },
+        {
+          "caller": "drainQueue",
+          "callee": "cb.onRetry",
+          "lineNumber": 54
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 2,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "ag-platform/apps/mobile/lib/queue/types.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 61,
+      "nonEmptyLines": 54,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "ag-platform/apps/mobile/lib/sentry.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 14,
+      "nonEmptyLines": 12,
+      "functions": [
+        {
+          "name": "initSentry",
+          "startLine": 6,
+          "endLine": 14,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "initSentry",
+          "line": 6,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "initSentry",
+          "callee": "Sentry.init",
+          "lineNumber": 8
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "ag-platform/apps/mobile/lib/stores/useAuthStore.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 85,
+      "nonEmptyLines": 78,
+      "functions": [
+        {
+          "name": "extractRole",
+          "startLine": 19,
+          "endLine": 26,
+          "params": [
+            "session"
+          ]
+        },
+        {
+          "name": "extractOrgId",
+          "startLine": 28,
+          "endLine": 30,
+          "params": [
+            "session"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "useAuthStore",
+          "line": 32,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "ag-platform/apps/mobile/lib/stores/useDutyStore.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 30,
+      "nonEmptyLines": 28,
+      "exports": [
+        {
+          "name": "useDutyStore",
+          "line": 14,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "ag-platform/apps/mobile/lib/stores/useQueueStore.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 53,
+      "nonEmptyLines": 51,
+      "exports": [
+        {
+          "name": "useQueueStore",
+          "line": 19,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "ag-platform/apps/mobile/lib/supabase.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 18,
+      "nonEmptyLines": 17,
+      "exports": [
+        {
+          "name": "supabase",
+          "line": 9,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "ag-platform/apps/mobile/metro.config.js",
+      "language": "javascript",
+      "fileCategory": "code",
+      "totalLines": 19,
+      "nonEmptyLines": 15,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "ag-platform/apps/mobile/package.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 64,
+      "nonEmptyLines": 64,
+      "sections": [
+        {
+          "heading": "name",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "version",
+          "level": 1,
+          "line": 3
+        },
+        {
+          "heading": "private",
+          "level": 1,
+          "line": 4
+        },
+        {
+          "heading": "main",
+          "level": 1,
+          "line": 5
+        },
+        {
+          "heading": "scripts",
+          "level": 1,
+          "line": 6
+        },
+        {
+          "heading": "dependencies",
+          "level": 1,
+          "line": 15
+        },
+        {
+          "heading": "devDependencies",
+          "level": 1,
+          "line": 49
+        },
+        {
+          "heading": "jest",
+          "level": 1,
+          "line": 53
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 8
+      }
+    }
+  ]
+}

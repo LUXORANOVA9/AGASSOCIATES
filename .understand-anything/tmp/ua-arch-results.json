@@ -1,0 +1,1890 @@
+{
+  "scriptCompleted": true,
+  "directoryGroups": {
+    "bolt": [
+      "config:.bolt/mcp.json"
+    ],
+    "changeset": [
+      "config:.changeset/config.json"
+    ],
+    "devcontainer": [
+      "config:.devcontainer/devcontainer.json"
+    ],
+    "root-config": [
+      "config:.env.example",
+      "config:.lintstagedrc.json",
+      "config:.pre-commit-config.yaml",
+      "service:docker-compose.prod.yml",
+      "service:docker-compose.yml",
+      "config:package.json",
+      "config:render.yaml",
+      "config:turbo.json"
+    ],
+    ".github": [
+      "pipeline:.github/actions/setup/action.yml",
+      "pipeline:.github/workflows/ci.yml",
+      "pipeline:.github/workflows/codeql.yml",
+      "pipeline:.github/workflows/deploy.yml",
+      "pipeline:.github/workflows/main.yml",
+      "pipeline:.github/workflows/nextjs.yml",
+      "pipeline:.github/workflows/preview.yml",
+      "pipeline:.github/workflows/release.yml",
+      "pipeline:.github/workflows/test-checkout.yml",
+      "pipeline:.github/workflows/test-permissions.yml",
+      "pipeline:.github/workflows/test-simple.yml",
+      "pipeline:.github/workflows/test-runner.yml",
+      "pipeline:.github/workflows/test.yml"
+    ],
+    "root": [
+      "config:CNAME",
+      "service:ag-associates-ai/backend/Dockerfile:builder",
+      "service:ag-associates-ai/backend/Dockerfile:python",
+      "table:ag-platform/src/server/migrations.sql:banks",
+      "table:ag-platform/src/server/migrations.sql:organizations",
+      "table:ag-platform/src/server/migrations.sql:profiles",
+      "table:ag-platform/src/server/migrations.sql:cases",
+      "table:ag-platform/src/server/migrations.sql:disbursements",
+      "table:ag-platform/src/server/migrations.sql:case_timeline",
+      "table:ag-platform/src/server/migrations.sql:timesheets",
+      "file:CNAME",
+      "file:CODEOWNERS",
+      "file:commitlint.config.js"
+    ],
+    "infra-root": [
+      "service:Caddyfile",
+      "file:Caddyfile",
+      "pipeline:Makefile"
+    ],
+    "root-docs": [
+      "document:CONTEXT.md",
+      "document:CONTRIBUTING.md",
+      "document:CLAUDE.md",
+      "document:CULTURE.md",
+      "document:DEPLOYMENT_PLAYBOOK.md",
+      "document:DEVIN_PLAYBOOK.md",
+      "document:ERROR_HANDLING_GUIDELINES.md",
+      "document:FRONTEND_UI_GUIDELINES.md",
+      "document:GIT_GUIDELINES.md",
+      "document:GOAL_DRIVEN_EXECUTION_GUIDELINES.md",
+      "document:GOVERNANCE.md",
+      "document:HALLUCINATION_MITIGATION_GUIDELINES.md",
+      "document:RAG_AND_MEMORY_GUIDELINES.md",
+      "document:README.md",
+      "document:REFACTORING_GUIDELINES.md",
+      "document:SECURITY.md",
+      "document:TDD_GUIDELINES.md"
+    ],
+    "ag-ai-agents": [
+      "file:ag-associates-ai/backend/agents/aisha.py",
+      "file:ag-associates-ai/backend/agents/auditor.py",
+      "file:ag-associates-ai/backend/agents/bouncer.py",
+      "file:ag-associates-ai/backend/agents/db.py",
+      "file:ag-associates-ai/backend/agents/__init__.py"
+    ],
+    "ag-ai-backend": [
+      "service:ag-associates-ai/backend/Dockerfile",
+      "file:ag-associates-ai/backend/executor_agent.py",
+      "file:ag-associates-ai/backend/igr_executor.py",
+      "file:ag-associates-ai/backend/main.py",
+      "file:ag-associates-ai/backend/nesl_client.py",
+      "file:ag-associates-ai/backend/pdf_generator.py",
+      "file:ag-associates-ai/backend/config.py",
+      "file:ag-associates-ai/backend/requirements.txt",
+      "file:ag-associates-ai/backend/fee_calculator.py",
+      "file:ag-associates-ai/backend/template_manager.py",
+      "file:ag-associates-ai/backend/lic_manager.py",
+      "file:ag-associates-ai/backend/noi_pipeline.py",
+      "file:ag-associates-ai/backend/noi_automation.py",
+      "file:ag-associates-ai/backend/rag_engine.py",
+      "file:ag-associates-ai/backend/search_agent.py",
+      "file:ag-associates-ai/backend/websocket_manager.py",
+      "file:ag-associates-ai/backend/test_db.py",
+      "file:ag-associates-ai/backend/models.py",
+      "file:ag-associates-ai/backend/email_intake.py",
+      "file:ag-associates-ai/backend/gras_client.py",
+      "file:ag-associates-ai/backend/notifications.py",
+      "file:ag-associates-ai/backend/database.py",
+      "file:ag-associates-ai/backend/tasks.py",
+      "document:ag-associates-ai/backend/README.md",
+      "document:ag-associates-ai/backend/CHANGELOG.md",
+      "file:ag-associates-ai/backend/n8n_webhook.py",
+      "file:ag-associates-ai/backend/bot.py"
+    ],
+    "ag-ai-docs": [
+      "document:ag-associates-ai/backend/docs/supabase.md",
+      "document:ag-associates-ai/backend/docs/setup.md",
+      "document:ag-associates-ai/backend/docs/agents.md"
+    ],
+    "ag-ai-front-root": [
+      "document:ag-associates-ai/backend/frontend/README.md",
+      "file:ag-associates-ai/backend/frontend/vite.config.ts",
+      "config:ag-associates-ai/backend/frontend/tsconfig.json",
+      "config:ag-associates-ai/backend/frontend/tsconfig.node.json",
+      "file:ag-associates-ai/backend/frontend/index.html",
+      "config:ag-associates-ai/backend/frontend/eslint.config.js",
+      "config:ag-associates-ai/backend/frontend/.gitignore"
+    ],
+    "ag-ai-front-src": [
+      "file:ag-associates-ai/backend/frontend/src/App.tsx",
+      "file:ag-associates-ai/backend/frontend/src/main.tsx",
+      "file:ag-associates-ai/backend/frontend/src/index.css",
+      "file:ag-associates-ai/backend/frontend/src/vite-env.d.ts"
+    ],
+    "ag-ai-front-pages": [
+      "file:ag-associates-ai/backend/frontend/src/pages/Dashboard.tsx",
+      "file:ag-associates-ai/backend/frontend/src/pages/Cases.tsx",
+      "file:ag-associates-ai/backend/frontend/src/pages/Settings.tsx",
+      "file:ag-associates-ai/backend/frontend/src/pages/CaseDetail.tsx"
+    ],
+    "ag-ai-front-components": [
+      "file:ag-associates-ai/backend/frontend/src/components/Layout.tsx",
+      "file:ag-associates-ai/backend/frontend/src/components/StatsCard.tsx",
+      "file:ag-associates-ai/backend/frontend/src/components/CaseList.tsx",
+      "file:ag-associates-ai/backend/frontend/src/components/CaseTimeline.tsx",
+      "file:ag-associates-ai/backend/frontend/src/components/BotStatus.tsx",
+      "file:ag-associates-ai/backend/frontend/src/components/DashboardSkeleton.tsx"
+    ],
+    "ag-ai-front-api": [
+      "file:ag-associates-ai/backend/frontend/src/api/index.ts",
+      "file:ag-associates-ai/backend/frontend/src/api/cases.ts"
+    ],
+    "ag-ai-front-hooks": [
+      "file:ag-associates-ai/backend/frontend/src/hooks/useCases.ts",
+      "file:ag-associates-ai/backend/frontend/src/hooks/useSocket.ts",
+      "file:ag-associates-ai/backend/frontend/src/hooks/useAuth.ts"
+    ],
+    "ag-ai-front-types": [
+      "file:ag-associates-ai/backend/frontend/src/types/index.ts"
+    ],
+    "ag-ai-front-data": [
+      "file:ag-associates-ai/backend/frontend/src/data/sampleData.ts"
+    ],
+    "ag-ai-utils": [
+      "file:ag-associates-ai/backend/utils/__init__.py"
+    ],
+    "ag-ai-models": [
+      "file:ag-associates-ai/backend/models/__init__.py"
+    ],
+    "ag-ai-routes": [
+      "file:ag-associates-ai/backend/routes/__init__.py",
+      "file:ag-associates-ai/backend/routes/documents.py",
+      "file:ag-associates-ai/backend/routes/auth.py",
+      "file:ag-associates-ai/backend/routes/cases.py",
+      "file:ag-associates-ai/backend/routes/health.py",
+      "file:ag-associates-ai/backend/routes/noi.py",
+      "file:ag-associates-ai/backend/routes/automation.py",
+      "file:ag-associates-ai/backend/routes/search.py",
+      "file:ag-associates-ai/backend/routes/routing.py"
+    ],
+    "ag-ai-services": [
+      "file:ag-associates-ai/backend/services/__init__.py"
+    ],
+    "ag-ai-payment": [
+      "file:ag-associates-ai/backend/payment/payment_intent.py",
+      "file:ag-associates-ai/backend/payment/payment_router.py",
+      "file:ag-associates-ai/backend/payment/webhook.py",
+      "file:ag-associates-ai/backend/payment/models.py"
+    ],
+    "ag-ai-front-public": [
+      "file:ag-associates-ai/backend/frontend/public/vite.svg"
+    ],
+    "ag-platform-mobile-screens": [
+      "file:ag-platform/apps/mobile/app/(app)/activity.tsx",
+      "file:ag-platform/apps/mobile/app/(app)/cases/[caseId].tsx",
+      "file:ag-platform/apps/mobile/app/(app)/dashboard.tsx",
+      "file:ag-platform/apps/mobile/app/(app)/debug/queue.tsx",
+      "file:ag-platform/apps/mobile/app/(app)/scanner.tsx",
+      "file:ag-platform/apps/mobile/app/(app)/settings.tsx"
+    ],
+    "ag-platform-mobile-app": [
+      "file:ag-platform/apps/mobile/app/index.tsx",
+      "file:ag-platform/apps/mobile/app/login.tsx",
+      "file:ag-platform/apps/mobile/app/privacy.tsx"
+    ],
+    "ag-platform-mobile": [
+      "file:ag-platform/apps/mobile/babel.config.js",
+      "config:ag-platform/apps/mobile/eas.json",
+      "config:ag-platform/apps/mobile/package.json",
+      "file:ag-platform/apps/mobile/global.css",
+      "file:ag-platform/apps/mobile/metro.config.js",
+      "document:ag-platform/apps/mobile/README.md",
+      "file:ag-platform/apps/mobile/tailwind.config.js",
+      "config:ag-platform/apps/mobile/tsconfig.json"
+    ],
+    "ag-platform-mobile-components": [
+      "file:ag-platform/apps/mobile/components/activity/ActivityToggle.tsx",
+      "file:ag-platform/apps/mobile/components/activity/RouteMap.tsx",
+      "file:ag-platform/apps/mobile/components/cases/CaseDetailHeader.tsx",
+      "file:ag-platform/apps/mobile/components/cases/CaseDocuments.tsx",
+      "file:ag-platform/apps/mobile/components/cases/CaseListItem.tsx",
+      "file:ag-platform/apps/mobile/components/scanner/CameraButton.tsx",
+      "file:ag-platform/apps/mobile/components/scanner/UploadQueueList.tsx",
+      "file:ag-platform/apps/mobile/components/status/StatusBoard.tsx",
+      "file:ag-platform/apps/mobile/components/status/StatusButton.tsx",
+      "file:ag-platform/apps/mobile/components/system/OfflineIndicator.tsx",
+      "file:ag-platform/apps/mobile/components/ui/EmptyState.tsx",
+      "file:ag-platform/apps/mobile/components/ui/ErrorBoundary.tsx",
+      "file:ag-platform/apps/mobile/components/ui/ErrorState.tsx",
+      "file:ag-platform/apps/mobile/components/ui/index.ts",
+      "file:ag-platform/apps/mobile/components/ui/Skeleton.tsx"
+    ],
+    "ag-platform-mobile-hooks": [
+      "file:ag-platform/apps/mobile/hooks/useAuth.ts",
+      "file:ag-platform/apps/mobile/hooks/useCase.ts",
+      "file:ag-platform/apps/mobile/hooks/useCases.ts",
+      "file:ag-platform/apps/mobile/hooks/useDocumentCapture.ts",
+      "file:ag-platform/apps/mobile/hooks/useMutationQueue.ts",
+      "file:ag-platform/apps/mobile/hooks/useOnDutyTracker.ts",
+      "file:ag-platform/apps/mobile/hooks/useOnlineStatus.ts",
+      "file:ag-platform/apps/mobile/hooks/usePushRegistration.ts",
+      "file:ag-platform/apps/mobile/hooks/useRealtimeCases.ts",
+      "file:ag-platform/apps/mobile/hooks/useStatusUpdate.ts",
+      "file:ag-platform/apps/mobile/hooks/useTodayActivity.ts"
+    ],
+    "ag-platform-mobile-lib": [
+      "file:ag-platform/apps/mobile/lib/env.ts",
+      "file:ag-platform/apps/mobile/lib/notifications.ts",
+      "file:ag-platform/apps/mobile/lib/queryClient.ts",
+      "file:ag-platform/apps/mobile/lib/queue/drain.ts",
+      "file:ag-platform/apps/mobile/lib/queue/types.ts",
+      "file:ag-platform/apps/mobile/lib/sentry.ts",
+      "file:ag-platform/apps/mobile/lib/stores/useAuthStore.ts",
+      "file:ag-platform/apps/mobile/lib/stores/useDutyStore.ts",
+      "file:ag-platform/apps/mobile/lib/stores/useQueueStore.ts",
+      "file:ag-platform/apps/mobile/lib/supabase.ts"
+    ],
+    "ag-platform-mobile-services": [
+      "file:ag-platform/apps/mobile/services/cases.ts",
+      "file:ag-platform/apps/mobile/services/devices.ts",
+      "file:ag-platform/apps/mobile/services/documents.ts",
+      "file:ag-platform/apps/mobile/services/field.ts"
+    ],
+    "ag-platform-root": [
+      "document:ag-platform/ARCHITECTURE.md",
+      "service:ag-platform/Dockerfile",
+      "service:ag-platform/Dockerfile:deps",
+      "service:ag-platform/Dockerfile:builder",
+      "service:ag-platform/Dockerfile:runner",
+      "file:ag-platform/index.html",
+      "config:ag-platform/package.json",
+      "file:ag-platform/postcss.config.js",
+      "document:ag-platform/README.md",
+      "config:ag-platform/render.yaml",
+      "document:ag-platform/SECURITY.md",
+      "file:ag-platform/server.ts",
+      "file:ag-platform/tailwind.config.js",
+      "config:ag-platform/tsconfig.json",
+      "config:ag-platform/tsconfig.node.json",
+      "config:ag-platform/turbo.json",
+      "file:ag-platform/vite.config.ts",
+      "file:ag-platform/vitest.config.ts"
+    ],
+    "ag-platform-docs": [
+      "document:ag-platform/docs/AUTH_ARCHITECTURE.md"
+    ],
+    "ag-platform-pkg-ai": [
+      "config:ag-platform/packages/ai/package.json",
+      "file:ag-platform/packages/ai/src/gemini.ts",
+      "file:ag-platform/packages/ai/src/index.ts",
+      "file:ag-platform/packages/ai/src/prompts/legal.ts",
+      "config:ag-platform/packages/ai/tsconfig.json"
+    ],
+    "ag-platform-pkg-db": [
+      "table:ag-platform/packages/db/migrations/001_ag_initial_schema.sql",
+      "table:ag-platform/packages/db/migrations/002_pgvector_templates.sql",
+      "config:ag-platform/packages/db/package.json",
+      "file:ag-platform/packages/db/src/index.ts",
+      "config:ag-platform/packages/db/tsconfig.json"
+    ],
+    "ag-platform-pkg-types": [
+      "config:ag-platform/packages/types/package.json",
+      "file:ag-platform/packages/types/src/domain.ts",
+      "file:ag-platform/packages/types/src/field-app.ts",
+      "file:ag-platform/packages/types/src/index.ts",
+      "file:ag-platform/packages/types/src/storage.ts",
+      "config:ag-platform/packages/types/tsconfig.json"
+    ],
+    "ag-platform-pkg-ui": [
+      "config:ag-platform/packages/ui/package.json",
+      "file:ag-platform/packages/ui/src/index.tsx",
+      "config:ag-platform/packages/ui/tsconfig.json"
+    ],
+    "ag-platform-intake": [
+      "service:ag-platform/services/intake-api/Dockerfile",
+      "config:ag-platform/services/intake-api/package.json",
+      "file:ag-platform/services/intake-api/src/routes/dashboard.ts",
+      "file:ag-platform/services/intake-api/src/routes/webhook.ts",
+      "file:ag-platform/services/intake-api/src/schemas/intake.schema.ts",
+      "file:ag-platform/services/intake-api/src/server.ts",
+      "file:ag-platform/services/intake-api/src/services/redis.service.ts",
+      "file:ag-platform/services/intake-api/src/services/supabase.service.ts",
+      "config:ag-platform/services/intake-api/tsconfig.json"
+    ],
+    "ag-platform-src": [
+      "file:ag-platform/src/App.tsx",
+      "file:ag-platform/src/index.css",
+      "file:ag-platform/src/main.tsx"
+    ],
+    "ag-platform-app": [
+      "file:ag-platform/src/app/admin/voice/page.tsx",
+      "file:ag-platform/src/app/admin/workforce/page.tsx",
+      "file:ag-platform/src/app/login/page.tsx",
+      "file:ag-platform/src/app/my-cases/page.tsx",
+      "file:ag-platform/src/app/office/page.tsx"
+    ],
+    "ag-platform-components": [
+      "file:ag-platform/src/components/admin/AdvisorCockpit.tsx",
+      "file:ag-platform/src/components/admin/BrainstormHub.tsx",
+      "file:ag-platform/src/components/admin/voice/VyasaVoiceControl.tsx",
+      "file:ag-platform/src/components/admin/WorkforceControl.tsx",
+      "file:ag-platform/src/components/ai/ClientEmailDrafting.tsx",
+      "file:ag-platform/src/components/ai/ProjectBriefGenerator.tsx",
+      "file:ag-platform/src/components/ai/SemanticProjectSearch.tsx",
+      "file:ag-platform/src/components/ai/SmartTaskSuggestions.tsx",
+      "file:ag-platform/src/components/applicant/ApplicantDashboard.tsx",
+      "file:ag-platform/src/components/auth/LoginPage.tsx",
+      "file:ag-platform/src/components/auth/ProtectedRoute.tsx",
+      "file:ag-platform/src/components/bank/BankPortal.tsx",
+      "file:ag-platform/src/components/collaboration/ActivityFeed.tsx",
+      "file:ag-platform/src/components/collaboration/CommentThread.tsx",
+      "file:ag-platform/src/components/collaboration/LivePresence.tsx",
+      "file:ag-platform/src/components/collaboration/NotificationBell.tsx",
+      "file:ag-platform/src/components/collaboration/TaskBoard.tsx",
+      "file:ag-platform/src/components/collaboration/TaskCard.tsx",
+      "file:ag-platform/src/components/collaboration/TimeTracker.tsx",
+      "file:ag-platform/src/components/field/FieldApp.tsx",
+      "file:ag-platform/src/components/home/MarketingLanding.tsx",
+      "file:ag-platform/src/components/LandingPage.tsx",
+      "file:ag-platform/src/components/privacy/policy-sections.tsx",
+      "file:ag-platform/src/components/privacy/PrivacyPolicy.tsx",
+      "file:ag-platform/src/components/storage/FilePreviewer.tsx",
+      "file:ag-platform/src/components/storage/FileUploader.tsx",
+      "file:ag-platform/src/components/storage/VersionHistory.tsx",
+      "file:ag-platform/src/components/ui/EmptyState.tsx",
+      "file:ag-platform/src/components/ui/ErrorBoundary.tsx",
+      "file:ag-platform/src/components/ui/ErrorState.tsx",
+      "file:ag-platform/src/components/ui/index.ts",
+      "file:ag-platform/src/components/ui/Skeleton.tsx"
+    ],
+    "ag-platform-hooks": [
+      "file:ag-platform/src/hooks/useActivityFeed.ts",
+      "file:ag-platform/src/hooks/useLivePresence.ts",
+      "file:ag-platform/src/hooks/useNotifications.ts"
+    ],
+    "ag-platform-lib": [
+      "file:ag-platform/src/lib/billing.test.ts",
+      "file:ag-platform/src/lib/billing.ts",
+      "file:ag-platform/src/lib/storage/download.ts",
+      "file:ag-platform/src/lib/storage/upload.test.ts",
+      "file:ag-platform/src/lib/storage/upload.ts",
+      "file:ag-platform/src/lib/supabase.ts"
+    ],
+    "ag-platform-server": [
+      "file:ag-platform/src/server/aiRouter.ts",
+      "file:ag-platform/src/server/db.ts",
+      "table:ag-platform/src/server/migrations.sql",
+      "file:ag-platform/src/server/routes/cases.ts",
+      "file:ag-platform/src/server/routes/timesheets.ts",
+      "file:ag-platform/src/server/services/caseService.ts"
+    ],
+    "ag-platform-store": [
+      "file:ag-platform/src/store/useAuthStore.ts"
+    ],
+    "ag-platform-types": [
+      "file:ag-platform/src/types/domain.ts",
+      "file:ag-platform/src/types/storage.ts"
+    ],
+    "ag-platform-supabase-functions": [
+      "file:ag-platform/supabase/functions/send-push-on-case-assigned/index.ts"
+    ],
+    "ag-platform-supabase-migrations": [
+      "table:ag-platform/supabase/migrations/20260423_ai_setup.sql",
+      "table:ag-platform/supabase/migrations/20260423_ai_tokens.sql",
+      "table:ag-platform/supabase/migrations/20260423_collaboration_setup.sql",
+      "table:ag-platform/supabase/migrations/20260423_document_storage_setup.sql",
+      "table:ag-platform/supabase/migrations/20260514000000_core_schema.sql",
+      "table:ag-platform/supabase/migrations/20260514000000_init_schema.sql",
+      "table:ag-platform/supabase/migrations/20260514000001_auth_hooks.sql",
+      "table:ag-platform/supabase/migrations/20260514000002_rbac_setup.sql",
+      "table:ag-platform/supabase/migrations/20260514000003_voice_system_setup.sql",
+      "table:ag-platform/supabase/migrations/20260514000004_workforce_management.sql",
+      "table:ag-platform/supabase/migrations/20260515000000_voice_command_logs.sql",
+      "table:ag-platform/supabase/migrations/20260515000001_voice_tool_config.sql",
+      "table:ag-platform/supabase/migrations/20260515000002_workforce.sql",
+      "table:ag-platform/supabase/migrations/20260515000003_workforce_phase4.sql",
+      "table:ag-platform/supabase/migrations/20260518000000_field_app.sql",
+      "table:ag-platform/supabase/migrations/20260519000000_push_trigger.sql",
+      "table:ag-platform/supabase/migrations/20260520000000_fix_auth_token_hook.sql",
+      "table:ag-platform/supabase/migrations/20260423_ai_setup.sql:project_embeddings",
+      "table:ag-platform/supabase/migrations/20260423_ai_setup.sql:projects",
+      "table:ag-platform/supabase/migrations/20260423_collaboration_setup.sql:tasks",
+      "table:ag-platform/supabase/migrations/20260423_collaboration_setup.sql:comments",
+      "table:ag-platform/supabase/migrations/20260423_collaboration_setup.sql:notifications",
+      "table:ag-platform/supabase/migrations/20260423_collaboration_setup.sql:activities",
+      "table:ag-platform/supabase/migrations/20260423_document_storage_setup.sql:files",
+      "table:ag-platform/supabase/migrations/20260514000000_core_schema.sql:organizations",
+      "table:ag-platform/supabase/migrations/20260514000000_core_schema.sql:cases",
+      "table:ag-platform/supabase/migrations/20260514000002_rbac_setup.sql:user_roles",
+      "table:ag-platform/supabase/migrations/20260514000004_workforce_management.sql:workforce_members",
+      "table:ag-platform/supabase/migrations/20260514000004_workforce_management.sql:workforce_tasks",
+      "table:ag-platform/supabase/migrations/20260515000000_voice_command_logs.sql:voice_command_logs",
+      "table:ag-platform/supabase/migrations/20260515000001_voice_tool_config.sql:voice_tool_config",
+      "table:ag-platform/supabase/migrations/20260515000002_workforce.sql:staff",
+      "table:ag-platform/supabase/migrations/20260515000002_workforce.sql:capability",
+      "table:ag-platform/supabase/migrations/20260515000002_workforce.sql:staff_capability",
+      "table:ag-platform/supabase/migrations/20260515000002_workforce.sql:staff_activity",
+      "table:ag-platform/supabase/migrations/20260518000000_field_app.sql:field_documents",
+      "table:ag-platform/supabase/migrations/20260518000000_field_app.sql:case_audit_logs",
+      "table:ag-platform/supabase/migrations/20260518000000_field_app.sql:device_push_tokens"
+    ],
+    "content": [
+      "file:content/02-getting-started/jupyter_notebooks.ipynb"
+    ],
+    "docs": [
+      "document:docs/adr/0001-monorepo-orchestration.md",
+      "document:docs/noi-automation-plan.md"
+    ],
+    "prototype": [
+      "file:prototype/noi-dashboard/index.html",
+      "config:prototype/noi-dashboard/package.json",
+      "file:prototype/noi-dashboard/postcss.config.js",
+      "file:prototype/noi-dashboard/src/App.tsx",
+      "file:prototype/noi-dashboard/src/index.css",
+      "file:prototype/noi-dashboard/src/main.tsx",
+      "file:prototype/noi-dashboard/tailwind.config.js",
+      "file:prototype/noi-dashboard/vite.config.ts"
+    ],
+    "scripts": [
+      "file:scripts/backup.sh",
+      "file:scripts/bootstrap-vps.sh",
+      "file:scripts/provision.sh",
+      "file:scripts/setup-runner.sh",
+      "file:scripts/setup-telegram-bot.sh"
+    ],
+    "tasks": [
+      "document:tasks/lessons.md",
+      "document:tasks/todo.md"
+    ]
+  },
+  "nodeTypeGroups": {
+    "config": [
+      "config:.bolt/mcp.json",
+      "config:.changeset/config.json",
+      "config:.devcontainer/devcontainer.json",
+      "config:.env.example",
+      "config:.lintstagedrc.json",
+      "config:.pre-commit-config.yaml",
+      "config:CNAME",
+      "config:ag-associates-ai/backend/frontend/tsconfig.json",
+      "config:ag-associates-ai/backend/frontend/tsconfig.node.json",
+      "config:ag-associates-ai/backend/frontend/eslint.config.js",
+      "config:ag-associates-ai/backend/frontend/.gitignore",
+      "config:ag-platform/apps/mobile/eas.json",
+      "config:ag-platform/apps/mobile/package.json",
+      "config:ag-platform/apps/mobile/tsconfig.json",
+      "config:ag-platform/package.json",
+      "config:ag-platform/packages/ai/package.json",
+      "config:ag-platform/packages/ai/tsconfig.json",
+      "config:ag-platform/packages/db/package.json",
+      "config:ag-platform/packages/db/tsconfig.json",
+      "config:ag-platform/packages/types/package.json",
+      "config:ag-platform/packages/types/tsconfig.json",
+      "config:ag-platform/packages/ui/package.json",
+      "config:ag-platform/packages/ui/tsconfig.json",
+      "config:ag-platform/render.yaml",
+      "config:ag-platform/services/intake-api/package.json",
+      "config:ag-platform/services/intake-api/tsconfig.json",
+      "config:ag-platform/tsconfig.json",
+      "config:ag-platform/tsconfig.node.json",
+      "config:ag-platform/turbo.json",
+      "config:package.json",
+      "config:prototype/noi-dashboard/package.json",
+      "config:render.yaml",
+      "config:turbo.json"
+    ],
+    "pipeline": [
+      "pipeline:.github/actions/setup/action.yml",
+      "pipeline:.github/workflows/ci.yml",
+      "pipeline:.github/workflows/codeql.yml",
+      "pipeline:.github/workflows/deploy.yml",
+      "pipeline:.github/workflows/main.yml",
+      "pipeline:.github/workflows/nextjs.yml",
+      "pipeline:.github/workflows/preview.yml",
+      "pipeline:.github/workflows/release.yml",
+      "pipeline:.github/workflows/test-checkout.yml",
+      "pipeline:.github/workflows/test-permissions.yml",
+      "pipeline:.github/workflows/test-simple.yml",
+      "pipeline:.github/workflows/test-runner.yml",
+      "pipeline:.github/workflows/test.yml",
+      "pipeline:Makefile"
+    ],
+    "service": [
+      "service:Caddyfile",
+      "service:ag-associates-ai/backend/Dockerfile",
+      "service:ag-associates-ai/backend/Dockerfile:builder",
+      "service:ag-associates-ai/backend/Dockerfile:python",
+      "service:ag-platform/Dockerfile",
+      "service:ag-platform/Dockerfile:deps",
+      "service:ag-platform/Dockerfile:builder",
+      "service:ag-platform/Dockerfile:runner",
+      "service:ag-platform/services/intake-api/Dockerfile",
+      "service:docker-compose.prod.yml",
+      "service:docker-compose.yml"
+    ],
+    "document": [
+      "document:CONTEXT.md",
+      "document:CONTRIBUTING.md",
+      "document:CLAUDE.md",
+      "document:CULTURE.md",
+      "document:ag-associates-ai/backend/README.md",
+      "document:ag-associates-ai/backend/CHANGELOG.md",
+      "document:ag-associates-ai/backend/docs/supabase.md",
+      "document:ag-associates-ai/backend/frontend/README.md",
+      "document:ag-associates-ai/backend/docs/setup.md",
+      "document:ag-associates-ai/backend/docs/agents.md",
+      "document:ag-platform/apps/mobile/README.md",
+      "document:ag-platform/ARCHITECTURE.md",
+      "document:ag-platform/docs/AUTH_ARCHITECTURE.md",
+      "document:ag-platform/README.md",
+      "document:ag-platform/SECURITY.md",
+      "document:DEPLOYMENT_PLAYBOOK.md",
+      "document:DEVIN_PLAYBOOK.md",
+      "document:docs/adr/0001-monorepo-orchestration.md",
+      "document:docs/noi-automation-plan.md",
+      "document:ERROR_HANDLING_GUIDELINES.md",
+      "document:FRONTEND_UI_GUIDELINES.md",
+      "document:GIT_GUIDELINES.md",
+      "document:GOAL_DRIVEN_EXECUTION_GUIDELINES.md",
+      "document:GOVERNANCE.md",
+      "document:HALLUCINATION_MITIGATION_GUIDELINES.md",
+      "document:RAG_AND_MEMORY_GUIDELINES.md",
+      "document:README.md",
+      "document:REFACTORING_GUIDELINES.md",
+      "document:SECURITY.md",
+      "document:tasks/lessons.md",
+      "document:tasks/todo.md",
+      "document:TDD_GUIDELINES.md"
+    ],
+    "file": [
+      "file:ag-associates-ai/backend/agents/aisha.py",
+      "file:ag-associates-ai/backend/agents/auditor.py",
+      "file:ag-associates-ai/backend/agents/bouncer.py",
+      "file:ag-associates-ai/backend/agents/db.py",
+      "file:ag-associates-ai/backend/executor_agent.py",
+      "file:ag-associates-ai/backend/igr_executor.py",
+      "file:ag-associates-ai/backend/main.py",
+      "file:ag-associates-ai/backend/nesl_client.py",
+      "file:ag-associates-ai/backend/pdf_generator.py",
+      "file:ag-associates-ai/backend/config.py",
+      "file:ag-associates-ai/backend/requirements.txt",
+      "file:ag-associates-ai/backend/fee_calculator.py",
+      "file:ag-associates-ai/backend/template_manager.py",
+      "file:ag-associates-ai/backend/lic_manager.py",
+      "file:ag-associates-ai/backend/noi_pipeline.py",
+      "file:ag-associates-ai/backend/noi_automation.py",
+      "file:ag-associates-ai/backend/rag_engine.py",
+      "file:ag-associates-ai/backend/search_agent.py",
+      "file:ag-associates-ai/backend/websocket_manager.py",
+      "file:ag-associates-ai/backend/test_db.py",
+      "file:ag-associates-ai/backend/models.py",
+      "file:ag-associates-ai/backend/email_intake.py",
+      "file:ag-associates-ai/backend/gras_client.py",
+      "file:ag-associates-ai/backend/notifications.py",
+      "file:ag-associates-ai/backend/database.py",
+      "file:ag-associates-ai/backend/tasks.py",
+      "file:ag-associates-ai/backend/frontend/src/App.tsx",
+      "file:ag-associates-ai/backend/frontend/src/main.tsx",
+      "file:ag-associates-ai/backend/frontend/src/index.css",
+      "file:ag-associates-ai/backend/frontend/src/pages/Dashboard.tsx",
+      "file:ag-associates-ai/backend/frontend/src/pages/Cases.tsx",
+      "file:ag-associates-ai/backend/frontend/src/pages/Settings.tsx",
+      "file:ag-associates-ai/backend/frontend/src/pages/CaseDetail.tsx",
+      "file:ag-associates-ai/backend/frontend/src/components/Layout.tsx",
+      "file:ag-associates-ai/backend/frontend/src/components/StatsCard.tsx",
+      "file:ag-associates-ai/backend/frontend/src/components/CaseList.tsx",
+      "file:ag-associates-ai/backend/frontend/src/components/CaseTimeline.tsx",
+      "file:ag-associates-ai/backend/frontend/src/components/BotStatus.tsx",
+      "file:ag-associates-ai/backend/frontend/src/components/DashboardSkeleton.tsx",
+      "file:ag-associates-ai/backend/frontend/src/api/index.ts",
+      "file:ag-associates-ai/backend/frontend/src/api/cases.ts",
+      "file:ag-associates-ai/backend/frontend/src/hooks/useCases.ts",
+      "file:ag-associates-ai/backend/frontend/src/hooks/useSocket.ts",
+      "file:ag-associates-ai/backend/frontend/src/hooks/useAuth.ts",
+      "file:ag-associates-ai/backend/frontend/src/types/index.ts",
+      "file:ag-associates-ai/backend/frontend/src/data/sampleData.ts",
+      "file:ag-associates-ai/backend/frontend/vite.config.ts",
+      "file:ag-associates-ai/backend/frontend/index.html",
+      "file:ag-associates-ai/backend/agents/__init__.py",
+      "file:ag-associates-ai/backend/utils/__init__.py",
+      "file:ag-associates-ai/backend/models/__init__.py",
+      "file:ag-associates-ai/backend/routes/__init__.py",
+      "file:ag-associates-ai/backend/services/__init__.py",
+      "file:ag-associates-ai/backend/n8n_webhook.py",
+      "file:ag-associates-ai/backend/bot.py",
+      "file:ag-associates-ai/backend/payment/payment_intent.py",
+      "file:ag-associates-ai/backend/payment/payment_router.py",
+      "file:ag-associates-ai/backend/payment/webhook.py",
+      "file:ag-associates-ai/backend/payment/models.py",
+      "file:ag-associates-ai/backend/routes/documents.py",
+      "file:ag-associates-ai/backend/routes/auth.py",
+      "file:ag-associates-ai/backend/routes/cases.py",
+      "file:ag-associates-ai/backend/routes/health.py",
+      "file:ag-associates-ai/backend/routes/noi.py",
+      "file:ag-associates-ai/backend/routes/automation.py",
+      "file:ag-associates-ai/backend/routes/search.py",
+      "file:ag-associates-ai/backend/routes/routing.py",
+      "file:ag-associates-ai/backend/frontend/src/vite-env.d.ts",
+      "file:ag-associates-ai/backend/frontend/public/vite.svg",
+      "file:ag-platform/apps/mobile/app/(app)/activity.tsx",
+      "file:ag-platform/apps/mobile/app/(app)/cases/[caseId].tsx",
+      "file:ag-platform/apps/mobile/app/(app)/dashboard.tsx",
+      "file:ag-platform/apps/mobile/app/(app)/debug/queue.tsx",
+      "file:ag-platform/apps/mobile/app/(app)/scanner.tsx",
+      "file:ag-platform/apps/mobile/app/(app)/settings.tsx",
+      "file:ag-platform/apps/mobile/app/index.tsx",
+      "file:ag-platform/apps/mobile/app/login.tsx",
+      "file:ag-platform/apps/mobile/app/privacy.tsx",
+      "file:ag-platform/apps/mobile/babel.config.js",
+      "file:ag-platform/apps/mobile/components/activity/ActivityToggle.tsx",
+      "file:ag-platform/apps/mobile/components/activity/RouteMap.tsx",
+      "file:ag-platform/apps/mobile/components/cases/CaseDetailHeader.tsx",
+      "file:ag-platform/apps/mobile/components/cases/CaseDocuments.tsx",
+      "file:ag-platform/apps/mobile/components/cases/CaseListItem.tsx",
+      "file:ag-platform/apps/mobile/components/scanner/CameraButton.tsx",
+      "file:ag-platform/apps/mobile/components/scanner/UploadQueueList.tsx",
+      "file:ag-platform/apps/mobile/components/status/StatusBoard.tsx",
+      "file:ag-platform/apps/mobile/components/status/StatusButton.tsx",
+      "file:ag-platform/apps/mobile/components/system/OfflineIndicator.tsx",
+      "file:ag-platform/apps/mobile/components/ui/EmptyState.tsx",
+      "file:ag-platform/apps/mobile/components/ui/ErrorBoundary.tsx",
+      "file:ag-platform/apps/mobile/components/ui/ErrorState.tsx",
+      "file:ag-platform/apps/mobile/components/ui/index.ts",
+      "file:ag-platform/apps/mobile/components/ui/Skeleton.tsx",
+      "file:ag-platform/apps/mobile/global.css",
+      "file:ag-platform/apps/mobile/hooks/useAuth.ts",
+      "file:ag-platform/apps/mobile/hooks/useCase.ts",
+      "file:ag-platform/apps/mobile/hooks/useCases.ts",
+      "file:ag-platform/apps/mobile/hooks/useDocumentCapture.ts",
+      "file:ag-platform/apps/mobile/hooks/useMutationQueue.ts",
+      "file:ag-platform/apps/mobile/hooks/useOnDutyTracker.ts",
+      "file:ag-platform/apps/mobile/hooks/useOnlineStatus.ts",
+      "file:ag-platform/apps/mobile/hooks/usePushRegistration.ts",
+      "file:ag-platform/apps/mobile/hooks/useRealtimeCases.ts",
+      "file:ag-platform/apps/mobile/hooks/useStatusUpdate.ts",
+      "file:ag-platform/apps/mobile/hooks/useTodayActivity.ts",
+      "file:ag-platform/apps/mobile/lib/env.ts",
+      "file:ag-platform/apps/mobile/lib/notifications.ts",
+      "file:ag-platform/apps/mobile/lib/queryClient.ts",
+      "file:ag-platform/apps/mobile/lib/queue/drain.ts",
+      "file:ag-platform/apps/mobile/lib/queue/types.ts",
+      "file:ag-platform/apps/mobile/lib/sentry.ts",
+      "file:ag-platform/apps/mobile/lib/stores/useAuthStore.ts",
+      "file:ag-platform/apps/mobile/lib/stores/useDutyStore.ts",
+      "file:ag-platform/apps/mobile/lib/stores/useQueueStore.ts",
+      "file:ag-platform/apps/mobile/lib/supabase.ts",
+      "file:ag-platform/apps/mobile/metro.config.js",
+      "file:ag-platform/apps/mobile/services/cases.ts",
+      "file:ag-platform/apps/mobile/services/devices.ts",
+      "file:ag-platform/apps/mobile/services/documents.ts",
+      "file:ag-platform/apps/mobile/services/field.ts",
+      "file:ag-platform/apps/mobile/tailwind.config.js",
+      "file:ag-platform/index.html",
+      "file:ag-platform/packages/ai/src/gemini.ts",
+      "file:ag-platform/packages/ai/src/index.ts",
+      "file:ag-platform/packages/ai/src/prompts/legal.ts",
+      "file:ag-platform/packages/db/src/index.ts",
+      "file:ag-platform/packages/types/src/domain.ts",
+      "file:ag-platform/packages/types/src/field-app.ts",
+      "file:ag-platform/packages/types/src/index.ts",
+      "file:ag-platform/packages/types/src/storage.ts",
+      "file:ag-platform/packages/ui/src/index.tsx",
+      "file:ag-platform/postcss.config.js",
+      "file:ag-platform/server.ts",
+      "file:ag-platform/services/intake-api/src/routes/dashboard.ts",
+      "file:ag-platform/services/intake-api/src/routes/webhook.ts",
+      "file:ag-platform/services/intake-api/src/schemas/intake.schema.ts",
+      "file:ag-platform/services/intake-api/src/server.ts",
+      "file:ag-platform/services/intake-api/src/services/redis.service.ts",
+      "file:ag-platform/services/intake-api/src/services/supabase.service.ts",
+      "file:ag-platform/src/App.tsx",
+      "file:ag-platform/src/app/admin/voice/page.tsx",
+      "file:ag-platform/src/app/admin/workforce/page.tsx",
+      "file:ag-platform/src/app/login/page.tsx",
+      "file:ag-platform/src/app/my-cases/page.tsx",
+      "file:ag-platform/src/app/office/page.tsx",
+      "file:ag-platform/src/components/admin/AdvisorCockpit.tsx",
+      "file:ag-platform/src/components/admin/BrainstormHub.tsx",
+      "file:ag-platform/src/components/admin/voice/VyasaVoiceControl.tsx",
+      "file:ag-platform/src/components/admin/WorkforceControl.tsx",
+      "file:ag-platform/src/components/ai/ClientEmailDrafting.tsx",
+      "file:ag-platform/src/components/ai/ProjectBriefGenerator.tsx",
+      "file:ag-platform/src/components/ai/SemanticProjectSearch.tsx",
+      "file:ag-platform/src/components/ai/SmartTaskSuggestions.tsx",
+      "file:ag-platform/src/components/applicant/ApplicantDashboard.tsx",
+      "file:ag-platform/src/components/auth/LoginPage.tsx",
+      "file:ag-platform/src/components/auth/ProtectedRoute.tsx",
+      "file:ag-platform/src/components/bank/BankPortal.tsx",
+      "file:ag-platform/src/components/collaboration/ActivityFeed.tsx",
+      "file:ag-platform/src/components/collaboration/CommentThread.tsx",
+      "file:ag-platform/src/components/collaboration/LivePresence.tsx",
+      "file:ag-platform/src/components/collaboration/NotificationBell.tsx",
+      "file:ag-platform/src/components/collaboration/TaskBoard.tsx",
+      "file:ag-platform/src/components/collaboration/TaskCard.tsx",
+      "file:ag-platform/src/components/collaboration/TimeTracker.tsx",
+      "file:ag-platform/src/components/field/FieldApp.tsx",
+      "file:ag-platform/src/components/home/MarketingLanding.tsx",
+      "file:ag-platform/src/components/LandingPage.tsx",
+      "file:ag-platform/src/components/privacy/policy-sections.tsx",
+      "file:ag-platform/src/components/privacy/PrivacyPolicy.tsx",
+      "file:ag-platform/src/components/storage/FilePreviewer.tsx",
+      "file:ag-platform/src/components/storage/FileUploader.tsx",
+      "file:ag-platform/src/components/storage/VersionHistory.tsx",
+      "file:ag-platform/src/components/ui/EmptyState.tsx",
+      "file:ag-platform/src/components/ui/ErrorBoundary.tsx",
+      "file:ag-platform/src/components/ui/ErrorState.tsx",
+      "file:ag-platform/src/components/ui/index.ts",
+      "file:ag-platform/src/components/ui/Skeleton.tsx",
+      "file:ag-platform/src/hooks/useActivityFeed.ts",
+      "file:ag-platform/src/hooks/useLivePresence.ts",
+      "file:ag-platform/src/hooks/useNotifications.ts",
+      "file:ag-platform/src/index.css",
+      "file:ag-platform/src/lib/billing.test.ts",
+      "file:ag-platform/src/lib/billing.ts",
+      "file:ag-platform/src/lib/storage/download.ts",
+      "file:ag-platform/src/lib/storage/upload.test.ts",
+      "file:ag-platform/src/lib/storage/upload.ts",
+      "file:ag-platform/src/lib/supabase.ts",
+      "file:ag-platform/src/main.tsx",
+      "file:ag-platform/src/server/aiRouter.ts",
+      "file:ag-platform/src/server/db.ts",
+      "file:ag-platform/src/server/routes/cases.ts",
+      "file:ag-platform/src/server/routes/timesheets.ts",
+      "file:ag-platform/src/server/services/caseService.ts",
+      "file:ag-platform/src/store/useAuthStore.ts",
+      "file:ag-platform/src/types/domain.ts",
+      "file:ag-platform/src/types/storage.ts",
+      "file:ag-platform/supabase/functions/send-push-on-case-assigned/index.ts",
+      "file:ag-platform/tailwind.config.js",
+      "file:ag-platform/vite.config.ts",
+      "file:ag-platform/vitest.config.ts",
+      "file:Caddyfile",
+      "file:CNAME",
+      "file:CODEOWNERS",
+      "file:commitlint.config.js",
+      "file:content/02-getting-started/jupyter_notebooks.ipynb",
+      "file:prototype/noi-dashboard/index.html",
+      "file:prototype/noi-dashboard/postcss.config.js",
+      "file:prototype/noi-dashboard/src/App.tsx",
+      "file:prototype/noi-dashboard/src/index.css",
+      "file:prototype/noi-dashboard/src/main.tsx",
+      "file:prototype/noi-dashboard/tailwind.config.js",
+      "file:prototype/noi-dashboard/vite.config.ts",
+      "file:scripts/backup.sh",
+      "file:scripts/bootstrap-vps.sh",
+      "file:scripts/provision.sh",
+      "file:scripts/setup-runner.sh",
+      "file:scripts/setup-telegram-bot.sh"
+    ],
+    "table": [
+      "table:ag-platform/packages/db/migrations/001_ag_initial_schema.sql",
+      "table:ag-platform/packages/db/migrations/002_pgvector_templates.sql",
+      "table:ag-platform/src/server/migrations.sql",
+      "table:ag-platform/src/server/migrations.sql:banks",
+      "table:ag-platform/src/server/migrations.sql:organizations",
+      "table:ag-platform/src/server/migrations.sql:profiles",
+      "table:ag-platform/src/server/migrations.sql:cases",
+      "table:ag-platform/src/server/migrations.sql:disbursements",
+      "table:ag-platform/src/server/migrations.sql:case_timeline",
+      "table:ag-platform/src/server/migrations.sql:timesheets",
+      "table:ag-platform/supabase/migrations/20260423_ai_setup.sql",
+      "table:ag-platform/supabase/migrations/20260423_ai_tokens.sql",
+      "table:ag-platform/supabase/migrations/20260423_collaboration_setup.sql",
+      "table:ag-platform/supabase/migrations/20260423_document_storage_setup.sql",
+      "table:ag-platform/supabase/migrations/20260514000000_core_schema.sql",
+      "table:ag-platform/supabase/migrations/20260514000000_init_schema.sql",
+      "table:ag-platform/supabase/migrations/20260514000001_auth_hooks.sql",
+      "table:ag-platform/supabase/migrations/20260514000002_rbac_setup.sql",
+      "table:ag-platform/supabase/migrations/20260514000003_voice_system_setup.sql",
+      "table:ag-platform/supabase/migrations/20260514000004_workforce_management.sql",
+      "table:ag-platform/supabase/migrations/20260515000000_voice_command_logs.sql",
+      "table:ag-platform/supabase/migrations/20260515000001_voice_tool_config.sql",
+      "table:ag-platform/supabase/migrations/20260515000002_workforce.sql",
+      "table:ag-platform/supabase/migrations/20260515000003_workforce_phase4.sql",
+      "table:ag-platform/supabase/migrations/20260518000000_field_app.sql",
+      "table:ag-platform/supabase/migrations/20260519000000_push_trigger.sql",
+      "table:ag-platform/supabase/migrations/20260520000000_fix_auth_token_hook.sql",
+      "table:ag-platform/supabase/migrations/20260423_ai_setup.sql:project_embeddings",
+      "table:ag-platform/supabase/migrations/20260423_ai_setup.sql:projects",
+      "table:ag-platform/supabase/migrations/20260423_collaboration_setup.sql:tasks",
+      "table:ag-platform/supabase/migrations/20260423_collaboration_setup.sql:comments",
+      "table:ag-platform/supabase/migrations/20260423_collaboration_setup.sql:notifications",
+      "table:ag-platform/supabase/migrations/20260423_collaboration_setup.sql:activities",
+      "table:ag-platform/supabase/migrations/20260423_document_storage_setup.sql:files",
+      "table:ag-platform/supabase/migrations/20260514000000_core_schema.sql:organizations",
+      "table:ag-platform/supabase/migrations/20260514000000_core_schema.sql:cases",
+      "table:ag-platform/supabase/migrations/20260514000002_rbac_setup.sql:user_roles",
+      "table:ag-platform/supabase/migrations/20260514000004_workforce_management.sql:workforce_members",
+      "table:ag-platform/supabase/migrations/20260514000004_workforce_management.sql:workforce_tasks",
+      "table:ag-platform/supabase/migrations/20260515000000_voice_command_logs.sql:voice_command_logs",
+      "table:ag-platform/supabase/migrations/20260515000001_voice_tool_config.sql:voice_tool_config",
+      "table:ag-platform/supabase/migrations/20260515000002_workforce.sql:staff",
+      "table:ag-platform/supabase/migrations/20260515000002_workforce.sql:capability",
+      "table:ag-platform/supabase/migrations/20260515000002_workforce.sql:staff_capability",
+      "table:ag-platform/supabase/migrations/20260515000002_workforce.sql:staff_activity",
+      "table:ag-platform/supabase/migrations/20260518000000_field_app.sql:field_documents",
+      "table:ag-platform/supabase/migrations/20260518000000_field_app.sql:case_audit_logs",
+      "table:ag-platform/supabase/migrations/20260518000000_field_app.sql:device_push_tokens"
+    ]
+  },
+  "crossCategoryEdges": [
+    {
+      "fromType": "config",
+      "toType": "service",
+      "edgeType": "configures",
+      "count": 1
+    },
+    {
+      "fromType": "service",
+      "toType": "config",
+      "edgeType": "depends_on",
+      "count": 1
+    },
+    {
+      "fromType": "pipeline",
+      "toType": "config",
+      "edgeType": "triggers",
+      "count": 5
+    },
+    {
+      "fromType": "pipeline",
+      "toType": "service",
+      "edgeType": "triggers",
+      "count": 1
+    },
+    {
+      "fromType": "pipeline",
+      "toType": "config",
+      "edgeType": "depends_on",
+      "count": 1
+    },
+    {
+      "fromType": "pipeline",
+      "toType": "pipeline",
+      "edgeType": "related",
+      "count": 3
+    },
+    {
+      "fromType": "document",
+      "toType": "service",
+      "edgeType": "documents",
+      "count": 4
+    },
+    {
+      "fromType": "document",
+      "toType": "config",
+      "edgeType": "documents",
+      "count": 6
+    },
+    {
+      "fromType": "document",
+      "toType": "pipeline",
+      "edgeType": "documents",
+      "count": 3
+    },
+    {
+      "fromType": "document",
+      "toType": "document",
+      "edgeType": "related",
+      "count": 5
+    },
+    {
+      "fromType": "service",
+      "toType": "service",
+      "edgeType": "contains",
+      "count": 5
+    },
+    {
+      "fromType": "service",
+      "toType": "service",
+      "edgeType": "depends_on",
+      "count": 3
+    },
+    {
+      "fromType": "service",
+      "toType": "file",
+      "edgeType": "deploys",
+      "count": 9
+    },
+    {
+      "fromType": "document",
+      "toType": "file",
+      "edgeType": "documents",
+      "count": 15
+    },
+    {
+      "fromType": "config",
+      "toType": "config",
+      "edgeType": "configures",
+      "count": 1
+    },
+    {
+      "fromType": "config",
+      "toType": "file",
+      "edgeType": "configures",
+      "count": 30
+    },
+    {
+      "fromType": "file",
+      "toType": "file",
+      "edgeType": "imports",
+      "count": 128
+    },
+    {
+      "fromType": "document",
+      "toType": "table",
+      "edgeType": "documents",
+      "count": 1
+    },
+    {
+      "fromType": "file",
+      "toType": "file",
+      "edgeType": "depends_on",
+      "count": 5
+    },
+    {
+      "fromType": "table",
+      "toType": "table",
+      "edgeType": "contains",
+      "count": 28
+    },
+    {
+      "fromType": "file",
+      "toType": "file",
+      "edgeType": "tested_by",
+      "count": 2
+    },
+    {
+      "fromType": "table",
+      "toType": "table",
+      "edgeType": "migrates",
+      "count": 11
+    },
+    {
+      "fromType": "table",
+      "toType": "file",
+      "edgeType": "defines_schema",
+      "count": 4
+    },
+    {
+      "fromType": "config",
+      "toType": "config",
+      "edgeType": "depends_on",
+      "count": 2
+    },
+    {
+      "fromType": "table",
+      "toType": "table",
+      "edgeType": "depends_on",
+      "count": 9
+    },
+    {
+      "fromType": "table",
+      "toType": "file",
+      "edgeType": "triggers",
+      "count": 1
+    },
+    {
+      "fromType": "config",
+      "toType": "pipeline",
+      "edgeType": "configures",
+      "count": 1
+    },
+    {
+      "fromType": "service",
+      "toType": "file",
+      "edgeType": "depends_on",
+      "count": 1
+    },
+    {
+      "fromType": "file",
+      "toType": "service",
+      "edgeType": "routes",
+      "count": 1
+    },
+    {
+      "fromType": "file",
+      "toType": "pipeline",
+      "edgeType": "depends_on",
+      "count": 1
+    },
+    {
+      "fromType": "service",
+      "toType": "service",
+      "edgeType": "related",
+      "count": 1
+    },
+    {
+      "fromType": "file",
+      "toType": "file",
+      "edgeType": "configures",
+      "count": 3
+    },
+    {
+      "fromType": "document",
+      "toType": "document",
+      "edgeType": "documents",
+      "count": 6
+    },
+    {
+      "fromType": "config",
+      "toType": "file",
+      "edgeType": "deploys",
+      "count": 1
+    }
+  ],
+  "interGroupImports": [
+    {
+      "from": "ag-platform-mobile-services",
+      "to": "ag-platform-mobile-lib",
+      "count": 7
+    },
+    {
+      "from": "ag-platform-src",
+      "to": "ag-platform-components",
+      "count": 10
+    },
+    {
+      "from": "ag-platform-src",
+      "to": "ag-platform-store",
+      "count": 1
+    },
+    {
+      "from": "ag-platform-components",
+      "to": "ag-platform-types",
+      "count": 6
+    },
+    {
+      "from": "ag-platform-components",
+      "to": "ag-platform-lib",
+      "count": 5
+    },
+    {
+      "from": "ag-platform-components",
+      "to": "ag-platform-store",
+      "count": 2
+    },
+    {
+      "from": "ag-platform-components",
+      "to": "ag-platform-hooks",
+      "count": 5
+    },
+    {
+      "from": "ag-platform-lib",
+      "to": "ag-platform-types",
+      "count": 1
+    },
+    {
+      "from": "ag-platform-store",
+      "to": "ag-platform-lib",
+      "count": 1
+    },
+    {
+      "from": "ag-platform-mobile-screens",
+      "to": "ag-platform-mobile-components",
+      "count": 10
+    },
+    {
+      "from": "ag-platform-mobile-screens",
+      "to": "ag-platform-mobile-hooks",
+      "count": 8
+    },
+    {
+      "from": "ag-platform-mobile-screens",
+      "to": "ag-platform-mobile-lib",
+      "count": 2
+    },
+    {
+      "from": "ag-platform-mobile-app",
+      "to": "ag-platform-mobile-lib",
+      "count": 2
+    },
+    {
+      "from": "ag-platform-mobile-app",
+      "to": "ag-platform-mobile-hooks",
+      "count": 1
+    },
+    {
+      "from": "ag-platform-mobile-components",
+      "to": "ag-platform-mobile-lib",
+      "count": 3
+    },
+    {
+      "from": "ag-platform-mobile-components",
+      "to": "ag-platform-mobile-hooks",
+      "count": 1
+    },
+    {
+      "from": "ag-platform-mobile-hooks",
+      "to": "ag-platform-mobile-lib",
+      "count": 21
+    },
+    {
+      "from": "ag-platform-mobile-hooks",
+      "to": "ag-platform-mobile-services",
+      "count": 4
+    }
+  ],
+  "intraGroupDensity": {
+    "bolt": {
+      "internalEdges": 0,
+      "totalEdges": 0,
+      "density": 0
+    },
+    "changeset": {
+      "internalEdges": 0,
+      "totalEdges": 0,
+      "density": 0
+    },
+    "devcontainer": {
+      "internalEdges": 0,
+      "totalEdges": 0,
+      "density": 0
+    },
+    "root-config": {
+      "internalEdges": 0,
+      "totalEdges": 0,
+      "density": 0
+    },
+    ".github": {
+      "internalEdges": 0,
+      "totalEdges": 0,
+      "density": 0
+    },
+    "root": {
+      "internalEdges": 0,
+      "totalEdges": 0,
+      "density": 0
+    },
+    "infra-root": {
+      "internalEdges": 0,
+      "totalEdges": 0,
+      "density": 0
+    },
+    "root-docs": {
+      "internalEdges": 0,
+      "totalEdges": 0,
+      "density": 0
+    },
+    "ag-ai-agents": {
+      "internalEdges": 1,
+      "totalEdges": 1,
+      "density": 1
+    },
+    "ag-ai-backend": {
+      "internalEdges": 0,
+      "totalEdges": 0,
+      "density": 0
+    },
+    "ag-ai-docs": {
+      "internalEdges": 0,
+      "totalEdges": 0,
+      "density": 0
+    },
+    "ag-ai-front-root": {
+      "internalEdges": 0,
+      "totalEdges": 0,
+      "density": 0
+    },
+    "ag-ai-front-src": {
+      "internalEdges": 0,
+      "totalEdges": 0,
+      "density": 0
+    },
+    "ag-ai-front-pages": {
+      "internalEdges": 0,
+      "totalEdges": 0,
+      "density": 0
+    },
+    "ag-ai-front-components": {
+      "internalEdges": 0,
+      "totalEdges": 0,
+      "density": 0
+    },
+    "ag-ai-front-api": {
+      "internalEdges": 0,
+      "totalEdges": 0,
+      "density": 0
+    },
+    "ag-ai-front-hooks": {
+      "internalEdges": 0,
+      "totalEdges": 0,
+      "density": 0
+    },
+    "ag-ai-front-types": {
+      "internalEdges": 0,
+      "totalEdges": 0,
+      "density": 0
+    },
+    "ag-ai-front-data": {
+      "internalEdges": 0,
+      "totalEdges": 0,
+      "density": 0
+    },
+    "ag-ai-utils": {
+      "internalEdges": 0,
+      "totalEdges": 0,
+      "density": 0
+    },
+    "ag-ai-models": {
+      "internalEdges": 0,
+      "totalEdges": 0,
+      "density": 0
+    },
+    "ag-ai-routes": {
+      "internalEdges": 0,
+      "totalEdges": 0,
+      "density": 0
+    },
+    "ag-ai-services": {
+      "internalEdges": 0,
+      "totalEdges": 0,
+      "density": 0
+    },
+    "ag-ai-payment": {
+      "internalEdges": 0,
+      "totalEdges": 0,
+      "density": 0
+    },
+    "ag-ai-front-public": {
+      "internalEdges": 0,
+      "totalEdges": 0,
+      "density": 0
+    },
+    "ag-platform-mobile-screens": {
+      "internalEdges": 0,
+      "totalEdges": 20,
+      "density": 0
+    },
+    "ag-platform-mobile-app": {
+      "internalEdges": 0,
+      "totalEdges": 3,
+      "density": 0
+    },
+    "ag-platform-mobile": {
+      "internalEdges": 0,
+      "totalEdges": 0,
+      "density": 0
+    },
+    "ag-platform-mobile-components": {
+      "internalEdges": 6,
+      "totalEdges": 10,
+      "density": 0.6
+    },
+    "ag-platform-mobile-hooks": {
+      "internalEdges": 3,
+      "totalEdges": 28,
+      "density": 0.11
+    },
+    "ag-platform-mobile-lib": {
+      "internalEdges": 5,
+      "totalEdges": 5,
+      "density": 1
+    },
+    "ag-platform-mobile-services": {
+      "internalEdges": 0,
+      "totalEdges": 7,
+      "density": 0
+    },
+    "ag-platform-root": {
+      "internalEdges": 0,
+      "totalEdges": 0,
+      "density": 0
+    },
+    "ag-platform-docs": {
+      "internalEdges": 0,
+      "totalEdges": 0,
+      "density": 0
+    },
+    "ag-platform-pkg-ai": {
+      "internalEdges": 2,
+      "totalEdges": 2,
+      "density": 1
+    },
+    "ag-platform-pkg-db": {
+      "internalEdges": 0,
+      "totalEdges": 0,
+      "density": 0
+    },
+    "ag-platform-pkg-types": {
+      "internalEdges": 3,
+      "totalEdges": 3,
+      "density": 1
+    },
+    "ag-platform-pkg-ui": {
+      "internalEdges": 0,
+      "totalEdges": 0,
+      "density": 0
+    },
+    "ag-platform-intake": {
+      "internalEdges": 7,
+      "totalEdges": 7,
+      "density": 1
+    },
+    "ag-platform-src": {
+      "internalEdges": 0,
+      "totalEdges": 11,
+      "density": 0
+    },
+    "ag-platform-app": {
+      "internalEdges": 0,
+      "totalEdges": 0,
+      "density": 0
+    },
+    "ag-platform-components": {
+      "internalEdges": 8,
+      "totalEdges": 26,
+      "density": 0.31
+    },
+    "ag-platform-hooks": {
+      "internalEdges": 2,
+      "totalEdges": 2,
+      "density": 1
+    },
+    "ag-platform-lib": {
+      "internalEdges": 0,
+      "totalEdges": 1,
+      "density": 0
+    },
+    "ag-platform-server": {
+      "internalEdges": 0,
+      "totalEdges": 0,
+      "density": 0
+    },
+    "ag-platform-store": {
+      "internalEdges": 0,
+      "totalEdges": 1,
+      "density": 0
+    },
+    "ag-platform-types": {
+      "internalEdges": 0,
+      "totalEdges": 0,
+      "density": 0
+    },
+    "ag-platform-supabase-functions": {
+      "internalEdges": 0,
+      "totalEdges": 0,
+      "density": 0
+    },
+    "ag-platform-supabase-migrations": {
+      "internalEdges": 0,
+      "totalEdges": 0,
+      "density": 0
+    },
+    "content": {
+      "internalEdges": 0,
+      "totalEdges": 0,
+      "density": 0
+    },
+    "docs": {
+      "internalEdges": 0,
+      "totalEdges": 0,
+      "density": 0
+    },
+    "prototype": {
+      "internalEdges": 1,
+      "totalEdges": 1,
+      "density": 1
+    },
+    "scripts": {
+      "internalEdges": 0,
+      "totalEdges": 0,
+      "density": 0
+    },
+    "tasks": {
+      "internalEdges": 0,
+      "totalEdges": 0,
+      "density": 0
+    }
+  },
+  "patternMatches": {
+    "bolt": "config",
+    "changeset": "config",
+    "devcontainer": "infrastructure",
+    "root-config": "config",
+    ".github": "ci-cd",
+    "root": "config",
+    "infra-root": "infrastructure",
+    "root-docs": "documentation",
+    "ag-ai-agents": "service",
+    "ag-ai-backend": "service",
+    "ag-ai-docs": "documentation",
+    "ag-ai-front-root": "ui",
+    "ag-ai-front-src": "ui",
+    "ag-ai-front-pages": "ui",
+    "ag-ai-front-components": "ui",
+    "ag-ai-front-api": "api",
+    "ag-ai-front-hooks": "hooks",
+    "ag-ai-front-types": "types",
+    "ag-ai-front-data": "data",
+    "ag-ai-utils": "utility",
+    "ag-ai-models": "data",
+    "ag-ai-routes": "api",
+    "ag-ai-services": "service",
+    "ag-ai-payment": "service",
+    "ag-ai-front-public": "assets",
+    "ag-platform-mobile-screens": "ui",
+    "ag-platform-mobile-app": "ui",
+    "ag-platform-mobile": "ui",
+    "ag-platform-mobile-components": "ui",
+    "ag-platform-mobile-hooks": "hooks",
+    "ag-platform-mobile-lib": "utility",
+    "ag-platform-mobile-services": "service",
+    "ag-platform-root": "config",
+    "ag-platform-docs": "documentation",
+    "ag-platform-pkg-ai": "service",
+    "ag-platform-pkg-db": "data",
+    "ag-platform-pkg-types": "types",
+    "ag-platform-pkg-ui": "ui",
+    "ag-platform-intake": "api",
+    "ag-platform-src": "ui",
+    "ag-platform-app": "ui",
+    "ag-platform-components": "ui",
+    "ag-platform-hooks": "hooks",
+    "ag-platform-lib": "utility",
+    "ag-platform-server": "service",
+    "ag-platform-store": "state",
+    "ag-platform-types": "types",
+    "ag-platform-supabase-functions": "service",
+    "ag-platform-supabase-migrations": "data",
+    "content": "assets",
+    "docs": "documentation",
+    "prototype": "ui",
+    "scripts": "infrastructure",
+    "tasks": "documentation"
+  },
+  "deploymentTopology": {
+    "hasDockerfile": true,
+    "hasCompose": true,
+    "hasK8s": false,
+    "hasTerraform": false,
+    "hasCI": true,
+    "infraFiles": [
+      "pipeline:.github/workflows/ci.yml",
+      "pipeline:.github/workflows/codeql.yml",
+      "pipeline:.github/workflows/deploy.yml",
+      "pipeline:.github/workflows/main.yml",
+      "pipeline:.github/workflows/nextjs.yml",
+      "pipeline:.github/workflows/preview.yml",
+      "pipeline:.github/workflows/release.yml",
+      "pipeline:.github/workflows/test-checkout.yml",
+      "pipeline:.github/workflows/test-permissions.yml",
+      "pipeline:.github/workflows/test-simple.yml",
+      "pipeline:.github/workflows/test-runner.yml",
+      "pipeline:.github/workflows/test.yml",
+      "service:Caddyfile",
+      "service:ag-associates-ai/backend/Dockerfile",
+      "service:ag-platform/Dockerfile",
+      "service:ag-platform/services/intake-api/Dockerfile",
+      "file:Caddyfile",
+      "service:docker-compose.prod.yml",
+      "service:docker-compose.yml"
+    ]
+  },
+  "dataPipeline": {
+    "schemaFiles": [
+      "table:ag-platform/packages/db/migrations/001_ag_initial_schema.sql",
+      "table:ag-platform/supabase/migrations/20260514000000_core_schema.sql",
+      "table:ag-platform/supabase/migrations/20260514000000_init_schema.sql",
+      "table:ag-platform/supabase/migrations/20260514000000_core_schema.sql:organizations",
+      "table:ag-platform/supabase/migrations/20260514000000_core_schema.sql:cases"
+    ],
+    "migrationFiles": [
+      "table:ag-platform/packages/db/migrations/001_ag_initial_schema.sql",
+      "table:ag-platform/packages/db/migrations/001_ag_initial_schema.sql",
+      "table:ag-platform/packages/db/migrations/002_pgvector_templates.sql",
+      "table:ag-platform/packages/db/migrations/002_pgvector_templates.sql",
+      "table:ag-platform/src/server/migrations.sql",
+      "table:ag-platform/src/server/migrations.sql",
+      "table:ag-platform/supabase/migrations/20260423_ai_setup.sql",
+      "table:ag-platform/supabase/migrations/20260423_ai_setup.sql",
+      "table:ag-platform/supabase/migrations/20260423_ai_tokens.sql",
+      "table:ag-platform/supabase/migrations/20260423_ai_tokens.sql",
+      "table:ag-platform/supabase/migrations/20260423_collaboration_setup.sql",
+      "table:ag-platform/supabase/migrations/20260423_collaboration_setup.sql",
+      "table:ag-platform/supabase/migrations/20260423_document_storage_setup.sql",
+      "table:ag-platform/supabase/migrations/20260423_document_storage_setup.sql",
+      "table:ag-platform/supabase/migrations/20260514000000_core_schema.sql",
+      "table:ag-platform/supabase/migrations/20260514000000_core_schema.sql",
+      "table:ag-platform/supabase/migrations/20260514000000_init_schema.sql",
+      "table:ag-platform/supabase/migrations/20260514000000_init_schema.sql",
+      "table:ag-platform/supabase/migrations/20260514000001_auth_hooks.sql",
+      "table:ag-platform/supabase/migrations/20260514000001_auth_hooks.sql",
+      "table:ag-platform/supabase/migrations/20260514000002_rbac_setup.sql",
+      "table:ag-platform/supabase/migrations/20260514000002_rbac_setup.sql",
+      "table:ag-platform/supabase/migrations/20260514000003_voice_system_setup.sql",
+      "table:ag-platform/supabase/migrations/20260514000003_voice_system_setup.sql",
+      "table:ag-platform/supabase/migrations/20260514000004_workforce_management.sql",
+      "table:ag-platform/supabase/migrations/20260514000004_workforce_management.sql",
+      "table:ag-platform/supabase/migrations/20260515000000_voice_command_logs.sql",
+      "table:ag-platform/supabase/migrations/20260515000000_voice_command_logs.sql",
+      "table:ag-platform/supabase/migrations/20260515000001_voice_tool_config.sql",
+      "table:ag-platform/supabase/migrations/20260515000001_voice_tool_config.sql",
+      "table:ag-platform/supabase/migrations/20260515000002_workforce.sql",
+      "table:ag-platform/supabase/migrations/20260515000002_workforce.sql",
+      "table:ag-platform/supabase/migrations/20260515000003_workforce_phase4.sql",
+      "table:ag-platform/supabase/migrations/20260515000003_workforce_phase4.sql",
+      "table:ag-platform/supabase/migrations/20260518000000_field_app.sql",
+      "table:ag-platform/supabase/migrations/20260518000000_field_app.sql",
+      "table:ag-platform/supabase/migrations/20260519000000_push_trigger.sql",
+      "table:ag-platform/supabase/migrations/20260519000000_push_trigger.sql",
+      "table:ag-platform/supabase/migrations/20260520000000_fix_auth_token_hook.sql",
+      "table:ag-platform/supabase/migrations/20260520000000_fix_auth_token_hook.sql",
+      "table:ag-platform/supabase/migrations/20260423_ai_setup.sql:project_embeddings",
+      "table:ag-platform/supabase/migrations/20260423_ai_setup.sql:project_embeddings",
+      "table:ag-platform/supabase/migrations/20260423_ai_setup.sql:projects",
+      "table:ag-platform/supabase/migrations/20260423_ai_setup.sql:projects",
+      "table:ag-platform/supabase/migrations/20260423_collaboration_setup.sql:tasks",
+      "table:ag-platform/supabase/migrations/20260423_collaboration_setup.sql:tasks",
+      "table:ag-platform/supabase/migrations/20260423_collaboration_setup.sql:comments",
+      "table:ag-platform/supabase/migrations/20260423_collaboration_setup.sql:comments",
+      "table:ag-platform/supabase/migrations/20260423_collaboration_setup.sql:notifications",
+      "table:ag-platform/supabase/migrations/20260423_collaboration_setup.sql:notifications",
+      "table:ag-platform/supabase/migrations/20260423_collaboration_setup.sql:activities",
+      "table:ag-platform/supabase/migrations/20260423_collaboration_setup.sql:activities",
+      "table:ag-platform/supabase/migrations/20260423_document_storage_setup.sql:files",
+      "table:ag-platform/supabase/migrations/20260423_document_storage_setup.sql:files",
+      "table:ag-platform/supabase/migrations/20260514000000_core_schema.sql:organizations",
+      "table:ag-platform/supabase/migrations/20260514000000_core_schema.sql:organizations",
+      "table:ag-platform/supabase/migrations/20260514000000_core_schema.sql:cases",
+      "table:ag-platform/supabase/migrations/20260514000000_core_schema.sql:cases",
+      "table:ag-platform/supabase/migrations/20260514000002_rbac_setup.sql:user_roles",
+      "table:ag-platform/supabase/migrations/20260514000002_rbac_setup.sql:user_roles",
+      "table:ag-platform/supabase/migrations/20260514000004_workforce_management.sql:workforce_members",
+      "table:ag-platform/supabase/migrations/20260514000004_workforce_management.sql:workforce_members",
+      "table:ag-platform/supabase/migrations/20260514000004_workforce_management.sql:workforce_tasks",
+      "table:ag-platform/supabase/migrations/20260514000004_workforce_management.sql:workforce_tasks",
+      "table:ag-platform/supabase/migrations/20260515000000_voice_command_logs.sql:voice_command_logs",
+      "table:ag-platform/supabase/migrations/20260515000000_voice_command_logs.sql:voice_command_logs",
+      "table:ag-platform/supabase/migrations/20260515000001_voice_tool_config.sql:voice_tool_config",
+      "table:ag-platform/supabase/migrations/20260515000001_voice_tool_config.sql:voice_tool_config",
+      "table:ag-platform/supabase/migrations/20260515000002_workforce.sql:staff",
+      "table:ag-platform/supabase/migrations/20260515000002_workforce.sql:staff",
+      "table:ag-platform/supabase/migrations/20260515000002_workforce.sql:capability",
+      "table:ag-platform/supabase/migrations/20260515000002_workforce.sql:capability",
+      "table:ag-platform/supabase/migrations/20260515000002_workforce.sql:staff_capability",
+      "table:ag-platform/supabase/migrations/20260515000002_workforce.sql:staff_capability",
+      "table:ag-platform/supabase/migrations/20260515000002_workforce.sql:staff_activity",
+      "table:ag-platform/supabase/migrations/20260515000002_workforce.sql:staff_activity",
+      "table:ag-platform/supabase/migrations/20260518000000_field_app.sql:field_documents",
+      "table:ag-platform/supabase/migrations/20260518000000_field_app.sql:field_documents",
+      "table:ag-platform/supabase/migrations/20260518000000_field_app.sql:case_audit_logs",
+      "table:ag-platform/supabase/migrations/20260518000000_field_app.sql:case_audit_logs",
+      "table:ag-platform/supabase/migrations/20260518000000_field_app.sql:device_push_tokens",
+      "table:ag-platform/supabase/migrations/20260518000000_field_app.sql:device_push_tokens"
+    ],
+    "dataModelFiles": [
+      "file:ag-associates-ai/backend/agents/db.py",
+      "file:ag-associates-ai/backend/test_db.py",
+      "file:ag-associates-ai/backend/models.py",
+      "file:ag-associates-ai/backend/database.py",
+      "document:ag-associates-ai/backend/docs/supabase.md",
+      "file:ag-associates-ai/backend/models/__init__.py",
+      "file:ag-associates-ai/backend/payment/models.py",
+      "file:ag-platform/apps/mobile/lib/supabase.ts",
+      "table:ag-platform/packages/db/migrations/001_ag_initial_schema.sql",
+      "table:ag-platform/packages/db/migrations/002_pgvector_templates.sql",
+      "config:ag-platform/packages/db/package.json",
+      "file:ag-platform/packages/db/src/index.ts",
+      "file:ag-platform/packages/types/src/field-app.ts",
+      "file:ag-platform/packages/types/src/storage.ts",
+      "file:ag-platform/services/intake-api/src/services/redis.service.ts",
+      "file:ag-platform/services/intake-api/src/services/supabase.service.ts",
+      "file:ag-platform/src/lib/supabase.ts",
+      "file:ag-platform/src/server/db.ts",
+      "table:ag-platform/src/server/migrations.sql",
+      "table:ag-platform/src/server/migrations.sql:banks",
+      "table:ag-platform/src/server/migrations.sql:organizations",
+      "table:ag-platform/src/server/migrations.sql:profiles",
+      "table:ag-platform/src/server/migrations.sql:cases",
+      "table:ag-platform/src/server/migrations.sql:disbursements",
+      "table:ag-platform/src/server/migrations.sql:case_timeline",
+      "table:ag-platform/src/server/migrations.sql:timesheets",
+      "file:ag-platform/src/server/services/caseService.ts",
+      "file:ag-platform/src/types/domain.ts",
+      "table:ag-platform/supabase/migrations/20260423_ai_setup.sql",
+      "table:ag-platform/supabase/migrations/20260423_ai_tokens.sql",
+      "table:ag-platform/supabase/migrations/20260423_collaboration_setup.sql",
+      "table:ag-platform/supabase/migrations/20260423_document_storage_setup.sql",
+      "table:ag-platform/supabase/migrations/20260514000000_core_schema.sql",
+      "table:ag-platform/supabase/migrations/20260514000000_init_schema.sql",
+      "table:ag-platform/supabase/migrations/20260514000001_auth_hooks.sql",
+      "table:ag-platform/supabase/migrations/20260514000002_rbac_setup.sql",
+      "table:ag-platform/supabase/migrations/20260514000003_voice_system_setup.sql",
+      "table:ag-platform/supabase/migrations/20260514000004_workforce_management.sql",
+      "table:ag-platform/supabase/migrations/20260515000000_voice_command_logs.sql",
+      "table:ag-platform/supabase/migrations/20260515000001_voice_tool_config.sql",
+      "table:ag-platform/supabase/migrations/20260515000002_workforce.sql",
+      "table:ag-platform/supabase/migrations/20260515000003_workforce_phase4.sql",
+      "table:ag-platform/supabase/migrations/20260518000000_field_app.sql",
+      "table:ag-platform/supabase/migrations/20260519000000_push_trigger.sql",
+      "table:ag-platform/supabase/migrations/20260520000000_fix_auth_token_hook.sql",
+      "service:docker-compose.yml"
+    ],
+    "apiHandlerFiles": [
+      "file:ag-associates-ai/backend/main.py",
+      "file:ag-associates-ai/backend/frontend/src/api/cases.ts",
+      "file:ag-associates-ai/backend/routes/__init__.py",
+      "file:ag-associates-ai/backend/payment/payment_router.py",
+      "file:ag-associates-ai/backend/routes/documents.py",
+      "file:ag-associates-ai/backend/routes/auth.py",
+      "file:ag-associates-ai/backend/routes/cases.py",
+      "file:ag-associates-ai/backend/routes/health.py",
+      "file:ag-associates-ai/backend/routes/noi.py",
+      "file:ag-associates-ai/backend/routes/automation.py",
+      "file:ag-associates-ai/backend/routes/search.py",
+      "file:ag-associates-ai/backend/routes/routing.py",
+      "file:ag-platform/apps/mobile/services/cases.ts",
+      "file:ag-platform/server.ts",
+      "file:ag-platform/services/intake-api/src/routes/dashboard.ts",
+      "file:ag-platform/services/intake-api/src/routes/webhook.ts",
+      "file:ag-platform/services/intake-api/src/server.ts"
+    ]
+  },
+  "docCoverage": {
+    "groupsWithDocs": 9,
+    "totalGroups": 54,
+    "coverageRatio": 0.17,
+    "undocumentedGroups": [
+      "bolt",
+      "changeset",
+      "devcontainer",
+      "root-config",
+      ".github",
+      "root",
+      "infra-root",
+      "ag-ai-agents",
+      "ag-ai-front-src",
+      "ag-ai-front-pages",
+      "ag-ai-front-components",
+      "ag-ai-front-api",
+      "ag-ai-front-hooks",
+      "ag-ai-front-types",
+      "ag-ai-front-data",
+      "ag-ai-utils",
+      "ag-ai-models",
+      "ag-ai-routes",
+      "ag-ai-services",
+      "ag-ai-payment",
+      "ag-ai-front-public",
+      "ag-platform-mobile-screens",
+      "ag-platform-mobile-app",
+      "ag-platform-mobile-components",
+      "ag-platform-mobile-hooks",
+      "ag-platform-mobile-lib",
+      "ag-platform-mobile-services",
+      "ag-platform-pkg-ai",
+      "ag-platform-pkg-db",
+      "ag-platform-pkg-types",
+      "ag-platform-pkg-ui",
+      "ag-platform-intake",
+      "ag-platform-src",
+      "ag-platform-app",
+      "ag-platform-components",
+      "ag-platform-hooks",
+      "ag-platform-lib",
+      "ag-platform-server",
+      "ag-platform-store",
+      "ag-platform-types",
+      "ag-platform-supabase-functions",
+      "ag-platform-supabase-migrations",
+      "content",
+      "prototype",
+      "scripts"
+    ]
+  },
+  "dependencyDirection": [
+    {
+      "dependent": "ag-platform-mobile-services",
+      "dependsOn": "ag-platform-mobile-lib"
+    },
+    {
+      "dependent": "ag-platform-src",
+      "dependsOn": "ag-platform-components"
+    },
+    {
+      "dependent": "ag-platform-src",
+      "dependsOn": "ag-platform-store"
+    },
+    {
+      "dependent": "ag-platform-components",
+      "dependsOn": "ag-platform-types"
+    },
+    {
+      "dependent": "ag-platform-components",
+      "dependsOn": "ag-platform-lib"
+    },
+    {
+      "dependent": "ag-platform-components",
+      "dependsOn": "ag-platform-store"
+    },
+    {
+      "dependent": "ag-platform-components",
+      "dependsOn": "ag-platform-hooks"
+    },
+    {
+      "dependent": "ag-platform-lib",
+      "dependsOn": "ag-platform-types"
+    },
+    {
+      "dependent": "ag-platform-store",
+      "dependsOn": "ag-platform-lib"
+    },
+    {
+      "dependent": "ag-platform-mobile-screens",
+      "dependsOn": "ag-platform-mobile-components"
+    },
+    {
+      "dependent": "ag-platform-mobile-screens",
+      "dependsOn": "ag-platform-mobile-hooks"
+    },
+    {
+      "dependent": "ag-platform-mobile-screens",
+      "dependsOn": "ag-platform-mobile-lib"
+    },
+    {
+      "dependent": "ag-platform-mobile-app",
+      "dependsOn": "ag-platform-mobile-lib"
+    },
+    {
+      "dependent": "ag-platform-mobile-app",
+      "dependsOn": "ag-platform-mobile-hooks"
+    },
+    {
+      "dependent": "ag-platform-mobile-components",
+      "dependsOn": "ag-platform-mobile-lib"
+    },
+    {
+      "dependent": "ag-platform-mobile-components",
+      "dependsOn": "ag-platform-mobile-hooks"
+    },
+    {
+      "dependent": "ag-platform-mobile-hooks",
+      "dependsOn": "ag-platform-mobile-lib"
+    },
+    {
+      "dependent": "ag-platform-mobile-hooks",
+      "dependsOn": "ag-platform-mobile-services"
+    }
+  ],
+  "fileStats": {
+    "totalFileNodes": 356,
+    "filesPerGroup": {
+      "bolt": 1,
+      "changeset": 1,
+      "devcontainer": 1,
+      "root-config": 8,
+      ".github": 13,
+      "root": 13,
+      "infra-root": 3,
+      "root-docs": 17,
+      "ag-ai-agents": 5,
+      "ag-ai-backend": 27,
+      "ag-ai-docs": 3,
+      "ag-ai-front-root": 7,
+      "ag-ai-front-src": 4,
+      "ag-ai-front-pages": 4,
+      "ag-ai-front-components": 6,
+      "ag-ai-front-api": 2,
+      "ag-ai-front-hooks": 3,
+      "ag-ai-front-types": 1,
+      "ag-ai-front-data": 1,
+      "ag-ai-utils": 1,
+      "ag-ai-models": 1,
+      "ag-ai-routes": 9,
+      "ag-ai-services": 1,
+      "ag-ai-payment": 4,
+      "ag-ai-front-public": 1,
+      "ag-platform-mobile-screens": 6,
+      "ag-platform-mobile-app": 3,
+      "ag-platform-mobile": 8,
+      "ag-platform-mobile-components": 15,
+      "ag-platform-mobile-hooks": 11,
+      "ag-platform-mobile-lib": 10,
+      "ag-platform-mobile-services": 4,
+      "ag-platform-root": 18,
+      "ag-platform-docs": 1,
+      "ag-platform-pkg-ai": 5,
+      "ag-platform-pkg-db": 5,
+      "ag-platform-pkg-types": 6,
+      "ag-platform-pkg-ui": 3,
+      "ag-platform-intake": 9,
+      "ag-platform-src": 3,
+      "ag-platform-app": 5,
+      "ag-platform-components": 32,
+      "ag-platform-hooks": 3,
+      "ag-platform-lib": 6,
+      "ag-platform-server": 6,
+      "ag-platform-store": 1,
+      "ag-platform-types": 2,
+      "ag-platform-supabase-functions": 1,
+      "ag-platform-supabase-migrations": 38,
+      "content": 1,
+      "docs": 2,
+      "prototype": 8,
+      "scripts": 5,
+      "tasks": 2
+    },
+    "nodeTypeCounts": {
+      "config": 33,
+      "pipeline": 14,
+      "service": 11,
+      "document": 32,
+      "file": 218,
+      "table": 48
+    }
+  },
+  "fileFanIn": {
+    "file:ag-platform/apps/mobile/lib/supabase.ts": 10,
+    "file:ag-platform/apps/mobile/lib/stores/useAuthStore.ts": 9,
+    "file:ag-platform/apps/mobile/lib/queue/types.ts": 8,
+    "file:ag-platform/apps/mobile/lib/stores/useQueueStore.ts": 6,
+    "file:ag-platform/src/hooks/useLivePresence.ts": 5,
+    "file:ag-platform/apps/mobile/hooks/useCases.ts": 4,
+    "file:ag-platform/apps/mobile/lib/env.ts": 4,
+    "file:ag-platform/src/lib/supabase.ts": 4,
+    "file:ag-platform/src/types/storage.ts": 4,
+    "file:ag-platform/apps/mobile/components/ui/index.ts": 3,
+    "file:ag-platform/services/intake-api/src/services/redis.service.ts": 3,
+    "file:ag-platform/src/store/useAuthStore.ts": 3,
+    "file:ag-platform/src/types/domain.ts": 3,
+    "file:ag-platform/apps/mobile/hooks/useAuth.ts": 2,
+    "file:ag-platform/apps/mobile/hooks/useOnlineStatus.ts": 2,
+    "file:ag-platform/apps/mobile/lib/stores/useDutyStore.ts": 2,
+    "file:ag-associates-ai/backend/agents/db.py": 1,
+    "file:ag-platform/apps/mobile/components/activity/ActivityToggle.tsx": 1,
+    "file:ag-platform/apps/mobile/components/activity/RouteMap.tsx": 1,
+    "file:ag-platform/apps/mobile/components/cases/CaseDetailHeader.tsx": 1
+  },
+  "fileFanOut": {
+    "file:ag-platform/src/App.tsx": 11,
+    "file:ag-platform/apps/mobile/hooks/useMutationQueue.ts": 6,
+    "file:ag-platform/apps/mobile/app/(app)/cases/[caseId].tsx": 5,
+    "file:ag-platform/apps/mobile/app/(app)/scanner.tsx": 5,
+    "file:ag-platform/apps/mobile/app/(app)/activity.tsx": 4,
+    "file:ag-platform/apps/mobile/app/(app)/dashboard.tsx": 4,
+    "file:ag-platform/apps/mobile/components/ui/index.ts": 4,
+    "file:ag-platform/src/components/ui/index.ts": 4,
+    "file:ag-platform/apps/mobile/hooks/useDocumentCapture.ts": 3,
+    "file:ag-platform/apps/mobile/hooks/useOnDutyTracker.ts": 3,
+    "file:ag-platform/apps/mobile/hooks/useRealtimeCases.ts": 3,
+    "file:ag-platform/apps/mobile/hooks/useStatusUpdate.ts": 3,
+    "file:ag-platform/apps/mobile/services/documents.ts": 3,
+    "file:ag-platform/packages/types/src/index.ts": 3,
+    "file:ag-platform/services/intake-api/src/routes/webhook.ts": 3,
+    "file:ag-platform/services/intake-api/src/server.ts": 3,
+    "file:ag-platform/apps/mobile/components/system/OfflineIndicator.tsx": 2,
+    "file:ag-platform/apps/mobile/hooks/useAuth.ts": 2,
+    "file:ag-platform/apps/mobile/hooks/useCase.ts": 2,
+    "file:ag-platform/apps/mobile/hooks/useCases.ts": 2
+  }
+}

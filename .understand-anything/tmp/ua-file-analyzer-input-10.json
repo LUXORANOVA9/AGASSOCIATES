@@ -1,0 +1,202 @@
+{
+  "projectRoot": "/home/luxor9/AGASSOCIATES",
+  "batchFiles": [
+    {
+      "path": "ag-platform/src/components/storage/FilePreviewer.tsx",
+      "language": "typescript",
+      "sizeLines": 96,
+      "fileCategory": "code"
+    },
+    {
+      "path": "ag-platform/src/components/storage/FileUploader.tsx",
+      "language": "typescript",
+      "sizeLines": 121,
+      "fileCategory": "code"
+    },
+    {
+      "path": "ag-platform/src/components/storage/VersionHistory.tsx",
+      "language": "typescript",
+      "sizeLines": 85,
+      "fileCategory": "code"
+    },
+    {
+      "path": "ag-platform/src/components/ui/EmptyState.tsx",
+      "language": "typescript",
+      "sizeLines": 37,
+      "fileCategory": "code"
+    },
+    {
+      "path": "ag-platform/src/components/ui/ErrorBoundary.tsx",
+      "language": "typescript",
+      "sizeLines": 86,
+      "fileCategory": "code"
+    },
+    {
+      "path": "ag-platform/src/components/ui/ErrorState.tsx",
+      "language": "typescript",
+      "sizeLines": 35,
+      "fileCategory": "code"
+    },
+    {
+      "path": "ag-platform/src/components/ui/index.ts",
+      "language": "typescript",
+      "sizeLines": 4,
+      "fileCategory": "code"
+    },
+    {
+      "path": "ag-platform/src/components/ui/Skeleton.tsx",
+      "language": "typescript",
+      "sizeLines": 31,
+      "fileCategory": "code"
+    },
+    {
+      "path": "ag-platform/src/hooks/useActivityFeed.ts",
+      "language": "typescript",
+      "sizeLines": 87,
+      "fileCategory": "code"
+    },
+    {
+      "path": "ag-platform/src/hooks/useLivePresence.ts",
+      "language": "typescript",
+      "sizeLines": 77,
+      "fileCategory": "code"
+    },
+    {
+      "path": "ag-platform/src/hooks/useNotifications.ts",
+      "language": "typescript",
+      "sizeLines": 113,
+      "fileCategory": "code"
+    },
+    {
+      "path": "ag-platform/src/index.css",
+      "language": "css",
+      "sizeLines": 16,
+      "fileCategory": "markup"
+    },
+    {
+      "path": "ag-platform/src/lib/billing.test.ts",
+      "language": "typescript",
+      "sizeLines": 23,
+      "fileCategory": "code"
+    },
+    {
+      "path": "ag-platform/src/lib/billing.ts",
+      "language": "typescript",
+      "sizeLines": 10,
+      "fileCategory": "code"
+    },
+    {
+      "path": "ag-platform/src/lib/storage/download.ts",
+      "language": "typescript",
+      "sizeLines": 46,
+      "fileCategory": "code"
+    },
+    {
+      "path": "ag-platform/src/lib/storage/upload.test.ts",
+      "language": "typescript",
+      "sizeLines": 90,
+      "fileCategory": "code"
+    },
+    {
+      "path": "ag-platform/src/lib/storage/upload.ts",
+      "language": "typescript",
+      "sizeLines": 99,
+      "fileCategory": "code"
+    },
+    {
+      "path": "ag-platform/src/lib/supabase.ts",
+      "language": "typescript",
+      "sizeLines": 10,
+      "fileCategory": "code"
+    },
+    {
+      "path": "ag-platform/src/main.tsx",
+      "language": "typescript",
+      "sizeLines": 10,
+      "fileCategory": "code"
+    },
+    {
+      "path": "ag-platform/src/server/aiRouter.ts",
+      "language": "typescript",
+      "sizeLines": 295,
+      "fileCategory": "code"
+    },
+    {
+      "path": "ag-platform/src/server/db.ts",
+      "language": "typescript",
+      "sizeLines": 22,
+      "fileCategory": "code"
+    },
+    {
+      "path": "ag-platform/src/server/migrations.sql",
+      "language": "sql",
+      "sizeLines": 158,
+      "fileCategory": "data"
+    },
+    {
+      "path": "ag-platform/src/server/routes/cases.ts",
+      "language": "typescript",
+      "sizeLines": 62,
+      "fileCategory": "code"
+    },
+    {
+      "path": "ag-platform/src/server/routes/timesheets.ts",
+      "language": "typescript",
+      "sizeLines": 65,
+      "fileCategory": "code"
+    },
+    {
+      "path": "ag-platform/src/server/services/caseService.ts",
+      "language": "typescript",
+      "sizeLines": 60,
+      "fileCategory": "code"
+    }
+  ],
+  "batchImportData": {
+    "ag-platform/src/components/storage/FilePreviewer.tsx": [
+      "ag-platform/src/lib/storage/download.ts",
+      "ag-platform/src/types/storage.ts"
+    ],
+    "ag-platform/src/components/storage/FileUploader.tsx": [
+      "ag-platform/src/lib/storage/upload.ts",
+      "ag-platform/src/types/storage.ts"
+    ],
+    "ag-platform/src/components/storage/VersionHistory.tsx": [
+      "ag-platform/src/components/storage/FileUploader.tsx",
+      "ag-platform/src/types/storage.ts"
+    ],
+    "ag-platform/src/components/ui/EmptyState.tsx": [],
+    "ag-platform/src/components/ui/ErrorBoundary.tsx": [],
+    "ag-platform/src/components/ui/ErrorState.tsx": [],
+    "ag-platform/src/components/ui/index.ts": [
+      "ag-platform/src/components/ui/EmptyState.tsx",
+      "ag-platform/src/components/ui/ErrorBoundary.tsx",
+      "ag-platform/src/components/ui/ErrorState.tsx",
+      "ag-platform/src/components/ui/Skeleton.tsx"
+    ],
+    "ag-platform/src/components/ui/Skeleton.tsx": [],
+    "ag-platform/src/hooks/useActivityFeed.ts": [
+      "ag-platform/src/hooks/useLivePresence.ts"
+    ],
+    "ag-platform/src/hooks/useLivePresence.ts": [],
+    "ag-platform/src/hooks/useNotifications.ts": [
+      "ag-platform/src/hooks/useLivePresence.ts"
+    ],
+    "ag-platform/src/index.css": [],
+    "ag-platform/src/lib/billing.test.ts": [],
+    "ag-platform/src/lib/billing.ts": [],
+    "ag-platform/src/lib/storage/download.ts": [],
+    "ag-platform/src/lib/storage/upload.test.ts": [],
+    "ag-platform/src/lib/storage/upload.ts": [
+      "ag-platform/src/types/storage.ts"
+    ],
+    "ag-platform/src/lib/supabase.ts": [],
+    "ag-platform/src/main.tsx": [],
+    "ag-platform/src/server/aiRouter.ts": [],
+    "ag-platform/src/server/db.ts": [],
+    "ag-platform/src/server/migrations.sql": [],
+    "ag-platform/src/server/routes/cases.ts": [],
+    "ag-platform/src/server/routes/timesheets.ts": [],
+    "ag-platform/src/server/services/caseService.ts": []
+  }
+}

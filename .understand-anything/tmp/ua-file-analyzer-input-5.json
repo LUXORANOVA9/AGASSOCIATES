@@ -1,0 +1,31 @@
+{
+  "projectRoot": "/home/luxor9/AGASSOCIATES",
+  "batchFiles": [
+    {"path": "ag-platform/apps/mobile/app/(app)/activity.tsx", "language": "typescript", "sizeLines": 40, "fileCategory": "code"},
+    {"path": "ag-platform/apps/mobile/app/(app)/cases/[caseId].tsx", "language": "typescript", "sizeLines": 94, "fileCategory": "code"},
+    {"path": "ag-platform/apps/mobile/app/(app)/dashboard.tsx", "language": "typescript", "sizeLines": 76, "fileCategory": "code"},
+    {"path": "ag-platform/apps/mobile/app/(app)/debug/queue.tsx", "language": "typescript", "sizeLines": 52, "fileCategory": "code"},
+    {"path": "ag-platform/apps/mobile/app/(app)/scanner.tsx", "language": "typescript", "sizeLines": 108, "fileCategory": "code"},
+    {"path": "ag-platform/apps/mobile/app/(app)/settings.tsx", "language": "typescript", "sizeLines": 95, "fileCategory": "code"},
+    {"path": "ag-platform/apps/mobile/app/index.tsx", "language": "typescript", "sizeLines": 21, "fileCategory": "code"},
+    {"path": "ag-platform/apps/mobile/app/login.tsx", "language": "typescript", "sizeLines": 87, "fileCategory": "code"},
+    {"path": "ag-platform/apps/mobile/app/privacy.tsx", "language": "typescript", "sizeLines": 45, "fileCategory": "code"},
+    {"path": "ag-platform/apps/mobile/babel.config.js", "language": "javascript", "sizeLines": 10, "fileCategory": "code"},
+    {"path": "ag-platform/apps/mobile/components/activity/ActivityToggle.tsx", "language": "typescript", "sizeLines": 61, "fileCategory": "code"},
+    {"path": "ag-platform/apps/mobile/components/activity/RouteMap.tsx", "language": "typescript", "sizeLines": 70, "fileCategory": "code"},
+    {"path": "ag-platform/apps/mobile/components/cases/CaseDetailHeader.tsx", "language": "typescript", "sizeLines": 44, "fileCategory": "code"},
+    {"path": "ag-platform/apps/mobile/components/cases/CaseDocuments.tsx", "language": "typescript", "sizeLines": 42, "fileCategory": "code"},
+    {"path": "ag-platform/apps/mobile/components/cases/CaseListItem.tsx", "language": "typescript", "sizeLines": 66, "fileCategory": "code"},
+    {"path": "ag-platform/apps/mobile/components/scanner/CameraButton.tsx", "language": "typescript", "sizeLines": 37, "fileCategory": "code"},
+    {"path": "ag-platform/apps/mobile/components/scanner/UploadQueueList.tsx", "language": "typescript", "sizeLines": 59, "fileCategory": "code"},
+    {"path": "ag-platform/apps/mobile/components/status/StatusBoard.tsx", "language": "typescript", "sizeLines": 44, "fileCategory": "code"},
+    {"path": "ag-platform/apps/mobile/components/status/StatusButton.tsx", "language": "typescript", "sizeLines": 39, "fileCategory": "code"},
+    {"path": "ag-platform/apps/mobile/components/system/OfflineIndicator.tsx", "language": "typescript", "sizeLines": 31, "fileCategory": "code"},
+    {"path": "ag-platform/apps/mobile/components/ui/EmptyState.tsx", "language": "typescript", "sizeLines": 35, "fileCategory": "code"},
+    {"path": "ag-platform/apps/mobile/components/ui/ErrorBoundary.tsx", "language": "typescript", "sizeLines": 63, "fileCategory": "code"},
+    {"path": "ag-platform/apps/mobile/components/ui/ErrorState.tsx", "language": "typescript", "sizeLines": 35, "fileCategory": "code"},
+    {"path": "ag-platform/apps/mobile/components/ui/index.ts", "language": "typescript", "sizeLines": 4, "fileCategory": "code"},
+    {"path": "ag-platform/apps/mobile/components/ui/Skeleton.tsx", "language": "typescript", "sizeLines": 55, "fileCategory": "code"}
+  ],
+  "batchImportData": {}
+}

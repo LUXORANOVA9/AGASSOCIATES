@@ -1,0 +1,1394 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 25,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "ag-platform/apps/mobile/README.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 70,
+      "nonEmptyLines": 54,
+      "sections": [
+        {
+          "heading": "@ag/mobile — AG Associates Field App",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Phase 1 scope (this commit)",
+          "level": 2,
+          "line": 7
+        },
+        {
+          "heading": "Run locally",
+          "level": 2,
+          "line": 23
+        },
+        {
+          "heading": "Environment",
+          "level": 2,
+          "line": 41
+        },
+        {
+          "heading": "Architectural rules enforced",
+          "level": 2,
+          "line": 56
+        },
+        {
+          "heading": "What hasn't been verified yet",
+          "level": 2,
+          "line": 65
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 6
+      }
+    },
+    {
+      "path": "ag-platform/apps/mobile/services/cases.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 67,
+      "nonEmptyLines": 62,
+      "functions": [
+        {
+          "name": "applyStatusUpdate",
+          "startLine": 13,
+          "endLine": 56,
+          "params": [
+            "m"
+          ]
+        },
+        {
+          "name": "isAuthOrPermissionError",
+          "startLine": 58,
+          "endLine": 67,
+          "params": [
+            "msg"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "applyStatusUpdate",
+          "line": 13,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "applyStatusUpdate",
+          "callee": "supabase.from('case_audit_logs').insert",
+          "lineNumber": 29
+        },
+        {
+          "caller": "applyStatusUpdate",
+          "callee": "supabase.from",
+          "lineNumber": 29
+        },
+        {
+          "caller": "applyStatusUpdate",
+          "callee": "isAuthOrPermissionError",
+          "lineNumber": 39
+        },
+        {
+          "caller": "applyStatusUpdate",
+          "callee": "supabase\n        .from('cases')\n        .update({ status: m.payload.toStatus })\n        .eq",
+          "lineNumber": 44
+        },
+        {
+          "caller": "applyStatusUpdate",
+          "callee": "supabase\n        .from('cases')\n        .update",
+          "lineNumber": 44
+        },
+        {
+          "caller": "applyStatusUpdate",
+          "callee": "supabase\n        .from",
+          "lineNumber": 44
+        },
+        {
+          "caller": "applyStatusUpdate",
+          "callee": "isAuthOrPermissionError",
+          "lineNumber": 52
+        },
+        {
+          "caller": "isAuthOrPermissionError",
+          "callee": "msg.toLowerCase",
+          "lineNumber": 59
+        },
+        {
+          "caller": "isAuthOrPermissionError",
+          "callee": "lower.includes",
+          "lineNumber": 61
+        },
+        {
+          "caller": "isAuthOrPermissionError",
+          "callee": "lower.includes",
+          "lineNumber": 62
+        },
+        {
+          "caller": "isAuthOrPermissionError",
+          "callee": "lower.includes",
+          "lineNumber": 63
+        },
+        {
+          "caller": "isAuthOrPermissionError",
+          "callee": "lower.includes",
+          "lineNumber": 64
+        },
+        {
+          "caller": "isAuthOrPermissionError",
+          "callee": "lower.includes",
+          "lineNumber": 65
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 1,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "ag-platform/apps/mobile/services/devices.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 21,
+      "nonEmptyLines": 19,
+      "functions": [
+        {
+          "name": "upsertPushToken",
+          "startLine": 6,
+          "endLine": 13,
+          "params": [
+            "payload"
+          ]
+        },
+        {
+          "name": "revokePushToken",
+          "startLine": 15,
+          "endLine": 21,
+          "params": [
+            "deviceId"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "upsertPushToken",
+          "line": 6,
+          "isDefault": false
+        },
+        {
+          "name": "revokePushToken",
+          "line": 15,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "upsertPushToken",
+          "callee": "supabase\n        .from('device_push_tokens')\n        .upsert",
+          "lineNumber": 9
+        },
+        {
+          "caller": "upsertPushToken",
+          "callee": "supabase\n        .from",
+          "lineNumber": 9
+        },
+        {
+          "caller": "revokePushToken",
+          "callee": "supabase\n        .from('device_push_tokens')\n        .update({ revoked_at: new Date().toISOString() })\n        .eq",
+          "lineNumber": 16
+        },
+        {
+          "caller": "revokePushToken",
+          "callee": "supabase\n        .from('device_push_tokens')\n        .update",
+          "lineNumber": 16
+        },
+        {
+          "caller": "revokePushToken",
+          "callee": "supabase\n        .from",
+          "lineNumber": 16
+        },
+        {
+          "caller": "revokePushToken",
+          "callee": "new Date().toISOString",
+          "lineNumber": 18
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 2,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "ag-platform/apps/mobile/services/documents.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 130,
+      "nonEmptyLines": 119,
+      "functions": [
+        {
+          "name": "applyDocumentUpload",
+          "startLine": 17,
+          "endLine": 89,
+          "params": [
+            "m"
+          ]
+        },
+        {
+          "name": "uploadViaTus",
+          "startLine": 98,
+          "endLine": 130,
+          "params": [
+            "{\n    uri,\n    storagePath,\n    contentType,\n    accessToken,\n}"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "applyDocumentUpload",
+          "line": 17,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "applyDocumentUpload",
+          "callee": "FileSystem.getInfoAsync",
+          "lineNumber": 24
+        },
+        {
+          "caller": "applyDocumentUpload",
+          "callee": "supabase.auth.getSession",
+          "lineNumber": 34
+        },
+        {
+          "caller": "applyDocumentUpload",
+          "callee": "uploadViaTus",
+          "lineNumber": 47
+        },
+        {
+          "caller": "applyDocumentUpload",
+          "callee": "supabase.from('documents').insert",
+          "lineNumber": 74
+        },
+        {
+          "caller": "applyDocumentUpload",
+          "callee": "supabase.from",
+          "lineNumber": 74
+        },
+        {
+          "caller": "applyDocumentUpload",
+          "callee": "FileSystem.deleteAsync(localUri, { idempotent: true }).catch",
+          "lineNumber": 87
+        },
+        {
+          "caller": "applyDocumentUpload",
+          "callee": "FileSystem.deleteAsync",
+          "lineNumber": 87
+        },
+        {
+          "caller": "uploadViaTus",
+          "callee": "fetch",
+          "lineNumber": 106
+        },
+        {
+          "caller": "uploadViaTus",
+          "callee": "response.blob",
+          "lineNumber": 107
+        },
+        {
+          "caller": "uploadViaTus",
+          "callee": "reject",
+          "lineNumber": 125
+        },
+        {
+          "caller": "uploadViaTus",
+          "callee": "resolve",
+          "lineNumber": 126
+        },
+        {
+          "caller": "uploadViaTus",
+          "callee": "upload.start",
+          "lineNumber": 128
+        }
+      ],
+      "metrics": {
+        "importCount": 3,
+        "exportCount": 1,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "ag-platform/apps/mobile/services/field.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 18,
+      "nonEmptyLines": 17,
+      "functions": [
+        {
+          "name": "flushActivityBatch",
+          "startLine": 7,
+          "endLine": 18,
+          "params": [
+            "rows"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "flushActivityBatch",
+          "line": 7,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "flushActivityBatch",
+          "callee": "supabase.from('field_activity_logs').insert",
+          "lineNumber": 11
+        },
+        {
+          "caller": "flushActivityBatch",
+          "callee": "supabase.from",
+          "lineNumber": 11
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "ag-platform/apps/mobile/tailwind.config.js",
+      "language": "javascript",
+      "fileCategory": "code",
+      "totalLines": 26,
+      "nonEmptyLines": 26,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "ag-platform/apps/mobile/tsconfig.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 18,
+      "nonEmptyLines": 18,
+      "sections": [
+        {
+          "heading": "extends",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "compilerOptions",
+          "level": 1,
+          "line": 3
+        },
+        {
+          "heading": "include",
+          "level": 1,
+          "line": 12
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 3
+      }
+    },
+    {
+      "path": "ag-platform/ARCHITECTURE.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 129,
+      "nonEmptyLines": 107,
+      "sections": [
+        {
+          "heading": "Architecture Document: AG Associates LegalTech Platform",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "1. Core Data Model",
+          "level": 2,
+          "line": 3
+        },
+        {
+          "heading": "Entities & Relationships",
+          "level": 3,
+          "line": 7
+        },
+        {
+          "heading": "2. Case Lifecycle Architecture (State Machine)",
+          "level": 2,
+          "line": 31
+        },
+        {
+          "heading": "States",
+          "level": 3,
+          "line": 35
+        },
+        {
+          "heading": "Transitions & Triggers",
+          "level": 3,
+          "line": 48
+        },
+        {
+          "heading": "3. Tech Stack (India-Ready & Cost-Efficient)",
+          "level": 2,
+          "line": 60
+        },
+        {
+          "heading": "4. Multi-Tenancy Model",
+          "level": 2,
+          "line": 75
+        },
+        {
+          "heading": "5. Folder Structure (Turborepo Monorepo)",
+          "level": 2,
+          "line": 90
+        },
+        {
+          "heading": "6. Security Considerations",
+          "level": 2,
+          "line": 120
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 10
+      }
+    },
+    {
+      "path": "ag-platform/Dockerfile",
+      "language": "dockerfile",
+      "fileCategory": "infra",
+      "totalLines": 57,
+      "nonEmptyLines": 50,
+      "services": [
+        {
+          "name": "deps",
+          "image": "node:22-bookworm-slim",
+          "ports": [],
+          "startLine": 2,
+          "endLine": 12
+        },
+        {
+          "name": "builder",
+          "image": "node:22-bookworm-slim",
+          "ports": [],
+          "startLine": 13,
+          "endLine": 28
+        },
+        {
+          "name": "runner",
+          "image": "node:22-bookworm-slim",
+          "ports": [
+            3000
+          ],
+          "startLine": 29,
+          "endLine": 58
+        }
+      ],
+      "steps": [
+        {
+          "name": "FROM node:22-bookworm-slim AS deps",
+          "startLine": 2,
+          "endLine": 2
+        },
+        {
+          "name": "RUN apt-get update \\",
+          "startLine": 3,
+          "endLine": 3
+        },
+        {
+          "name": "WORKDIR /app",
+          "startLine": 7,
+          "endLine": 7
+        },
+        {
+          "name": "COPY package.json package-lock.json* ./",
+          "startLine": 8,
+          "endLine": 8
+        },
+        {
+          "name": "COPY packages ./packages",
+          "startLine": 9,
+          "endLine": 9
+        },
+        {
+          "name": "RUN npm install --no-audit --no-fund",
+          "startLine": 10,
+          "endLine": 10
+        },
+        {
+          "name": "FROM node:22-bookworm-slim AS builder",
+          "startLine": 13,
+          "endLine": 13
+        },
+        {
+          "name": "WORKDIR /app",
+          "startLine": 14,
+          "endLine": 14
+        },
+        {
+          "name": "ARG VITE_SUPABASE_URL",
+          "startLine": 17,
+          "endLine": 17
+        },
+        {
+          "name": "ARG VITE_SUPABASE_ANON_KEY",
+          "startLine": 18,
+          "endLine": 18
+        },
+        {
+          "name": "ARG VITE_API_BASE_URL=/api",
+          "startLine": 19,
+          "endLine": 19
+        },
+        {
+          "name": "ENV VITE_SUPABASE_URL=$VITE_SUPABASE_URL \\",
+          "startLine": 20,
+          "endLine": 20
+        },
+        {
+          "name": "COPY --from=deps /app/node_modules ./node_modules",
+          "startLine": 23,
+          "endLine": 23
+        },
+        {
+          "name": "COPY --from=deps /app/packages ./packages",
+          "startLine": 24,
+          "endLine": 24
+        },
+        {
+          "name": "COPY . .",
+          "startLine": 25,
+          "endLine": 25
+        },
+        {
+          "name": "RUN npm run build",
+          "startLine": 26,
+          "endLine": 26
+        },
+        {
+          "name": "FROM node:22-bookworm-slim AS runner",
+          "startLine": 29,
+          "endLine": 29
+        },
+        {
+          "name": "RUN apt-get update \\",
+          "startLine": 30,
+          "endLine": 30
+        },
+        {
+          "name": "WORKDIR /app",
+          "startLine": 34,
+          "endLine": 34
+        },
+        {
+          "name": "ENV NODE_ENV=production \\",
+          "startLine": 35,
+          "endLine": 35
+        },
+        {
+          "name": "RUN addgroup --system --gid 1001 nodejs \\",
+          "startLine": 38,
+          "endLine": 38
+        },
+        {
+          "name": "COPY --from=builder --chown=reactjs:nodejs /app/dist ./dist",
+          "startLine": 43,
+          "endLine": 43
+        },
+        {
+          "name": "COPY --from=builder --chown=reactjs:nodejs /app/src ./src",
+          "startLine": 44,
+          "endLine": 44
+        },
+        {
+          "name": "COPY --from=builder --chown=reactjs:nodejs /app/packages ./packag",
+          "startLine": 45,
+          "endLine": 45
+        },
+        {
+          "name": "COPY --from=builder --chown=reactjs:nodejs /app/server.ts ./serve",
+          "startLine": 46,
+          "endLine": 46
+        },
+        {
+          "name": "COPY --from=builder --chown=reactjs:nodejs /app/tsconfig.json ./t",
+          "startLine": 47,
+          "endLine": 47
+        },
+        {
+          "name": "COPY --from=builder --chown=reactjs:nodejs /app/package.json ./pa",
+          "startLine": 48,
+          "endLine": 48
+        },
+        {
+          "name": "COPY --from=builder --chown=reactjs:nodejs /app/node_modules ./no",
+          "startLine": 49,
+          "endLine": 49
+        },
+        {
+          "name": "USER reactjs",
+          "startLine": 51,
+          "endLine": 51
+        },
+        {
+          "name": "EXPOSE 3000",
+          "startLine": 52,
+          "endLine": 52
+        },
+        {
+          "name": "HEALTHCHECK --interval=30s --timeout=5s --start-period=20s --retries=3 \\",
+          "startLine": 54,
+          "endLine": 54
+        },
+        {
+          "name": "CMD [\"npx\", \"tsx\", \"server.ts\"]",
+          "startLine": 57,
+          "endLine": 57
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "serviceCount": 3,
+        "stepCount": 32
+      }
+    },
+    {
+      "path": "ag-platform/docs/AUTH_ARCHITECTURE.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 66,
+      "nonEmptyLines": 47,
+      "sections": [
+        {
+          "heading": "AG Associates - Authentication & Authorization Architecture",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "1. Frictionless Authentication (Passwordless Magic Links)",
+          "level": 2,
+          "line": 5
+        },
+        {
+          "heading": "The Flow",
+          "level": 3,
+          "line": 9
+        },
+        {
+          "heading": "2. JWT Custom Claims Injection",
+          "level": 2,
+          "line": 18
+        },
+        {
+          "heading": "Supabase Custom Access Token Hooks",
+          "level": 3,
+          "line": 22
+        },
+        {
+          "heading": "3. PostgreSQL Row-Level Security (RLS)",
+          "level": 2,
+          "line": 45
+        },
+        {
+          "heading": "Implementation",
+          "level": 3,
+          "line": 49
+        },
+        {
+          "heading": "Why this architecture?",
+          "level": 3,
+          "line": 62
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 8
+      }
+    },
+    {
+      "path": "ag-platform/index.html",
+      "language": "html",
+      "fileCategory": "markup",
+      "totalLines": 12,
+      "nonEmptyLines": 12,
+      "metrics": {}
+    },
+    {
+      "path": "ag-platform/package.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 62,
+      "nonEmptyLines": 62,
+      "sections": [
+        {
+          "heading": "name",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "version",
+          "level": 1,
+          "line": 3
+        },
+        {
+          "heading": "private",
+          "level": 1,
+          "line": 4
+        },
+        {
+          "heading": "type",
+          "level": 1,
+          "line": 5
+        },
+        {
+          "heading": "packageManager",
+          "level": 1,
+          "line": 6
+        },
+        {
+          "heading": "workspaces",
+          "level": 1,
+          "line": 7
+        },
+        {
+          "heading": "scripts",
+          "level": 1,
+          "line": 12
+        },
+        {
+          "heading": "dependencies",
+          "level": 1,
+          "line": 21
+        },
+        {
+          "heading": "devDependencies",
+          "level": 1,
+          "line": 45
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 9
+      }
+    },
+    {
+      "path": "ag-platform/packages/ai/package.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 17,
+      "nonEmptyLines": 17,
+      "sections": [
+        {
+          "heading": "name",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "version",
+          "level": 1,
+          "line": 3
+        },
+        {
+          "heading": "private",
+          "level": 1,
+          "line": 4
+        },
+        {
+          "heading": "type",
+          "level": 1,
+          "line": 5
+        },
+        {
+          "heading": "main",
+          "level": 1,
+          "line": 6
+        },
+        {
+          "heading": "exports",
+          "level": 1,
+          "line": 7
+        },
+        {
+          "heading": "dependencies",
+          "level": 1,
+          "line": 8
+        },
+        {
+          "heading": "devDependencies",
+          "level": 1,
+          "line": 14
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 8
+      }
+    },
+    {
+      "path": "ag-platform/packages/ai/src/gemini.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 38,
+      "nonEmptyLines": 33,
+      "functions": [
+        {
+          "name": "createGeminiModel",
+          "startLine": 4,
+          "endLine": 6,
+          "params": [
+            "modelId"
+          ]
+        },
+        {
+          "name": "createEmbeddingModel",
+          "startLine": 8,
+          "endLine": 10,
+          "params": [
+            "modelId"
+          ]
+        },
+        {
+          "name": "getSupabaseClient",
+          "startLine": 14,
+          "endLine": 25,
+          "params": []
+        },
+        {
+          "name": "checkOrgTokenQuota",
+          "startLine": 27,
+          "endLine": 38,
+          "params": [
+            "orgId",
+            "supabase"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "createGeminiModel",
+          "line": 4,
+          "isDefault": false
+        },
+        {
+          "name": "createEmbeddingModel",
+          "line": 8,
+          "isDefault": false
+        },
+        {
+          "name": "getSupabaseClient",
+          "line": 14,
+          "isDefault": false
+        },
+        {
+          "name": "checkOrgTokenQuota",
+          "line": 27,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "createGeminiModel",
+          "callee": "google",
+          "lineNumber": 5
+        },
+        {
+          "caller": "createEmbeddingModel",
+          "callee": "google.textEmbeddingModel",
+          "lineNumber": 9
+        },
+        {
+          "caller": "getSupabaseClient",
+          "callee": "createClient",
+          "lineNumber": 22
+        },
+        {
+          "caller": "checkOrgTokenQuota",
+          "callee": "supabase\n    .from('organizations')\n    .select('ai_tokens_used, ai_tokens_limit')\n    .eq('id', orgId)\n    .single",
+          "lineNumber": 29
+        },
+        {
+          "caller": "checkOrgTokenQuota",
+          "callee": "supabase\n    .from('organizations')\n    .select('ai_tokens_used, ai_tokens_limit')\n    .eq",
+          "lineNumber": 29
+        },
+        {
+          "caller": "checkOrgTokenQuota",
+          "callee": "supabase\n    .from('organizations')\n    .select",
+          "lineNumber": 29
+        },
+        {
+          "caller": "checkOrgTokenQuota",
+          "callee": "supabase\n    .from",
+          "lineNumber": 29
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 4,
+        "functionCount": 4,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "ag-platform/packages/ai/src/index.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 2,
+      "nonEmptyLines": 2,
+      "exports": [
+        {
+          "name": "createGeminiModel",
+          "line": 1,
+          "isDefault": false
+        },
+        {
+          "name": "createEmbeddingModel",
+          "line": 1,
+          "isDefault": false
+        },
+        {
+          "name": "getSupabaseClient",
+          "line": 1,
+          "isDefault": false
+        },
+        {
+          "name": "checkOrgTokenQuota",
+          "line": 1,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 4,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "ag-platform/packages/ai/src/prompts/legal.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 13,
+      "nonEmptyLines": 10,
+      "exports": [
+        {
+          "name": "BRIEF_GENERATOR_SYSTEM_PROMPT",
+          "line": 1,
+          "isDefault": false
+        },
+        {
+          "name": "LEGAL_VETTING_SYSTEM_PROMPT",
+          "line": 9,
+          "isDefault": false
+        },
+        {
+          "name": "INVOICE_LINE_ITEM_SYSTEM_PROMPT",
+          "line": 11,
+          "isDefault": false
+        },
+        {
+          "name": "DOCUMENT_SUMMARY_SYSTEM_PROMPT",
+          "line": 13,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 4,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "ag-platform/packages/ai/tsconfig.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 11,
+      "nonEmptyLines": 11,
+      "sections": [
+        {
+          "heading": "compilerOptions",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "include",
+          "level": 1,
+          "line": 10
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 2
+      }
+    },
+    {
+      "path": "ag-platform/packages/db/migrations/001_ag_initial_schema.sql",
+      "language": "sql",
+      "fileCategory": "data",
+      "totalLines": 141,
+      "nonEmptyLines": 124,
+      "definitions": [
+        {
+          "name": "banks",
+          "kind": "table",
+          "fields": [
+            "id",
+            "name",
+            "short_code",
+            "type",
+            "billing_contact",
+            "advance_balance",
+            "created_at"
+          ],
+          "startLine": 48,
+          "endLine": 56
+        },
+        {
+          "name": "organizations",
+          "kind": "table",
+          "fields": [
+            "id",
+            "name",
+            "created_at"
+          ],
+          "startLine": 59,
+          "endLine": 63
+        },
+        {
+          "name": "profiles",
+          "kind": "table",
+          "fields": [
+            "id",
+            "user_id",
+            "org_id",
+            "bank_id",
+            "full_name",
+            "phone",
+            "role",
+            "created_at"
+          ],
+          "startLine": 66,
+          "endLine": 75
+        },
+        {
+          "name": "cases",
+          "kind": "table",
+          "fields": [
+            "id",
+            "case_number",
+            "org_id",
+            "bank_id",
+            "case_type",
+            "status",
+            "borrower_name",
+            "loan_amount",
+            "received_date",
+            "sla_deadline",
+            "assigned_executive_id",
+            "disbursement_total",
+            "professional_fee",
+            "created_at",
+            "updated_at"
+          ],
+          "startLine": 78,
+          "endLine": 94
+        },
+        {
+          "name": "disbursements",
+          "kind": "table",
+          "fields": [
+            "id",
+            "case_id",
+            "type",
+            "amount",
+            "paid_date",
+            "is_reimbursed",
+            "created_at"
+          ],
+          "startLine": 97,
+          "endLine": 105
+        },
+        {
+          "name": "case_timeline",
+          "kind": "table",
+          "fields": [
+            "id",
+            "case_id",
+            "status_from",
+            "status_to",
+            "notes",
+            "changed_by",
+            "created_at"
+          ],
+          "startLine": 108,
+          "endLine": 116
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "definitionCount": 6
+      }
+    },
+    {
+      "path": "ag-platform/packages/db/migrations/002_pgvector_templates.sql",
+      "language": "sql",
+      "fileCategory": "data",
+      "totalLines": 61,
+      "nonEmptyLines": 55,
+      "definitions": [
+        {
+          "name": "legal_templates",
+          "kind": "table",
+          "fields": [
+            "id",
+            "title",
+            "content",
+            "template_type",
+            "jurisdiction",
+            "language",
+            "embedding",
+            "created_at",
+            "updated_at"
+          ],
+          "startLine": 8,
+          "endLine": 18
+        },
+        {
+          "name": "legal_templates_embedding_idx",
+          "kind": "index",
+          "fields": [],
+          "startLine": 20,
+          "endLine": 20
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "definitionCount": 2
+      }
+    },
+    {
+      "path": "ag-platform/packages/db/package.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 16,
+      "nonEmptyLines": 16,
+      "sections": [
+        {
+          "heading": "name",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "version",
+          "level": 1,
+          "line": 3
+        },
+        {
+          "heading": "private",
+          "level": 1,
+          "line": 4
+        },
+        {
+          "heading": "type",
+          "level": 1,
+          "line": 5
+        },
+        {
+          "heading": "main",
+          "level": 1,
+          "line": 6
+        },
+        {
+          "heading": "exports",
+          "level": 1,
+          "line": 7
+        },
+        {
+          "heading": "dependencies",
+          "level": 1,
+          "line": 8
+        },
+        {
+          "heading": "devDependencies",
+          "level": 1,
+          "line": 12
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 8
+      }
+    },
+    {
+      "path": "ag-platform/packages/db/src/index.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 22,
+      "nonEmptyLines": 18,
+      "exports": [
+        {
+          "name": "pool",
+          "line": 15,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "ag-platform/packages/db/tsconfig.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 11,
+      "nonEmptyLines": 11,
+      "sections": [
+        {
+          "heading": "compilerOptions",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "include",
+          "level": 1,
+          "line": 10
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 2
+      }
+    },
+    {
+      "path": "ag-platform/packages/types/package.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 10,
+      "nonEmptyLines": 10,
+      "sections": [
+        {
+          "heading": "name",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "version",
+          "level": 1,
+          "line": 3
+        },
+        {
+          "heading": "private",
+          "level": 1,
+          "line": 4
+        },
+        {
+          "heading": "main",
+          "level": 1,
+          "line": 5
+        },
+        {
+          "heading": "types",
+          "level": 1,
+          "line": 6
+        },
+        {
+          "heading": "exports",
+          "level": 1,
+          "line": 7
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 6
+      }
+    },
+    {
+      "path": "ag-platform/packages/types/src/domain.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 88,
+      "nonEmptyLines": 81,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "ag-platform/packages/types/src/field-app.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 128,
+      "nonEmptyLines": 116,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    }
+  ]
+}

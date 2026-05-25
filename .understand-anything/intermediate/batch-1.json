@@ -1,0 +1,333 @@
+{
+  "nodes": [
+    {
+      "id": "file:ag-associates-ai/backend/agents/aisha.py",
+      "type": "file",
+      "name": "aisha.py",
+      "filePath": "ag-associates-ai/backend/agents/aisha.py",
+      "summary": "Intake agent (Aisha) that extracts structured rental agreement fields from raw user messages using an LLM chain with LangChain, returning parsed JSON.",
+      "tags": ["agent", "intake", "llm", "extraction", "langchain"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:ag-associates-ai/backend/agents/aisha.py:aisha_intake_node",
+      "type": "function",
+      "name": "aisha_intake_node",
+      "filePath": "ag-associates-ai/backend/agents/aisha.py",
+      "lineRange": [50, 107],
+      "summary": "Extracts tenant, landlord, rent, address, dates, deposit, and stamp duty fields from raw input via a ChatOpenAI LLM with JSON output parsing.",
+      "tags": ["agent", "intake", "llm-call", "extraction"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:ag-associates-ai/backend/agents/auditor.py",
+      "type": "file",
+      "name": "auditor.py",
+      "filePath": "ag-associates-ai/backend/agents/auditor.py",
+      "summary": "Quality assurance agent that scores drafted rental agreements against extracted requirements, flagging discrepancies and missing fields.",
+      "tags": ["agent", "qa", "audit", "llm", "validation"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:ag-associates-ai/backend/agents/auditor.py:auditor_node",
+      "type": "function",
+      "name": "auditor_node",
+      "filePath": "ag-associates-ai/backend/agents/auditor.py",
+      "lineRange": [47, 116],
+      "summary": "Compares drafted document against extracted JSON via LLM, producing a pass/fail score (threshold 85) with detailed issue list and feedback.",
+      "tags": ["agent", "audit", "llm-call", "validation"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:ag-associates-ai/backend/agents/bouncer.py",
+      "type": "file",
+      "name": "bouncer.py",
+      "filePath": "ag-associates-ai/backend/agents/bouncer.py",
+      "summary": "Mathematical validation agent that verifies stamp duty paid equals ~0.3% of rent over the agreement duration within ₹50 tolerance.",
+      "tags": ["agent", "validation", "math", "stamp-duty", "calculation"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:ag-associates-ai/backend/agents/bouncer.py:_extract_numeric",
+      "type": "function",
+      "name": "_extract_numeric",
+      "filePath": "ag-associates-ai/backend/agents/bouncer.py",
+      "lineRange": [13, 21],
+      "summary": "Extracts a float from mixed-format strings like '₹25,000 per month' by stripping non-digit characters.",
+      "tags": ["utility", "parsing", "numeric"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:ag-associates-ai/backend/agents/bouncer.py:_duration_to_months",
+      "type": "function",
+      "name": "_duration_to_months",
+      "filePath": "ag-associates-ai/backend/agents/bouncer.py",
+      "lineRange": [24, 49],
+      "summary": "Parses duration strings (e.g. '1.5 years', '11 months') into a normalized integer month count using regex.",
+      "tags": ["utility", "parsing", "duration", "regex"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:ag-associates-ai/backend/agents/bouncer.py:bouncer_node",
+      "type": "function",
+      "name": "bouncer_node",
+      "filePath": "ag-associates-ai/backend/agents/bouncer.py",
+      "lineRange": [53, 107],
+      "summary": "Computes expected stamp duty (0.3% of rent × months), compares to paid amount within ₹50 tolerance, and records pass/fail.",
+      "tags": ["agent", "validation", "math", "stamp-duty"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:ag-associates-ai/backend/agents/db.py",
+      "type": "file",
+      "name": "db.py",
+      "filePath": "ag-associates-ai/backend/agents/db.py",
+      "summary": "Database helper module providing pgvector-backed PostgreSQL connection, embedding generation via SentenceTransformer, and similarity search for legal templates.",
+      "tags": ["database", "pgvector", "embedding", "rag", "similarity-search"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:ag-associates-ai/backend/agents/db.py:get_db_connection",
+      "type": "function",
+      "name": "get_db_connection",
+      "filePath": "ag-associates-ai/backend/agents/db.py",
+      "lineRange": [15, 19],
+      "summary": "Creates a pgvector-registered psycopg2 connection with RealDictCursor for the caller to close.",
+      "tags": ["database", "connection", "pgvector"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:ag-associates-ai/backend/agents/db.py:_get_embedding_model",
+      "type": "function",
+      "name": "_get_embedding_model",
+      "filePath": "ag-associates-ai/backend/agents/db.py",
+      "lineRange": [28, 40],
+      "summary": "Lazy-loads and caches a SentenceTransformer model, returning None if the package is unavailable to gracefully disable RAG.",
+      "tags": ["utility", "embedding", "lazy-loading", "model"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:ag-associates-ai/backend/agents/db.py:generate_embedding",
+      "type": "function",
+      "name": "generate_embedding",
+      "filePath": "ag-associates-ai/backend/agents/db.py",
+      "lineRange": [43, 49],
+      "summary": "Generates a vector embedding for input text via SentenceTransformer, falling back to a zero vector if the model is unavailable.",
+      "tags": ["utility", "embedding", "vector"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:ag-associates-ai/backend/agents/db.py:similarity_search",
+      "type": "function",
+      "name": "similarity_search",
+      "filePath": "ag-associates-ai/backend/agents/db.py",
+      "lineRange": [52, 76],
+      "summary": "Performs pgvector cosine-similarity search on legal_templates table, returning top-k matching rows with similarity scores.",
+      "tags": ["database", "search", "rag", "vector", "similarity"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "service:ag-associates-ai/backend/Dockerfile",
+      "type": "service",
+      "name": "Dockerfile",
+      "filePath": "ag-associates-ai/backend/Dockerfile",
+      "summary": "Multi-stage Docker build producing a minimal Python 3.11 runtime image with Playwright for RPA automation, uvicorn server, and health checks.",
+      "tags": ["containerization", "infrastructure", "deployment", "docker", "multi-stage"],
+      "complexity": "moderate",
+      "languageNotes": "Multi-stage build separates build-time pip/Python deps and Playwright browser download from the slim runtime image."
+    },
+    {
+      "id": "service:ag-associates-ai/backend/Dockerfile:builder",
+      "type": "service",
+      "name": "builder",
+      "summary": "Build stage that installs Python dependencies and pre-downloads Playwright Chromium for RPA portal automation.",
+      "tags": ["build-stage", "dependencies", "playwright", "containerization"],
+      "complexity": "simple"
+    },
+    {
+      "id": "service:ag-associates-ai/backend/Dockerfile:python",
+      "type": "service",
+      "name": "python",
+      "summary": "Runtime stage with non-root user, Playwright browser support, and uvicorn serving the FastAPI application on port 8000 with health checks.",
+      "tags": ["runtime", "uvicorn", "fastapi", "containerization"],
+      "complexity": "moderate"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:ag-associates-ai/backend/agents/aisha.py",
+      "target": "function:ag-associates-ai/backend/agents/aisha.py:aisha_intake_node",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-associates-ai/backend/agents/aisha.py",
+      "target": "function:ag-associates-ai/backend/agents/aisha.py:aisha_intake_node",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:ag-associates-ai/backend/agents/auditor.py",
+      "target": "function:ag-associates-ai/backend/agents/auditor.py:auditor_node",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-associates-ai/backend/agents/auditor.py",
+      "target": "function:ag-associates-ai/backend/agents/auditor.py:auditor_node",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:ag-associates-ai/backend/agents/bouncer.py",
+      "target": "function:ag-associates-ai/backend/agents/bouncer.py:_extract_numeric",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-associates-ai/backend/agents/bouncer.py",
+      "target": "function:ag-associates-ai/backend/agents/bouncer.py:_extract_numeric",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:ag-associates-ai/backend/agents/bouncer.py",
+      "target": "function:ag-associates-ai/backend/agents/bouncer.py:_duration_to_months",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-associates-ai/backend/agents/bouncer.py",
+      "target": "function:ag-associates-ai/backend/agents/bouncer.py:_duration_to_months",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:ag-associates-ai/backend/agents/bouncer.py",
+      "target": "function:ag-associates-ai/backend/agents/bouncer.py:bouncer_node",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-associates-ai/backend/agents/bouncer.py",
+      "target": "function:ag-associates-ai/backend/agents/bouncer.py:bouncer_node",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:ag-associates-ai/backend/agents/db.py",
+      "target": "function:ag-associates-ai/backend/agents/db.py:get_db_connection",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-associates-ai/backend/agents/db.py",
+      "target": "function:ag-associates-ai/backend/agents/db.py:get_db_connection",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:ag-associates-ai/backend/agents/db.py",
+      "target": "function:ag-associates-ai/backend/agents/db.py:_get_embedding_model",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-associates-ai/backend/agents/db.py",
+      "target": "function:ag-associates-ai/backend/agents/db.py:_get_embedding_model",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:ag-associates-ai/backend/agents/db.py",
+      "target": "function:ag-associates-ai/backend/agents/db.py:generate_embedding",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-associates-ai/backend/agents/db.py",
+      "target": "function:ag-associates-ai/backend/agents/db.py:generate_embedding",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:ag-associates-ai/backend/agents/db.py",
+      "target": "function:ag-associates-ai/backend/agents/db.py:similarity_search",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-associates-ai/backend/agents/db.py",
+      "target": "function:ag-associates-ai/backend/agents/db.py:similarity_search",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "service:ag-associates-ai/backend/Dockerfile",
+      "target": "service:ag-associates-ai/backend/Dockerfile:builder",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "service:ag-associates-ai/backend/Dockerfile",
+      "target": "service:ag-associates-ai/backend/Dockerfile:python",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "service:ag-associates-ai/backend/Dockerfile:python",
+      "target": "service:ag-associates-ai/backend/Dockerfile:builder",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "service:ag-associates-ai/backend/Dockerfile",
+      "target": "file:ag-associates-ai/backend/agents/aisha.py",
+      "type": "deploys",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "service:ag-associates-ai/backend/Dockerfile",
+      "target": "file:ag-associates-ai/backend/agents/auditor.py",
+      "type": "deploys",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "service:ag-associates-ai/backend/Dockerfile",
+      "target": "file:ag-associates-ai/backend/agents/bouncer.py",
+      "type": "deploys",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "service:ag-associates-ai/backend/Dockerfile",
+      "target": "file:ag-associates-ai/backend/agents/db.py",
+      "type": "deploys",
+      "direction": "forward",
+      "weight": 0.7
+    }
+  ]
+}

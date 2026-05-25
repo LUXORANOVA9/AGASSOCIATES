@@ -1,0 +1,407 @@
+{
+  "nodes": [
+    {
+      "id": "config:.bolt/mcp.json",
+      "type": "config",
+      "name": "mcp.json",
+      "filePath": ".bolt/mcp.json",
+      "summary": "Bolt MCP server configuration enabling the shaders integration for AI-assisted development.",
+      "tags": ["configuration", "development", "mcp"],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:.changeset/config.json",
+      "type": "config",
+      "name": "config.json",
+      "filePath": ".changeset/config.json",
+      "summary": "Changesets versioning configuration with restricted access, main branch base, and conventional commit changelog generation.",
+      "tags": ["configuration", "versioning", "build-system"],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:.devcontainer/devcontainer.json",
+      "type": "config",
+      "name": "devcontainer.json",
+      "filePath": ".devcontainer/devcontainer.json",
+      "summary": "Development container definition using the universal devcontainers image with no additional features.",
+      "tags": ["configuration", "development", "containerization"],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:.env.example",
+      "type": "config",
+      "name": ".env.example",
+      "filePath": ".env.example",
+      "summary": "Environment variables template for production deployment covering domain, PostgreSQL, Redis, LLM providers (Groq/Gemini), Supabase auth, email intake (Resend/IMAP), Telegram OTP bot, n8n WhatsApp orchestration, NeSL e-filing, IGR Maharashtra portal, and GRAS challan portal.",
+      "tags": ["configuration", "deployment", "environment", "secrets"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "pipeline:.github/actions/setup/action.yml",
+      "type": "pipeline",
+      "name": "action.yml",
+      "filePath": ".github/actions/setup/action.yml",
+      "summary": "Reusable GitHub Actions composite action for setting up the CI environment. File does not exist on disk.",
+      "tags": ["ci-cd", "infrastructure", "setup"],
+      "complexity": "simple"
+    },
+    {
+      "id": "pipeline:.github/workflows/ci.yml",
+      "type": "pipeline",
+      "name": "ci.yml",
+      "filePath": ".github/workflows/ci.yml",
+      "summary": "GitHub Actions CI workflow running pre-commit hooks, Python backend linting (ruff), Python tests (pytest), Turborepo platform checks (lint, type-check, test, build), Next.js AI dashboard build, and commitlint on pull requests.",
+      "tags": ["ci-cd", "linting", "testing", "build"],
+      "complexity": "complex"
+    },
+    {
+      "id": "pipeline:.github/workflows/codeql.yml",
+      "type": "pipeline",
+      "name": "codeql.yml",
+      "filePath": ".github/workflows/codeql.yml",
+      "summary": "GitHub Advanced Security CodeQL analysis workflow scanning JavaScript/TypeScript and Python codebases on push, pull request, and weekly schedule.",
+      "tags": ["ci-cd", "security", "code-analysis"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "pipeline:.github/workflows/deploy.yml",
+      "type": "pipeline",
+      "name": "deploy.yml",
+      "filePath": ".github/workflows/deploy.yml",
+      "summary": "Manual-deploy workflow for self-hosted runner that pulls latest code, creates a production .env with auto-generated secrets, builds Docker images, deploys the full stack, and runs health checks.",
+      "tags": ["ci-cd", "deployment", "docker", "production"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "pipeline:.github/workflows/main.yml",
+      "type": "pipeline",
+      "name": "main.yml",
+      "filePath": ".github/workflows/main.yml",
+      "summary": "Primary CI workflow running pre-commit hooks, Python backend validation (ruff), Turborepo platform checks, and Next.js frontend build on pushes and pull requests to main.",
+      "tags": ["ci-cd", "linting", "testing", "build"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "pipeline:.github/workflows/nextjs.yml",
+      "type": "pipeline",
+      "name": "nextjs.yml",
+      "filePath": ".github/workflows/nextjs.yml",
+      "summary": "GitHub Pages deployment workflow for the Next.js AI dashboard with package manager detection, cache restoration, static export build, and artifact upload.",
+      "tags": ["ci-cd", "deployment", "nextjs", "github-pages"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "pipeline:.github/workflows/preview.yml",
+      "type": "pipeline",
+      "name": "preview.yml",
+      "filePath": ".github/workflows/preview.yml",
+      "summary": "PR preview deployment workflow deploying the platform SPA and AI dashboard to Cloudflare Pages with automatic PR comment linking.",
+      "tags": ["ci-cd", "preview", "cloudflare", "pull-request"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "pipeline:.github/workflows/release.yml",
+      "type": "pipeline",
+      "name": "release.yml",
+      "filePath": ".github/workflows/release.yml",
+      "summary": "Changesets-based release workflow creating version bump PRs and GitHub releases on push to main.",
+      "tags": ["ci-cd", "release", "versioning", "changesets"],
+      "complexity": "simple"
+    },
+    {
+      "id": "pipeline:.github/workflows/test-checkout.yml",
+      "type": "pipeline",
+      "name": "test-checkout.yml",
+      "filePath": ".github/workflows/test-checkout.yml",
+      "summary": "Sandbox workflow for verifying the self-hosted runner can checkout the repository correctly.",
+      "tags": ["ci-cd", "testing", "infrastructure"],
+      "complexity": "simple"
+    },
+    {
+      "id": "pipeline:.github/workflows/test-permissions.yml",
+      "type": "pipeline",
+      "name": "test-permissions.yml",
+      "filePath": ".github/workflows/test-permissions.yml",
+      "summary": "Sandbox workflow testing write-all permissions on the self-hosted runner.",
+      "tags": ["ci-cd", "testing", "infrastructure", "security"],
+      "complexity": "simple"
+    },
+    {
+      "id": "pipeline:.github/workflows/test-simple.yml",
+      "type": "pipeline",
+      "name": "test-simple.yml",
+      "filePath": ".github/workflows/test-simple.yml",
+      "summary": "Minimal sandbox workflow printing Hello World on ubuntu-latest to validate basic CI functionality.",
+      "tags": ["ci-cd", "testing", "infrastructure"],
+      "complexity": "simple"
+    },
+    {
+      "id": "pipeline:.github/workflows/test-runner.yml",
+      "type": "pipeline",
+      "name": "test-runner.yml",
+      "filePath": ".github/workflows/test-runner.yml",
+      "summary": "Sandbox workflow testing the self-hosted runner connectivity by printing hostname.",
+      "tags": ["ci-cd", "testing", "infrastructure"],
+      "complexity": "simple"
+    },
+    {
+      "id": "pipeline:.github/workflows/test.yml",
+      "type": "pipeline",
+      "name": "test.yml",
+      "filePath": ".github/workflows/test.yml",
+      "summary": "Test workflow file. Does not exist on disk.",
+      "tags": ["ci-cd", "testing"],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:.lintstagedrc.json",
+      "type": "config",
+      "name": ".lintstagedrc.json",
+      "filePath": ".lintstagedrc.json",
+      "summary": "lint-staged configuration running ESLint and Prettier on TypeScript/JavaScript files, Ruff on Python files, and Prettier on JSON/YAML/Markdown files.",
+      "tags": ["configuration", "linting", "formatting", "pre-commit"],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:.pre-commit-config.yaml",
+      "type": "config",
+      "name": ".pre-commit-config.yaml",
+      "filePath": ".pre-commit-config.yaml",
+      "summary": "Pre-commit hook configuration with trailing-whitespace, end-of-file-fixer, YAML validation, large file detection, private key detection (pre-commit-hooks), Ruff linting/formatting (Python), and ESLint (TypeScript/JavaScript).",
+      "tags": ["configuration", "linting", "formatting", "pre-commit", "quality"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "config:CNAME",
+      "type": "config",
+      "name": "CNAME",
+      "filePath": "CNAME",
+      "summary": "Custom domain name record pointing to advadiityagade.com for the production deployment.",
+      "tags": ["configuration", "dns", "domain"],
+      "complexity": "simple"
+    },
+    {
+      "id": "service:Caddyfile",
+      "type": "service",
+      "name": "Caddyfile",
+      "filePath": "Caddyfile",
+      "summary": "Caddy reverse proxy configuration routing six subdomains (app, dashboard, api, intake, n8n, docs) to Docker containers with health checks, gzip encoding, basic auth for n8n, and static file serving for docs.",
+      "tags": ["infrastructure", "reverse-proxy", "routing", "containerization"],
+      "complexity": "moderate",
+      "languageNotes": "Caddyfile using on-the-fly TLS via ACME with trusted proxy detection and per-service health monitoring."
+    },
+    {
+      "id": "document:CONTEXT.md",
+      "type": "document",
+      "name": "CONTEXT.md",
+      "filePath": "CONTEXT.md",
+      "summary": "Domain glossary documenting core legal-tech terms (NOI, Challan, GRAS, IGR, NeSL), agent workflows (Email Intake, Doc Verifier, Auto-Comms), deployment architecture (Caddy routes, CI/CD), governance (commit convention, branch strategy, RBAC roles), and error escalation patterns.",
+      "tags": ["documentation", "domain", "glossary", "architecture"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:CONTRIBUTING.md",
+      "type": "document",
+      "name": "CONTRIBUTING.md",
+      "filePath": "CONTRIBUTING.md",
+      "summary": "Contributing guide covering development setup, code standards (commit messages, branch naming), Python and TypeScript conventions, PR submission checklist, issue reporting procedures, and security guidelines.",
+      "tags": ["documentation", "development", "contributing", "standards"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:CLAUDE.md",
+      "type": "document",
+      "name": "CLAUDE.md",
+      "filePath": "CLAUDE.md",
+      "summary": "AI agent instructions for the AG Associates repository detailing repository layout (ag-associates-ai and ag-platform), common commands, architecture overview, key conventions, git workflow, CI/CD, and project policies.",
+      "tags": ["documentation", "agent", "ai", "development", "architecture"],
+      "complexity": "complex"
+    },
+    {
+      "id": "document:CULTURE.md",
+      "type": "document",
+      "name": "CULTURE.md",
+      "filePath": "CULTURE.md",
+      "summary": "Organizational culture document defining mission, vision, core principles (ownership, speed, systems, clarity, automation, data-driven, client outcomes), work practices (async-first, documentation culture, AI-assisted workflows), leadership philosophy, and hiring principles.",
+      "tags": ["documentation", "culture", "values", "operations"],
+      "complexity": "complex"
+    }
+  ],
+  "edges": [
+    {
+      "source": "config:.env.example",
+      "target": "service:Caddyfile",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "service:Caddyfile",
+      "target": "config:.env.example",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "pipeline:.github/workflows/ci.yml",
+      "target": "config:.pre-commit-config.yaml",
+      "type": "triggers",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "pipeline:.github/workflows/main.yml",
+      "target": "config:.pre-commit-config.yaml",
+      "type": "triggers",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "pipeline:.github/workflows/ci.yml",
+      "target": "config:.lintstagedrc.json",
+      "type": "triggers",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "pipeline:.github/workflows/main.yml",
+      "target": "config:.lintstagedrc.json",
+      "type": "triggers",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "pipeline:.github/workflows/deploy.yml",
+      "target": "service:Caddyfile",
+      "type": "triggers",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "pipeline:.github/workflows/deploy.yml",
+      "target": "config:.env.example",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "pipeline:.github/workflows/release.yml",
+      "target": "config:.changeset/config.json",
+      "type": "triggers",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "pipeline:.github/workflows/nextjs.yml",
+      "target": "pipeline:.github/workflows/deploy.yml",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "pipeline:.github/workflows/preview.yml",
+      "target": "pipeline:.github/workflows/ci.yml",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:CONTEXT.md",
+      "target": "service:Caddyfile",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:CONTEXT.md",
+      "target": "config:.env.example",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:CONTEXT.md",
+      "target": "pipeline:.github/workflows/ci.yml",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:CONTEXT.md",
+      "target": "pipeline:.github/workflows/deploy.yml",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:CLAUDE.md",
+      "target": "config:.pre-commit-config.yaml",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:CLAUDE.md",
+      "target": "config:.lintstagedrc.json",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:CLAUDE.md",
+      "target": "service:Caddyfile",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:CLAUDE.md",
+      "target": "document:CONTEXT.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:CLAUDE.md",
+      "target": "document:CONTRIBUTING.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:CONTRIBUTING.md",
+      "target": "config:.pre-commit-config.yaml",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:CONTRIBUTING.md",
+      "target": "document:CULTURE.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:CULTURE.md",
+      "target": "document:CONTEXT.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:CULTURE.md",
+      "target": "document:CLAUDE.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "pipeline:.github/workflows/ci.yml",
+      "target": "pipeline:.github/workflows/deploy.yml",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    }
+  ]
+}

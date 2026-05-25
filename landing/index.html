@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>AG Associates — Panel Advocates · Thane</title>
+<meta name="description" content="AG Associates: AI-driven legal operations platform for panel advocates. Zero-staff automation, NOI pipeline, RPA portal filing, field app, and white-label SaaS for the Indian legal services market.">
+<meta property="og:title" content="AG Associates — LegalTech Automation Platform">
+<meta property="og:description" content="AI-powered legal operations: NOI processing, RPA government portal automation, field executive mobile app, and multi-channel case intake.">
+<meta property="og:url" content="https://advadiityagade.com">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://advadiityagade.com/og-image.svg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚖️</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--gold:#c9a84c;--gold-dark:#8a6e2b;--gold-light:#e0c878;--black:#000;--white:#fff;--glass:rgba(255,255,255,0.04);--glass-border:rgba(255,255,255,0.08);--glass-hover:rgba(255,255,255,0.08)}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:#000;color:#fff;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+::selection{background:var(--gold);color:#000}
+h1,h2,h3,h4{font-family:'DM Serif Display',serif;font-weight:400}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+
+.noise{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.03;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:256px}
+
+.orb{position:fixed;border-radius:50%;filter:blur(80px);pointer-events:none;z-index:0;opacity:.15}
+.orb-1{width:500px;height:500px;background:var(--gold);top:-200px;right:-150px;animation:orbFloat 20s ease-in-out infinite}
+.orb-2{width:400px;height:400px;background:#4466cc;bottom:-150px;left:-100px;animation:orbFloat 25s ease-in-out infinite reverse}
+.orb-3{width:300px;height:300px;background:var(--gold);top:50%;left:50%;animation:orbFloat 18s ease-in-out infinite 5s}
+@keyframes orbFloat{0%,100%{transform:translate(0,0)scale(1)}33%{transform:translate(30px,-40px)scale(1.1)}66%{transform:translate(-20px,20px)scale(.95)}}
+
+/* Glass card */
+.glass{background:var(--glass);border:1px solid var(--glass-border);border-radius:16px;backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);transition:all .5s cubic-bezier(.23,1,.32,1)}
+.glass:hover{background:var(--glass-hover);border-color:rgba(201,168,76,0.2);transform:translateY(-4px)}
+.glass-border{position:relative}
+.glass-border::before{content:'';position:absolute;inset:-1px;border-radius:17px;background:linear-gradient(135deg,rgba(201,168,76,0.3),transparent 40%,transparent 60%,rgba(201,168,76,0.1));z-index:-1;pointer-events:none}
+
+.btn-gold{display:inline-flex;align-items:center;gap:.5rem;padding:.75rem 2rem;background:var(--gold);color:#000;border:none;border-radius:8px;font-family:'DM Sans',sans-serif;font-weight:600;font-size:.95rem;cursor:pointer;transition:all .3s}
+.btn-gold:hover{background:var(--gold-light);transform:translateY(-2px);box-shadow:0 8px 32px rgba(201,168,76,0.3)}
+.btn-ghost{display:inline-flex;align-items:center;gap:.5rem;padding:.75rem 2rem;background:transparent;color:var(--gold);border:1px solid rgba(201,168,76,0.3);border-radius:8px;font-family:'DM Sans',sans-serif;font-weight:500;font-size:.95rem;cursor:pointer;transition:all .3s}
+.btn-ghost:hover{background:rgba(201,168,76,0.1);border-color:var(--gold)}
+
+/* Hero */
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:2rem;position:relative;z-index:1}
+.hero-badge{display:inline-flex;align-items:center;gap:.5rem;padding:.4rem 1.2rem;border:1px solid rgba(201,168,76,0.2);border-radius:100px;font-size:.8rem;color:var(--gold);text-transform:uppercase;letter-spacing:.15em;margin-bottom:2rem;animation:fadeUp .8s ease forwards;opacity:0}
+.hero h1{font-size:clamp(2.8rem,8vw,6rem);line-height:1.05;letter-spacing:-.02em;margin-bottom:1.5rem;animation:fadeUp .8s .15s ease forwards;opacity:0}
+.hero h1 span{color:var(--gold)}
+.hero p{font-size:clamp(1rem,2vw,1.3rem);color:rgba(255,255,255,0.6);max-width:640px;line-height:1.7;margin-bottom:3rem;animation:fadeUp .8s .3s ease forwards;opacity:0}
+.hero-actions{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;animation:fadeUp .8s .45s ease forwards;opacity:0}
+.hero-scroll{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.5rem;color:rgba(255,255,255,0.3);font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;animation:fadeUp .8s .6s ease forwards,scrollBounce 2s ease-in-out infinite 1s;opacity:0}
+.hero-scroll svg{width:20px;height:20px;animation:scrollBounce 2s ease-in-out infinite}
+.hero-ring{position:absolute;width:clamp(300px,60vw,700px);height:clamp(300px,60vw,700px);border-radius:50%;border:1px solid rgba(201,168,76,0.06);animation:spin 60s linear infinite;pointer-events:none}
+.hero-ring:nth-child(2){width:clamp(400px,70vw,800px);height:clamp(400px,70vw,800px);border-color:rgba(201,168,76,0.04);animation-direction:reverse;animation-duration:80s}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes fadeUp{to{opacity:1;transform:translateY(0)}}
+@keyframes scrollBounce{0%,100%{transform:translateY(0)}50%{transform:translateY(6px)}}
+
+/* Nav */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1rem 2rem;background:rgba(0,0,0,0.6);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,0.05);display:flex;justify-content:space-between;align-items:center}
+.nav-logo{font-family:'DM Serif Display',serif;font-size:1.3rem;color:var(--gold)}
+.nav-links{display:flex;gap:.25rem;align-items:center}
+.nav-links a{padding:.5rem 1rem;border-radius:6px;font-size:.85rem;color:rgba(255,255,255,0.6);transition:all .2s}
+.nav-links a:hover{color:#fff;background:rgba(255,255,255,0.05)}
+.nav-links a.active{color:var(--gold)}
+.nav-toggle{display:none;background:none;border:none;color:#fff;cursor:pointer;padding:.5rem}
+.nav-toggle svg{width:24px;height:24px}
+
+/* Sections */
+section{padding:6rem 2rem;position:relative;z-index:1}
+.section-label{font-size:.75rem;text-transform:uppercase;letter-spacing:.2em;color:var(--gold);margin-bottom:.75rem;font-weight:500}
+.section-title{font-size:clamp(2rem,4vw,3rem);line-height:1.15;letter-spacing:-.01em;margin-bottom:1rem}
+.section-sub{color:rgba(255,255,255,0.5);max-width:560px;font-size:1.05rem;line-height:1.7;margin-bottom:3rem}
+.container{max-width:1200px;margin:0 auto}
+
+/* Platforms grid */
+.platforms{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:1.5rem}
+.platform-card{padding:2rem}
+.platform-icon{width:48px;height:48px;border-radius:12px;background:rgba(201,168,76,0.1);display:flex;align-items:center;justify-content:center;margin-bottom:1.25rem;font-size:1.4rem}
+.platform-card h3{font-size:1.3rem;margin-bottom:.6rem;letter-spacing:-.01em}
+.platform-card p{font-size:.9rem;color:rgba(255,255,255,0.55);line-height:1.6;margin-bottom:1.25rem}
+.platform-tag{display:inline-block;padding:.2rem .7rem;border-radius:100px;font-size:.7rem;color:rgba(201,168,76,0.9);background:rgba(201,168,76,0.08);margin-right:.4rem;margin-bottom:.4rem;text-transform:uppercase;letter-spacing:.05em;font-weight:500}
+.platform-link{display:inline-flex;align-items:center;gap:.4rem;color:var(--gold);font-size:.85rem;font-weight:500;margin-top:.5rem;transition:gap .3s}
+.platform-link:hover{gap:.7rem}
+
+/* Quick links */
+.quick-links{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1rem}
+.quick-link{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.75rem;padding:1.5rem 1rem;text-align:center;border-radius:12px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);transition:all .3s}
+.quick-link:hover{background:rgba(201,168,76,0.06);border-color:rgba(201,168,76,0.2);transform:translateY(-3px)}
+.quick-link-icon{font-size:1.5rem}
+.quick-link-label{font-size:.8rem;font-weight:500;color:rgba(255,255,255,0.7)}
+.quick-link .pill{font-size:.65rem;padding:.15rem .5rem;border-radius:100px;background:rgba(201,168,76,0.1);color:var(--gold)}
+
+/* Stats */
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.5rem}
+.stat-card{text-align:center;padding:2rem 1.5rem}
+.stat-number{font-family:'DM Serif Display',serif;font-size:2.8rem;color:var(--gold);line-height:1;margin-bottom:.5rem}
+.stat-bar{width:40px;height:2px;background:var(--gold);margin:0 auto 1rem;border-radius:2px}
+.stat-label{font-size:.85rem;color:rgba(255,255,255,0.5);line-height:1.5}
+
+/* Pipeline viz */
+.pipeline{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.75rem}
+.pipeline-step{text-align:center;padding:1.25rem .75rem;border-radius:10px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);position:relative}
+.pipeline-step::after{content:'→';position:absolute;right:-.6rem;top:50%;transform:translateY(-50%);color:var(--gold);font-size:1.1rem}
+.pipeline-step:last-child::after{display:none}
+.pipeline-icon{font-size:1.3rem;margin-bottom:.4rem}
+.pipeline-label{font-size:.75rem;color:rgba(255,255,255,0.6);font-weight:500}
+
+/* Contact */
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start}
+.contact-info h4{font-size:1.4rem;margin-bottom:.75rem}
+.contact-info p{color:rgba(255,255,255,0.5);font-size:.95rem;line-height:1.7;margin-bottom:1.5rem}
+.contact-detail{display:flex;align-items:center;gap:.75rem;margin-bottom:1rem;font-size:.9rem;color:rgba(255,255,255,0.6)}
+.contact-detail svg{width:18px;height:18px;color:var(--gold);flex-shrink:0}
+.contact-form{display:flex;flex-direction:column;gap:1rem}
+.contact-form input,.contact-form textarea{padding:.85rem 1rem;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:8px;color:#fff;font-family:'DM Sans',sans-serif;font-size:.9rem;outline:none;transition:border-color .3s}
+.contact-form input:focus,.contact-form textarea:focus{border-color:rgba(201,168,76,0.4)}
+.contact-form textarea{min-height:120px;resize:vertical}
+
+/* Footer */
+footer{padding:3rem 2rem 2rem;border-top:1px solid rgba(255,255,255,0.05);position:relative;z-index:1}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:2.5rem;max-width:1200px;margin:0 auto}
+.footer-brand .nav-logo{font-size:1.2rem;display:inline-block;margin-bottom:.75rem}
+.footer-brand p{font-size:.85rem;color:rgba(255,255,255,0.4);line-height:1.6;max-width:300px}
+.footer-col h4{font-size:.8rem;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,0.4);margin-bottom:1rem;font-family:'DM Sans',sans-serif;font-weight:600}
+.footer-col a{display:block;font-size:.85rem;color:rgba(255,255,255,0.45);margin-bottom:.6rem;transition:color .3s}
+.footer-col a:hover{color:var(--gold)}
+.footer-bottom{max-width:1200px;margin:2rem auto 0;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,0.04);display:flex;justify-content:space-between;align-items:center;font-size:.8rem;color:rgba(255,255,255,0.3)}
+
+/* Status dots */
+.status-dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:.4rem;vertical-align:middle}
+.status-dot.up{background:#4ade80;box-shadow:0 0 8px rgba(74,222,128,0.4);animation:pulse 2s ease-in-out infinite}
+.status-dot.down{background:#f87171;box-shadow:0 0 8px rgba(248,113,113,0.4)}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
+
+/* Mobile */
+@media(max-width:768px){
+  nav{padding:.75rem 1rem}
+  .nav-links{display:none;position:absolute;top:100%;left:0;right:0;background:rgba(0,0,0,.95);backdrop-filter:blur(20px);flex-direction:column;padding:.5rem;border-bottom:1px solid rgba(255,255,255,0.05)}
+  .nav-links.open{display:flex}
+  .nav-toggle{display:block}
+  section{padding:4rem 1.25rem}
+  .platforms{grid-template-columns:1fr}
+  .quick-links{grid-template-columns:repeat(3,1fr)}
+  .contact-grid{grid-template-columns:1fr}
+  .contact-form textarea{min-height:100px}
+  .footer-grid{grid-template-columns:1fr 1fr;gap:1.5rem}
+  .footer-bottom{flex-direction:column;gap:.5rem;text-align:center}
+  .pipeline-step::after{display:none}
+  .pipeline{grid-template-columns:repeat(3,1fr)}
+}
+@media(max-width:480px){
+  .quick-links{grid-template-columns:repeat(2,1fr)}
+  .pipeline{grid-template-columns:repeat(2,1fr)}
+  .hero h1{font-size:2rem}
+  .hero-actions{gap:.75rem;flex-direction:column;align-items:center}
+}
+
+/* Animations */
+.reveal{opacity:0;transform:translateY(30px);transition:all .8s cubic-bezier(.23,1,.32,1)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+</style>
+</head>
+<body>
+<div class="noise"></div>
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+<div class="orb orb-3"></div>
+
+<nav>
+  <div class="nav-logo">AG Associates</div>
+  <div class="nav-links" id="navLinks">
+    <a href="#platforms">Platform</a>
+    <a href="#services">Services</a>
+    <a href="#status">Status</a>
+    <a href="https://app.advadiityagade.com" target="_blank">Case Portal</a>
+    <a href="https://dashboard.advadiityagade.com" target="_blank">Dashboard</a>
+    <a href="https://docs.advadiityagade.com" target="_blank">Docs</a>
+  </div>
+  <button class="nav-toggle" onclick="document.getElementById('navLinks').classList.toggle('open')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+  </button>
+</nav>
+
+<section class="hero">
+  <div class="hero-ring"></div>
+  <div class="hero-ring"></div>
+  <div class="hero-badge">⚡ AI-Powered Legal Operations</div>
+  <h1>Panel Advocacy,<br><span>Reimagined</span></h1>
+  <p>End-to-end automation for panel advocates — from NOI processing and RPA government portal filing to field executive coordination and multi-channel client intake.</p>
+  <div class="hero-actions">
+    <a href="https://app.advadiityagade.com" class="btn-gold">Launch Platform →</a>
+    <a href="https://dashboard.advadiityagade.com" class="btn-ghost">View Dashboard</a>
+  </div>
+  <div class="hero-scroll">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<section id="platforms">
+  <div class="container">
+    <div class="reveal"><p class="section-label">● The Platform</p></div>
+    <div class="reveal"><h2 class="section-title">Five capabilities.<br>One unified system.</h2></div>
+    <div class="reveal"><p class="section-sub">From AI-powered document drafting to field executive tracking — every layer of the legal workflow, automated.</p></div>
+    <div class="platforms reveal">
+      <div class="platform-card glass glass-border">
+        <div class="platform-icon">🤖</div>
+        <h3>AI Agreement Automation</h3>
+        <p>LangGraph agent pipeline: Aisha intake extracts rental fields, Auditor QA scores drafts, Bouncer validates stamp duty — all within ₹50 tolerance.</p>
+        <div><span class="platform-tag">LangGraph</span><span class="platform-tag">LLM</span><span class="platform-tag">RAG</span></div>
+      </div>
+      <div class="platform-card glass glass-border">
+        <div class="platform-icon">📋</div>
+        <h3>NOI Pipeline & Case Mgmt</h3>
+        <p>End-to-end Notice of Intimation processing — seed, prepare, file, verify, acknowledge. Automated retry with exponential backoff and status tracking.</p>
+        <div><span class="platform-tag">Pipeline</span><span class="platform-tag">Status Tracking</span><span class="platform-tag">IGR</span></div>
+      </div>
+      <div class="platform-card glass glass-border">
+        <div class="platform-icon">🌐</div>
+        <h3>RPA Government Portals</h3>
+        <p>Playwright automation for GRAS challan generation, IGR document filing with OTP auth, and NESL property registration — API, RPA, or mock mode.</p>
+        <div><span class="platform-tag">GRAS</span><span class="platform-tag">IGR</span><span class="platform-tag">NESL</span><span class="platform-tag">Playwright</span></div>
+      </div>
+      <div class="platform-card glass glass-border">
+        <div class="platform-icon">📱</div>
+        <h3>Field Executive Mobile App</h3>
+        <p>Offline-first React Native app with TUS resumable document upload, GPS breadcrumb tracking, optimistic status updates, and push notifications.</p>
+        <div><span class="platform-tag">Expo</span><span class="platform-tag">Offline-First</span><span class="platform-tag">GPS</span></div>
+      </div>
+      <div class="platform-card glass glass-border">
+        <div class="platform-icon">📬</div>
+        <h3>Multi-Channel Intake</h3>
+        <p>WhatsApp, SMS (Twilio), voice calls, email, and n8n webhooks — all routed through a unified intake pipeline with circuit breaker protection.</p>
+        <div><span class="platform-tag">Webhooks</span><span class="platform-tag">Twilio</span><span class="platform-tag">n8n</span><span class="platform-tag">RBAC</span></div>
+      </div>
+      <div class="platform-card glass glass-border">
+        <div class="platform-icon">⚙️</div>
+        <h3>Admin Console & Docs</h3>
+        <p>Role-based access, workforce management, Vyasa voice control, real-time collaboration board, file storage, billing, and comprehensive docs.</p>
+        <div><span class="platform-tag">RBAC</span><span class="platform-tag">Voice Control</span><span class="platform-tag">Real-time</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="services" style="background:linear-gradient(180deg,transparent,rgba(201,168,76,0.02),transparent)">
+  <div class="container">
+    <div class="reveal"><p class="section-label">● Quick Access</p></div>
+    <div class="reveal"><h2 class="section-title">Your workspace, one click away.</h2></div>
+    <div class="reveal"><p class="section-sub">Every service in the AG Associates ecosystem, directly accessible.</p></div>
+    <div class="quick-links reveal">
+      <a href="https://app.advadiityagade.com" target="_blank" class="quick-link">
+        <div class="quick-link-icon">⚖️</div>
+        <div class="quick-link-label">Case Portal</div>
+        <span class="pill">app.</span>
+      </a>
+      <a href="https://dashboard.advadiityagade.com" target="_blank" class="quick-link">
+        <div class="quick-link-icon">📊</div>
+        <div class="quick-link-label">AI Dashboard</div>
+        <span class="pill">dashboard.</span>
+      </a>
+      <a href="https://api.advadiityagade.com/health" target="_blank" class="quick-link">
+        <div class="quick-link-icon">🔌</div>
+        <div class="quick-link-label">API Health</div>
+        <span class="pill">api.</span>
+      </a>
+      <a href="https://intake.advadiityagade.com/health" target="_blank" class="quick-link">
+        <div class="quick-link-icon">📨</div>
+        <div class="quick-link-label">Intake Gateway</div>
+        <span class="pill">intake.</span>
+      </a>
+      <a href="https://n8n.advadiityagade.com" target="_blank" class="quick-link">
+        <div class="quick-link-icon">🔗</div>
+        <div class="quick-link-label">n8n Orchestration</div>
+        <span class="pill">n8n.</span>
+      </a>
+      <a href="https://docs.advadiityagade.com" target="_blank" class="quick-link">
+        <div class="quick-link-icon">📖</div>
+        <div class="quick-link-label">Documentation</div>
+        <span class="pill">docs.</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section id="pipeline">
+  <div class="container">
+    <div class="reveal"><p class="section-label">● How It Works</p></div>
+    <div class="reveal"><h2 class="section-title">The NOI lifecycle.</h2></div>
+    <div class="reveal"><p class="section-sub">From client intake to final registration — every stage automated end-to-end.</p></div>
+    <div class="pipeline reveal">
+      <div class="pipeline-step"><div class="pipeline-icon">📥</div><div class="pipeline-label">Intake</div></div>
+      <div class="pipeline-step"><div class="pipeline-icon">🤖</div><div class="pipeline-label">AI Drafting</div></div>
+      <div class="pipeline-step"><div class="pipeline-icon">✅</div><div class="pipeline-label">Audit & QA</div></div>
+      <div class="pipeline-step"><div class="pipeline-icon">💰</div><div class="pipeline-label">Stamp Duty</div></div>
+      <div class="pipeline-step"><div class="pipeline-icon">🌐</div><div class="pipeline-label">Portal Filing</div></div>
+      <div class="pipeline-step"><div class="pipeline-icon">📋</div><div class="pipeline-label">Registration</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="status" style="background:linear-gradient(180deg,transparent,rgba(201,168,76,0.02),transparent)">
+  <div class="container">
+    <div class="reveal"><p class="section-label">● System Status</p></div>
+    <div class="reveal"><h2 class="section-title">All services operational.</h2></div>
+    <div class="reveal"><p class="section-sub">Real-time health monitoring across the entire platform.</p></div>
+    <div class="stats-grid reveal" id="statusGrid">
+      <div class="stat-card glass">
+        <div class="stat-number" id="servicesUp">6</div>
+        <div class="stat-bar"></div>
+        <div class="stat-label">Services<br>Healthy</div>
+      </div>
+      <div class="stat-card glass">
+        <div class="stat-number" id="casesCount">—</div>
+        <div class="stat-bar"></div>
+        <div class="stat-label">Active<br>Cases</div>
+      </div>
+      <div class="stat-card glass">
+        <div class="stat-number" id="filingCount">—</div>
+        <div class="stat-bar"></div>
+        <div class="stat-label">IGR Filings<br>This Month</div>
+      </div>
+      <div class="stat-card glass">
+        <div class="stat-number" id="agentsActive">—</div>
+        <div class="stat-bar"></div>
+        <div class="stat-label">AI Agents<br>Online</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="container">
+    <div class="reveal"><p class="section-label">● Get in Touch</p></div>
+    <div class="reveal"><h2 class="section-title">Let's build<br>the future of legal ops.</h2></div>
+    <div class="reveal"><p class="section-sub">Panel advocate for Kotak Mahindra Bank, Axis Finance, Muthoot Homefin, Karur Vysya Bank — and beyond.</p></div>
+    <div class="contact-grid reveal">
+      <div class="contact-info">
+        <h4>AG Associates</h4>
+        <p>Founded by Aditya Gade. Specialised in property law, title search, registration, and NOI processing for financial institutions across Maharashtra.</p>
+        <div class="contact-detail">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span>Thane, Maharashtra</span>
+        </div>
+        <div class="contact-detail">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+          <span>+91 9876543210</span>
+        </div>
+        <div class="contact-detail">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          <span>advadiityagade.com</span>
+        </div>
+        <a href="https://wa.me/919876543210?text=Hi%20AG%20Associates" target="_blank" style="display:inline-flex;align-items:center;gap:.6rem;margin-top:1rem;padding:.7rem 1.5rem;background:rgba(37,211,102,0.1);border:1px solid rgba(37,211,102,0.2);border-radius:8px;color:#25D366;font-size:.9rem;font-weight:500;transition:all .3s" onmouseover="this.style.background='rgba(37,211,102,0.2)'" onmouseout="this.style.background='rgba(37,211,102,0.1)'">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Chat on WhatsApp
+      </a>
+      </div>
+      <form class="contact-form" onsubmit="event.preventDefault();alert('Thank you! We will get back to you shortly.');this.reset()">
+        <input type="text" placeholder="Your Name" required>
+        <input type="email" placeholder="Email Address" required>
+        <input type="text" placeholder="Subject">
+        <textarea placeholder="How can we help you?" required></textarea>
+        <button type="submit" class="btn-gold" style="align-self:flex-start">Send Message →</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="nav-logo">AG Associates</div>
+      <p>AI-driven legal operations platform for panel advocates. Property law, reimagined.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Platform</h4>
+      <a href="https://app.advadiityagade.com">Case Portal</a>
+      <a href="https://dashboard.advadiityagade.com">AI Dashboard</a>
+      <a href="https://docs.advadiityagade.com">Documentation</a>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <a href="#platforms">AI Agents</a>
+      <a href="#platforms">RPA Automation</a>
+      <a href="#platforms">Field App</a>
+    </div>
+    <div class="footer-col">
+      <h4>Connect</h4>
+      <a href="#contact">Contact</a>
+      <a href="https://wa.me/919876543210">WhatsApp</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>&copy; 2026 AG Associates. All rights reserved.</span>
+    <span>Built with ⚖️ in Thane</span>
+  </div>
+</footer>
+
+<script>
+// Scroll reveal
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible') })
+}, {threshold:.1})
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el))
+
+// Live status polling
+;(async function pollStatus() {
+  const services = [
+    {name:'api',url:'https://api.advadiityagade.com/health'},
+    {name:'app',url:'https://app.advadiityagade.com/api/health'},
+    {name:'dashboard',url:'https://dashboard.advadiityagade.com/'},
+    {name:'intake',url:'https://intake.advadiityagade.com/health'},
+    {name:'n8n',url:'https://n8n.advadiityagade.com/healthz'},
+  ]
+  try {
+    const results = await Promise.allSettled(services.map(s =>
+      fetch(s.url,{mode:'no-cors',signal:AbortSignal.timeout(5000)}).then(r => r.status).catch(()=>0)
+    ))
+    const up = results.filter(r => r.status==='fulfilled' && r.value>0).length
+    document.getElementById('servicesUp').textContent = up + '/' + services.length
+  } catch(e) {}
+  try {
+    const resp = await fetch('https://api.advadiityagade.com/dashboard/status',{signal:AbortSignal.timeout(5000)})
+    if(resp.ok) {
+      const data = await resp.json()
+      if(data.active_cases !== undefined) document.getElementById('casesCount').textContent = data.active_cases
+      if(data.filings_this_month !== undefined) document.getElementById('filingCount').textContent = data.filings_this_month
+      if(data.agents_online !== undefined) document.getElementById('agentsActive').textContent = data.agents_online
+    }
+  } catch(e) {}
+  setTimeout(pollStatus, 30000)
+})()
+</script>
+</body>
+</html>

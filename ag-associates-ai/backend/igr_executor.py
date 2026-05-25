@@ -16,6 +16,9 @@ from typing import Any, Dict, List, Optional
 
 from playwright.async_api import async_playwright
 
+from circuit_breaker import get_breaker, CircuitState
+from hitl_queue import hitl_queue
+from selector_config import load_portal_selectors, get_selector
 from workforce.ledger import record_activity
 
 logger = logging.getLogger(__name__)
@@ -47,36 +50,57 @@ class IgrRpaExecutor:
 
     def _load_selectors(self):
         """Load Playwright selectors from env vars with production defaults."""
-        self.sel = {
+        self._sel_defaults = {
             # Login
-            "username_input": os.environ.get("IGR_SEL_USERNAME", "input[name='username']"),
-            "password_input": os.environ.get("IGR_SEL_PASSWORD", "input[name='password']"),
-            "login_button": os.environ.get("IGR_SEL_LOGIN_BTN", "button[type='submit']"),
-            "otp_input": os.environ.get("IGR_SEL_OTP", "input[id='otp']"),
-            "otp_verify_button": os.environ.get("IGR_SEL_OTP_VERIFY", "button[id='verify']"),
-            "dashboard_indicator": os.environ.get("IGR_SEL_DASHBOARD", "text=Dashboard"),
+            "username_input": "input[name='username']",
+            "password_input": "input[name='password']",
+            "login_button": "button[type='submit']",
+            "otp_input": "input[id='otp']",
+            "otp_verify_button": "button[id='verify']",
+            "dashboard_indicator": "text=Dashboard",
             # NOI filing
-            "file_noi_link": os.environ.get("IGR_SEL_FILE_NOI", "text=File Intimation Mortgage"),
-            "noi_form": os.environ.get("IGR_SEL_NOI_FORM", "form#noi-form"),
-            "borrower_name_input": os.environ.get("IGR_SEL_BORROWER", "input[name='borrower_name']"),
-            "loan_amount_input": os.environ.get("IGR_SEL_LOAN_AMOUNT", "input[name='loan_amount']"),
-            "property_address_input": os.environ.get("IGR_SEL_PROP_ADDR", "input[name='property_address']"),
-            "property_city_input": os.environ.get("IGR_SEL_PROP_CITY", "input[name='property_city']"),
-            "bank_name_input": os.environ.get("IGR_SEL_BANK_NAME", "input[name='bank_name']"),
-            "grn_input": os.environ.get("IGR_SEL_GRN", "input[name='grn_number']"),
-            "sanction_letter_upload": os.environ.get("IGR_SEL_SANCTION_UPLOAD", "input[name='sanction_letter']"),
-            "borrower_kyc_upload": os.environ.get("IGR_SEL_KYC_UPLOAD", "input[name='borrower_kyc']"),
-            "stamp_duty_upload": os.environ.get("IGR_SEL_STAMP_UPLOAD", "input[name='stamp_duty_receipt']"),
-            "submit_button": os.environ.get("IGR_SEL_SUBMIT", "button[type='submit']"),
-            "success_indicator": os.environ.get("IGR_SEL_SUCCESS", "text=Filing Successful"),
-            "acknowledgment_span": os.environ.get("IGR_SEL_ACK_SPAN", "span#acknowledgment_number"),
+            "file_noi_link": "text=File Intimation Mortgage",
+            "noi_form": "form#noi-form",
+            "borrower_name_input": "input[name='borrower_name']",
+            "loan_amount_input": "input[name='loan_amount']",
+            "property_address_input": "input[name='property_address']",
+            "property_city_input": "input[name='property_city']",
+            "bank_name_input": "input[name='bank_name']",
+            "grn_input": "input[name='grn_number']",
+            "sanction_letter_upload": "input[name='sanction_letter']",
+            "borrower_kyc_upload": "input[name='borrower_kyc']",
+            "stamp_duty_upload": "input[name='stamp_duty_receipt']",
+            "submit_button": "button[type='submit']",
+            "success_indicator": "text=Filing Successful",
+            "acknowledgment_span": "span#acknowledgment_number",
         }
+        self.sel = dict(self._sel_defaults)
+        for k in self.sel:
+            self.sel[k] = get_selector("igr", k, self.sel[k])
 
     def _upload_path(self, doc_type: str, case_id: str) -> str:
         """Resolve document upload path from env var or default convention."""
         env_key = f"IGR_DOC_PATH_{doc_type.upper()}"
         default = f"/srv/ag/documents/{case_id}/{doc_type}.pdf"
         return os.environ.get(env_key, default)
+
+    async def _check_igr_breaker(self, case_id: str) -> bool:
+        breaker = get_breaker("igr")
+        state = await breaker.state()
+        if state == CircuitState.CLOSED:
+            return True
+        can_pass = await breaker.can_pass()
+        if can_pass:
+            return True
+        await hitl_queue.add_task(
+            portal="igr",
+            case_id=case_id,
+            action="file_noi",
+            payload={"reason": f"Circuit breaker {state.value} for IGR"},
+            reason=f"Circuit breaker {state.value} — IGR portal filing blocked. Manual intervention required.",
+        )
+        logger.warning("HITL task queued for IGR/%s — breaker %s", case_id, state.value)
+        return False
 
     async def file_noi(
         self,
@@ -94,6 +118,9 @@ class IgrRpaExecutor:
         selector in production .env without touching code.
         """
         logger.info(f"🚀 [IGR] Starting NOI filing for case: {case_id}")
+
+        if not await self._check_igr_breaker(case_id):
+            return {"success": False, "error": "IGR circuit breaker OPEN — task queued for human review", "hitl": True, "case_id": case_id}
 
         if not grn_number:
             return {"success": False, "error": "GRN number required — generate challan first"}
@@ -155,6 +182,8 @@ class IgrRpaExecutor:
                     status="ok",
                 )
 
+                await get_breaker("igr").record_success()
+
                 return {
                     "success": True,
                     "acknowledgment_number": ack,
@@ -164,6 +193,7 @@ class IgrRpaExecutor:
 
         except Exception as e:
             logger.error(f"❌ [IGR] NOI filing failed: {str(e)}")
+            await get_breaker("igr").record_failure(str(e))
             record_activity(
                 source="igr_rpa",
                 staff_kind="agent",

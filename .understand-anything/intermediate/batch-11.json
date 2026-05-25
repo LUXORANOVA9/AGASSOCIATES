@@ -1,0 +1,711 @@
+{
+  "nodes": [
+    {
+      "id": "file:ag-platform/src/store/useAuthStore.ts",
+      "type": "file",
+      "name": "useAuthStore.ts",
+      "filePath": "ag-platform/src/store/useAuthStore.ts",
+      "summary": "Zustand store managing user authentication state, session lifecycle, role tracking, and sign-out with Supabase.",
+      "tags": ["store", "authentication", "state-management"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:ag-platform/src/types/domain.ts",
+      "type": "file",
+      "name": "domain.ts",
+      "filePath": "ag-platform/src/types/domain.ts",
+      "summary": "Core domain type definitions including enums for user roles, case types, statuses, and interfaces for bank, case, and disbursement entities.",
+      "tags": ["type-definition", "data-model", "enum"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:ag-platform/src/types/storage.ts",
+      "type": "file",
+      "name": "storage.ts",
+      "filePath": "ag-platform/src/types/storage.ts",
+      "summary": "TypeScript interfaces for file records, upload progress tracking, and versioning metadata used across the storage layer.",
+      "tags": ["type-definition", "storage", "file-management"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:ag-platform/supabase/functions/send-push-on-case-assigned/index.ts",
+      "type": "file",
+      "name": "index.ts",
+      "filePath": "ag-platform/supabase/functions/send-push-on-case-assigned/index.ts",
+      "summary": "Supabase Edge Function triggered on case assignment that sends Expo push notifications to the assigned executive via database trigger.",
+      "tags": ["edge-function", "notification", "push", "trigger"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "table:ag-platform/supabase/migrations/20260423_ai_setup.sql",
+      "type": "table",
+      "name": "20260423_ai_setup.sql",
+      "filePath": "ag-platform/supabase/migrations/20260423_ai_setup.sql",
+      "summary": "Enables pgvector extension and creates project_embeddings table with 768-dimension vector support, projects table, match function, and AI token tracking columns.",
+      "tags": ["database", "migration", "vector", "ai", "embedding"],
+      "complexity": "moderate",
+      "languageNotes": "Uses pgvector for semantic search with a 768-dimension Gemini embedding match function."
+    },
+    {
+      "id": "table:ag-platform/supabase/migrations/20260423_ai_tokens.sql",
+      "type": "table",
+      "name": "20260423_ai_tokens.sql",
+      "filePath": "ag-platform/supabase/migrations/20260423_ai_tokens.sql",
+      "summary": "Creates a PL/pgSQL function to safely increment organization AI token usage counters.",
+      "tags": ["database", "migration", "ai", "token"],
+      "complexity": "simple"
+    },
+    {
+      "id": "table:ag-platform/supabase/migrations/20260423_collaboration_setup.sql",
+      "type": "table",
+      "name": "20260423_collaboration_setup.sql",
+      "filePath": "ag-platform/supabase/migrations/20260423_collaboration_setup.sql",
+      "summary": "Sets up tasks, comments, notifications, and activities tables with realtime publication, RLS policies, and Supabase replication.",
+      "tags": ["database", "migration", "collaboration", "realtime", "rls"],
+      "complexity": "moderate",
+      "languageNotes": "Enables Supabase realtime replication and row-level security on all collaboration tables."
+    },
+    {
+      "id": "table:ag-platform/supabase/migrations/20260423_document_storage_setup.sql",
+      "type": "table",
+      "name": "20260423_document_storage_setup.sql",
+      "filePath": "ag-platform/supabase/migrations/20260423_document_storage_setup.sql",
+      "summary": "Creates storage buckets, files metadata table with versioning, storage quota trigger, and RLS policies for org-scoped access control.",
+      "tags": ["database", "migration", "storage", "rls", "versioning"],
+      "complexity": "complex",
+      "languageNotes": "Implements storage quota tracking via PL/pgSQL trigger and role-based access policies on storage.objects."
+    },
+    {
+      "id": "table:ag-platform/supabase/migrations/20260514000000_core_schema.sql",
+      "type": "table",
+      "name": "20260514000000_core_schema.sql",
+      "filePath": "ag-platform/supabase/migrations/20260514000000_core_schema.sql",
+      "summary": "Defines core organizations and cases tables with indexes for the AG platform's primary data model.",
+      "tags": ["database", "migration", "schema", "core"],
+      "complexity": "simple"
+    },
+    {
+      "id": "table:ag-platform/supabase/migrations/20260514000000_init_schema.sql",
+      "type": "table",
+      "name": "20260514000000_init_schema.sql",
+      "filePath": "ag-platform/supabase/migrations/20260514000000_init_schema.sql",
+      "summary": "Initial schema with organizations and cases tables including client details, financial fields, and composite indexes.",
+      "tags": ["database", "migration", "schema", "init"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "table:ag-platform/supabase/migrations/20260514000001_auth_hooks.sql",
+      "type": "table",
+      "name": "20260514000001_auth_hooks.sql",
+      "filePath": "ag-platform/supabase/migrations/20260514000001_auth_hooks.sql",
+      "summary": "Sets up authentication hooks and triggers for user lifecycle management.",
+      "tags": ["database", "migration", "auth", "hooks"],
+      "complexity": "simple"
+    },
+    {
+      "id": "table:ag-platform/supabase/migrations/20260514000002_rbac_setup.sql",
+      "type": "table",
+      "name": "20260514000002_rbac_setup.sql",
+      "filePath": "ag-platform/supabase/migrations/20260514000002_rbac_setup.sql",
+      "summary": "Creates user_roles table for role-based access control mapping users to organizational roles.",
+      "tags": ["database", "migration", "rbac", "authorization"],
+      "complexity": "simple"
+    },
+    {
+      "id": "table:ag-platform/supabase/migrations/20260514000003_voice_system_setup.sql",
+      "type": "table",
+      "name": "20260514000003_voice_system_setup.sql",
+      "filePath": "ag-platform/supabase/migrations/20260514000003_voice_system_setup.sql",
+      "summary": "Creates voice command processing tables, system config, and tool registry with risk levels for the voice control system.",
+      "tags": ["database", "migration", "voice", "tool-registry", "risk"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "table:ag-platform/supabase/migrations/20260514000004_workforce_management.sql",
+      "type": "table",
+      "name": "20260514000004_workforce_management.sql",
+      "filePath": "ag-platform/supabase/migrations/20260514000004_workforce_management.sql",
+      "summary": "Defines workforce_members, workforce_tasks, and case_notes tables for managing distributed workforce operations.",
+      "tags": ["database", "migration", "workforce", "task-management"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "table:ag-platform/supabase/migrations/20260515000000_voice_command_logs.sql",
+      "type": "table",
+      "name": "20260515000000_voice_command_logs.sql",
+      "filePath": "ag-platform/supabase/migrations/20260515000000_voice_command_logs.sql",
+      "summary": "Creates voice_command_logs table with indexes for auditing and tracking voice command execution history.",
+      "tags": ["database", "migration", "voice", "audit", "logging"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "table:ag-platform/supabase/migrations/20260515000001_voice_tool_config.sql",
+      "type": "table",
+      "name": "20260515000001_voice_tool_config.sql",
+      "filePath": "ag-platform/supabase/migrations/20260515000001_voice_tool_config.sql",
+      "summary": "Creates voice_tool_config table for per-tool enablement and risk override settings.",
+      "tags": ["database", "migration", "voice", "configuration"],
+      "complexity": "simple"
+    },
+    {
+      "id": "table:ag-platform/supabase/migrations/20260515000002_workforce.sql",
+      "type": "table",
+      "name": "20260515000002_workforce.sql",
+      "filePath": "ag-platform/supabase/migrations/20260515000002_workforce.sql",
+      "summary": "Full workforce schema with staff, capability, staff_capability, and staff_activity tables for role-based staffing and activity tracking.",
+      "tags": ["database", "migration", "workforce", "staffing", "capability"],
+      "complexity": "complex"
+    },
+    {
+      "id": "table:ag-platform/supabase/migrations/20260515000003_workforce_phase4.sql",
+      "type": "table",
+      "name": "20260515000003_workforce_phase4.sql",
+      "filePath": "ag-platform/supabase/migrations/20260515000003_workforce_phase4.sql",
+      "summary": "Adds staff_anomaly_window view and index for workforce anomaly detection in phase 4.",
+      "tags": ["database", "migration", "workforce", "anomaly", "view"],
+      "complexity": "simple"
+    },
+    {
+      "id": "table:ag-platform/supabase/migrations/20260518000000_field_app.sql",
+      "type": "table",
+      "name": "20260518000000_field_app.sql",
+      "filePath": "ag-platform/supabase/migrations/20260518000000_field_app.sql",
+      "summary": "Creates field app tables for document uploads, case audit logs, GPS-tracked field activity, and device push token registration.",
+      "tags": ["database", "migration", "field-app", "gps", "push"],
+      "complexity": "complex",
+      "languageNotes": "Includes client-side event deduplication via client_event_id and geospatial tracking with lat/lon columns."
+    },
+    {
+      "id": "table:ag-platform/supabase/migrations/20260519000000_push_trigger.sql",
+      "type": "table",
+      "name": "20260519000000_push_trigger.sql",
+      "filePath": "ag-platform/supabase/migrations/20260519000000_push_trigger.sql",
+      "summary": "Database trigger that invokes the send-push-on-case-assigned Edge Function when a case is assigned to an executive.",
+      "tags": ["database", "migration", "trigger", "push", "notification"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "table:ag-platform/supabase/migrations/20260520000000_fix_auth_token_hook.sql",
+      "type": "table",
+      "name": "20260520000000_fix_auth_token_hook.sql",
+      "filePath": "ag-platform/supabase/migrations/20260520000000_fix_auth_token_hook.sql",
+      "summary": "Fixes auth token hook with index on user_roles by org_id for efficient role lookups.",
+      "tags": ["database", "migration", "auth", "fix", "index"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:ag-platform/tailwind.config.js",
+      "type": "file",
+      "name": "tailwind.config.js",
+      "filePath": "ag-platform/tailwind.config.js",
+      "summary": "Tailwind CSS configuration defining content scan paths and custom CSS variable-driven font family tokens.",
+      "tags": ["configuration", "styling", "build-system", "css"],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:ag-platform/tsconfig.json",
+      "type": "config",
+      "name": "tsconfig.json",
+      "filePath": "ag-platform/tsconfig.json",
+      "summary": "TypeScript compiler configuration with strict mode, bundler module resolution, path alias to src/, and project references.",
+      "tags": ["configuration", "typescript", "build-system", "strict-mode"],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:ag-platform/tsconfig.node.json",
+      "type": "config",
+      "name": "tsconfig.node.json",
+      "filePath": "ag-platform/tsconfig.node.json",
+      "summary": "TypeScript configuration for Node-side vite.config.ts with composite project reference support.",
+      "tags": ["configuration", "typescript", "build-system", "node"],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:ag-platform/turbo.json",
+      "type": "config",
+      "name": "turbo.json",
+      "filePath": "ag-platform/turbo.json",
+      "summary": "Turborepo pipeline configuration defining build, dev, lint, type-check, and clean task dependencies and caching rules.",
+      "tags": ["configuration", "build-system", "monorepo", "task-runner"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "table:ag-platform/supabase/migrations/20260423_ai_setup.sql:project_embeddings",
+      "type": "table",
+      "name": "project_embeddings",
+      "filePath": "ag-platform/supabase/migrations/20260423_ai_setup.sql",
+      "summary": "Stores project content embeddings using 768-dimension pgvector for semantic search across projects.",
+      "tags": ["table", "vector", "embedding", "semantic-search"],
+      "complexity": "simple"
+    },
+    {
+      "id": "table:ag-platform/supabase/migrations/20260423_ai_setup.sql:projects",
+      "type": "table",
+      "name": "projects",
+      "filePath": "ag-platform/supabase/migrations/20260423_ai_setup.sql",
+      "summary": "Core projects table linked to organizations for grouping AI-related content and embeddings.",
+      "tags": ["table", "project", "organization"],
+      "complexity": "simple"
+    },
+    {
+      "id": "table:ag-platform/supabase/migrations/20260423_collaboration_setup.sql:tasks",
+      "type": "table",
+      "name": "tasks",
+      "filePath": "ag-platform/supabase/migrations/20260423_collaboration_setup.sql",
+      "summary": "Task management table with assignee tracking, status, and positional ordering for kanban-style boards.",
+      "tags": ["table", "task", "collaboration"],
+      "complexity": "simple"
+    },
+    {
+      "id": "table:ag-platform/supabase/migrations/20260423_collaboration_setup.sql:comments",
+      "type": "table",
+      "name": "comments",
+      "filePath": "ag-platform/supabase/migrations/20260423_collaboration_setup.sql",
+      "summary": "Task-level comment threads with user attribution and timestamps.",
+      "tags": ["table", "comment", "collaboration"],
+      "complexity": "simple"
+    },
+    {
+      "id": "table:ag-platform/supabase/migrations/20260423_collaboration_setup.sql:notifications",
+      "type": "table",
+      "name": "notifications",
+      "filePath": "ag-platform/supabase/migrations/20260423_collaboration_setup.sql",
+      "summary": "User notification table with read status, type classification, and deep-link support.",
+      "tags": ["table", "notification", "collaboration"],
+      "complexity": "simple"
+    },
+    {
+      "id": "table:ag-platform/supabase/migrations/20260423_collaboration_setup.sql:activities",
+      "type": "table",
+      "name": "activities",
+      "filePath": "ag-platform/supabase/migrations/20260423_collaboration_setup.sql",
+      "summary": "Activity feed table recording user actions and targets for realtime collaboration streams.",
+      "tags": ["table", "activity", "realtime"],
+      "complexity": "simple"
+    },
+    {
+      "id": "table:ag-platform/supabase/migrations/20260423_document_storage_setup.sql:files",
+      "type": "table",
+      "name": "files",
+      "filePath": "ag-platform/supabase/migrations/20260423_document_storage_setup.sql",
+      "summary": "File metadata and versioning table tracking uploads across organizations with storage path and content type.",
+      "tags": ["table", "file", "storage", "versioning"],
+      "complexity": "simple"
+    },
+    {
+      "id": "table:ag-platform/supabase/migrations/20260514000000_core_schema.sql:organizations",
+      "type": "table",
+      "name": "organizations",
+      "filePath": "ag-platform/supabase/migrations/20260514000000_core_schema.sql",
+      "summary": "Core organizations table as the top-level tenant entity in the platform.",
+      "tags": ["table", "organization", "tenant"],
+      "complexity": "simple"
+    },
+    {
+      "id": "table:ag-platform/supabase/migrations/20260514000000_core_schema.sql:cases",
+      "type": "table",
+      "name": "cases",
+      "filePath": "ag-platform/supabase/migrations/20260514000000_core_schema.sql",
+      "summary": "Core cases table tracking legal case lifecycle with bank and type information.",
+      "tags": ["table", "case", "legal"],
+      "complexity": "simple"
+    },
+    {
+      "id": "table:ag-platform/supabase/migrations/20260514000002_rbac_setup.sql:user_roles",
+      "type": "table",
+      "name": "user_roles",
+      "filePath": "ag-platform/supabase/migrations/20260514000002_rbac_setup.sql",
+      "summary": "Maps users to organizational roles for role-based access control.",
+      "tags": ["table", "rbac", "authorization", "role"],
+      "complexity": "simple"
+    },
+    {
+      "id": "table:ag-platform/supabase/migrations/20260514000004_workforce_management.sql:workforce_members",
+      "type": "table",
+      "name": "workforce_members",
+      "filePath": "ag-platform/supabase/migrations/20260514000004_workforce_management.sql",
+      "summary": "Tracks workforce members with role, status, load score, and maintenance mode per organization.",
+      "tags": ["table", "workforce", "staffing"],
+      "complexity": "simple"
+    },
+    {
+      "id": "table:ag-platform/supabase/migrations/20260514000004_workforce_management.sql:workforce_tasks",
+      "type": "table",
+      "name": "workforce_tasks",
+      "filePath": "ag-platform/supabase/migrations/20260514000004_workforce_management.sql",
+      "summary": "Workforce task assignments with priority, status tracking, and output storage.",
+      "tags": ["table", "workforce", "task", "assignment"],
+      "complexity": "simple"
+    },
+    {
+      "id": "table:ag-platform/supabase/migrations/20260515000000_voice_command_logs.sql:voice_command_logs",
+      "type": "table",
+      "name": "voice_command_logs",
+      "filePath": "ag-platform/supabase/migrations/20260515000000_voice_command_logs.sql",
+      "summary": "Audit log for voice commands capturing transcript, detected language, tool invocation, risk level, and execution status.",
+      "tags": ["table", "voice", "audit", "logging"],
+      "complexity": "simple"
+    },
+    {
+      "id": "table:ag-platform/supabase/migrations/20260515000001_voice_tool_config.sql:voice_tool_config",
+      "type": "table",
+      "name": "voice_tool_config",
+      "filePath": "ag-platform/supabase/migrations/20260515000001_voice_tool_config.sql",
+      "summary": "Per-tool enablement and risk override configuration for the voice control system.",
+      "tags": ["table", "voice", "configuration", "tool"],
+      "complexity": "simple"
+    },
+    {
+      "id": "table:ag-platform/supabase/migrations/20260515000002_workforce.sql:staff",
+      "type": "table",
+      "name": "staff",
+      "filePath": "ag-platform/supabase/migrations/20260515000002_workforce.sql",
+      "summary": "Staff registry with kind, display info, heartbeat tracking, and metadata for AI and human workers.",
+      "tags": ["table", "staff", "workforce", "registry"],
+      "complexity": "simple"
+    },
+    {
+      "id": "table:ag-platform/supabase/migrations/20260515000002_workforce.sql:capability",
+      "type": "table",
+      "name": "capability",
+      "filePath": "ag-platform/supabase/migrations/20260515000002_workforce.sql",
+      "summary": "Capability catalog defining available skills and their categories for the workforce system.",
+      "tags": ["table", "capability", "workforce", "skill"],
+      "complexity": "simple"
+    },
+    {
+      "id": "table:ag-platform/supabase/migrations/20260515000002_workforce.sql:staff_capability",
+      "type": "table",
+      "name": "staff_capability",
+      "filePath": "ag-platform/supabase/migrations/20260515000002_workforce.sql",
+      "summary": "Many-to-many mapping linking staff to capabilities with enablement and grant tracking.",
+      "tags": ["table", "junction", "workforce", "capability"],
+      "complexity": "simple"
+    },
+    {
+      "id": "table:ag-platform/supabase/migrations/20260515000002_workforce.sql:staff_activity",
+      "type": "table",
+      "name": "staff_activity",
+      "filePath": "ag-platform/supabase/migrations/20260515000002_workforce.sql",
+      "summary": "Activity log tracking staff actions including capability usage, case associations, and status transitions.",
+      "tags": ["table", "activity", "workforce", "audit"],
+      "complexity": "simple"
+    },
+    {
+      "id": "table:ag-platform/supabase/migrations/20260518000000_field_app.sql:field_documents",
+      "type": "table",
+      "name": "field_documents",
+      "filePath": "ag-platform/supabase/migrations/20260518000000_field_app.sql",
+      "summary": "Field-collected document uploads with client event dedup, GPS coordinates, and storage path.",
+      "tags": ["table", "field-app", "document", "upload", "gps"],
+      "complexity": "simple"
+    },
+    {
+      "id": "table:ag-platform/supabase/migrations/20260518000000_field_app.sql:case_audit_logs",
+      "type": "table",
+      "name": "case_audit_logs",
+      "filePath": "ag-platform/supabase/migrations/20260518000000_field_app.sql",
+      "summary": "Audit trail for case status transitions with GPS-tagged field notes and actor attribution.",
+      "tags": ["table", "audit", "case", "gps", "field-app"],
+      "complexity": "simple"
+    },
+    {
+      "id": "table:ag-platform/supabase/migrations/20260518000000_field_app.sql:device_push_tokens",
+      "type": "table",
+      "name": "device_push_tokens",
+      "filePath": "ag-platform/supabase/migrations/20260518000000_field_app.sql",
+      "summary": "Expo push token registry per user with device info, revocation, and last-seen tracking.",
+      "tags": ["table", "push", "notification", "device", "field-app"],
+      "complexity": "simple"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:ag-platform/src/store/useAuthStore.ts",
+      "target": "file:ag-platform/src/lib/supabase.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "config:ag-platform/tsconfig.json",
+      "target": "file:ag-platform/src/store/useAuthStore.ts",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:ag-platform/tsconfig.json",
+      "target": "file:ag-platform/src/types/domain.ts",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:ag-platform/tsconfig.json",
+      "target": "file:ag-platform/src/types/storage.ts",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:ag-platform/tsconfig.node.json",
+      "target": "config:ag-platform/tsconfig.json",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:ag-platform/turbo.json",
+      "target": "config:ag-platform/tsconfig.json",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "table:ag-platform/supabase/migrations/20260423_ai_setup.sql",
+      "target": "table:ag-platform/supabase/migrations/20260423_ai_setup.sql:project_embeddings",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "table:ag-platform/supabase/migrations/20260423_ai_setup.sql",
+      "target": "table:ag-platform/supabase/migrations/20260423_ai_setup.sql:projects",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "table:ag-platform/supabase/migrations/20260423_collaboration_setup.sql",
+      "target": "table:ag-platform/supabase/migrations/20260423_collaboration_setup.sql:tasks",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "table:ag-platform/supabase/migrations/20260423_collaboration_setup.sql",
+      "target": "table:ag-platform/supabase/migrations/20260423_collaboration_setup.sql:comments",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "table:ag-platform/supabase/migrations/20260423_collaboration_setup.sql",
+      "target": "table:ag-platform/supabase/migrations/20260423_collaboration_setup.sql:notifications",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "table:ag-platform/supabase/migrations/20260423_collaboration_setup.sql",
+      "target": "table:ag-platform/supabase/migrations/20260423_collaboration_setup.sql:activities",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "table:ag-platform/supabase/migrations/20260423_document_storage_setup.sql",
+      "target": "table:ag-platform/supabase/migrations/20260423_document_storage_setup.sql:files",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "table:ag-platform/supabase/migrations/20260514000000_core_schema.sql",
+      "target": "table:ag-platform/supabase/migrations/20260514000000_core_schema.sql:organizations",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "table:ag-platform/supabase/migrations/20260514000000_core_schema.sql",
+      "target": "table:ag-platform/supabase/migrations/20260514000000_core_schema.sql:cases",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "table:ag-platform/supabase/migrations/20260514000002_rbac_setup.sql",
+      "target": "table:ag-platform/supabase/migrations/20260514000002_rbac_setup.sql:user_roles",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "table:ag-platform/supabase/migrations/20260514000004_workforce_management.sql",
+      "target": "table:ag-platform/supabase/migrations/20260514000004_workforce_management.sql:workforce_members",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "table:ag-platform/supabase/migrations/20260514000004_workforce_management.sql",
+      "target": "table:ag-platform/supabase/migrations/20260514000004_workforce_management.sql:workforce_tasks",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "table:ag-platform/supabase/migrations/20260515000000_voice_command_logs.sql",
+      "target": "table:ag-platform/supabase/migrations/20260515000000_voice_command_logs.sql:voice_command_logs",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "table:ag-platform/supabase/migrations/20260515000001_voice_tool_config.sql",
+      "target": "table:ag-platform/supabase/migrations/20260515000001_voice_tool_config.sql:voice_tool_config",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "table:ag-platform/supabase/migrations/20260515000002_workforce.sql",
+      "target": "table:ag-platform/supabase/migrations/20260515000002_workforce.sql:staff",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "table:ag-platform/supabase/migrations/20260515000002_workforce.sql",
+      "target": "table:ag-platform/supabase/migrations/20260515000002_workforce.sql:capability",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "table:ag-platform/supabase/migrations/20260515000002_workforce.sql",
+      "target": "table:ag-platform/supabase/migrations/20260515000002_workforce.sql:staff_capability",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "table:ag-platform/supabase/migrations/20260515000002_workforce.sql",
+      "target": "table:ag-platform/supabase/migrations/20260515000002_workforce.sql:staff_activity",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "table:ag-platform/supabase/migrations/20260518000000_field_app.sql",
+      "target": "table:ag-platform/supabase/migrations/20260518000000_field_app.sql:field_documents",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "table:ag-platform/supabase/migrations/20260518000000_field_app.sql",
+      "target": "table:ag-platform/supabase/migrations/20260518000000_field_app.sql:case_audit_logs",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "table:ag-platform/supabase/migrations/20260518000000_field_app.sql",
+      "target": "table:ag-platform/supabase/migrations/20260518000000_field_app.sql:device_push_tokens",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "table:ag-platform/supabase/migrations/20260514000000_init_schema.sql",
+      "target": "table:ag-platform/supabase/migrations/20260514000000_core_schema.sql",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "table:ag-platform/supabase/migrations/20260514000002_rbac_setup.sql",
+      "target": "table:ag-platform/supabase/migrations/20260514000000_init_schema.sql",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "table:ag-platform/supabase/migrations/20260514000003_voice_system_setup.sql",
+      "target": "table:ag-platform/supabase/migrations/20260514000000_init_schema.sql",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "table:ag-platform/supabase/migrations/20260514000004_workforce_management.sql",
+      "target": "table:ag-platform/supabase/migrations/20260514000000_init_schema.sql",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "table:ag-platform/supabase/migrations/20260515000000_voice_command_logs.sql",
+      "target": "table:ag-platform/supabase/migrations/20260514000003_voice_system_setup.sql",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "table:ag-platform/supabase/migrations/20260515000001_voice_tool_config.sql",
+      "target": "table:ag-platform/supabase/migrations/20260514000003_voice_system_setup.sql",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "table:ag-platform/supabase/migrations/20260515000002_workforce.sql",
+      "target": "table:ag-platform/supabase/migrations/20260514000004_workforce_management.sql",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "table:ag-platform/supabase/migrations/20260515000003_workforce_phase4.sql",
+      "target": "table:ag-platform/supabase/migrations/20260515000002_workforce.sql",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "table:ag-platform/supabase/migrations/20260518000000_field_app.sql",
+      "target": "table:ag-platform/supabase/migrations/20260514000000_init_schema.sql",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "table:ag-platform/supabase/migrations/20260519000000_push_trigger.sql",
+      "target": "table:ag-platform/supabase/migrations/20260518000000_field_app.sql:device_push_tokens",
+      "type": "migrates",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "table:ag-platform/supabase/migrations/20260519000000_push_trigger.sql",
+      "target": "file:ag-platform/supabase/functions/send-push-on-case-assigned/index.ts",
+      "type": "triggers",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "table:ag-platform/supabase/migrations/20260423_ai_setup.sql",
+      "target": "table:ag-platform/supabase/migrations/20260514000000_core_schema.sql:organizations",
+      "type": "migrates",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "table:ag-platform/supabase/migrations/20260423_document_storage_setup.sql",
+      "target": "table:ag-platform/supabase/migrations/20260423_document_storage_setup.sql:files",
+      "type": "migrates",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "table:ag-platform/supabase/migrations/20260520000000_fix_auth_token_hook.sql",
+      "target": "table:ag-platform/supabase/migrations/20260514000002_rbac_setup.sql:user_roles",
+      "type": "migrates",
+      "direction": "forward",
+      "weight": 0.7
+    }
+  ]
+}

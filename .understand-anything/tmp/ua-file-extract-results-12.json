@@ -1,0 +1,1716 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 25,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "ag-platform/vite.config.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 13,
+      "nonEmptyLines": 12,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "ag-platform/vitest.config.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 10,
+      "nonEmptyLines": 9,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "Caddyfile",
+      "language": "unknown",
+      "fileCategory": "code",
+      "totalLines": 58,
+      "nonEmptyLines": 52,
+      "metrics": {}
+    },
+    {
+      "path": "CLAUDE.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 187,
+      "nonEmptyLines": 145,
+      "sections": [
+        {
+          "heading": "CLAUDE.md",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Repository Layout",
+          "level": 2,
+          "line": 5
+        },
+        {
+          "heading": "Common Commands",
+          "level": 2,
+          "line": 35
+        },
+        {
+          "heading": "ag-associates-ai/",
+          "level": 3,
+          "line": 39
+        },
+        {
+          "heading": "ag-platform/",
+          "level": 3,
+          "line": 75
+        },
+        {
+          "heading": "Pre-commit hooks",
+          "level": 3,
+          "line": 92
+        },
+        {
+          "heading": "Architecture",
+          "level": 2,
+          "line": 96
+        },
+        {
+          "heading": "ag-associates-ai/ — AI Document Pipeline",
+          "level": 3,
+          "line": 100
+        },
+        {
+          "heading": "ag-platform/ — LegalTech Collaboration Platform",
+          "level": 3,
+          "line": 147
+        },
+        {
+          "heading": "Key Conventions & Gotchas",
+          "level": 2,
+          "line": 158
+        },
+        {
+          "heading": "Git Workflow & CI",
+          "level": 2,
+          "line": 169
+        },
+        {
+          "heading": "Project Policies",
+          "level": 2,
+          "line": 179
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 12
+      }
+    },
+    {
+      "path": "CNAME",
+      "language": "unknown",
+      "fileCategory": "code",
+      "totalLines": 1,
+      "nonEmptyLines": 1,
+      "metrics": {}
+    },
+    {
+      "path": "CODEOWNERS",
+      "language": "unknown",
+      "fileCategory": "code",
+      "totalLines": 28,
+      "nonEmptyLines": 20,
+      "metrics": {}
+    },
+    {
+      "path": "commitlint.config.js",
+      "language": "javascript",
+      "fileCategory": "code",
+      "totalLines": 46,
+      "nonEmptyLines": 46,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "content/02-getting-started/jupyter_notebooks.ipynb",
+      "language": "ipynb",
+      "fileCategory": "code",
+      "totalLines": 642,
+      "nonEmptyLines": 642,
+      "metrics": {}
+    },
+    {
+      "path": "CONTEXT.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 119,
+      "nonEmptyLines": 82,
+      "sections": [
+        {
+          "heading": "AG Associates — Domain Glossary",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Core Terms",
+          "level": 2,
+          "line": 3
+        },
+        {
+          "heading": "Aisha",
+          "level": 3,
+          "line": 5
+        },
+        {
+          "heading": "Notice of Intimation (NOI)",
+          "level": 3,
+          "line": 8
+        },
+        {
+          "heading": "NOI Workflow",
+          "level": 3,
+          "line": 11
+        },
+        {
+          "heading": "NOI Status",
+          "level": 3,
+          "line": 14
+        },
+        {
+          "heading": "Case Status",
+          "level": 3,
+          "line": 19
+        },
+        {
+          "heading": "Challan",
+          "level": 3,
+          "line": 26
+        },
+        {
+          "heading": "GRAS Portal",
+          "level": 3,
+          "line": 29
+        },
+        {
+          "heading": "IGR Portal",
+          "level": 3,
+          "line": 32
+        },
+        {
+          "heading": "Sub-Registrar Office",
+          "level": 3,
+          "line": 35
+        },
+        {
+          "heading": "GRN",
+          "level": 3,
+          "line": 38
+        },
+        {
+          "heading": "Intimation Mortgage",
+          "level": 3,
+          "line": 41
+        },
+        {
+          "heading": "Case Type",
+          "level": 3,
+          "line": 44
+        },
+        {
+          "heading": "Rectify",
+          "level": 3,
+          "line": 47
+        },
+        {
+          "heading": "NOI Drop",
+          "level": 3,
+          "line": 50
+        },
+        {
+          "heading": "Owner Consent",
+          "level": 3,
+          "line": 53
+        },
+        {
+          "heading": "Sanction Letter",
+          "level": 3,
+          "line": 56
+        },
+        {
+          "heading": "GrasRPAExecutor",
+          "level": 3,
+          "line": 59
+        },
+        {
+          "heading": "IgrRpaExecutor",
+          "level": 3,
+          "line": 62
+        },
+        {
+          "heading": "OTP Bridge",
+          "level": 3,
+          "line": 65
+        },
+        {
+          "heading": "Telegram Bot",
+          "level": 3,
+          "line": 68
+        },
+        {
+          "heading": "Email Intake Agent",
+          "level": 3,
+          "line": 71
+        },
+        {
+          "heading": "Doc Verifier Agent",
+          "level": 3,
+          "line": 74
+        },
+        {
+          "heading": "Auto-Comms Agent",
+          "level": 3,
+          "line": 77
+        },
+        {
+          "heading": "Deployment",
+          "level": 2,
+          "line": 80
+        },
+        {
+          "heading": "Production Stack (VPS Docker Compose)",
+          "level": 3,
+          "line": 82
+        },
+        {
+          "heading": "Caddy Routes",
+          "level": 3,
+          "line": 85
+        },
+        {
+          "heading": "CI/CD",
+          "level": 3,
+          "line": 93
+        },
+        {
+          "heading": "Governance",
+          "level": 2,
+          "line": 96
+        },
+        {
+          "heading": "Commit Convention",
+          "level": 3,
+          "line": 98
+        },
+        {
+          "heading": "Branch Strategy",
+          "level": 3,
+          "line": 101
+        },
+        {
+          "heading": "Error Escalation",
+          "level": 3,
+          "line": 104
+        },
+        {
+          "heading": "Users / Roles (Hierarchical RBAC)",
+          "level": 2,
+          "line": 107
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 34
+      }
+    },
+    {
+      "path": "CONTRIBUTING.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 78,
+      "nonEmptyLines": 53,
+      "sections": [
+        {
+          "heading": "Contributing to AG Associates",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "🏗 Development Setup",
+          "level": 2,
+          "line": 5
+        },
+        {
+          "heading": "Prerequisites",
+          "level": 3,
+          "line": 7
+        },
+        {
+          "heading": "Clone & Configure",
+          "level": 3,
+          "line": 13
+        },
+        {
+          "heading": "📏 Code Standards",
+          "level": 2,
+          "line": 22
+        },
+        {
+          "heading": "Commit Messages",
+          "level": 3,
+          "line": 24
+        },
+        {
+          "heading": "Branch Naming",
+          "level": 3,
+          "line": 35
+        },
+        {
+          "heading": "Python (Backend)",
+          "level": 3,
+          "line": 43
+        },
+        {
+          "heading": "TypeScript (Platform)",
+          "level": 3,
+          "line": 50
+        },
+        {
+          "heading": "🔍 Before Submitting a PR",
+          "level": 2,
+          "line": 56
+        },
+        {
+          "heading": "🐛 Reporting Issues",
+          "level": 2,
+          "line": 64
+        },
+        {
+          "heading": "🔒 Security",
+          "level": 2,
+          "line": 72
+        },
+        {
+          "heading": "📜 License",
+          "level": 2,
+          "line": 76
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 13
+      }
+    },
+    {
+      "path": "CULTURE.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 306,
+      "nonEmptyLines": 168,
+      "sections": [
+        {
+          "heading": "AG Associates — The Culture Document",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "1. Who We Are",
+          "level": 2,
+          "line": 7
+        },
+        {
+          "heading": "2. Our Mission",
+          "level": 2,
+          "line": 19
+        },
+        {
+          "heading": "3. Our Vision",
+          "level": 2,
+          "line": 29
+        },
+        {
+          "heading": "4. Core Principles",
+          "level": 2,
+          "line": 41
+        },
+        {
+          "heading": "Ownership Over Excuses",
+          "level": 3,
+          "line": 43
+        },
+        {
+          "heading": "Speed Over Bureaucracy",
+          "level": 3,
+          "line": 51
+        },
+        {
+          "heading": "Systems Over Chaos",
+          "level": 3,
+          "line": 59
+        },
+        {
+          "heading": "Clarity Over Ego",
+          "level": 3,
+          "line": 67
+        },
+        {
+          "heading": "Automation Before Hiring",
+          "level": 3,
+          "line": 75
+        },
+        {
+          "heading": "Data Before Assumptions",
+          "level": 3,
+          "line": 83
+        },
+        {
+          "heading": "Relentless Client Outcomes",
+          "level": 3,
+          "line": 91
+        },
+        {
+          "heading": "Calm Under Pressure",
+          "level": 3,
+          "line": 99
+        },
+        {
+          "heading": "Deep Work Culture",
+          "level": 3,
+          "line": 107
+        },
+        {
+          "heading": "Confidentiality and Trust",
+          "level": 3,
+          "line": 115
+        },
+        {
+          "heading": "High Accountability",
+          "level": 3,
+          "line": 123
+        },
+        {
+          "heading": "Continuous Learning",
+          "level": 3,
+          "line": 131
+        },
+        {
+          "heading": "5. How We Work",
+          "level": 2,
+          "line": 141
+        },
+        {
+          "heading": "Async-First Communication",
+          "level": 3,
+          "line": 143
+        },
+        {
+          "heading": "Documentation Culture",
+          "level": 3,
+          "line": 149
+        },
+        {
+          "heading": "Execution Tracking",
+          "level": 3,
+          "line": 155
+        },
+        {
+          "heading": "AI-Assisted Workflows",
+          "level": 3,
+          "line": 159
+        },
+        {
+          "heading": "Decision-Making Structure",
+          "level": 3,
+          "line": 163
+        },
+        {
+          "heading": "Meeting Philosophy",
+          "level": 3,
+          "line": 169
+        },
+        {
+          "heading": "Escalation Systems",
+          "level": 3,
+          "line": 175
+        },
+        {
+          "heading": "Operational Discipline",
+          "level": 3,
+          "line": 183
+        },
+        {
+          "heading": "6. What We Expect From Team Members",
+          "level": 2,
+          "line": 191
+        },
+        {
+          "heading": "7. Leadership Philosophy",
+          "level": 2,
+          "line": 211
+        },
+        {
+          "heading": "8. Hiring Philosophy",
+          "level": 2,
+          "line": 229
+        },
+        {
+          "heading": "9. Client Commitment",
+          "level": 2,
+          "line": 241
+        },
+        {
+          "heading": "10. The Future",
+          "level": 2,
+          "line": 257
+        },
+        {
+          "heading": "What AG Associates Stands For",
+          "level": 2,
+          "line": 274
+        },
+        {
+          "heading": "What AG Associates Will Never Become",
+          "level": 2,
+          "line": 286
+        },
+        {
+          "heading": "The AG Associates Pledge",
+          "level": 2,
+          "line": 297
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 34
+      }
+    },
+    {
+      "path": "DEPLOYMENT_PLAYBOOK.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 261,
+      "nonEmptyLines": 178,
+      "sections": [
+        {
+          "heading": "AG Associates — Production Deployment Playbook",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "1. One-time provisioning",
+          "level": 2,
+          "line": 11
+        },
+        {
+          "heading": "1.1 Pick a VPS",
+          "level": 3,
+          "line": 13
+        },
+        {
+          "heading": "1.2 Domain + DNS",
+          "level": 3,
+          "line": 17
+        },
+        {
+          "heading": "1.3 Supabase Cloud project",
+          "level": 3,
+          "line": 32
+        },
+        {
+          "heading": "1.4 LLM provider",
+          "level": 3,
+          "line": 40
+        },
+        {
+          "heading": "1.5 Bootstrap the VPS",
+          "level": 3,
+          "line": 44
+        },
+        {
+          "heading": "1.6 Fill in secrets",
+          "level": 3,
+          "line": 54
+        },
+        {
+          "heading": "1.7 First boot",
+          "level": 3,
+          "line": 62
+        },
+        {
+          "heading": "1.8 Seed RAG templates (optional — RAG gracefully degrades without this)",
+          "level": 3,
+          "line": 80
+        },
+        {
+          "heading": "1.9 Seed a test NOI case (optional)",
+          "level": 3,
+          "line": 88
+        },
+        {
+          "heading": "2. Smoke tests",
+          "level": 2,
+          "line": 100
+        },
+        {
+          "heading": "3. Continuous deployment",
+          "level": 2,
+          "line": 142
+        },
+        {
+          "heading": "Rollback",
+          "level": 3,
+          "line": 176
+        },
+        {
+          "heading": "4. Backups & restore",
+          "level": 2,
+          "line": 191
+        },
+        {
+          "heading": "5. Observability (minimum viable)",
+          "level": 2,
+          "line": 213
+        },
+        {
+          "heading": "6. Day-2 operations",
+          "level": 2,
+          "line": 221
+        },
+        {
+          "heading": "7. NeSL integration (deferred)",
+          "level": 2,
+          "line": 240
+        },
+        {
+          "heading": "Appendix A — Alternative: managed cloud (Supabase + Cloud Run + Vercel)",
+          "level": 2,
+          "line": 251
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 19
+      }
+    },
+    {
+      "path": "DEVIN_PLAYBOOK.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 154,
+      "nonEmptyLines": 108,
+      "sections": [
+        {
+          "heading": "DEVIN_PLAYBOOK.md",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "1. First-Session Checklist",
+          "level": 2,
+          "line": 8
+        },
+        {
+          "heading": "2. Sandbox Setup (Reproducible)",
+          "level": 2,
+          "line": 19
+        },
+        {
+          "heading": "3. Branch & PR Conventions",
+          "level": 2,
+          "line": 46
+        },
+        {
+          "heading": "4. Risk-Tiered Auto-Merge — What Devin Must Know",
+          "level": 2,
+          "line": 68
+        },
+        {
+          "heading": "5. Verification Bar (\"Done\" Definition)",
+          "level": 2,
+          "line": 82
+        },
+        {
+          "heading": "6. Repo-Specific Gotchas (Top 5)",
+          "level": 2,
+          "line": 98
+        },
+        {
+          "heading": "7. Communicating Progress",
+          "level": 2,
+          "line": 110
+        },
+        {
+          "heading": "8. Self-Improvement",
+          "level": 2,
+          "line": 119
+        },
+        {
+          "heading": "9. Things Devin Should NOT Do",
+          "level": 2,
+          "line": 129
+        },
+        {
+          "heading": "10. Quick Reference",
+          "level": 2,
+          "line": 140
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 11
+      }
+    },
+    {
+      "path": "docker-compose.prod.yml",
+      "language": "yaml",
+      "fileCategory": "infra",
+      "totalLines": 254,
+      "nonEmptyLines": 239,
+      "sections": [
+        {
+          "heading": "name",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "x-restart",
+          "level": 1,
+          "line": 3
+        },
+        {
+          "heading": "x-logging",
+          "level": 1,
+          "line": 6
+        },
+        {
+          "heading": "services",
+          "level": 1,
+          "line": 13
+        },
+        {
+          "heading": "volumes",
+          "level": 1,
+          "line": 243
+        },
+        {
+          "heading": "networks",
+          "level": 1,
+          "line": 252
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 6
+      }
+    },
+    {
+      "path": "docker-compose.yml",
+      "language": "yaml",
+      "fileCategory": "infra",
+      "totalLines": 64,
+      "nonEmptyLines": 59,
+      "sections": [
+        {
+          "heading": "version",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "services",
+          "level": 1,
+          "line": 3
+        },
+        {
+          "heading": "volumes",
+          "level": 1,
+          "line": 63
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 3
+      }
+    },
+    {
+      "path": "docs/adr/0001-monorepo-orchestration.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 55,
+      "nonEmptyLines": 35,
+      "sections": [
+        {
+          "heading": "ADR 0001: Monorepo Orchestration Strategy",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Status",
+          "level": 2,
+          "line": 3
+        },
+        {
+          "heading": "Context",
+          "level": 2,
+          "line": 7
+        },
+        {
+          "heading": "Decision",
+          "level": 2,
+          "line": 16
+        },
+        {
+          "heading": "Why not force everything into Turborepo?",
+          "level": 3,
+          "line": 26
+        },
+        {
+          "heading": "Why Conventional Commits for both stacks?",
+          "level": 3,
+          "line": 30
+        },
+        {
+          "heading": "Consequences",
+          "level": 2,
+          "line": 34
+        },
+        {
+          "heading": "Positive",
+          "level": 3,
+          "line": 36
+        },
+        {
+          "heading": "Negative",
+          "level": 3,
+          "line": 45
+        },
+        {
+          "heading": "Risks",
+          "level": 3,
+          "line": 51
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 10
+      }
+    },
+    {
+      "path": "docs/noi-automation-plan.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 490,
+      "nonEmptyLines": 404,
+      "sections": [
+        {
+          "heading": "NOI Automation — Complete System Plan",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Agent Orchestration Architecture",
+          "level": 2,
+          "line": 3
+        },
+        {
+          "heading": "Parallel Execution Design",
+          "level": 3,
+          "line": 5
+        },
+        {
+          "heading": "LangGraph Implementation",
+          "level": 3,
+          "line": 58
+        },
+        {
+          "heading": "Parallel Execution Guarantees",
+          "level": 3,
+          "line": 112
+        },
+        {
+          "heading": "Overview",
+          "level": 2,
+          "line": 122
+        },
+        {
+          "heading": "1. Architecture",
+          "level": 2,
+          "line": 128
+        },
+        {
+          "heading": "2. Agents (Build vs. Existing)",
+          "level": 2,
+          "line": 175
+        },
+        {
+          "heading": "3. Email Intake",
+          "level": 2,
+          "line": 190
+        },
+        {
+          "heading": "How bank email becomes a case",
+          "level": 3,
+          "line": 192
+        },
+        {
+          "heading": "Implementation options",
+          "level": 3,
+          "line": 212
+        },
+        {
+          "heading": "4. Document Verification",
+          "level": 2,
+          "line": 225
+        },
+        {
+          "heading": "AI scans uploaded docs against required checklist",
+          "level": 3,
+          "line": 227
+        },
+        {
+          "heading": "If all docs present → auto-proceed to challan",
+          "level": 3,
+          "line": 244
+        },
+        {
+          "heading": "If docs missing → trigger Auto-Comms Agent",
+          "level": 3,
+          "line": 245
+        },
+        {
+          "heading": "5. Automated Communication (Auto-Comms Agent)",
+          "level": 2,
+          "line": 249
+        },
+        {
+          "heading": "Triggers + templates",
+          "level": 3,
+          "line": 251
+        },
+        {
+          "heading": "Channel",
+          "level": 3,
+          "line": 263
+        },
+        {
+          "heading": "Implementation",
+          "level": 3,
+          "line": 271
+        },
+        {
+          "heading": "6. OTP Bridge (Telegram + SMS)",
+          "level": 2,
+          "line": 282
+        },
+        {
+          "heading": "Flow",
+          "level": 3,
+          "line": 284
+        },
+        {
+          "heading": "SMS ingestion — three supported methods",
+          "level": 3,
+          "line": 314
+        },
+        {
+          "heading": "Telegram Bot commands",
+          "level": 3,
+          "line": 322
+        },
+        {
+          "heading": "OTP matching logic (AI reasoning)",
+          "level": 3,
+          "line": 333
+        },
+        {
+          "heading": "7. RPA Executor (GRAS + IGR)",
+          "level": 2,
+          "line": 350
+        },
+        {
+          "heading": "GRAS Challan (exists, needs wiring)",
+          "level": 3,
+          "line": 352
+        },
+        {
+          "heading": "IGR E-Filing for NOI (new)",
+          "level": 3,
+          "line": 373
+        },
+        {
+          "heading": "8. Staff Workflow (Day-to-Day)",
+          "level": 2,
+          "line": 397
+        },
+        {
+          "heading": "9. Solo Advocate Dashboard",
+          "level": 2,
+          "line": 429
+        },
+        {
+          "heading": "10. Build Order (Recommended Phases)",
+          "level": 2,
+          "line": 441
+        },
+        {
+          "heading": "Phase 1 — Foundation (Week 1)",
+          "level": 3,
+          "line": 443
+        },
+        {
+          "heading": "Phase 2 — OTP Bridge (Week 2)",
+          "level": 3,
+          "line": 449
+        },
+        {
+          "heading": "Phase 3 — RPA (Week 3)",
+          "level": 3,
+          "line": 455
+        },
+        {
+          "heading": "Phase 4 — Polish (Week 4)",
+          "level": 3,
+          "line": 461
+        },
+        {
+          "heading": "11. Key Decisions (ADRs Needed)",
+          "level": 2,
+          "line": 469
+        },
+        {
+          "heading": "12. Risks",
+          "level": 2,
+          "line": 482
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 36
+      }
+    },
+    {
+      "path": "ERROR_HANDLING_GUIDELINES.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 78,
+      "nonEmptyLines": 62,
+      "sections": [
+        {
+          "heading": "Error Handling Guidelines",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "When to Use",
+          "level": 2,
+          "line": 5
+        },
+        {
+          "heading": "Process",
+          "level": 2,
+          "line": 12
+        },
+        {
+          "heading": "Step 1: Design Error Paths Explicitly",
+          "level": 3,
+          "line": 14
+        },
+        {
+          "heading": "Step 2: Meaningful Error Messages",
+          "level": 3,
+          "line": 24
+        },
+        {
+          "heading": "Step 3: Retry with Backoff",
+          "level": 3,
+          "line": 34
+        },
+        {
+          "heading": "Step 4: Graceful Degradation",
+          "level": 3,
+          "line": 41
+        },
+        {
+          "heading": "Step 5: Structured Error Responses (APIs)",
+          "level": 3,
+          "line": 47
+        },
+        {
+          "heading": "Common Rationalizations (and Rebuttals)",
+          "level": 2,
+          "line": 62
+        },
+        {
+          "heading": "Verification Checklist",
+          "level": 2,
+          "line": 72
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 10
+      }
+    },
+    {
+      "path": "FRONTEND_UI_GUIDELINES.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 62,
+      "nonEmptyLines": 48,
+      "sections": [
+        {
+          "heading": "Frontend UI Engineering Guidelines",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "When to Use",
+          "level": 2,
+          "line": 10
+        },
+        {
+          "heading": "Process",
+          "level": 2,
+          "line": 17
+        },
+        {
+          "heading": "Step 1: Accessibility First",
+          "level": 3,
+          "line": 19
+        },
+        {
+          "heading": "Step 2: Performance (Core Web Vitals)",
+          "level": 3,
+          "line": 27
+        },
+        {
+          "heading": "Step 3: Responsive Design",
+          "level": 3,
+          "line": 35
+        },
+        {
+          "heading": "Step 4: State Management Discipline",
+          "level": 3,
+          "line": 40
+        },
+        {
+          "heading": "Common Rationalizations (and Rebuttals)",
+          "level": 2,
+          "line": 48
+        },
+        {
+          "heading": "Verification Checklist",
+          "level": 2,
+          "line": 57
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 9
+      }
+    },
+    {
+      "path": "GIT_GUIDELINES.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 64,
+      "nonEmptyLines": 48,
+      "sections": [
+        {
+          "heading": "Git & Version Control Guidelines",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "When to Use",
+          "level": 2,
+          "line": 5
+        },
+        {
+          "heading": "Process",
+          "level": 2,
+          "line": 12
+        },
+        {
+          "heading": "Step 1: Atomic Commits",
+          "level": 3,
+          "line": 14
+        },
+        {
+          "heading": "Step 2: Commit Message Format",
+          "level": 3,
+          "line": 20
+        },
+        {
+          "heading": "Step 3: Trunk-Based Development",
+          "level": 3,
+          "line": 33
+        },
+        {
+          "heading": "Step 4: Pre-Commit Gates",
+          "level": 3,
+          "line": 40
+        },
+        {
+          "heading": "Common Rationalizations (and Rebuttals)",
+          "level": 2,
+          "line": 46
+        },
+        {
+          "heading": "Verification Checklist",
+          "level": 2,
+          "line": 56
+        },
+        {
+          "heading": "References",
+          "level": 2,
+          "line": 62
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 10
+      }
+    },
+    {
+      "path": "GOAL_DRIVEN_EXECUTION_GUIDELINES.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 83,
+      "nonEmptyLines": 62,
+      "sections": [
+        {
+          "heading": "Goal-Driven Execution Guidelines",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "When to Use",
+          "level": 2,
+          "line": 12
+        },
+        {
+          "heading": "Process",
+          "level": 2,
+          "line": 20
+        },
+        {
+          "heading": "Step 1: Extract the Underlying Goal",
+          "level": 3,
+          "line": 22
+        },
+        {
+          "heading": "Step 2: Define Success Criteria",
+          "level": 3,
+          "line": 33
+        },
+        {
+          "heading": "Step 3: Define the Execution Plan",
+          "level": 3,
+          "line": 43
+        },
+        {
+          "heading": "Step 4: Execute and Loop",
+          "level": 3,
+          "line": 52
+        },
+        {
+          "heading": "Common Rationalizations (and Rebuttals)",
+          "level": 2,
+          "line": 60
+        },
+        {
+          "heading": "Red Flags 🚩",
+          "level": 2,
+          "line": 71
+        },
+        {
+          "heading": "Verification Checklist",
+          "level": 2,
+          "line": 79
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 10
+      }
+    },
+    {
+      "path": "GOVERNANCE.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 113,
+      "nonEmptyLines": 90,
+      "sections": [
+        {
+          "heading": "AG ASSOCIATES — Project Governance",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Branch Strategy",
+          "level": 2,
+          "line": 3
+        },
+        {
+          "heading": "Commit Convention",
+          "level": 2,
+          "line": 18
+        },
+        {
+          "heading": "Types",
+          "level": 3,
+          "line": 30
+        },
+        {
+          "heading": "Scopes",
+          "level": 3,
+          "line": 45
+        },
+        {
+          "heading": "PR Workflow",
+          "level": 2,
+          "line": 64
+        },
+        {
+          "heading": "Branch Protection (Recommended for `main`)",
+          "level": 2,
+          "line": 75
+        },
+        {
+          "heading": "Release Process",
+          "level": 2,
+          "line": 83
+        },
+        {
+          "heading": "Environment Strategy",
+          "level": 2,
+          "line": 90
+        },
+        {
+          "heading": "Tech Stack Overview",
+          "level": 2,
+          "line": 98
+        },
+        {
+          "heading": "Error Escalation",
+          "level": 2,
+          "line": 109
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 11
+      }
+    },
+    {
+      "path": "HALLUCINATION_MITIGATION_GUIDELINES.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 88,
+      "nonEmptyLines": 70,
+      "sections": [
+        {
+          "heading": "Hallucination Detection and Mitigation Guidelines",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "When to Use",
+          "level": 2,
+          "line": 11
+        },
+        {
+          "heading": "Process",
+          "level": 2,
+          "line": 20
+        },
+        {
+          "heading": "Step 1: Classify Your Hallucination Risk",
+          "level": 3,
+          "line": 22
+        },
+        {
+          "heading": "Step 2: Ground LLM Outputs",
+          "level": 3,
+          "line": 32
+        },
+        {
+          "heading": "Step 3: Build Verification Layers",
+          "level": 3,
+          "line": 39
+        },
+        {
+          "heading": "Step 4: Design Fail-Safe Defaults",
+          "level": 3,
+          "line": 46
+        },
+        {
+          "heading": "Step 5: Monitor for Hallucinations in Production",
+          "level": 3,
+          "line": 53
+        },
+        {
+          "heading": "Common Rationalizations (and Rebuttals)",
+          "level": 2,
+          "line": 62
+        },
+        {
+          "heading": "Red Flags 🚩",
+          "level": 2,
+          "line": 73
+        },
+        {
+          "heading": "Verification Checklist",
+          "level": 2,
+          "line": 82
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 11
+      }
+    },
+    {
+      "path": "Makefile",
+      "language": "makefile",
+      "fileCategory": "infra",
+      "totalLines": 118,
+      "nonEmptyLines": 85,
+      "steps": [
+        {
+          "name": "help",
+          "startLine": 7,
+          "endLine": 26
+        },
+        {
+          "name": "python-install",
+          "startLine": 32,
+          "endLine": 34
+        },
+        {
+          "name": "python-lint",
+          "startLine": 35,
+          "endLine": 37
+        },
+        {
+          "name": "python-format",
+          "startLine": 38,
+          "endLine": 40
+        },
+        {
+          "name": "python-check",
+          "startLine": 41,
+          "endLine": 43
+        },
+        {
+          "name": "python-test",
+          "startLine": 44,
+          "endLine": 46
+        },
+        {
+          "name": "platform-install",
+          "startLine": 51,
+          "endLine": 53
+        },
+        {
+          "name": "platform-lint",
+          "startLine": 54,
+          "endLine": 56
+        },
+        {
+          "name": "platform-type-check",
+          "startLine": 57,
+          "endLine": 59
+        },
+        {
+          "name": "platform-test",
+          "startLine": 60,
+          "endLine": 62
+        },
+        {
+          "name": "platform-build",
+          "startLine": 63,
+          "endLine": 65
+        },
+        {
+          "name": "install",
+          "startLine": 68,
+          "endLine": 69
+        },
+        {
+          "name": "lint",
+          "startLine": 70,
+          "endLine": 71
+        },
+        {
+          "name": "format",
+          "startLine": 72,
+          "endLine": 74
+        },
+        {
+          "name": "type-check",
+          "startLine": 75,
+          "endLine": 76
+        },
+        {
+          "name": "test",
+          "startLine": 77,
+          "endLine": 78
+        },
+        {
+          "name": "build",
+          "startLine": 79,
+          "endLine": 81
+        },
+        {
+          "name": "clean",
+          "startLine": 82,
+          "endLine": 86
+        },
+        {
+          "name": "dev",
+          "startLine": 87,
+          "endLine": 96
+        },
+        {
+          "name": "ci",
+          "startLine": 97,
+          "endLine": 98
+        },
+        {
+          "name": "pre-commit",
+          "startLine": 99,
+          "endLine": 101
+        },
+        {
+          "name": "deploy",
+          "startLine": 102,
+          "endLine": 105
+        },
+        {
+          "name": "preview",
+          "startLine": 106,
+          "endLine": 109
+        },
+        {
+          "name": "noi-prototype",
+          "startLine": 112,
+          "endLine": 114
+        },
+        {
+          "name": "noi-prototype-build",
+          "startLine": 115,
+          "endLine": 117
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "stepCount": 25
+      }
+    },
+    {
+      "path": "package.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 17,
+      "nonEmptyLines": 17,
+      "sections": [
+        {
+          "heading": "name",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "version",
+          "level": 1,
+          "line": 3
+        },
+        {
+          "heading": "description",
+          "level": 1,
+          "line": 4
+        },
+        {
+          "heading": "private",
+          "level": 1,
+          "line": 5
+        },
+        {
+          "heading": "scripts",
+          "level": 1,
+          "line": 6
+        },
+        {
+          "heading": "workspaces",
+          "level": 1,
+          "line": 10
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 6
+      }
+    }
+  ]
+}

@@ -1,0 +1,1022 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 25,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "ag-platform/src/store/useAuthStore.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 54,
+      "nonEmptyLines": 51,
+      "exports": [
+        {
+          "name": "useAuthStore",
+          "line": 17,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "ag-platform/src/types/domain.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 88,
+      "nonEmptyLines": 81,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "ag-platform/src/types/storage.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 33,
+      "nonEmptyLines": 31,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "ag-platform/supabase/functions/send-push-on-case-assigned/index.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 101,
+      "nonEmptyLines": 89,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "ag-platform/supabase/migrations/20260423_ai_setup.sql",
+      "language": "sql",
+      "fileCategory": "data",
+      "totalLines": 56,
+      "nonEmptyLines": 51,
+      "definitions": [
+        {
+          "name": "public",
+          "kind": "table",
+          "fields": [
+            "id",
+            "project_id",
+            "content",
+            "embedding",
+            "updated_at"
+          ],
+          "startLine": 6,
+          "endLine": 13
+        },
+        {
+          "name": "public",
+          "kind": "table",
+          "fields": [
+            "id",
+            "organization_id",
+            "name",
+            "description",
+            "created_at"
+          ],
+          "startLine": 17,
+          "endLine": 23
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "definitionCount": 2
+      }
+    },
+    {
+      "path": "ag-platform/supabase/migrations/20260423_ai_tokens.sql",
+      "language": "sql",
+      "fileCategory": "data",
+      "totalLines": 11,
+      "nonEmptyLines": 11,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "definitionCount": 0
+      }
+    },
+    {
+      "path": "ag-platform/supabase/migrations/20260423_collaboration_setup.sql",
+      "language": "sql",
+      "fileCategory": "data",
+      "totalLines": 75,
+      "nonEmptyLines": 66,
+      "definitions": [
+        {
+          "name": "public",
+          "kind": "table",
+          "fields": [
+            "id",
+            "project_id",
+            "description",
+            "status",
+            "position",
+            "assignee_id",
+            "created_at",
+            "updated_at"
+          ],
+          "startLine": 3,
+          "endLine": 13
+        },
+        {
+          "name": "public",
+          "kind": "table",
+          "fields": [
+            "id",
+            "project_id",
+            "task_id",
+            "user_id",
+            "content",
+            "created_at",
+            "updated_at"
+          ],
+          "startLine": 15,
+          "endLine": 23
+        },
+        {
+          "name": "public",
+          "kind": "table",
+          "fields": [
+            "id",
+            "user_id",
+            "type",
+            "message",
+            "is_read",
+            "link",
+            "created_at"
+          ],
+          "startLine": 25,
+          "endLine": 33
+        },
+        {
+          "name": "public",
+          "kind": "table",
+          "fields": [
+            "id",
+            "project_id",
+            "user_id",
+            "action",
+            "target",
+            "created_at"
+          ],
+          "startLine": 35,
+          "endLine": 42
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "definitionCount": 4
+      }
+    },
+    {
+      "path": "ag-platform/supabase/migrations/20260423_document_storage_setup.sql",
+      "language": "sql",
+      "fileCategory": "data",
+      "totalLines": 93,
+      "nonEmptyLines": 78,
+      "definitions": [
+        {
+          "name": "public",
+          "kind": "table",
+          "fields": [
+            "id",
+            "organization_id",
+            "project_id",
+            "uploader_id",
+            "name",
+            "storage_path",
+            "bucket_id",
+            "size_bytes",
+            "content_type",
+            "version_number",
+            "parent_file_id",
+            "created_at",
+            "is_archived"
+          ],
+          "startLine": 16,
+          "endLine": 30
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "definitionCount": 1
+      }
+    },
+    {
+      "path": "ag-platform/supabase/migrations/20260514000000_core_schema.sql",
+      "language": "sql",
+      "fileCategory": "data",
+      "totalLines": 85,
+      "nonEmptyLines": 75,
+      "definitions": [
+        {
+          "name": "organizations",
+          "kind": "table",
+          "fields": [
+            "id",
+            "name",
+            "created_at"
+          ],
+          "startLine": 17,
+          "endLine": 21
+        },
+        {
+          "name": "cases",
+          "kind": "table",
+          "fields": [
+            "id",
+            "org_id",
+            "bank_name",
+            "case_type",
+            "status",
+            "created_at",
+            "updated_at"
+          ],
+          "startLine": 24,
+          "endLine": 32
+        },
+        {
+          "name": "idx_cases_org_id",
+          "kind": "index",
+          "fields": [],
+          "startLine": 49,
+          "endLine": 49
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "definitionCount": 3
+      }
+    },
+    {
+      "path": "ag-platform/supabase/migrations/20260514000000_init_schema.sql",
+      "language": "sql",
+      "fileCategory": "data",
+      "totalLines": 64,
+      "nonEmptyLines": 57,
+      "definitions": [
+        {
+          "name": "organizations",
+          "kind": "table",
+          "fields": [
+            "id",
+            "name",
+            "created_at"
+          ],
+          "startLine": 9,
+          "endLine": 13
+        },
+        {
+          "name": "cases",
+          "kind": "table",
+          "fields": [
+            "id",
+            "org_id",
+            "bank_name",
+            "client_name",
+            "pan_number",
+            "consideration_amount",
+            "stamp_duty_paid",
+            "status",
+            "document_embedding",
+            "updated_at"
+          ],
+          "startLine": 16,
+          "endLine": 28
+        },
+        {
+          "name": "idx_cases_org_id",
+          "kind": "index",
+          "fields": [],
+          "startLine": 31,
+          "endLine": 31
+        },
+        {
+          "name": "idx_cases_bank_name",
+          "kind": "index",
+          "fields": [],
+          "startLine": 32,
+          "endLine": 32
+        },
+        {
+          "name": "idx_cases_status",
+          "kind": "index",
+          "fields": [],
+          "startLine": 33,
+          "endLine": 33
+        },
+        {
+          "name": "idx_cases_org_status",
+          "kind": "index",
+          "fields": [],
+          "startLine": 34,
+          "endLine": 34
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "definitionCount": 6
+      }
+    },
+    {
+      "path": "ag-platform/supabase/migrations/20260514000001_auth_hooks.sql",
+      "language": "sql",
+      "fileCategory": "data",
+      "totalLines": 52,
+      "nonEmptyLines": 41,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "definitionCount": 0
+      }
+    },
+    {
+      "path": "ag-platform/supabase/migrations/20260514000002_rbac_setup.sql",
+      "language": "sql",
+      "fileCategory": "data",
+      "totalLines": 43,
+      "nonEmptyLines": 38,
+      "definitions": [
+        {
+          "name": "public",
+          "kind": "table",
+          "fields": [
+            "id",
+            "user_id",
+            "role",
+            "created_at"
+          ],
+          "startLine": 2,
+          "endLine": 8
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "definitionCount": 1
+      }
+    },
+    {
+      "path": "ag-platform/supabase/migrations/20260514000003_voice_system_setup.sql",
+      "language": "sql",
+      "fileCategory": "data",
+      "totalLines": 67,
+      "nonEmptyLines": 60,
+      "definitions": [
+        {
+          "name": "public",
+          "kind": "table",
+          "fields": [
+            "id",
+            "user_id",
+            "audio_s3_key",
+            "intent",
+            "tool",
+            "args",
+            "status",
+            "rejected",
+            "confirmed_at",
+            "result",
+            "error",
+            "created_at"
+          ],
+          "startLine": 2,
+          "endLine": 16
+        },
+        {
+          "name": "public",
+          "kind": "table",
+          "fields": [
+            "id",
+            "enabled",
+            "kill_switch_active",
+            "updated_at"
+          ],
+          "startLine": 39,
+          "endLine": 44
+        },
+        {
+          "name": "public",
+          "kind": "table",
+          "fields": [
+            "id",
+            "name",
+            "description",
+            "risk_level",
+            "high",
+            "required_role",
+            "created_at"
+          ],
+          "startLine": 50,
+          "endLine": 58
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "definitionCount": 3
+      }
+    },
+    {
+      "path": "ag-platform/supabase/migrations/20260514000004_workforce_management.sql",
+      "language": "sql",
+      "fileCategory": "data",
+      "totalLines": 95,
+      "nonEmptyLines": 84,
+      "definitions": [
+        {
+          "name": "public",
+          "kind": "table",
+          "fields": [
+            "id",
+            "org_id",
+            "user_id",
+            "type",
+            "role",
+            "status",
+            "maintenance",
+            "load_score",
+            "active",
+            "updated_at"
+          ],
+          "startLine": 23,
+          "endLine": 35
+        },
+        {
+          "name": "public",
+          "kind": "table",
+          "fields": [
+            "id",
+            "org_id",
+            "case_id",
+            "assigned_to",
+            "description",
+            "priority",
+            "status",
+            "output",
+            "started_at",
+            "completed_at",
+            "created_at",
+            "updated_at"
+          ],
+          "startLine": 38,
+          "endLine": 51
+        },
+        {
+          "name": "public",
+          "kind": "table",
+          "fields": [
+            "id",
+            "case_id",
+            "sender_id",
+            "content",
+            "created_at"
+          ],
+          "startLine": 54,
+          "endLine": 60
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "definitionCount": 3
+      }
+    },
+    {
+      "path": "ag-platform/supabase/migrations/20260515000000_voice_command_logs.sql",
+      "language": "sql",
+      "fileCategory": "data",
+      "totalLines": 46,
+      "nonEmptyLines": 38,
+      "definitions": [
+        {
+          "name": "voice_command_logs",
+          "kind": "table",
+          "fields": [
+            "id",
+            "user_id",
+            "transcript",
+            "detected_language",
+            "tool_name",
+            "tool_args",
+            "risk",
+            "status",
+            "result",
+            "audio_s3_key",
+            "created_at",
+            "confirmed_at"
+          ],
+          "startLine": 19,
+          "endLine": 32
+        },
+        {
+          "name": "idx_voice_command_logs_user_created",
+          "kind": "index",
+          "fields": [],
+          "startLine": 34,
+          "endLine": 34
+        },
+        {
+          "name": "idx_voice_command_logs_status",
+          "kind": "index",
+          "fields": [],
+          "startLine": 37,
+          "endLine": 37
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "definitionCount": 3
+      }
+    },
+    {
+      "path": "ag-platform/supabase/migrations/20260515000001_voice_tool_config.sql",
+      "language": "sql",
+      "fileCategory": "data",
+      "totalLines": 18,
+      "nonEmptyLines": 15,
+      "definitions": [
+        {
+          "name": "voice_tool_config",
+          "kind": "table",
+          "fields": [
+            "tool_name",
+            "enabled",
+            "risk_override"
+          ],
+          "startLine": 4,
+          "endLine": 10
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "definitionCount": 1
+      }
+    },
+    {
+      "path": "ag-platform/supabase/migrations/20260515000002_workforce.sql",
+      "language": "sql",
+      "fileCategory": "data",
+      "totalLines": 146,
+      "nonEmptyLines": 128,
+      "definitions": [
+        {
+          "name": "staff",
+          "kind": "table",
+          "fields": [
+            "id",
+            "kind",
+            "display_name",
+            "short_name",
+            "email",
+            "last_heartbeat",
+            "metadata",
+            "created_at",
+            "updated_at"
+          ],
+          "startLine": 23,
+          "endLine": 41
+        },
+        {
+          "name": "capability",
+          "kind": "table",
+          "fields": [
+            "code",
+            "category"
+          ],
+          "startLine": 49,
+          "endLine": 54
+        },
+        {
+          "name": "staff_capability",
+          "kind": "table",
+          "fields": [
+            "staff_id",
+            "capability_code",
+            "enabled",
+            "granted_by"
+          ],
+          "startLine": 57,
+          "endLine": 64
+        },
+        {
+          "name": "staff_activity",
+          "kind": "table",
+          "fields": [
+            "id",
+            "staff_id",
+            "source",
+            "capability_code",
+            "case_id",
+            "Cheque",
+            "status"
+          ],
+          "startLine": 70,
+          "endLine": 80
+        },
+        {
+          "name": "idx_staff_state",
+          "kind": "index",
+          "fields": [],
+          "startLine": 43,
+          "endLine": 43
+        },
+        {
+          "name": "idx_staff_kind",
+          "kind": "index",
+          "fields": [],
+          "startLine": 44,
+          "endLine": 44
+        },
+        {
+          "name": "idx_staff_activity_staff_time",
+          "kind": "index",
+          "fields": [],
+          "startLine": 82,
+          "endLine": 82
+        },
+        {
+          "name": "idx_staff_activity_case",
+          "kind": "index",
+          "fields": [],
+          "startLine": 84,
+          "endLine": 84
+        },
+        {
+          "name": "idx_staff_activity_source",
+          "kind": "index",
+          "fields": [],
+          "startLine": 86,
+          "endLine": 86
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "definitionCount": 9
+      }
+    },
+    {
+      "path": "ag-platform/supabase/migrations/20260515000003_workforce_phase4.sql",
+      "language": "sql",
+      "fileCategory": "data",
+      "totalLines": 27,
+      "nonEmptyLines": 23,
+      "definitions": [
+        {
+          "name": "staff_anomaly_window",
+          "kind": "view",
+          "fields": [],
+          "startLine": 13,
+          "endLine": 13
+        },
+        {
+          "name": "idx_staff_activity_case_time",
+          "kind": "index",
+          "fields": [],
+          "startLine": 25,
+          "endLine": 25
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "definitionCount": 2
+      }
+    },
+    {
+      "path": "ag-platform/supabase/migrations/20260518000000_field_app.sql",
+      "language": "sql",
+      "fileCategory": "data",
+      "totalLines": 141,
+      "nonEmptyLines": 123,
+      "definitions": [
+        {
+          "name": "public",
+          "kind": "table",
+          "fields": [
+            "id",
+            "client_event_id",
+            "case_id",
+            "org_id",
+            "uploader_id",
+            "storage_path",
+            "bucket_id",
+            "received_status",
+            "size_bytes",
+            "content_type",
+            "captured_at",
+            "captured_lat",
+            "captured_lon",
+            "created_at"
+          ],
+          "startLine": 31,
+          "endLine": 47
+        },
+        {
+          "name": "public",
+          "kind": "table",
+          "fields": [
+            "id",
+            "client_event_id",
+            "case_id",
+            "org_id",
+            "actor_id",
+            "from_status",
+            "to_status",
+            "note",
+            "gps_lat",
+            "gps_lon",
+            "occurred_at",
+            "created_at"
+          ],
+          "startLine": 62,
+          "endLine": 75
+        },
+        {
+          "name": "public",
+          "kind": "table",
+          "fields": [
+            "id",
+            "client_event_id",
+            "executive_id",
+            "org_id",
+            "recorded_at",
+            "lat",
+            "lon",
+            "accuracy_m",
+            "battery_pct",
+            "created_at"
+          ],
+          "startLine": 92,
+          "endLine": 103
+        },
+        {
+          "name": "public",
+          "kind": "table",
+          "fields": [
+            "id",
+            "user_id",
+            "org_id",
+            "expo_push_token",
+            "device_id",
+            "platform",
+            "app_version",
+            "revoked_at",
+            "last_seen_at",
+            "created_at"
+          ],
+          "startLine": 118,
+          "endLine": 130
+        },
+        {
+          "name": "idx_cases_executive_id",
+          "kind": "index",
+          "fields": [],
+          "startLine": 23,
+          "endLine": 23
+        },
+        {
+          "name": "idx_documents_case_id",
+          "kind": "index",
+          "fields": [],
+          "startLine": 48,
+          "endLine": 48
+        },
+        {
+          "name": "idx_documents_org_id",
+          "kind": "index",
+          "fields": [],
+          "startLine": 49,
+          "endLine": 49
+        },
+        {
+          "name": "idx_case_audit_logs_case_time",
+          "kind": "index",
+          "fields": [],
+          "startLine": 76,
+          "endLine": 76
+        },
+        {
+          "name": "idx_case_audit_logs_org_id",
+          "kind": "index",
+          "fields": [],
+          "startLine": 78,
+          "endLine": 78
+        },
+        {
+          "name": "idx_field_activity_logs_exec_time",
+          "kind": "index",
+          "fields": [],
+          "startLine": 104,
+          "endLine": 104
+        },
+        {
+          "name": "idx_device_push_tokens_active_user",
+          "kind": "index",
+          "fields": [],
+          "startLine": 131,
+          "endLine": 131
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "definitionCount": 11
+      }
+    },
+    {
+      "path": "ag-platform/supabase/migrations/20260519000000_push_trigger.sql",
+      "language": "sql",
+      "fileCategory": "data",
+      "totalLines": 67,
+      "nonEmptyLines": 61,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "definitionCount": 0
+      }
+    },
+    {
+      "path": "ag-platform/supabase/migrations/20260520000000_fix_auth_token_hook.sql",
+      "language": "sql",
+      "fileCategory": "data",
+      "totalLines": 104,
+      "nonEmptyLines": 94,
+      "definitions": [
+        {
+          "name": "idx_user_roles_org_id",
+          "kind": "index",
+          "fields": [],
+          "startLine": 26,
+          "endLine": 26
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "definitionCount": 1
+      }
+    },
+    {
+      "path": "ag-platform/tailwind.config.js",
+      "language": "javascript",
+      "fileCategory": "code",
+      "totalLines": 17,
+      "nonEmptyLines": 17,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "ag-platform/tsconfig.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 30,
+      "nonEmptyLines": 28,
+      "sections": [
+        {
+          "heading": "compilerOptions",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "include",
+          "level": 1,
+          "line": 28
+        },
+        {
+          "heading": "references",
+          "level": 1,
+          "line": 29
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 3
+      }
+    },
+    {
+      "path": "ag-platform/tsconfig.node.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 10,
+      "nonEmptyLines": 10,
+      "sections": [
+        {
+          "heading": "compilerOptions",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "include",
+          "level": 1,
+          "line": 9
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 2
+      }
+    },
+    {
+      "path": "ag-platform/turbo.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 24,
+      "nonEmptyLines": 24,
+      "sections": [
+        {
+          "heading": "$schema",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "ui",
+          "level": 1,
+          "line": 3
+        },
+        {
+          "heading": "tasks",
+          "level": 1,
+          "line": 4
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 3
+      }
+    }
+  ]
+}

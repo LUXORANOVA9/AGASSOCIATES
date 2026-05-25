@@ -26,6 +26,9 @@ langsmith>=0.3.0
 # Workflow engine
 langgraph>=1.0.0
 
+# Stripe payment
+stripe>=11.0.0
+
 # PDF generation
 reportlab==4.0.8
 pdfkit==1.0.0

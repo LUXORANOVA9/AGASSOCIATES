@@ -86,3 +86,18 @@ export interface Disbursement {
   paid_date: Date;
   is_reimbursed: boolean;
 }
+
+export interface HITLTask {
+  id: string;
+  portal: string;
+  case_id: string;
+  action: string;
+  payload: Record<string, unknown>;
+  reason: string;
+  status: 'PENDING' | 'CLAIMED' | 'COMPLETED' | 'FAILED';
+  created_at: string;
+  claimed_by: string | null;
+  claimed_at: string | null;
+  completed_at: string | null;
+  notes: string | null;
+}

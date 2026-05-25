@@ -1,0 +1,32 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 0,
+  "filesSkipped": [
+    "ag-associates-ai/backend/frontend/README.md",
+    "ag-associates-ai/backend/frontend/src/App.tsx",
+    "ag-associates-ai/backend/frontend/src/main.tsx",
+    "ag-associates-ai/backend/frontend/src/index.css",
+    "ag-associates-ai/backend/frontend/src/pages/Dashboard.tsx",
+    "ag-associates-ai/backend/frontend/src/pages/Cases.tsx",
+    "ag-associates-ai/backend/frontend/src/pages/Settings.tsx",
+    "ag-associates-ai/backend/frontend/src/pages/CaseDetail.tsx",
+    "ag-associates-ai/backend/frontend/src/components/Layout.tsx",
+    "ag-associates-ai/backend/frontend/src/components/StatsCard.tsx",
+    "ag-associates-ai/backend/frontend/src/components/CaseList.tsx",
+    "ag-associates-ai/backend/frontend/src/components/CaseTimeline.tsx",
+    "ag-associates-ai/backend/frontend/src/components/BotStatus.tsx",
+    "ag-associates-ai/backend/frontend/src/components/DashboardSkeleton.tsx",
+    "ag-associates-ai/backend/frontend/src/api/index.ts",
+    "ag-associates-ai/backend/frontend/src/api/cases.ts",
+    "ag-associates-ai/backend/frontend/src/hooks/useCases.ts",
+    "ag-associates-ai/backend/frontend/src/hooks/useSocket.ts",
+    "ag-associates-ai/backend/frontend/src/hooks/useAuth.ts",
+    "ag-associates-ai/backend/frontend/src/types/index.ts",
+    "ag-associates-ai/backend/frontend/src/data/sampleData.ts",
+    "ag-associates-ai/backend/frontend/vite.config.ts",
+    "ag-associates-ai/backend/frontend/tsconfig.json",
+    "ag-associates-ai/backend/frontend/tsconfig.node.json",
+    "ag-associates-ai/backend/frontend/index.html"
+  ],
+  "results": []
+}

@@ -1,0 +1,3718 @@
+{
+  "scriptCompleted": true,
+  "entryPointCandidates": [
+    {
+      "id": "document:README.md",
+      "score": 5,
+      "name": "README.md",
+      "summary": "Project overview covering architecture, AI workforce, key modules, quick start, environment setup, and roadmap for the AG Associates legal platform."
+    },
+    {
+      "id": "file:ag-associates-ai/backend/main.py",
+      "score": 4,
+      "name": "main.py",
+      "summary": "FastAPI application entry point exposing REST webhooks for WhatsApp, Aisha chat/SMS/voice, NESL property registration execution, NOI workflow management, agreement generation, and system health endpoints."
+    },
+    {
+      "id": "file:ag-associates-ai/backend/frontend/src/api/index.ts",
+      "score": 4,
+      "name": "index.ts",
+      "summary": "API client barrel file exporting configured HTTP client and base request utilities."
+    },
+    {
+      "id": "file:ag-associates-ai/backend/frontend/src/types/index.ts",
+      "score": 4,
+      "name": "index.ts",
+      "summary": "TypeScript type definitions barrel file exporting interfaces and types for the frontend."
+    },
+    {
+      "id": "file:ag-platform/server.ts",
+      "score": 4,
+      "name": "server.ts",
+      "summary": "Express server entry point that runs database migrations, mounts case and timesheet API routes, configures rate limiting for AI endpoints, and serves a Vite SPA in development mode."
+    }
+  ],
+  "fanInRanking": [
+    {
+      "id": "file:ag-platform/apps/mobile/lib/supabase.ts",
+      "fanIn": 10,
+      "name": "supabase.ts"
+    },
+    {
+      "id": "file:ag-platform/apps/mobile/lib/stores/useAuthStore.ts",
+      "fanIn": 9,
+      "name": "useAuthStore.ts"
+    },
+    {
+      "id": "file:ag-platform/apps/mobile/lib/queue/types.ts",
+      "fanIn": 8,
+      "name": "types.ts"
+    },
+    {
+      "id": "file:ag-platform/apps/mobile/lib/stores/useQueueStore.ts",
+      "fanIn": 6,
+      "name": "useQueueStore.ts"
+    },
+    {
+      "id": "document:README.md",
+      "fanIn": 6,
+      "name": "README.md"
+    },
+    {
+      "id": "file:ag-platform/packages/types/src/domain.ts",
+      "fanIn": 5,
+      "name": "domain.ts"
+    },
+    {
+      "id": "file:ag-platform/src/hooks/useLivePresence.ts",
+      "fanIn": 5,
+      "name": "useLivePresence.ts"
+    },
+    {
+      "id": "file:ag-platform/src/types/storage.ts",
+      "fanIn": 5,
+      "name": "storage.ts"
+    },
+    {
+      "id": "config:.pre-commit-config.yaml",
+      "fanIn": 4,
+      "name": ".pre-commit-config.yaml"
+    },
+    {
+      "id": "service:Caddyfile",
+      "fanIn": 4,
+      "name": "Caddyfile"
+    },
+    {
+      "id": "file:ag-platform/apps/mobile/hooks/useCases.ts",
+      "fanIn": 4,
+      "name": "useCases.ts"
+    },
+    {
+      "id": "file:ag-platform/apps/mobile/lib/env.ts",
+      "fanIn": 4,
+      "name": "env.ts"
+    },
+    {
+      "id": "file:ag-platform/packages/ai/src/index.ts",
+      "fanIn": 4,
+      "name": "index.ts"
+    },
+    {
+      "id": "file:ag-platform/packages/db/src/index.ts",
+      "fanIn": 4,
+      "name": "index.ts"
+    },
+    {
+      "id": "file:ag-platform/packages/types/src/field-app.ts",
+      "fanIn": 4,
+      "name": "field-app.ts"
+    },
+    {
+      "id": "file:ag-platform/src/lib/supabase.ts",
+      "fanIn": 4,
+      "name": "supabase.ts"
+    },
+    {
+      "id": "file:ag-platform/src/store/useAuthStore.ts",
+      "fanIn": 4,
+      "name": "useAuthStore.ts"
+    },
+    {
+      "id": "file:ag-platform/src/types/domain.ts",
+      "fanIn": 4,
+      "name": "domain.ts"
+    },
+    {
+      "id": "table:ag-platform/supabase/migrations/20260514000000_init_schema.sql",
+      "fanIn": 4,
+      "name": "20260514000000_init_schema.sql"
+    },
+    {
+      "id": "file:prototype/noi-dashboard/src/App.tsx",
+      "fanIn": 4,
+      "name": "App.tsx"
+    }
+  ],
+  "fanOutRanking": [
+    {
+      "id": "file:ag-associates-ai/backend/main.py",
+      "fanOut": 38,
+      "name": "main.py"
+    },
+    {
+      "id": "table:ag-platform/src/server/migrations.sql",
+      "fanOut": 14,
+      "name": "migrations.sql"
+    },
+    {
+      "id": "file:ag-platform/src/App.tsx",
+      "fanOut": 13,
+      "name": "App.tsx"
+    },
+    {
+      "id": "file:prototype/noi-dashboard/src/App.tsx",
+      "fanOut": 10,
+      "name": "App.tsx"
+    },
+    {
+      "id": "file:ag-associates-ai/backend/agents/db.py",
+      "fanOut": 8,
+      "name": "db.py"
+    },
+    {
+      "id": "file:ag-platform/apps/mobile/app/(app)/scanner.tsx",
+      "fanOut": 8,
+      "name": "scanner.tsx"
+    },
+    {
+      "id": "file:ag-platform/apps/mobile/hooks/useMutationQueue.ts",
+      "fanOut": 8,
+      "name": "useMutationQueue.ts"
+    },
+    {
+      "id": "file:ag-platform/services/intake-api/src/services/redis.service.ts",
+      "fanOut": 8,
+      "name": "redis.service.ts"
+    },
+    {
+      "id": "document:CLAUDE.md",
+      "fanOut": 7,
+      "name": "CLAUDE.md"
+    },
+    {
+      "id": "file:ag-platform/apps/mobile/app/(app)/cases/[caseId].tsx",
+      "fanOut": 7,
+      "name": "[caseId].tsx"
+    },
+    {
+      "id": "file:ag-platform/apps/mobile/hooks/useOnDutyTracker.ts",
+      "fanOut": 7,
+      "name": "useOnDutyTracker.ts"
+    },
+    {
+      "id": "service:ag-platform/Dockerfile",
+      "fanOut": 7,
+      "name": "Dockerfile"
+    },
+    {
+      "id": "document:CONTEXT.md",
+      "fanOut": 6,
+      "name": "CONTEXT.md"
+    },
+    {
+      "id": "file:ag-associates-ai/backend/agents/bouncer.py",
+      "fanOut": 6,
+      "name": "bouncer.py"
+    },
+    {
+      "id": "service:ag-associates-ai/backend/Dockerfile",
+      "fanOut": 6,
+      "name": "Dockerfile"
+    },
+    {
+      "id": "file:ag-associates-ai/backend/config.py",
+      "fanOut": 6,
+      "name": "config.py"
+    },
+    {
+      "id": "file:ag-platform/apps/mobile/app/(app)/activity.tsx",
+      "fanOut": 6,
+      "name": "activity.tsx"
+    },
+    {
+      "id": "file:ag-platform/apps/mobile/app/(app)/dashboard.tsx",
+      "fanOut": 6,
+      "name": "dashboard.tsx"
+    },
+    {
+      "id": "file:ag-platform/apps/mobile/hooks/useAuth.ts",
+      "fanOut": 6,
+      "name": "useAuth.ts"
+    },
+    {
+      "id": "file:ag-platform/apps/mobile/hooks/useCase.ts",
+      "fanOut": 6,
+      "name": "useCase.ts"
+    }
+  ],
+  "bfsTraversal": {
+    "startNode": "file:ag-associates-ai/backend/main.py",
+    "order": [
+      "file:ag-associates-ai/backend/main.py"
+    ],
+    "depthMap": {
+      "file:ag-associates-ai/backend/main.py": 0
+    },
+    "byDepth": {
+      "0": [
+        "file:ag-associates-ai/backend/main.py"
+      ]
+    }
+  },
+  "nonCodeFiles": {
+    "documentation": [
+      {
+        "id": "document:CONTEXT.md",
+        "name": "CONTEXT.md",
+        "type": "document",
+        "summary": "Domain glossary defining core business terms, NOI workflow states, case lifecycle, deployment architecture, and governance rules for the AG Associates legaltech platform."
+      },
+      {
+        "id": "document:CONTRIBUTING.md",
+        "name": "CONTRIBUTING.md",
+        "type": "document",
+        "summary": "Contribution guide covering development setup, code standards, commit conventions, branch naming, and PR submission requirements."
+      },
+      {
+        "id": "document:CLAUDE.md",
+        "name": "CLAUDE.md",
+        "type": "document",
+        "summary": "AI assistant onboarding document covering repository layout, common commands, architecture overview, and key conventions for both the Python AI pipeline and TypeScript platform."
+      },
+      {
+        "id": "document:CULTURE.md",
+        "name": "CULTURE.md",
+        "type": "document",
+        "summary": "Company culture document defining core principles, async-first communication, operational discipline, AI-assisted workflows, and leadership philosophy for AG Associates."
+      },
+      {
+        "id": "document:ag-associates-ai/backend/README.md",
+        "name": "README.md",
+        "type": "document",
+        "summary": "Project overview documentation with setup instructions, API endpoint reference, and architecture guide for the backend service."
+      },
+      {
+        "id": "document:ag-associates-ai/backend/CHANGELOG.md",
+        "name": "CHANGELOG.md",
+        "type": "document",
+        "summary": "Version history and release notes tracking feature additions, bug fixes, and breaking changes across backend deployments."
+      },
+      {
+        "id": "document:ag-associates-ai/backend/docs/supabase.md",
+        "name": "supabase.md",
+        "type": "document",
+        "summary": "Technical guide for configuring and integrating Supabase for database, authentication, and storage services."
+      },
+      {
+        "id": "document:ag-associates-ai/backend/frontend/README.md",
+        "name": "README.md",
+        "type": "document",
+        "summary": "Documentation for the frontend application covering setup, development, and usage instructions."
+      },
+      {
+        "id": "document:ag-associates-ai/backend/docs/setup.md",
+        "name": "setup.md",
+        "type": "document",
+        "summary": "Setup and installation guide for the backend application covering prerequisites, configuration, and deployment steps."
+      },
+      {
+        "id": "document:ag-associates-ai/backend/docs/agents.md",
+        "name": "agents.md",
+        "type": "document",
+        "summary": "Documentation describing the agent pipeline architecture, components, and workflows."
+      },
+      {
+        "id": "document:ag-platform/apps/mobile/README.md",
+        "name": "README.md",
+        "type": "document",
+        "summary": "Documentation for the AG Associates mobile field app covering setup instructions, environment variables, and enforced architectural rules for the Expo React Native project."
+      },
+      {
+        "id": "document:ag-platform/ARCHITECTURE.md",
+        "name": "ARCHITECTURE.md",
+        "type": "document",
+        "summary": "Comprehensive architecture document covering the core data model, case lifecycle state machine, India-ready tech stack, multi-tenancy model, and monorepo folder structure."
+      },
+      {
+        "id": "document:ag-platform/docs/AUTH_ARCHITECTURE.md",
+        "name": "AUTH_ARCHITECTURE.md",
+        "type": "document",
+        "summary": "Authentication and authorization architecture documentation covering passwordless magic links, Supabase JWT custom claims injection, and PostgreSQL row-level security policies."
+      },
+      {
+        "id": "document:ag-platform/README.md",
+        "name": "README.md",
+        "type": "document",
+        "summary": "Empty placeholder README document for the AG platform project root."
+      },
+      {
+        "id": "document:ag-platform/SECURITY.md",
+        "name": "SECURITY.md",
+        "type": "document",
+        "summary": "Security policy document outlining supported versions and vulnerability reporting procedures for the project."
+      },
+      {
+        "id": "document:DEPLOYMENT_PLAYBOOK.md",
+        "name": "DEPLOYMENT_PLAYBOOK.md",
+        "type": "document",
+        "summary": "Production deployment playbook covering VPS provisioning, Docker Compose setup, Supabase configuration, CI/CD, backups, observability, and day-2 operations."
+      },
+      {
+        "id": "document:DEVIN_PLAYBOOK.md",
+        "name": "DEVIN_PLAYBOOK.md",
+        "type": "document",
+        "summary": "AI agent operations playbook detailing first-session checklist, sandbox setup, branch conventions, risk-tiered auto-merge rules, and repo-specific gotchas."
+      },
+      {
+        "id": "document:docs/adr/0001-monorepo-orchestration.md",
+        "name": "0001-monorepo-orchestration.md",
+        "type": "document",
+        "summary": "Architecture Decision Record documenting the decision to use a split orchestration strategy with Turborepo for the platform and a separate Makefile for the AI pipeline."
+      },
+      {
+        "id": "document:docs/noi-automation-plan.md",
+        "name": "noi-automation-plan.md",
+        "type": "document",
+        "summary": "Comprehensive NOI automation system plan covering agent orchestration architecture, LangGraph implementation, email intake, document verification, OTP bridge, RPA executor, and phased build order."
+      },
+      {
+        "id": "document:ERROR_HANDLING_GUIDELINES.md",
+        "name": "ERROR_HANDLING_GUIDELINES.md",
+        "type": "document",
+        "summary": "Error handling guidelines prescribing explicit error path design, meaningful messages, retry with backoff, graceful degradation, and structured API error responses."
+      },
+      {
+        "id": "document:FRONTEND_UI_GUIDELINES.md",
+        "name": "FRONTEND_UI_GUIDELINES.md",
+        "type": "document",
+        "summary": "Frontend UI engineering guidelines covering accessibility, Core Web Vitals performance, responsive design, and state management discipline."
+      },
+      {
+        "id": "document:GIT_GUIDELINES.md",
+        "name": "GIT_GUIDELINES.md",
+        "type": "document",
+        "summary": "Git and version control guidelines advocating atomic commits, Conventional Commits format, trunk-based development, and pre-commit gates."
+      },
+      {
+        "id": "document:GOAL_DRIVEN_EXECUTION_GUIDELINES.md",
+        "name": "GOAL_DRIVEN_EXECUTION_GUIDELINES.md",
+        "type": "document",
+        "summary": "Goal-driven execution methodology detailing how to extract underlying goals, define success criteria, create execution plans, and iterate with feedback loops."
+      },
+      {
+        "id": "document:GOVERNANCE.md",
+        "name": "GOVERNANCE.md",
+        "type": "document",
+        "summary": "Project governance document defining branch strategy, commit convention, PR workflow, release process, environment strategy, and tech stack overview."
+      },
+      {
+        "id": "document:HALLUCINATION_MITIGATION_GUIDELINES.md",
+        "name": "HALLUCINATION_MITIGATION_GUIDELINES.md",
+        "type": "document",
+        "summary": "Hallucination detection and mitigation guidelines covering risk classification, grounded outputs, verification layers, fail-safe defaults, and production monitoring."
+      },
+      {
+        "id": "document:RAG_AND_MEMORY_GUIDELINES.md",
+        "name": "RAG_AND_MEMORY_GUIDELINES.md",
+        "type": "document",
+        "summary": "Comprehensive guide on RAG pipeline design and memory system architecture with 5-step process and common pitfalls."
+      },
+      {
+        "id": "document:README.md",
+        "name": "README.md",
+        "type": "document",
+        "summary": "Project overview covering architecture, AI workforce, key modules, quick start, environment setup, and roadmap for the AG Associates legal platform."
+      },
+      {
+        "id": "document:REFACTORING_GUIDELINES.md",
+        "name": "REFACTORING_GUIDELINES.md",
+        "type": "document",
+        "summary": "Step-by-step refactoring process emphasizing safety nets, micro-steps, and behavior preservation."
+      },
+      {
+        "id": "document:SECURITY.md",
+        "name": "SECURITY.md",
+        "type": "document",
+        "summary": "Security policy detailing supported versions, vulnerability reporting process, response timeline, and security measures."
+      },
+      {
+        "id": "document:tasks/lessons.md",
+        "name": "lessons.md",
+        "type": "document",
+        "summary": "Running log of bug patterns, process patterns, and production patterns learned during development."
+      },
+      {
+        "id": "document:tasks/todo.md",
+        "name": "todo.md",
+        "type": "document",
+        "summary": "Task tracking with completed items and upcoming priorities for the AG Associates project."
+      },
+      {
+        "id": "document:TDD_GUIDELINES.md",
+        "name": "TDD_GUIDELINES.md",
+        "type": "document",
+        "summary": "Test-driven development guidelines with the red-green-refactor cycle, coverage checks, and common rationalizations."
+      }
+    ],
+    "infrastructure": [
+      {
+        "id": "pipeline:.github/actions/setup/action.yml",
+        "name": "action.yml",
+        "type": "pipeline",
+        "summary": "Reusable GitHub Actions composite action for setting up the CI environment. File does not exist on disk."
+      },
+      {
+        "id": "pipeline:.github/workflows/ci.yml",
+        "name": "ci.yml",
+        "type": "pipeline",
+        "summary": "GitHub Actions CI workflow running pre-commit hooks, Python backend linting (ruff), Python tests (pytest), Turborepo platform checks (lint, type-check, test, build), Next.js AI dashboard build, and commitlint on pull requests."
+      },
+      {
+        "id": "pipeline:.github/workflows/codeql.yml",
+        "name": "codeql.yml",
+        "type": "pipeline",
+        "summary": "GitHub Advanced Security CodeQL analysis workflow scanning JavaScript/TypeScript and Python codebases on push, pull request, and weekly schedule."
+      },
+      {
+        "id": "pipeline:.github/workflows/deploy.yml",
+        "name": "deploy.yml",
+        "type": "pipeline",
+        "summary": "Manual-deploy workflow for self-hosted runner that pulls latest code, creates a production .env with auto-generated secrets, builds Docker images, deploys the full stack, and runs health checks."
+      },
+      {
+        "id": "pipeline:.github/workflows/main.yml",
+        "name": "main.yml",
+        "type": "pipeline",
+        "summary": "Primary CI workflow running pre-commit hooks, Python backend validation (ruff), Turborepo platform checks, and Next.js frontend build on pushes and pull requests to main."
+      },
+      {
+        "id": "pipeline:.github/workflows/nextjs.yml",
+        "name": "nextjs.yml",
+        "type": "pipeline",
+        "summary": "GitHub Pages deployment workflow for the Next.js AI dashboard with package manager detection, cache restoration, static export build, and artifact upload."
+      },
+      {
+        "id": "pipeline:.github/workflows/preview.yml",
+        "name": "preview.yml",
+        "type": "pipeline",
+        "summary": "PR preview deployment workflow deploying the platform SPA and AI dashboard to Cloudflare Pages with automatic PR comment linking."
+      },
+      {
+        "id": "pipeline:.github/workflows/release.yml",
+        "name": "release.yml",
+        "type": "pipeline",
+        "summary": "Changesets-based release workflow creating version bump PRs and GitHub releases on push to main."
+      },
+      {
+        "id": "pipeline:.github/workflows/test-checkout.yml",
+        "name": "test-checkout.yml",
+        "type": "pipeline",
+        "summary": "Sandbox workflow for verifying the self-hosted runner can checkout the repository correctly."
+      },
+      {
+        "id": "pipeline:.github/workflows/test-permissions.yml",
+        "name": "test-permissions.yml",
+        "type": "pipeline",
+        "summary": "Sandbox workflow testing write-all permissions on the self-hosted runner."
+      },
+      {
+        "id": "pipeline:.github/workflows/test-simple.yml",
+        "name": "test-simple.yml",
+        "type": "pipeline",
+        "summary": "Minimal sandbox workflow printing Hello World on ubuntu-latest to validate basic CI functionality."
+      },
+      {
+        "id": "pipeline:.github/workflows/test-runner.yml",
+        "name": "test-runner.yml",
+        "type": "pipeline",
+        "summary": "Sandbox workflow testing the self-hosted runner connectivity by printing hostname."
+      },
+      {
+        "id": "pipeline:.github/workflows/test.yml",
+        "name": "test.yml",
+        "type": "pipeline",
+        "summary": "Test workflow file. Does not exist on disk."
+      },
+      {
+        "id": "service:Caddyfile",
+        "name": "Caddyfile",
+        "type": "service",
+        "summary": "Caddy reverse proxy configuration routing six subdomains (app, dashboard, api, intake, n8n, docs) to Docker containers with health checks, gzip encoding, basic auth for n8n, and static file serving for docs."
+      },
+      {
+        "id": "service:ag-associates-ai/backend/Dockerfile",
+        "name": "Dockerfile",
+        "type": "service",
+        "summary": "Multi-stage Docker build producing a minimal Python 3.11 runtime image with Playwright for RPA automation, uvicorn server, and health checks."
+      },
+      {
+        "id": "service:ag-associates-ai/backend/Dockerfile:builder",
+        "name": "builder",
+        "type": "service",
+        "summary": "Build stage that installs Python dependencies and pre-downloads Playwright Chromium for RPA portal automation."
+      },
+      {
+        "id": "service:ag-associates-ai/backend/Dockerfile:python",
+        "name": "python",
+        "type": "service",
+        "summary": "Runtime stage with non-root user, Playwright browser support, and uvicorn serving the FastAPI application on port 8000 with health checks."
+      },
+      {
+        "id": "service:ag-platform/Dockerfile",
+        "name": "Dockerfile",
+        "type": "service",
+        "summary": "Multi-stage Docker build producing a production Node.js image with dependency caching, Vite build optimization, and health check configuration."
+      },
+      {
+        "id": "service:ag-platform/Dockerfile:deps",
+        "name": "deps",
+        "type": "service",
+        "summary": "First build stage that installs all npm dependencies including monorepo packages for downstream caching."
+      },
+      {
+        "id": "service:ag-platform/Dockerfile:builder",
+        "name": "builder",
+        "type": "service",
+        "summary": "Build stage that compiles the application using Vite with environment-specific build arguments."
+      },
+      {
+        "id": "service:ag-platform/Dockerfile:runner",
+        "name": "runner",
+        "type": "service",
+        "summary": "Production runtime stage with non-root user, health checks, and minimal production-only artifacts."
+      },
+      {
+        "id": "service:ag-platform/services/intake-api/Dockerfile",
+        "name": "Dockerfile",
+        "type": "service",
+        "summary": "Multi-stage Docker build for the Intake API with dependency installation, TypeScript compilation, and a production runner stage exposing port 3002 with health checks."
+      },
+      {
+        "id": "service:docker-compose.prod.yml",
+        "name": "docker-compose.prod.yml",
+        "type": "service",
+        "summary": "Production Docker Compose orchestration running Caddy reverse-proxy, AI backend, dashboard, intake API, n8n, and docs site with shared networking and persistent volumes."
+      },
+      {
+        "id": "service:docker-compose.yml",
+        "name": "docker-compose.yml",
+        "type": "service",
+        "summary": "Development Docker Compose configuration providing a PostgreSQL database with pgvector extension for local development."
+      },
+      {
+        "id": "pipeline:Makefile",
+        "name": "Makefile",
+        "type": "pipeline",
+        "summary": "Monorepo build system Makefile orchestrating Python and TypeScript tasks including install, lint, format, type-check, test, build, deploy, and CI pipeline."
+      }
+    ],
+    "data": [
+      {
+        "id": "table:ag-platform/packages/db/migrations/001_ag_initial_schema.sql",
+        "name": "001_ag_initial_schema.sql",
+        "type": "table",
+        "summary": "Initial database schema migration defining the core data model with banks, organizations, profiles, cases, disbursements, and case_timeline tables with foreign key relationships."
+      },
+      {
+        "id": "table:ag-platform/packages/db/migrations/002_pgvector_templates.sql",
+        "name": "002_pgvector_templates.sql",
+        "type": "table",
+        "summary": "SQL migration adding the legal_templates table with pgvector embedding column and ivfflat index for semantic search over legal documents."
+      },
+      {
+        "id": "table:ag-platform/src/server/migrations.sql",
+        "name": "migrations.sql",
+        "type": "table",
+        "summary": "Database schema migration defining core tables for banks, organizations, profiles, cases, disbursements, case timeline, and timesheets with field constraints."
+      },
+      {
+        "id": "table:ag-platform/src/server/migrations.sql:banks",
+        "name": "banks",
+        "type": "table",
+        "summary": "Bank entities table storing name, short code, type, billing contact, and advance balance."
+      },
+      {
+        "id": "table:ag-platform/src/server/migrations.sql:organizations",
+        "name": "organizations",
+        "type": "table",
+        "summary": "Organizations table with name and created_at tracking."
+      },
+      {
+        "id": "table:ag-platform/src/server/migrations.sql:profiles",
+        "name": "profiles",
+        "type": "table",
+        "summary": "User profiles table linked to banks and users with phone and role fields."
+      },
+      {
+        "id": "table:ag-platform/src/server/migrations.sql:cases",
+        "name": "cases",
+        "type": "table",
+        "summary": "Core case management table with case number, type, status, borrower, loan amount, SLA deadline, and professional fee tracking."
+      },
+      {
+        "id": "table:ag-platform/src/server/migrations.sql:disbursements",
+        "name": "disbursements",
+        "type": "table",
+        "summary": "Disbursements table tracking payments per case with reimbursement status."
+      },
+      {
+        "id": "table:ag-platform/src/server/migrations.sql:case_timeline",
+        "name": "case_timeline",
+        "type": "table",
+        "summary": "Case status change audit trail tracking status transitions with timestamps and user attribution."
+      },
+      {
+        "id": "table:ag-platform/src/server/migrations.sql:timesheets",
+        "name": "timesheets",
+        "type": "table",
+        "summary": "Timesheets table logging work entries per case with billable tracking, hourly rates, and duration."
+      },
+      {
+        "id": "table:ag-platform/supabase/migrations/20260423_ai_setup.sql",
+        "name": "20260423_ai_setup.sql",
+        "type": "table",
+        "summary": "Enables pgvector extension and creates project_embeddings table with 768-dimension vector support, projects table, match function, and AI token tracking columns."
+      },
+      {
+        "id": "table:ag-platform/supabase/migrations/20260423_ai_tokens.sql",
+        "name": "20260423_ai_tokens.sql",
+        "type": "table",
+        "summary": "Creates a PL/pgSQL function to safely increment organization AI token usage counters."
+      },
+      {
+        "id": "table:ag-platform/supabase/migrations/20260423_collaboration_setup.sql",
+        "name": "20260423_collaboration_setup.sql",
+        "type": "table",
+        "summary": "Sets up tasks, comments, notifications, and activities tables with realtime publication, RLS policies, and Supabase replication."
+      },
+      {
+        "id": "table:ag-platform/supabase/migrations/20260423_document_storage_setup.sql",
+        "name": "20260423_document_storage_setup.sql",
+        "type": "table",
+        "summary": "Creates storage buckets, files metadata table with versioning, storage quota trigger, and RLS policies for org-scoped access control."
+      },
+      {
+        "id": "table:ag-platform/supabase/migrations/20260514000000_core_schema.sql",
+        "name": "20260514000000_core_schema.sql",
+        "type": "table",
+        "summary": "Defines core organizations and cases tables with indexes for the AG platform's primary data model."
+      },
+      {
+        "id": "table:ag-platform/supabase/migrations/20260514000000_init_schema.sql",
+        "name": "20260514000000_init_schema.sql",
+        "type": "table",
+        "summary": "Initial schema with organizations and cases tables including client details, financial fields, and composite indexes."
+      },
+      {
+        "id": "table:ag-platform/supabase/migrations/20260514000001_auth_hooks.sql",
+        "name": "20260514000001_auth_hooks.sql",
+        "type": "table",
+        "summary": "Sets up authentication hooks and triggers for user lifecycle management."
+      },
+      {
+        "id": "table:ag-platform/supabase/migrations/20260514000002_rbac_setup.sql",
+        "name": "20260514000002_rbac_setup.sql",
+        "type": "table",
+        "summary": "Creates user_roles table for role-based access control mapping users to organizational roles."
+      },
+      {
+        "id": "table:ag-platform/supabase/migrations/20260514000003_voice_system_setup.sql",
+        "name": "20260514000003_voice_system_setup.sql",
+        "type": "table",
+        "summary": "Creates voice command processing tables, system config, and tool registry with risk levels for the voice control system."
+      },
+      {
+        "id": "table:ag-platform/supabase/migrations/20260514000004_workforce_management.sql",
+        "name": "20260514000004_workforce_management.sql",
+        "type": "table",
+        "summary": "Defines workforce_members, workforce_tasks, and case_notes tables for managing distributed workforce operations."
+      },
+      {
+        "id": "table:ag-platform/supabase/migrations/20260515000000_voice_command_logs.sql",
+        "name": "20260515000000_voice_command_logs.sql",
+        "type": "table",
+        "summary": "Creates voice_command_logs table with indexes for auditing and tracking voice command execution history."
+      },
+      {
+        "id": "table:ag-platform/supabase/migrations/20260515000001_voice_tool_config.sql",
+        "name": "20260515000001_voice_tool_config.sql",
+        "type": "table",
+        "summary": "Creates voice_tool_config table for per-tool enablement and risk override settings."
+      },
+      {
+        "id": "table:ag-platform/supabase/migrations/20260515000002_workforce.sql",
+        "name": "20260515000002_workforce.sql",
+        "type": "table",
+        "summary": "Full workforce schema with staff, capability, staff_capability, and staff_activity tables for role-based staffing and activity tracking."
+      },
+      {
+        "id": "table:ag-platform/supabase/migrations/20260515000003_workforce_phase4.sql",
+        "name": "20260515000003_workforce_phase4.sql",
+        "type": "table",
+        "summary": "Adds staff_anomaly_window view and index for workforce anomaly detection in phase 4."
+      },
+      {
+        "id": "table:ag-platform/supabase/migrations/20260518000000_field_app.sql",
+        "name": "20260518000000_field_app.sql",
+        "type": "table",
+        "summary": "Creates field app tables for document uploads, case audit logs, GPS-tracked field activity, and device push token registration."
+      },
+      {
+        "id": "table:ag-platform/supabase/migrations/20260519000000_push_trigger.sql",
+        "name": "20260519000000_push_trigger.sql",
+        "type": "table",
+        "summary": "Database trigger that invokes the send-push-on-case-assigned Edge Function when a case is assigned to an executive."
+      },
+      {
+        "id": "table:ag-platform/supabase/migrations/20260520000000_fix_auth_token_hook.sql",
+        "name": "20260520000000_fix_auth_token_hook.sql",
+        "type": "table",
+        "summary": "Fixes auth token hook with index on user_roles by org_id for efficient role lookups."
+      },
+      {
+        "id": "table:ag-platform/supabase/migrations/20260423_ai_setup.sql:project_embeddings",
+        "name": "project_embeddings",
+        "type": "table",
+        "summary": "Stores project content embeddings using 768-dimension pgvector for semantic search across projects."
+      },
+      {
+        "id": "table:ag-platform/supabase/migrations/20260423_ai_setup.sql:projects",
+        "name": "projects",
+        "type": "table",
+        "summary": "Core projects table linked to organizations for grouping AI-related content and embeddings."
+      },
+      {
+        "id": "table:ag-platform/supabase/migrations/20260423_collaboration_setup.sql:tasks",
+        "name": "tasks",
+        "type": "table",
+        "summary": "Task management table with assignee tracking, status, and positional ordering for kanban-style boards."
+      },
+      {
+        "id": "table:ag-platform/supabase/migrations/20260423_collaboration_setup.sql:comments",
+        "name": "comments",
+        "type": "table",
+        "summary": "Task-level comment threads with user attribution and timestamps."
+      },
+      {
+        "id": "table:ag-platform/supabase/migrations/20260423_collaboration_setup.sql:notifications",
+        "name": "notifications",
+        "type": "table",
+        "summary": "User notification table with read status, type classification, and deep-link support."
+      },
+      {
+        "id": "table:ag-platform/supabase/migrations/20260423_collaboration_setup.sql:activities",
+        "name": "activities",
+        "type": "table",
+        "summary": "Activity feed table recording user actions and targets for realtime collaboration streams."
+      },
+      {
+        "id": "table:ag-platform/supabase/migrations/20260423_document_storage_setup.sql:files",
+        "name": "files",
+        "type": "table",
+        "summary": "File metadata and versioning table tracking uploads across organizations with storage path and content type."
+      },
+      {
+        "id": "table:ag-platform/supabase/migrations/20260514000000_core_schema.sql:organizations",
+        "name": "organizations",
+        "type": "table",
+        "summary": "Core organizations table as the top-level tenant entity in the platform."
+      },
+      {
+        "id": "table:ag-platform/supabase/migrations/20260514000000_core_schema.sql:cases",
+        "name": "cases",
+        "type": "table",
+        "summary": "Core cases table tracking legal case lifecycle with bank and type information."
+      },
+      {
+        "id": "table:ag-platform/supabase/migrations/20260514000002_rbac_setup.sql:user_roles",
+        "name": "user_roles",
+        "type": "table",
+        "summary": "Maps users to organizational roles for role-based access control."
+      },
+      {
+        "id": "table:ag-platform/supabase/migrations/20260514000004_workforce_management.sql:workforce_members",
+        "name": "workforce_members",
+        "type": "table",
+        "summary": "Tracks workforce members with role, status, load score, and maintenance mode per organization."
+      },
+      {
+        "id": "table:ag-platform/supabase/migrations/20260514000004_workforce_management.sql:workforce_tasks",
+        "name": "workforce_tasks",
+        "type": "table",
+        "summary": "Workforce task assignments with priority, status tracking, and output storage."
+      },
+      {
+        "id": "table:ag-platform/supabase/migrations/20260515000000_voice_command_logs.sql:voice_command_logs",
+        "name": "voice_command_logs",
+        "type": "table",
+        "summary": "Audit log for voice commands capturing transcript, detected language, tool invocation, risk level, and execution status."
+      },
+      {
+        "id": "table:ag-platform/supabase/migrations/20260515000001_voice_tool_config.sql:voice_tool_config",
+        "name": "voice_tool_config",
+        "type": "table",
+        "summary": "Per-tool enablement and risk override configuration for the voice control system."
+      },
+      {
+        "id": "table:ag-platform/supabase/migrations/20260515000002_workforce.sql:staff",
+        "name": "staff",
+        "type": "table",
+        "summary": "Staff registry with kind, display info, heartbeat tracking, and metadata for AI and human workers."
+      },
+      {
+        "id": "table:ag-platform/supabase/migrations/20260515000002_workforce.sql:capability",
+        "name": "capability",
+        "type": "table",
+        "summary": "Capability catalog defining available skills and their categories for the workforce system."
+      },
+      {
+        "id": "table:ag-platform/supabase/migrations/20260515000002_workforce.sql:staff_capability",
+        "name": "staff_capability",
+        "type": "table",
+        "summary": "Many-to-many mapping linking staff to capabilities with enablement and grant tracking."
+      },
+      {
+        "id": "table:ag-platform/supabase/migrations/20260515000002_workforce.sql:staff_activity",
+        "name": "staff_activity",
+        "type": "table",
+        "summary": "Activity log tracking staff actions including capability usage, case associations, and status transitions."
+      },
+      {
+        "id": "table:ag-platform/supabase/migrations/20260518000000_field_app.sql:field_documents",
+        "name": "field_documents",
+        "type": "table",
+        "summary": "Field-collected document uploads with client event dedup, GPS coordinates, and storage path."
+      },
+      {
+        "id": "table:ag-platform/supabase/migrations/20260518000000_field_app.sql:case_audit_logs",
+        "name": "case_audit_logs",
+        "type": "table",
+        "summary": "Audit trail for case status transitions with GPS-tagged field notes and actor attribution."
+      },
+      {
+        "id": "table:ag-platform/supabase/migrations/20260518000000_field_app.sql:device_push_tokens",
+        "name": "device_push_tokens",
+        "type": "table",
+        "summary": "Expo push token registry per user with device info, revocation, and last-seen tracking."
+      }
+    ],
+    "config": [
+      {
+        "id": "config:.bolt/mcp.json",
+        "name": "mcp.json",
+        "type": "config",
+        "summary": "Bolt MCP server configuration enabling the shaders integration for AI-assisted development."
+      },
+      {
+        "id": "config:.changeset/config.json",
+        "name": "config.json",
+        "type": "config",
+        "summary": "Changesets versioning configuration with restricted access, main branch base, and conventional commit changelog generation."
+      },
+      {
+        "id": "config:.devcontainer/devcontainer.json",
+        "name": "devcontainer.json",
+        "type": "config",
+        "summary": "Development container definition using the universal devcontainers image with no additional features."
+      },
+      {
+        "id": "config:.env.example",
+        "name": ".env.example",
+        "type": "config",
+        "summary": "Environment variables template for production deployment covering domain, PostgreSQL, Redis, LLM providers (Groq/Gemini), Supabase auth, email intake (Resend/IMAP), Telegram OTP bot, n8n WhatsApp orchestration, NeSL e-filing, IGR Maharashtra portal, and GRAS challan portal."
+      },
+      {
+        "id": "config:.lintstagedrc.json",
+        "name": ".lintstagedrc.json",
+        "type": "config",
+        "summary": "lint-staged configuration running ESLint and Prettier on TypeScript/JavaScript files, Ruff on Python files, and Prettier on JSON/YAML/Markdown files."
+      },
+      {
+        "id": "config:.pre-commit-config.yaml",
+        "name": ".pre-commit-config.yaml",
+        "type": "config",
+        "summary": "Pre-commit hook configuration with trailing-whitespace, end-of-file-fixer, YAML validation, large file detection, private key detection (pre-commit-hooks), Ruff linting/formatting (Python), and ESLint (TypeScript/JavaScript)."
+      },
+      {
+        "id": "config:CNAME",
+        "name": "CNAME",
+        "type": "config",
+        "summary": "Custom domain name record pointing to advadiityagade.com for the production deployment."
+      },
+      {
+        "id": "config:ag-associates-ai/backend/frontend/tsconfig.json",
+        "name": "tsconfig.json",
+        "type": "config",
+        "summary": "TypeScript compiler configuration for the frontend application with strict type checking."
+      },
+      {
+        "id": "config:ag-associates-ai/backend/frontend/tsconfig.node.json",
+        "name": "tsconfig.node.json",
+        "type": "config",
+        "summary": "TypeScript configuration for Node.js tooling files like Vite config."
+      },
+      {
+        "id": "config:ag-associates-ai/backend/frontend/eslint.config.js",
+        "name": "eslint.config.js",
+        "type": "config",
+        "summary": "ESLint configuration for the frontend codebase defining linting rules and plugins."
+      },
+      {
+        "id": "config:ag-associates-ai/backend/frontend/.gitignore",
+        "name": ".gitignore",
+        "type": "config",
+        "summary": "Git ignore rules for the frontend module excluding build artifacts and dependencies."
+      },
+      {
+        "id": "config:ag-platform/apps/mobile/eas.json",
+        "name": "eas.json",
+        "type": "config",
+        "summary": "EAS Build configuration defining development, preview, and production build profiles with iOS simulator support and auto-incrementing versions."
+      },
+      {
+        "id": "config:ag-platform/apps/mobile/package.json",
+        "name": "package.json",
+        "type": "config",
+        "summary": "Mobile app package configuration with Expo SDK 51 dependencies including navigation, camera, maps, notifications, and offline storage."
+      },
+      {
+        "id": "config:ag-platform/apps/mobile/tsconfig.json",
+        "name": "tsconfig.json",
+        "type": "config",
+        "summary": "TypeScript compiler configuration for the Expo mobile app with strict mode and path aliases."
+      },
+      {
+        "id": "config:ag-platform/package.json",
+        "name": "package.json",
+        "type": "config",
+        "summary": "Root package.json for the ag-platform Turborepo monorepo defining workspace packages, shared scripts, and common dependencies."
+      },
+      {
+        "id": "config:ag-platform/packages/ai/package.json",
+        "name": "package.json",
+        "type": "config",
+        "summary": "Package configuration for the AI package with Google GenAI SDK and Supabase dependencies."
+      },
+      {
+        "id": "config:ag-platform/packages/ai/tsconfig.json",
+        "name": "tsconfig.json",
+        "type": "config",
+        "summary": "TypeScript compiler configuration for the AI package with ESNext module and JSX support."
+      },
+      {
+        "id": "config:ag-platform/packages/db/package.json",
+        "name": "package.json",
+        "type": "config",
+        "summary": "Package configuration for the database package with pg and pgvector dependencies."
+      },
+      {
+        "id": "config:ag-platform/packages/db/tsconfig.json",
+        "name": "tsconfig.json",
+        "type": "config",
+        "summary": "TypeScript compiler configuration for the database package."
+      },
+      {
+        "id": "config:ag-platform/packages/types/package.json",
+        "name": "package.json",
+        "type": "config",
+        "summary": "Package configuration for shared TypeScript type definitions used across the monorepo."
+      },
+      {
+        "id": "config:ag-platform/packages/types/tsconfig.json",
+        "name": "tsconfig.json",
+        "type": "config",
+        "summary": "TypeScript compiler configuration for the types package targeting ES2020 with strict mode and bundler module resolution."
+      },
+      {
+        "id": "config:ag-platform/packages/ui/package.json",
+        "name": "package.json",
+        "type": "config",
+        "summary": "Package manifest for the UI component library defining React peer dependencies and exports for Button, Card, and Badge components."
+      },
+      {
+        "id": "config:ag-platform/packages/ui/tsconfig.json",
+        "name": "tsconfig.json",
+        "type": "config",
+        "summary": "TypeScript configuration for the UI package targeting ES2020 with strict mode and JSX support."
+      },
+      {
+        "id": "config:ag-platform/render.yaml",
+        "name": "render.yaml",
+        "type": "config",
+        "summary": "Render.com deployment configuration defining a Node.js web service with build and start commands."
+      },
+      {
+        "id": "config:ag-platform/services/intake-api/package.json",
+        "name": "package.json",
+        "type": "config",
+        "summary": "Package manifest for the Intake API Gateway service with Fastify, Redis, Supabase, and Zod runtime dependencies."
+      },
+      {
+        "id": "config:ag-platform/services/intake-api/tsconfig.json",
+        "name": "tsconfig.json",
+        "type": "config",
+        "summary": "TypeScript configuration for the Intake API service targeting ES2022 with CommonJS module output and declaration files."
+      },
+      {
+        "id": "config:ag-platform/tsconfig.json",
+        "name": "tsconfig.json",
+        "type": "config",
+        "summary": "TypeScript compiler configuration with strict mode, bundler module resolution, path alias to src/, and project references."
+      },
+      {
+        "id": "config:ag-platform/tsconfig.node.json",
+        "name": "tsconfig.node.json",
+        "type": "config",
+        "summary": "TypeScript configuration for Node-side vite.config.ts with composite project reference support."
+      },
+      {
+        "id": "config:ag-platform/turbo.json",
+        "name": "turbo.json",
+        "type": "config",
+        "summary": "Turborepo pipeline configuration defining build, dev, lint, type-check, and clean task dependencies and caching rules."
+      },
+      {
+        "id": "config:package.json",
+        "name": "package.json",
+        "type": "config",
+        "summary": "Root package.json defining the monorepo workspace configuration with npm workspaces for the platform, mobile app, packages, services, and frontend."
+      },
+      {
+        "id": "config:prototype/noi-dashboard/package.json",
+        "name": "package.json",
+        "type": "config",
+        "summary": "Vite + React + Tailwind project configuration for the NOI Dashboard prototype with build and dev scripts."
+      },
+      {
+        "id": "config:render.yaml",
+        "name": "render.yaml",
+        "type": "config",
+        "summary": "Render.com infrastructure-as-code defining a web service and PostgreSQL database for production deployment."
+      },
+      {
+        "id": "config:turbo.json",
+        "name": "turbo.json",
+        "type": "config",
+        "summary": "Turborepo pipeline configuration defining build, dev, lint, and typecheck task dependencies and caching."
+      }
+    ]
+  },
+  "clusters": [
+    {
+      "nodes": [
+        "service:docker-compose.prod.yml",
+        "file:Caddyfile",
+        "document:CONTEXT.md",
+        "document:DEPLOYMENT_PLAYBOOK.md"
+      ],
+      "edgeCount": 6
+    },
+    {
+      "nodes": [
+        "file:ag-platform/src/components/collaboration/TaskBoard.tsx",
+        "file:ag-platform/src/components/collaboration/TaskCard.tsx"
+      ],
+      "edgeCount": 2
+    }
+  ],
+  "layers": {
+    "count": 9,
+    "list": [
+      {
+        "id": "layer:ai-api",
+        "name": "AI Backend API",
+        "description": "Python/FastAPI backend with AI agents, routes, services, and automation workflows"
+      },
+      {
+        "id": "layer:ai-frontend",
+        "name": "AI Frontend",
+        "description": "Legacy Vite React frontend for the AI backend"
+      },
+      {
+        "id": "layer:platform-ui",
+        "name": "Platform UI",
+        "description": "Next.js web application with admin dashboard, office, storage, collaboration UI"
+      },
+      {
+        "id": "layer:platform-api",
+        "name": "Platform API & Services",
+        "description": "Intake API service and server-side logic for the platform"
+      },
+      {
+        "id": "layer:mobile-app",
+        "name": "Mobile App",
+        "description": "React Native mobile PWA for field executives"
+      },
+      {
+        "id": "layer:shared-packages",
+        "name": "Shared Packages",
+        "description": "Shared types, database, AI, and UI packages in the monorepo"
+      },
+      {
+        "id": "layer:data",
+        "name": "Data Layer",
+        "description": "Database migrations, Supabase schema, seed data, and sample data"
+      },
+      {
+        "id": "layer:infrastructure",
+        "name": "Infrastructure & CI/CD",
+        "description": "Docker, Caddy, GitHub Actions workflows, deployment configs"
+      },
+      {
+        "id": "layer:config-docs",
+        "name": "Config & Documentation",
+        "description": "Project configuration files, documentation, prototypes, and content"
+      }
+    ]
+  },
+  "nodeSummaryIndex": {
+    "config:.bolt/mcp.json": {
+      "name": "mcp.json",
+      "type": "config",
+      "summary": "Bolt MCP server configuration enabling the shaders integration for AI-assisted development."
+    },
+    "config:.changeset/config.json": {
+      "name": "config.json",
+      "type": "config",
+      "summary": "Changesets versioning configuration with restricted access, main branch base, and conventional commit changelog generation."
+    },
+    "config:.devcontainer/devcontainer.json": {
+      "name": "devcontainer.json",
+      "type": "config",
+      "summary": "Development container definition using the universal devcontainers image with no additional features."
+    },
+    "config:.env.example": {
+      "name": ".env.example",
+      "type": "config",
+      "summary": "Environment variables template for production deployment covering domain, PostgreSQL, Redis, LLM providers (Groq/Gemini), Supabase auth, email intake (Resend/IMAP), Telegram OTP bot, n8n WhatsApp orchestration, NeSL e-filing, IGR Maharashtra portal, and GRAS challan portal."
+    },
+    "pipeline:.github/actions/setup/action.yml": {
+      "name": "action.yml",
+      "type": "pipeline",
+      "summary": "Reusable GitHub Actions composite action for setting up the CI environment. File does not exist on disk."
+    },
+    "pipeline:.github/workflows/ci.yml": {
+      "name": "ci.yml",
+      "type": "pipeline",
+      "summary": "GitHub Actions CI workflow running pre-commit hooks, Python backend linting (ruff), Python tests (pytest), Turborepo platform checks (lint, type-check, test, build), Next.js AI dashboard build, and commitlint on pull requests."
+    },
+    "pipeline:.github/workflows/codeql.yml": {
+      "name": "codeql.yml",
+      "type": "pipeline",
+      "summary": "GitHub Advanced Security CodeQL analysis workflow scanning JavaScript/TypeScript and Python codebases on push, pull request, and weekly schedule."
+    },
+    "pipeline:.github/workflows/deploy.yml": {
+      "name": "deploy.yml",
+      "type": "pipeline",
+      "summary": "Manual-deploy workflow for self-hosted runner that pulls latest code, creates a production .env with auto-generated secrets, builds Docker images, deploys the full stack, and runs health checks."
+    },
+    "pipeline:.github/workflows/main.yml": {
+      "name": "main.yml",
+      "type": "pipeline",
+      "summary": "Primary CI workflow running pre-commit hooks, Python backend validation (ruff), Turborepo platform checks, and Next.js frontend build on pushes and pull requests to main."
+    },
+    "pipeline:.github/workflows/nextjs.yml": {
+      "name": "nextjs.yml",
+      "type": "pipeline",
+      "summary": "GitHub Pages deployment workflow for the Next.js AI dashboard with package manager detection, cache restoration, static export build, and artifact upload."
+    },
+    "pipeline:.github/workflows/preview.yml": {
+      "name": "preview.yml",
+      "type": "pipeline",
+      "summary": "PR preview deployment workflow deploying the platform SPA and AI dashboard to Cloudflare Pages with automatic PR comment linking."
+    },
+    "pipeline:.github/workflows/release.yml": {
+      "name": "release.yml",
+      "type": "pipeline",
+      "summary": "Changesets-based release workflow creating version bump PRs and GitHub releases on push to main."
+    },
+    "pipeline:.github/workflows/test-checkout.yml": {
+      "name": "test-checkout.yml",
+      "type": "pipeline",
+      "summary": "Sandbox workflow for verifying the self-hosted runner can checkout the repository correctly."
+    },
+    "pipeline:.github/workflows/test-permissions.yml": {
+      "name": "test-permissions.yml",
+      "type": "pipeline",
+      "summary": "Sandbox workflow testing write-all permissions on the self-hosted runner."
+    },
+    "pipeline:.github/workflows/test-simple.yml": {
+      "name": "test-simple.yml",
+      "type": "pipeline",
+      "summary": "Minimal sandbox workflow printing Hello World on ubuntu-latest to validate basic CI functionality."
+    },
+    "pipeline:.github/workflows/test-runner.yml": {
+      "name": "test-runner.yml",
+      "type": "pipeline",
+      "summary": "Sandbox workflow testing the self-hosted runner connectivity by printing hostname."
+    },
+    "pipeline:.github/workflows/test.yml": {
+      "name": "test.yml",
+      "type": "pipeline",
+      "summary": "Test workflow file. Does not exist on disk."
+    },
+    "config:.lintstagedrc.json": {
+      "name": ".lintstagedrc.json",
+      "type": "config",
+      "summary": "lint-staged configuration running ESLint and Prettier on TypeScript/JavaScript files, Ruff on Python files, and Prettier on JSON/YAML/Markdown files."
+    },
+    "config:.pre-commit-config.yaml": {
+      "name": ".pre-commit-config.yaml",
+      "type": "config",
+      "summary": "Pre-commit hook configuration with trailing-whitespace, end-of-file-fixer, YAML validation, large file detection, private key detection (pre-commit-hooks), Ruff linting/formatting (Python), and ESLint (TypeScript/JavaScript)."
+    },
+    "config:CNAME": {
+      "name": "CNAME",
+      "type": "config",
+      "summary": "Custom domain name record pointing to advadiityagade.com for the production deployment."
+    },
+    "service:Caddyfile": {
+      "name": "Caddyfile",
+      "type": "service",
+      "summary": "Caddy reverse proxy configuration routing six subdomains (app, dashboard, api, intake, n8n, docs) to Docker containers with health checks, gzip encoding, basic auth for n8n, and static file serving for docs."
+    },
+    "document:CONTEXT.md": {
+      "name": "CONTEXT.md",
+      "type": "document",
+      "summary": "Domain glossary defining core business terms, NOI workflow states, case lifecycle, deployment architecture, and governance rules for the AG Associates legaltech platform."
+    },
+    "document:CONTRIBUTING.md": {
+      "name": "CONTRIBUTING.md",
+      "type": "document",
+      "summary": "Contribution guide covering development setup, code standards, commit conventions, branch naming, and PR submission requirements."
+    },
+    "document:CLAUDE.md": {
+      "name": "CLAUDE.md",
+      "type": "document",
+      "summary": "AI assistant onboarding document covering repository layout, common commands, architecture overview, and key conventions for both the Python AI pipeline and TypeScript platform."
+    },
+    "document:CULTURE.md": {
+      "name": "CULTURE.md",
+      "type": "document",
+      "summary": "Company culture document defining core principles, async-first communication, operational discipline, AI-assisted workflows, and leadership philosophy for AG Associates."
+    },
+    "file:ag-associates-ai/backend/agents/aisha.py": {
+      "name": "aisha.py",
+      "type": "file",
+      "summary": "Intake agent (Aisha) that extracts structured rental agreement fields from raw user messages using an LLM chain with LangChain, returning parsed JSON."
+    },
+    "function:ag-associates-ai/backend/agents/aisha.py:aisha_intake_node": {
+      "name": "aisha_intake_node",
+      "type": "function",
+      "summary": "Extracts tenant, landlord, rent, address, dates, deposit, and stamp duty fields from raw input via a ChatOpenAI LLM with JSON output parsing."
+    },
+    "file:ag-associates-ai/backend/agents/auditor.py": {
+      "name": "auditor.py",
+      "type": "file",
+      "summary": "Quality assurance agent that scores drafted rental agreements against extracted requirements, flagging discrepancies and missing fields."
+    },
+    "function:ag-associates-ai/backend/agents/auditor.py:auditor_node": {
+      "name": "auditor_node",
+      "type": "function",
+      "summary": "Compares drafted document against extracted JSON via LLM, producing a pass/fail score (threshold 85) with detailed issue list and feedback."
+    },
+    "file:ag-associates-ai/backend/agents/bouncer.py": {
+      "name": "bouncer.py",
+      "type": "file",
+      "summary": "Mathematical validation agent that verifies stamp duty paid equals ~0.3% of rent over the agreement duration within ₹50 tolerance."
+    },
+    "function:ag-associates-ai/backend/agents/bouncer.py:_extract_numeric": {
+      "name": "_extract_numeric",
+      "type": "function",
+      "summary": "Extracts a float from mixed-format strings like '₹25,000 per month' by stripping non-digit characters."
+    },
+    "function:ag-associates-ai/backend/agents/bouncer.py:_duration_to_months": {
+      "name": "_duration_to_months",
+      "type": "function",
+      "summary": "Parses duration strings (e.g. '1.5 years', '11 months') into a normalized integer month count using regex."
+    },
+    "function:ag-associates-ai/backend/agents/bouncer.py:bouncer_node": {
+      "name": "bouncer_node",
+      "type": "function",
+      "summary": "Computes expected stamp duty (0.3% of rent × months), compares to paid amount within ₹50 tolerance, and records pass/fail."
+    },
+    "file:ag-associates-ai/backend/agents/db.py": {
+      "name": "db.py",
+      "type": "file",
+      "summary": "Database helper module providing pgvector-backed PostgreSQL connection, embedding generation via SentenceTransformer, and similarity search for legal templates."
+    },
+    "function:ag-associates-ai/backend/agents/db.py:get_db_connection": {
+      "name": "get_db_connection",
+      "type": "function",
+      "summary": "Creates a pgvector-registered psycopg2 connection with RealDictCursor for the caller to close."
+    },
+    "function:ag-associates-ai/backend/agents/db.py:_get_embedding_model": {
+      "name": "_get_embedding_model",
+      "type": "function",
+      "summary": "Lazy-loads and caches a SentenceTransformer model, returning None if the package is unavailable to gracefully disable RAG."
+    },
+    "function:ag-associates-ai/backend/agents/db.py:generate_embedding": {
+      "name": "generate_embedding",
+      "type": "function",
+      "summary": "Generates a vector embedding for input text via SentenceTransformer, falling back to a zero vector if the model is unavailable."
+    },
+    "function:ag-associates-ai/backend/agents/db.py:similarity_search": {
+      "name": "similarity_search",
+      "type": "function",
+      "summary": "Performs pgvector cosine-similarity search on legal_templates table, returning top-k matching rows with similarity scores."
+    },
+    "service:ag-associates-ai/backend/Dockerfile": {
+      "name": "Dockerfile",
+      "type": "service",
+      "summary": "Multi-stage Docker build producing a minimal Python 3.11 runtime image with Playwright for RPA automation, uvicorn server, and health checks."
+    },
+    "service:ag-associates-ai/backend/Dockerfile:builder": {
+      "name": "builder",
+      "type": "service",
+      "summary": "Build stage that installs Python dependencies and pre-downloads Playwright Chromium for RPA portal automation."
+    },
+    "service:ag-associates-ai/backend/Dockerfile:python": {
+      "name": "python",
+      "type": "service",
+      "summary": "Runtime stage with non-root user, Playwright browser support, and uvicorn serving the FastAPI application on port 8000 with health checks."
+    },
+    "file:ag-associates-ai/backend/executor_agent.py": {
+      "name": "executor_agent.py",
+      "type": "file",
+      "summary": "Orchestrates RPA-based challan generation for MTR-6 (rent) and NOI (loan) using Playwright browser automation with the GRAS portal, handling OTP verification via Redis pub/sub."
+    },
+    "class:ag-associates-ai/backend/executor_agent.py:GrasRPAExecutor": {
+      "name": "GrasRPAExecutor",
+      "type": "class",
+      "summary": "Manages GRAS portal browser automation for generating MTR-6 rent challans and NOI loan challans with OTP-based authentication via Redis."
+    },
+    "file:ag-associates-ai/backend/igr_executor.py": {
+      "name": "igr_executor.py",
+      "type": "file",
+      "summary": "Handles RPA-based NOI document filing on the IGR portal using Playwright, including document upload, OTP verification, and filing result storage."
+    },
+    "class:ag-associates-ai/backend/igr_executor.py:IgrRpaExecutor": {
+      "name": "IgrRpaExecutor",
+      "type": "class",
+      "summary": "Automates NOI document filing on the IGR portal with Playwright, handling login, document upload, OTP authentication, and filing status verification."
+    },
+    "file:ag-associates-ai/backend/main.py": {
+      "name": "main.py",
+      "type": "file",
+      "summary": "FastAPI application entry point exposing REST webhooks for WhatsApp, Aisha chat/SMS/voice, NESL property registration execution, NOI workflow management, agreement generation, and system health endpoints."
+    },
+    "function:ag-associates-ai/backend/main.py:whatsapp_webhook": {
+      "name": "whatsapp_webhook",
+      "type": "function",
+      "summary": "Handles incoming WhatsApp messages via n8n webhook, processes the message content asynchronously, and returns a response."
+    },
+    "function:ag-associates-ai/backend/main.py:generate_agreement": {
+      "name": "generate_agreement",
+      "type": "function",
+      "summary": "Generates a legal agreement PDF from a message using async processing and returns the generated document."
+    },
+    "function:ag-associates-ai/backend/main.py:dashboard_status": {
+      "name": "dashboard_status",
+      "type": "function",
+      "summary": "Returns system dashboard status including database connectivity and recent activity metrics."
+    },
+    "function:ag-associates-ai/backend/main.py:list_templates": {
+      "name": "list_templates",
+      "type": "function",
+      "summary": "Queries and returns available document templates filtered by type and language from the database."
+    },
+    "function:ag-associates-ai/backend/main.py:aisha_chat": {
+      "name": "aisha_chat",
+      "type": "function",
+      "summary": "Processes chat messages for the Aisha AI assistant, routing to the async processing pipeline and returning the response."
+    },
+    "function:ag-associates-ai/backend/main.py:aisha_sms_webhook": {
+      "name": "aisha_sms_webhook",
+      "type": "function",
+      "summary": "Receives incoming SMS messages via Twilio webhook, processes them through the Aisha AI pipeline, and returns TwiML response."
+    },
+    "function:ag-associates-ai/backend/main.py:aisha_voice_call_webhook": {
+      "name": "aisha_voice_call_webhook",
+      "type": "function",
+      "summary": "Handles Twilio voice call webhooks, processing speech recognition results through the Aisha AI pipeline and returning TwiML responses."
+    },
+    "function:ag-associates-ai/backend/main.py:_escape_twiml": {
+      "name": "_escape_twiml",
+      "type": "function",
+      "summary": "Escapes special XML characters in text for safe TwiML response generation."
+    },
+    "function:ag-associates-ai/backend/main.py:aisha_voice_text": {
+      "name": "aisha_voice_text",
+      "type": "function",
+      "summary": "Converts text to speech using Azure Cognitive Services, processing payload through the Aisha AI pipeline and returning base64-encoded audio."
+    },
+    "function:ag-associates-ai/backend/main.py:aisha_chat_stream": {
+      "name": "aisha_chat_stream",
+      "type": "function",
+      "summary": "Streams chat conversation messages via SSE for real-time chat updates."
+    },
+    "function:ag-associates-ai/backend/main.py:unified_chat": {
+      "name": "unified_chat",
+      "type": "function",
+      "summary": "Unified chat endpoint that processes messages across platforms and routes to the appropriate AI handler."
+    },
+    "function:ag-associates-ai/backend/main.py:_verify_n8n_key": {
+      "name": "_verify_n8n_key",
+      "type": "function",
+      "summary": "Verifies the n8n webhook API key using constant-time comparison for request authentication."
+    },
+    "function:ag-associates-ai/backend/main.py:n8n_intake_webhook": {
+      "name": "n8n_intake_webhook",
+      "type": "function",
+      "summary": "Intake webhook for n8n workflow triggers, forwarding payloads to the processing pipeline after key verification."
+    },
+    "function:ag-associates-ai/backend/main.py:_get_nesl_client": {
+      "name": "_get_nesl_client",
+      "type": "function",
+      "summary": "Factory function that creates and returns a configured NESL client instance."
+    },
+    "function:ag-associates-ai/backend/main.py:nesl_execute": {
+      "name": "nesl_execute",
+      "type": "function",
+      "summary": "Executes property registration transactions through the NESL system, returning transaction ID and filing reference."
+    },
+    "function:ag-associates-ai/backend/main.py:noi_seed": {
+      "name": "noi_seed",
+      "type": "function",
+      "summary": "Seeds a new NOI case into the pipeline for processing and status tracking."
+    },
+    "function:ag-associates-ai/backend/main.py:noi_workflow": {
+      "name": "noi_workflow",
+      "type": "function",
+      "summary": "Manages NOI workflow actions including filing, status checks, and acknowledgment updates."
+    },
+    "function:ag-associates-ai/backend/main.py:noi_status": {
+      "name": "noi_status",
+      "type": "function",
+      "summary": "Queries and returns the current status and details of a specific NOI case."
+    },
+    "function:ag-associates-ai/backend/main.py:noi_webhook": {
+      "name": "noi_webhook",
+      "type": "function",
+      "summary": "External webhook receiver that updates NOI case status from external systems (e.g., IGR portal callback)."
+    },
+    "file:ag-associates-ai/backend/nesl_client.py": {
+      "name": "nesl_client.py",
+      "type": "file",
+      "summary": "Client for the NESL (National E-Services) property registration system supporting API, RPA, and mock execution modes with transaction ID generation and filing reference tracking."
+    },
+    "class:ag-associates-ai/backend/nesl_client.py:NeslClient": {
+      "name": "NeslClient",
+      "type": "class",
+      "summary": "Provides multi-mode NESL execution (API, RPA, mock) for property registration with access token management, transaction IDs, and filing reference generation."
+    },
+    "file:ag-associates-ai/backend/pdf_generator.py": {
+      "name": "pdf_generator.py",
+      "type": "file",
+      "summary": "Generates formatted PDF legal agreements using ReportLab with custom styles, markdown content parsing, and structured document layout."
+    },
+    "class:ag-associates-ai/backend/pdf_generator.py:AgreementPDFGenerator": {
+      "name": "AgreementPDFGenerator",
+      "type": "class",
+      "summary": "Builds PDF agreements using ReportLab with custom styles, markdown-to-flowable parsing, and structured document generation."
+    },
+    "function:ag-associates-ai/backend/pdf_generator.py:convert_to_pdf": {
+      "name": "convert_to_pdf",
+      "type": "function",
+      "summary": "Converts markdown content to a PDF file by delegating to AgreementPDFGenerator and saving the result."
+    },
+    "file:ag-associates-ai/backend/config.py": {
+      "name": "config.py",
+      "type": "file",
+      "summary": "Centralized configuration loading from environment variables for database URLs, API keys, Redis, Twilio, and Supabase settings."
+    },
+    "function:ag-associates-ai/backend/config.py:_env_bool": {
+      "name": "_env_bool",
+      "type": "function",
+      "summary": "Parses an environment variable as a boolean value with a default fallback."
+    },
+    "function:ag-associates-ai/backend/config.py:_env_list": {
+      "name": "_env_list",
+      "type": "function",
+      "summary": "Parses an environment variable as a comma-separated list with a default fallback."
+    },
+    "function:ag-associates-ai/backend/config.py:get_database_url": {
+      "name": "get_database_url",
+      "type": "function",
+      "summary": "Returns the database connection URL from environment configuration."
+    },
+    "file:ag-associates-ai/backend/requirements.txt": {
+      "name": "requirements.txt",
+      "type": "file",
+      "summary": "Python dependency manifest listing required packages for the backend including FastAPI, Playwright, ReportLab, database drivers, and AI/ML libraries."
+    },
+    "file:ag-associates-ai/backend/fee_calculator.py": {
+      "name": "fee_calculator.py",
+      "type": "file",
+      "summary": "Stamp duty and registration fee calculation logic for property transactions based on property value and type."
+    },
+    "file:ag-associates-ai/backend/template_manager.py": {
+      "name": "template_manager.py",
+      "type": "file",
+      "summary": "Manages document templates for generating legal agreements, notices, and correspondence with variable substitution."
+    },
+    "file:ag-associates-ai/backend/lic_manager.py": {
+      "name": "lic_manager.py",
+      "type": "file",
+      "summary": "License management utilities for professional licensing workflows including validation and renewal tracking."
+    },
+    "file:ag-associates-ai/backend/noi_pipeline.py": {
+      "name": "noi_pipeline.py",
+      "type": "file",
+      "summary": "NOI (Notice of Intimation) processing pipeline orchestrating the end-to-end workflow from intake to filing and status tracking."
+    },
+    "file:ag-associates-ai/backend/noi_automation.py": {
+      "name": "noi_automation.py",
+      "type": "file",
+      "summary": "Automated NOI workflow handling including scheduled status checks, retry logic, and notification triggers."
+    },
+    "file:ag-associates-ai/backend/rag_engine.py": {
+      "name": "rag_engine.py",
+      "type": "file",
+      "summary": "Retrieval-Augmented Generation engine for answering legal queries using vector search on document embeddings."
+    },
+    "file:ag-associates-ai/backend/search_agent.py": {
+      "name": "search_agent.py",
+      "type": "file",
+      "summary": "Search agent coordinating across document stores and external APIs for comprehensive information retrieval."
+    },
+    "file:ag-associates-ai/backend/websocket_manager.py": {
+      "name": "websocket_manager.py",
+      "type": "file",
+      "summary": "WebSocket connection manager for real-time bidirectional communication with frontend clients."
+    },
+    "file:ag-associates-ai/backend/test_db.py": {
+      "name": "test_db.py",
+      "type": "file",
+      "summary": "Database connectivity test script for verifying database configuration and connection parameters."
+    },
+    "file:ag-associates-ai/backend/models.py": {
+      "name": "models.py",
+      "type": "file",
+      "summary": "Pydantic and SQLAlchemy data models defining database entities, request schemas, and response types."
+    },
+    "file:ag-associates-ai/backend/email_intake.py": {
+      "name": "email_intake.py",
+      "type": "file",
+      "summary": "Email ingestion service that monitors and processes incoming emails for automated case creation and routing."
+    },
+    "file:ag-associates-ai/backend/gras_client.py": {
+      "name": "gras_client.py",
+      "type": "file",
+      "summary": "Client library for interacting with the GRAS (Gujarat Registration Automation System) REST API."
+    },
+    "file:ag-associates-ai/backend/notifications.py": {
+      "name": "notifications.py",
+      "type": "file",
+      "summary": "Notification dispatch service supporting SMS, email, and in-app alert delivery for system events."
+    },
+    "file:ag-associates-ai/backend/database.py": {
+      "name": "database.py",
+      "type": "file",
+      "summary": "Database connection setup, session management, and query utilities using SQLAlchemy async patterns."
+    },
+    "file:ag-associates-ai/backend/tasks.py": {
+      "name": "tasks.py",
+      "type": "file",
+      "summary": "Background task definitions for async job processing including retry logic and scheduled execution."
+    },
+    "document:ag-associates-ai/backend/README.md": {
+      "name": "README.md",
+      "type": "document",
+      "summary": "Project overview documentation with setup instructions, API endpoint reference, and architecture guide for the backend service."
+    },
+    "document:ag-associates-ai/backend/CHANGELOG.md": {
+      "name": "CHANGELOG.md",
+      "type": "document",
+      "summary": "Version history and release notes tracking feature additions, bug fixes, and breaking changes across backend deployments."
+    },
+    "document:ag-associates-ai/backend/docs/supabase.md": {
+      "name": "supabase.md",
+      "type": "document",
+      "summary": "Technical guide for configuring and integrating Supabase for database, authentication, and storage services."
+    },
+    "document:ag-associates-ai/backend/frontend/README.md": {
+      "name": "README.md",
+      "type": "document",
+      "summary": "Documentation for the frontend application covering setup, development, and usage instructions."
+    },
+    "file:ag-associates-ai/backend/frontend/src/App.tsx": {
+      "name": "App.tsx",
+      "type": "file",
+      "summary": "Root React component defining the application layout with routing and page structure."
+    },
+    "file:ag-associates-ai/backend/frontend/src/main.tsx": {
+      "name": "main.tsx",
+      "type": "file",
+      "summary": "Application entry point that mounts the React app into the DOM."
+    },
+    "file:ag-associates-ai/backend/frontend/src/index.css": {
+      "name": "index.css",
+      "type": "file",
+      "summary": "Global CSS styles for the frontend application including base resets and utility classes."
+    },
+    "file:ag-associates-ai/backend/frontend/src/pages/Dashboard.tsx": {
+      "name": "Dashboard.tsx",
+      "type": "file",
+      "summary": "Dashboard page component displaying key metrics, case summaries, and status overview."
+    },
+    "file:ag-associates-ai/backend/frontend/src/pages/Cases.tsx": {
+      "name": "Cases.tsx",
+      "type": "file",
+      "summary": "Cases listing page component with filtering, sorting, and case management capabilities."
+    },
+    "file:ag-associates-ai/backend/frontend/src/pages/Settings.tsx": {
+      "name": "Settings.tsx",
+      "type": "file",
+      "summary": "Settings page component for user preferences and application configuration."
+    },
+    "file:ag-associates-ai/backend/frontend/src/pages/CaseDetail.tsx": {
+      "name": "CaseDetail.tsx",
+      "type": "file",
+      "summary": "Individual case detail page showing full case information, timeline, and actions."
+    },
+    "file:ag-associates-ai/backend/frontend/src/components/Layout.tsx": {
+      "name": "Layout.tsx",
+      "type": "file",
+      "summary": "Shared layout component providing navigation sidebar, header, and main content area."
+    },
+    "file:ag-associates-ai/backend/frontend/src/components/StatsCard.tsx": {
+      "name": "StatsCard.tsx",
+      "type": "file",
+      "summary": "Reusable statistics card component for displaying metric values with labels and icons."
+    },
+    "file:ag-associates-ai/backend/frontend/src/components/CaseList.tsx": {
+      "name": "CaseList.tsx",
+      "type": "file",
+      "summary": "Reusable case list component rendering a table or card layout of legal cases."
+    },
+    "file:ag-associates-ai/backend/frontend/src/components/CaseTimeline.tsx": {
+      "name": "CaseTimeline.tsx",
+      "type": "file",
+      "summary": "Timeline component displaying chronological case events and status changes."
+    },
+    "file:ag-associates-ai/backend/frontend/src/components/BotStatus.tsx": {
+      "name": "BotStatus.tsx",
+      "type": "file",
+      "summary": "Status indicator component showing bot/agent online status and activity information."
+    },
+    "file:ag-associates-ai/backend/frontend/src/components/DashboardSkeleton.tsx": {
+      "name": "DashboardSkeleton.tsx",
+      "type": "file",
+      "summary": "Loading skeleton component for the dashboard to improve perceived performance."
+    },
+    "file:ag-associates-ai/backend/frontend/src/api/index.ts": {
+      "name": "index.ts",
+      "type": "file",
+      "summary": "API client barrel file exporting configured HTTP client and base request utilities."
+    },
+    "file:ag-associates-ai/backend/frontend/src/api/cases.ts": {
+      "name": "cases.ts",
+      "type": "file",
+      "summary": "API module providing case-related endpoint functions for CRUD operations."
+    },
+    "file:ag-associates-ai/backend/frontend/src/hooks/useCases.ts": {
+      "name": "useCases.ts",
+      "type": "file",
+      "summary": "React hook encapsulating case data fetching, caching, and state management logic."
+    },
+    "file:ag-associates-ai/backend/frontend/src/hooks/useSocket.ts": {
+      "name": "useSocket.ts",
+      "type": "file",
+      "summary": "React hook managing WebSocket connection for real-time updates from the backend."
+    },
+    "file:ag-associates-ai/backend/frontend/src/hooks/useAuth.ts": {
+      "name": "useAuth.ts",
+      "type": "file",
+      "summary": "React hook providing authentication state, login, logout, and token management."
+    },
+    "file:ag-associates-ai/backend/frontend/src/types/index.ts": {
+      "name": "index.ts",
+      "type": "file",
+      "summary": "TypeScript type definitions barrel file exporting interfaces and types for the frontend."
+    },
+    "file:ag-associates-ai/backend/frontend/src/data/sampleData.ts": {
+      "name": "sampleData.ts",
+      "type": "file",
+      "summary": "Mock data module providing sample cases, users, and activity for development and testing."
+    },
+    "file:ag-associates-ai/backend/frontend/vite.config.ts": {
+      "name": "vite.config.ts",
+      "type": "file",
+      "summary": "Vite build tool configuration with React plugin, dev server settings, and build options."
+    },
+    "config:ag-associates-ai/backend/frontend/tsconfig.json": {
+      "name": "tsconfig.json",
+      "type": "config",
+      "summary": "TypeScript compiler configuration for the frontend application with strict type checking."
+    },
+    "config:ag-associates-ai/backend/frontend/tsconfig.node.json": {
+      "name": "tsconfig.node.json",
+      "type": "config",
+      "summary": "TypeScript configuration for Node.js tooling files like Vite config."
+    },
+    "file:ag-associates-ai/backend/frontend/index.html": {
+      "name": "index.html",
+      "type": "file",
+      "summary": "HTML entry point for the Vite-powered React application with root mount element."
+    },
+    "file:ag-associates-ai/backend/agents/__init__.py": {
+      "name": "__init__.py",
+      "type": "file",
+      "summary": "LangGraph agent pipeline barrel file that re-exports the public API (AgentState, build_agent_graph, generate_embedding, get_db_connection, process_rental_request, should_revise, similarity_search) from submodules (db, graph, state)."
+    },
+    "file:ag-associates-ai/backend/utils/__init__.py": {
+      "name": "__init__.py",
+      "type": "file",
+      "summary": "Empty package initializer for the utils module."
+    },
+    "file:ag-associates-ai/backend/models/__init__.py": {
+      "name": "__init__.py",
+      "type": "file",
+      "summary": "Package initializer for the models module, re-exporting data model definitions."
+    },
+    "file:ag-associates-ai/backend/routes/__init__.py": {
+      "name": "__init__.py",
+      "type": "file",
+      "summary": "Package initializer for the routes module, re-exporting API route handlers."
+    },
+    "file:ag-associates-ai/backend/services/__init__.py": {
+      "name": "__init__.py",
+      "type": "file",
+      "summary": "Package initializer for the services module, re-exporting service layer components."
+    },
+    "file:ag-associates-ai/backend/n8n_webhook.py": {
+      "name": "n8n_webhook.py",
+      "type": "file",
+      "summary": "Webhook handler for n8n workflow automation integration."
+    },
+    "file:ag-associates-ai/backend/bot.py": {
+      "name": "bot.py",
+      "type": "file",
+      "summary": "Main bot implementation for handling user interactions and workflow automation."
+    },
+    "file:ag-associates-ai/backend/payment/payment_intent.py": {
+      "name": "payment_intent.py",
+      "type": "file",
+      "summary": "Payment intent creation and management service using Stripe."
+    },
+    "file:ag-associates-ai/backend/payment/payment_router.py": {
+      "name": "payment_router.py",
+      "type": "file",
+      "summary": "API route definitions for payment endpoints."
+    },
+    "file:ag-associates-ai/backend/payment/webhook.py": {
+      "name": "webhook.py",
+      "type": "file",
+      "summary": "Stripe webhook handler for processing payment events."
+    },
+    "file:ag-associates-ai/backend/payment/models.py": {
+      "name": "models.py",
+      "type": "file",
+      "summary": "Payment data models and schema definitions."
+    },
+    "file:ag-associates-ai/backend/routes/documents.py": {
+      "name": "documents.py",
+      "type": "file",
+      "summary": "API route handlers for document management endpoints."
+    },
+    "file:ag-associates-ai/backend/routes/auth.py": {
+      "name": "auth.py",
+      "type": "file",
+      "summary": "Authentication and authorization route handlers."
+    },
+    "file:ag-associates-ai/backend/routes/cases.py": {
+      "name": "cases.py",
+      "type": "file",
+      "summary": "API route handlers for case management endpoints."
+    },
+    "file:ag-associates-ai/backend/routes/health.py": {
+      "name": "health.py",
+      "type": "file",
+      "summary": "Health check endpoint for monitoring application status."
+    },
+    "file:ag-associates-ai/backend/routes/noi.py": {
+      "name": "noi.py",
+      "type": "file",
+      "summary": "API route handlers for Notice of Intent (NOI) workflow endpoints."
+    },
+    "file:ag-associates-ai/backend/routes/automation.py": {
+      "name": "automation.py",
+      "type": "file",
+      "summary": "API route handlers for workflow automation endpoints."
+    },
+    "file:ag-associates-ai/backend/routes/search.py": {
+      "name": "search.py",
+      "type": "file",
+      "summary": "Search endpoint handlers for querying case and document data."
+    },
+    "file:ag-associates-ai/backend/routes/routing.py": {
+      "name": "routing.py",
+      "type": "file",
+      "summary": "Central request routing configuration mapping endpoints to handlers."
+    },
+    "file:ag-associates-ai/backend/frontend/src/vite-env.d.ts": {
+      "name": "vite-env.d.ts",
+      "type": "file",
+      "summary": "Vite environment type declaration file providing TypeScript type definitions for Vite-specific features."
+    },
+    "config:ag-associates-ai/backend/frontend/eslint.config.js": {
+      "name": "eslint.config.js",
+      "type": "config",
+      "summary": "ESLint configuration for the frontend codebase defining linting rules and plugins."
+    },
+    "config:ag-associates-ai/backend/frontend/.gitignore": {
+      "name": ".gitignore",
+      "type": "config",
+      "summary": "Git ignore rules for the frontend module excluding build artifacts and dependencies."
+    },
+    "file:ag-associates-ai/backend/frontend/public/vite.svg": {
+      "name": "vite.svg",
+      "type": "file",
+      "summary": "Vite logo SVG asset used as the application favicon and branding element."
+    },
+    "document:ag-associates-ai/backend/docs/setup.md": {
+      "name": "setup.md",
+      "type": "document",
+      "summary": "Setup and installation guide for the backend application covering prerequisites, configuration, and deployment steps."
+    },
+    "document:ag-associates-ai/backend/docs/agents.md": {
+      "name": "agents.md",
+      "type": "document",
+      "summary": "Documentation describing the agent pipeline architecture, components, and workflows."
+    },
+    "file:ag-platform/apps/mobile/app/(app)/activity.tsx": {
+      "name": "activity.tsx",
+      "type": "file",
+      "summary": "Expo Router screen showing the officer's daily activity log with on-duty status toggle and breadcrumb trail."
+    },
+    "function:ag-platform/apps/mobile/app/(app)/activity.tsx:Activity": {
+      "name": "Activity",
+      "type": "function",
+      "summary": "Default-exported screen component rendering today's activity feed with on-duty toggle."
+    },
+    "file:ag-platform/apps/mobile/app/(app)/cases/[caseId].tsx": {
+      "name": "[caseId].tsx",
+      "type": "file",
+      "summary": "Dynamic route screen displaying case detail with documents, status updates, and header info."
+    },
+    "function:ag-platform/apps/mobile/app/(app)/cases/[caseId].tsx:CaseDetail": {
+      "name": "CaseDetail",
+      "type": "function",
+      "summary": "Default-exported screen component loading case details, documents, and status update UI."
+    },
+    "file:ag-platform/apps/mobile/app/(app)/dashboard.tsx": {
+      "name": "dashboard.tsx",
+      "type": "file",
+      "summary": "Expo Router dashboard screen showing assigned cases list with realtime updates and pull-to-refresh."
+    },
+    "function:ag-platform/apps/mobile/app/(app)/dashboard.tsx:Dashboard": {
+      "name": "Dashboard",
+      "type": "function",
+      "summary": "Default-exported dashboard component displaying assigned cases with realtime updates and navigation."
+    },
+    "file:ag-platform/apps/mobile/app/(app)/debug/queue.tsx": {
+      "name": "queue.tsx",
+      "type": "file",
+      "summary": "Debug screen for inspecting the offline mutation queue state."
+    },
+    "function:ag-platform/apps/mobile/app/(app)/debug/queue.tsx:QueueDebug": {
+      "name": "QueueDebug",
+      "type": "function",
+      "summary": "Default-exported debug screen rendering queued mutation items with raw JSON inspection."
+    },
+    "file:ag-platform/apps/mobile/app/(app)/scanner.tsx": {
+      "name": "scanner.tsx",
+      "type": "file",
+      "summary": "Document scanner screen with camera capture, case selection, and upload queue management."
+    },
+    "function:ag-platform/apps/mobile/app/(app)/scanner.tsx:Scanner": {
+      "name": "Scanner",
+      "type": "function",
+      "summary": "Default-exported scanner component handling camera capture and document upload."
+    },
+    "function:ag-platform/apps/mobile/app/(app)/scanner.tsx:CaseSelector": {
+      "name": "CaseSelector",
+      "type": "function",
+      "summary": "Inline helper component rendering a list of selectable cases for associating scanned documents."
+    },
+    "file:ag-platform/apps/mobile/app/(app)/settings.tsx": {
+      "name": "settings.tsx",
+      "type": "file",
+      "summary": "Settings screen with user profile info, sign-out action, and reusable section/row layout components."
+    },
+    "function:ag-platform/apps/mobile/app/(app)/settings.tsx:Settings": {
+      "name": "Settings",
+      "type": "function",
+      "summary": "Default-exported settings screen showing user email and sign-out button."
+    },
+    "function:ag-platform/apps/mobile/app/(app)/settings.tsx:Section": {
+      "name": "Section",
+      "type": "function",
+      "summary": "Reusable layout component rendering a titled section container with children."
+    },
+    "file:ag-platform/apps/mobile/app/index.tsx": {
+      "name": "index.tsx",
+      "type": "file",
+      "summary": "App entry-point redirect screen checking auth state and navigating to login or dashboard."
+    },
+    "function:ag-platform/apps/mobile/app/index.tsx:Index": {
+      "name": "Index",
+      "type": "function",
+      "summary": "Default-exported index component redirecting authenticated users to dashboard or unauthenticated to login."
+    },
+    "file:ag-platform/apps/mobile/app/login.tsx": {
+      "name": "login.tsx",
+      "type": "file",
+      "summary": "Login screen with magic link email authentication flow."
+    },
+    "function:ag-platform/apps/mobile/app/login.tsx:Login": {
+      "name": "Login",
+      "type": "function",
+      "summary": "Default-exported login component handling email input and magic link submission."
+    },
+    "file:ag-platform/apps/mobile/app/privacy.tsx": {
+      "name": "privacy.tsx",
+      "type": "file",
+      "summary": "Privacy policy screen with links to external policy documents and a back navigation button."
+    },
+    "function:ag-platform/apps/mobile/app/privacy.tsx:PrivacyScreen": {
+      "name": "PrivacyScreen",
+      "type": "function",
+      "summary": "Default-exported privacy screen with external links and back navigation."
+    },
+    "file:ag-platform/apps/mobile/babel.config.js": {
+      "name": "babel.config.js",
+      "type": "file",
+      "summary": "Babel configuration for the React Native Expo mobile app."
+    },
+    "file:ag-platform/apps/mobile/components/activity/ActivityToggle.tsx": {
+      "name": "ActivityToggle.tsx",
+      "type": "file",
+      "summary": "On-duty status toggle component with clock-in/out times and real-time duration display."
+    },
+    "function:ag-platform/apps/mobile/components/activity/ActivityToggle.tsx:ActivityToggle": {
+      "name": "ActivityToggle",
+      "type": "function",
+      "summary": "Named-exported component toggling officer on-duty state with formatted time display."
+    },
+    "file:ag-platform/apps/mobile/components/activity/RouteMap.tsx": {
+      "name": "RouteMap.tsx",
+      "type": "file",
+      "summary": "Breadcrumb trail component rendering a sequence of location checkpoints with timestamps."
+    },
+    "function:ag-platform/apps/mobile/components/activity/RouteMap.tsx:RouteMap": {
+      "name": "RouteMap",
+      "type": "function",
+      "summary": "Named-exported component rendering breadcrumb trail from geolocation checkpoints."
+    },
+    "file:ag-platform/apps/mobile/components/cases/CaseDetailHeader.tsx": {
+      "name": "CaseDetailHeader.tsx",
+      "type": "file",
+      "summary": "Header component displaying case metadata including bank name, case type, status badge, and assigned date."
+    },
+    "function:ag-platform/apps/mobile/components/cases/CaseDetailHeader.tsx:CaseDetailHeader": {
+      "name": "CaseDetailHeader",
+      "type": "function",
+      "summary": "Named-exported header component rendering bank name, case type, status badge, and assignment timestamp."
+    },
+    "file:ag-platform/apps/mobile/components/cases/CaseDocuments.tsx": {
+      "name": "CaseDocuments.tsx",
+      "type": "file",
+      "summary": "Document list component displaying uploaded case documents with file names, sizes, and upload dates."
+    },
+    "function:ag-platform/apps/mobile/components/cases/CaseDocuments.tsx:CaseDocuments": {
+      "name": "CaseDocuments",
+      "type": "function",
+      "summary": "Named-exported component rendering a list of uploaded documents with formatted sizes and timestamps."
+    },
+    "file:ag-platform/apps/mobile/components/cases/CaseListItem.tsx": {
+      "name": "CaseListItem.tsx",
+      "type": "file",
+      "summary": "Case list item component showing case number, bank, type, status badge, and relative time."
+    },
+    "function:ag-platform/apps/mobile/components/cases/CaseListItem.tsx:CaseListItem": {
+      "name": "CaseListItem",
+      "type": "function",
+      "summary": "Named-exported component rendering a pressable case row with details and relative time."
+    },
+    "function:ag-platform/apps/mobile/components/cases/CaseListItem.tsx:formatRelative": {
+      "name": "formatRelative",
+      "type": "function",
+      "summary": "Helper formatting an ISO timestamp into a human-readable relative time string."
+    },
+    "file:ag-platform/apps/mobile/components/scanner/CameraButton.tsx": {
+      "name": "CameraButton.tsx",
+      "type": "file",
+      "summary": "Camera capture button with busy/disabled states for document scanning."
+    },
+    "function:ag-platform/apps/mobile/components/scanner/CameraButton.tsx:CameraButton": {
+      "name": "CameraButton",
+      "type": "function",
+      "summary": "Named-exported camera button handling busy and disabled states during document capture."
+    },
+    "file:ag-platform/apps/mobile/components/scanner/UploadQueueList.tsx": {
+      "name": "UploadQueueList.tsx",
+      "type": "file",
+      "summary": "Upload queue list component showing pending document uploads with retry capability."
+    },
+    "function:ag-platform/apps/mobile/components/scanner/UploadQueueList.tsx:UploadQueueList": {
+      "name": "UploadQueueList",
+      "type": "function",
+      "summary": "Named-exported component rendering a list of queued upload items with status indicators."
+    },
+    "function:ag-platform/apps/mobile/components/scanner/UploadQueueList.tsx:Row": {
+      "name": "Row",
+      "type": "function",
+      "summary": "Inline helper component rendering a single upload queue row with progress and retry."
+    },
+    "file:ag-platform/apps/mobile/components/status/StatusBoard.tsx": {
+      "name": "StatusBoard.tsx",
+      "type": "file",
+      "summary": "Status selection board component allowing officers to update case status."
+    },
+    "function:ag-platform/apps/mobile/components/status/StatusBoard.tsx:StatusBoard": {
+      "name": "StatusBoard",
+      "type": "function",
+      "summary": "Named-exported component rendering a grid of status options for case state updates."
+    },
+    "file:ag-platform/apps/mobile/components/status/StatusButton.tsx": {
+      "name": "StatusButton.tsx",
+      "type": "file",
+      "summary": "Individual status button component with active state highlighting."
+    },
+    "function:ag-platform/apps/mobile/components/status/StatusButton.tsx:StatusButton": {
+      "name": "StatusButton",
+      "type": "function",
+      "summary": "Named-exported pressable button with active/inactive styling for status selection."
+    },
+    "file:ag-platform/apps/mobile/components/system/OfflineIndicator.tsx": {
+      "name": "OfflineIndicator.tsx",
+      "type": "file",
+      "summary": "Offline status banner showing connectivity state and pending queue count."
+    },
+    "function:ag-platform/apps/mobile/components/system/OfflineIndicator.tsx:OfflineIndicator": {
+      "name": "OfflineIndicator",
+      "type": "function",
+      "summary": "Named-exported banner component displaying connectivity status and queued item count."
+    },
+    "file:ag-platform/apps/mobile/components/ui/EmptyState.tsx": {
+      "name": "EmptyState.tsx",
+      "type": "file",
+      "summary": "Reusable empty state UI component with title, message, and optional action button."
+    },
+    "function:ag-platform/apps/mobile/components/ui/EmptyState.tsx:EmptyState": {
+      "name": "EmptyState",
+      "type": "function",
+      "summary": "Named-exported empty state display with title, message, and optional action."
+    },
+    "file:ag-platform/apps/mobile/components/ui/ErrorBoundary.tsx": {
+      "name": "ErrorBoundary.tsx",
+      "type": "file",
+      "summary": "React class-based error boundary catching rendering errors and showing a reset fallback."
+    },
+    "class:ag-platform/apps/mobile/components/ui/ErrorBoundary.tsx:ErrorBoundary": {
+      "name": "ErrorBoundary",
+      "type": "class",
+      "summary": "Named-exported React error boundary class with getDerivedStateFromError and componentDidCatch lifecycle methods."
+    },
+    "file:ag-platform/apps/mobile/components/ui/ErrorState.tsx": {
+      "name": "ErrorState.tsx",
+      "type": "file",
+      "summary": "Reusable error state UI component with customizable title, message, and retry action."
+    },
+    "function:ag-platform/apps/mobile/components/ui/ErrorState.tsx:ErrorState": {
+      "name": "ErrorState",
+      "type": "function",
+      "summary": "Named-exported error state display with customizable message and retry callback."
+    },
+    "file:ag-platform/apps/mobile/components/ui/index.ts": {
+      "name": "index.ts",
+      "type": "file",
+      "summary": "Barrel file re-exporting UI components: ErrorBoundary, Skeleton, EmptyState, and ErrorState."
+    },
+    "file:ag-platform/apps/mobile/components/ui/Skeleton.tsx": {
+      "name": "Skeleton.tsx",
+      "type": "file",
+      "summary": "Animated skeleton loading placeholder components for content loading states."
+    },
+    "function:ag-platform/apps/mobile/components/ui/Skeleton.tsx:Skeleton": {
+      "name": "Skeleton",
+      "type": "function",
+      "summary": "Named-exported animated skeleton placeholder using React Native Animated API."
+    },
+    "function:ag-platform/apps/mobile/components/ui/Skeleton.tsx:SkeletonList": {
+      "name": "SkeletonList",
+      "type": "function",
+      "summary": "Named-exported component rendering a configurable list of skeleton rows."
+    },
+    "config:ag-platform/apps/mobile/eas.json": {
+      "name": "eas.json",
+      "type": "config",
+      "summary": "EAS Build configuration defining development, preview, and production build profiles with iOS simulator support and auto-incrementing versions."
+    },
+    "config:ag-platform/apps/mobile/package.json": {
+      "name": "package.json",
+      "type": "config",
+      "summary": "Mobile app package configuration with Expo SDK 51 dependencies including navigation, camera, maps, notifications, and offline storage."
+    },
+    "file:ag-platform/apps/mobile/global.css": {
+      "name": "global.css",
+      "type": "file",
+      "summary": "Tailwind CSS entry-point importing base, component, and utility layers for the mobile app."
+    },
+    "file:ag-platform/apps/mobile/hooks/useAuth.ts": {
+      "name": "useAuth.ts",
+      "type": "file",
+      "summary": "Authentication hooks providing auth state selector and magic link sign-in with Supabase for the mobile app."
+    },
+    "file:ag-platform/apps/mobile/hooks/useCase.ts": {
+      "name": "useCase.ts",
+      "type": "file",
+      "summary": "React Query hooks for fetching individual case details and associated documents from Supabase."
+    },
+    "file:ag-platform/apps/mobile/hooks/useCases.ts": {
+      "name": "useCases.ts",
+      "type": "file",
+      "summary": "React Query hook for fetching the list of cases assigned to the current executive user."
+    },
+    "file:ag-platform/apps/mobile/hooks/useDocumentCapture.ts": {
+      "name": "useDocumentCapture.ts",
+      "type": "file",
+      "summary": "Camera capture hook that takes photos, persists them to the app cache directory, and enqueues document upload mutations for offline replay."
+    },
+    "file:ag-platform/apps/mobile/hooks/useMutationQueue.ts": {
+      "name": "useMutationQueue.ts",
+      "type": "file",
+      "summary": "Singleton hook that drains the offline mutation queue FIFO with exponential backoff retry and automatic replay on connectivity restored."
+    },
+    "file:ag-platform/apps/mobile/hooks/useOnDutyTracker.ts": {
+      "name": "useOnDutyTracker.ts",
+      "type": "file",
+      "summary": "Foreground GPS location tracker that buffers breadcrumbs and flushes them in batches to the activity log while the officer is on duty."
+    },
+    "file:ag-platform/apps/mobile/hooks/useOnlineStatus.ts": {
+      "name": "useOnlineStatus.ts",
+      "type": "file",
+      "summary": "Network connectivity hook that tracks online/offline state using NetInfo."
+    },
+    "file:ag-platform/apps/mobile/hooks/usePushRegistration.ts": {
+      "name": "usePushRegistration.ts",
+      "type": "file",
+      "summary": "Push notification registration hook that requests permissions and upserts the Expo push token for the authenticated user."
+    },
+    "file:ag-platform/apps/mobile/hooks/useRealtimeCases.ts": {
+      "name": "useRealtimeCases.ts",
+      "type": "file",
+      "summary": "Supabase real-time subscription hook that invalidates the cases query cache when case records change for the current executive."
+    },
+    "file:ag-platform/apps/mobile/hooks/useStatusUpdate.ts": {
+      "name": "useStatusUpdate.ts",
+      "type": "file",
+      "summary": "Optimistic status update hook that enqueues status transitions into the offline mutation queue with immediate cache patching."
+    },
+    "file:ag-platform/apps/mobile/hooks/useTodayActivity.ts": {
+      "name": "useTodayActivity.ts",
+      "type": "file",
+      "summary": "React Query hook for fetching today's field activity GPS logs for the current executive."
+    },
+    "file:ag-platform/apps/mobile/lib/env.ts": {
+      "name": "env.ts",
+      "type": "file",
+      "summary": "Runtime environment variable reader that validates required config values from Expo Constants and fails loudly on missing production vars."
+    },
+    "file:ag-platform/apps/mobile/lib/notifications.ts": {
+      "name": "notifications.ts",
+      "type": "file",
+      "summary": "Notification handler configuration that foregrounds push notifications using the default alert presentation."
+    },
+    "file:ag-platform/apps/mobile/lib/queryClient.ts": {
+      "name": "queryClient.ts",
+      "type": "file",
+      "summary": "React Query client setup with AsyncStorage persistence for offline cache survival across cold starts."
+    },
+    "file:ag-platform/apps/mobile/lib/queue/drain.ts": {
+      "name": "drain.ts",
+      "type": "file",
+      "summary": "Offline queue drain processor that replays mutations FIFO with configurable retry limits and per-item error handling."
+    },
+    "file:ag-platform/apps/mobile/lib/queue/types.ts": {
+      "name": "types.ts",
+      "type": "file",
+      "summary": "TypeScript type definitions for the offline mutation queue including status updates, document uploads, and drain result contracts."
+    },
+    "file:ag-platform/apps/mobile/lib/sentry.ts": {
+      "name": "sentry.ts",
+      "type": "file",
+      "summary": "Sentry crash reporting initialisation for error tracking and performance monitoring in the mobile app."
+    },
+    "file:ag-platform/apps/mobile/lib/stores/useAuthStore.ts": {
+      "name": "useAuthStore.ts",
+      "type": "file",
+      "summary": "Zustand auth store with AsyncStorage persistence managing session, user, role, and organisation state with Supabase auth lifecycle."
+    },
+    "file:ag-platform/apps/mobile/lib/stores/useDutyStore.ts": {
+      "name": "useDutyStore.ts",
+      "type": "file",
+      "summary": "Zustand store tracking on-duty state toggle for field officer location monitoring."
+    },
+    "file:ag-platform/apps/mobile/lib/stores/useQueueStore.ts": {
+      "name": "useQueueStore.ts",
+      "type": "file",
+      "summary": "Zustand queue store with AsyncStorage persistence managing offline mutation enqueue, status tracking, deduplication, and cleanup."
+    },
+    "file:ag-platform/apps/mobile/lib/supabase.ts": {
+      "name": "supabase.ts",
+      "type": "file",
+      "summary": "Supabase client singleton initialisation for database queries and real-time subscriptions in the mobile app."
+    },
+    "file:ag-platform/apps/mobile/metro.config.js": {
+      "name": "metro.config.js",
+      "type": "file",
+      "summary": "Metro bundler configuration enabling monorepo package resolution for @ag/types and NativeWind Tailwind CSS integration."
+    },
+    "function:ag-platform/apps/mobile/hooks/useAuth.ts:useAuth": {
+      "name": "useAuth",
+      "type": "function",
+      "summary": "Auth state selector hook exposing user, session, role, orgId, and signOut from the Zustand auth store."
+    },
+    "function:ag-platform/apps/mobile/hooks/useAuth.ts:useSendMagicLink": {
+      "name": "useSendMagicLink",
+      "type": "function",
+      "summary": "Magic link email authentication hook with sending state, error handling, and success tracking."
+    },
+    "function:ag-platform/apps/mobile/hooks/useCase.ts:useCase": {
+      "name": "useCase",
+      "type": "function",
+      "summary": "React Query hook fetching a single case by ID with enabled guard for truthy caseId."
+    },
+    "function:ag-platform/apps/mobile/hooks/useCase.ts:useCaseDocuments": {
+      "name": "useCaseDocuments",
+      "type": "function",
+      "summary": "React Query hook fetching documents associated with a case by case ID."
+    },
+    "function:ag-platform/apps/mobile/hooks/useCases.ts:useAssignedCases": {
+      "name": "useAssignedCases",
+      "type": "function",
+      "summary": "React Query hook fetching cases assigned to the current executive using auth store for user and org IDs."
+    },
+    "function:ag-platform/apps/mobile/hooks/useDocumentCapture.ts:useDocumentCapture": {
+      "name": "useDocumentCapture",
+      "type": "function",
+      "summary": "Camera capture hook orchestrating permission requests, photo capture, file persistence, and mutation enqueue for offline upload."
+    },
+    "function:ag-platform/apps/mobile/hooks/useMutationQueue.ts:useMutationQueue": {
+      "name": "useMutationQueue",
+      "type": "function",
+      "summary": "Singleton mutation drain hook that processes the queue FIFO with exponential backoff and triggers on connectivity restore."
+    },
+    "function:ag-platform/apps/mobile/hooks/useOnDutyTracker.ts:useOnDutyTracker": {
+      "name": "useOnDutyTracker",
+      "type": "function",
+      "summary": "GPS tracking hook that subscribes to location updates at balanced accuracy and buffers breadcrumbs for batch flushing."
+    },
+    "function:ag-platform/apps/mobile/hooks/useOnDutyTracker.ts:flush": {
+      "name": "flush",
+      "type": "function",
+      "summary": "Flushes the GPS breadcrumb buffer to the server, re-queuing the batch at the head on failure."
+    },
+    "function:ag-platform/apps/mobile/hooks/useOnDutyTracker.ts:teardown": {
+      "name": "teardown",
+      "type": "function",
+      "summary": "Cleans up location subscription, flush timer, and flushes remaining buffer on duty toggle off."
+    },
+    "function:ag-platform/apps/mobile/hooks/useOnlineStatus.ts:useOnlineStatus": {
+      "name": "useOnlineStatus",
+      "type": "function",
+      "summary": "Connectivity hook tracking online/offline state via NetInfo event listener."
+    },
+    "function:ag-platform/apps/mobile/hooks/usePushRegistration.ts:usePushRegistration": {
+      "name": "usePushRegistration",
+      "type": "function",
+      "summary": "Push registration hook handling permission requests, platform notification channels, and Expo push token upsert."
+    },
+    "function:ag-platform/apps/mobile/hooks/useRealtimeCases.ts:useRealtimeCases": {
+      "name": "useRealtimeCases",
+      "type": "function",
+      "summary": "Supabase real-time subscription hook that auto-invalidates case query cache on postgres changes."
+    },
+    "function:ag-platform/apps/mobile/hooks/useStatusUpdate.ts:useStatusUpdate": {
+      "name": "useStatusUpdate",
+      "type": "function",
+      "summary": "Optimistic status update hook that enqueues mutations and patches the React Query cache for instant UI feedback."
+    },
+    "function:ag-platform/apps/mobile/hooks/useTodayActivity.ts:useTodayActivity": {
+      "name": "useTodayActivity",
+      "type": "function",
+      "summary": "React Query hook fetching today's field activity logs for the current executive."
+    },
+    "function:ag-platform/apps/mobile/hooks/useTodayActivity.ts:fetchTodayActivity": {
+      "name": "fetchTodayActivity",
+      "type": "function",
+      "summary": "Queries field activity logs from Supabase for today's GPS breadcrumbs filtered by executive ID."
+    },
+    "function:ag-platform/apps/mobile/lib/env.ts:read": {
+      "name": "read",
+      "type": "function",
+      "summary": "Reads and validates a typed environment variable from Expo Constants, throwing on missing required values."
+    },
+    "function:ag-platform/apps/mobile/lib/notifications.ts:configureNotifications": {
+      "name": "configureNotifications",
+      "type": "function",
+      "summary": "Configures Expo notifications to show banners and play sounds while the app is in the foreground."
+    },
+    "function:ag-platform/apps/mobile/lib/queue/drain.ts:drainQueue": {
+      "name": "drainQueue",
+      "type": "function",
+      "summary": "FIFO queue drain processor that replays pending mutations with retry limit enforcement and bail-out on hard failures."
+    },
+    "function:ag-platform/apps/mobile/lib/sentry.ts:initSentry": {
+      "name": "initSentry",
+      "type": "function",
+      "summary": "Initialises Sentry crash reporting with environment context from Expo Constants."
+    },
+    "document:ag-platform/apps/mobile/README.md": {
+      "name": "README.md",
+      "type": "document",
+      "summary": "Documentation for the AG Associates mobile field app covering setup instructions, environment variables, and enforced architectural rules for the Expo React Native project."
+    },
+    "file:ag-platform/apps/mobile/services/cases.ts": {
+      "name": "cases.ts",
+      "type": "file",
+      "summary": "Case status update service that persists status transitions to Supabase with idempotent retry handling and auth/permission error classification."
+    },
+    "function:ag-platform/apps/mobile/services/cases.ts:applyStatusUpdate": {
+      "name": "applyStatusUpdate",
+      "type": "function",
+      "summary": "Applies a case status mutation by inserting an audit log and updating the case row, handling unique violation idempotency and auth error classification."
+    },
+    "file:ag-platform/apps/mobile/services/devices.ts": {
+      "name": "devices.ts",
+      "type": "file",
+      "summary": "Device push token management service for registering and revoking Expo push notification tokens via Supabase upsert."
+    },
+    "function:ag-platform/apps/mobile/services/devices.ts:upsertPushToken": {
+      "name": "upsertPushToken",
+      "type": "function",
+      "summary": "Registers or updates a device push token keyed on user_id and device_id for cross-reinstall deduplication."
+    },
+    "function:ag-platform/apps/mobile/services/devices.ts:revokePushToken": {
+      "name": "revokePushToken",
+      "type": "function",
+      "summary": "Revokes a device push token by setting revoked_at timestamp, preventing future notifications to that device."
+    },
+    "file:ag-platform/apps/mobile/services/documents.ts": {
+      "name": "documents.ts",
+      "type": "file",
+      "summary": "Document upload service using TUS resumable protocol to Supabase Storage with client-event-id idempotency for reliable offline queue processing."
+    },
+    "function:ag-platform/apps/mobile/services/documents.ts:applyDocumentUpload": {
+      "name": "applyDocumentUpload",
+      "type": "function",
+      "summary": "Two-phase document upload: TUS resumable PUT to Supabase Storage, then metadata insert with unique violation idempotency and staged file cleanup."
+    },
+    "function:ag-platform/apps/mobile/services/documents.ts:uploadViaTus": {
+      "name": "uploadViaTus",
+      "type": "function",
+      "summary": "Internal helper that performs a TUS resumable upload from a local file URI to Supabase Storage with retry delays and chunked transfer."
+    },
+    "file:ag-platform/apps/mobile/services/field.ts": {
+      "name": "field.ts",
+      "type": "file",
+      "summary": "Field activity log batch flusher that inserts rows into Supabase with unique violation tolerance for offline queue replay safety."
+    },
+    "function:ag-platform/apps/mobile/services/field.ts:flushActivityBatch": {
+      "name": "flushActivityBatch",
+      "type": "function",
+      "summary": "Batch-inserts field activity log rows to Supabase, silently ignoring unique violations for idempotent retry support."
+    },
+    "file:ag-platform/apps/mobile/tailwind.config.js": {
+      "name": "tailwind.config.js",
+      "type": "file",
+      "summary": "Tailwind CSS configuration for the Expo mobile app defining content file paths for class scanning."
+    },
+    "config:ag-platform/apps/mobile/tsconfig.json": {
+      "name": "tsconfig.json",
+      "type": "config",
+      "summary": "TypeScript compiler configuration for the Expo mobile app with strict mode and path aliases."
+    },
+    "document:ag-platform/ARCHITECTURE.md": {
+      "name": "ARCHITECTURE.md",
+      "type": "document",
+      "summary": "Comprehensive architecture document covering the core data model, case lifecycle state machine, India-ready tech stack, multi-tenancy model, and monorepo folder structure."
+    },
+    "service:ag-platform/Dockerfile": {
+      "name": "Dockerfile",
+      "type": "service",
+      "summary": "Multi-stage Docker build producing a production Node.js image with dependency caching, Vite build optimization, and health check configuration."
+    },
+    "service:ag-platform/Dockerfile:deps": {
+      "name": "deps",
+      "type": "service",
+      "summary": "First build stage that installs all npm dependencies including monorepo packages for downstream caching."
+    },
+    "service:ag-platform/Dockerfile:builder": {
+      "name": "builder",
+      "type": "service",
+      "summary": "Build stage that compiles the application using Vite with environment-specific build arguments."
+    },
+    "service:ag-platform/Dockerfile:runner": {
+      "name": "runner",
+      "type": "service",
+      "summary": "Production runtime stage with non-root user, health checks, and minimal production-only artifacts."
+    },
+    "document:ag-platform/docs/AUTH_ARCHITECTURE.md": {
+      "name": "AUTH_ARCHITECTURE.md",
+      "type": "document",
+      "summary": "Authentication and authorization architecture documentation covering passwordless magic links, Supabase JWT custom claims injection, and PostgreSQL row-level security policies."
+    },
+    "file:ag-platform/index.html": {
+      "name": "index.html",
+      "type": "file",
+      "summary": "Root HTML entry point for the AG platform web application with standard document shell and root div."
+    },
+    "config:ag-platform/package.json": {
+      "name": "package.json",
+      "type": "config",
+      "summary": "Root package.json for the ag-platform Turborepo monorepo defining workspace packages, shared scripts, and common dependencies."
+    },
+    "config:ag-platform/packages/ai/package.json": {
+      "name": "package.json",
+      "type": "config",
+      "summary": "Package configuration for the AI package with Google GenAI SDK and Supabase dependencies."
+    },
+    "file:ag-platform/packages/ai/src/gemini.ts": {
+      "name": "gemini.ts",
+      "type": "file",
+      "summary": "Google Gemini AI integration providing model factory functions, embedding support, Supabase client singleton, and organization token quota checking."
+    },
+    "function:ag-platform/packages/ai/src/gemini.ts:getSupabaseClient": {
+      "name": "getSupabaseClient",
+      "type": "function",
+      "summary": "Lazily creates and caches a Supabase client singleton using environment variables for URL and service/anonymous keys."
+    },
+    "function:ag-platform/packages/ai/src/gemini.ts:checkOrgTokenQuota": {
+      "name": "checkOrgTokenQuota",
+      "type": "function",
+      "summary": "Checks an organization's AI token usage against its limit, throwing an error if quota is exceeded."
+    },
+    "file:ag-platform/packages/ai/src/index.ts": {
+      "name": "index.ts",
+      "type": "file",
+      "summary": "Barrel file re-exporting the AI package's public API including Gemini model factories and legal prompt templates."
+    },
+    "file:ag-platform/packages/ai/src/prompts/legal.ts": {
+      "name": "legal.ts",
+      "type": "file",
+      "summary": "System prompt templates for legal AI features including brief generation, document vetting, invoice extraction, and document summarization."
+    },
+    "config:ag-platform/packages/ai/tsconfig.json": {
+      "name": "tsconfig.json",
+      "type": "config",
+      "summary": "TypeScript compiler configuration for the AI package with ESNext module and JSX support."
+    },
+    "table:ag-platform/packages/db/migrations/001_ag_initial_schema.sql": {
+      "name": "001_ag_initial_schema.sql",
+      "type": "table",
+      "summary": "Initial database schema migration defining the core data model with banks, organizations, profiles, cases, disbursements, and case_timeline tables with foreign key relationships."
+    },
+    "table:ag-platform/packages/db/migrations/002_pgvector_templates.sql": {
+      "name": "002_pgvector_templates.sql",
+      "type": "table",
+      "summary": "SQL migration adding the legal_templates table with pgvector embedding column and ivfflat index for semantic search over legal documents."
+    },
+    "config:ag-platform/packages/db/package.json": {
+      "name": "package.json",
+      "type": "config",
+      "summary": "Package configuration for the database package with pg and pgvector dependencies."
+    },
+    "file:ag-platform/packages/db/src/index.ts": {
+      "name": "index.ts",
+      "type": "file",
+      "summary": "Database connection pool singleton using pg Pool with SSL support and automatic connection string assembly from environment variables."
+    },
+    "config:ag-platform/packages/db/tsconfig.json": {
+      "name": "tsconfig.json",
+      "type": "config",
+      "summary": "TypeScript compiler configuration for the database package."
+    },
+    "config:ag-platform/packages/types/package.json": {
+      "name": "package.json",
+      "type": "config",
+      "summary": "Package configuration for shared TypeScript type definitions used across the monorepo."
+    },
+    "file:ag-platform/packages/types/src/domain.ts": {
+      "name": "domain.ts",
+      "type": "file",
+      "summary": "Core domain type definitions including enums for user roles and case types, interfaces for bank, case, and disbursement entities."
+    },
+    "file:ag-platform/packages/types/src/field-app.ts": {
+      "name": "field-app.ts",
+      "type": "file",
+      "summary": "Field app TypeScript type definitions for database rows and insert payloads covering documents, case audit logs, field activity logs, and device push tokens."
+    },
+    "file:ag-platform/packages/types/src/index.ts": {
+      "name": "index.ts",
+      "type": "file",
+      "summary": "Barrel file re-exporting domain, storage, and field-app type definitions for the shared types package."
+    },
+    "file:ag-platform/packages/types/src/storage.ts": {
+      "name": "storage.ts",
+      "type": "file",
+      "summary": "Defines TypeScript interfaces for file storage including FileRecord, UploadProgress, and FileVersion types."
+    },
+    "config:ag-platform/packages/types/tsconfig.json": {
+      "name": "tsconfig.json",
+      "type": "config",
+      "summary": "TypeScript compiler configuration for the types package targeting ES2020 with strict mode and bundler module resolution."
+    },
+    "config:ag-platform/packages/ui/package.json": {
+      "name": "package.json",
+      "type": "config",
+      "summary": "Package manifest for the UI component library defining React peer dependencies and exports for Button, Card, and Badge components."
+    },
+    "file:ag-platform/packages/ui/src/index.tsx": {
+      "name": "index.tsx",
+      "type": "file",
+      "summary": "Shared UI component library providing Button, Card, and Badge React components with variant-based styling using Tailwind CSS."
+    },
+    "function:ag-platform/packages/ui/src/index.tsx:Button": {
+      "name": "Button",
+      "type": "function",
+      "summary": "Renders a styled button with default, outline, and ghost variants using Tailwind CSS classes."
+    },
+    "function:ag-platform/packages/ui/src/index.tsx:Card": {
+      "name": "Card",
+      "type": "function",
+      "summary": "Renders a rounded card container with border and shadow styling."
+    },
+    "function:ag-platform/packages/ui/src/index.tsx:Badge": {
+      "name": "Badge",
+      "type": "function",
+      "summary": "Renders a small badge label with default, success, warning, and danger color variants."
+    },
+    "config:ag-platform/packages/ui/tsconfig.json": {
+      "name": "tsconfig.json",
+      "type": "config",
+      "summary": "TypeScript configuration for the UI package targeting ES2020 with strict mode and JSX support."
+    },
+    "file:ag-platform/postcss.config.js": {
+      "name": "postcss.config.js",
+      "type": "file",
+      "summary": "PostCSS configuration enabling Tailwind CSS and Autoprefixer plugins for CSS processing."
+    },
+    "document:ag-platform/README.md": {
+      "name": "README.md",
+      "type": "document",
+      "summary": "Empty placeholder README document for the AG platform project root."
+    },
+    "config:ag-platform/render.yaml": {
+      "name": "render.yaml",
+      "type": "config",
+      "summary": "Render.com deployment configuration defining a Node.js web service with build and start commands."
+    },
+    "document:ag-platform/SECURITY.md": {
+      "name": "SECURITY.md",
+      "type": "document",
+      "summary": "Security policy document outlining supported versions and vulnerability reporting procedures for the project."
+    },
+    "file:ag-platform/server.ts": {
+      "name": "server.ts",
+      "type": "file",
+      "summary": "Express server entry point that runs database migrations, mounts case and timesheet API routes, configures rate limiting for AI endpoints, and serves a Vite SPA in development mode."
+    },
+    "function:ag-platform/server.ts:runMigrations": {
+      "name": "runMigrations",
+      "type": "function",
+      "summary": "Reads and executes the migrations.sql file against the database pool on server startup."
+    },
+    "function:ag-platform/server.ts:startServer": {
+      "name": "startServer",
+      "type": "function",
+      "summary": "Bootstraps the Express application with CORS, JSON parsing, rate limiting, request IDs, API route mounting, Vite dev middleware, and a global error handler."
+    },
+    "service:ag-platform/services/intake-api/Dockerfile": {
+      "name": "Dockerfile",
+      "type": "service",
+      "summary": "Multi-stage Docker build for the Intake API with dependency installation, TypeScript compilation, and a production runner stage exposing port 3002 with health checks."
+    },
+    "config:ag-platform/services/intake-api/package.json": {
+      "name": "package.json",
+      "type": "config",
+      "summary": "Package manifest for the Intake API Gateway service with Fastify, Redis, Supabase, and Zod runtime dependencies."
+    },
+    "file:ag-platform/services/intake-api/src/routes/dashboard.ts": {
+      "name": "dashboard.ts",
+      "type": "file",
+      "summary": "Fastify route handler for the NOI dashboard endpoint with Redis caching layer and simulated database fallback."
+    },
+    "function:ag-platform/services/intake-api/src/routes/dashboard.ts:fetchNOIDataFromDB": {
+      "name": "fetchNOIDataFromDB",
+      "type": "function",
+      "summary": "Simulates a database query for NOI dashboard data with a mock response containing active cases and critical counts."
+    },
+    "function:ag-platform/services/intake-api/src/routes/dashboard.ts:dashboardRoutes": {
+      "name": "dashboardRoutes",
+      "type": "function",
+      "summary": "Fastify plugin registering a GET /noi endpoint with Zod-validated query params and Redis cache-first strategy."
+    },
+    "file:ag-platform/services/intake-api/src/routes/webhook.ts": {
+      "name": "webhook.ts",
+      "type": "file",
+      "summary": "Fastify webhook handler processing intake payloads, SMS command routing, and Redis pub/sub message queuing for the Intake API."
+    },
+    "function:ag-platform/services/intake-api/src/routes/webhook.ts:webhookRoutes": {
+      "name": "webhookRoutes",
+      "type": "function",
+      "summary": "Fastify plugin registering POST endpoints for intake case creation, SMS command processing, and webhook validation with Redis queue integration."
+    },
+    "file:ag-platform/services/intake-api/src/schemas/intake.schema.ts": {
+      "name": "intake.schema.ts",
+      "type": "file",
+      "summary": "Zod schema definitions for intake payload validation including email path URL format, bank name enum, and optional sender metadata."
+    },
+    "file:ag-platform/services/intake-api/src/server.ts": {
+      "name": "server.ts",
+      "type": "file",
+      "summary": "Fastify server bootstrap with Zod validation compiler, CORS registration, Redis connectivity, route mounting, and health check endpoint."
+    },
+    "function:ag-platform/services/intake-api/src/server.ts:start": {
+      "name": "start",
+      "type": "function",
+      "summary": "Initializes the Fastify server with plugins, routes, health check, and listens on the configured port."
+    },
+    "file:ag-platform/services/intake-api/src/services/redis.service.ts": {
+      "name": "redis.service.ts",
+      "type": "file",
+      "summary": "Redis client initialization and caching utilities for NOI dashboard data with TTL-based cache management and fail-open error handling."
+    },
+    "function:ag-platform/services/intake-api/src/services/redis.service.ts:connectRedis": {
+      "name": "connectRedis",
+      "type": "function",
+      "summary": "Connects the Redis client if not already open."
+    },
+    "function:ag-platform/services/intake-api/src/services/redis.service.ts:getCachedNOIDashboard": {
+      "name": "getCachedNOIDashboard",
+      "type": "function",
+      "summary": "Retrieves cached NOI dashboard data for an organization from Redis, returning null on cache miss or error."
+    },
+    "function:ag-platform/services/intake-api/src/services/redis.service.ts:cacheNOIDashboard": {
+      "name": "cacheNOIDashboard",
+      "type": "function",
+      "summary": "Caches NOI dashboard data in Redis with a 15-minute TTL for the given organization."
+    },
+    "function:ag-platform/services/intake-api/src/services/redis.service.ts:invalidateNOICache": {
+      "name": "invalidateNOICache",
+      "type": "function",
+      "summary": "Invalidates the cached NOI dashboard entry for an organization by deleting the Redis key."
+    },
+    "file:ag-platform/services/intake-api/src/services/supabase.service.ts": {
+      "name": "supabase.service.ts",
+      "type": "file",
+      "summary": "Supabase client initialization with service role key and data access functions for case creation and organization lookup by bank name."
+    },
+    "function:ag-platform/services/intake-api/src/services/supabase.service.ts:createCase": {
+      "name": "createCase",
+      "type": "function",
+      "summary": "Inserts a new case record into the Supabase cases table and returns the created row."
+    },
+    "function:ag-platform/services/intake-api/src/services/supabase.service.ts:getOrganizationByBank": {
+      "name": "getOrganizationByBank",
+      "type": "function",
+      "summary": "Resolves an organization ID from a bank partner name, returning null when no match exists."
+    },
+    "config:ag-platform/services/intake-api/tsconfig.json": {
+      "name": "tsconfig.json",
+      "type": "config",
+      "summary": "TypeScript configuration for the Intake API service targeting ES2022 with CommonJS module output and declaration files."
+    },
+    "file:ag-platform/src/App.tsx": {
+      "name": "App.tsx",
+      "type": "file",
+      "summary": "Root React application component with navigation header, route definitions for all major sections, authentication initialization, and error boundary wrapping."
+    },
+    "function:ag-platform/src/App.tsx:Navigation": {
+      "name": "Navigation",
+      "type": "function",
+      "summary": "Renders a sticky navigation header with role-based links, active route highlighting, and sign-out functionality."
+    },
+    "function:ag-platform/src/App.tsx:App": {
+      "name": "App",
+      "type": "function",
+      "summary": "Main application component that initializes authentication on mount and renders routes for all pages wrapped in an error boundary."
+    },
+    "file:ag-platform/src/app/admin/voice/page.tsx": {
+      "name": "page.tsx",
+      "type": "file",
+      "summary": "Admin voice console page with audio recording, transcription display, voice command confirmation workflow, and tool management interface."
+    },
+    "function:ag-platform/src/app/admin/voice/page.tsx:AdminVoiceConsole": {
+      "name": "AdminVoiceConsole",
+      "type": "function",
+      "summary": "Manages audio recording, transcription via API, voice command confirmation, and displays tool registry and history for the admin voice interface."
+    },
+    "file:ag-platform/src/app/admin/workforce/page.tsx": {
+      "name": "page.tsx",
+      "type": "file",
+      "summary": "Admin workforce management console with agent matrix display, shift allocation, real-time activity monitoring, metrics dashboard, and skill gap analysis."
+    },
+    "function:ag-platform/src/app/admin/workforce/page.tsx:WorkforceConsole": {
+      "name": "WorkforceConsole",
+      "type": "function",
+      "summary": "Renders the workforce management interface with agent status matrix, shift controls, skill gap display, and real-time KPI tracking."
+    },
+    "file:ag-platform/src/app/login/page.tsx": {
+      "name": "page.tsx",
+      "type": "file",
+      "summary": "Login page with Google OAuth integration featuring a dark-themed AG Digital Office branded UI with gradient background and glassmorphism card."
+    },
+    "function:ag-platform/src/app/login/page.tsx:LoginPage": {
+      "name": "LoginPage",
+      "type": "function",
+      "summary": "Renders the login page with Google OAuth sign-in button and AG Digital Office branding."
+    },
+    "file:ag-platform/src/app/my-cases/page.tsx": {
+      "name": "page.tsx",
+      "type": "file",
+      "summary": "Mobile field executive PWA page displaying offline case list with pending upload status indicators and scan challan actions."
+    },
+    "function:ag-platform/src/app/my-cases/page.tsx:MobileFieldExecutivePWA": {
+      "name": "MobileFieldExecutivePWA",
+      "type": "function",
+      "summary": "Renders a mobile case list for field executives with offline mode indicator and scan challan buttons per case."
+    },
+    "file:ag-platform/src/app/office/page.tsx": {
+      "name": "page.tsx",
+      "type": "file",
+      "summary": "Desktop-like office workspace with draggable windows for browser playground and notes, handling auth and session management."
+    },
+    "function:ag-platform/src/app/office/page.tsx:Office": {
+      "name": "Office",
+      "type": "function",
+      "summary": "Main office workspace component managing window state, user auth check, and logout."
+    },
+    "function:ag-platform/src/app/office/page.tsx:Window": {
+      "name": "Window",
+      "type": "function",
+      "summary": "Draggable window container with focus and close handlers."
+    },
+    "function:ag-platform/src/app/office/page.tsx:BrowserApp": {
+      "name": "BrowserApp",
+      "type": "function",
+      "summary": "Browser automation component using session-based screenshot polling and action dispatch."
+    },
+    "file:ag-platform/src/components/admin/AdvisorCockpit.tsx": {
+      "name": "AdvisorCockpit.tsx",
+      "type": "file",
+      "summary": "Case management dashboard for advisors with kanban-style status columns and case status transitions."
+    },
+    "function:ag-platform/src/components/admin/AdvisorCockpit.tsx:AdvisorCockpit": {
+      "name": "AdvisorCockpit",
+      "type": "function",
+      "summary": "Main advisor cockpit component fetching and displaying cases grouped by status with update handlers."
+    },
+    "function:ag-platform/src/components/admin/AdvisorCockpit.tsx:CaseCard": {
+      "name": "CaseCard",
+      "type": "function",
+      "summary": "Individual case card with loan amount display and status advancement button."
+    },
+    "file:ag-platform/src/components/admin/BrainstormHub.tsx": {
+      "name": "BrainstormHub.tsx",
+      "type": "file",
+      "summary": "Real-time brainstorming chat hub using Supabase subscriptions and workforce integration."
+    },
+    "function:ag-platform/src/components/admin/BrainstormHub.tsx:BrainstormHub": {
+      "name": "BrainstormHub",
+      "type": "function",
+      "summary": "Real-time brainstorm message feed with send capability, Supabase channel subscriptions and workforce sender lookup."
+    },
+    "file:ag-platform/src/components/admin/voice/VyasaVoiceControl.tsx": {
+      "name": "VyasaVoiceControl.tsx",
+      "type": "file",
+      "summary": "Voice recording and command processing interface using MediaRecorder API with transcription and action result display."
+    },
+    "function:ag-platform/src/components/admin/voice/VyasaVoiceControl.tsx:VyasaVoiceControl": {
+      "name": "VyasaVoiceControl",
+      "type": "function",
+      "summary": "Full voice control UI with start/stop recording, audio processing, transcription, and command result display."
+    },
+    "file:ag-platform/src/components/admin/WorkforceControl.tsx": {
+      "name": "WorkforceControl.tsx",
+      "type": "file",
+      "summary": "Workforce management dashboard with real-time agent status via Supabase subscriptions and task assignment."
+    },
+    "function:ag-platform/src/components/admin/WorkforceControl.tsx:WorkforceControl": {
+      "name": "WorkforceControl",
+      "type": "function",
+      "summary": "Workforce control panel displaying AI agents and human staff with real-time status updates and task assignment flow."
+    },
+    "file:ag-platform/src/components/ai/ClientEmailDrafting.tsx": {
+      "name": "ClientEmailDrafting.tsx",
+      "type": "file",
+      "summary": "AI-powered client email drafting tool with type selection, context input, draft generation, and send capability."
+    },
+    "function:ag-platform/src/components/ai/ClientEmailDrafting.tsx:ClientEmailDrafting": {
+      "name": "ClientEmailDrafting",
+      "type": "function",
+      "summary": "Client email drafting UI with generate draft and send email handlers via API calls."
+    },
+    "file:ag-platform/src/components/ai/ProjectBriefGenerator.tsx": {
+      "name": "ProjectBriefGenerator.tsx",
+      "type": "file",
+      "summary": "AI project brief generator using Vercel AI SDK useCompletion for draft generation from structured form inputs."
+    },
+    "function:ag-platform/src/components/ai/ProjectBriefGenerator.tsx:ProjectBriefGenerator": {
+      "name": "ProjectBriefGenerator",
+      "type": "function",
+      "summary": "Project brief generator form collecting deliverables, milestones, timeline and generating AI completion."
+    },
+    "file:ag-platform/src/components/ai/SemanticProjectSearch.tsx": {
+      "name": "SemanticProjectSearch.tsx",
+      "type": "file",
+      "summary": "Semantic project search component with query input and similarity-based results display via API."
+    },
+    "file:ag-platform/src/components/ai/SmartTaskSuggestions.tsx": {
+      "name": "SmartTaskSuggestions.tsx",
+      "type": "file",
+      "summary": "AI-powered task suggestion component generating tasks from a project brief with add-all capability."
+    },
+    "file:ag-platform/src/components/applicant/ApplicantDashboard.tsx": {
+      "name": "ApplicantDashboard.tsx",
+      "type": "file",
+      "summary": "Applicant-facing case tracking dashboard with milestone progress indicators and case details."
+    },
+    "function:ag-platform/src/components/applicant/ApplicantDashboard.tsx:ApplicantDashboard": {
+      "name": "ApplicantDashboard",
+      "type": "function",
+      "summary": "Applicant dashboard fetching active case and displaying status milestones and case details."
+    },
+    "file:ag-platform/src/components/auth/LoginPage.tsx": {
+      "name": "LoginPage.tsx",
+      "type": "file",
+      "summary": "Login page with role selection, email/password authentication via Supabase, and error handling."
+    },
+    "file:ag-platform/src/components/auth/ProtectedRoute.tsx": {
+      "name": "ProtectedRoute.tsx",
+      "type": "file",
+      "summary": "Route guard component checking auth store for user session and allowed roles, redirecting unauthorized users."
+    },
+    "file:ag-platform/src/components/bank/BankPortal.tsx": {
+      "name": "BankPortal.tsx",
+      "type": "file",
+      "summary": "Bank portal case listing with loading state and formatted case details including loan amounts."
+    },
+    "file:ag-platform/src/components/collaboration/ActivityFeed.tsx": {
+      "name": "ActivityFeed.tsx",
+      "type": "file",
+      "summary": "Real-time activity feed component using custom hook with icon mapping and time-ago formatting."
+    },
+    "file:ag-platform/src/components/collaboration/CommentThread.tsx": {
+      "name": "CommentThread.tsx",
+      "type": "file",
+      "summary": "Real-time comment thread with Supabase subscriptions, user email lookup, and threaded replies."
+    },
+    "file:ag-platform/src/components/collaboration/LivePresence.tsx": {
+      "name": "LivePresence.tsx",
+      "type": "file",
+      "summary": "Live presence indicator component displaying online users with avatars and count."
+    },
+    "file:ag-platform/src/components/collaboration/NotificationBell.tsx": {
+      "name": "NotificationBell.tsx",
+      "type": "file",
+      "summary": "Notification bell component using custom hook with unread count badge and dropdown list."
+    },
+    "file:ag-platform/src/components/collaboration/TaskBoard.tsx": {
+      "name": "TaskBoard.tsx",
+      "type": "file",
+      "summary": "Kanban-style task board with drag-and-drop status columns and real-time collaboration presence."
+    },
+    "function:ag-platform/src/components/collaboration/TaskBoard.tsx:TaskBoard": {
+      "name": "TaskBoard",
+      "type": "function",
+      "summary": "Task board with column-based status grouping and inline task creation form."
+    },
+    "file:ag-platform/src/components/collaboration/TaskCard.tsx": {
+      "name": "TaskCard.tsx",
+      "type": "file",
+      "summary": "Draggable task card component with assignee avatar and status badge."
+    },
+    "file:ag-platform/src/components/collaboration/TimeTracker.tsx": {
+      "name": "TimeTracker.tsx",
+      "type": "file",
+      "summary": "Time tracking component with clock-in/out, elapsed timer, and weekly hours summary."
+    },
+    "file:ag-platform/src/components/field/FieldApp.tsx": {
+      "name": "FieldApp.tsx",
+      "type": "file",
+      "summary": "Field agent mobile-style app with case navigation, document capture queue, and offline support."
+    },
+    "file:ag-platform/src/components/home/MarketingLanding.tsx": {
+      "name": "MarketingLanding.tsx",
+      "type": "file",
+      "summary": "Marketing landing page with hero, features, pricing tiers, and call-to-action sections."
+    },
+    "file:ag-platform/src/components/LandingPage.tsx": {
+      "name": "LandingPage.tsx",
+      "type": "file",
+      "summary": "Main landing page with animated hero, feature grid, testimonials, and footer for AG Associates platform."
+    },
+    "file:ag-platform/src/components/privacy/policy-sections.tsx": {
+      "name": "policy-sections.tsx",
+      "type": "file",
+      "summary": "Privacy policy section components covering data collection, usage, GDPR rights, and security."
+    },
+    "file:ag-platform/src/components/privacy/PrivacyPolicy.tsx": {
+      "name": "PrivacyPolicy.tsx",
+      "type": "file",
+      "summary": "Privacy policy page with collapsible sections and contact information."
+    },
+    "file:ag-platform/src/components/storage/FilePreviewer.tsx": {
+      "name": "FilePreviewer.tsx",
+      "type": "file",
+      "summary": "Provides file preview with signed URL loading, supporting image, PDF, video, and audio content types with fallback download."
+    },
+    "function:ag-platform/src/components/storage/FilePreviewer.tsx:FilePreviewer": {
+      "name": "FilePreviewer",
+      "type": "function",
+      "summary": "React component rendering file preview based on content type with signed URL loading and error handling."
+    },
+    "file:ag-platform/src/components/storage/FileUploader.tsx": {
+      "name": "FileUploader.tsx",
+      "type": "file",
+      "summary": "Drag-and-drop file upload component with progress tracking, file type icons, and Supabase resumable TUS upload integration."
+    },
+    "function:ag-platform/src/components/storage/FileUploader.tsx:FileUploader": {
+      "name": "FileUploader",
+      "type": "function",
+      "summary": "React component managing drag-and-drop file upload with progress tracking and Supabase storage integration."
+    },
+    "file:ag-platform/src/components/storage/VersionHistory.tsx": {
+      "name": "VersionHistory.tsx",
+      "type": "file",
+      "summary": "Displays file version history with sorting, upload new version capability, and restore to previous version functionality."
+    },
+    "function:ag-platform/src/components/storage/VersionHistory.tsx:VersionHistory": {
+      "name": "VersionHistory",
+      "type": "function",
+      "summary": "React component rendering version history list with upload new version and restore actions."
+    },
+    "file:ag-platform/src/components/ui/EmptyState.tsx": {
+      "name": "EmptyState.tsx",
+      "type": "file",
+      "summary": "Reusable empty state component with customizable icon, title, message, and action button for UI placeholder states."
+    },
+    "function:ag-platform/src/components/ui/EmptyState.tsx:EmptyState": {
+      "name": "EmptyState",
+      "type": "function",
+      "summary": "React component displaying a customizable empty state placeholder with icon and optional action."
+    },
+    "file:ag-platform/src/components/ui/ErrorBoundary.tsx": {
+      "name": "ErrorBoundary.tsx",
+      "type": "file",
+      "summary": "React error boundary class component with customizable fallback UI and reset capability to catch rendering errors."
+    },
+    "class:ag-platform/src/components/ui/ErrorBoundary.tsx:ErrorBoundary": {
+      "name": "ErrorBoundary",
+      "type": "class",
+      "summary": "React class component implementing componentDidCatch with fallback rendering and error reset."
+    },
+    "function:ag-platform/src/components/ui/ErrorBoundary.tsx:DefaultFallback": {
+      "name": "DefaultFallback",
+      "type": "function",
+      "summary": "Default fallback UI component displaying error message and retry button for ErrorBoundary."
+    },
+    "file:ag-platform/src/components/ui/ErrorState.tsx": {
+      "name": "ErrorState.tsx",
+      "type": "file",
+      "summary": "Error state display component with customizable title, message, and retry action for error UI states."
+    },
+    "function:ag-platform/src/components/ui/ErrorState.tsx:ErrorState": {
+      "name": "ErrorState",
+      "type": "function",
+      "summary": "React component rendering an error state with customizable title, message, and retry callback."
+    },
+    "file:ag-platform/src/components/ui/index.ts": {
+      "name": "index.ts",
+      "type": "file",
+      "summary": "Barrel file re-exporting all UI components (ErrorBoundary, Skeleton, EmptyState, ErrorState) for cleaner imports."
+    },
+    "file:ag-platform/src/components/ui/Skeleton.tsx": {
+      "name": "Skeleton.tsx",
+      "type": "file",
+      "summary": "Loading skeleton components providing Skeleton and SkeletonList placeholders for content loading states."
+    },
+    "function:ag-platform/src/components/ui/Skeleton.tsx:Skeleton": {
+      "name": "Skeleton",
+      "type": "function",
+      "summary": "React component rendering a single skeleton loading placeholder with customizable class name."
+    },
+    "function:ag-platform/src/components/ui/Skeleton.tsx:SkeletonList": {
+      "name": "SkeletonList",
+      "type": "function",
+      "summary": "React component rendering a configurable number of skeleton rows for list loading states."
+    },
+    "file:ag-platform/src/hooks/useActivityFeed.ts": {
+      "name": "useActivityFeed.ts",
+      "type": "file",
+      "summary": "React hook fetching project activity feed from Supabase with real-time subscription for new activity insertions."
+    },
+    "function:ag-platform/src/hooks/useActivityFeed.ts:useActivityFeed": {
+      "name": "useActivityFeed",
+      "type": "function",
+      "summary": "React hook querying activity feed with real-time Postgres changes subscription for live updates."
+    },
+    "file:ag-platform/src/hooks/useLivePresence.ts": {
+      "name": "useLivePresence.ts",
+      "type": "file",
+      "summary": "React hook managing real-time user presence tracking via Supabase channels, deduplicating connected users."
+    },
+    "function:ag-platform/src/hooks/useLivePresence.ts:useLivePresence": {
+      "name": "useLivePresence",
+      "type": "function",
+      "summary": "React hook tracking online users via Supabase presence channels with user deduplication."
+    },
+    "file:ag-platform/src/hooks/useNotifications.ts": {
+      "name": "useNotifications.ts",
+      "type": "file",
+      "summary": "React hook managing notifications with real-time subscription, unread count tracking, and mark-as-read functionality."
+    },
+    "function:ag-platform/src/hooks/useNotifications.ts:useNotifications": {
+      "name": "useNotifications",
+      "type": "function",
+      "summary": "React hook providing notification state management with real-time updates, markAsRead and markAllAsRead methods."
+    },
+    "file:ag-platform/src/index.css": {
+      "name": "index.css",
+      "type": "file",
+      "summary": "Global CSS stylesheet with Tailwind directives and base application styles."
+    },
+    "file:ag-platform/src/lib/billing.test.ts": {
+      "name": "billing.test.ts",
+      "type": "file",
+      "summary": "Test file for billing utilities verifying fee calculation logic with vitest."
+    },
+    "file:ag-platform/src/lib/billing.ts": {
+      "name": "billing.ts",
+      "type": "file",
+      "summary": "Billing utility function calculating professional fees from duration and hourly rate with minimum charge enforcement."
+    },
+    "function:ag-platform/src/lib/billing.ts:calculateBillableFee": {
+      "name": "calculateBillableFee",
+      "type": "function",
+      "summary": "Calculates billable fee from duration minutes and hourly rate, enforcing minimum 1-minute billing."
+    },
+    "file:ag-platform/src/lib/storage/download.ts": {
+      "name": "download.ts",
+      "type": "file",
+      "summary": "Storage download utilities providing signed URL generation and browser-based file download functionality."
+    },
+    "function:ag-platform/src/lib/storage/download.ts:getSignedUrl": {
+      "name": "getSignedUrl",
+      "type": "function",
+      "summary": "Generates a time-limited signed URL for secure file access from Supabase storage."
+    },
+    "function:ag-platform/src/lib/storage/download.ts:downloadFile": {
+      "name": "downloadFile",
+      "type": "function",
+      "summary": "Downloads a file from Supabase storage and triggers browser download via a temporary anchor element."
+    },
+    "file:ag-platform/src/lib/storage/upload.test.ts": {
+      "name": "upload.test.ts",
+      "type": "file",
+      "summary": "Test file for resumable file upload utility covering authorization, size limits, and upload flow."
+    },
+    "file:ag-platform/src/lib/storage/upload.ts": {
+      "name": "upload.ts",
+      "type": "file",
+      "summary": "Resumable file upload utility using TUS protocol with progress tracking, virus scan trigger, and database file record insertion."
+    },
+    "function:ag-platform/src/lib/storage/upload.ts:uploadFileResumable": {
+      "name": "uploadFileResumable",
+      "type": "function",
+      "summary": "Uploads a file to Supabase storage via TUS resumable protocol with progress callback, virus scan, versioning, and DB record creation."
+    },
+    "file:ag-platform/src/lib/supabase.ts": {
+      "name": "supabase.ts",
+      "type": "file",
+      "summary": "Supabase client singleton initialization for frontend database and authentication operations."
+    },
+    "file:ag-platform/src/main.tsx": {
+      "name": "main.tsx",
+      "type": "file",
+      "summary": "Application entry point rendering the root React component into the DOM with StrictMode."
+    },
+    "file:ag-platform/src/server/aiRouter.ts": {
+      "name": "aiRouter.ts",
+      "type": "file",
+      "summary": "Express router providing AI-powered endpoints for brief generation, task suggestions, email drafting, document summarization, semantic search, and legal document vetting with token tracking."
+    },
+    "function:ag-platform/src/server/aiRouter.ts:checkAndTrackTokens": {
+      "name": "checkAndTrackTokens",
+      "type": "function",
+      "summary": "Middleware checking AI token budget for an organization and incrementing usage via Supabase RPC."
+    },
+    "file:ag-platform/src/server/db.ts": {
+      "name": "db.ts",
+      "type": "file",
+      "summary": "PostgreSQL connection pool configuration using pg with SSL for production database access."
+    },
+    "table:ag-platform/src/server/migrations.sql": {
+      "name": "migrations.sql",
+      "type": "table",
+      "summary": "Database schema migration defining core tables for banks, organizations, profiles, cases, disbursements, case timeline, and timesheets with field constraints."
+    },
+    "table:ag-platform/src/server/migrations.sql:banks": {
+      "name": "banks",
+      "type": "table",
+      "summary": "Bank entities table storing name, short code, type, billing contact, and advance balance."
+    },
+    "table:ag-platform/src/server/migrations.sql:organizations": {
+      "name": "organizations",
+      "type": "table",
+      "summary": "Organizations table with name and created_at tracking."
+    },
+    "table:ag-platform/src/server/migrations.sql:profiles": {
+      "name": "profiles",
+      "type": "table",
+      "summary": "User profiles table linked to banks and users with phone and role fields."
+    },
+    "table:ag-platform/src/server/migrations.sql:cases": {
+      "name": "cases",
+      "type": "table",
+      "summary": "Core case management table with case number, type, status, borrower, loan amount, SLA deadline, and professional fee tracking."
+    },
+    "table:ag-platform/src/server/migrations.sql:disbursements": {
+      "name": "disbursements",
+      "type": "table",
+      "summary": "Disbursements table tracking payments per case with reimbursement status."
+    },
+    "table:ag-platform/src/server/migrations.sql:case_timeline": {
+      "name": "case_timeline",
+      "type": "table",
+      "summary": "Case status change audit trail tracking status transitions with timestamps and user attribution."
+    },
+    "table:ag-platform/src/server/migrations.sql:timesheets": {
+      "name": "timesheets",
+      "type": "table",
+      "summary": "Timesheets table logging work entries per case with billable tracking, hourly rates, and duration."
+    },
+    "file:ag-platform/src/server/routes/cases.ts": {
+      "name": "cases.ts",
+      "type": "file",
+      "summary": "Express API route handlers for case CRUD operations with status transition and AI pipeline trigger on progress."
+    },
+    "file:ag-platform/src/server/routes/timesheets.ts": {
+      "name": "timesheets.ts",
+      "type": "file",
+      "summary": "Express API route handlers for timesheet CRUD operations with billable fee auto-calculation on the case."
+    },
+    "file:ag-platform/src/server/services/caseService.ts": {
+      "name": "caseService.ts",
+      "type": "file",
+      "summary": "Case service layer providing business logic for case management including CRUD operations and status transitions with timeline audit and transaction safety."
+    },
+    "file:ag-platform/src/store/useAuthStore.ts": {
+      "name": "useAuthStore.ts",
+      "type": "file",
+      "summary": "Zustand store managing user authentication state, session lifecycle, role tracking, and sign-out with Supabase."
+    },
+    "file:ag-platform/src/types/domain.ts": {
+      "name": "domain.ts",
+      "type": "file",
+      "summary": "Core domain type definitions including enums for user roles, case types, statuses, and interfaces for bank, case, and disbursement entities."
+    },
+    "file:ag-platform/src/types/storage.ts": {
+      "name": "storage.ts",
+      "type": "file",
+      "summary": "TypeScript interfaces for file records, upload progress tracking, and versioning metadata used across the storage layer."
+    },
+    "file:ag-platform/supabase/functions/send-push-on-case-assigned/index.ts": {
+      "name": "index.ts",
+      "type": "file",
+      "summary": "Supabase Edge Function triggered on case assignment that sends Expo push notifications to the assigned executive via database trigger."
+    },
+    "table:ag-platform/supabase/migrations/20260423_ai_setup.sql": {
+      "name": "20260423_ai_setup.sql",
+      "type": "table",
+      "summary": "Enables pgvector extension and creates project_embeddings table with 768-dimension vector support, projects table, match function, and AI token tracking columns."
+    },
+    "table:ag-platform/supabase/migrations/20260423_ai_tokens.sql": {
+      "name": "20260423_ai_tokens.sql",
+      "type": "table",
+      "summary": "Creates a PL/pgSQL function to safely increment organization AI token usage counters."
+    },
+    "table:ag-platform/supabase/migrations/20260423_collaboration_setup.sql": {
+      "name": "20260423_collaboration_setup.sql",
+      "type": "table",
+      "summary": "Sets up tasks, comments, notifications, and activities tables with realtime publication, RLS policies, and Supabase replication."
+    },
+    "table:ag-platform/supabase/migrations/20260423_document_storage_setup.sql": {
+      "name": "20260423_document_storage_setup.sql",
+      "type": "table",
+      "summary": "Creates storage buckets, files metadata table with versioning, storage quota trigger, and RLS policies for org-scoped access control."
+    },
+    "table:ag-platform/supabase/migrations/20260514000000_core_schema.sql": {
+      "name": "20260514000000_core_schema.sql",
+      "type": "table",
+      "summary": "Defines core organizations and cases tables with indexes for the AG platform's primary data model."
+    },
+    "table:ag-platform/supabase/migrations/20260514000000_init_schema.sql": {
+      "name": "20260514000000_init_schema.sql",
+      "type": "table",
+      "summary": "Initial schema with organizations and cases tables including client details, financial fields, and composite indexes."
+    },
+    "table:ag-platform/supabase/migrations/20260514000001_auth_hooks.sql": {
+      "name": "20260514000001_auth_hooks.sql",
+      "type": "table",
+      "summary": "Sets up authentication hooks and triggers for user lifecycle management."
+    },
+    "table:ag-platform/supabase/migrations/20260514000002_rbac_setup.sql": {
+      "name": "20260514000002_rbac_setup.sql",
+      "type": "table",
+      "summary": "Creates user_roles table for role-based access control mapping users to organizational roles."
+    },
+    "table:ag-platform/supabase/migrations/20260514000003_voice_system_setup.sql": {
+      "name": "20260514000003_voice_system_setup.sql",
+      "type": "table",
+      "summary": "Creates voice command processing tables, system config, and tool registry with risk levels for the voice control system."
+    },
+    "table:ag-platform/supabase/migrations/20260514000004_workforce_management.sql": {
+      "name": "20260514000004_workforce_management.sql",
+      "type": "table",
+      "summary": "Defines workforce_members, workforce_tasks, and case_notes tables for managing distributed workforce operations."
+    },
+    "table:ag-platform/supabase/migrations/20260515000000_voice_command_logs.sql": {
+      "name": "20260515000000_voice_command_logs.sql",
+      "type": "table",
+      "summary": "Creates voice_command_logs table with indexes for auditing and tracking voice command execution history."
+    },
+    "table:ag-platform/supabase/migrations/20260515000001_voice_tool_config.sql": {
+      "name": "20260515000001_voice_tool_config.sql",
+      "type": "table",
+      "summary": "Creates voice_tool_config table for per-tool enablement and risk override settings."
+    },
+    "table:ag-platform/supabase/migrations/20260515000002_workforce.sql": {
+      "name": "20260515000002_workforce.sql",
+      "type": "table",
+      "summary": "Full workforce schema with staff, capability, staff_capability, and staff_activity tables for role-based staffing and activity tracking."
+    },
+    "table:ag-platform/supabase/migrations/20260515000003_workforce_phase4.sql": {
+      "name": "20260515000003_workforce_phase4.sql",
+      "type": "table",
+      "summary": "Adds staff_anomaly_window view and index for workforce anomaly detection in phase 4."
+    },
+    "table:ag-platform/supabase/migrations/20260518000000_field_app.sql": {
+      "name": "20260518000000_field_app.sql",
+      "type": "table",
+      "summary": "Creates field app tables for document uploads, case audit logs, GPS-tracked field activity, and device push token registration."
+    },
+    "table:ag-platform/supabase/migrations/20260519000000_push_trigger.sql": {
+      "name": "20260519000000_push_trigger.sql",
+      "type": "table",
+      "summary": "Database trigger that invokes the send-push-on-case-assigned Edge Function when a case is assigned to an executive."
+    },
+    "table:ag-platform/supabase/migrations/20260520000000_fix_auth_token_hook.sql": {
+      "name": "20260520000000_fix_auth_token_hook.sql",
+      "type": "table",
+      "summary": "Fixes auth token hook with index on user_roles by org_id for efficient role lookups."
+    },
+    "file:ag-platform/tailwind.config.js": {
+      "name": "tailwind.config.js",
+      "type": "file",
+      "summary": "Tailwind CSS configuration defining content scan paths and custom CSS variable-driven font family tokens."
+    },
+    "config:ag-platform/tsconfig.json": {
+      "name": "tsconfig.json",
+      "type": "config",
+      "summary": "TypeScript compiler configuration with strict mode, bundler module resolution, path alias to src/, and project references."
+    },
+    "config:ag-platform/tsconfig.node.json": {
+      "name": "tsconfig.node.json",
+      "type": "config",
+      "summary": "TypeScript configuration for Node-side vite.config.ts with composite project reference support."
+    },
+    "config:ag-platform/turbo.json": {
+      "name": "turbo.json",
+      "type": "config",
+      "summary": "Turborepo pipeline configuration defining build, dev, lint, type-check, and clean task dependencies and caching rules."
+    },
+    "table:ag-platform/supabase/migrations/20260423_ai_setup.sql:project_embeddings": {
+      "name": "project_embeddings",
+      "type": "table",
+      "summary": "Stores project content embeddings using 768-dimension pgvector for semantic search across projects."
+    },
+    "table:ag-platform/supabase/migrations/20260423_ai_setup.sql:projects": {
+      "name": "projects",
+      "type": "table",
+      "summary": "Core projects table linked to organizations for grouping AI-related content and embeddings."
+    },
+    "table:ag-platform/supabase/migrations/20260423_collaboration_setup.sql:tasks": {
+      "name": "tasks",
+      "type": "table",
+      "summary": "Task management table with assignee tracking, status, and positional ordering for kanban-style boards."
+    },
+    "table:ag-platform/supabase/migrations/20260423_collaboration_setup.sql:comments": {
+      "name": "comments",
+      "type": "table",
+      "summary": "Task-level comment threads with user attribution and timestamps."
+    },
+    "table:ag-platform/supabase/migrations/20260423_collaboration_setup.sql:notifications": {
+      "name": "notifications",
+      "type": "table",
+      "summary": "User notification table with read status, type classification, and deep-link support."
+    },
+    "table:ag-platform/supabase/migrations/20260423_collaboration_setup.sql:activities": {
+      "name": "activities",
+      "type": "table",
+      "summary": "Activity feed table recording user actions and targets for realtime collaboration streams."
+    },
+    "table:ag-platform/supabase/migrations/20260423_document_storage_setup.sql:files": {
+      "name": "files",
+      "type": "table",
+      "summary": "File metadata and versioning table tracking uploads across organizations with storage path and content type."
+    },
+    "table:ag-platform/supabase/migrations/20260514000000_core_schema.sql:organizations": {
+      "name": "organizations",
+      "type": "table",
+      "summary": "Core organizations table as the top-level tenant entity in the platform."
+    },
+    "table:ag-platform/supabase/migrations/20260514000000_core_schema.sql:cases": {
+      "name": "cases",
+      "type": "table",
+      "summary": "Core cases table tracking legal case lifecycle with bank and type information."
+    },
+    "table:ag-platform/supabase/migrations/20260514000002_rbac_setup.sql:user_roles": {
+      "name": "user_roles",
+      "type": "table",
+      "summary": "Maps users to organizational roles for role-based access control."
+    },
+    "table:ag-platform/supabase/migrations/20260514000004_workforce_management.sql:workforce_members": {
+      "name": "workforce_members",
+      "type": "table",
+      "summary": "Tracks workforce members with role, status, load score, and maintenance mode per organization."
+    },
+    "table:ag-platform/supabase/migrations/20260514000004_workforce_management.sql:workforce_tasks": {
+      "name": "workforce_tasks",
+      "type": "table",
+      "summary": "Workforce task assignments with priority, status tracking, and output storage."
+    },
+    "table:ag-platform/supabase/migrations/20260515000000_voice_command_logs.sql:voice_command_logs": {
+      "name": "voice_command_logs",
+      "type": "table",
+      "summary": "Audit log for voice commands capturing transcript, detected language, tool invocation, risk level, and execution status."
+    },
+    "table:ag-platform/supabase/migrations/20260515000001_voice_tool_config.sql:voice_tool_config": {
+      "name": "voice_tool_config",
+      "type": "table",
+      "summary": "Per-tool enablement and risk override configuration for the voice control system."
+    },
+    "table:ag-platform/supabase/migrations/20260515000002_workforce.sql:staff": {
+      "name": "staff",
+      "type": "table",
+      "summary": "Staff registry with kind, display info, heartbeat tracking, and metadata for AI and human workers."
+    },
+    "table:ag-platform/supabase/migrations/20260515000002_workforce.sql:capability": {
+      "name": "capability",
+      "type": "table",
+      "summary": "Capability catalog defining available skills and their categories for the workforce system."
+    },
+    "table:ag-platform/supabase/migrations/20260515000002_workforce.sql:staff_capability": {
+      "name": "staff_capability",
+      "type": "table",
+      "summary": "Many-to-many mapping linking staff to capabilities with enablement and grant tracking."
+    },
+    "table:ag-platform/supabase/migrations/20260515000002_workforce.sql:staff_activity": {
+      "name": "staff_activity",
+      "type": "table",
+      "summary": "Activity log tracking staff actions including capability usage, case associations, and status transitions."
+    },
+    "table:ag-platform/supabase/migrations/20260518000000_field_app.sql:field_documents": {
+      "name": "field_documents",
+      "type": "table",
+      "summary": "Field-collected document uploads with client event dedup, GPS coordinates, and storage path."
+    },
+    "table:ag-platform/supabase/migrations/20260518000000_field_app.sql:case_audit_logs": {
+      "name": "case_audit_logs",
+      "type": "table",
+      "summary": "Audit trail for case status transitions with GPS-tagged field notes and actor attribution."
+    },
+    "table:ag-platform/supabase/migrations/20260518000000_field_app.sql:device_push_tokens": {
+      "name": "device_push_tokens",
+      "type": "table",
+      "summary": "Expo push token registry per user with device info, revocation, and last-seen tracking."
+    },
+    "file:ag-platform/vite.config.ts": {
+      "name": "vite.config.ts",
+      "type": "file",
+      "summary": "Vite build configuration for the AG Platform React SPA with React plugin and `@` path alias to `./src`."
+    },
+    "file:ag-platform/vitest.config.ts": {
+      "name": "vitest.config.ts",
+      "type": "file",
+      "summary": "Vitest test runner configuration targeting Node environment with PostCSS support."
+    },
+    "file:Caddyfile": {
+      "name": "Caddyfile",
+      "type": "file",
+      "summary": "Caddy web server reverse-proxy configuration routing five subdomains (app, dashboard, api, intake, n8n, docs) with TLS, health checks, compression, and basic auth."
+    },
+    "file:CNAME": {
+      "name": "CNAME",
+      "type": "file",
+      "summary": "Custom domain record pointing the repository to advadiityagade.com for GitHub Pages or DNS configuration."
+    },
+    "file:CODEOWNERS": {
+      "name": "CODEOWNERS",
+      "type": "file",
+      "summary": "GitHub CODEOWNERS file assigning @LUXORANOVA9 as the default owner for all paths across the monorepo."
+    },
+    "file:commitlint.config.js": {
+      "name": "commitlint.config.js",
+      "type": "file",
+      "summary": "Commitlint configuration enforcing Conventional Commits with project-specific types and scopes for the monorepo."
+    },
+    "file:content/02-getting-started/jupyter_notebooks.ipynb": {
+      "name": "jupyter_notebooks.ipynb",
+      "type": "file",
+      "summary": "Jupyter notebook providing a getting-started tutorial with executable code cells for the data science workflow."
+    },
+    "document:DEPLOYMENT_PLAYBOOK.md": {
+      "name": "DEPLOYMENT_PLAYBOOK.md",
+      "type": "document",
+      "summary": "Production deployment playbook covering VPS provisioning, Docker Compose setup, Supabase configuration, CI/CD, backups, observability, and day-2 operations."
+    },
+    "document:DEVIN_PLAYBOOK.md": {
+      "name": "DEVIN_PLAYBOOK.md",
+      "type": "document",
+      "summary": "AI agent operations playbook detailing first-session checklist, sandbox setup, branch conventions, risk-tiered auto-merge rules, and repo-specific gotchas."
+    },
+    "service:docker-compose.prod.yml": {
+      "name": "docker-compose.prod.yml",
+      "type": "service",
+      "summary": "Production Docker Compose orchestration running Caddy reverse-proxy, AI backend, dashboard, intake API, n8n, and docs site with shared networking and persistent volumes."
+    },
+    "service:docker-compose.yml": {
+      "name": "docker-compose.yml",
+      "type": "service",
+      "summary": "Development Docker Compose configuration providing a PostgreSQL database with pgvector extension for local development."
+    },
+    "document:docs/adr/0001-monorepo-orchestration.md": {
+      "name": "0001-monorepo-orchestration.md",
+      "type": "document",
+      "summary": "Architecture Decision Record documenting the decision to use a split orchestration strategy with Turborepo for the platform and a separate Makefile for the AI pipeline."
+    },
+    "document:docs/noi-automation-plan.md": {
+      "name": "noi-automation-plan.md",
+      "type": "document",
+      "summary": "Comprehensive NOI automation system plan covering agent orchestration architecture, LangGraph implementation, email intake, document verification, OTP bridge, RPA executor, and phased build order."
+    },
+    "document:ERROR_HANDLING_GUIDELINES.md": {
+      "name": "ERROR_HANDLING_GUIDELINES.md",
+      "type": "document",
+      "summary": "Error handling guidelines prescribing explicit error path design, meaningful messages, retry with backoff, graceful degradation, and structured API error responses."
+    },
+    "document:FRONTEND_UI_GUIDELINES.md": {
+      "name": "FRONTEND_UI_GUIDELINES.md",
+      "type": "document",
+      "summary": "Frontend UI engineering guidelines covering accessibility, Core Web Vitals performance, responsive design, and state management discipline."
+    },
+    "document:GIT_GUIDELINES.md": {
+      "name": "GIT_GUIDELINES.md",
+      "type": "document",
+      "summary": "Git and version control guidelines advocating atomic commits, Conventional Commits format, trunk-based development, and pre-commit gates."
+    },
+    "document:GOAL_DRIVEN_EXECUTION_GUIDELINES.md": {
+      "name": "GOAL_DRIVEN_EXECUTION_GUIDELINES.md",
+      "type": "document",
+      "summary": "Goal-driven execution methodology detailing how to extract underlying goals, define success criteria, create execution plans, and iterate with feedback loops."
+    },
+    "document:GOVERNANCE.md": {
+      "name": "GOVERNANCE.md",
+      "type": "document",
+      "summary": "Project governance document defining branch strategy, commit convention, PR workflow, release process, environment strategy, and tech stack overview."
+    },
+    "document:HALLUCINATION_MITIGATION_GUIDELINES.md": {
+      "name": "HALLUCINATION_MITIGATION_GUIDELINES.md",
+      "type": "document",
+      "summary": "Hallucination detection and mitigation guidelines covering risk classification, grounded outputs, verification layers, fail-safe defaults, and production monitoring."
+    },
+    "pipeline:Makefile": {
+      "name": "Makefile",
+      "type": "pipeline",
+      "summary": "Monorepo build system Makefile orchestrating Python and TypeScript tasks including install, lint, format, type-check, test, build, deploy, and CI pipeline."
+    },
+    "config:package.json": {
+      "name": "package.json",
+      "type": "config",
+      "summary": "Root package.json defining the monorepo workspace configuration with npm workspaces for the platform, mobile app, packages, services, and frontend."
+    },
+    "file:prototype/noi-dashboard/index.html": {
+      "name": "index.html",
+      "type": "file",
+      "summary": "HTML shell that mounts the React NOI Dashboard prototype with a dark-themed layout."
+    },
+    "config:prototype/noi-dashboard/package.json": {
+      "name": "package.json",
+      "type": "config",
+      "summary": "Vite + React + Tailwind project configuration for the NOI Dashboard prototype with build and dev scripts."
+    },
+    "file:prototype/noi-dashboard/postcss.config.js": {
+      "name": "postcss.config.js",
+      "type": "file",
+      "summary": "PostCSS configuration enabling Tailwind CSS and autoprefixer for the prototype."
+    },
+    "file:prototype/noi-dashboard/src/App.tsx": {
+      "name": "App.tsx",
+      "type": "file",
+      "summary": "Main RBAC dashboard prototype with role-based pipeline views, org chart, automation panel, and keyboard-switchable role variants."
+    },
+    "file:prototype/noi-dashboard/src/index.css": {
+      "name": "index.css",
+      "type": "file",
+      "summary": "Tailwind CSS with custom dark theme including gold accent colors and glass-morphism utility classes."
+    },
+    "file:prototype/noi-dashboard/src/main.tsx": {
+      "name": "main.tsx",
+      "type": "file",
+      "summary": "React entry point that renders the App component into the DOM root element."
+    },
+    "file:prototype/noi-dashboard/tailwind.config.js": {
+      "name": "tailwind.config.js",
+      "type": "file",
+      "summary": "Tailwind CSS configuration scoped to the prototype source files with custom color palette."
+    },
+    "file:prototype/noi-dashboard/vite.config.ts": {
+      "name": "vite.config.ts",
+      "type": "file",
+      "summary": "Vite build configuration using the React plugin for fast HMR development."
+    },
+    "document:RAG_AND_MEMORY_GUIDELINES.md": {
+      "name": "RAG_AND_MEMORY_GUIDELINES.md",
+      "type": "document",
+      "summary": "Comprehensive guide on RAG pipeline design and memory system architecture with 5-step process and common pitfalls."
+    },
+    "document:README.md": {
+      "name": "README.md",
+      "type": "document",
+      "summary": "Project overview covering architecture, AI workforce, key modules, quick start, environment setup, and roadmap for the AG Associates legal platform."
+    },
+    "document:REFACTORING_GUIDELINES.md": {
+      "name": "REFACTORING_GUIDELINES.md",
+      "type": "document",
+      "summary": "Step-by-step refactoring process emphasizing safety nets, micro-steps, and behavior preservation."
+    },
+    "config:render.yaml": {
+      "name": "render.yaml",
+      "type": "config",
+      "summary": "Render.com infrastructure-as-code defining a web service and PostgreSQL database for production deployment."
+    },
+    "file:scripts/backup.sh": {
+      "name": "backup.sh",
+      "type": "file",
+      "summary": "Nightly backup script dumping Postgres, archiving n8n and ag_output volumes, then pushing encrypted restic snapshots to remote storage."
+    },
+    "file:scripts/bootstrap-vps.sh": {
+      "name": "bootstrap-vps.sh",
+      "type": "file",
+      "summary": "Idempotent VPS bootstrap script installing Docker, configuring firewall, creating deploy user, cloning repo, and setting up self-hosted runner."
+    },
+    "file:scripts/provision.sh": {
+      "name": "provision.sh",
+      "type": "file",
+      "summary": "Full production provisioning orchestrator creating Hetzner VPS, configuring Cloudflare DNS, writing .env, and triggering CI deploy."
+    },
+    "file:scripts/setup-runner.sh": {
+      "name": "setup-runner.sh",
+      "type": "file",
+      "summary": "Downloads, configures, and registers a GitHub Actions self-hosted runner on the VPS as a systemd service."
+    },
+    "file:scripts/setup-telegram-bot.sh": {
+      "name": "setup-telegram-bot.sh",
+      "type": "file",
+      "summary": "Interactive script guiding the user through Telegram bot creation via @BotFather and extracting environment variables."
+    },
+    "document:SECURITY.md": {
+      "name": "SECURITY.md",
+      "type": "document",
+      "summary": "Security policy detailing supported versions, vulnerability reporting process, response timeline, and security measures."
+    },
+    "document:tasks/lessons.md": {
+      "name": "lessons.md",
+      "type": "document",
+      "summary": "Running log of bug patterns, process patterns, and production patterns learned during development."
+    },
+    "document:tasks/todo.md": {
+      "name": "todo.md",
+      "type": "document",
+      "summary": "Task tracking with completed items and upcoming priorities for the AG Associates project."
+    },
+    "document:TDD_GUIDELINES.md": {
+      "name": "TDD_GUIDELINES.md",
+      "type": "document",
+      "summary": "Test-driven development guidelines with the red-green-refactor cycle, coverage checks, and common rationalizations."
+    },
+    "config:turbo.json": {
+      "name": "turbo.json",
+      "type": "config",
+      "summary": "Turborepo pipeline configuration defining build, dev, lint, and typecheck task dependencies and caching."
+    },
+    "function:prototype/noi-dashboard/src/App.tsx:roleHasPermission": {
+      "name": "roleHasPermission",
+      "type": "function",
+      "summary": "Checks if a role has a specific permission, supporting wildcard domain.all patterns."
+    },
+    "function:prototype/noi-dashboard/src/App.tsx:RoleSwitcher": {
+      "name": "RoleSwitcher",
+      "type": "function",
+      "summary": "Renders a button group for switching between RBAC roles with visual highlighting of the active role."
+    },
+    "function:prototype/noi-dashboard/src/App.tsx:RbacSidebar": {
+      "name": "RbacSidebar",
+      "type": "function",
+      "summary": "Sidebar showing team hierarchy, role switcher, current user card, and permission domain summary."
+    },
+    "function:prototype/noi-dashboard/src/App.tsx:PipelineSection": {
+      "name": "PipelineSection",
+      "type": "function",
+      "summary": "Kanban-style pipeline view with per-step columns, action buttons, and role-based access control."
+    },
+    "function:prototype/noi-dashboard/src/App.tsx:OrgChartPanel": {
+      "name": "OrgChartPanel",
+      "type": "function",
+      "summary": "Tree-style organizational hierarchy panel with online indicators and case counts per staff member."
+    },
+    "function:prototype/noi-dashboard/src/App.tsx:AutomationPanel": {
+      "name": "AutomationPanel",
+      "type": "function",
+      "summary": "Panel showing AI agent statuses with role-restricted visibility and active case counts."
+    },
+    "function:prototype/noi-dashboard/src/App.tsx:RbacDashboard": {
+      "name": "RbacDashboard",
+      "type": "function",
+      "summary": "Main dashboard layout composing sidebar, pipeline, and right panel with role-based permission cards."
+    },
+    "function:prototype/noi-dashboard/src/App.tsx:Switcher": {
+      "name": "Switcher",
+      "type": "function",
+      "summary": "Keyboard-accessible prototype variant switcher navigating between RBAC role views via arrow keys."
+    },
+    "function:prototype/noi-dashboard/src/App.tsx:App": {
+      "name": "App",
+      "type": "function",
+      "summary": "Root component managing URL-based variant state and rendering the appropriate RBAC dashboard view."
+    },
+    "function:ag-platform/src/components/ai/SemanticProjectSearch.tsx:SemanticProjectSearch": {
+      "name": "SemanticProjectSearch",
+      "type": "function",
+      "summary": "Semantic search component for projects using vector-based query matching"
+    },
+    "function:ag-platform/src/components/ai/SmartTaskSuggestions.tsx:SmartTaskSuggestions": {
+      "name": "SmartTaskSuggestions",
+      "type": "function",
+      "summary": "AI-powered smart task suggestion component for project briefs"
+    },
+    "function:ag-platform/src/components/auth/LoginPage.tsx:LoginPage": {
+      "name": "LoginPage",
+      "type": "function",
+      "summary": "Authentication login page supporting admin, staff, and applicant roles"
+    },
+    "function:ag-platform/src/components/collaboration/TaskCard.tsx:TaskCard": {
+      "name": "TaskCard",
+      "type": "function",
+      "summary": "Draggable task card component for the task board interface"
+    }
+  },
+  "totalNodes": 511,
+  "totalEdges": 581
+}

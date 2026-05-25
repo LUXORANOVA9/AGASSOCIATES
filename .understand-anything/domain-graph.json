@@ -1,0 +1,1182 @@
+{
+  "version": "1.0.0",
+  "project": {
+    "name": "AG Associates",
+    "languages": ["python", "typescript", "javascript", "sql", "css", "html"],
+    "frameworks": ["FastAPI", "Express", "Next.js", "React Native", "Fastify", "React", "Tailwind CSS", "Turborepo", "Pydantic", "Zustand", "Playwright", "LangChain"],
+    "description": "AI-driven legal operations and SaaS platform for panel advocates, featuring zero-staff automation, title search and registration, bank panel operations, and white-label SaaS capabilities for the Indian legal services market.",
+    "analyzedAt": "2026-05-24T07:13:13.353257",
+    "gitCommitHash": "1bf4de8a2c0ad2742c25b931b082c3693e089e49"
+  },
+  "nodes": [
+    {
+      "id": "domain:ai-agreement-automation",
+      "type": "domain",
+      "name": "AI Agreement Automation",
+      "summary": "AI-powered pipeline for automated rental agreement drafting, quality assurance, and stamp duty validation. Uses a LangGraph agent chain (Aisha intake, Auditor QA, Bouncer validation) with RAG on legal templates and ReportLab PDF generation.",
+      "tags": ["ai-agents", "legal-documents", "rental-agreements", "nlp", "pdf-generation"],
+      "complexity": "complex",
+      "domainMeta": {
+        "entities": ["RentalAgreement", "TenantInfo", "StampDuty", "LegalTemplate", "PDFDocument"],
+        "businessRules": ["Stamp duty must equal 0.3% of total rent across duration within Rs 50 tolerance", "Auditor pass/fail threshold set at 85% score", "Extract tenant, landlord, rent, address, dates, deposit from raw message"],
+        "crossDomainInteractions": ["Provides drafted agreements to NOI pipeline for filing", "Uses RAG engine shared with search agent", "Generates PDFs delivered via multi-channel intake"]
+      }
+    },
+    {
+      "id": "domain:noi-pipeline-and-case-management",
+      "type": "domain",
+      "name": "NOI Pipeline & Case Management",
+      "summary": "End-to-end Notice of Intimation processing pipeline that orchestrates case seeding, document preparation, IGR portal filing via RPA, status tracking, acknowledgment updates, and automated retry. Includes web-based case management dashboard for monitoring active cases.",
+      "tags": ["noi", "case-management", "legal-pipeline", "status-tracking", "igr"],
+      "complexity": "complex",
+      "domainMeta": {
+        "entities": ["NOICase", "IGRFiling", "CaseStatus", "CaseAuditLog", "Organization"],
+        "businessRules": ["NOI cases progress through seed to prepare to file to verify to acknowledge lifecycle", "External IGR portal callback updates case status", "Retry logic for failed filings with exponential backoff"],
+        "crossDomainInteractions": ["Receives filed NOI documents from RPA government automation domain", "Seeds cases from intake partner integration webhooks", "Displays case data in admin dashboard and field mobile app"]
+      }
+    },
+    {
+      "id": "domain:rpa-government-portal-automation",
+      "type": "domain",
+      "name": "RPA Government Portal Automation",
+      "summary": "Playwright-based browser automation for interacting with Indian government portals. Handles GRAS portal challan generation, IGR portal document filing with OTP authentication, and NESL property registration with multi-mode execution.",
+      "tags": ["rpa", "browser-automation", "playwright", "gras", "igr", "nesl", "property-registration"],
+      "complexity": "complex",
+      "domainMeta": {
+        "entities": ["Challan", "GRASSession", "IGRFiling", "NESLTransaction", "OTPVerification"],
+        "businessRules": ["OTP-based authentication via Redis for government portals", "NESL supports three execution modes: API, RPA, mock", "Filing status verified through portal scraping"],
+        "crossDomainInteractions": ["Generates challans for NOI pipeline cases", "Files NOI documents on IGR portal on behalf of pipeline", "Executes property registration for NESL client module"]
+      }
+    },
+    {
+      "id": "domain:field-executive-mobile-operations",
+      "type": "domain",
+      "name": "Field Executive Mobile Operations",
+      "summary": "React Native mobile application for field executives with offline-first case management, document capture via camera scanner, GPS-based activity tracking, push notification registration, and an offline mutation queue with exponential backoff sync.",
+      "tags": ["mobile", "offline-first", "field-service", "document-capture", "gps-tracking"],
+      "complexity": "complex",
+      "domainMeta": {
+        "entities": ["FieldExecutive", "CaseAssignment", "FieldDocument", "GPSBreadcrumb", "MutationQueue", "PushToken"],
+        "businessRules": ["Document uploads use TUS resumable protocol for reliability", "GPS breadcrumbs buffered and batch-flushed", "Offline mutations queued with FIFO drain and retry limit", "Status updates applied optimistically with cache patching"],
+        "crossDomainInteractions": ["Fetches assigned cases from NOI pipeline case management", "Uploads field-collected documents to Supabase storage", "Submits case status updates back to the platform"]
+      }
+    },
+    {
+      "id": "domain:platform-intake-and-admin",
+      "type": "domain",
+      "name": "Platform Intake & Admin Operations",
+      "summary": "Multi-channel intake system handling case creation via WhatsApp, SMS, voice calls, email, and n8n webhooks. Includes an admin console with workforce management, voice command control, real-time collaboration, task board, file storage, billing, and role-based access control.",
+      "tags": ["intake", "admin", "webhooks", "multi-channel", "workforce", "voice-control", "rbac"],
+      "complexity": "complex",
+      "domainMeta": {
+        "entities": ["IntakeWebhook", "WorkforceMember", "VoiceCommand", "Task", "Notification", "UserRole", "File", "Organization"],
+        "businessRules": ["n8n webhook intake requires API key verification", "Voice command tool registry with risk levels", "RBAC with wildcard domain.all permission patterns", "AI token quota checked and tracked per organization"],
+        "crossDomainInteractions": ["Creates cases in NOI pipeline via intake webhooks", "Assigns field executives cases for mobile operations", "Workforce management includes AI agents from agreement automation"]
+      }
+    },
+    {
+      "id": "flow:rental-agreement-drafting",
+      "type": "flow",
+      "name": "Rental Agreement Drafting",
+      "summary": "AI-assisted rental agreement generation pipeline that extracts tenant details from raw messages, retrieves legal templates, drafts PDF agreements, audits quality, and validates stamp duty before multi-channel delivery.",
+      "tags": ["ai-agents", "document-drafting", "pdf", "stamp-duty"],
+      "complexity": "complex",
+      "domainMeta": {
+        "entryPoint": "POST /api/aisha/chat or WhatsApp/SMS/Voice webhook",
+        "entryType": "http"
+      }
+    },
+    {
+      "id": "flow:noi-case-lifecycle",
+      "type": "flow",
+      "name": "NOI Case Lifecycle",
+      "summary": "End-to-end NOI case processing from seeding and intake through document preparation, IGR filing, status verification, acknowledgment update, and automated retry on failure.",
+      "tags": ["noi", "case-lifecycle", "pipeline", "igr-filing"],
+      "complexity": "complex",
+      "domainMeta": {
+        "entryPoint": "POST /api/noi/seed or /api/noi/workflow",
+        "entryType": "http"
+      }
+    },
+    {
+      "id": "flow:challan-generation",
+      "type": "flow",
+      "name": "Challan Generation",
+      "summary": "RPA-based generation of MTR-6 rent challans and NOI loan challans on the GRAS portal using Playwright browser automation with OTP authentication.",
+      "tags": ["rpa", "challan", "gras-portal", "payment"],
+      "complexity": "moderate",
+      "domainMeta": {
+        "entryPoint": "Programmatic call from NOI pipeline or admin console",
+        "entryType": "event"
+      }
+    },
+    {
+      "id": "flow:igr-document-filing",
+      "type": "flow",
+      "name": "IGR Document Filing",
+      "summary": "Automated NOI document filing on the IGR portal via Playwright, handling login, document upload, OTP authentication, and filing status verification.",
+      "tags": ["rpa", "igr-portal", "document-filing", "otp"],
+      "complexity": "moderate",
+      "domainMeta": {
+        "entryPoint": "Called from NOI pipeline prepare step",
+        "entryType": "event"
+      }
+    },
+    {
+      "id": "flow:property-registration",
+      "type": "flow",
+      "name": "Property Registration via NESL",
+      "summary": "Multi-mode property registration execution through the NESL (National E-Services) system supporting API, RPA, and mock modes with access token management and transaction tracking.",
+      "tags": ["nesl", "property-registration", "api-client", "transaction"],
+      "complexity": "moderate",
+      "domainMeta": {
+        "entryPoint": "POST /api/nesl/execute",
+        "entryType": "http"
+      }
+    },
+    {
+      "id": "flow:field-case-management",
+      "type": "flow",
+      "name": "Field Case Management",
+      "summary": "Mobile workflows for field executives to view assigned cases, examine case details and documents, update case status with GPS-tagged audit trails, and receive realtime case changes.",
+      "tags": ["mobile", "case-management", "field-executive"],
+      "complexity": "moderate",
+      "domainMeta": {
+        "entryPoint": "Mobile app dashboard (authenticated session)",
+        "entryType": "manual"
+      }
+    },
+    {
+      "id": "flow:field-document-capture",
+      "type": "flow",
+      "name": "Field Document Capture",
+      "summary": "Camera-based document scanning and upload flow with offline queue support, case association, and TUS resumable upload protocol for reliability in low-connectivity environments.",
+      "tags": ["mobile", "document-capture", "scanner", "offline-upload"],
+      "complexity": "moderate",
+      "domainMeta": {
+        "entryPoint": "Mobile app scanner screen",
+        "entryType": "manual"
+      }
+    },
+    {
+      "id": "flow:field-activity-tracking",
+      "type": "flow",
+      "name": "Field Activity Tracking",
+      "summary": "GPS-based field activity tracking with on-duty toggling, location breadcrumb buffering, batch flushing to server, and today's activity feed display.",
+      "tags": ["mobile", "gps", "activity-tracking", "breadcrumb"],
+      "complexity": "moderate",
+      "domainMeta": {
+        "entryPoint": "Mobile app activity screen with on-duty toggle",
+        "entryType": "manual"
+      }
+    },
+    {
+      "id": "flow:offline-mutation-sync",
+      "type": "flow",
+      "name": "Offline Mutation Sync",
+      "summary": "Offline-first mutation queue that enqueues status updates and document uploads during connectivity loss, monitors network restore, and drains the queue FIFO with exponential backoff retry.",
+      "tags": ["mobile", "offline", "sync", "queue"],
+      "complexity": "moderate",
+      "domainMeta": {
+        "entryPoint": "Automatic on connectivity loss during mutation",
+        "entryType": "event"
+      }
+    },
+    {
+      "id": "flow:multi-channel-intake",
+      "type": "flow",
+      "name": "Multi-Channel Intake",
+      "summary": "Receives incoming case data via WhatsApp webhook, SMS (Twilio), voice calls (Twilio), email ingestion, and n8n workflow triggers, then routes to the appropriate processing pipeline.",
+      "tags": ["intake", "webhooks", "whatsapp", "sms", "voice", "email"],
+      "complexity": "moderate",
+      "domainMeta": {
+        "entryPoint": "Webhook endpoints on FastAPI /api/*",
+        "entryType": "http"
+      }
+    },
+    {
+      "id": "flow:workforce-and-voice-control",
+      "type": "flow",
+      "name": "Workforce & Voice Control",
+      "summary": "Admin console for managing AI agents and human staff with real-time status monitoring, voice command recording and transcription, tool registry execution, skill gap tracking, and task assignment.",
+      "tags": ["admin", "workforce", "voice-control", "ai-agents"],
+      "complexity": "complex",
+      "domainMeta": {
+        "entryPoint": "Admin dashboard /admin/workforce and /admin/voice",
+        "entryType": "manual"
+      }
+    },
+    {
+      "id": "flow:platform-collaboration",
+      "type": "flow",
+      "name": "Platform Collaboration",
+      "summary": "Real-time collaboration features including kanban task board with drag-and-drop, file storage with version history, notification management, and live presence tracking.",
+      "tags": ["collaboration", "tasks", "files", "notifications", "realtime"],
+      "complexity": "moderate",
+      "domainMeta": {
+        "entryPoint": "Platform web app /office or /collaboration",
+        "entryType": "manual"
+      }
+    },
+    {
+      "id": "step:rental-agreement-drafting:extract-tenant-property-details",
+      "type": "step",
+      "name": "Extract Tenant & Property Details",
+      "summary": "Aisha AI agent extracts tenant name, landlord name, rent amount, address, dates, deposit, and stamp duty from raw unstructured message using ChatOpenAI LLM with JSON output parsing.",
+      "tags": ["ai-agent", "aisha", "extraction", "nlp"],
+      "complexity": "moderate",
+      "filePath": "ag-associates-ai/backend/agents/aisha.py"
+    },
+    {
+      "id": "step:rental-agreement-drafting:retrieve-legal-templates",
+      "type": "step",
+      "name": "Retrieve Legal Templates via RAG",
+      "summary": "Performs pgvector cosine-similarity search on legal_templates table using SentenceTransformer embeddings to find the most relevant template for the agreement type.",
+      "tags": ["rag", "vector-search", "templates"],
+      "complexity": "moderate",
+      "filePath": "ag-associates-ai/backend/agents/db.py"
+    },
+    {
+      "id": "step:rental-agreement-drafting:draft-and-generate-pdf",
+      "type": "step",
+      "name": "Draft Agreement & Generate PDF",
+      "summary": "Builds the agreement document using AgreementPDFGenerator with ReportLab, converting markdown content to formatted PDF with custom styles and structured layout.",
+      "tags": ["pdf-generation", "reportlab", "document"],
+      "complexity": "moderate",
+      "filePath": "ag-associates-ai/backend/pdf_generator.py"
+    },
+    {
+      "id": "step:rental-agreement-drafting:audit-draft-quality",
+      "type": "step",
+      "name": "Audit Draft Quality",
+      "summary": "Auditor agent compares drafted document against extracted JSON via LLM, producing a pass/fail score with threshold of 85 and detailed issue list with feedback.",
+      "tags": ["ai-agent", "auditor", "qa", "validation"],
+      "complexity": "moderate",
+      "filePath": "ag-associates-ai/backend/agents/auditor.py"
+    },
+    {
+      "id": "step:rental-agreement-drafting:validate-stamp-duty",
+      "type": "step",
+      "name": "Validate Stamp Duty",
+      "summary": "Bouncer agent computes expected stamp duty at 0.3% of rent multiplied by months, compares to paid amount within Rs 50 tolerance, and records pass or fail.",
+      "tags": ["ai-agent", "bouncer", "stamp-duty", "math"],
+      "complexity": "moderate",
+      "filePath": "ag-associates-ai/backend/agents/bouncer.py"
+    },
+    {
+      "id": "step:rental-agreement-drafting:deliver-via-channel",
+      "type": "step",
+      "name": "Deliver Agreement via Channel",
+      "summary": "Returns the generated PDF and agreement details through the originating channel: chat API response, WhatsApp reply, SMS, or voice call as appropriate.",
+      "tags": ["delivery", "multi-channel", "response"],
+      "complexity": "simple",
+      "filePath": "ag-associates-ai/backend/main.py"
+    },
+    {
+      "id": "step:noi-case-lifecycle:seed-case",
+      "type": "step",
+      "name": "Seed NOI Case",
+      "summary": "Creates a new NOI case record in the pipeline via the noi_seed API endpoint, setting initial status and storing case metadata.",
+      "tags": ["noi", "seeding", "case-creation"],
+      "complexity": "simple",
+      "filePath": "ag-associates-ai/backend/main.py"
+    },
+    {
+      "id": "step:noi-case-lifecycle:prepare-documents",
+      "type": "step",
+      "name": "Prepare Documents for Filing",
+      "summary": "Prepares the required NOI documents using the template manager and readies them for submission to the IGR portal.",
+      "tags": ["noi", "document-preparation", "templates"],
+      "complexity": "moderate",
+      "filePath": "ag-associates-ai/backend/noi_pipeline.py"
+    },
+    {
+      "id": "step:noi-case-lifecycle:file-on-igr-portal",
+      "type": "step",
+      "name": "File on IGR Portal",
+      "summary": "Triggers IgrRpaExecutor to file NOI documents on the IGR portal via automated browser session with OTP verification.",
+      "tags": ["noi", "igr", "filing", "rpa"],
+      "complexity": "complex",
+      "filePath": "ag-associates-ai/backend/igr_executor.py"
+    },
+    {
+      "id": "step:noi-case-lifecycle:check-filing-status",
+      "type": "step",
+      "name": "Check Filing Status",
+      "summary": "Queries current NOI case status via API or awaits external IGR portal callback via noi_webhook to update the case record.",
+      "tags": ["noi", "status", "callback"],
+      "complexity": "simple",
+      "filePath": "ag-associates-ai/backend/main.py"
+    },
+    {
+      "id": "step:noi-case-lifecycle:update-acknowledgment",
+      "type": "step",
+      "name": "Update Acknowledgment",
+      "summary": "Records the final acknowledgment reference and closes the NOI case loop, updating all downstream dashboards and notifications.",
+      "tags": ["noi", "acknowledgment", "completion"],
+      "complexity": "simple",
+      "filePath": "ag-associates-ai/backend/main.py"
+    },
+    {
+      "id": "step:challan-generation:authenticate-gras-portal",
+      "type": "step",
+      "name": "Authenticate to GRAS Portal",
+      "summary": "Launches Playwright browser, navigates to GRAS portal, and performs OTP-based authentication using Redis for OTP storage.",
+      "tags": ["rpa", "authentication", "gras", "otp"],
+      "complexity": "moderate",
+      "filePath": "ag-associates-ai/backend/executor_agent.py"
+    },
+    {
+      "id": "step:challan-generation:navigate-challan-form",
+      "type": "step",
+      "name": "Navigate Challan Form",
+      "summary": "Navigates to the MTR-6 rent challan or NOI loan challan form section within the GRAS portal.",
+      "tags": ["rpa", "navigation", "challan"],
+      "complexity": "moderate",
+      "filePath": "ag-associates-ai/backend/executor_agent.py"
+    },
+    {
+      "id": "step:challan-generation:generate-challan",
+      "type": "step",
+      "name": "Generate Challan",
+      "summary": "Fills challan form fields and submits on the GRAS portal to generate the payment challan.",
+      "tags": ["rpa", "challan", "submission"],
+      "complexity": "moderate",
+      "filePath": "ag-associates-ai/backend/executor_agent.py"
+    },
+    {
+      "id": "step:challan-generation:download-challan-pdf",
+      "type": "step",
+      "name": "Download Challan PDF",
+      "summary": "Downloads the generated challan PDF from the GRAS portal and stores it for record-keeping and downstream processing.",
+      "tags": ["rpa", "download", "pdf"],
+      "complexity": "simple",
+      "filePath": "ag-associates-ai/backend/executor_agent.py"
+    },
+    {
+      "id": "step:igr-document-filing:login-igr-portal",
+      "type": "step",
+      "name": "Login to IGR Portal",
+      "summary": "Launches Playwright browser and performs authenticated login to the IGR (Inspector General of Registration) portal.",
+      "tags": ["rpa", "igr", "authentication"],
+      "complexity": "moderate",
+      "filePath": "ag-associates-ai/backend/igr_executor.py"
+    },
+    {
+      "id": "step:igr-document-filing:upload-noi-documents",
+      "type": "step",
+      "name": "Upload NOI Documents",
+      "summary": "Uploads the prepared NOI documents to the IGR portal through the browser automation session.",
+      "tags": ["rpa", "upload", "documents"],
+      "complexity": "moderate",
+      "filePath": "ag-associates-ai/backend/igr_executor.py"
+    },
+    {
+      "id": "step:igr-document-filing:verify-otp",
+      "type": "step",
+      "name": "Verify OTP for Filing",
+      "summary": "Handles OTP verification step required by the IGR portal to authorize the document filing submission.",
+      "tags": ["rpa", "otp", "verification"],
+      "complexity": "moderate",
+      "filePath": "ag-associates-ai/backend/igr_executor.py"
+    },
+    {
+      "id": "step:igr-document-filing:confirm-filing-status",
+      "type": "step",
+      "name": "Confirm Filing Status",
+      "summary": "Confirms the filing result from the IGR portal and stores the filing reference and status for downstream case tracking.",
+      "tags": ["rpa", "filing", "status", "confirmation"],
+      "complexity": "simple",
+      "filePath": "ag-associates-ai/backend/igr_executor.py"
+    },
+    {
+      "id": "step:property-registration:acquire-nesl-token",
+      "type": "step",
+      "name": "Acquire NESL Access Token",
+      "summary": "Obtains an access token from the NESL system for authenticating subsequent property registration API calls.",
+      "tags": ["nesl", "authentication", "token"],
+      "complexity": "simple",
+      "filePath": "ag-associates-ai/backend/nesl_client.py"
+    },
+    {
+      "id": "step:property-registration:execute-transaction",
+      "type": "step",
+      "name": "Execute Registration Transaction",
+      "summary": "Submits the property registration transaction to NESL via API, RPA, or mock mode depending on configuration.",
+      "tags": ["nesl", "transaction", "registration"],
+      "complexity": "complex",
+      "filePath": "ag-associates-ai/backend/nesl_client.py"
+    },
+    {
+      "id": "step:property-registration:generate-filing-reference",
+      "type": "step",
+      "name": "Generate Filing Reference",
+      "summary": "Receives and stores the transaction ID and filing reference returned by the NESL system upon successful registration.",
+      "tags": ["nesl", "reference", "completion"],
+      "complexity": "simple",
+      "filePath": "ag-associates-ai/backend/nesl_client.py"
+    },
+    {
+      "id": "step:field-case-management:authenticate-and-load-cases",
+      "type": "step",
+      "name": "Authenticate & Load Cases",
+      "summary": "Handles magic link email authentication and loads assigned cases for the authenticated field executive using React Query with Supabase.",
+      "tags": ["mobile", "authentication", "data-fetching", "cases"],
+      "complexity": "moderate",
+      "filePath": "ag-platform/apps/mobile/app/login.tsx"
+    },
+    {
+      "id": "step:field-case-management:view-case-details",
+      "type": "step",
+      "name": "View Case Details & Documents",
+      "summary": "Displays full case detail including bank name, case type, status badge, assignment timestamp, and associated documents list.",
+      "tags": ["mobile", "case-detail", "documents"],
+      "complexity": "simple",
+      "filePath": "ag-platform/apps/mobile/app/(app)/cases/[caseId].tsx"
+    },
+    {
+      "id": "step:field-case-management:update-case-status",
+      "type": "step",
+      "name": "Update Case Status",
+      "summary": "Selects new status from status board grid and applies update with optimistic cache patching and audit log entry including GPS coordinates.",
+      "tags": ["mobile", "status-update", "optimistic"],
+      "complexity": "moderate",
+      "filePath": "ag-platform/apps/mobile/hooks/useStatusUpdate.ts"
+    },
+    {
+      "id": "step:field-case-management:receive-realtime-updates",
+      "type": "step",
+      "name": "Receive Realtime Case Updates",
+      "summary": "Subscribes to Supabase real-time postgres changes for live case updates and auto-invalidates the React Query cache.",
+      "tags": ["mobile", "realtime", "subscription"],
+      "complexity": "moderate",
+      "filePath": "ag-platform/apps/mobile/hooks/useRealtimeCases.ts"
+    },
+    {
+      "id": "step:field-case-management:sign-out-and-settings",
+      "type": "step",
+      "name": "Manage Account Settings",
+      "summary": "Displays user email and provides sign-out functionality from the settings screen.",
+      "tags": ["mobile", "settings", "auth"],
+      "complexity": "simple",
+      "filePath": "ag-platform/apps/mobile/app/(app)/settings.tsx"
+    },
+    {
+      "id": "step:field-document-capture:open-scanner",
+      "type": "step",
+      "name": "Open Scanner & Select Case",
+      "summary": "Opens camera scanner interface and allows the field executive to select which case to associate the captured document with.",
+      "tags": ["mobile", "scanner", "camera", "case-association"],
+      "complexity": "simple",
+      "filePath": "ag-platform/apps/mobile/app/(app)/scanner.tsx"
+    },
+    {
+      "id": "step:field-document-capture:capture-photo",
+      "type": "step",
+      "name": "Capture Photo",
+      "summary": "Requests camera permissions, captures a photo using the device camera, and persists the file locally for upload processing.",
+      "tags": ["mobile", "capture", "camera", "permissions"],
+      "complexity": "moderate",
+      "filePath": "ag-platform/apps/mobile/hooks/useDocumentCapture.ts"
+    },
+    {
+      "id": "step:field-document-capture:upload-via-tus",
+      "type": "step",
+      "name": "Upload via TUS Protocol",
+      "summary": "Performs TUS resumable PUT upload from local file URI to Supabase Storage with retry delays and chunked transfer for reliability.",
+      "tags": ["mobile", "upload", "tus", "resumable"],
+      "complexity": "moderate",
+      "filePath": "ag-platform/apps/mobile/services/documents.ts"
+    },
+    {
+      "id": "step:field-document-capture:enqueue-for-offline",
+      "type": "step",
+      "name": "Enqueue for Offline Resilience",
+      "summary": "Enqueues the upload mutation into the offline queue when connectivity is unavailable, ensuring eventual consistency.",
+      "tags": ["mobile", "offline", "queue", "mutation"],
+      "complexity": "simple",
+      "filePath": "ag-platform/apps/mobile/hooks/useMutationQueue.ts"
+    },
+    {
+      "id": "step:field-activity-tracking:toggle-duty-state",
+      "type": "step",
+      "name": "Toggle On-Duty State",
+      "summary": "Toggles the field executive on-duty state which starts or stops GPS tracking and activity logging.",
+      "tags": ["mobile", "duty", "state-toggle"],
+      "complexity": "simple",
+      "filePath": "ag-platform/apps/mobile/components/activity/ActivityToggle.tsx"
+    },
+    {
+      "id": "step:field-activity-tracking:subscribe-gps-location",
+      "type": "step",
+      "name": "Subscribe to GPS Location",
+      "summary": "Subscribes to GPS location updates at balanced accuracy and buffers breadcrumb points for batch flushing to the server.",
+      "tags": ["mobile", "gps", "location", "tracking"],
+      "complexity": "moderate",
+      "filePath": "ag-platform/apps/mobile/hooks/useOnDutyTracker.ts"
+    },
+    {
+      "id": "step:field-activity-tracking:flush-breadcrumbs",
+      "type": "step",
+      "name": "Flush GPS Breadcrumbs",
+      "summary": "Batch-inserts field activity log rows (GPS breadcrumbs) to Supabase, silently ignoring unique violations for idempotent retry.",
+      "tags": ["mobile", "gps", "batch", "flush"],
+      "complexity": "moderate",
+      "filePath": "ag-platform/apps/mobile/services/field.ts"
+    },
+    {
+      "id": "step:field-activity-tracking:view-activity-feed",
+      "type": "step",
+      "name": "View Today Activity Feed",
+      "summary": "Displays today's field activity feed with a route map showing breadcrumb trail from geolocation checkpoints.",
+      "tags": ["mobile", "activity", "feed", "map"],
+      "complexity": "simple",
+      "filePath": "ag-platform/apps/mobile/app/(app)/activity.tsx"
+    },
+    {
+      "id": "step:offline-mutation-sync:enqueue-mutation",
+      "type": "step",
+      "name": "Enqueue Mutation Offline",
+      "summary": "Captures mutations (status updates, document uploads) when connectivity is lost and stores them in an ordered FIFO queue.",
+      "tags": ["mobile", "offline", "enqueue", "mutation"],
+      "complexity": "simple",
+      "filePath": "ag-platform/apps/mobile/hooks/useMutationQueue.ts"
+    },
+    {
+      "id": "step:offline-mutation-sync:monitor-connectivity",
+      "type": "step",
+      "name": "Monitor Connectivity Restore",
+      "summary": "Tracks online or offline state via NetInfo event listener and triggers queue drain on connectivity restore.",
+      "tags": ["mobile", "connectivity", "network", "monitor"],
+      "complexity": "simple",
+      "filePath": "ag-platform/apps/mobile/hooks/useOnlineStatus.ts"
+    },
+    {
+      "id": "step:offline-mutation-sync:drain-queue",
+      "type": "step",
+      "name": "Drain Queue with Retry",
+      "summary": "Processes the mutation queue FIFO with exponential backoff, retry limit enforcement, and bail-out on hard failures.",
+      "tags": ["mobile", "queue", "drain", "retry"],
+      "complexity": "moderate",
+      "filePath": "ag-platform/apps/mobile/lib/queue/drain.ts"
+    },
+    {
+      "id": "step:multi-channel-intake:receive-webhook-payload",
+      "type": "step",
+      "name": "Receive Webhook Payload",
+      "summary": "FastAPI endpoint receives incoming webhook payload from WhatsApp, SMS (Twilio), voice call (Twilio), email, or n8n workflow trigger.",
+      "tags": ["intake", "webhook", "receive"],
+      "complexity": "simple",
+      "filePath": "ag-associates-ai/backend/main.py"
+    },
+    {
+      "id": "step:multi-channel-intake:verify-authentication",
+      "type": "step",
+      "name": "Verify Intake Authentication",
+      "summary": "Validates the n8n webhook API key using constant-time comparison or verifies Twilio request signature for authorized intake.",
+      "tags": ["intake", "security", "authentication"],
+      "complexity": "simple",
+      "filePath": "ag-associates-ai/backend/main.py"
+    },
+    {
+      "id": "step:multi-channel-intake:route-to-handler",
+      "type": "step",
+      "name": "Route to Handler",
+      "summary": "Routes the message to the appropriate handler: Aisha AI for agreements, NOI pipeline for case creation, or SMS command parser.",
+      "tags": ["intake", "routing", "dispatch"],
+      "complexity": "moderate",
+      "filePath": "ag-associates-ai/backend/main.py"
+    },
+    {
+      "id": "step:multi-channel-intake:create-case",
+      "type": "step",
+      "name": "Create Case Record",
+      "summary": "Inserts a new case record into the Supabase cases table, resolving bank partner name to organization ID and returning the created row.",
+      "tags": ["intake", "case-creation", "database"],
+      "complexity": "moderate",
+      "filePath": "ag-platform/services/intake-api/src/services/supabase.service.ts"
+    },
+    {
+      "id": "step:multi-channel-intake:return-acknowledgment",
+      "type": "step",
+      "name": "Return Acknowledgment",
+      "summary": "Returns an appropriate acknowledgment: TwiML response for voice calls, text reply for SMS, or webhook response with case reference ID.",
+      "tags": ["intake", "response", "acknowledgment"],
+      "complexity": "simple",
+      "filePath": "ag-associates-ai/backend/main.py"
+    },
+    {
+      "id": "step:workforce-and-voice-control:record-voice-command",
+      "type": "step",
+      "name": "Record & Transcribe Voice Command",
+      "summary": "Records audio from the browser, sends for transcription via API, and displays the recognized command text for user confirmation.",
+      "tags": ["admin", "voice", "transcription", "recording"],
+      "complexity": "moderate",
+      "filePath": "ag-platform/src/app/admin/voice/page.tsx"
+    },
+    {
+      "id": "step:workforce-and-voice-control:match-tool-registry",
+      "type": "step",
+      "name": "Match Command to Tool Registry",
+      "summary": "Matches the transcribed command against the voice tool registry with configured risk levels and per-tool enablement settings.",
+      "tags": ["admin", "voice", "tool-registry", "routing"],
+      "complexity": "moderate",
+      "filePath": "ag-platform/src/components/admin/voice/VyasaVoiceControl.tsx"
+    },
+    {
+      "id": "step:workforce-and-voice-control:execute-tool-action",
+      "type": "step",
+      "name": "Execute Tool Action",
+      "summary": "Executes the voice command tool action with appropriate risk-level handling and logs the command execution for audit.",
+      "tags": ["admin", "voice", "execution", "audit"],
+      "complexity": "moderate",
+      "filePath": "ag-platform/src/components/admin/voice/VyasaVoiceControl.tsx"
+    },
+    {
+      "id": "step:workforce-and-voice-control:monitor-agent-status",
+      "type": "step",
+      "name": "Monitor Agent & Staff Status",
+      "summary": "Displays AI agent and human staff status matrix with real-time updates, load scores, and skill gap indicators.",
+      "tags": ["admin", "workforce", "monitoring", "realtime"],
+      "complexity": "moderate",
+      "filePath": "ag-platform/src/app/admin/workforce/page.tsx"
+    },
+    {
+      "id": "step:workforce-and-voice-control:assign-task",
+      "type": "step",
+      "name": "Assign Tasks to Staff or AI",
+      "summary": "Assigns tasks to workforce members (human or AI agents) with priority, tracking, and output storage.",
+      "tags": ["admin", "workforce", "task-assignment"],
+      "complexity": "moderate",
+      "filePath": "ag-platform/src/components/admin/WorkforceControl.tsx"
+    },
+    {
+      "id": "step:platform-collaboration:manage-tasks",
+      "type": "step",
+      "name": "Manage Tasks on Kanban Board",
+      "summary": "Kanban-style task board with column-based status grouping, inline task creation, and drag-and-drop reordering with positional tracking.",
+      "tags": ["collaboration", "tasks", "kanban"],
+      "complexity": "moderate",
+      "filePath": "ag-platform/src/components/collaboration/TaskBoard.tsx"
+    },
+    {
+      "id": "step:platform-collaboration:share-files",
+      "type": "step",
+      "name": "Share Files with Version History",
+      "summary": "Drag-and-drop file upload with progress tracking, TUS resumable protocol, virus scan, versioning, and signed URL generation for secure access.",
+      "tags": ["collaboration", "files", "upload", "versioning"],
+      "complexity": "moderate",
+      "filePath": "ag-platform/src/components/storage/FileUploader.tsx"
+    },
+    {
+      "id": "step:platform-collaboration:send-notifications",
+      "type": "step",
+      "name": "Send & Receive Notifications",
+      "summary": "Manages user notifications with real-time updates, read status tracking, type classification, deep-link support, and push notification dispatch.",
+      "tags": ["collaboration", "notifications", "realtime", "push"],
+      "complexity": "moderate",
+      "filePath": "ag-platform/src/hooks/useNotifications.ts"
+    },
+    {
+      "id": "step:platform-collaboration:track-presence",
+      "type": "step",
+      "name": "Track Realtime Presence",
+      "summary": "Tracks online users via Supabase presence channels with user deduplication and displays live activity feed from postgres changes.",
+      "tags": ["collaboration", "presence", "realtime", "activity"],
+      "complexity": "moderate",
+      "filePath": "ag-platform/src/hooks/useLivePresence.ts"
+    }
+  ],
+  "edges": [
+    {
+      "source": "domain:ai-agreement-automation",
+      "target": "flow:rental-agreement-drafting",
+      "type": "contains_flow",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "domain:noi-pipeline-and-case-management",
+      "target": "flow:noi-case-lifecycle",
+      "type": "contains_flow",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "domain:rpa-government-portal-automation",
+      "target": "flow:challan-generation",
+      "type": "contains_flow",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "domain:rpa-government-portal-automation",
+      "target": "flow:igr-document-filing",
+      "type": "contains_flow",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "domain:rpa-government-portal-automation",
+      "target": "flow:property-registration",
+      "type": "contains_flow",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "domain:field-executive-mobile-operations",
+      "target": "flow:field-case-management",
+      "type": "contains_flow",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "domain:field-executive-mobile-operations",
+      "target": "flow:field-document-capture",
+      "type": "contains_flow",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "domain:field-executive-mobile-operations",
+      "target": "flow:field-activity-tracking",
+      "type": "contains_flow",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "domain:field-executive-mobile-operations",
+      "target": "flow:offline-mutation-sync",
+      "type": "contains_flow",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "domain:platform-intake-and-admin",
+      "target": "flow:multi-channel-intake",
+      "type": "contains_flow",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "domain:platform-intake-and-admin",
+      "target": "flow:workforce-and-voice-control",
+      "type": "contains_flow",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "domain:platform-intake-and-admin",
+      "target": "flow:platform-collaboration",
+      "type": "contains_flow",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "flow:rental-agreement-drafting",
+      "target": "step:rental-agreement-drafting:extract-tenant-property-details",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.2
+    },
+    {
+      "source": "flow:rental-agreement-drafting",
+      "target": "step:rental-agreement-drafting:retrieve-legal-templates",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.3
+    },
+    {
+      "source": "flow:rental-agreement-drafting",
+      "target": "step:rental-agreement-drafting:draft-and-generate-pdf",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "flow:rental-agreement-drafting",
+      "target": "step:rental-agreement-drafting:audit-draft-quality",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "flow:rental-agreement-drafting",
+      "target": "step:rental-agreement-drafting:validate-stamp-duty",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "flow:rental-agreement-drafting",
+      "target": "step:rental-agreement-drafting:deliver-via-channel",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "flow:noi-case-lifecycle",
+      "target": "step:noi-case-lifecycle:seed-case",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.2
+    },
+    {
+      "source": "flow:noi-case-lifecycle",
+      "target": "step:noi-case-lifecycle:prepare-documents",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.4
+    },
+    {
+      "source": "flow:noi-case-lifecycle",
+      "target": "step:noi-case-lifecycle:file-on-igr-portal",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "flow:noi-case-lifecycle",
+      "target": "step:noi-case-lifecycle:check-filing-status",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "flow:noi-case-lifecycle",
+      "target": "step:noi-case-lifecycle:update-acknowledgment",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "flow:challan-generation",
+      "target": "step:challan-generation:authenticate-gras-portal",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.3
+    },
+    {
+      "source": "flow:challan-generation",
+      "target": "step:challan-generation:navigate-challan-form",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "flow:challan-generation",
+      "target": "step:challan-generation:generate-challan",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "flow:challan-generation",
+      "target": "step:challan-generation:download-challan-pdf",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "flow:igr-document-filing",
+      "target": "step:igr-document-filing:login-igr-portal",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.3
+    },
+    {
+      "source": "flow:igr-document-filing",
+      "target": "step:igr-document-filing:upload-noi-documents",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "flow:igr-document-filing",
+      "target": "step:igr-document-filing:verify-otp",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "flow:igr-document-filing",
+      "target": "step:igr-document-filing:confirm-filing-status",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "flow:property-registration",
+      "target": "step:property-registration:acquire-nesl-token",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.3
+    },
+    {
+      "source": "flow:property-registration",
+      "target": "step:property-registration:execute-transaction",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "flow:property-registration",
+      "target": "step:property-registration:generate-filing-reference",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "flow:field-case-management",
+      "target": "step:field-case-management:authenticate-and-load-cases",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.2
+    },
+    {
+      "source": "flow:field-case-management",
+      "target": "step:field-case-management:view-case-details",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.4
+    },
+    {
+      "source": "flow:field-case-management",
+      "target": "step:field-case-management:update-case-status",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "flow:field-case-management",
+      "target": "step:field-case-management:receive-realtime-updates",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "flow:field-case-management",
+      "target": "step:field-case-management:sign-out-and-settings",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "flow:field-document-capture",
+      "target": "step:field-document-capture:open-scanner",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.3
+    },
+    {
+      "source": "flow:field-document-capture",
+      "target": "step:field-document-capture:capture-photo",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "flow:field-document-capture",
+      "target": "step:field-document-capture:upload-via-tus",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "flow:field-document-capture",
+      "target": "step:field-document-capture:enqueue-for-offline",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "flow:field-activity-tracking",
+      "target": "step:field-activity-tracking:toggle-duty-state",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.3
+    },
+    {
+      "source": "flow:field-activity-tracking",
+      "target": "step:field-activity-tracking:subscribe-gps-location",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "flow:field-activity-tracking",
+      "target": "step:field-activity-tracking:flush-breadcrumbs",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "flow:field-activity-tracking",
+      "target": "step:field-activity-tracking:view-activity-feed",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "flow:offline-mutation-sync",
+      "target": "step:offline-mutation-sync:enqueue-mutation",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.3
+    },
+    {
+      "source": "flow:offline-mutation-sync",
+      "target": "step:offline-mutation-sync:monitor-connectivity",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "flow:offline-mutation-sync",
+      "target": "step:offline-mutation-sync:drain-queue",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "flow:multi-channel-intake",
+      "target": "step:multi-channel-intake:receive-webhook-payload",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.2
+    },
+    {
+      "source": "flow:multi-channel-intake",
+      "target": "step:multi-channel-intake:verify-authentication",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.4
+    },
+    {
+      "source": "flow:multi-channel-intake",
+      "target": "step:multi-channel-intake:route-to-handler",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "flow:multi-channel-intake",
+      "target": "step:multi-channel-intake:create-case",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "flow:multi-channel-intake",
+      "target": "step:multi-channel-intake:return-acknowledgment",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "flow:workforce-and-voice-control",
+      "target": "step:workforce-and-voice-control:record-voice-command",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.2
+    },
+    {
+      "source": "flow:workforce-and-voice-control",
+      "target": "step:workforce-and-voice-control:match-tool-registry",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.4
+    },
+    {
+      "source": "flow:workforce-and-voice-control",
+      "target": "step:workforce-and-voice-control:execute-tool-action",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "flow:workforce-and-voice-control",
+      "target": "step:workforce-and-voice-control:monitor-agent-status",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "flow:workforce-and-voice-control",
+      "target": "step:workforce-and-voice-control:assign-task",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "flow:platform-collaboration",
+      "target": "step:platform-collaboration:manage-tasks",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.3
+    },
+    {
+      "source": "flow:platform-collaboration",
+      "target": "step:platform-collaboration:share-files",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "flow:platform-collaboration",
+      "target": "step:platform-collaboration:send-notifications",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "flow:platform-collaboration",
+      "target": "step:platform-collaboration:track-presence",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "domain:noi-pipeline-and-case-management",
+      "target": "domain:rpa-government-portal-automation",
+      "type": "cross_domain",
+      "direction": "forward",
+      "description": "NOI pipeline triggers IGR document filing and challan generation via RPA executors",
+      "weight": 0.8
+    },
+    {
+      "source": "domain:noi-pipeline-and-case-management",
+      "target": "domain:field-executive-mobile-operations",
+      "type": "cross_domain",
+      "direction": "forward",
+      "description": "Case data from NOI pipeline is assigned to field executives for mobile field operations",
+      "weight": 0.7
+    },
+    {
+      "source": "domain:platform-intake-and-admin",
+      "target": "domain:noi-pipeline-and-case-management",
+      "type": "cross_domain",
+      "direction": "forward",
+      "description": "Intake webhooks create and seed NOI cases; admin dashboard monitors pipeline",
+      "weight": 0.9
+    },
+    {
+      "source": "domain:ai-agreement-automation",
+      "target": "domain:noi-pipeline-and-case-management",
+      "type": "cross_domain",
+      "direction": "forward",
+      "description": "Generated rental agreements may feed into NOI filing pipeline",
+      "weight": 0.5
+    },
+    {
+      "source": "domain:platform-intake-and-admin",
+      "target": "domain:field-executive-mobile-operations",
+      "type": "cross_domain",
+      "direction": "forward",
+      "description": "Admin assigns cases to field executives; push notifications alert mobile users",
+      "weight": 0.6
+    }
+  ],
+  "layers": [],
+  "tour": []
+}

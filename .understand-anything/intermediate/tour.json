@@ -1,0 +1,70 @@
+[
+  {
+    "order": 1,
+    "title": "Project Overview",
+    "description": "Start with the root README to understand AG Associates' mission: an AI-driven legal operations platform for Indian panel advocates. It covers the two major subsystems (AI Document Pipeline and LegalTech Collaboration Platform), the AI agent workforce, key modules, and the project roadmap. This document provides the essential map for the tour ahead.",
+    "nodeIds": ["document:README.md"]
+  },
+  {
+    "order": 2,
+    "title": "Domain Context & Architecture Guide",
+    "description": "CONTEXT.md defines the core legal domain vocabulary — NOI workflow states, case lifecycle, deployment architecture, and governance rules — giving you the terminology needed to understand the code. CLAUDE.md complements this with a detailed repository layout, common commands, and architecture notes for both the Python AI pipeline and the TypeScript platform.",
+    "nodeIds": ["document:CONTEXT.md", "document:CLAUDE.md"]
+  },
+  {
+    "order": 3,
+    "title": "AI Backend Entry Point",
+    "description": "main.py is the FastAPI application server with the highest fan-out in the entire codebase (38 outgoing edges), exposing REST webhooks for WhatsApp, Aisha chat/SMS/voice, NeSL property registration, NOI workflow management, and agreement generation. Its config.py loads all environment-driven settings (database URLs, API keys, Redis, Twilio, Supabase), while .env.example documents every required secret from production domains to LLM provider keys.",
+    "nodeIds": ["file:ag-associates-ai/backend/main.py", "file:ag-associates-ai/backend/config.py", "config:.env.example"]
+  },
+  {
+    "order": 4,
+    "title": "AI Agent Pipeline",
+    "description": "The LangGraph agent pipeline is the system's brain. agents/__init__.py re-exports the public API (AgentState, build_agent_graph, process_rental_request) from submodules. The Aisha intake agent extracts structured rental fields from raw messages via vLLM, while the Auditor agent scores drafted agreements against extracted requirements with a pass/fail threshold of 85. These agents share a single AgentState TypedDict and route through a StateGraph with up to 3 revision attempts.",
+    "nodeIds": ["file:ag-associates-ai/backend/agents/__init__.py", "file:ag-associates-ai/backend/agents/aisha.py", "file:ag-associates-ai/backend/agents/auditor.py"]
+  },
+  {
+    "order": 5,
+    "title": "AI Data Layer & RAG",
+    "description": "The database helper module (agents/db.py) provides a pgvector-backed PostgreSQL connection with SentenceTransformer embeddings for semantic template search. Building on the agent pipeline from Step 4, the similarity_search function performs cosine-similarity queries against legal_templates to find the best document template for each case. The RAG engine wraps this into a complete retrieval-augmented generation system for answering legal queries.",
+    "nodeIds": ["file:ag-associates-ai/backend/agents/db.py", "file:ag-associates-ai/backend/rag_engine.py"]
+  },
+  {
+    "order": 6,
+    "title": "Document Generation & Portal Automation",
+    "description": "The pdf_generator.py module uses ReportLab to convert drafted markdown agreements into formatted PDF legal documents with custom styles and structured layout. The executor_agent.py orchestrates Playwright-based RPA for challan generation on the GRAS portal with OTP verification via Redis pub/sub, while igr_executor.py handles NOI document filing on the IGR Maharashtra portal. These complete the pipeline from intake to government filing.",
+    "nodeIds": ["file:ag-associates-ai/backend/pdf_generator.py", "file:ag-associates-ai/backend/executor_agent.py", "file:ag-associates-ai/backend/igr_executor.py"]
+  },
+  {
+    "order": 7,
+    "title": "Platform Server & Database Schema",
+    "description": "The ag-platform Express entry point (server.ts) bootstraps the server with database migrations, API route mounting, rate limiting, and Vite SPA serving. The migrations.sql (fan-out 14) defines the core data model: banks, organizations, profiles, cases (with 10-state lifecycle), disbursements, case timeline audit trail, and timesheets. This schema is the backbone of the platform's case management and bank panel operations.",
+    "nodeIds": ["file:ag-platform/server.ts", "table:ag-platform/src/server/migrations.sql"]
+  },
+  {
+    "order": 8,
+    "title": "Shared Monorepo Packages",
+    "description": "Three shared packages provide the platform's foundation. The types package defines core domain interfaces (UserRole, CaseType enums, Bank, Case entities) and field-app types for the mobile client — these are the vocabulary used across all platform code. The db package provides a pg Pool singleton with SSL support. The gemini.ts module integrates Google Gemini AI with Supabase client singleton and organization token quota checking for AI features.",
+    "nodeIds": ["file:ag-platform/packages/types/src/domain.ts", "file:ag-platform/packages/db/src/index.ts", "file:ag-platform/packages/ai/src/gemini.ts"]
+  },
+  {
+    "order": 9,
+    "title": "Platform Web UI",
+    "description": "The root App.tsx (fan-out 13) is the React application entry point with navigation header, route definitions for admin voice/workforce consoles, login, my-cases PWA, and the office workspace. It initializes authentication on mount and wraps all pages in an error boundary. This component ties together the platform's entire user-facing experience, from the dark-themed glassmorphism login to the draggable-window office workspace.",
+    "nodeIds": ["file:ag-platform/src/App.tsx"]
+  },
+  {
+    "order": 10,
+    "title": "Mobile Field App",
+    "description": "The Expo React Native mobile app serves field executives with offline-first case management. The dashboard screen shows assigned cases with realtime updates via Supabase subscriptions and pull-to-refresh. The lib/supabase.ts singleton (highest fan-in in the codebase at 10) provides database queries and real-time subscriptions. The useMutationQueue hook implements FIFO offline queue draining with exponential backoff and automatic replay on connectivity restore, enabling reliable field operations in areas with poor connectivity.",
+    "nodeIds": ["file:ag-platform/apps/mobile/app/(app)/dashboard.tsx", "file:ag-platform/apps/mobile/lib/supabase.ts", "file:ag-platform/apps/mobile/hooks/useMutationQueue.ts"],
+    "languageLesson": "Offline-first mutation queues persist pending writes to AsyncStorage and replay them FIFO on reconnection. Combined with TUS resumable uploads for documents, this pattern ensures no data loss when field executives work in areas with unreliable network coverage."
+  },
+  {
+    "order": 11,
+    "title": "Containerization & Deployment",
+    "description": "The AI backend Dockerfile uses a multi-stage build separating Python dependency installation (with Playwright Chromium for RPA) from the slim runtime image running uvicorn. The Caddy reverse proxy routes six subdomains (app, dashboard, api, intake, n8n, docs) to their Docker containers with automated TLS and health checks. The deploy GitHub Actions workflow pulls latest code, builds images, and deploys the full stack to a self-hosted runner with health verification.",
+    "nodeIds": ["service:ag-associates-ai/backend/Dockerfile", "service:Caddyfile", "pipeline:.github/workflows/deploy.yml"],
+    "languageLesson": "Multi-stage Docker builds use multiple FROM statements to separate build and runtime dependencies. The builder stage has dev dependencies for compilation, while the final stage only includes runtime artifacts, reducing image size by 50-80%."
+  }
+]

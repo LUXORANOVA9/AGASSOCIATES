@@ -1,0 +1,1757 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 25,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "ag-platform/src/components/storage/FilePreviewer.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 96,
+      "nonEmptyLines": 85,
+      "functions": [
+        {
+          "name": "FilePreviewer",
+          "startLine": 18,
+          "endLine": 96,
+          "params": [
+            "{ file }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "FilePreviewer",
+          "line": 18,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "FilePreviewer",
+          "callee": "useState",
+          "lineNumber": 19
+        },
+        {
+          "caller": "FilePreviewer",
+          "callee": "useState",
+          "lineNumber": 20
+        },
+        {
+          "caller": "FilePreviewer",
+          "callee": "useState",
+          "lineNumber": 21
+        },
+        {
+          "caller": "FilePreviewer",
+          "callee": "useEffect",
+          "lineNumber": 23
+        },
+        {
+          "caller": "FilePreviewer",
+          "callee": "getSignedUrl(file.bucket_id, file.storage_path)\n      .then(setUrl)\n      .catch",
+          "lineNumber": 24
+        },
+        {
+          "caller": "FilePreviewer",
+          "callee": "getSignedUrl(file.bucket_id, file.storage_path)\n      .then",
+          "lineNumber": 24
+        },
+        {
+          "caller": "FilePreviewer",
+          "callee": "getSignedUrl",
+          "lineNumber": 24
+        },
+        {
+          "caller": "FilePreviewer",
+          "callee": "setError",
+          "lineNumber": 26
+        },
+        {
+          "caller": "renderContent",
+          "callee": "file.content_type.includes",
+          "lineNumber": 33
+        },
+        {
+          "caller": "renderContent",
+          "callee": "setNumPages",
+          "lineNumber": 36
+        },
+        {
+          "caller": "renderContent",
+          "callee": "file.content_type.startsWith",
+          "lineNumber": 43
+        },
+        {
+          "caller": "renderContent",
+          "callee": "file.content_type.startsWith",
+          "lineNumber": 51
+        },
+        {
+          "caller": "renderContent",
+          "callee": "downloadFile",
+          "lineNumber": 71
+        },
+        {
+          "caller": "FilePreviewer",
+          "callee": "(file.size_bytes / 1024 / 1024).toFixed",
+          "lineNumber": 85
+        },
+        {
+          "caller": "FilePreviewer",
+          "callee": "renderContent",
+          "lineNumber": 93
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "ag-platform/src/components/storage/FileUploader.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 121,
+      "nonEmptyLines": 109,
+      "functions": [
+        {
+          "name": "getFileIcon",
+          "startLine": 16,
+          "endLine": 21,
+          "params": [
+            "type"
+          ]
+        },
+        {
+          "name": "FileUploader",
+          "startLine": 23,
+          "endLine": 121,
+          "params": [
+            "{ organizationId, projectId, bucketId, onUploadComplete }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "FileUploader",
+          "line": 23,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "getFileIcon",
+          "callee": "type.includes",
+          "lineNumber": 17
+        },
+        {
+          "caller": "getFileIcon",
+          "callee": "type.includes",
+          "lineNumber": 18
+        },
+        {
+          "caller": "getFileIcon",
+          "callee": "type.includes",
+          "lineNumber": 19
+        },
+        {
+          "caller": "FileUploader",
+          "callee": "useState",
+          "lineNumber": 24
+        },
+        {
+          "caller": "FileUploader",
+          "callee": "useCallback",
+          "lineNumber": 26
+        },
+        {
+          "caller": "FileUploader",
+          "callee": "acceptedFiles.forEach",
+          "lineNumber": 27
+        },
+        {
+          "caller": "FileUploader",
+          "callee": "Date.now",
+          "lineNumber": 28
+        },
+        {
+          "caller": "FileUploader",
+          "callee": "setUploads",
+          "lineNumber": 29
+        },
+        {
+          "caller": "FileUploader",
+          "callee": "startUpload",
+          "lineNumber": 34
+        },
+        {
+          "caller": "startUpload",
+          "callee": "setUploads",
+          "lineNumber": 39
+        },
+        {
+          "caller": "startUpload",
+          "callee": "uploadFileResumable",
+          "lineNumber": 42
+        },
+        {
+          "caller": "startUpload",
+          "callee": "Math.round",
+          "lineNumber": 49
+        },
+        {
+          "caller": "startUpload",
+          "callee": "setUploads",
+          "lineNumber": 50
+        },
+        {
+          "caller": "startUpload",
+          "callee": "setUploads",
+          "lineNumber": 54
+        },
+        {
+          "caller": "startUpload",
+          "callee": "onUploadComplete",
+          "lineNumber": 55
+        },
+        {
+          "caller": "startUpload",
+          "callee": "setUploads",
+          "lineNumber": 57
+        },
+        {
+          "caller": "FileUploader",
+          "callee": "useDropzone",
+          "lineNumber": 61
+        },
+        {
+          "caller": "FileUploader",
+          "callee": "getRootProps",
+          "lineNumber": 76
+        },
+        {
+          "caller": "FileUploader",
+          "callee": "getInputProps",
+          "lineNumber": 79
+        },
+        {
+          "caller": "FileUploader",
+          "callee": "Object.values",
+          "lineNumber": 85
+        },
+        {
+          "caller": "FileUploader",
+          "callee": "Object.entries(uploads).map",
+          "lineNumber": 87
+        },
+        {
+          "caller": "FileUploader",
+          "callee": "Object.entries",
+          "lineNumber": 87
+        },
+        {
+          "caller": "FileUploader",
+          "callee": "getFileIcon",
+          "lineNumber": 89
+        },
+        {
+          "caller": "FileUploader",
+          "callee": "(upload.file.size / 1024 / 1024).toFixed",
+          "lineNumber": 93
+        },
+        {
+          "caller": "FileUploader",
+          "callee": "startUpload",
+          "lineNumber": 105
+        },
+        {
+          "caller": "FileUploader",
+          "callee": "['uploading', 'pending'].includes",
+          "lineNumber": 109
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 1,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "ag-platform/src/components/storage/VersionHistory.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 85,
+      "nonEmptyLines": 77,
+      "functions": [
+        {
+          "name": "VersionHistory",
+          "startLine": 15,
+          "endLine": 85,
+          "params": [
+            "{ currentFile, history, onRestored }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "VersionHistory",
+          "line": 15,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "VersionHistory",
+          "callee": "useState",
+          "lineNumber": 16
+        },
+        {
+          "caller": "VersionHistory",
+          "callee": "[...history].sort",
+          "lineNumber": 18
+        },
+        {
+          "caller": "VersionHistory",
+          "callee": "setIsUploadingNew",
+          "lineNumber": 27
+        },
+        {
+          "caller": "VersionHistory",
+          "callee": "setIsUploadingNew",
+          "lineNumber": 41
+        },
+        {
+          "caller": "VersionHistory",
+          "callee": "onRestored",
+          "lineNumber": 42
+        },
+        {
+          "caller": "VersionHistory",
+          "callee": "format",
+          "lineNumber": 58
+        },
+        {
+          "caller": "VersionHistory",
+          "callee": "(currentFile.size_bytes / 1024).toFixed",
+          "lineNumber": 58
+        },
+        {
+          "caller": "VersionHistory",
+          "callee": "sortedHistory.map",
+          "lineNumber": 63
+        },
+        {
+          "caller": "VersionHistory",
+          "callee": "format",
+          "lineNumber": 72
+        },
+        {
+          "caller": "VersionHistory",
+          "callee": "(version.size_bytes / 1024).toFixed",
+          "lineNumber": 72
+        },
+        {
+          "caller": "VersionHistory",
+          "callee": "onRestored",
+          "lineNumber": 75
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "ag-platform/src/components/ui/EmptyState.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 37,
+      "nonEmptyLines": 35,
+      "functions": [
+        {
+          "name": "EmptyState",
+          "startLine": 11,
+          "endLine": 37,
+          "params": [
+            "{\n    title,\n    message,\n    icon: Icon = Inbox,\n    action,\n}"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "EmptyState",
+          "line": 11,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "ag-platform/src/components/ui/ErrorBoundary.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 86,
+      "nonEmptyLines": 78,
+      "functions": [
+        {
+          "name": "DefaultFallback",
+          "startLine": 48,
+          "endLine": 86,
+          "params": [
+            "{\n    error,\n    onReset,\n}"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "ErrorBoundary",
+          "startLine": 13,
+          "endLine": 46,
+          "methods": [
+            "getDerivedStateFromError",
+            "componentDidCatch",
+            "render"
+          ],
+          "properties": [
+            "state",
+            "reset"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "ErrorBoundary",
+          "line": 13,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "componentDidCatch",
+          "callee": "console.error",
+          "lineNumber": 28
+        },
+        {
+          "caller": "render",
+          "callee": "this.props.fallback",
+          "lineNumber": 37
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "ag-platform/src/components/ui/ErrorState.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 35,
+      "nonEmptyLines": 33,
+      "functions": [
+        {
+          "name": "ErrorState",
+          "startLine": 10,
+          "endLine": 35,
+          "params": [
+            "{\n    title = \"Couldn't load\",\n    message = 'Check your connection and try again.',\n    onRetry,\n}"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "ErrorState",
+          "line": 10,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "ag-platform/src/components/ui/index.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 4,
+      "nonEmptyLines": 4,
+      "exports": [
+        {
+          "name": "ErrorBoundary",
+          "line": 1,
+          "isDefault": false
+        },
+        {
+          "name": "Skeleton",
+          "line": 2,
+          "isDefault": false
+        },
+        {
+          "name": "SkeletonList",
+          "line": 2,
+          "isDefault": false
+        },
+        {
+          "name": "EmptyState",
+          "line": 3,
+          "isDefault": false
+        },
+        {
+          "name": "ErrorState",
+          "line": 4,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 4,
+        "exportCount": 5,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "ag-platform/src/components/ui/Skeleton.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 31,
+      "nonEmptyLines": 28,
+      "functions": [
+        {
+          "name": "Skeleton",
+          "startLine": 7,
+          "endLine": 14,
+          "params": [
+            "{ className = '' }"
+          ]
+        },
+        {
+          "name": "SkeletonList",
+          "startLine": 16,
+          "endLine": 31,
+          "params": [
+            "{ rows = 3 }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "Skeleton",
+          "line": 7,
+          "isDefault": false
+        },
+        {
+          "name": "SkeletonList",
+          "line": 16,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "SkeletonList",
+          "callee": "Array.from({ length: rows }).map",
+          "lineNumber": 19
+        },
+        {
+          "caller": "SkeletonList",
+          "callee": "Array.from",
+          "lineNumber": 19
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 2,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "ag-platform/src/hooks/useActivityFeed.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 87,
+      "nonEmptyLines": 74,
+      "functions": [
+        {
+          "name": "useActivityFeed",
+          "startLine": 16,
+          "endLine": 87,
+          "params": [
+            "projectId"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "useActivityFeed",
+          "line": 16,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "useActivityFeed",
+          "callee": "useState",
+          "lineNumber": 17
+        },
+        {
+          "caller": "useActivityFeed",
+          "callee": "useEffect",
+          "lineNumber": 19
+        },
+        {
+          "caller": "loadActivities",
+          "callee": "supabase\n        .from('activities')\n        .select(`\n          *,\n          users:user_id ( email )\n        `)\n        .eq('project_id', projectId)\n        .order('created_at', { ascending: false })\n        .limit",
+          "lineNumber": 26
+        },
+        {
+          "caller": "loadActivities",
+          "callee": "supabase\n        .from('activities')\n        .select(`\n          *,\n          users:user_id ( email )\n        `)\n        .eq('project_id', projectId)\n        .order",
+          "lineNumber": 26
+        },
+        {
+          "caller": "loadActivities",
+          "callee": "supabase\n        .from('activities')\n        .select(`\n          *,\n          users:user_id ( email )\n        `)\n        .eq",
+          "lineNumber": 26
+        },
+        {
+          "caller": "loadActivities",
+          "callee": "supabase\n        .from('activities')\n        .select",
+          "lineNumber": 26
+        },
+        {
+          "caller": "loadActivities",
+          "callee": "supabase\n        .from",
+          "lineNumber": 26
+        },
+        {
+          "caller": "loadActivities",
+          "callee": "setActivities",
+          "lineNumber": 37
+        },
+        {
+          "caller": "loadActivities",
+          "callee": "supabase.channel",
+          "lineNumber": 44
+        },
+        {
+          "caller": "loadActivities",
+          "callee": "channel\n        .on(\n          'postgres_changes',\n          {\n            event: 'INSERT',\n            schema: 'public',\n            table: 'activities',\n            filter: `project_id=eq.${projectId}`\n          },\n          async (payload) => {\n            if (!isMounted) return;\n            const newRecord = payload.new as Activity;\n            \n            // To get relations like email, we might need an extra fetch for realtime records\n            // Or just fetch the profile if the user table works like that.\n            // For simplicity, fetch the user record manually if missing\n            const { data: userData } = await supabase.from('users').select('email').eq('id', newRecord.user_id).single();\n            \n            const detailedRecord = {\n                ...newRecord,\n                users: userData ? { email: userData.email } : { email: 'Unknown' }\n            };\n\n            setActivities(prev => [detailedRecord, ...prev]);\n          }\n        )\n        .subscribe",
+          "lineNumber": 45
+        },
+        {
+          "caller": "loadActivities",
+          "callee": "channel\n        .on",
+          "lineNumber": 45
+        },
+        {
+          "caller": "loadActivities",
+          "callee": "supabase.from('users').select('email').eq('id', newRecord.user_id).single",
+          "lineNumber": 61
+        },
+        {
+          "caller": "loadActivities",
+          "callee": "supabase.from('users').select('email').eq",
+          "lineNumber": 61
+        },
+        {
+          "caller": "loadActivities",
+          "callee": "supabase.from('users').select",
+          "lineNumber": 61
+        },
+        {
+          "caller": "loadActivities",
+          "callee": "supabase.from",
+          "lineNumber": 61
+        },
+        {
+          "caller": "loadActivities",
+          "callee": "setActivities",
+          "lineNumber": 68
+        },
+        {
+          "caller": "useActivityFeed",
+          "callee": "loadActivities",
+          "lineNumber": 74
+        },
+        {
+          "caller": "useActivityFeed",
+          "callee": "supabase.removeChannel",
+          "lineNumber": 79
+        },
+        {
+          "caller": "useActivityFeed",
+          "callee": "supabase.removeChannel",
+          "lineNumber": 81
+        },
+        {
+          "caller": "useActivityFeed",
+          "callee": "supabase.channel",
+          "lineNumber": 81
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "ag-platform/src/hooks/useLivePresence.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 77,
+      "nonEmptyLines": 63,
+      "functions": [
+        {
+          "name": "useLivePresence",
+          "startLine": 15,
+          "endLine": 77,
+          "params": [
+            "projectId"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "supabase",
+          "line": 6,
+          "isDefault": false
+        },
+        {
+          "name": "useLivePresence",
+          "line": 15,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "useLivePresence",
+          "callee": "useState",
+          "lineNumber": 16
+        },
+        {
+          "caller": "useLivePresence",
+          "callee": "useEffect",
+          "lineNumber": 18
+        },
+        {
+          "caller": "useLivePresence",
+          "callee": "supabase.channel",
+          "lineNumber": 25
+        },
+        {
+          "caller": "initPresence",
+          "callee": "supabase.auth.getSession",
+          "lineNumber": 34
+        },
+        {
+          "caller": "initPresence",
+          "callee": "channel\n        .on(\"presence\", { event: \"sync\" }, () => {\n          if (!isMounted) return;\n          const newState = channel.presenceState<PresenceUser>();\n          \n          const uniqueUsers = new Map<string, PresenceUser>();\n          Object.values(newState).forEach((presenceKeys) => {\n            presenceKeys.forEach((presence) => {\n              if (!uniqueUsers.has(presence.user_id)) {\n                uniqueUsers.set(presence.user_id, presence);\n              }\n            });\n          });\n          \n          setUsers(Array.from(uniqueUsers.values()));\n        })\n        .subscribe",
+          "lineNumber": 41
+        },
+        {
+          "caller": "initPresence",
+          "callee": "channel\n        .on",
+          "lineNumber": 41
+        },
+        {
+          "caller": "initPresence",
+          "callee": "channel.presenceState",
+          "lineNumber": 44
+        },
+        {
+          "caller": "initPresence",
+          "callee": "Object.values(newState).forEach",
+          "lineNumber": 47
+        },
+        {
+          "caller": "initPresence",
+          "callee": "Object.values",
+          "lineNumber": 47
+        },
+        {
+          "caller": "initPresence",
+          "callee": "presenceKeys.forEach",
+          "lineNumber": 48
+        },
+        {
+          "caller": "initPresence",
+          "callee": "uniqueUsers.has",
+          "lineNumber": 49
+        },
+        {
+          "caller": "initPresence",
+          "callee": "uniqueUsers.set",
+          "lineNumber": 50
+        },
+        {
+          "caller": "initPresence",
+          "callee": "setUsers",
+          "lineNumber": 55
+        },
+        {
+          "caller": "initPresence",
+          "callee": "Array.from",
+          "lineNumber": 55
+        },
+        {
+          "caller": "initPresence",
+          "callee": "uniqueUsers.values",
+          "lineNumber": 55
+        },
+        {
+          "caller": "initPresence",
+          "callee": "channel.track",
+          "lineNumber": 59
+        },
+        {
+          "caller": "initPresence",
+          "callee": "new Date().toISOString",
+          "lineNumber": 62
+        },
+        {
+          "caller": "useLivePresence",
+          "callee": "initPresence",
+          "lineNumber": 68
+        },
+        {
+          "caller": "useLivePresence",
+          "callee": "supabase.removeChannel",
+          "lineNumber": 72
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 2,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "ag-platform/src/hooks/useNotifications.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 113,
+      "nonEmptyLines": 97,
+      "functions": [
+        {
+          "name": "useNotifications",
+          "startLine": 14,
+          "endLine": 113,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "useNotifications",
+          "line": 14,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "useNotifications",
+          "callee": "useState",
+          "lineNumber": 15
+        },
+        {
+          "caller": "useNotifications",
+          "callee": "useState",
+          "lineNumber": 16
+        },
+        {
+          "caller": "useNotifications",
+          "callee": "useEffect",
+          "lineNumber": 18
+        },
+        {
+          "caller": "loadNotifications",
+          "callee": "supabase.auth.getSession",
+          "lineNumber": 24
+        },
+        {
+          "caller": "loadNotifications",
+          "callee": "supabase\n        .from('notifications')\n        .select('*')\n        .eq('user_id', userId)\n        .order('created_at', { ascending: false })\n        .limit",
+          "lineNumber": 29
+        },
+        {
+          "caller": "loadNotifications",
+          "callee": "supabase\n        .from('notifications')\n        .select('*')\n        .eq('user_id', userId)\n        .order",
+          "lineNumber": 29
+        },
+        {
+          "caller": "loadNotifications",
+          "callee": "supabase\n        .from('notifications')\n        .select('*')\n        .eq",
+          "lineNumber": 29
+        },
+        {
+          "caller": "loadNotifications",
+          "callee": "supabase\n        .from('notifications')\n        .select",
+          "lineNumber": 29
+        },
+        {
+          "caller": "loadNotifications",
+          "callee": "supabase\n        .from",
+          "lineNumber": 29
+        },
+        {
+          "caller": "loadNotifications",
+          "callee": "setNotifications",
+          "lineNumber": 37
+        },
+        {
+          "caller": "loadNotifications",
+          "callee": "setUnreadCount",
+          "lineNumber": 38
+        },
+        {
+          "caller": "loadNotifications",
+          "callee": "data.filter",
+          "lineNumber": 38
+        },
+        {
+          "caller": "loadNotifications",
+          "callee": "supabase.channel",
+          "lineNumber": 44
+        },
+        {
+          "caller": "loadNotifications",
+          "callee": "channel\n        .on(\n          'postgres_changes',\n          {\n            event: 'INSERT',\n            schema: 'public',\n            table: 'notifications',\n            filter: `user_id=eq.${userId}`,\n          },\n          (payload) => {\n            if (!isMounted) return;\n            const newNotif = payload.new as Notification;\n            setNotifications((prev) => [newNotif, ...prev]);\n            setUnreadCount((prev) => prev + 1);\n          }\n        )\n        .on(\n          'postgres_changes',\n          {\n            event: 'UPDATE',\n            schema: 'public',\n            table: 'notifications',\n            filter: `user_id=eq.${userId}`,\n          },\n          (payload) => {\n            if (!isMounted) return;\n            const updated = payload.new as Notification;\n            setNotifications((prev) => \n               prev.map(n => n.id === updated.id ? updated : n)\n            );\n            \n            // Recalculate unread count\n            setUnreadCount(prev => prev - (updated.is_read ? 1 : 0));\n          }\n        )\n        .subscribe",
+          "lineNumber": 45
+        },
+        {
+          "caller": "loadNotifications",
+          "callee": "channel\n        .on(\n          'postgres_changes',\n          {\n            event: 'INSERT',\n            schema: 'public',\n            table: 'notifications',\n            filter: `user_id=eq.${userId}`,\n          },\n          (payload) => {\n            if (!isMounted) return;\n            const newNotif = payload.new as Notification;\n            setNotifications((prev) => [newNotif, ...prev]);\n            setUnreadCount((prev) => prev + 1);\n          }\n        )\n        .on",
+          "lineNumber": 45
+        },
+        {
+          "caller": "loadNotifications",
+          "callee": "channel\n        .on",
+          "lineNumber": 45
+        },
+        {
+          "caller": "loadNotifications",
+          "callee": "setNotifications",
+          "lineNumber": 57
+        },
+        {
+          "caller": "loadNotifications",
+          "callee": "setUnreadCount",
+          "lineNumber": 58
+        },
+        {
+          "caller": "loadNotifications",
+          "callee": "setNotifications",
+          "lineNumber": 72
+        },
+        {
+          "caller": "loadNotifications",
+          "callee": "prev.map",
+          "lineNumber": 73
+        },
+        {
+          "caller": "loadNotifications",
+          "callee": "setUnreadCount",
+          "lineNumber": 77
+        },
+        {
+          "caller": "useNotifications",
+          "callee": "loadNotifications",
+          "lineNumber": 83
+        },
+        {
+          "caller": "useNotifications",
+          "callee": "supabase.removeChannel",
+          "lineNumber": 88
+        },
+        {
+          "caller": "markAsRead",
+          "callee": "setNotifications",
+          "lineNumber": 95
+        },
+        {
+          "caller": "markAsRead",
+          "callee": "prev.map",
+          "lineNumber": 95
+        },
+        {
+          "caller": "markAsRead",
+          "callee": "setUnreadCount",
+          "lineNumber": 96
+        },
+        {
+          "caller": "markAsRead",
+          "callee": "Math.max",
+          "lineNumber": 96
+        },
+        {
+          "caller": "markAsRead",
+          "callee": "supabase.from('notifications').update({ is_read: true }).eq",
+          "lineNumber": 98
+        },
+        {
+          "caller": "markAsRead",
+          "callee": "supabase.from('notifications').update",
+          "lineNumber": 98
+        },
+        {
+          "caller": "markAsRead",
+          "callee": "supabase.from",
+          "lineNumber": 98
+        },
+        {
+          "caller": "markAllAsRead",
+          "callee": "setNotifications",
+          "lineNumber": 102
+        },
+        {
+          "caller": "markAllAsRead",
+          "callee": "prev.map",
+          "lineNumber": 102
+        },
+        {
+          "caller": "markAllAsRead",
+          "callee": "setUnreadCount",
+          "lineNumber": 103
+        },
+        {
+          "caller": "markAllAsRead",
+          "callee": "supabase.auth.getSession",
+          "lineNumber": 106
+        },
+        {
+          "caller": "markAllAsRead",
+          "callee": "supabase.from('notifications').update({ is_read: true }).eq('user_id', session.user.id).eq",
+          "lineNumber": 108
+        },
+        {
+          "caller": "markAllAsRead",
+          "callee": "supabase.from('notifications').update({ is_read: true }).eq",
+          "lineNumber": 108
+        },
+        {
+          "caller": "markAllAsRead",
+          "callee": "supabase.from('notifications').update",
+          "lineNumber": 108
+        },
+        {
+          "caller": "markAllAsRead",
+          "callee": "supabase.from",
+          "lineNumber": 108
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "ag-platform/src/index.css",
+      "language": "css",
+      "fileCategory": "markup",
+      "totalLines": 17,
+      "nonEmptyLines": 14,
+      "metrics": {}
+    },
+    {
+      "path": "ag-platform/src/lib/billing.test.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 23,
+      "nonEmptyLines": 20,
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "ag-platform/src/lib/billing.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 10,
+      "nonEmptyLines": 8,
+      "functions": [
+        {
+          "name": "calculateBillableFee",
+          "startLine": 1,
+          "endLine": 10,
+          "params": [
+            "durationMinutes",
+            "hourlyRate"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "calculateBillableFee",
+          "line": 1,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "calculateBillableFee",
+          "callee": "Math.max",
+          "lineNumber": 3
+        },
+        {
+          "caller": "calculateBillableFee",
+          "callee": "Math.round",
+          "lineNumber": 9
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "ag-platform/src/lib/storage/download.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 46,
+      "nonEmptyLines": 39,
+      "functions": [
+        {
+          "name": "getSignedUrl",
+          "startLine": 10,
+          "endLine": 24,
+          "params": [
+            "bucketId",
+            "storagePath",
+            "expiresInSeconds"
+          ]
+        },
+        {
+          "name": "downloadFile",
+          "startLine": 29,
+          "endLine": 46,
+          "params": [
+            "bucketId",
+            "storagePath",
+            "fileName"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "getSignedUrl",
+          "line": 10,
+          "isDefault": false
+        },
+        {
+          "name": "downloadFile",
+          "line": 29,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "getSignedUrl",
+          "callee": "supabase.storage\n    .from(bucketId)\n    .createSignedUrl",
+          "lineNumber": 15
+        },
+        {
+          "caller": "getSignedUrl",
+          "callee": "supabase.storage\n    .from",
+          "lineNumber": 15
+        },
+        {
+          "caller": "downloadFile",
+          "callee": "supabase.storage\n    .from(bucketId)\n    .download",
+          "lineNumber": 30
+        },
+        {
+          "caller": "downloadFile",
+          "callee": "supabase.storage\n    .from",
+          "lineNumber": 30
+        },
+        {
+          "caller": "downloadFile",
+          "callee": "URL.createObjectURL",
+          "lineNumber": 38
+        },
+        {
+          "caller": "downloadFile",
+          "callee": "document.createElement",
+          "lineNumber": 39
+        },
+        {
+          "caller": "downloadFile",
+          "callee": "document.body.appendChild",
+          "lineNumber": 42
+        },
+        {
+          "caller": "downloadFile",
+          "callee": "a.click",
+          "lineNumber": 43
+        },
+        {
+          "caller": "downloadFile",
+          "callee": "document.body.removeChild",
+          "lineNumber": 44
+        },
+        {
+          "caller": "downloadFile",
+          "callee": "URL.revokeObjectURL",
+          "lineNumber": 45
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 2,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "ag-platform/src/lib/storage/upload.test.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 90,
+      "nonEmptyLines": 78,
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "ag-platform/src/lib/storage/upload.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 99,
+      "nonEmptyLines": 87,
+      "functions": [
+        {
+          "name": "uploadFileResumable",
+          "startLine": 10,
+          "endLine": 99,
+          "params": [
+            "file",
+            "bucketId",
+            "organizationId",
+            "projectId",
+            "parentFileId",
+            "onProgress"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "uploadFileResumable",
+          "line": 10,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "uploadFileResumable",
+          "callee": "supabase.auth.getSession",
+          "lineNumber": 18
+        },
+        {
+          "caller": "uploadFileResumable",
+          "callee": "Date.now",
+          "lineNumber": 25
+        },
+        {
+          "caller": "uploadFileResumable",
+          "callee": "console.error",
+          "lineNumber": 45
+        },
+        {
+          "caller": "uploadFileResumable",
+          "callee": "reject",
+          "lineNumber": 46
+        },
+        {
+          "caller": "uploadFileResumable",
+          "callee": "onProgress",
+          "lineNumber": 49
+        },
+        {
+          "caller": "uploadFileResumable",
+          "callee": "fetch(\"/api/webhooks/virus-scan\", {\n            method: \"POST\",\n            body: JSON.stringify({ bucketId, filePath }),\n          }).catch",
+          "lineNumber": 54
+        },
+        {
+          "caller": "uploadFileResumable",
+          "callee": "fetch",
+          "lineNumber": 54
+        },
+        {
+          "caller": "uploadFileResumable",
+          "callee": "JSON.stringify",
+          "lineNumber": 56
+        },
+        {
+          "caller": "uploadFileResumable",
+          "callee": "console.log",
+          "lineNumber": 57
+        },
+        {
+          "caller": "uploadFileResumable",
+          "callee": "supabase.from('files').select('version_number').eq('id', parentFileId).single",
+          "lineNumber": 64
+        },
+        {
+          "caller": "uploadFileResumable",
+          "callee": "supabase.from('files').select('version_number').eq",
+          "lineNumber": 64
+        },
+        {
+          "caller": "uploadFileResumable",
+          "callee": "supabase.from('files').select",
+          "lineNumber": 64
+        },
+        {
+          "caller": "uploadFileResumable",
+          "callee": "supabase.from",
+          "lineNumber": 64
+        },
+        {
+          "caller": "uploadFileResumable",
+          "callee": "supabase.from('files').insert({\n            organization_id: organizationId,\n            project_id: projectId,\n            uploader_id: session.session.user.id,\n            name: file.name,\n            storage_path: filePath,\n            bucket_id: bucketId,\n            size_bytes: file.size,\n            content_type: file.type,\n            version_number: version,\n            parent_file_id: parentFileId || null\n          }).select('*').single",
+          "lineNumber": 68
+        },
+        {
+          "caller": "uploadFileResumable",
+          "callee": "supabase.from('files').insert({\n            organization_id: organizationId,\n            project_id: projectId,\n            uploader_id: session.session.user.id,\n            name: file.name,\n            storage_path: filePath,\n            bucket_id: bucketId,\n            size_bytes: file.size,\n            content_type: file.type,\n            version_number: version,\n            parent_file_id: parentFileId || null\n          }).select",
+          "lineNumber": 68
+        },
+        {
+          "caller": "uploadFileResumable",
+          "callee": "supabase.from('files').insert",
+          "lineNumber": 68
+        },
+        {
+          "caller": "uploadFileResumable",
+          "callee": "supabase.from",
+          "lineNumber": 68
+        },
+        {
+          "caller": "uploadFileResumable",
+          "callee": "resolve",
+          "lineNumber": 82
+        },
+        {
+          "caller": "uploadFileResumable",
+          "callee": "reject",
+          "lineNumber": 85
+        },
+        {
+          "caller": "uploadFileResumable",
+          "callee": "upload.findPreviousUploads().then",
+          "lineNumber": 91
+        },
+        {
+          "caller": "uploadFileResumable",
+          "callee": "upload.findPreviousUploads",
+          "lineNumber": 91
+        },
+        {
+          "caller": "uploadFileResumable",
+          "callee": "upload.resumeFromPreviousUpload",
+          "lineNumber": 93
+        },
+        {
+          "caller": "uploadFileResumable",
+          "callee": "upload.start",
+          "lineNumber": 95
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "ag-platform/src/lib/supabase.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 10,
+      "nonEmptyLines": 7,
+      "exports": [
+        {
+          "name": "supabase",
+          "line": 10,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "ag-platform/src/main.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 10,
+      "nonEmptyLines": 9,
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "ag-platform/src/server/aiRouter.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 295,
+      "nonEmptyLines": 248,
+      "functions": [
+        {
+          "name": "getResendClient",
+          "startLine": 14,
+          "endLine": 23,
+          "params": []
+        },
+        {
+          "name": "checkAndTrackTokens",
+          "startLine": 30,
+          "endLine": 52,
+          "params": [
+            "orgId",
+            "tokensToConsume"
+          ]
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "checkAndTrackTokens",
+          "callee": "supabase\n    .from(\"organizations\")\n    .select(\"ai_tokens_used, ai_tokens_limit\")\n    .eq(\"id\", orgId)\n    .single",
+          "lineNumber": 34
+        },
+        {
+          "caller": "checkAndTrackTokens",
+          "callee": "supabase\n    .from(\"organizations\")\n    .select(\"ai_tokens_used, ai_tokens_limit\")\n    .eq",
+          "lineNumber": 34
+        },
+        {
+          "caller": "checkAndTrackTokens",
+          "callee": "supabase\n    .from(\"organizations\")\n    .select",
+          "lineNumber": 34
+        },
+        {
+          "caller": "checkAndTrackTokens",
+          "callee": "supabase\n    .from",
+          "lineNumber": 34
+        },
+        {
+          "caller": "checkAndTrackTokens",
+          "callee": "supabase.rpc",
+          "lineNumber": 47
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "ag-platform/src/server/db.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 22,
+      "nonEmptyLines": 18,
+      "exports": [
+        {
+          "name": "pool",
+          "line": 13,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "ag-platform/src/server/migrations.sql",
+      "language": "sql",
+      "fileCategory": "data",
+      "totalLines": 158,
+      "nonEmptyLines": 140,
+      "definitions": [
+        {
+          "name": "banks",
+          "kind": "table",
+          "fields": [
+            "id",
+            "name",
+            "short_code",
+            "type",
+            "billing_contact",
+            "advance_balance",
+            "created_at"
+          ],
+          "startLine": 48,
+          "endLine": 56
+        },
+        {
+          "name": "organizations",
+          "kind": "table",
+          "fields": [
+            "id",
+            "name",
+            "created_at"
+          ],
+          "startLine": 59,
+          "endLine": 63
+        },
+        {
+          "name": "profiles",
+          "kind": "table",
+          "fields": [
+            "id",
+            "user_id",
+            "bank_id",
+            "phone",
+            "role",
+            "created_at"
+          ],
+          "startLine": 66,
+          "endLine": 75
+        },
+        {
+          "name": "cases",
+          "kind": "table",
+          "fields": [
+            "id",
+            "case_number",
+            "org_id",
+            "bank_id",
+            "case_type",
+            "status",
+            "borrower_name",
+            "loan_amount",
+            "received_date",
+            "sla_deadline",
+            "assigned_executive_id",
+            "disbursement_total",
+            "professional_fee",
+            "created_at",
+            "updated_at"
+          ],
+          "startLine": 78,
+          "endLine": 94
+        },
+        {
+          "name": "disbursements",
+          "kind": "table",
+          "fields": [
+            "id",
+            "case_id",
+            "type",
+            "amount",
+            "paid_date",
+            "is_reimbursed",
+            "created_at"
+          ],
+          "startLine": 97,
+          "endLine": 105
+        },
+        {
+          "name": "case_timeline",
+          "kind": "table",
+          "fields": [
+            "id",
+            "case_id",
+            "status_from",
+            "status_to",
+            "notes",
+            "changed_by",
+            "created_at"
+          ],
+          "startLine": 108,
+          "endLine": 116
+        },
+        {
+          "name": "timesheets",
+          "kind": "table",
+          "fields": [
+            "id",
+            "org_id",
+            "case_id",
+            "profile_id",
+            "task_description",
+            "start_time",
+            "end_time",
+            "duration_minutes",
+            "is_billable",
+            "hourly_rate",
+            "created_at"
+          ],
+          "startLine": 119,
+          "endLine": 131
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "definitionCount": 7
+      }
+    },
+    {
+      "path": "ag-platform/src/server/routes/cases.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 62,
+      "nonEmptyLines": 53,
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "ag-platform/src/server/routes/timesheets.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 65,
+      "nonEmptyLines": 54,
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "ag-platform/src/server/services/caseService.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 60,
+      "nonEmptyLines": 49,
+      "exports": [
+        {
+          "name": "CaseService",
+          "line": 6,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "getActiveCases",
+          "callee": "pool.query",
+          "lineNumber": 8
+        },
+        {
+          "caller": "getCaseById",
+          "callee": "pool.query",
+          "lineNumber": 13
+        },
+        {
+          "caller": "createCase",
+          "callee": "crypto.randomInt",
+          "lineNumber": 24
+        },
+        {
+          "caller": "createCase",
+          "callee": "new Date().getFullYear",
+          "lineNumber": 25
+        },
+        {
+          "caller": "createCase",
+          "callee": "randomValue.toString().padStart",
+          "lineNumber": 25
+        },
+        {
+          "caller": "createCase",
+          "callee": "randomValue.toString",
+          "lineNumber": 25
+        },
+        {
+          "caller": "createCase",
+          "callee": "pool.query",
+          "lineNumber": 27
+        },
+        {
+          "caller": "updateStatus",
+          "callee": "pool.connect",
+          "lineNumber": 37
+        },
+        {
+          "caller": "updateStatus",
+          "callee": "client.query",
+          "lineNumber": 39
+        },
+        {
+          "caller": "updateStatus",
+          "callee": "client.query",
+          "lineNumber": 41
+        },
+        {
+          "caller": "updateStatus",
+          "callee": "client.query",
+          "lineNumber": 44
+        },
+        {
+          "caller": "updateStatus",
+          "callee": "client.query",
+          "lineNumber": 46
+        },
+        {
+          "caller": "updateStatus",
+          "callee": "client.query",
+          "lineNumber": 52
+        },
+        {
+          "caller": "updateStatus",
+          "callee": "client.query",
+          "lineNumber": 54
+        },
+        {
+          "caller": "updateStatus",
+          "callee": "client.release",
+          "lineNumber": 57
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    }
+  ]
+}

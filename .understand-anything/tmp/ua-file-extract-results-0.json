@@ -1,0 +1,1432 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 23,
+  "filesSkipped": [
+    ".github/actions/setup/action.yml",
+    ".github/workflows/test.yml"
+  ],
+  "results": [
+    {
+      "path": ".bolt/mcp.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 7,
+      "nonEmptyLines": 7,
+      "sections": [
+        {
+          "heading": "mcpServers",
+          "level": 1,
+          "line": 2
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 1
+      }
+    },
+    {
+      "path": ".changeset/config.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 11,
+      "nonEmptyLines": 11,
+      "sections": [
+        {
+          "heading": "$schema",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "changelog",
+          "level": 1,
+          "line": 3
+        },
+        {
+          "heading": "commit",
+          "level": 1,
+          "line": 4
+        },
+        {
+          "heading": "fixed",
+          "level": 1,
+          "line": 5
+        },
+        {
+          "heading": "linked",
+          "level": 1,
+          "line": 6
+        },
+        {
+          "heading": "access",
+          "level": 1,
+          "line": 7
+        },
+        {
+          "heading": "baseBranch",
+          "level": 1,
+          "line": 8
+        },
+        {
+          "heading": "updateInternalDependencies",
+          "level": 1,
+          "line": 9
+        },
+        {
+          "heading": "ignore",
+          "level": 1,
+          "line": 10
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 9
+      }
+    },
+    {
+      "path": ".devcontainer/devcontainer.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 4,
+      "nonEmptyLines": 4,
+      "sections": [
+        {
+          "heading": "image",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "features",
+          "level": 1,
+          "line": 3
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 2
+      }
+    },
+    {
+      "path": ".env.example",
+      "language": "example",
+      "fileCategory": "code",
+      "totalLines": 103,
+      "nonEmptyLines": 85,
+      "definitions": [
+        {
+          "name": "DOMAIN",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 6,
+          "endLine": 6
+        },
+        {
+          "name": "ACME_EMAIL",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 7,
+          "endLine": 7
+        },
+        {
+          "name": "IMAGE_TAG",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 11,
+          "endLine": 11
+        },
+        {
+          "name": "POSTGRES_USER",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 14,
+          "endLine": 14
+        },
+        {
+          "name": "POSTGRES_PASSWORD",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 15,
+          "endLine": 15
+        },
+        {
+          "name": "POSTGRES_DB",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 16,
+          "endLine": 16
+        },
+        {
+          "name": "REDIS_PASSWORD",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 19,
+          "endLine": 19
+        },
+        {
+          "name": "LLM_BASE_URL",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 26,
+          "endLine": 26
+        },
+        {
+          "name": "LLM_MODEL_NAME",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 27,
+          "endLine": 27
+        },
+        {
+          "name": "LLM_API_KEY",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 28,
+          "endLine": 28
+        },
+        {
+          "name": "LLM_MOCK_MODE",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 29,
+          "endLine": 29
+        },
+        {
+          "name": "SUPABASE_URL",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 33,
+          "endLine": 33
+        },
+        {
+          "name": "SUPABASE_ANON_KEY",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 34,
+          "endLine": 34
+        },
+        {
+          "name": "SUPABASE_SERVICE_ROLE_KEY",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 35,
+          "endLine": 35
+        },
+        {
+          "name": "SUPABASE_JWT_SECRET",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 36,
+          "endLine": 36
+        },
+        {
+          "name": "JWT_SECRET",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 39,
+          "endLine": 39
+        },
+        {
+          "name": "ENVIRONMENT",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 42,
+          "endLine": 42
+        },
+        {
+          "name": "SENTRY_DSN",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 43,
+          "endLine": 43
+        },
+        {
+          "name": "RESEND_API_KEY",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 46,
+          "endLine": 46
+        },
+        {
+          "name": "EMAIL_IMAP_HOST",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 49,
+          "endLine": 49
+        },
+        {
+          "name": "EMAIL_IMAP_PORT",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 50,
+          "endLine": 50
+        },
+        {
+          "name": "EMAIL_IMAP_USER",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 51,
+          "endLine": 51
+        },
+        {
+          "name": "EMAIL_IMAP_PASS",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 52,
+          "endLine": 52
+        },
+        {
+          "name": "EMAIL_POLL_INTERVAL",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 53,
+          "endLine": 53
+        },
+        {
+          "name": "TELEGRAM_BOT_TOKEN",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 56,
+          "endLine": 56
+        },
+        {
+          "name": "ADMIN_CHAT_IDS",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 57,
+          "endLine": 57
+        },
+        {
+          "name": "N8N_BASIC_AUTH_USER",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 60,
+          "endLine": 60
+        },
+        {
+          "name": "N8N_BASIC_AUTH_PASSWORD_HASH",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 62,
+          "endLine": 62
+        },
+        {
+          "name": "WHATSAPP_ACCESS_TOKEN",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 63,
+          "endLine": 63
+        },
+        {
+          "name": "WHATSAPP_PHONE_NUMBER_ID",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 64,
+          "endLine": 64
+        },
+        {
+          "name": "WHATSAPP_BUSINESS_ACCOUNT_ID",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 65,
+          "endLine": 65
+        },
+        {
+          "name": "WHATSAPP_VERIFY_TOKEN",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 66,
+          "endLine": 66
+        },
+        {
+          "name": "N8N_WEBHOOK_KEY",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 67,
+          "endLine": 67
+        },
+        {
+          "name": "N8N_WHATSAPP_INBOUND_KEY",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 68,
+          "endLine": 68
+        },
+        {
+          "name": "N8N_WHATSAPP_SEND_URL",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 69,
+          "endLine": 69
+        },
+        {
+          "name": "NESL_API_KEY",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 76,
+          "endLine": 76
+        },
+        {
+          "name": "NESL_API_BASE_URL",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 77,
+          "endLine": 77
+        },
+        {
+          "name": "NESL_CLIENT_ID",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 78,
+          "endLine": 78
+        },
+        {
+          "name": "NESL_CLIENT_SECRET",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 79,
+          "endLine": 79
+        },
+        {
+          "name": "NESL_MOCK_DELAY_SEC",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 80,
+          "endLine": 80
+        },
+        {
+          "name": "IGR_PORTAL_URL",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 83,
+          "endLine": 83
+        },
+        {
+          "name": "IGR_PORTAL_USERNAME",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 84,
+          "endLine": 84
+        },
+        {
+          "name": "IGR_PORTAL_PASSWORD",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 85,
+          "endLine": 85
+        },
+        {
+          "name": "GRAS_PORTAL_URL",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 88,
+          "endLine": 88
+        },
+        {
+          "name": "GOOGLE_GENERATIVE_AI_API_KEY",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 103,
+          "endLine": 103
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "definitionCount": 45
+      }
+    },
+    {
+      "path": ".github/workflows/ci.yml",
+      "language": "yaml",
+      "fileCategory": "infra",
+      "totalLines": 113,
+      "nonEmptyLines": 105,
+      "sections": [
+        {
+          "heading": "name",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "on",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "concurrency",
+          "level": 1,
+          "line": 9
+        },
+        {
+          "heading": "permissions",
+          "level": 1,
+          "line": 13
+        },
+        {
+          "heading": "jobs",
+          "level": 1,
+          "line": 16
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 5
+      }
+    },
+    {
+      "path": ".github/workflows/codeql.yml",
+      "language": "yaml",
+      "fileCategory": "infra",
+      "totalLines": 102,
+      "nonEmptyLines": 92,
+      "sections": [
+        {
+          "heading": "name",
+          "level": 1,
+          "line": 12
+        },
+        {
+          "heading": "on",
+          "level": 1,
+          "line": 14
+        },
+        {
+          "heading": "jobs",
+          "level": 1,
+          "line": 23
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 3
+      }
+    },
+    {
+      "path": ".github/workflows/deploy.yml",
+      "language": "yaml",
+      "fileCategory": "infra",
+      "totalLines": 46,
+      "nonEmptyLines": 46,
+      "sections": [
+        {
+          "heading": "name",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "on",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "jobs",
+          "level": 1,
+          "line": 3
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 3
+      }
+    },
+    {
+      "path": ".github/workflows/main.yml",
+      "language": "yaml",
+      "fileCategory": "infra",
+      "totalLines": 84,
+      "nonEmptyLines": 77,
+      "sections": [
+        {
+          "heading": "name",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "on",
+          "level": 1,
+          "line": 3
+        },
+        {
+          "heading": "permissions",
+          "level": 1,
+          "line": 10
+        },
+        {
+          "heading": "concurrency",
+          "level": 1,
+          "line": 13
+        },
+        {
+          "heading": "jobs",
+          "level": 1,
+          "line": 17
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 5
+      }
+    },
+    {
+      "path": ".github/workflows/nextjs.yml",
+      "language": "yaml",
+      "fileCategory": "infra",
+      "totalLines": 91,
+      "nonEmptyLines": 85,
+      "sections": [
+        {
+          "heading": "name",
+          "level": 1,
+          "line": 5
+        },
+        {
+          "heading": "on",
+          "level": 1,
+          "line": 7
+        },
+        {
+          "heading": "permissions",
+          "level": 1,
+          "line": 16
+        },
+        {
+          "heading": "concurrency",
+          "level": 1,
+          "line": 23
+        },
+        {
+          "heading": "jobs",
+          "level": 1,
+          "line": 27
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 5
+      }
+    },
+    {
+      "path": ".github/workflows/preview.yml",
+      "language": "yaml",
+      "fileCategory": "infra",
+      "totalLines": 69,
+      "nonEmptyLines": 66,
+      "sections": [
+        {
+          "heading": "name",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "on",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "permissions",
+          "level": 1,
+          "line": 6
+        },
+        {
+          "heading": "jobs",
+          "level": 1,
+          "line": 11
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 4
+      }
+    },
+    {
+      "path": ".github/workflows/release.yml",
+      "language": "yaml",
+      "fileCategory": "infra",
+      "totalLines": 25,
+      "nonEmptyLines": 23,
+      "sections": [
+        {
+          "heading": "name",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "on",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "permissions",
+          "level": 1,
+          "line": 6
+        },
+        {
+          "heading": "jobs",
+          "level": 1,
+          "line": 10
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 4
+      }
+    },
+    {
+      "path": ".github/workflows/test-checkout.yml",
+      "language": "yaml",
+      "fileCategory": "infra",
+      "totalLines": 8,
+      "nonEmptyLines": 8,
+      "sections": [
+        {
+          "heading": "name",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "on",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "jobs",
+          "level": 1,
+          "line": 3
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 3
+      }
+    },
+    {
+      "path": ".github/workflows/test-permissions.yml",
+      "language": "yaml",
+      "fileCategory": "infra",
+      "totalLines": 8,
+      "nonEmptyLines": 8,
+      "sections": [
+        {
+          "heading": "name",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "on",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "permissions",
+          "level": 1,
+          "line": 3
+        },
+        {
+          "heading": "jobs",
+          "level": 1,
+          "line": 4
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 4
+      }
+    },
+    {
+      "path": ".github/workflows/test-simple.yml",
+      "language": "yaml",
+      "fileCategory": "infra",
+      "totalLines": 8,
+      "nonEmptyLines": 8,
+      "sections": [
+        {
+          "heading": "name",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "on",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "jobs",
+          "level": 1,
+          "line": 4
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 3
+      }
+    },
+    {
+      "path": ".github/workflows/test-runner.yml",
+      "language": "yaml",
+      "fileCategory": "infra",
+      "totalLines": 7,
+      "nonEmptyLines": 7,
+      "sections": [
+        {
+          "heading": "name",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "on",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "jobs",
+          "level": 1,
+          "line": 3
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 3
+      }
+    },
+    {
+      "path": ".lintstagedrc.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 13,
+      "nonEmptyLines": 13,
+      "sections": [
+        {
+          "heading": "*.{ts,tsx,js,jsx}",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "*.py",
+          "level": 1,
+          "line": 6
+        },
+        {
+          "heading": "*.{json,yaml,yml,md}",
+          "level": 1,
+          "line": 10
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 3
+      }
+    },
+    {
+      "path": ".pre-commit-config.yaml",
+      "language": "yaml",
+      "fileCategory": "config",
+      "totalLines": 30,
+      "nonEmptyLines": 28,
+      "sections": [
+        {
+          "heading": "repos",
+          "level": 1,
+          "line": 1
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 1
+      }
+    },
+    {
+      "path": "CNAME",
+      "language": "txt",
+      "fileCategory": "config",
+      "totalLines": 1,
+      "nonEmptyLines": 1,
+      "metrics": {}
+    },
+    {
+      "path": "Caddyfile",
+      "language": "unknown",
+      "fileCategory": "infra",
+      "totalLines": 58,
+      "nonEmptyLines": 52,
+      "metrics": {}
+    },
+    {
+      "path": "CONTEXT.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 119,
+      "nonEmptyLines": 82,
+      "sections": [
+        {
+          "heading": "AG Associates — Domain Glossary",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Core Terms",
+          "level": 2,
+          "line": 3
+        },
+        {
+          "heading": "Aisha",
+          "level": 3,
+          "line": 5
+        },
+        {
+          "heading": "Notice of Intimation (NOI)",
+          "level": 3,
+          "line": 8
+        },
+        {
+          "heading": "NOI Workflow",
+          "level": 3,
+          "line": 11
+        },
+        {
+          "heading": "NOI Status",
+          "level": 3,
+          "line": 14
+        },
+        {
+          "heading": "Case Status",
+          "level": 3,
+          "line": 19
+        },
+        {
+          "heading": "Challan",
+          "level": 3,
+          "line": 26
+        },
+        {
+          "heading": "GRAS Portal",
+          "level": 3,
+          "line": 29
+        },
+        {
+          "heading": "IGR Portal",
+          "level": 3,
+          "line": 32
+        },
+        {
+          "heading": "Sub-Registrar Office",
+          "level": 3,
+          "line": 35
+        },
+        {
+          "heading": "GRN",
+          "level": 3,
+          "line": 38
+        },
+        {
+          "heading": "Intimation Mortgage",
+          "level": 3,
+          "line": 41
+        },
+        {
+          "heading": "Case Type",
+          "level": 3,
+          "line": 44
+        },
+        {
+          "heading": "Rectify",
+          "level": 3,
+          "line": 47
+        },
+        {
+          "heading": "NOI Drop",
+          "level": 3,
+          "line": 50
+        },
+        {
+          "heading": "Owner Consent",
+          "level": 3,
+          "line": 53
+        },
+        {
+          "heading": "Sanction Letter",
+          "level": 3,
+          "line": 56
+        },
+        {
+          "heading": "GrasRPAExecutor",
+          "level": 3,
+          "line": 59
+        },
+        {
+          "heading": "IgrRpaExecutor",
+          "level": 3,
+          "line": 62
+        },
+        {
+          "heading": "OTP Bridge",
+          "level": 3,
+          "line": 65
+        },
+        {
+          "heading": "Telegram Bot",
+          "level": 3,
+          "line": 68
+        },
+        {
+          "heading": "Email Intake Agent",
+          "level": 3,
+          "line": 71
+        },
+        {
+          "heading": "Doc Verifier Agent",
+          "level": 3,
+          "line": 74
+        },
+        {
+          "heading": "Auto-Comms Agent",
+          "level": 3,
+          "line": 77
+        },
+        {
+          "heading": "Deployment",
+          "level": 2,
+          "line": 80
+        },
+        {
+          "heading": "Production Stack (VPS Docker Compose)",
+          "level": 3,
+          "line": 82
+        },
+        {
+          "heading": "Caddy Routes",
+          "level": 3,
+          "line": 85
+        },
+        {
+          "heading": "CI/CD",
+          "level": 3,
+          "line": 93
+        },
+        {
+          "heading": "Governance",
+          "level": 2,
+          "line": 96
+        },
+        {
+          "heading": "Commit Convention",
+          "level": 3,
+          "line": 98
+        },
+        {
+          "heading": "Branch Strategy",
+          "level": 3,
+          "line": 101
+        },
+        {
+          "heading": "Error Escalation",
+          "level": 3,
+          "line": 104
+        },
+        {
+          "heading": "Users / Roles (Hierarchical RBAC)",
+          "level": 2,
+          "line": 107
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 34
+      }
+    },
+    {
+      "path": "CONTRIBUTING.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 78,
+      "nonEmptyLines": 53,
+      "sections": [
+        {
+          "heading": "Contributing to AG Associates",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "🏗 Development Setup",
+          "level": 2,
+          "line": 5
+        },
+        {
+          "heading": "Prerequisites",
+          "level": 3,
+          "line": 7
+        },
+        {
+          "heading": "Clone & Configure",
+          "level": 3,
+          "line": 13
+        },
+        {
+          "heading": "📏 Code Standards",
+          "level": 2,
+          "line": 22
+        },
+        {
+          "heading": "Commit Messages",
+          "level": 3,
+          "line": 24
+        },
+        {
+          "heading": "Branch Naming",
+          "level": 3,
+          "line": 35
+        },
+        {
+          "heading": "Python (Backend)",
+          "level": 3,
+          "line": 43
+        },
+        {
+          "heading": "TypeScript (Platform)",
+          "level": 3,
+          "line": 50
+        },
+        {
+          "heading": "🔍 Before Submitting a PR",
+          "level": 2,
+          "line": 56
+        },
+        {
+          "heading": "🐛 Reporting Issues",
+          "level": 2,
+          "line": 64
+        },
+        {
+          "heading": "🔒 Security",
+          "level": 2,
+          "line": 72
+        },
+        {
+          "heading": "📜 License",
+          "level": 2,
+          "line": 76
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 13
+      }
+    },
+    {
+      "path": "CLAUDE.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 187,
+      "nonEmptyLines": 145,
+      "sections": [
+        {
+          "heading": "CLAUDE.md",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Repository Layout",
+          "level": 2,
+          "line": 5
+        },
+        {
+          "heading": "Common Commands",
+          "level": 2,
+          "line": 35
+        },
+        {
+          "heading": "ag-associates-ai/",
+          "level": 3,
+          "line": 39
+        },
+        {
+          "heading": "ag-platform/",
+          "level": 3,
+          "line": 75
+        },
+        {
+          "heading": "Pre-commit hooks",
+          "level": 3,
+          "line": 92
+        },
+        {
+          "heading": "Architecture",
+          "level": 2,
+          "line": 96
+        },
+        {
+          "heading": "ag-associates-ai/ — AI Document Pipeline",
+          "level": 3,
+          "line": 100
+        },
+        {
+          "heading": "ag-platform/ — LegalTech Collaboration Platform",
+          "level": 3,
+          "line": 147
+        },
+        {
+          "heading": "Key Conventions & Gotchas",
+          "level": 2,
+          "line": 158
+        },
+        {
+          "heading": "Git Workflow & CI",
+          "level": 2,
+          "line": 169
+        },
+        {
+          "heading": "Project Policies",
+          "level": 2,
+          "line": 179
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 12
+      }
+    },
+    {
+      "path": "CULTURE.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 306,
+      "nonEmptyLines": 168,
+      "sections": [
+        {
+          "heading": "AG Associates — The Culture Document",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "1. Who We Are",
+          "level": 2,
+          "line": 7
+        },
+        {
+          "heading": "2. Our Mission",
+          "level": 2,
+          "line": 19
+        },
+        {
+          "heading": "3. Our Vision",
+          "level": 2,
+          "line": 29
+        },
+        {
+          "heading": "4. Core Principles",
+          "level": 2,
+          "line": 41
+        },
+        {
+          "heading": "Ownership Over Excuses",
+          "level": 3,
+          "line": 43
+        },
+        {
+          "heading": "Speed Over Bureaucracy",
+          "level": 3,
+          "line": 51
+        },
+        {
+          "heading": "Systems Over Chaos",
+          "level": 3,
+          "line": 59
+        },
+        {
+          "heading": "Clarity Over Ego",
+          "level": 3,
+          "line": 67
+        },
+        {
+          "heading": "Automation Before Hiring",
+          "level": 3,
+          "line": 75
+        },
+        {
+          "heading": "Data Before Assumptions",
+          "level": 3,
+          "line": 83
+        },
+        {
+          "heading": "Relentless Client Outcomes",
+          "level": 3,
+          "line": 91
+        },
+        {
+          "heading": "Calm Under Pressure",
+          "level": 3,
+          "line": 99
+        },
+        {
+          "heading": "Deep Work Culture",
+          "level": 3,
+          "line": 107
+        },
+        {
+          "heading": "Confidentiality and Trust",
+          "level": 3,
+          "line": 115
+        },
+        {
+          "heading": "High Accountability",
+          "level": 3,
+          "line": 123
+        },
+        {
+          "heading": "Continuous Learning",
+          "level": 3,
+          "line": 131
+        },
+        {
+          "heading": "5. How We Work",
+          "level": 2,
+          "line": 141
+        },
+        {
+          "heading": "Async-First Communication",
+          "level": 3,
+          "line": 143
+        },
+        {
+          "heading": "Documentation Culture",
+          "level": 3,
+          "line": 149
+        },
+        {
+          "heading": "Execution Tracking",
+          "level": 3,
+          "line": 155
+        },
+        {
+          "heading": "AI-Assisted Workflows",
+          "level": 3,
+          "line": 159
+        },
+        {
+          "heading": "Decision-Making Structure",
+          "level": 3,
+          "line": 163
+        },
+        {
+          "heading": "Meeting Philosophy",
+          "level": 3,
+          "line": 169
+        },
+        {
+          "heading": "Escalation Systems",
+          "level": 3,
+          "line": 175
+        },
+        {
+          "heading": "Operational Discipline",
+          "level": 3,
+          "line": 183
+        },
+        {
+          "heading": "6. What We Expect From Team Members",
+          "level": 2,
+          "line": 191
+        },
+        {
+          "heading": "7. Leadership Philosophy",
+          "level": 2,
+          "line": 211
+        },
+        {
+          "heading": "8. Hiring Philosophy",
+          "level": 2,
+          "line": 229
+        },
+        {
+          "heading": "9. Client Commitment",
+          "level": 2,
+          "line": 241
+        },
+        {
+          "heading": "10. The Future",
+          "level": 2,
+          "line": 257
+        },
+        {
+          "heading": "What AG Associates Stands For",
+          "level": 2,
+          "line": 274
+        },
+        {
+          "heading": "What AG Associates Will Never Become",
+          "level": 2,
+          "line": 286
+        },
+        {
+          "heading": "The AG Associates Pledge",
+          "level": 2,
+          "line": 297
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 34
+      }
+    }
+  ]
+}

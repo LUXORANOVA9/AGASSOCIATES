@@ -1,0 +1,1250 @@
+{
+  "nodes": [
+    {
+      "id": "file:ag-platform/src/components/storage/FilePreviewer.tsx",
+      "type": "file",
+      "name": "FilePreviewer.tsx",
+      "summary": "Provides file preview with signed URL loading, supporting image, PDF, video, and audio content types with fallback download.",
+      "tags": [
+        "component",
+        "file-preview",
+        "storage",
+        "utility"
+      ],
+      "complexity": "moderate",
+      "filePath": "ag-platform/src/components/storage/FilePreviewer.tsx"
+    },
+    {
+      "id": "function:ag-platform/src/components/storage/FilePreviewer.tsx:FilePreviewer",
+      "type": "function",
+      "name": "FilePreviewer",
+      "summary": "React component rendering file preview based on content type with signed URL loading and error handling.",
+      "tags": [
+        "component",
+        "file-preview",
+        "react",
+        "storage"
+      ],
+      "complexity": "moderate",
+      "lineRange": [
+        18,
+        96
+      ]
+    },
+    {
+      "id": "file:ag-platform/src/components/storage/FileUploader.tsx",
+      "type": "file",
+      "name": "FileUploader.tsx",
+      "summary": "Drag-and-drop file upload component with progress tracking, file type icons, and Supabase resumable TUS upload integration.",
+      "tags": [
+        "component",
+        "file-upload",
+        "storage",
+        "drag-and-drop"
+      ],
+      "complexity": "moderate",
+      "filePath": "ag-platform/src/components/storage/FileUploader.tsx"
+    },
+    {
+      "id": "function:ag-platform/src/components/storage/FileUploader.tsx:FileUploader",
+      "type": "function",
+      "name": "FileUploader",
+      "summary": "React component managing drag-and-drop file upload with progress tracking and Supabase storage integration.",
+      "tags": [
+        "component",
+        "file-upload",
+        "react",
+        "storage"
+      ],
+      "complexity": "moderate",
+      "lineRange": [
+        23,
+        121
+      ]
+    },
+    {
+      "id": "file:ag-platform/src/components/storage/VersionHistory.tsx",
+      "type": "file",
+      "name": "VersionHistory.tsx",
+      "summary": "Displays file version history with sorting, upload new version capability, and restore to previous version functionality.",
+      "tags": [
+        "component",
+        "version-history",
+        "storage",
+        "utility"
+      ],
+      "complexity": "moderate",
+      "filePath": "ag-platform/src/components/storage/VersionHistory.tsx"
+    },
+    {
+      "id": "function:ag-platform/src/components/storage/VersionHistory.tsx:VersionHistory",
+      "type": "function",
+      "name": "VersionHistory",
+      "summary": "React component rendering version history list with upload new version and restore actions.",
+      "tags": [
+        "component",
+        "version-history",
+        "react",
+        "storage"
+      ],
+      "complexity": "moderate",
+      "lineRange": [
+        15,
+        85
+      ]
+    },
+    {
+      "id": "file:ag-platform/src/components/ui/EmptyState.tsx",
+      "type": "file",
+      "name": "EmptyState.tsx",
+      "summary": "Reusable empty state component with customizable icon, title, message, and action button for UI placeholder states.",
+      "tags": [
+        "component",
+        "ui",
+        "empty-state",
+        "utility"
+      ],
+      "complexity": "simple",
+      "filePath": "ag-platform/src/components/ui/EmptyState.tsx"
+    },
+    {
+      "id": "function:ag-platform/src/components/ui/EmptyState.tsx:EmptyState",
+      "type": "function",
+      "name": "EmptyState",
+      "summary": "React component displaying a customizable empty state placeholder with icon and optional action.",
+      "tags": [
+        "component",
+        "ui",
+        "empty-state",
+        "placeholder"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        11,
+        37
+      ]
+    },
+    {
+      "id": "file:ag-platform/src/components/ui/ErrorBoundary.tsx",
+      "type": "file",
+      "name": "ErrorBoundary.tsx",
+      "summary": "React error boundary class component with customizable fallback UI and reset capability to catch rendering errors.",
+      "tags": [
+        "component",
+        "error-handling",
+        "ui",
+        "boundary"
+      ],
+      "complexity": "moderate",
+      "filePath": "ag-platform/src/components/ui/ErrorBoundary.tsx"
+    },
+    {
+      "id": "class:ag-platform/src/components/ui/ErrorBoundary.tsx:ErrorBoundary",
+      "type": "class",
+      "name": "ErrorBoundary",
+      "summary": "React class component implementing componentDidCatch with fallback rendering and error reset.",
+      "tags": [
+        "component",
+        "error-boundary",
+        "react",
+        "error-handling"
+      ],
+      "complexity": "moderate",
+      "lineRange": [
+        13,
+        46
+      ]
+    },
+    {
+      "id": "function:ag-platform/src/components/ui/ErrorBoundary.tsx:DefaultFallback",
+      "type": "function",
+      "name": "DefaultFallback",
+      "summary": "Default fallback UI component displaying error message and retry button for ErrorBoundary.",
+      "tags": [
+        "component",
+        "fallback",
+        "error-handling",
+        "ui"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        48,
+        86
+      ]
+    },
+    {
+      "id": "file:ag-platform/src/components/ui/ErrorState.tsx",
+      "type": "file",
+      "name": "ErrorState.tsx",
+      "summary": "Error state display component with customizable title, message, and retry action for error UI states.",
+      "tags": [
+        "component",
+        "error-handling",
+        "ui",
+        "utility"
+      ],
+      "complexity": "simple",
+      "filePath": "ag-platform/src/components/ui/ErrorState.tsx"
+    },
+    {
+      "id": "function:ag-platform/src/components/ui/ErrorState.tsx:ErrorState",
+      "type": "function",
+      "name": "ErrorState",
+      "summary": "React component rendering an error state with customizable title, message, and retry callback.",
+      "tags": [
+        "component",
+        "error",
+        "ui",
+        "fallback"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        10,
+        35
+      ]
+    },
+    {
+      "id": "file:ag-platform/src/components/ui/index.ts",
+      "type": "file",
+      "name": "index.ts",
+      "summary": "Barrel file re-exporting all UI components (ErrorBoundary, Skeleton, EmptyState, ErrorState) for cleaner imports.",
+      "tags": [
+        "barrel",
+        "ui",
+        "index",
+        "entry-point"
+      ],
+      "complexity": "simple",
+      "filePath": "ag-platform/src/components/ui/index.ts",
+      "languageNotes": "TypeScript barrel file using named re-exports."
+    },
+    {
+      "id": "file:ag-platform/src/components/ui/Skeleton.tsx",
+      "type": "file",
+      "name": "Skeleton.tsx",
+      "summary": "Loading skeleton components providing Skeleton and SkeletonList placeholders for content loading states.",
+      "tags": [
+        "component",
+        "loading",
+        "skeleton",
+        "ui"
+      ],
+      "complexity": "simple",
+      "filePath": "ag-platform/src/components/ui/Skeleton.tsx"
+    },
+    {
+      "id": "function:ag-platform/src/components/ui/Skeleton.tsx:Skeleton",
+      "type": "function",
+      "name": "Skeleton",
+      "summary": "React component rendering a single skeleton loading placeholder with customizable class name.",
+      "tags": [
+        "component",
+        "skeleton",
+        "loading",
+        "ui"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        7,
+        14
+      ]
+    },
+    {
+      "id": "function:ag-platform/src/components/ui/Skeleton.tsx:SkeletonList",
+      "type": "function",
+      "name": "SkeletonList",
+      "summary": "React component rendering a configurable number of skeleton rows for list loading states.",
+      "tags": [
+        "component",
+        "skeleton",
+        "loading",
+        "list"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        16,
+        31
+      ]
+    },
+    {
+      "id": "file:ag-platform/src/hooks/useActivityFeed.ts",
+      "type": "file",
+      "name": "useActivityFeed.ts",
+      "summary": "React hook fetching project activity feed from Supabase with real-time subscription for new activity insertions.",
+      "tags": [
+        "hook",
+        "activity",
+        "realtime",
+        "supabase"
+      ],
+      "complexity": "moderate",
+      "filePath": "ag-platform/src/hooks/useActivityFeed.ts"
+    },
+    {
+      "id": "function:ag-platform/src/hooks/useActivityFeed.ts:useActivityFeed",
+      "type": "function",
+      "name": "useActivityFeed",
+      "summary": "React hook querying activity feed with real-time Postgres changes subscription for live updates.",
+      "tags": [
+        "hook",
+        "activity",
+        "realtime",
+        "database"
+      ],
+      "complexity": "moderate",
+      "lineRange": [
+        16,
+        87
+      ]
+    },
+    {
+      "id": "file:ag-platform/src/hooks/useLivePresence.ts",
+      "type": "file",
+      "name": "useLivePresence.ts",
+      "summary": "React hook managing real-time user presence tracking via Supabase channels, deduplicating connected users.",
+      "tags": [
+        "hook",
+        "presence",
+        "realtime",
+        "collaboration"
+      ],
+      "complexity": "moderate",
+      "filePath": "ag-platform/src/hooks/useLivePresence.ts"
+    },
+    {
+      "id": "function:ag-platform/src/hooks/useLivePresence.ts:useLivePresence",
+      "type": "function",
+      "name": "useLivePresence",
+      "summary": "React hook tracking online users via Supabase presence channels with user deduplication.",
+      "tags": [
+        "hook",
+        "presence",
+        "realtime",
+        "collaboration"
+      ],
+      "complexity": "moderate",
+      "lineRange": [
+        15,
+        77
+      ]
+    },
+    {
+      "id": "file:ag-platform/src/hooks/useNotifications.ts",
+      "type": "file",
+      "name": "useNotifications.ts",
+      "summary": "React hook managing notifications with real-time subscription, unread count tracking, and mark-as-read functionality.",
+      "tags": [
+        "hook",
+        "notifications",
+        "realtime",
+        "supabase"
+      ],
+      "complexity": "moderate",
+      "filePath": "ag-platform/src/hooks/useNotifications.ts"
+    },
+    {
+      "id": "function:ag-platform/src/hooks/useNotifications.ts:useNotifications",
+      "type": "function",
+      "name": "useNotifications",
+      "summary": "React hook providing notification state management with real-time updates, markAsRead and markAllAsRead methods.",
+      "tags": [
+        "hook",
+        "notifications",
+        "realtime",
+        "state-management"
+      ],
+      "complexity": "moderate",
+      "lineRange": [
+        14,
+        113
+      ]
+    },
+    {
+      "id": "file:ag-platform/src/index.css",
+      "type": "file",
+      "name": "index.css",
+      "summary": "Global CSS stylesheet with Tailwind directives and base application styles.",
+      "tags": [
+        "styles",
+        "css",
+        "global",
+        "tailwind"
+      ],
+      "complexity": "simple",
+      "filePath": "ag-platform/src/index.css"
+    },
+    {
+      "id": "file:ag-platform/src/lib/billing.test.ts",
+      "type": "file",
+      "name": "billing.test.ts",
+      "summary": "Test file for billing utilities verifying fee calculation logic with vitest.",
+      "tags": [
+        "test",
+        "billing",
+        "utility",
+        "vitest"
+      ],
+      "complexity": "simple",
+      "filePath": "ag-platform/src/lib/billing.test.ts"
+    },
+    {
+      "id": "file:ag-platform/src/lib/billing.ts",
+      "type": "file",
+      "name": "billing.ts",
+      "summary": "Billing utility function calculating professional fees from duration and hourly rate with minimum charge enforcement.",
+      "tags": [
+        "utility",
+        "billing",
+        "calculation",
+        "finance"
+      ],
+      "complexity": "simple",
+      "filePath": "ag-platform/src/lib/billing.ts"
+    },
+    {
+      "id": "function:ag-platform/src/lib/billing.ts:calculateBillableFee",
+      "type": "function",
+      "name": "calculateBillableFee",
+      "summary": "Calculates billable fee from duration minutes and hourly rate, enforcing minimum 1-minute billing.",
+      "tags": [
+        "utility",
+        "billing",
+        "calculation",
+        "fee"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        1,
+        10
+      ]
+    },
+    {
+      "id": "file:ag-platform/src/lib/storage/download.ts",
+      "type": "file",
+      "name": "download.ts",
+      "summary": "Storage download utilities providing signed URL generation and browser-based file download functionality.",
+      "tags": [
+        "utility",
+        "storage",
+        "download",
+        "supabase"
+      ],
+      "complexity": "simple",
+      "filePath": "ag-platform/src/lib/storage/download.ts"
+    },
+    {
+      "id": "function:ag-platform/src/lib/storage/download.ts:getSignedUrl",
+      "type": "function",
+      "name": "getSignedUrl",
+      "summary": "Generates a time-limited signed URL for secure file access from Supabase storage.",
+      "tags": [
+        "utility",
+        "storage",
+        "signed-url",
+        "supabase"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        10,
+        24
+      ]
+    },
+    {
+      "id": "function:ag-platform/src/lib/storage/download.ts:downloadFile",
+      "type": "function",
+      "name": "downloadFile",
+      "summary": "Downloads a file from Supabase storage and triggers browser download via a temporary anchor element.",
+      "tags": [
+        "utility",
+        "storage",
+        "download",
+        "browser"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        29,
+        46
+      ]
+    },
+    {
+      "id": "file:ag-platform/src/lib/storage/upload.test.ts",
+      "type": "file",
+      "name": "upload.test.ts",
+      "summary": "Test file for resumable file upload utility covering authorization, size limits, and upload flow.",
+      "tags": [
+        "test",
+        "storage",
+        "upload",
+        "vitest"
+      ],
+      "complexity": "moderate",
+      "filePath": "ag-platform/src/lib/storage/upload.test.ts"
+    },
+    {
+      "id": "file:ag-platform/src/lib/storage/upload.ts",
+      "type": "file",
+      "name": "upload.ts",
+      "summary": "Resumable file upload utility using TUS protocol with progress tracking, virus scan trigger, and database file record insertion.",
+      "tags": [
+        "utility",
+        "storage",
+        "upload",
+        "supabase"
+      ],
+      "complexity": "moderate",
+      "filePath": "ag-platform/src/lib/storage/upload.ts"
+    },
+    {
+      "id": "function:ag-platform/src/lib/storage/upload.ts:uploadFileResumable",
+      "type": "function",
+      "name": "uploadFileResumable",
+      "summary": "Uploads a file to Supabase storage via TUS resumable protocol with progress callback, virus scan, versioning, and DB record creation.",
+      "tags": [
+        "utility",
+        "storage",
+        "upload",
+        "resumable"
+      ],
+      "complexity": "moderate",
+      "lineRange": [
+        10,
+        99
+      ]
+    },
+    {
+      "id": "file:ag-platform/src/lib/supabase.ts",
+      "type": "file",
+      "name": "supabase.ts",
+      "summary": "Supabase client singleton initialization for frontend database and authentication operations.",
+      "tags": [
+        "config",
+        "supabase",
+        "client",
+        "database"
+      ],
+      "complexity": "simple",
+      "filePath": "ag-platform/src/lib/supabase.ts"
+    },
+    {
+      "id": "file:ag-platform/src/main.tsx",
+      "type": "file",
+      "name": "main.tsx",
+      "summary": "Application entry point rendering the root React component into the DOM with StrictMode.",
+      "tags": [
+        "entry-point",
+        "react",
+        "app",
+        "bootstrap"
+      ],
+      "complexity": "simple",
+      "filePath": "ag-platform/src/main.tsx"
+    },
+    {
+      "id": "file:ag-platform/src/server/aiRouter.ts",
+      "type": "file",
+      "name": "aiRouter.ts",
+      "summary": "Express router providing AI-powered endpoints for brief generation, task suggestions, email drafting, document summarization, semantic search, and legal document vetting with token tracking.",
+      "tags": [
+        "server",
+        "router",
+        "ai",
+        "gemini",
+        "middleware"
+      ],
+      "complexity": "complex",
+      "filePath": "ag-platform/src/server/aiRouter.ts"
+    },
+    {
+      "id": "function:ag-platform/src/server/aiRouter.ts:checkAndTrackTokens",
+      "type": "function",
+      "name": "checkAndTrackTokens",
+      "summary": "Middleware checking AI token budget for an organization and incrementing usage via Supabase RPC.",
+      "tags": [
+        "middleware",
+        "tokens",
+        "quota",
+        "supabase"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        30,
+        52
+      ]
+    },
+    {
+      "id": "file:ag-platform/src/server/db.ts",
+      "type": "file",
+      "name": "db.ts",
+      "summary": "PostgreSQL connection pool configuration using pg with SSL for production database access.",
+      "tags": [
+        "config",
+        "database",
+        "postgresql",
+        "pool"
+      ],
+      "complexity": "simple",
+      "filePath": "ag-platform/src/server/db.ts"
+    },
+    {
+      "id": "table:ag-platform/src/server/migrations.sql",
+      "type": "table",
+      "name": "migrations.sql",
+      "summary": "Database schema migration defining core tables for banks, organizations, profiles, cases, disbursements, case timeline, and timesheets with field constraints.",
+      "tags": [
+        "database",
+        "migration",
+        "schema",
+        "sql",
+        "ddl"
+      ],
+      "complexity": "moderate",
+      "filePath": "ag-platform/src/server/migrations.sql"
+    },
+    {
+      "id": "table:ag-platform/src/server/migrations.sql:banks",
+      "type": "table",
+      "name": "banks",
+      "summary": "Bank entities table storing name, short code, type, billing contact, and advance balance.",
+      "tags": [
+        "database",
+        "table",
+        "bank",
+        "schema"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        48,
+        56
+      ]
+    },
+    {
+      "id": "table:ag-platform/src/server/migrations.sql:organizations",
+      "type": "table",
+      "name": "organizations",
+      "summary": "Organizations table with name and created_at tracking.",
+      "tags": [
+        "database",
+        "table",
+        "organization",
+        "schema"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        59,
+        63
+      ]
+    },
+    {
+      "id": "table:ag-platform/src/server/migrations.sql:profiles",
+      "type": "table",
+      "name": "profiles",
+      "summary": "User profiles table linked to banks and users with phone and role fields.",
+      "tags": [
+        "database",
+        "table",
+        "profile",
+        "user"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        66,
+        75
+      ]
+    },
+    {
+      "id": "table:ag-platform/src/server/migrations.sql:cases",
+      "type": "table",
+      "name": "cases",
+      "summary": "Core case management table with case number, type, status, borrower, loan amount, SLA deadline, and professional fee tracking.",
+      "tags": [
+        "database",
+        "table",
+        "case",
+        "legal"
+      ],
+      "complexity": "moderate",
+      "lineRange": [
+        78,
+        94
+      ]
+    },
+    {
+      "id": "table:ag-platform/src/server/migrations.sql:disbursements",
+      "type": "table",
+      "name": "disbursements",
+      "summary": "Disbursements table tracking payments per case with reimbursement status.",
+      "tags": [
+        "database",
+        "table",
+        "disbursement",
+        "payment"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        97,
+        105
+      ]
+    },
+    {
+      "id": "table:ag-platform/src/server/migrations.sql:case_timeline",
+      "type": "table",
+      "name": "case_timeline",
+      "summary": "Case status change audit trail tracking status transitions with timestamps and user attribution.",
+      "tags": [
+        "database",
+        "table",
+        "timeline",
+        "audit"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        108,
+        116
+      ]
+    },
+    {
+      "id": "table:ag-platform/src/server/migrations.sql:timesheets",
+      "type": "table",
+      "name": "timesheets",
+      "summary": "Timesheets table logging work entries per case with billable tracking, hourly rates, and duration.",
+      "tags": [
+        "database",
+        "table",
+        "timesheet",
+        "billing"
+      ],
+      "complexity": "moderate",
+      "lineRange": [
+        119,
+        131
+      ]
+    },
+    {
+      "id": "file:ag-platform/src/server/routes/cases.ts",
+      "type": "file",
+      "name": "cases.ts",
+      "summary": "Express API route handlers for case CRUD operations with status transition and AI pipeline trigger on progress.",
+      "tags": [
+        "router",
+        "api",
+        "cases",
+        "server"
+      ],
+      "complexity": "moderate",
+      "filePath": "ag-platform/src/server/routes/cases.ts"
+    },
+    {
+      "id": "file:ag-platform/src/server/routes/timesheets.ts",
+      "type": "file",
+      "name": "timesheets.ts",
+      "summary": "Express API route handlers for timesheet CRUD operations with billable fee auto-calculation on the case.",
+      "tags": [
+        "router",
+        "api",
+        "timesheets",
+        "server"
+      ],
+      "complexity": "moderate",
+      "filePath": "ag-platform/src/server/routes/timesheets.ts"
+    },
+    {
+      "id": "file:ag-platform/src/server/services/caseService.ts",
+      "type": "file",
+      "name": "caseService.ts",
+      "summary": "Case service layer providing business logic for case management including CRUD operations and status transitions with timeline audit and transaction safety.",
+      "tags": [
+        "service",
+        "cases",
+        "business-logic",
+        "database"
+      ],
+      "complexity": "moderate",
+      "filePath": "ag-platform/src/server/services/caseService.ts"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:ag-platform/src/components/storage/FilePreviewer.tsx",
+      "target": "file:ag-platform/src/lib/storage/download.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:ag-platform/src/components/storage/FilePreviewer.tsx",
+      "target": "file:ag-platform/src/types/storage.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:ag-platform/src/components/storage/FileUploader.tsx",
+      "target": "file:ag-platform/src/lib/storage/upload.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:ag-platform/src/components/storage/FileUploader.tsx",
+      "target": "file:ag-platform/src/types/storage.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:ag-platform/src/components/storage/VersionHistory.tsx",
+      "target": "file:ag-platform/src/components/storage/FileUploader.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:ag-platform/src/components/storage/VersionHistory.tsx",
+      "target": "file:ag-platform/src/types/storage.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:ag-platform/src/components/ui/index.ts",
+      "target": "file:ag-platform/src/components/ui/EmptyState.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:ag-platform/src/components/ui/index.ts",
+      "target": "file:ag-platform/src/components/ui/ErrorBoundary.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:ag-platform/src/components/ui/index.ts",
+      "target": "file:ag-platform/src/components/ui/ErrorState.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:ag-platform/src/components/ui/index.ts",
+      "target": "file:ag-platform/src/components/ui/Skeleton.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:ag-platform/src/hooks/useActivityFeed.ts",
+      "target": "file:ag-platform/src/hooks/useLivePresence.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:ag-platform/src/hooks/useNotifications.ts",
+      "target": "file:ag-platform/src/hooks/useLivePresence.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:ag-platform/src/lib/storage/upload.ts",
+      "target": "file:ag-platform/src/types/storage.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:ag-platform/src/components/storage/FilePreviewer.tsx",
+      "target": "function:ag-platform/src/components/storage/FilePreviewer.tsx:FilePreviewer",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-platform/src/components/storage/FileUploader.tsx",
+      "target": "function:ag-platform/src/components/storage/FileUploader.tsx:FileUploader",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-platform/src/components/storage/VersionHistory.tsx",
+      "target": "function:ag-platform/src/components/storage/VersionHistory.tsx:VersionHistory",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-platform/src/components/ui/EmptyState.tsx",
+      "target": "function:ag-platform/src/components/ui/EmptyState.tsx:EmptyState",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-platform/src/components/ui/ErrorBoundary.tsx",
+      "target": "class:ag-platform/src/components/ui/ErrorBoundary.tsx:ErrorBoundary",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-platform/src/components/ui/ErrorBoundary.tsx",
+      "target": "function:ag-platform/src/components/ui/ErrorBoundary.tsx:DefaultFallback",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-platform/src/components/ui/ErrorState.tsx",
+      "target": "function:ag-platform/src/components/ui/ErrorState.tsx:ErrorState",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-platform/src/components/ui/Skeleton.tsx",
+      "target": "function:ag-platform/src/components/ui/Skeleton.tsx:Skeleton",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-platform/src/components/ui/Skeleton.tsx",
+      "target": "function:ag-platform/src/components/ui/Skeleton.tsx:SkeletonList",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-platform/src/hooks/useActivityFeed.ts",
+      "target": "function:ag-platform/src/hooks/useActivityFeed.ts:useActivityFeed",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-platform/src/hooks/useLivePresence.ts",
+      "target": "function:ag-platform/src/hooks/useLivePresence.ts:useLivePresence",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-platform/src/hooks/useNotifications.ts",
+      "target": "function:ag-platform/src/hooks/useNotifications.ts:useNotifications",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-platform/src/lib/billing.ts",
+      "target": "function:ag-platform/src/lib/billing.ts:calculateBillableFee",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-platform/src/lib/storage/download.ts",
+      "target": "function:ag-platform/src/lib/storage/download.ts:getSignedUrl",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-platform/src/lib/storage/download.ts",
+      "target": "function:ag-platform/src/lib/storage/download.ts:downloadFile",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-platform/src/lib/storage/upload.ts",
+      "target": "function:ag-platform/src/lib/storage/upload.ts:uploadFileResumable",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-platform/src/server/aiRouter.ts",
+      "target": "function:ag-platform/src/server/aiRouter.ts:checkAndTrackTokens",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "table:ag-platform/src/server/migrations.sql",
+      "target": "table:ag-platform/src/server/migrations.sql:banks",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "table:ag-platform/src/server/migrations.sql",
+      "target": "table:ag-platform/src/server/migrations.sql:organizations",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "table:ag-platform/src/server/migrations.sql",
+      "target": "table:ag-platform/src/server/migrations.sql:profiles",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "table:ag-platform/src/server/migrations.sql",
+      "target": "table:ag-platform/src/server/migrations.sql:cases",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "table:ag-platform/src/server/migrations.sql",
+      "target": "table:ag-platform/src/server/migrations.sql:disbursements",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "table:ag-platform/src/server/migrations.sql",
+      "target": "table:ag-platform/src/server/migrations.sql:case_timeline",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "table:ag-platform/src/server/migrations.sql",
+      "target": "table:ag-platform/src/server/migrations.sql:timesheets",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-platform/src/components/storage/FilePreviewer.tsx",
+      "target": "function:ag-platform/src/components/storage/FilePreviewer.tsx:FilePreviewer",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:ag-platform/src/components/storage/FileUploader.tsx",
+      "target": "function:ag-platform/src/components/storage/FileUploader.tsx:FileUploader",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:ag-platform/src/components/storage/VersionHistory.tsx",
+      "target": "function:ag-platform/src/components/storage/VersionHistory.tsx:VersionHistory",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:ag-platform/src/components/ui/EmptyState.tsx",
+      "target": "function:ag-platform/src/components/ui/EmptyState.tsx:EmptyState",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:ag-platform/src/components/ui/ErrorBoundary.tsx",
+      "target": "class:ag-platform/src/components/ui/ErrorBoundary.tsx:ErrorBoundary",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:ag-platform/src/components/ui/ErrorState.tsx",
+      "target": "function:ag-platform/src/components/ui/ErrorState.tsx:ErrorState",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:ag-platform/src/components/ui/Skeleton.tsx",
+      "target": "function:ag-platform/src/components/ui/Skeleton.tsx:Skeleton",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:ag-platform/src/components/ui/Skeleton.tsx",
+      "target": "function:ag-platform/src/components/ui/Skeleton.tsx:SkeletonList",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:ag-platform/src/hooks/useActivityFeed.ts",
+      "target": "function:ag-platform/src/hooks/useActivityFeed.ts:useActivityFeed",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:ag-platform/src/hooks/useLivePresence.ts",
+      "target": "function:ag-platform/src/hooks/useLivePresence.ts:useLivePresence",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:ag-platform/src/hooks/useNotifications.ts",
+      "target": "function:ag-platform/src/hooks/useNotifications.ts:useNotifications",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:ag-platform/src/lib/billing.ts",
+      "target": "function:ag-platform/src/lib/billing.ts:calculateBillableFee",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:ag-platform/src/lib/storage/download.ts",
+      "target": "function:ag-platform/src/lib/storage/download.ts:getSignedUrl",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:ag-platform/src/lib/storage/download.ts",
+      "target": "function:ag-platform/src/lib/storage/download.ts:downloadFile",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:ag-platform/src/lib/storage/upload.ts",
+      "target": "function:ag-platform/src/lib/storage/upload.ts:uploadFileResumable",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:ag-platform/src/lib/billing.ts",
+      "target": "file:ag-platform/src/lib/billing.test.ts",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:ag-platform/src/lib/storage/upload.ts",
+      "target": "file:ag-platform/src/lib/storage/upload.test.ts",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "table:ag-platform/src/server/migrations.sql",
+      "target": "table:ag-platform/src/server/migrations.sql:banks",
+      "type": "migrates",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "table:ag-platform/src/server/migrations.sql",
+      "target": "table:ag-platform/src/server/migrations.sql:organizations",
+      "type": "migrates",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "table:ag-platform/src/server/migrations.sql",
+      "target": "table:ag-platform/src/server/migrations.sql:profiles",
+      "type": "migrates",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "table:ag-platform/src/server/migrations.sql",
+      "target": "table:ag-platform/src/server/migrations.sql:cases",
+      "type": "migrates",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "table:ag-platform/src/server/migrations.sql",
+      "target": "table:ag-platform/src/server/migrations.sql:disbursements",
+      "type": "migrates",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "table:ag-platform/src/server/migrations.sql",
+      "target": "table:ag-platform/src/server/migrations.sql:case_timeline",
+      "type": "migrates",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "table:ag-platform/src/server/migrations.sql",
+      "target": "table:ag-platform/src/server/migrations.sql:timesheets",
+      "type": "migrates",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "table:ag-platform/src/server/migrations.sql:cases",
+      "target": "file:ag-platform/src/server/services/caseService.ts",
+      "type": "defines_schema",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "table:ag-platform/src/server/migrations.sql:cases",
+      "target": "file:ag-platform/src/server/routes/cases.ts",
+      "type": "defines_schema",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "table:ag-platform/src/server/migrations.sql:timesheets",
+      "target": "file:ag-platform/src/server/routes/timesheets.ts",
+      "type": "defines_schema",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "table:ag-platform/src/server/migrations.sql:profiles",
+      "target": "file:ag-platform/src/server/routes/timesheets.ts",
+      "type": "defines_schema",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:ag-platform/src/server/services/caseService.ts",
+      "target": "file:ag-platform/src/server/db.ts",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "file:ag-platform/src/server/routes/cases.ts",
+      "target": "file:ag-platform/src/server/services/caseService.ts",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "file:ag-platform/src/server/routes/timesheets.ts",
+      "target": "file:ag-platform/src/server/db.ts",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "file:ag-platform/src/server/routes/timesheets.ts",
+      "target": "file:ag-platform/src/lib/billing.ts",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    }
+  ]
+}

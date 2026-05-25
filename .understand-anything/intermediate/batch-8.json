@@ -1,0 +1,904 @@
+{
+  "nodes": [
+    {
+      "id": "file:ag-platform/packages/types/src/index.ts",
+      "type": "file",
+      "name": "index.ts",
+      "filePath": "ag-platform/packages/types/src/index.ts",
+      "summary": "Barrel file re-exporting domain, storage, and field-app type definitions for the shared types package.",
+      "tags": ["barrel", "entry-point", "type-definition"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:ag-platform/packages/types/src/storage.ts",
+      "type": "file",
+      "name": "storage.ts",
+      "filePath": "ag-platform/packages/types/src/storage.ts",
+      "summary": "Defines TypeScript interfaces for file storage including FileRecord, UploadProgress, and FileVersion types.",
+      "tags": ["type-definition", "storage", "data-model"],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:ag-platform/packages/types/tsconfig.json",
+      "type": "config",
+      "name": "tsconfig.json",
+      "filePath": "ag-platform/packages/types/tsconfig.json",
+      "summary": "TypeScript compiler configuration for the types package targeting ES2020 with strict mode and bundler module resolution.",
+      "tags": ["configuration", "typescript", "build-system"],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:ag-platform/packages/ui/package.json",
+      "type": "config",
+      "name": "package.json",
+      "filePath": "ag-platform/packages/ui/package.json",
+      "summary": "Package manifest for the UI component library defining React peer dependencies and exports for Button, Card, and Badge components.",
+      "tags": ["configuration", "ui", "package"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:ag-platform/packages/ui/src/index.tsx",
+      "type": "file",
+      "name": "index.tsx",
+      "filePath": "ag-platform/packages/ui/src/index.tsx",
+      "summary": "Shared UI component library providing Button, Card, and Badge React components with variant-based styling using Tailwind CSS.",
+      "tags": ["ui", "component", "react"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:ag-platform/packages/ui/src/index.tsx:Button",
+      "type": "function",
+      "name": "Button",
+      "filePath": "ag-platform/packages/ui/src/index.tsx",
+      "lineRange": [7, 25],
+      "summary": "Renders a styled button with default, outline, and ghost variants using Tailwind CSS classes.",
+      "tags": ["ui", "component", "react"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:ag-platform/packages/ui/src/index.tsx:Card",
+      "type": "function",
+      "name": "Card",
+      "filePath": "ag-platform/packages/ui/src/index.tsx",
+      "lineRange": [29, 35],
+      "summary": "Renders a rounded card container with border and shadow styling.",
+      "tags": ["ui", "component", "react"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:ag-platform/packages/ui/src/index.tsx:Badge",
+      "type": "function",
+      "name": "Badge",
+      "filePath": "ag-platform/packages/ui/src/index.tsx",
+      "lineRange": [39, 59],
+      "summary": "Renders a small badge label with default, success, warning, and danger color variants.",
+      "tags": ["ui", "component", "react"],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:ag-platform/packages/ui/tsconfig.json",
+      "type": "config",
+      "name": "tsconfig.json",
+      "filePath": "ag-platform/packages/ui/tsconfig.json",
+      "summary": "TypeScript configuration for the UI package targeting ES2020 with strict mode and JSX support.",
+      "tags": ["configuration", "typescript", "build-system"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:ag-platform/postcss.config.js",
+      "type": "file",
+      "name": "postcss.config.js",
+      "filePath": "ag-platform/postcss.config.js",
+      "summary": "PostCSS configuration enabling Tailwind CSS and Autoprefixer plugins for CSS processing.",
+      "tags": ["configuration", "build-system", "css"],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:ag-platform/README.md",
+      "type": "document",
+      "name": "README.md",
+      "filePath": "ag-platform/README.md",
+      "summary": "Empty placeholder README document for the AG platform project root.",
+      "tags": ["documentation", "placeholder"],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:ag-platform/render.yaml",
+      "type": "config",
+      "name": "render.yaml",
+      "filePath": "ag-platform/render.yaml",
+      "summary": "Render.com deployment configuration defining a Node.js web service with build and start commands.",
+      "tags": ["configuration", "deployment", "infrastructure"],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:ag-platform/SECURITY.md",
+      "type": "document",
+      "name": "SECURITY.md",
+      "filePath": "ag-platform/SECURITY.md",
+      "summary": "Security policy document outlining supported versions and vulnerability reporting procedures for the project.",
+      "tags": ["documentation", "security", "policy"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:ag-platform/server.ts",
+      "type": "file",
+      "name": "server.ts",
+      "filePath": "ag-platform/server.ts",
+      "summary": "Express server entry point that runs database migrations, mounts case and timesheet API routes, configures rate limiting for AI endpoints, and serves a Vite SPA in development mode.",
+      "tags": ["entry-point", "server", "api-handler"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:ag-platform/server.ts:runMigrations",
+      "type": "function",
+      "name": "runMigrations",
+      "filePath": "ag-platform/server.ts",
+      "lineRange": [22, 31],
+      "summary": "Reads and executes the migrations.sql file against the database pool on server startup.",
+      "tags": ["database", "migration", "utility"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:ag-platform/server.ts:startServer",
+      "type": "function",
+      "name": "startServer",
+      "filePath": "ag-platform/server.ts",
+      "lineRange": [33, 116],
+      "summary": "Bootstraps the Express application with CORS, JSON parsing, rate limiting, request IDs, API route mounting, Vite dev middleware, and a global error handler.",
+      "tags": ["server", "entry-point", "middleware"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "service:ag-platform/services/intake-api/Dockerfile",
+      "type": "service",
+      "name": "Dockerfile",
+      "filePath": "ag-platform/services/intake-api/Dockerfile",
+      "summary": "Multi-stage Docker build for the Intake API with dependency installation, TypeScript compilation, and a production runner stage exposing port 3002 with health checks.",
+      "tags": ["containerization", "infrastructure", "deployment"],
+      "complexity": "moderate",
+      "languageNotes": "Multi-stage build with three stages (deps, builder, runner) minimizes final image size by separating build dependencies from runtime."
+    },
+    {
+      "id": "config:ag-platform/services/intake-api/package.json",
+      "type": "config",
+      "name": "package.json",
+      "filePath": "ag-platform/services/intake-api/package.json",
+      "summary": "Package manifest for the Intake API Gateway service with Fastify, Redis, Supabase, and Zod runtime dependencies.",
+      "tags": ["configuration", "package", "api"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:ag-platform/services/intake-api/src/routes/dashboard.ts",
+      "type": "file",
+      "name": "dashboard.ts",
+      "filePath": "ag-platform/services/intake-api/src/routes/dashboard.ts",
+      "summary": "Fastify route handler for the NOI dashboard endpoint with Redis caching layer and simulated database fallback.",
+      "tags": ["api-handler", "route", "caching"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:ag-platform/services/intake-api/src/routes/dashboard.ts:fetchNOIDataFromDB",
+      "type": "function",
+      "name": "fetchNOIDataFromDB",
+      "filePath": "ag-platform/services/intake-api/src/routes/dashboard.ts",
+      "lineRange": [7, 19],
+      "summary": "Simulates a database query for NOI dashboard data with a mock response containing active cases and critical counts.",
+      "tags": ["utility", "database", "mock"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:ag-platform/services/intake-api/src/routes/dashboard.ts:dashboardRoutes",
+      "type": "function",
+      "name": "dashboardRoutes",
+      "filePath": "ag-platform/services/intake-api/src/routes/dashboard.ts",
+      "lineRange": [21, 63],
+      "summary": "Fastify plugin registering a GET /noi endpoint with Zod-validated query params and Redis cache-first strategy.",
+      "tags": ["api-handler", "route", "caching"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:ag-platform/services/intake-api/src/routes/webhook.ts",
+      "type": "file",
+      "name": "webhook.ts",
+      "filePath": "ag-platform/services/intake-api/src/routes/webhook.ts",
+      "summary": "Fastify webhook handler processing intake payloads, SMS command routing, and Redis pub/sub message queuing for the Intake API.",
+      "tags": ["api-handler", "webhook", "routing"],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:ag-platform/services/intake-api/src/routes/webhook.ts:webhookRoutes",
+      "type": "function",
+      "name": "webhookRoutes",
+      "filePath": "ag-platform/services/intake-api/src/routes/webhook.ts",
+      "lineRange": [8, 178],
+      "summary": "Fastify plugin registering POST endpoints for intake case creation, SMS command processing, and webhook validation with Redis queue integration.",
+      "tags": ["api-handler", "webhook", "routing"],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:ag-platform/services/intake-api/src/schemas/intake.schema.ts",
+      "type": "file",
+      "name": "intake.schema.ts",
+      "filePath": "ag-platform/services/intake-api/src/schemas/intake.schema.ts",
+      "summary": "Zod schema definitions for intake payload validation including email path URL format, bank name enum, and optional sender metadata.",
+      "tags": ["validation", "schema", "type-definition"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:ag-platform/services/intake-api/src/server.ts",
+      "type": "file",
+      "name": "server.ts",
+      "filePath": "ag-platform/services/intake-api/src/server.ts",
+      "summary": "Fastify server bootstrap with Zod validation compiler, CORS registration, Redis connectivity, route mounting, and health check endpoint.",
+      "tags": ["entry-point", "server", "api-handler"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:ag-platform/services/intake-api/src/server.ts:start",
+      "type": "function",
+      "name": "start",
+      "filePath": "ag-platform/services/intake-api/src/server.ts",
+      "lineRange": [27, 58],
+      "summary": "Initializes the Fastify server with plugins, routes, health check, and listens on the configured port.",
+      "tags": ["server", "entry-point", "bootstrap"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:ag-platform/services/intake-api/src/services/redis.service.ts",
+      "type": "file",
+      "name": "redis.service.ts",
+      "filePath": "ag-platform/services/intake-api/src/services/redis.service.ts",
+      "summary": "Redis client initialization and caching utilities for NOI dashboard data with TTL-based cache management and fail-open error handling.",
+      "tags": ["service", "caching", "database"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:ag-platform/services/intake-api/src/services/redis.service.ts:connectRedis",
+      "type": "function",
+      "name": "connectRedis",
+      "filePath": "ag-platform/services/intake-api/src/services/redis.service.ts",
+      "lineRange": [13, 17],
+      "summary": "Connects the Redis client if not already open.",
+      "tags": ["utility", "connection", "database"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:ag-platform/services/intake-api/src/services/redis.service.ts:getCachedNOIDashboard",
+      "type": "function",
+      "name": "getCachedNOIDashboard",
+      "filePath": "ag-platform/services/intake-api/src/services/redis.service.ts",
+      "lineRange": [22, 30],
+      "summary": "Retrieves cached NOI dashboard data for an organization from Redis, returning null on cache miss or error.",
+      "tags": ["caching", "utility", "database"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:ag-platform/services/intake-api/src/services/redis.service.ts:cacheNOIDashboard",
+      "type": "function",
+      "name": "cacheNOIDashboard",
+      "filePath": "ag-platform/services/intake-api/src/services/redis.service.ts",
+      "lineRange": [32, 38],
+      "summary": "Caches NOI dashboard data in Redis with a 15-minute TTL for the given organization.",
+      "tags": ["caching", "utility", "database"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:ag-platform/services/intake-api/src/services/redis.service.ts:invalidateNOICache",
+      "type": "function",
+      "name": "invalidateNOICache",
+      "filePath": "ag-platform/services/intake-api/src/services/redis.service.ts",
+      "lineRange": [40, 47],
+      "summary": "Invalidates the cached NOI dashboard entry for an organization by deleting the Redis key.",
+      "tags": ["caching", "utility", "database"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:ag-platform/services/intake-api/src/services/supabase.service.ts",
+      "type": "file",
+      "name": "supabase.service.ts",
+      "filePath": "ag-platform/services/intake-api/src/services/supabase.service.ts",
+      "summary": "Supabase client initialization with service role key and data access functions for case creation and organization lookup by bank name.",
+      "tags": ["service", "database", "data-model"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:ag-platform/services/intake-api/src/services/supabase.service.ts:createCase",
+      "type": "function",
+      "name": "createCase",
+      "filePath": "ag-platform/services/intake-api/src/services/supabase.service.ts",
+      "lineRange": [28, 37],
+      "summary": "Inserts a new case record into the Supabase cases table and returns the created row.",
+      "tags": ["database", "crud", "service"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:ag-platform/services/intake-api/src/services/supabase.service.ts:getOrganizationByBank",
+      "type": "function",
+      "name": "getOrganizationByBank",
+      "filePath": "ag-platform/services/intake-api/src/services/supabase.service.ts",
+      "lineRange": [39, 53],
+      "summary": "Resolves an organization ID from a bank partner name, returning null when no match exists.",
+      "tags": ["database", "lookup", "service"],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:ag-platform/services/intake-api/tsconfig.json",
+      "type": "config",
+      "name": "tsconfig.json",
+      "filePath": "ag-platform/services/intake-api/tsconfig.json",
+      "summary": "TypeScript configuration for the Intake API service targeting ES2022 with CommonJS module output and declaration files.",
+      "tags": ["configuration", "typescript", "build-system"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:ag-platform/src/App.tsx",
+      "type": "file",
+      "name": "App.tsx",
+      "filePath": "ag-platform/src/App.tsx",
+      "summary": "Root React application component with navigation header, route definitions for all major sections, authentication initialization, and error boundary wrapping.",
+      "tags": ["entry-point", "component", "app"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:ag-platform/src/App.tsx:Navigation",
+      "type": "function",
+      "name": "Navigation",
+      "filePath": "ag-platform/src/App.tsx",
+      "lineRange": [16, 62],
+      "summary": "Renders a sticky navigation header with role-based links, active route highlighting, and sign-out functionality.",
+      "tags": ["ui", "navigation", "component"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:ag-platform/src/App.tsx:App",
+      "type": "function",
+      "name": "App",
+      "filePath": "ag-platform/src/App.tsx",
+      "lineRange": [64, 120],
+      "summary": "Main application component that initializes authentication on mount and renders routes for all pages wrapped in an error boundary.",
+      "tags": ["entry-point", "component", "app"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:ag-platform/src/app/admin/voice/page.tsx",
+      "type": "file",
+      "name": "page.tsx",
+      "filePath": "ag-platform/src/app/admin/voice/page.tsx",
+      "summary": "Admin voice console page with audio recording, transcription display, voice command confirmation workflow, and tool management interface.",
+      "tags": ["ui", "admin", "voice", "component"],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:ag-platform/src/app/admin/voice/page.tsx:AdminVoiceConsole",
+      "type": "function",
+      "name": "AdminVoiceConsole",
+      "filePath": "ag-platform/src/app/admin/voice/page.tsx",
+      "lineRange": [16, 194],
+      "summary": "Manages audio recording, transcription via API, voice command confirmation, and displays tool registry and history for the admin voice interface.",
+      "tags": ["ui", "admin", "voice", "component"],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:ag-platform/src/app/admin/workforce/page.tsx",
+      "type": "file",
+      "name": "page.tsx",
+      "filePath": "ag-platform/src/app/admin/workforce/page.tsx",
+      "summary": "Admin workforce management console with agent matrix display, shift allocation, real-time activity monitoring, metrics dashboard, and skill gap analysis.",
+      "tags": ["ui", "admin", "workforce", "component"],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:ag-platform/src/app/admin/workforce/page.tsx:WorkforceConsole",
+      "type": "function",
+      "name": "WorkforceConsole",
+      "filePath": "ag-platform/src/app/admin/workforce/page.tsx",
+      "lineRange": [32, 281],
+      "summary": "Renders the workforce management interface with agent status matrix, shift controls, skill gap display, and real-time KPI tracking.",
+      "tags": ["ui", "admin", "workforce", "component"],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:ag-platform/src/app/login/page.tsx",
+      "type": "file",
+      "name": "page.tsx",
+      "filePath": "ag-platform/src/app/login/page.tsx",
+      "summary": "Login page with Google OAuth integration featuring a dark-themed AG Digital Office branded UI with gradient background and glassmorphism card.",
+      "tags": ["ui", "auth", "entry-point"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:ag-platform/src/app/login/page.tsx:LoginPage",
+      "type": "function",
+      "name": "LoginPage",
+      "filePath": "ag-platform/src/app/login/page.tsx",
+      "lineRange": [7, 74],
+      "summary": "Renders the login page with Google OAuth sign-in button and AG Digital Office branding.",
+      "tags": ["ui", "auth", "component"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:ag-platform/src/app/my-cases/page.tsx",
+      "type": "file",
+      "name": "page.tsx",
+      "filePath": "ag-platform/src/app/my-cases/page.tsx",
+      "summary": "Mobile field executive PWA page displaying offline case list with pending upload status indicators and scan challan actions.",
+      "tags": ["ui", "mobile", "cases", "component"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:ag-platform/src/app/my-cases/page.tsx:MobileFieldExecutivePWA",
+      "type": "function",
+      "name": "MobileFieldExecutivePWA",
+      "filePath": "ag-platform/src/app/my-cases/page.tsx",
+      "lineRange": [6, 62],
+      "summary": "Renders a mobile case list for field executives with offline mode indicator and scan challan buttons per case.",
+      "tags": ["ui", "mobile", "cases", "component"],
+      "complexity": "moderate"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:ag-platform/packages/ui/src/index.tsx",
+      "target": "function:ag-platform/packages/ui/src/index.tsx:Button",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-platform/packages/ui/src/index.tsx",
+      "target": "function:ag-platform/packages/ui/src/index.tsx:Card",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-platform/packages/ui/src/index.tsx",
+      "target": "function:ag-platform/packages/ui/src/index.tsx:Badge",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-platform/server.ts",
+      "target": "function:ag-platform/server.ts:runMigrations",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-platform/server.ts",
+      "target": "function:ag-platform/server.ts:startServer",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-platform/services/intake-api/src/routes/dashboard.ts",
+      "target": "function:ag-platform/services/intake-api/src/routes/dashboard.ts:fetchNOIDataFromDB",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-platform/services/intake-api/src/routes/dashboard.ts",
+      "target": "function:ag-platform/services/intake-api/src/routes/dashboard.ts:dashboardRoutes",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-platform/services/intake-api/src/routes/webhook.ts",
+      "target": "function:ag-platform/services/intake-api/src/routes/webhook.ts:webhookRoutes",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-platform/services/intake-api/src/server.ts",
+      "target": "function:ag-platform/services/intake-api/src/server.ts:start",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-platform/services/intake-api/src/services/redis.service.ts",
+      "target": "function:ag-platform/services/intake-api/src/services/redis.service.ts:connectRedis",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-platform/services/intake-api/src/services/redis.service.ts",
+      "target": "function:ag-platform/services/intake-api/src/services/redis.service.ts:getCachedNOIDashboard",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-platform/services/intake-api/src/services/redis.service.ts",
+      "target": "function:ag-platform/services/intake-api/src/services/redis.service.ts:cacheNOIDashboard",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-platform/services/intake-api/src/services/redis.service.ts",
+      "target": "function:ag-platform/services/intake-api/src/services/redis.service.ts:invalidateNOICache",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-platform/services/intake-api/src/services/supabase.service.ts",
+      "target": "function:ag-platform/services/intake-api/src/services/supabase.service.ts:createCase",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-platform/services/intake-api/src/services/supabase.service.ts",
+      "target": "function:ag-platform/services/intake-api/src/services/supabase.service.ts:getOrganizationByBank",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-platform/src/App.tsx",
+      "target": "function:ag-platform/src/App.tsx:Navigation",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-platform/src/App.tsx",
+      "target": "function:ag-platform/src/App.tsx:App",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-platform/src/app/admin/voice/page.tsx",
+      "target": "function:ag-platform/src/app/admin/voice/page.tsx:AdminVoiceConsole",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-platform/src/app/admin/workforce/page.tsx",
+      "target": "function:ag-platform/src/app/admin/workforce/page.tsx:WorkforceConsole",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-platform/src/app/login/page.tsx",
+      "target": "function:ag-platform/src/app/login/page.tsx:LoginPage",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-platform/src/app/my-cases/page.tsx",
+      "target": "function:ag-platform/src/app/my-cases/page.tsx:MobileFieldExecutivePWA",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-platform/packages/ui/src/index.tsx",
+      "target": "function:ag-platform/packages/ui/src/index.tsx:Button",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:ag-platform/packages/ui/src/index.tsx",
+      "target": "function:ag-platform/packages/ui/src/index.tsx:Card",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:ag-platform/packages/ui/src/index.tsx",
+      "target": "function:ag-platform/packages/ui/src/index.tsx:Badge",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:ag-platform/services/intake-api/src/routes/dashboard.ts",
+      "target": "function:ag-platform/services/intake-api/src/routes/dashboard.ts:dashboardRoutes",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:ag-platform/services/intake-api/src/routes/webhook.ts",
+      "target": "function:ag-platform/services/intake-api/src/routes/webhook.ts:webhookRoutes",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:ag-platform/services/intake-api/src/services/redis.service.ts",
+      "target": "function:ag-platform/services/intake-api/src/services/redis.service.ts:connectRedis",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:ag-platform/services/intake-api/src/services/redis.service.ts",
+      "target": "function:ag-platform/services/intake-api/src/services/redis.service.ts:getCachedNOIDashboard",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:ag-platform/services/intake-api/src/services/redis.service.ts",
+      "target": "function:ag-platform/services/intake-api/src/services/redis.service.ts:cacheNOIDashboard",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:ag-platform/services/intake-api/src/services/redis.service.ts",
+      "target": "function:ag-platform/services/intake-api/src/services/redis.service.ts:invalidateNOICache",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:ag-platform/services/intake-api/src/services/supabase.service.ts",
+      "target": "function:ag-platform/services/intake-api/src/services/supabase.service.ts:createCase",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:ag-platform/services/intake-api/src/services/supabase.service.ts",
+      "target": "function:ag-platform/services/intake-api/src/services/supabase.service.ts:getOrganizationByBank",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:ag-platform/src/app/admin/voice/page.tsx",
+      "target": "function:ag-platform/src/app/admin/voice/page.tsx:AdminVoiceConsole",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:ag-platform/src/app/admin/workforce/page.tsx",
+      "target": "function:ag-platform/src/app/admin/workforce/page.tsx:WorkforceConsole",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:ag-platform/src/app/login/page.tsx",
+      "target": "function:ag-platform/src/app/login/page.tsx:LoginPage",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:ag-platform/src/app/my-cases/page.tsx",
+      "target": "function:ag-platform/src/app/my-cases/page.tsx:MobileFieldExecutivePWA",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:ag-platform/packages/types/src/index.ts",
+      "target": "file:ag-platform/packages/types/src/domain.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:ag-platform/packages/types/src/index.ts",
+      "target": "file:ag-platform/packages/types/src/field-app.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:ag-platform/packages/types/src/index.ts",
+      "target": "file:ag-platform/packages/types/src/storage.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:ag-platform/services/intake-api/src/routes/dashboard.ts",
+      "target": "file:ag-platform/services/intake-api/src/services/redis.service.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:ag-platform/services/intake-api/src/routes/webhook.ts",
+      "target": "file:ag-platform/services/intake-api/src/schemas/intake.schema.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:ag-platform/services/intake-api/src/routes/webhook.ts",
+      "target": "file:ag-platform/services/intake-api/src/services/redis.service.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:ag-platform/services/intake-api/src/routes/webhook.ts",
+      "target": "file:ag-platform/services/intake-api/src/services/supabase.service.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:ag-platform/services/intake-api/src/server.ts",
+      "target": "file:ag-platform/services/intake-api/src/routes/dashboard.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:ag-platform/services/intake-api/src/server.ts",
+      "target": "file:ag-platform/services/intake-api/src/routes/webhook.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:ag-platform/services/intake-api/src/server.ts",
+      "target": "file:ag-platform/services/intake-api/src/services/redis.service.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:ag-platform/src/App.tsx",
+      "target": "file:ag-platform/src/components/admin/AdvisorCockpit.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:ag-platform/src/App.tsx",
+      "target": "file:ag-platform/src/components/admin/WorkforceControl.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:ag-platform/src/App.tsx",
+      "target": "file:ag-platform/src/components/applicant/ApplicantDashboard.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:ag-platform/src/App.tsx",
+      "target": "file:ag-platform/src/components/auth/LoginPage.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:ag-platform/src/App.tsx",
+      "target": "file:ag-platform/src/components/auth/ProtectedRoute.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:ag-platform/src/App.tsx",
+      "target": "file:ag-platform/src/components/bank/BankPortal.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:ag-platform/src/App.tsx",
+      "target": "file:ag-platform/src/components/collaboration/TimeTracker.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:ag-platform/src/App.tsx",
+      "target": "file:ag-platform/src/components/home/MarketingLanding.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:ag-platform/src/App.tsx",
+      "target": "file:ag-platform/src/components/privacy/PrivacyPolicy.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:ag-platform/src/App.tsx",
+      "target": "file:ag-platform/src/components/ui/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:ag-platform/src/App.tsx",
+      "target": "file:ag-platform/src/store/useAuthStore.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "config:ag-platform/packages/types/tsconfig.json",
+      "target": "file:ag-platform/packages/types/src/index.ts",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:ag-platform/packages/types/tsconfig.json",
+      "target": "file:ag-platform/packages/types/src/storage.ts",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:ag-platform/packages/ui/package.json",
+      "target": "file:ag-platform/packages/ui/src/index.tsx",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:ag-platform/packages/ui/tsconfig.json",
+      "target": "file:ag-platform/packages/ui/src/index.tsx",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:ag-platform/services/intake-api/package.json",
+      "target": "file:ag-platform/services/intake-api/src/server.ts",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:ag-platform/services/intake-api/tsconfig.json",
+      "target": "file:ag-platform/services/intake-api/src/server.ts",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:ag-platform/render.yaml",
+      "target": "file:ag-platform/server.ts",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "document:ag-platform/SECURITY.md",
+      "target": "file:ag-platform/server.ts",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "service:ag-platform/services/intake-api/Dockerfile",
+      "target": "file:ag-platform/services/intake-api/src/server.ts",
+      "type": "deploys",
+      "direction": "forward",
+      "weight": 0.7
+    }
+  ]
+}

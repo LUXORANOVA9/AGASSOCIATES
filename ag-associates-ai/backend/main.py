@@ -8,14 +8,15 @@ import importlib.util
 sentry_sdk = None
 if importlib.util.find_spec("sentry_sdk"):
     import sentry_sdk
-from fastapi import FastAPI, Header, HTTPException, status, Response, Request
+from fastapi import FastAPI, Header, HTTPException, status, Response, Request, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from typing import Dict, Any, Optional
 from pydantic import BaseModel, Field
 from voice.voice_api import router as voice_router
 from workforce import workforce_router
-from auth import oauth_router
+from auth import oauth_router, require_auth, require_permission, AuthContext
 from playground import playground_router, session_manager as _playground_sm
+from payment.router import router as payment_router
 from controller_agent import UnifiedController
 from agents import process_rental_request
 from aisha_core import handle_message as aisha_handle_message, ensure_tables
@@ -67,6 +68,7 @@ app.include_router(voice_router)
 app.include_router(workforce_router)
 app.include_router(oauth_router)
 app.include_router(playground_router)
+app.include_router(payment_router)
 
 
 @app.on_event("shutdown")
@@ -555,7 +557,7 @@ class NOISeedRequest(BaseModel):
 
 
 @app.post("/api/noi/seed", tags=["NOI"])
-async def noi_seed(request: NOISeedRequest):
+async def noi_seed(request: NOISeedRequest, auth: AuthContext = Depends(require_permission("noi.initiate"))):
     """Seed a test case in the in-memory store (dev only, no Supabase needed)."""
     try:
         case_data = request.model_dump(exclude_none=True)
@@ -569,7 +571,7 @@ async def noi_seed(request: NOISeedRequest):
 
 
 @app.post("/api/noi/workflow", tags=["NOI"])
-async def noi_workflow(request: NOIWorkflowRequest):
+async def noi_workflow(request: NOIWorkflowRequest, auth: AuthContext = Depends(require_permission("noi.initiate"))):
     """Trigger a NOI workflow action for a case.
     
     Actions:
@@ -592,7 +594,7 @@ async def noi_workflow(request: NOIWorkflowRequest):
         return NOIWorkflowResponse(success=False, error=str(e))
 
 @app.get("/api/noi/status/{case_id}", tags=["NOI"])
-async def noi_status(case_id: str):
+async def noi_status(case_id: str, auth: AuthContext = Depends(require_permission("noi.view_progress"))):
     """Get current NOI status and workflow state for a case."""
     try:
         case = await noi_agent.get_case(case_id)
@@ -636,18 +638,64 @@ async def noi_webhook(payload: NOIWebhookPayload):
             case_id=payload.case_id,
             new_status=payload.status,
             notes=payload.notes,
+            force=True,
         )
         if not success:
             return NOIWorkflowResponse(success=False, error="Failed to update status")
-
-        if payload.status == "CHALLAN_PAID" and payload.acknowledgment_number:
-            await noi_agent.acknowledge(payload.case_id, payload.acknowledgment_number)
 
         return NOIWorkflowResponse(success=True, data={"case_id": payload.case_id, "status": payload.status})
     except Exception as e:
         import logging
         logging.getLogger(__name__).error(f"NOI webhook error: {e}")
         return NOIWorkflowResponse(success=False, error=str(e))
+
+
+# ── HITL (Human-in-the-Loop) Queue API ─────────────────────────────────────
+
+from hitl_queue import hitl_queue
+from circuit_breaker import breakers
+
+
+class HITLClaimRequest(BaseModel):
+    claimed_by: str = Field(default="admin", description="Who is claiming the task")
+
+
+class HITLCompleteRequest(BaseModel):
+    notes: str = Field(default="", description="Resolution notes")
+
+
+@app.get("/api/hitl/tasks", tags=["HITL"])
+async def hitl_list_tasks():
+    """List pending HITL tasks (circuit breaker fallbacks requiring human action)."""
+    tasks = await hitl_queue.list_pending()
+    return {"success": True, "tasks": tasks, "count": len(tasks)}
+
+
+@app.post("/api/hitl/tasks/{task_id}/claim", tags=["HITL"])
+async def hitl_claim_task(task_id: str, req: HITLClaimRequest):
+    """Claim a HITL task for manual processing."""
+    task = await hitl_queue.claim_task(task_id, req.claimed_by)
+    if task is None:
+        raise HTTPException(status_code=404, detail="Task not found or already claimed")
+    return {"success": True, "task": task}
+
+
+@app.post("/api/hitl/tasks/{task_id}/complete", tags=["HITL"])
+async def hitl_complete_task(task_id: str, req: HITLCompleteRequest):
+    """Mark a HITL task as completed."""
+    task = await hitl_queue.complete_task(task_id, req.notes)
+    if task is None:
+        raise HTTPException(status_code=404, detail="Task not found")
+    return {"success": True, "task": task}
+
+
+@app.get("/api/circuit-breakers", tags=["HITL"])
+async def circuit_breaker_status():
+    """Get status of all RPA circuit breakers."""
+    results = {}
+    for name, breaker in breakers.items():
+        results[name] = await breaker.status()
+    return {"success": True, "breakers": results}
 
 
 if __name__ == "__main__":

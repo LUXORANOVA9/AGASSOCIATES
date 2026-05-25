@@ -1,0 +1,97 @@
+{
+  "projectRoot": "/home/luxor9/AGASSOCIATES",
+  "scanDate": "2026-05-24",
+  "languages": [
+    {
+      "language": "TypeScript",
+      "extensions": [".ts", ".tsx"],
+      "prevalence": "High"
+    },
+    {
+      "language": "Python",
+      "extensions": [".py"],
+      "prevalence": "High"
+    },
+    {
+      "language": "SQL",
+      "extensions": [".sql"],
+      "prevalence": "Medium"
+    },
+    {
+      "language": "Markdown",
+      "extensions": [".md"],
+      "prevalence": "High"
+    },
+    {
+      "language": "JavaScript",
+      "extensions": [".js", ".jsx"],
+      "prevalence": "Medium"
+    },
+    {
+      "language": "JSON",
+      "extensions": [".json"],
+      "prevalence": "Medium"
+    },
+    {
+      "language": "YAML",
+      "extensions": [".yml", ".yaml"],
+      "prevalence": "Low"
+    },
+    {
+      "language": "CSS",
+      "extensions": [".css"],
+      "prevalence": "Medium"
+    },
+    {
+      "language": "Shell",
+      "extensions": [".sh"],
+      "prevalence": "Low"
+    }
+  ],
+  "frameworks": {
+    "frontend": [
+      "Next.js 15 (App Router)",
+      "React",
+      "Vite",
+      "Tailwind CSS",
+      "shadcn/ui"
+    ],
+    "backend": [
+      "FastAPI",
+      "Express",
+      "Fastify"
+    ],
+    "ai_ml": [
+      "LangGraph",
+      "LangChain",
+      "vLLM",
+      "SentenceTransformers",
+      "pgvector"
+    ],
+    "infrastructure": [
+      "Docker",
+      "Supabase",
+      "Render.com",
+      "GitHub Pages",
+      "TurboRepo"
+    ],
+    "mobile": [
+      "React Native / Expo"
+    ]
+  },
+  "architecture": {
+    "type": "Polyglot Monorepo",
+    "subsystems": [
+      {
+        "name": "ag-associates-ai",
+        "description": "AI Document Pipeline for legal automation (FastAPI, LangGraph, pgvector, Next.js 15)",
+        "path": "/home/luxor9/AGASSOCIATES/ag-associates-ai"
+      },
+      {
+        "name": "ag-platform",
+        "description": "LegalTech Collaboration Platform (Turborepo, Express, Fastify, React/Vite, Supabase)",
+        "path": "/home/luxor9/AGASSOCIATES/ag-platform"
+      }
+    ]
+  }
+}

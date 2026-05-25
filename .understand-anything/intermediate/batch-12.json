@@ -1,0 +1,315 @@
+{
+  "nodes": [
+    {
+      "id": "file:ag-platform/vite.config.ts",
+      "type": "file",
+      "name": "vite.config.ts",
+      "filePath": "ag-platform/vite.config.ts",
+      "summary": "Vite build configuration for the AG Platform React SPA with React plugin and `@` path alias to `./src`.",
+      "tags": ["build-config", "bundler", "typescript"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:ag-platform/vitest.config.ts",
+      "type": "file",
+      "name": "vitest.config.ts",
+      "filePath": "ag-platform/vitest.config.ts",
+      "summary": "Vitest test runner configuration targeting Node environment with PostCSS support.",
+      "tags": ["test-config", "testing", "typescript"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:Caddyfile",
+      "type": "file",
+      "name": "Caddyfile",
+      "filePath": "Caddyfile",
+      "summary": "Caddy web server reverse-proxy configuration routing five subdomains (app, dashboard, api, intake, n8n, docs) with TLS, health checks, compression, and basic auth.",
+      "tags": ["reverse-proxy", "infrastructure", "networking", "routing"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:CLAUDE.md",
+      "type": "document",
+      "name": "CLAUDE.md",
+      "filePath": "CLAUDE.md",
+      "summary": "AI assistant onboarding document covering repository layout, common commands, architecture overview, and key conventions for both the Python AI pipeline and TypeScript platform.",
+      "tags": ["documentation", "onboarding", "architecture", "development"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:CNAME",
+      "type": "file",
+      "name": "CNAME",
+      "filePath": "CNAME",
+      "summary": "Custom domain record pointing the repository to advadiityagade.com for GitHub Pages or DNS configuration.",
+      "tags": ["dns", "domain", "infrastructure"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:CODEOWNERS",
+      "type": "file",
+      "name": "CODEOWNERS",
+      "filePath": "CODEOWNERS",
+      "summary": "GitHub CODEOWNERS file assigning @LUXORANOVA9 as the default owner for all paths across the monorepo.",
+      "tags": ["governance", "ownership", "github"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:commitlint.config.js",
+      "type": "file",
+      "name": "commitlint.config.js",
+      "filePath": "commitlint.config.js",
+      "summary": "Commitlint configuration enforcing Conventional Commits with project-specific types and scopes for the monorepo.",
+      "tags": ["commit-convention", "linting", "configuration"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:content/02-getting-started/jupyter_notebooks.ipynb",
+      "type": "file",
+      "name": "jupyter_notebooks.ipynb",
+      "filePath": "content/02-getting-started/jupyter_notebooks.ipynb",
+      "summary": "Jupyter notebook providing a getting-started tutorial with executable code cells for the data science workflow.",
+      "tags": ["tutorial", "notebook", "getting-started", "data-science"],
+      "complexity": "complex"
+    },
+    {
+      "id": "document:CONTEXT.md",
+      "type": "document",
+      "name": "CONTEXT.md",
+      "filePath": "CONTEXT.md",
+      "summary": "Domain glossary defining core business terms, NOI workflow states, case lifecycle, deployment architecture, and governance rules for the AG Associates legaltech platform.",
+      "tags": ["documentation", "domain-glossary", "architecture", "reference"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:CONTRIBUTING.md",
+      "type": "document",
+      "name": "CONTRIBUTING.md",
+      "filePath": "CONTRIBUTING.md",
+      "summary": "Contribution guide covering development setup, code standards, commit conventions, branch naming, and PR submission requirements.",
+      "tags": ["documentation", "contributing", "development", "guidelines"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:CULTURE.md",
+      "type": "document",
+      "name": "CULTURE.md",
+      "filePath": "CULTURE.md",
+      "summary": "Company culture document defining core principles, async-first communication, operational discipline, AI-assisted workflows, and leadership philosophy for AG Associates.",
+      "tags": ["documentation", "culture", "values", "principles"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:DEPLOYMENT_PLAYBOOK.md",
+      "type": "document",
+      "name": "DEPLOYMENT_PLAYBOOK.md",
+      "filePath": "DEPLOYMENT_PLAYBOOK.md",
+      "summary": "Production deployment playbook covering VPS provisioning, Docker Compose setup, Supabase configuration, CI/CD, backups, observability, and day-2 operations.",
+      "tags": ["documentation", "deployment", "devops", "infrastructure"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:DEVIN_PLAYBOOK.md",
+      "type": "document",
+      "name": "DEVIN_PLAYBOOK.md",
+      "filePath": "DEVIN_PLAYBOOK.md",
+      "summary": "AI agent operations playbook detailing first-session checklist, sandbox setup, branch conventions, risk-tiered auto-merge rules, and repo-specific gotchas.",
+      "tags": ["documentation", "agent-operations", "playbook", "development"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "service:docker-compose.prod.yml",
+      "type": "service",
+      "name": "docker-compose.prod.yml",
+      "filePath": "docker-compose.prod.yml",
+      "summary": "Production Docker Compose orchestration running Caddy reverse-proxy, AI backend, dashboard, intake API, n8n, and docs site with shared networking and persistent volumes.",
+      "tags": ["orchestration", "infrastructure", "deployment", "containerization"],
+      "complexity": "complex"
+    },
+    {
+      "id": "service:docker-compose.yml",
+      "type": "service",
+      "name": "docker-compose.yml",
+      "filePath": "docker-compose.yml",
+      "summary": "Development Docker Compose configuration providing a PostgreSQL database with pgvector extension for local development.",
+      "tags": ["orchestration", "infrastructure", "database", "development"],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:docs/adr/0001-monorepo-orchestration.md",
+      "type": "document",
+      "name": "0001-monorepo-orchestration.md",
+      "filePath": "docs/adr/0001-monorepo-orchestration.md",
+      "summary": "Architecture Decision Record documenting the decision to use a split orchestration strategy with Turborepo for the platform and a separate Makefile for the AI pipeline.",
+      "tags": ["documentation", "architecture-decision", "monorepo", "governance"],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:docs/noi-automation-plan.md",
+      "type": "document",
+      "name": "noi-automation-plan.md",
+      "filePath": "docs/noi-automation-plan.md",
+      "summary": "Comprehensive NOI automation system plan covering agent orchestration architecture, LangGraph implementation, email intake, document verification, OTP bridge, RPA executor, and phased build order.",
+      "tags": ["documentation", "automation", "noi", "architecture"],
+      "complexity": "complex"
+    },
+    {
+      "id": "document:ERROR_HANDLING_GUIDELINES.md",
+      "type": "document",
+      "name": "ERROR_HANDLING_GUIDELINES.md",
+      "filePath": "ERROR_HANDLING_GUIDELINES.md",
+      "summary": "Error handling guidelines prescribing explicit error path design, meaningful messages, retry with backoff, graceful degradation, and structured API error responses.",
+      "tags": ["documentation", "error-handling", "guidelines", "best-practices"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:FRONTEND_UI_GUIDELINES.md",
+      "type": "document",
+      "name": "FRONTEND_UI_GUIDELINES.md",
+      "filePath": "FRONTEND_UI_GUIDELINES.md",
+      "summary": "Frontend UI engineering guidelines covering accessibility, Core Web Vitals performance, responsive design, and state management discipline.",
+      "tags": ["documentation", "frontend", "ui", "guidelines"],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:GIT_GUIDELINES.md",
+      "type": "document",
+      "name": "GIT_GUIDELINES.md",
+      "filePath": "GIT_GUIDELINES.md",
+      "summary": "Git and version control guidelines advocating atomic commits, Conventional Commits format, trunk-based development, and pre-commit gates.",
+      "tags": ["documentation", "git", "version-control", "guidelines"],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:GOAL_DRIVEN_EXECUTION_GUIDELINES.md",
+      "type": "document",
+      "name": "GOAL_DRIVEN_EXECUTION_GUIDELINES.md",
+      "filePath": "GOAL_DRIVEN_EXECUTION_GUIDELINES.md",
+      "summary": "Goal-driven execution methodology detailing how to extract underlying goals, define success criteria, create execution plans, and iterate with feedback loops.",
+      "tags": ["documentation", "execution", "methodology", "guidelines"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:GOVERNANCE.md",
+      "type": "document",
+      "name": "GOVERNANCE.md",
+      "filePath": "GOVERNANCE.md",
+      "summary": "Project governance document defining branch strategy, commit convention, PR workflow, release process, environment strategy, and tech stack overview.",
+      "tags": ["documentation", "governance", "process", "guidelines"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:HALLUCINATION_MITIGATION_GUIDELINES.md",
+      "type": "document",
+      "name": "HALLUCINATION_MITIGATION_GUIDELINES.md",
+      "filePath": "HALLUCINATION_MITIGATION_GUIDELINES.md",
+      "summary": "Hallucination detection and mitigation guidelines covering risk classification, grounded outputs, verification layers, fail-safe defaults, and production monitoring.",
+      "tags": ["documentation", "ai-safety", "hallucination", "guidelines"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "pipeline:Makefile",
+      "type": "pipeline",
+      "name": "Makefile",
+      "filePath": "Makefile",
+      "summary": "Monorepo build system Makefile orchestrating Python and TypeScript tasks including install, lint, format, type-check, test, build, deploy, and CI pipeline.",
+      "tags": ["build-system", "ci-cd", "automation", "infrastructure"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "config:package.json",
+      "type": "config",
+      "name": "package.json",
+      "filePath": "package.json",
+      "summary": "Root package.json defining the monorepo workspace configuration with npm workspaces for the platform, mobile app, packages, services, and frontend.",
+      "tags": ["configuration", "monorepo", "npm", "workspace"],
+      "complexity": "simple"
+    }
+  ],
+  "edges": [
+    {
+      "source": "config:package.json",
+      "target": "pipeline:Makefile",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "service:docker-compose.prod.yml",
+      "target": "file:Caddyfile",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "file:Caddyfile",
+      "target": "service:docker-compose.prod.yml",
+      "type": "routes",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "document:DEPLOYMENT_PLAYBOOK.md",
+      "target": "service:docker-compose.prod.yml",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:DEPLOYMENT_PLAYBOOK.md",
+      "target": "file:Caddyfile",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:CLAUDE.md",
+      "target": "pipeline:Makefile",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:CLAUDE.md",
+      "target": "config:package.json",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:GOVERNANCE.md",
+      "target": "file:commitlint.config.js",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:CONTEXT.md",
+      "target": "file:Caddyfile",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:CONTEXT.md",
+      "target": "service:docker-compose.prod.yml",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:commitlint.config.js",
+      "target": "pipeline:Makefile",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "service:docker-compose.prod.yml",
+      "target": "service:docker-compose.yml",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    }
+  ]
+}

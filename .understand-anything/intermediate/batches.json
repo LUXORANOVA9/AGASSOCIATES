@@ -1,0 +1,2154 @@
+[
+  {
+    "batchIndex": 0,
+    "files": [
+      {
+        "path": ".bolt/mcp.json",
+        "language": "json",
+        "sizeLines": 7,
+        "fileCategory": "config"
+      },
+      {
+        "path": ".changeset/config.json",
+        "language": "json",
+        "sizeLines": 11,
+        "fileCategory": "config"
+      },
+      {
+        "path": ".devcontainer/devcontainer.json",
+        "language": "json",
+        "sizeLines": 4,
+        "fileCategory": "config"
+      },
+      {
+        "path": ".env.example",
+        "language": "example",
+        "sizeLines": 103,
+        "fileCategory": "code"
+      },
+      {
+        "path": ".github/PULL_REQUEST_TEMPLATE.md",
+        "language": "markdown",
+        "sizeLines": 48,
+        "fileCategory": "docs"
+      },
+      {
+        "path": ".github/workflows/ci.yml",
+        "language": "yaml",
+        "sizeLines": 113,
+        "fileCategory": "infra"
+      },
+      {
+        "path": ".github/workflows/codeql.yml",
+        "language": "yaml",
+        "sizeLines": 102,
+        "fileCategory": "infra"
+      },
+      {
+        "path": ".github/workflows/create-env.yml",
+        "language": "yaml",
+        "sizeLines": 38,
+        "fileCategory": "infra"
+      },
+      {
+        "path": ".github/workflows/deploy.yml",
+        "language": "yaml",
+        "sizeLines": 46,
+        "fileCategory": "infra"
+      },
+      {
+        "path": ".github/workflows/fix-ssh.yml",
+        "language": "yaml",
+        "sizeLines": 57,
+        "fileCategory": "infra"
+      },
+      {
+        "path": ".github/workflows/main.yml",
+        "language": "yaml",
+        "sizeLines": 84,
+        "fileCategory": "infra"
+      },
+      {
+        "path": ".github/workflows/nextjs.yml",
+        "language": "yaml",
+        "sizeLines": 91,
+        "fileCategory": "infra"
+      },
+      {
+        "path": ".github/workflows/preview.yml",
+        "language": "yaml",
+        "sizeLines": 69,
+        "fileCategory": "infra"
+      },
+      {
+        "path": ".github/workflows/release.yml",
+        "language": "yaml",
+        "sizeLines": 25,
+        "fileCategory": "infra"
+      },
+      {
+        "path": ".github/workflows/test-checkout.yml",
+        "language": "yaml",
+        "sizeLines": 8,
+        "fileCategory": "infra"
+      },
+      {
+        "path": ".github/workflows/test-permissions.yml",
+        "language": "yaml",
+        "sizeLines": 8,
+        "fileCategory": "infra"
+      },
+      {
+        "path": ".github/workflows/test-runner.yml",
+        "language": "yaml",
+        "sizeLines": 7,
+        "fileCategory": "infra"
+      },
+      {
+        "path": ".github/workflows/test-simple.yml",
+        "language": "yaml",
+        "sizeLines": 8,
+        "fileCategory": "infra"
+      },
+      {
+        "path": ".jules/bolt.md",
+        "language": "markdown",
+        "sizeLines": 5,
+        "fileCategory": "docs"
+      },
+      {
+        "path": ".Jules/palette.md",
+        "language": "markdown",
+        "sizeLines": 3,
+        "fileCategory": "docs"
+      },
+      {
+        "path": ".lintstagedrc.json",
+        "language": "json",
+        "sizeLines": 13,
+        "fileCategory": "config"
+      },
+      {
+        "path": ".pre-commit-config.yaml",
+        "language": "yaml",
+        "sizeLines": 30,
+        "fileCategory": "config"
+      },
+      {
+        "path": "ag-associates-ai/backend/accountant_agent.py",
+        "language": "python",
+        "sizeLines": 85,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-associates-ai/backend/agents/__init__.py",
+        "language": "python",
+        "sizeLines": 24,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-associates-ai/backend/agents/__main__.py",
+        "language": "python",
+        "sizeLines": 24,
+        "fileCategory": "code"
+      }
+    ]
+  },
+  {
+    "batchIndex": 1,
+    "files": [
+      {
+        "path": "ag-associates-ai/backend/agents/aisha.py",
+        "language": "python",
+        "sizeLines": 107,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-associates-ai/backend/agents/auditor.py",
+        "language": "python",
+        "sizeLines": 116,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-associates-ai/backend/agents/bouncer.py",
+        "language": "python",
+        "sizeLines": 107,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-associates-ai/backend/agents/db.py",
+        "language": "python",
+        "sizeLines": 76,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-associates-ai/backend/agents/drafter.py",
+        "language": "python",
+        "sizeLines": 161,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-associates-ai/backend/agents/graph.py",
+        "language": "python",
+        "sizeLines": 146,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-associates-ai/backend/agents/guardrail.py",
+        "language": "python",
+        "sizeLines": 50,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-associates-ai/backend/agents/state.py",
+        "language": "python",
+        "sizeLines": 46,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-associates-ai/backend/agents/utils.py",
+        "language": "python",
+        "sizeLines": 19,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-associates-ai/backend/aisha_core.py",
+        "language": "python",
+        "sizeLines": 328,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-associates-ai/backend/auth.py",
+        "language": "python",
+        "sizeLines": 56,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-associates-ai/backend/auth/__init__.py",
+        "language": "python",
+        "sizeLines": 10,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-associates-ai/backend/auth/google_oauth.py",
+        "language": "python",
+        "sizeLines": 153,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-associates-ai/backend/auth/rbac.py",
+        "language": "python",
+        "sizeLines": 163,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-associates-ai/backend/auto_comms.py",
+        "language": "python",
+        "sizeLines": 223,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-associates-ai/backend/benchmark_dashboard.py",
+        "language": "python",
+        "sizeLines": 45,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-associates-ai/backend/config.py",
+        "language": "python",
+        "sizeLines": 53,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-associates-ai/backend/controller_agent.py",
+        "language": "python",
+        "sizeLines": 69,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-associates-ai/backend/conversation_store.py",
+        "language": "python",
+        "sizeLines": 362,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-associates-ai/backend/crew.py",
+        "language": "python",
+        "sizeLines": 94,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-associates-ai/backend/Dockerfile",
+        "language": "dockerfile",
+        "sizeLines": 53,
+        "fileCategory": "infra"
+      },
+      {
+        "path": "ag-associates-ai/backend/email_intake/agent.py",
+        "language": "python",
+        "sizeLines": 333,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-associates-ai/backend/email_intake/Dockerfile",
+        "language": "dockerfile",
+        "sizeLines": 21,
+        "fileCategory": "infra"
+      },
+      {
+        "path": "ag-associates-ai/backend/email_intake/requirements.txt",
+        "language": "txt",
+        "sizeLines": 5,
+        "fileCategory": "docs"
+      },
+      {
+        "path": "ag-associates-ai/backend/executor_agent.py",
+        "language": "python",
+        "sizeLines": 274,
+        "fileCategory": "code"
+      }
+    ]
+  },
+  {
+    "batchIndex": 2,
+    "files": [
+      {
+        "path": "ag-associates-ai/backend/generate_embeddings.py",
+        "language": "python",
+        "sizeLines": 82,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-associates-ai/backend/igr_executor.py",
+        "language": "python",
+        "sizeLines": 228,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-associates-ai/backend/jurisdictions.py",
+        "language": "python",
+        "sizeLines": 54,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-associates-ai/backend/main.py",
+        "language": "python",
+        "sizeLines": 656,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-associates-ai/backend/nesl_client.py",
+        "language": "python",
+        "sizeLines": 232,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-associates-ai/backend/noi_agent.py",
+        "language": "python",
+        "sizeLines": 392,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-associates-ai/backend/pdf_generator.py",
+        "language": "python",
+        "sizeLines": 263,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-associates-ai/backend/playground/__init__.py",
+        "language": "python",
+        "sizeLines": 11,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-associates-ai/backend/playground/browser_session.py",
+        "language": "python",
+        "sizeLines": 221,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-associates-ai/backend/playground/playground_api.py",
+        "language": "python",
+        "sizeLines": 86,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-associates-ai/backend/requirements.prod.txt",
+        "language": "txt",
+        "sizeLines": 36,
+        "fileCategory": "docs"
+      },
+      {
+        "path": "ag-associates-ai/backend/requirements.txt",
+        "language": "txt",
+        "sizeLines": 34,
+        "fileCategory": "docs"
+      },
+      {
+        "path": "ag-associates-ai/backend/telegram_bot/bot.py",
+        "language": "python",
+        "sizeLines": 440,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-associates-ai/backend/telegram_bot/Dockerfile",
+        "language": "dockerfile",
+        "sizeLines": 21,
+        "fileCategory": "infra"
+      },
+      {
+        "path": "ag-associates-ai/backend/telegram_bot/requirements.txt",
+        "language": "txt",
+        "sizeLines": 4,
+        "fileCategory": "docs"
+      },
+      {
+        "path": "ag-associates-ai/backend/test_accountant_agent.py",
+        "language": "python",
+        "sizeLines": 74,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-associates-ai/backend/utils/conversation_service.py",
+        "language": "python",
+        "sizeLines": 69,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-associates-ai/backend/utils/mcp_client.py",
+        "language": "python",
+        "sizeLines": 115,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-associates-ai/backend/utils/s3.py",
+        "language": "python",
+        "sizeLines": 52,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-associates-ai/backend/voice/__init__.py",
+        "language": "python",
+        "sizeLines": 12,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-associates-ai/backend/voice/audit.py",
+        "language": "python",
+        "sizeLines": 166,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-associates-ai/backend/voice/piper_service.py",
+        "language": "python",
+        "sizeLines": 52,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-associates-ai/backend/voice/rate_limit.py",
+        "language": "python",
+        "sizeLines": 97,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-associates-ai/backend/voice/rbac.py",
+        "language": "python",
+        "sizeLines": 108,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-associates-ai/backend/voice/tool_registry.py",
+        "language": "python",
+        "sizeLines": 183,
+        "fileCategory": "code"
+      }
+    ]
+  },
+  {
+    "batchIndex": 3,
+    "files": [
+      {
+        "path": "ag-associates-ai/backend/voice/voice_api.py",
+        "language": "python",
+        "sizeLines": 469,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-associates-ai/backend/voice/vox_router.py",
+        "language": "python",
+        "sizeLines": 60,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-associates-ai/backend/voice/wakeword_listener.py",
+        "language": "python",
+        "sizeLines": 98,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-associates-ai/backend/voice/whatsapp.py",
+        "language": "python",
+        "sizeLines": 64,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-associates-ai/backend/voice/whisper_service.py",
+        "language": "python",
+        "sizeLines": 32,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-associates-ai/backend/vyasa_agent.py",
+        "language": "python",
+        "sizeLines": 69,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-associates-ai/backend/workforce_service.py",
+        "language": "python",
+        "sizeLines": 51,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-associates-ai/backend/workforce/__init__.py",
+        "language": "python",
+        "sizeLines": 6,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-associates-ai/backend/workforce/anomaly.py",
+        "language": "python",
+        "sizeLines": 79,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-associates-ai/backend/workforce/api.py",
+        "language": "python",
+        "sizeLines": 272,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-associates-ai/backend/workforce/ledger.py",
+        "language": "python",
+        "sizeLines": 101,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-associates-ai/database/init.sql",
+        "language": "sql",
+        "sizeLines": 62,
+        "fileCategory": "data"
+      },
+      {
+        "path": "ag-associates-ai/DAY3_COMPLETE.md",
+        "language": "markdown",
+        "sizeLines": 431,
+        "fileCategory": "docs"
+      },
+      {
+        "path": "ag-associates-ai/docker-compose.yml",
+        "language": "yaml",
+        "sizeLines": 128,
+        "fileCategory": "infra"
+      },
+      {
+        "path": "ag-associates-ai/frontend/app/components/AgentRoster.tsx",
+        "language": "typescript",
+        "sizeLines": 163,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-associates-ai/frontend/app/components/AishaChat.tsx",
+        "language": "typescript",
+        "sizeLines": 394,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-associates-ai/frontend/app/components/ContactSection.tsx",
+        "language": "typescript",
+        "sizeLines": 121,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-associates-ai/frontend/app/components/ExceptionMatrix.tsx",
+        "language": "typescript",
+        "sizeLines": 112,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-associates-ai/frontend/app/components/FlywheelSection.tsx",
+        "language": "typescript",
+        "sizeLines": 129,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-associates-ai/frontend/app/components/HeroSection.tsx",
+        "language": "typescript",
+        "sizeLines": 140,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-associates-ai/frontend/app/components/ManifestoSection.tsx",
+        "language": "typescript",
+        "sizeLines": 106,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-associates-ai/frontend/app/components/NavBar.tsx",
+        "language": "typescript",
+        "sizeLines": 81,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-associates-ai/frontend/app/components/TechStack.tsx",
+        "language": "typescript",
+        "sizeLines": 138,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-associates-ai/frontend/app/components/WorkflowTimeline.tsx",
+        "language": "typescript",
+        "sizeLines": 121,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-associates-ai/frontend/app/dashboard/page.tsx",
+        "language": "typescript",
+        "sizeLines": 446,
+        "fileCategory": "code"
+      }
+    ]
+  },
+  {
+    "batchIndex": 4,
+    "files": [
+      {
+        "path": "ag-associates-ai/frontend/app/globals.css",
+        "language": "css",
+        "sizeLines": 223,
+        "fileCategory": "markup"
+      },
+      {
+        "path": "ag-associates-ai/frontend/app/layout.tsx",
+        "language": "typescript",
+        "sizeLines": 63,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-associates-ai/frontend/app/noi-cases/page.tsx",
+        "language": "typescript",
+        "sizeLines": 650,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-associates-ai/frontend/app/noi-mobile/page.tsx",
+        "language": "typescript",
+        "sizeLines": 716,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-associates-ai/frontend/app/page.tsx",
+        "language": "typescript",
+        "sizeLines": 72,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-associates-ai/frontend/Dockerfile",
+        "language": "dockerfile",
+        "sizeLines": 34,
+        "fileCategory": "infra"
+      },
+      {
+        "path": "ag-associates-ai/frontend/next-env.d.ts",
+        "language": "typescript",
+        "sizeLines": 6,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-associates-ai/frontend/next.config.js",
+        "language": "javascript",
+        "sizeLines": 30,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-associates-ai/frontend/package.json",
+        "language": "json",
+        "sizeLines": 28,
+        "fileCategory": "config"
+      },
+      {
+        "path": "ag-associates-ai/frontend/postcss.config.js",
+        "language": "javascript",
+        "sizeLines": 6,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-associates-ai/frontend/public/.gitkeep",
+        "language": "unknown",
+        "sizeLines": 0,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-associates-ai/frontend/public/manifest.json",
+        "language": "json",
+        "sizeLines": 17,
+        "fileCategory": "config"
+      },
+      {
+        "path": "ag-associates-ai/frontend/tailwind.config.js",
+        "language": "javascript",
+        "sizeLines": 66,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-associates-ai/frontend/tsconfig.json",
+        "language": "json",
+        "sizeLines": 27,
+        "fileCategory": "config"
+      },
+      {
+        "path": "ag-associates-ai/LANGGRAPH_AGENTS.md",
+        "language": "markdown",
+        "sizeLines": 300,
+        "fileCategory": "docs"
+      },
+      {
+        "path": "ag-associates-ai/N8N_WHATSAPP_SETUP.md",
+        "language": "markdown",
+        "sizeLines": 314,
+        "fileCategory": "docs"
+      },
+      {
+        "path": "ag-associates-ai/README.md",
+        "language": "markdown",
+        "sizeLines": 107,
+        "fileCategory": "docs"
+      },
+      {
+        "path": "ag-associates-ai/tests/test_noi_logic.py",
+        "language": "python",
+        "sizeLines": 86,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-associates-ai/tests/test_noi_workflow.py",
+        "language": "python",
+        "sizeLines": 336,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-platform/.github/workflows/sonarcloud.yml",
+        "language": "yaml",
+        "sizeLines": 67,
+        "fileCategory": "infra"
+      },
+      {
+        "path": "ag-platform/.npmrc",
+        "language": "unknown",
+        "sizeLines": 1,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-platform/apps/mobile/__tests__/queue-drain.test.ts",
+        "language": "typescript",
+        "sizeLines": 118,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-platform/apps/mobile/app.config.ts",
+        "language": "typescript",
+        "sizeLines": 82,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-platform/apps/mobile/app/_layout.tsx",
+        "language": "typescript",
+        "sizeLines": 47,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-platform/apps/mobile/app/(app)/_layout.tsx",
+        "language": "typescript",
+        "sizeLines": 58,
+        "fileCategory": "code"
+      }
+    ]
+  },
+  {
+    "batchIndex": 5,
+    "files": [
+      {
+        "path": "ag-platform/apps/mobile/app/(app)/activity.tsx",
+        "language": "typescript",
+        "sizeLines": 40,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-platform/apps/mobile/app/(app)/cases/[caseId].tsx",
+        "language": "typescript",
+        "sizeLines": 94,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-platform/apps/mobile/app/(app)/dashboard.tsx",
+        "language": "typescript",
+        "sizeLines": 76,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-platform/apps/mobile/app/(app)/debug/queue.tsx",
+        "language": "typescript",
+        "sizeLines": 52,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-platform/apps/mobile/app/(app)/scanner.tsx",
+        "language": "typescript",
+        "sizeLines": 108,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-platform/apps/mobile/app/(app)/settings.tsx",
+        "language": "typescript",
+        "sizeLines": 95,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-platform/apps/mobile/app/index.tsx",
+        "language": "typescript",
+        "sizeLines": 21,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-platform/apps/mobile/app/login.tsx",
+        "language": "typescript",
+        "sizeLines": 87,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-platform/apps/mobile/app/privacy.tsx",
+        "language": "typescript",
+        "sizeLines": 45,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-platform/apps/mobile/babel.config.js",
+        "language": "javascript",
+        "sizeLines": 10,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-platform/apps/mobile/components/activity/ActivityToggle.tsx",
+        "language": "typescript",
+        "sizeLines": 61,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-platform/apps/mobile/components/activity/RouteMap.tsx",
+        "language": "typescript",
+        "sizeLines": 70,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-platform/apps/mobile/components/cases/CaseDetailHeader.tsx",
+        "language": "typescript",
+        "sizeLines": 44,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-platform/apps/mobile/components/cases/CaseDocuments.tsx",
+        "language": "typescript",
+        "sizeLines": 42,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-platform/apps/mobile/components/cases/CaseListItem.tsx",
+        "language": "typescript",
+        "sizeLines": 66,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-platform/apps/mobile/components/scanner/CameraButton.tsx",
+        "language": "typescript",
+        "sizeLines": 37,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-platform/apps/mobile/components/scanner/UploadQueueList.tsx",
+        "language": "typescript",
+        "sizeLines": 59,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-platform/apps/mobile/components/status/StatusBoard.tsx",
+        "language": "typescript",
+        "sizeLines": 44,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-platform/apps/mobile/components/status/StatusButton.tsx",
+        "language": "typescript",
+        "sizeLines": 39,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-platform/apps/mobile/components/system/OfflineIndicator.tsx",
+        "language": "typescript",
+        "sizeLines": 31,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-platform/apps/mobile/components/ui/EmptyState.tsx",
+        "language": "typescript",
+        "sizeLines": 35,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-platform/apps/mobile/components/ui/ErrorBoundary.tsx",
+        "language": "typescript",
+        "sizeLines": 63,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-platform/apps/mobile/components/ui/ErrorState.tsx",
+        "language": "typescript",
+        "sizeLines": 35,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-platform/apps/mobile/components/ui/index.ts",
+        "language": "typescript",
+        "sizeLines": 4,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-platform/apps/mobile/components/ui/Skeleton.tsx",
+        "language": "typescript",
+        "sizeLines": 55,
+        "fileCategory": "code"
+      }
+    ]
+  },
+  {
+    "batchIndex": 6,
+    "files": [
+      {
+        "path": "ag-platform/apps/mobile/eas.json",
+        "language": "json",
+        "sizeLines": 25,
+        "fileCategory": "config"
+      },
+      {
+        "path": "ag-platform/apps/mobile/global.css",
+        "language": "css",
+        "sizeLines": 3,
+        "fileCategory": "markup"
+      },
+      {
+        "path": "ag-platform/apps/mobile/hooks/useAuth.ts",
+        "language": "typescript",
+        "sizeLines": 44,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-platform/apps/mobile/hooks/useCase.ts",
+        "language": "typescript",
+        "sizeLines": 45,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-platform/apps/mobile/hooks/useCases.ts",
+        "language": "typescript",
+        "sizeLines": 45,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-platform/apps/mobile/hooks/useDocumentCapture.ts",
+        "language": "typescript",
+        "sizeLines": 96,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-platform/apps/mobile/hooks/useMutationQueue.ts",
+        "language": "typescript",
+        "sizeLines": 98,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-platform/apps/mobile/hooks/useOnDutyTracker.ts",
+        "language": "typescript",
+        "sizeLines": 101,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-platform/apps/mobile/hooks/useOnlineStatus.ts",
+        "language": "typescript",
+        "sizeLines": 13,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-platform/apps/mobile/hooks/usePushRegistration.ts",
+        "language": "typescript",
+        "sizeLines": 71,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-platform/apps/mobile/hooks/useRealtimeCases.ts",
+        "language": "typescript",
+        "sizeLines": 39,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-platform/apps/mobile/hooks/useStatusUpdate.ts",
+        "language": "typescript",
+        "sizeLines": 81,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-platform/apps/mobile/hooks/useTodayActivity.ts",
+        "language": "typescript",
+        "sizeLines": 31,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-platform/apps/mobile/lib/env.ts",
+        "language": "typescript",
+        "sizeLines": 32,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-platform/apps/mobile/lib/notifications.ts",
+        "language": "typescript",
+        "sizeLines": 17,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-platform/apps/mobile/lib/queryClient.ts",
+        "language": "typescript",
+        "sizeLines": 27,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-platform/apps/mobile/lib/queue/drain.ts",
+        "language": "typescript",
+        "sizeLines": 59,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-platform/apps/mobile/lib/queue/types.ts",
+        "language": "typescript",
+        "sizeLines": 61,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-platform/apps/mobile/lib/sentry.ts",
+        "language": "typescript",
+        "sizeLines": 14,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-platform/apps/mobile/lib/stores/useAuthStore.ts",
+        "language": "typescript",
+        "sizeLines": 85,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-platform/apps/mobile/lib/stores/useDutyStore.ts",
+        "language": "typescript",
+        "sizeLines": 30,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-platform/apps/mobile/lib/stores/useQueueStore.ts",
+        "language": "typescript",
+        "sizeLines": 53,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-platform/apps/mobile/lib/supabase.ts",
+        "language": "typescript",
+        "sizeLines": 18,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-platform/apps/mobile/metro.config.js",
+        "language": "javascript",
+        "sizeLines": 19,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-platform/apps/mobile/package.json",
+        "language": "json",
+        "sizeLines": 64,
+        "fileCategory": "config"
+      }
+    ]
+  },
+  {
+    "batchIndex": 7,
+    "files": [
+      {
+        "path": "ag-platform/apps/mobile/README.md",
+        "language": "markdown",
+        "sizeLines": 70,
+        "fileCategory": "docs"
+      },
+      {
+        "path": "ag-platform/apps/mobile/services/cases.ts",
+        "language": "typescript",
+        "sizeLines": 67,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-platform/apps/mobile/services/devices.ts",
+        "language": "typescript",
+        "sizeLines": 21,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-platform/apps/mobile/services/documents.ts",
+        "language": "typescript",
+        "sizeLines": 130,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-platform/apps/mobile/services/field.ts",
+        "language": "typescript",
+        "sizeLines": 18,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-platform/apps/mobile/tailwind.config.js",
+        "language": "javascript",
+        "sizeLines": 26,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-platform/apps/mobile/tsconfig.json",
+        "language": "json",
+        "sizeLines": 18,
+        "fileCategory": "config"
+      },
+      {
+        "path": "ag-platform/ARCHITECTURE.md",
+        "language": "markdown",
+        "sizeLines": 129,
+        "fileCategory": "docs"
+      },
+      {
+        "path": "ag-platform/Dockerfile",
+        "language": "dockerfile",
+        "sizeLines": 57,
+        "fileCategory": "infra"
+      },
+      {
+        "path": "ag-platform/docs/AUTH_ARCHITECTURE.md",
+        "language": "markdown",
+        "sizeLines": 66,
+        "fileCategory": "docs"
+      },
+      {
+        "path": "ag-platform/index.html",
+        "language": "html",
+        "sizeLines": 12,
+        "fileCategory": "markup"
+      },
+      {
+        "path": "ag-platform/package.json",
+        "language": "json",
+        "sizeLines": 62,
+        "fileCategory": "config"
+      },
+      {
+        "path": "ag-platform/packages/ai/package.json",
+        "language": "json",
+        "sizeLines": 17,
+        "fileCategory": "config"
+      },
+      {
+        "path": "ag-platform/packages/ai/src/gemini.ts",
+        "language": "typescript",
+        "sizeLines": 38,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-platform/packages/ai/src/index.ts",
+        "language": "typescript",
+        "sizeLines": 2,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-platform/packages/ai/src/prompts/legal.ts",
+        "language": "typescript",
+        "sizeLines": 13,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-platform/packages/ai/tsconfig.json",
+        "language": "json",
+        "sizeLines": 11,
+        "fileCategory": "config"
+      },
+      {
+        "path": "ag-platform/packages/db/migrations/001_ag_initial_schema.sql",
+        "language": "sql",
+        "sizeLines": 141,
+        "fileCategory": "data"
+      },
+      {
+        "path": "ag-platform/packages/db/migrations/002_pgvector_templates.sql",
+        "language": "sql",
+        "sizeLines": 61,
+        "fileCategory": "data"
+      },
+      {
+        "path": "ag-platform/packages/db/package.json",
+        "language": "json",
+        "sizeLines": 16,
+        "fileCategory": "config"
+      },
+      {
+        "path": "ag-platform/packages/db/src/index.ts",
+        "language": "typescript",
+        "sizeLines": 22,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-platform/packages/db/tsconfig.json",
+        "language": "json",
+        "sizeLines": 11,
+        "fileCategory": "config"
+      },
+      {
+        "path": "ag-platform/packages/types/package.json",
+        "language": "json",
+        "sizeLines": 10,
+        "fileCategory": "config"
+      },
+      {
+        "path": "ag-platform/packages/types/src/domain.ts",
+        "language": "typescript",
+        "sizeLines": 88,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-platform/packages/types/src/field-app.ts",
+        "language": "typescript",
+        "sizeLines": 128,
+        "fileCategory": "code"
+      }
+    ]
+  },
+  {
+    "batchIndex": 8,
+    "files": [
+      {
+        "path": "ag-platform/packages/types/src/index.ts",
+        "language": "typescript",
+        "sizeLines": 3,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-platform/packages/types/src/storage.ts",
+        "language": "typescript",
+        "sizeLines": 33,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-platform/packages/types/tsconfig.json",
+        "language": "json",
+        "sizeLines": 12,
+        "fileCategory": "config"
+      },
+      {
+        "path": "ag-platform/packages/ui/package.json",
+        "language": "json",
+        "sizeLines": 15,
+        "fileCategory": "config"
+      },
+      {
+        "path": "ag-platform/packages/ui/src/index.tsx",
+        "language": "typescript",
+        "sizeLines": 59,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-platform/packages/ui/tsconfig.json",
+        "language": "json",
+        "sizeLines": 12,
+        "fileCategory": "config"
+      },
+      {
+        "path": "ag-platform/postcss.config.js",
+        "language": "javascript",
+        "sizeLines": 6,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-platform/README.md",
+        "language": "markdown",
+        "sizeLines": 0,
+        "fileCategory": "docs"
+      },
+      {
+        "path": "ag-platform/render.yaml",
+        "language": "yaml",
+        "sizeLines": 9,
+        "fileCategory": "config"
+      },
+      {
+        "path": "ag-platform/SECURITY.md",
+        "language": "markdown",
+        "sizeLines": 21,
+        "fileCategory": "docs"
+      },
+      {
+        "path": "ag-platform/server.ts",
+        "language": "typescript",
+        "sizeLines": 118,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-platform/services/intake-api/Dockerfile",
+        "language": "dockerfile",
+        "sizeLines": 30,
+        "fileCategory": "infra"
+      },
+      {
+        "path": "ag-platform/services/intake-api/package.json",
+        "language": "json",
+        "sizeLines": 28,
+        "fileCategory": "config"
+      },
+      {
+        "path": "ag-platform/services/intake-api/src/routes/dashboard.ts",
+        "language": "typescript",
+        "sizeLines": 63,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-platform/services/intake-api/src/routes/webhook.ts",
+        "language": "typescript",
+        "sizeLines": 178,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-platform/services/intake-api/src/schemas/intake.schema.ts",
+        "language": "typescript",
+        "sizeLines": 19,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-platform/services/intake-api/src/server.ts",
+        "language": "typescript",
+        "sizeLines": 60,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-platform/services/intake-api/src/services/redis.service.ts",
+        "language": "typescript",
+        "sizeLines": 47,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-platform/services/intake-api/src/services/supabase.service.ts",
+        "language": "typescript",
+        "sizeLines": 53,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-platform/services/intake-api/tsconfig.json",
+        "language": "json",
+        "sizeLines": 15,
+        "fileCategory": "config"
+      },
+      {
+        "path": "ag-platform/src/App.tsx",
+        "language": "typescript",
+        "sizeLines": 122,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-platform/src/app/admin/voice/page.tsx",
+        "language": "typescript",
+        "sizeLines": 194,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-platform/src/app/admin/workforce/page.tsx",
+        "language": "typescript",
+        "sizeLines": 281,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-platform/src/app/login/page.tsx",
+        "language": "typescript",
+        "sizeLines": 74,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-platform/src/app/my-cases/page.tsx",
+        "language": "typescript",
+        "sizeLines": 62,
+        "fileCategory": "code"
+      }
+    ]
+  },
+  {
+    "batchIndex": 9,
+    "files": [
+      {
+        "path": "ag-platform/src/app/office/page.tsx",
+        "language": "typescript",
+        "sizeLines": 315,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-platform/src/components/admin/AdvisorCockpit.tsx",
+        "language": "typescript",
+        "sizeLines": 273,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-platform/src/components/admin/BrainstormHub.tsx",
+        "language": "typescript",
+        "sizeLines": 208,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-platform/src/components/admin/voice/VyasaVoiceControl.tsx",
+        "language": "typescript",
+        "sizeLines": 247,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-platform/src/components/admin/WorkforceControl.tsx",
+        "language": "typescript",
+        "sizeLines": 222,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-platform/src/components/ai/ClientEmailDrafting.tsx",
+        "language": "typescript",
+        "sizeLines": 113,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-platform/src/components/ai/ProjectBriefGenerator.tsx",
+        "language": "typescript",
+        "sizeLines": 143,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-platform/src/components/ai/SemanticProjectSearch.tsx",
+        "language": "typescript",
+        "sizeLines": 69,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-platform/src/components/ai/SmartTaskSuggestions.tsx",
+        "language": "typescript",
+        "sizeLines": 94,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-platform/src/components/applicant/ApplicantDashboard.tsx",
+        "language": "typescript",
+        "sizeLines": 137,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-platform/src/components/auth/LoginPage.tsx",
+        "language": "typescript",
+        "sizeLines": 192,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-platform/src/components/auth/ProtectedRoute.tsx",
+        "language": "typescript",
+        "sizeLines": 32,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-platform/src/components/bank/BankPortal.tsx",
+        "language": "typescript",
+        "sizeLines": 105,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-platform/src/components/collaboration/ActivityFeed.tsx",
+        "language": "typescript",
+        "sizeLines": 54,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-platform/src/components/collaboration/CommentThread.tsx",
+        "language": "typescript",
+        "sizeLines": 172,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-platform/src/components/collaboration/LivePresence.tsx",
+        "language": "typescript",
+        "sizeLines": 32,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-platform/src/components/collaboration/NotificationBell.tsx",
+        "language": "typescript",
+        "sizeLines": 85,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-platform/src/components/collaboration/TaskBoard.tsx",
+        "language": "typescript",
+        "sizeLines": 148,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-platform/src/components/collaboration/TaskCard.tsx",
+        "language": "typescript",
+        "sizeLines": 53,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-platform/src/components/collaboration/TimeTracker.tsx",
+        "language": "typescript",
+        "sizeLines": 220,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-platform/src/components/field/FieldApp.tsx",
+        "language": "typescript",
+        "sizeLines": 197,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-platform/src/components/home/MarketingLanding.tsx",
+        "language": "typescript",
+        "sizeLines": 232,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-platform/src/components/LandingPage.tsx",
+        "language": "typescript",
+        "sizeLines": 263,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-platform/src/components/privacy/policy-sections.tsx",
+        "language": "typescript",
+        "sizeLines": 172,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-platform/src/components/privacy/PrivacyPolicy.tsx",
+        "language": "typescript",
+        "sizeLines": 73,
+        "fileCategory": "code"
+      }
+    ]
+  },
+  {
+    "batchIndex": 10,
+    "files": [
+      {
+        "path": "ag-platform/src/components/storage/FilePreviewer.tsx",
+        "language": "typescript",
+        "sizeLines": 96,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-platform/src/components/storage/FileUploader.tsx",
+        "language": "typescript",
+        "sizeLines": 121,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-platform/src/components/storage/VersionHistory.tsx",
+        "language": "typescript",
+        "sizeLines": 85,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-platform/src/components/ui/EmptyState.tsx",
+        "language": "typescript",
+        "sizeLines": 37,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-platform/src/components/ui/ErrorBoundary.tsx",
+        "language": "typescript",
+        "sizeLines": 86,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-platform/src/components/ui/ErrorState.tsx",
+        "language": "typescript",
+        "sizeLines": 35,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-platform/src/components/ui/index.ts",
+        "language": "typescript",
+        "sizeLines": 4,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-platform/src/components/ui/Skeleton.tsx",
+        "language": "typescript",
+        "sizeLines": 31,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-platform/src/hooks/useActivityFeed.ts",
+        "language": "typescript",
+        "sizeLines": 87,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-platform/src/hooks/useLivePresence.ts",
+        "language": "typescript",
+        "sizeLines": 77,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-platform/src/hooks/useNotifications.ts",
+        "language": "typescript",
+        "sizeLines": 113,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-platform/src/index.css",
+        "language": "css",
+        "sizeLines": 16,
+        "fileCategory": "markup"
+      },
+      {
+        "path": "ag-platform/src/lib/billing.test.ts",
+        "language": "typescript",
+        "sizeLines": 23,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-platform/src/lib/billing.ts",
+        "language": "typescript",
+        "sizeLines": 10,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-platform/src/lib/storage/download.ts",
+        "language": "typescript",
+        "sizeLines": 46,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-platform/src/lib/storage/upload.test.ts",
+        "language": "typescript",
+        "sizeLines": 90,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-platform/src/lib/storage/upload.ts",
+        "language": "typescript",
+        "sizeLines": 99,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-platform/src/lib/supabase.ts",
+        "language": "typescript",
+        "sizeLines": 10,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-platform/src/main.tsx",
+        "language": "typescript",
+        "sizeLines": 10,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-platform/src/server/aiRouter.ts",
+        "language": "typescript",
+        "sizeLines": 295,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-platform/src/server/db.ts",
+        "language": "typescript",
+        "sizeLines": 22,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-platform/src/server/migrations.sql",
+        "language": "sql",
+        "sizeLines": 158,
+        "fileCategory": "data"
+      },
+      {
+        "path": "ag-platform/src/server/routes/cases.ts",
+        "language": "typescript",
+        "sizeLines": 62,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-platform/src/server/routes/timesheets.ts",
+        "language": "typescript",
+        "sizeLines": 65,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-platform/src/server/services/caseService.ts",
+        "language": "typescript",
+        "sizeLines": 60,
+        "fileCategory": "code"
+      }
+    ]
+  },
+  {
+    "batchIndex": 11,
+    "files": [
+      {
+        "path": "ag-platform/src/store/useAuthStore.ts",
+        "language": "typescript",
+        "sizeLines": 54,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-platform/src/types/domain.ts",
+        "language": "typescript",
+        "sizeLines": 88,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-platform/src/types/storage.ts",
+        "language": "typescript",
+        "sizeLines": 33,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-platform/supabase/functions/send-push-on-case-assigned/index.ts",
+        "language": "typescript",
+        "sizeLines": 101,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-platform/supabase/migrations/20260423_ai_setup.sql",
+        "language": "sql",
+        "sizeLines": 56,
+        "fileCategory": "data"
+      },
+      {
+        "path": "ag-platform/supabase/migrations/20260423_ai_tokens.sql",
+        "language": "sql",
+        "sizeLines": 11,
+        "fileCategory": "data"
+      },
+      {
+        "path": "ag-platform/supabase/migrations/20260423_collaboration_setup.sql",
+        "language": "sql",
+        "sizeLines": 75,
+        "fileCategory": "data"
+      },
+      {
+        "path": "ag-platform/supabase/migrations/20260423_document_storage_setup.sql",
+        "language": "sql",
+        "sizeLines": 93,
+        "fileCategory": "data"
+      },
+      {
+        "path": "ag-platform/supabase/migrations/20260514000000_core_schema.sql",
+        "language": "sql",
+        "sizeLines": 85,
+        "fileCategory": "data"
+      },
+      {
+        "path": "ag-platform/supabase/migrations/20260514000000_init_schema.sql",
+        "language": "sql",
+        "sizeLines": 64,
+        "fileCategory": "data"
+      },
+      {
+        "path": "ag-platform/supabase/migrations/20260514000001_auth_hooks.sql",
+        "language": "sql",
+        "sizeLines": 52,
+        "fileCategory": "data"
+      },
+      {
+        "path": "ag-platform/supabase/migrations/20260514000002_rbac_setup.sql",
+        "language": "sql",
+        "sizeLines": 43,
+        "fileCategory": "data"
+      },
+      {
+        "path": "ag-platform/supabase/migrations/20260514000003_voice_system_setup.sql",
+        "language": "sql",
+        "sizeLines": 67,
+        "fileCategory": "data"
+      },
+      {
+        "path": "ag-platform/supabase/migrations/20260514000004_workforce_management.sql",
+        "language": "sql",
+        "sizeLines": 95,
+        "fileCategory": "data"
+      },
+      {
+        "path": "ag-platform/supabase/migrations/20260515000000_voice_command_logs.sql",
+        "language": "sql",
+        "sizeLines": 46,
+        "fileCategory": "data"
+      },
+      {
+        "path": "ag-platform/supabase/migrations/20260515000001_voice_tool_config.sql",
+        "language": "sql",
+        "sizeLines": 18,
+        "fileCategory": "data"
+      },
+      {
+        "path": "ag-platform/supabase/migrations/20260515000002_workforce.sql",
+        "language": "sql",
+        "sizeLines": 146,
+        "fileCategory": "data"
+      },
+      {
+        "path": "ag-platform/supabase/migrations/20260515000003_workforce_phase4.sql",
+        "language": "sql",
+        "sizeLines": 27,
+        "fileCategory": "data"
+      },
+      {
+        "path": "ag-platform/supabase/migrations/20260518000000_field_app.sql",
+        "language": "sql",
+        "sizeLines": 141,
+        "fileCategory": "data"
+      },
+      {
+        "path": "ag-platform/supabase/migrations/20260519000000_push_trigger.sql",
+        "language": "sql",
+        "sizeLines": 67,
+        "fileCategory": "data"
+      },
+      {
+        "path": "ag-platform/supabase/migrations/20260520000000_fix_auth_token_hook.sql",
+        "language": "sql",
+        "sizeLines": 104,
+        "fileCategory": "data"
+      },
+      {
+        "path": "ag-platform/tailwind.config.js",
+        "language": "javascript",
+        "sizeLines": 17,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-platform/tsconfig.json",
+        "language": "json",
+        "sizeLines": 30,
+        "fileCategory": "config"
+      },
+      {
+        "path": "ag-platform/tsconfig.node.json",
+        "language": "json",
+        "sizeLines": 10,
+        "fileCategory": "config"
+      },
+      {
+        "path": "ag-platform/turbo.json",
+        "language": "json",
+        "sizeLines": 24,
+        "fileCategory": "config"
+      }
+    ]
+  },
+  {
+    "batchIndex": 12,
+    "files": [
+      {
+        "path": "ag-platform/vite.config.ts",
+        "language": "typescript",
+        "sizeLines": 13,
+        "fileCategory": "code"
+      },
+      {
+        "path": "ag-platform/vitest.config.ts",
+        "language": "typescript",
+        "sizeLines": 10,
+        "fileCategory": "code"
+      },
+      {
+        "path": "Caddyfile",
+        "language": "unknown",
+        "sizeLines": 58,
+        "fileCategory": "code"
+      },
+      {
+        "path": "CLAUDE.md",
+        "language": "markdown",
+        "sizeLines": 187,
+        "fileCategory": "docs"
+      },
+      {
+        "path": "CNAME",
+        "language": "unknown",
+        "sizeLines": 1,
+        "fileCategory": "code"
+      },
+      {
+        "path": "CODEOWNERS",
+        "language": "unknown",
+        "sizeLines": 28,
+        "fileCategory": "code"
+      },
+      {
+        "path": "commitlint.config.js",
+        "language": "javascript",
+        "sizeLines": 46,
+        "fileCategory": "code"
+      },
+      {
+        "path": "content/02-getting-started/jupyter_notebooks.ipynb",
+        "language": "ipynb",
+        "sizeLines": 641,
+        "fileCategory": "code"
+      },
+      {
+        "path": "CONTEXT.md",
+        "language": "markdown",
+        "sizeLines": 119,
+        "fileCategory": "docs"
+      },
+      {
+        "path": "CONTRIBUTING.md",
+        "language": "markdown",
+        "sizeLines": 78,
+        "fileCategory": "docs"
+      },
+      {
+        "path": "CULTURE.md",
+        "language": "markdown",
+        "sizeLines": 306,
+        "fileCategory": "docs"
+      },
+      {
+        "path": "DEPLOYMENT_PLAYBOOK.md",
+        "language": "markdown",
+        "sizeLines": 261,
+        "fileCategory": "docs"
+      },
+      {
+        "path": "DEVIN_PLAYBOOK.md",
+        "language": "markdown",
+        "sizeLines": 154,
+        "fileCategory": "docs"
+      },
+      {
+        "path": "docker-compose.prod.yml",
+        "language": "yaml",
+        "sizeLines": 254,
+        "fileCategory": "infra"
+      },
+      {
+        "path": "docker-compose.yml",
+        "language": "yaml",
+        "sizeLines": 64,
+        "fileCategory": "infra"
+      },
+      {
+        "path": "docs/adr/0001-monorepo-orchestration.md",
+        "language": "markdown",
+        "sizeLines": 55,
+        "fileCategory": "docs"
+      },
+      {
+        "path": "docs/noi-automation-plan.md",
+        "language": "markdown",
+        "sizeLines": 490,
+        "fileCategory": "docs"
+      },
+      {
+        "path": "ERROR_HANDLING_GUIDELINES.md",
+        "language": "markdown",
+        "sizeLines": 78,
+        "fileCategory": "docs"
+      },
+      {
+        "path": "FRONTEND_UI_GUIDELINES.md",
+        "language": "markdown",
+        "sizeLines": 62,
+        "fileCategory": "docs"
+      },
+      {
+        "path": "GIT_GUIDELINES.md",
+        "language": "markdown",
+        "sizeLines": 64,
+        "fileCategory": "docs"
+      },
+      {
+        "path": "GOAL_DRIVEN_EXECUTION_GUIDELINES.md",
+        "language": "markdown",
+        "sizeLines": 83,
+        "fileCategory": "docs"
+      },
+      {
+        "path": "GOVERNANCE.md",
+        "language": "markdown",
+        "sizeLines": 113,
+        "fileCategory": "docs"
+      },
+      {
+        "path": "HALLUCINATION_MITIGATION_GUIDELINES.md",
+        "language": "markdown",
+        "sizeLines": 88,
+        "fileCategory": "docs"
+      },
+      {
+        "path": "Makefile",
+        "language": "makefile",
+        "sizeLines": 118,
+        "fileCategory": "infra"
+      },
+      {
+        "path": "package.json",
+        "language": "json",
+        "sizeLines": 17,
+        "fileCategory": "config"
+      }
+    ]
+  },
+  {
+    "batchIndex": 13,
+    "files": [
+      {
+        "path": "prototype/noi-dashboard/index.html",
+        "language": "html",
+        "sizeLines": 13,
+        "fileCategory": "markup"
+      },
+      {
+        "path": "prototype/noi-dashboard/package.json",
+        "language": "json",
+        "sizeLines": 24,
+        "fileCategory": "config"
+      },
+      {
+        "path": "prototype/noi-dashboard/postcss.config.js",
+        "language": "javascript",
+        "sizeLines": 6,
+        "fileCategory": "code"
+      },
+      {
+        "path": "prototype/noi-dashboard/src/App.tsx",
+        "language": "typescript",
+        "sizeLines": 439,
+        "fileCategory": "code"
+      },
+      {
+        "path": "prototype/noi-dashboard/src/index.css",
+        "language": "css",
+        "sizeLines": 53,
+        "fileCategory": "markup"
+      },
+      {
+        "path": "prototype/noi-dashboard/src/main.tsx",
+        "language": "typescript",
+        "sizeLines": 10,
+        "fileCategory": "code"
+      },
+      {
+        "path": "prototype/noi-dashboard/tailwind.config.js",
+        "language": "javascript",
+        "sizeLines": 15,
+        "fileCategory": "code"
+      },
+      {
+        "path": "prototype/noi-dashboard/vite.config.ts",
+        "language": "typescript",
+        "sizeLines": 6,
+        "fileCategory": "code"
+      },
+      {
+        "path": "RAG_AND_MEMORY_GUIDELINES.md",
+        "language": "markdown",
+        "sizeLines": 97,
+        "fileCategory": "docs"
+      },
+      {
+        "path": "README.md",
+        "language": "markdown",
+        "sizeLines": 364,
+        "fileCategory": "docs"
+      },
+      {
+        "path": "REFACTORING_GUIDELINES.md",
+        "language": "markdown",
+        "sizeLines": 64,
+        "fileCategory": "docs"
+      },
+      {
+        "path": "render.yaml",
+        "language": "yaml",
+        "sizeLines": 52,
+        "fileCategory": "config"
+      },
+      {
+        "path": "scripts/backup.sh",
+        "language": "shell",
+        "sizeLines": 62,
+        "fileCategory": "script"
+      },
+      {
+        "path": "scripts/bootstrap-vps.sh",
+        "language": "shell",
+        "sizeLines": 113,
+        "fileCategory": "script"
+      },
+      {
+        "path": "scripts/provision.sh",
+        "language": "shell",
+        "sizeLines": 267,
+        "fileCategory": "script"
+      },
+      {
+        "path": "scripts/setup-runner.sh",
+        "language": "shell",
+        "sizeLines": 86,
+        "fileCategory": "script"
+      },
+      {
+        "path": "scripts/setup-telegram-bot.sh",
+        "language": "shell",
+        "sizeLines": 53,
+        "fileCategory": "script"
+      },
+      {
+        "path": "SECURITY.md",
+        "language": "markdown",
+        "sizeLines": 49,
+        "fileCategory": "docs"
+      },
+      {
+        "path": "tasks/lessons.md",
+        "language": "markdown",
+        "sizeLines": 35,
+        "fileCategory": "docs"
+      },
+      {
+        "path": "tasks/todo.md",
+        "language": "markdown",
+        "sizeLines": 30,
+        "fileCategory": "docs"
+      },
+      {
+        "path": "TDD_GUIDELINES.md",
+        "language": "markdown",
+        "sizeLines": 78,
+        "fileCategory": "docs"
+      },
+      {
+        "path": "turbo.json",
+        "language": "json",
+        "sizeLines": 37,
+        "fileCategory": "config"
+      }
+    ]
+  }
+]

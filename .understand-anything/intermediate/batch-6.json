@@ -1,0 +1,697 @@
+{
+  "nodes": [
+    {
+      "id": "config:ag-platform/apps/mobile/eas.json",
+      "type": "config",
+      "name": "eas.json",
+      "filePath": "ag-platform/apps/mobile/eas.json",
+      "summary": "EAS Build configuration defining development, preview, and production build profiles with iOS simulator support and auto-incrementing versions.",
+      "tags": ["configuration", "build-system", "mobile", "expo"],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:ag-platform/apps/mobile/package.json",
+      "type": "config",
+      "name": "package.json",
+      "filePath": "ag-platform/apps/mobile/package.json",
+      "summary": "Mobile app package configuration with Expo SDK 51 dependencies including navigation, camera, maps, notifications, and offline storage.",
+      "tags": ["configuration", "mobile", "expo", "dependencies"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:ag-platform/apps/mobile/global.css",
+      "type": "file",
+      "name": "global.css",
+      "filePath": "ag-platform/apps/mobile/global.css",
+      "summary": "Tailwind CSS entry-point importing base, component, and utility layers for the mobile app.",
+      "tags": ["styles", "css", "tailwind"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:ag-platform/apps/mobile/hooks/useAuth.ts",
+      "type": "file",
+      "name": "useAuth.ts",
+      "filePath": "ag-platform/apps/mobile/hooks/useAuth.ts",
+      "summary": "Authentication hooks providing auth state selector and magic link sign-in with Supabase for the mobile app.",
+      "tags": ["hook", "authentication", "supabase", "mobile"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:ag-platform/apps/mobile/hooks/useCase.ts",
+      "type": "file",
+      "name": "useCase.ts",
+      "filePath": "ag-platform/apps/mobile/hooks/useCase.ts",
+      "summary": "React Query hooks for fetching individual case details and associated documents from Supabase.",
+      "tags": ["hook", "data-fetching", "cases", "supabase"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:ag-platform/apps/mobile/hooks/useCases.ts",
+      "type": "file",
+      "name": "useCases.ts",
+      "filePath": "ag-platform/apps/mobile/hooks/useCases.ts",
+      "summary": "React Query hook for fetching the list of cases assigned to the current executive user.",
+      "tags": ["hook", "data-fetching", "cases", "supabase"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:ag-platform/apps/mobile/hooks/useDocumentCapture.ts",
+      "type": "file",
+      "name": "useDocumentCapture.ts",
+      "filePath": "ag-platform/apps/mobile/hooks/useDocumentCapture.ts",
+      "summary": "Camera capture hook that takes photos, persists them to the app cache directory, and enqueues document upload mutations for offline replay.",
+      "tags": ["hook", "document", "camera", "offline", "capture"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:ag-platform/apps/mobile/hooks/useMutationQueue.ts",
+      "type": "file",
+      "name": "useMutationQueue.ts",
+      "filePath": "ag-platform/apps/mobile/hooks/useMutationQueue.ts",
+      "summary": "Singleton hook that drains the offline mutation queue FIFO with exponential backoff retry and automatic replay on connectivity restored.",
+      "tags": ["hook", "queue", "offline", "mutation", "sync"],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:ag-platform/apps/mobile/hooks/useOnDutyTracker.ts",
+      "type": "file",
+      "name": "useOnDutyTracker.ts",
+      "filePath": "ag-platform/apps/mobile/hooks/useOnDutyTracker.ts",
+      "summary": "Foreground GPS location tracker that buffers breadcrumbs and flushes them in batches to the activity log while the officer is on duty.",
+      "tags": ["hook", "location", "tracking", "gps", "field-service"],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:ag-platform/apps/mobile/hooks/useOnlineStatus.ts",
+      "type": "file",
+      "name": "useOnlineStatus.ts",
+      "filePath": "ag-platform/apps/mobile/hooks/useOnlineStatus.ts",
+      "summary": "Network connectivity hook that tracks online/offline state using NetInfo.",
+      "tags": ["hook", "network", "connectivity", "offline"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:ag-platform/apps/mobile/hooks/usePushRegistration.ts",
+      "type": "file",
+      "name": "usePushRegistration.ts",
+      "filePath": "ag-platform/apps/mobile/hooks/usePushRegistration.ts",
+      "summary": "Push notification registration hook that requests permissions and upserts the Expo push token for the authenticated user.",
+      "tags": ["hook", "push-notifications", "mobile", "expo"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:ag-platform/apps/mobile/hooks/useRealtimeCases.ts",
+      "type": "file",
+      "name": "useRealtimeCases.ts",
+      "filePath": "ag-platform/apps/mobile/hooks/useRealtimeCases.ts",
+      "summary": "Supabase real-time subscription hook that invalidates the cases query cache when case records change for the current executive.",
+      "tags": ["hook", "realtime", "supabase", "subscription", "cases"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:ag-platform/apps/mobile/hooks/useStatusUpdate.ts",
+      "type": "file",
+      "name": "useStatusUpdate.ts",
+      "filePath": "ag-platform/apps/mobile/hooks/useStatusUpdate.ts",
+      "summary": "Optimistic status update hook that enqueues status transitions into the offline mutation queue with immediate cache patching.",
+      "tags": ["hook", "status", "updates", "offline", "optimistic"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:ag-platform/apps/mobile/hooks/useTodayActivity.ts",
+      "type": "file",
+      "name": "useTodayActivity.ts",
+      "filePath": "ag-platform/apps/mobile/hooks/useTodayActivity.ts",
+      "summary": "React Query hook for fetching today's field activity GPS logs for the current executive.",
+      "tags": ["hook", "activity", "field-service", "data-fetching"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:ag-platform/apps/mobile/lib/env.ts",
+      "type": "file",
+      "name": "env.ts",
+      "filePath": "ag-platform/apps/mobile/lib/env.ts",
+      "summary": "Runtime environment variable reader that validates required config values from Expo Constants and fails loudly on missing production vars.",
+      "tags": ["utility", "configuration", "environment", "validation"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:ag-platform/apps/mobile/lib/notifications.ts",
+      "type": "file",
+      "name": "notifications.ts",
+      "filePath": "ag-platform/apps/mobile/lib/notifications.ts",
+      "summary": "Notification handler configuration that foregrounds push notifications using the default alert presentation.",
+      "tags": ["utility", "notifications", "mobile", "configuration"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:ag-platform/apps/mobile/lib/queryClient.ts",
+      "type": "file",
+      "name": "queryClient.ts",
+      "filePath": "ag-platform/apps/mobile/lib/queryClient.ts",
+      "summary": "React Query client setup with AsyncStorage persistence for offline cache survival across cold starts.",
+      "tags": ["utility", "query", "caching", "offline", "persistence"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:ag-platform/apps/mobile/lib/queue/drain.ts",
+      "type": "file",
+      "name": "drain.ts",
+      "filePath": "ag-platform/apps/mobile/lib/queue/drain.ts",
+      "summary": "Offline queue drain processor that replays mutations FIFO with configurable retry limits and per-item error handling.",
+      "tags": ["utility", "queue", "offline", "retry", "sync"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:ag-platform/apps/mobile/lib/queue/types.ts",
+      "type": "file",
+      "name": "types.ts",
+      "filePath": "ag-platform/apps/mobile/lib/queue/types.ts",
+      "summary": "TypeScript type definitions for the offline mutation queue including status updates, document uploads, and drain result contracts.",
+      "tags": ["type-definition", "queue", "typescript", "offline"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:ag-platform/apps/mobile/lib/sentry.ts",
+      "type": "file",
+      "name": "sentry.ts",
+      "filePath": "ag-platform/apps/mobile/lib/sentry.ts",
+      "summary": "Sentry crash reporting initialisation for error tracking and performance monitoring in the mobile app.",
+      "tags": ["utility", "monitoring", "error-tracking", "sentry"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:ag-platform/apps/mobile/lib/stores/useAuthStore.ts",
+      "type": "file",
+      "name": "useAuthStore.ts",
+      "filePath": "ag-platform/apps/mobile/lib/stores/useAuthStore.ts",
+      "summary": "Zustand auth store with AsyncStorage persistence managing session, user, role, and organisation state with Supabase auth lifecycle.",
+      "tags": ["store", "authentication", "state-management", "persistence"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:ag-platform/apps/mobile/lib/stores/useDutyStore.ts",
+      "type": "file",
+      "name": "useDutyStore.ts",
+      "filePath": "ag-platform/apps/mobile/lib/stores/useDutyStore.ts",
+      "summary": "Zustand store tracking on-duty state toggle for field officer location monitoring.",
+      "tags": ["store", "duty", "field-service", "state-management"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:ag-platform/apps/mobile/lib/stores/useQueueStore.ts",
+      "type": "file",
+      "name": "useQueueStore.ts",
+      "filePath": "ag-platform/apps/mobile/lib/stores/useQueueStore.ts",
+      "summary": "Zustand queue store with AsyncStorage persistence managing offline mutation enqueue, status tracking, deduplication, and cleanup.",
+      "tags": ["store", "queue", "offline", "state-management", "persistence"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:ag-platform/apps/mobile/lib/supabase.ts",
+      "type": "file",
+      "name": "supabase.ts",
+      "filePath": "ag-platform/apps/mobile/lib/supabase.ts",
+      "summary": "Supabase client singleton initialisation for database queries and real-time subscriptions in the mobile app.",
+      "tags": ["utility", "supabase", "database", "realtime"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:ag-platform/apps/mobile/metro.config.js",
+      "type": "file",
+      "name": "metro.config.js",
+      "filePath": "ag-platform/apps/mobile/metro.config.js",
+      "summary": "Metro bundler configuration enabling monorepo package resolution for @ag/types and NativeWind Tailwind CSS integration.",
+      "tags": ["configuration", "bundler", "mobile", "monorepo"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:ag-platform/apps/mobile/hooks/useAuth.ts:useAuth",
+      "type": "function",
+      "name": "useAuth",
+      "filePath": "ag-platform/apps/mobile/hooks/useAuth.ts",
+      "lineRange": [5, 14],
+      "summary": "Auth state selector hook exposing user, session, role, orgId, and signOut from the Zustand auth store.",
+      "tags": ["hook", "authentication", "state-selector"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:ag-platform/apps/mobile/hooks/useAuth.ts:useSendMagicLink",
+      "type": "function",
+      "name": "useSendMagicLink",
+      "filePath": "ag-platform/apps/mobile/hooks/useAuth.ts",
+      "lineRange": [21, 44],
+      "summary": "Magic link email authentication hook with sending state, error handling, and success tracking.",
+      "tags": ["hook", "authentication", "magic-link", "email"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:ag-platform/apps/mobile/hooks/useCase.ts:useCase",
+      "type": "function",
+      "name": "useCase",
+      "filePath": "ag-platform/apps/mobile/hooks/useCase.ts",
+      "lineRange": [31, 37],
+      "summary": "React Query hook fetching a single case by ID with enabled guard for truthy caseId.",
+      "tags": ["hook", "data-fetching", "case", "query"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:ag-platform/apps/mobile/hooks/useCase.ts:useCaseDocuments",
+      "type": "function",
+      "name": "useCaseDocuments",
+      "filePath": "ag-platform/apps/mobile/hooks/useCase.ts",
+      "lineRange": [39, 45],
+      "summary": "React Query hook fetching documents associated with a case by case ID.",
+      "tags": ["hook", "data-fetching", "documents", "query"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:ag-platform/apps/mobile/hooks/useCases.ts:useAssignedCases",
+      "type": "function",
+      "name": "useAssignedCases",
+      "filePath": "ag-platform/apps/mobile/hooks/useCases.ts",
+      "lineRange": [37, 45],
+      "summary": "React Query hook fetching cases assigned to the current executive using auth store for user and org IDs.",
+      "tags": ["hook", "data-fetching", "cases", "query"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:ag-platform/apps/mobile/hooks/useDocumentCapture.ts:useDocumentCapture",
+      "type": "function",
+      "name": "useDocumentCapture",
+      "filePath": "ag-platform/apps/mobile/hooks/useDocumentCapture.ts",
+      "lineRange": [24, 96],
+      "summary": "Camera capture hook orchestrating permission requests, photo capture, file persistence, and mutation enqueue for offline upload.",
+      "tags": ["hook", "document", "camera", "capture", "offline"],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:ag-platform/apps/mobile/hooks/useMutationQueue.ts:useMutationQueue",
+      "type": "function",
+      "name": "useMutationQueue",
+      "filePath": "ag-platform/apps/mobile/hooks/useMutationQueue.ts",
+      "lineRange": [18, 89],
+      "summary": "Singleton mutation drain hook that processes the queue FIFO with exponential backoff and triggers on connectivity restore.",
+      "tags": ["hook", "queue", "offline", "sync", "retry"],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:ag-platform/apps/mobile/hooks/useOnDutyTracker.ts:useOnDutyTracker",
+      "type": "function",
+      "name": "useOnDutyTracker",
+      "filePath": "ag-platform/apps/mobile/hooks/useOnDutyTracker.ts",
+      "lineRange": [24, 73],
+      "summary": "GPS tracking hook that subscribes to location updates at balanced accuracy and buffers breadcrumbs for batch flushing.",
+      "tags": ["hook", "location", "tracking", "gps", "duty"],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:ag-platform/apps/mobile/hooks/useOnDutyTracker.ts:flush",
+      "type": "function",
+      "name": "flush",
+      "filePath": "ag-platform/apps/mobile/hooks/useOnDutyTracker.ts",
+      "lineRange": [75, 85],
+      "summary": "Flushes the GPS breadcrumb buffer to the server, re-queuing the batch at the head on failure.",
+      "tags": ["utility", "flush", "location", "buffer"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:ag-platform/apps/mobile/hooks/useOnDutyTracker.ts:teardown",
+      "type": "function",
+      "name": "teardown",
+      "filePath": "ag-platform/apps/mobile/hooks/useOnDutyTracker.ts",
+      "lineRange": [87, 101],
+      "summary": "Cleans up location subscription, flush timer, and flushes remaining buffer on duty toggle off.",
+      "tags": ["utility", "cleanup", "location", "teardown"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:ag-platform/apps/mobile/hooks/useOnlineStatus.ts:useOnlineStatus",
+      "type": "function",
+      "name": "useOnlineStatus",
+      "filePath": "ag-platform/apps/mobile/hooks/useOnlineStatus.ts",
+      "lineRange": [4, 13],
+      "summary": "Connectivity hook tracking online/offline state via NetInfo event listener.",
+      "tags": ["hook", "network", "connectivity", "status"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:ag-platform/apps/mobile/hooks/usePushRegistration.ts:usePushRegistration",
+      "type": "function",
+      "name": "usePushRegistration",
+      "filePath": "ag-platform/apps/mobile/hooks/usePushRegistration.ts",
+      "lineRange": [15, 71],
+      "summary": "Push registration hook handling permission requests, platform notification channels, and Expo push token upsert.",
+      "tags": ["hook", "push-notifications", "registration", "expo"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:ag-platform/apps/mobile/hooks/useRealtimeCases.ts:useRealtimeCases",
+      "type": "function",
+      "name": "useRealtimeCases",
+      "filePath": "ag-platform/apps/mobile/hooks/useRealtimeCases.ts",
+      "lineRange": [10, 39],
+      "summary": "Supabase real-time subscription hook that auto-invalidates case query cache on postgres changes.",
+      "tags": ["hook", "realtime", "subscription", "cases", "cache"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:ag-platform/apps/mobile/hooks/useStatusUpdate.ts:useStatusUpdate",
+      "type": "function",
+      "name": "useStatusUpdate",
+      "filePath": "ag-platform/apps/mobile/hooks/useStatusUpdate.ts",
+      "lineRange": [23, 81],
+      "summary": "Optimistic status update hook that enqueues mutations and patches the React Query cache for instant UI feedback.",
+      "tags": ["hook", "status", "optimistic", "offline", "mutation"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:ag-platform/apps/mobile/hooks/useTodayActivity.ts:useTodayActivity",
+      "type": "function",
+      "name": "useTodayActivity",
+      "filePath": "ag-platform/apps/mobile/hooks/useTodayActivity.ts",
+      "lineRange": [23, 31],
+      "summary": "React Query hook fetching today's field activity logs for the current executive.",
+      "tags": ["hook", "activity", "query", "field-service"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:ag-platform/apps/mobile/hooks/useTodayActivity.ts:fetchTodayActivity",
+      "type": "function",
+      "name": "fetchTodayActivity",
+      "filePath": "ag-platform/apps/mobile/hooks/useTodayActivity.ts",
+      "lineRange": [6, 21],
+      "summary": "Queries field activity logs from Supabase for today's GPS breadcrumbs filtered by executive ID.",
+      "tags": ["utility", "data-fetching", "activity", "supabase"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:ag-platform/apps/mobile/lib/env.ts:read",
+      "type": "function",
+      "name": "read",
+      "filePath": "ag-platform/apps/mobile/lib/env.ts",
+      "lineRange": [14, 24],
+      "summary": "Reads and validates a typed environment variable from Expo Constants, throwing on missing required values.",
+      "tags": ["utility", "configuration", "validation", "env"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:ag-platform/apps/mobile/lib/notifications.ts:configureNotifications",
+      "type": "function",
+      "name": "configureNotifications",
+      "filePath": "ag-platform/apps/mobile/lib/notifications.ts",
+      "lineRange": [7, 17],
+      "summary": "Configures Expo notifications to show banners and play sounds while the app is in the foreground.",
+      "tags": ["utility", "notifications", "configuration", "expo"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:ag-platform/apps/mobile/lib/queue/drain.ts:drainQueue",
+      "type": "function",
+      "name": "drainQueue",
+      "filePath": "ag-platform/apps/mobile/lib/queue/drain.ts",
+      "lineRange": [21, 57],
+      "summary": "FIFO queue drain processor that replays pending mutations with retry limit enforcement and bail-out on hard failures.",
+      "tags": ["utility", "queue", "offline", "drain", "retry"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:ag-platform/apps/mobile/lib/sentry.ts:initSentry",
+      "type": "function",
+      "name": "initSentry",
+      "filePath": "ag-platform/apps/mobile/lib/sentry.ts",
+      "lineRange": [6, 14],
+      "summary": "Initialises Sentry crash reporting with environment context from Expo Constants.",
+      "tags": ["utility", "monitoring", "error-tracking", "sentry"],
+      "complexity": "simple"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:ag-platform/apps/mobile/hooks/useAuth.ts",
+      "target": "function:ag-platform/apps/mobile/hooks/useAuth.ts:useAuth",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-platform/apps/mobile/hooks/useAuth.ts",
+      "target": "function:ag-platform/apps/mobile/hooks/useAuth.ts:useSendMagicLink",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-platform/apps/mobile/hooks/useCase.ts",
+      "target": "function:ag-platform/apps/mobile/hooks/useCase.ts:useCase",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-platform/apps/mobile/hooks/useCase.ts",
+      "target": "function:ag-platform/apps/mobile/hooks/useCase.ts:useCaseDocuments",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-platform/apps/mobile/hooks/useCases.ts",
+      "target": "function:ag-platform/apps/mobile/hooks/useCases.ts:useAssignedCases",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-platform/apps/mobile/hooks/useDocumentCapture.ts",
+      "target": "function:ag-platform/apps/mobile/hooks/useDocumentCapture.ts:useDocumentCapture",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-platform/apps/mobile/hooks/useMutationQueue.ts",
+      "target": "function:ag-platform/apps/mobile/hooks/useMutationQueue.ts:useMutationQueue",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-platform/apps/mobile/hooks/useOnDutyTracker.ts",
+      "target": "function:ag-platform/apps/mobile/hooks/useOnDutyTracker.ts:useOnDutyTracker",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-platform/apps/mobile/hooks/useOnDutyTracker.ts",
+      "target": "function:ag-platform/apps/mobile/hooks/useOnDutyTracker.ts:flush",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-platform/apps/mobile/hooks/useOnDutyTracker.ts",
+      "target": "function:ag-platform/apps/mobile/hooks/useOnDutyTracker.ts:teardown",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-platform/apps/mobile/hooks/useOnlineStatus.ts",
+      "target": "function:ag-platform/apps/mobile/hooks/useOnlineStatus.ts:useOnlineStatus",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-platform/apps/mobile/hooks/usePushRegistration.ts",
+      "target": "function:ag-platform/apps/mobile/hooks/usePushRegistration.ts:usePushRegistration",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-platform/apps/mobile/hooks/useRealtimeCases.ts",
+      "target": "function:ag-platform/apps/mobile/hooks/useRealtimeCases.ts:useRealtimeCases",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-platform/apps/mobile/hooks/useStatusUpdate.ts",
+      "target": "function:ag-platform/apps/mobile/hooks/useStatusUpdate.ts:useStatusUpdate",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-platform/apps/mobile/hooks/useTodayActivity.ts",
+      "target": "function:ag-platform/apps/mobile/hooks/useTodayActivity.ts:useTodayActivity",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-platform/apps/mobile/hooks/useTodayActivity.ts",
+      "target": "function:ag-platform/apps/mobile/hooks/useTodayActivity.ts:fetchTodayActivity",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-platform/apps/mobile/lib/env.ts",
+      "target": "function:ag-platform/apps/mobile/lib/env.ts:read",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-platform/apps/mobile/lib/notifications.ts",
+      "target": "function:ag-platform/apps/mobile/lib/notifications.ts:configureNotifications",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-platform/apps/mobile/lib/queue/drain.ts",
+      "target": "function:ag-platform/apps/mobile/lib/queue/drain.ts:drainQueue",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-platform/apps/mobile/lib/sentry.ts",
+      "target": "function:ag-platform/apps/mobile/lib/sentry.ts:initSentry",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-platform/apps/mobile/hooks/useAuth.ts",
+      "target": "function:ag-platform/apps/mobile/hooks/useAuth.ts:useAuth",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:ag-platform/apps/mobile/hooks/useAuth.ts",
+      "target": "function:ag-platform/apps/mobile/hooks/useAuth.ts:useSendMagicLink",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:ag-platform/apps/mobile/hooks/useCase.ts",
+      "target": "function:ag-platform/apps/mobile/hooks/useCase.ts:useCase",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:ag-platform/apps/mobile/hooks/useCase.ts",
+      "target": "function:ag-platform/apps/mobile/hooks/useCase.ts:useCaseDocuments",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:ag-platform/apps/mobile/hooks/useCases.ts",
+      "target": "function:ag-platform/apps/mobile/hooks/useCases.ts:useAssignedCases",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:ag-platform/apps/mobile/hooks/useDocumentCapture.ts",
+      "target": "function:ag-platform/apps/mobile/hooks/useDocumentCapture.ts:useDocumentCapture",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:ag-platform/apps/mobile/hooks/useMutationQueue.ts",
+      "target": "function:ag-platform/apps/mobile/hooks/useMutationQueue.ts:useMutationQueue",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:ag-platform/apps/mobile/hooks/useOnDutyTracker.ts",
+      "target": "function:ag-platform/apps/mobile/hooks/useOnDutyTracker.ts:useOnDutyTracker",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:ag-platform/apps/mobile/hooks/useOnlineStatus.ts",
+      "target": "function:ag-platform/apps/mobile/hooks/useOnlineStatus.ts:useOnlineStatus",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:ag-platform/apps/mobile/hooks/usePushRegistration.ts",
+      "target": "function:ag-platform/apps/mobile/hooks/usePushRegistration.ts:usePushRegistration",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:ag-platform/apps/mobile/hooks/useRealtimeCases.ts",
+      "target": "function:ag-platform/apps/mobile/hooks/useRealtimeCases.ts:useRealtimeCases",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:ag-platform/apps/mobile/hooks/useStatusUpdate.ts",
+      "target": "function:ag-platform/apps/mobile/hooks/useStatusUpdate.ts:useStatusUpdate",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:ag-platform/apps/mobile/hooks/useTodayActivity.ts",
+      "target": "function:ag-platform/apps/mobile/hooks/useTodayActivity.ts:useTodayActivity",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:ag-platform/apps/mobile/lib/notifications.ts",
+      "target": "function:ag-platform/apps/mobile/lib/notifications.ts:configureNotifications",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:ag-platform/apps/mobile/lib/queue/drain.ts",
+      "target": "function:ag-platform/apps/mobile/lib/queue/drain.ts:drainQueue",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:ag-platform/apps/mobile/lib/sentry.ts",
+      "target": "function:ag-platform/apps/mobile/lib/sentry.ts:initSentry",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "config:ag-platform/apps/mobile/eas.json",
+      "target": "config:ag-platform/apps/mobile/package.json",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:ag-platform/apps/mobile/package.json",
+      "target": "file:ag-platform/apps/mobile/metro.config.js",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    }
+  ]
+}

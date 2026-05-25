@@ -13,6 +13,7 @@ import os
 from datetime import datetime
 from typing import Any, Dict, List, Optional
 
+from agents.stamp_duty import validate_stamp_duty
 from workforce.ledger import record_activity
 
 logger = logging.getLogger(__name__)
@@ -23,6 +24,7 @@ NOI_STATES = [
     "CHALLAN_PAID",
     "VERIFIED",
     "NOI_DROP_RECEIVED",
+    "RECTIFY",
     "NOI_FILED",
     "ACKNOWLEDGED",
     "COMPLETED",
@@ -30,6 +32,22 @@ NOI_STATES = [
 
 NOI_EXCEPTION_STATES = ["MISMATCH", "REJECTED"]
 
+NOI_TRANSITIONS = {
+    "DOCUMENTS_RECEIVED": ["CHALLAN_GENERATED"],
+    "CHALLAN_GENERATED": ["CHALLAN_PAID"],
+    "CHALLAN_PAID": ["VERIFIED"],
+    "VERIFIED": ["NOI_DROP_RECEIVED", "RECTIFY"],
+    "NOI_DROP_RECEIVED": ["NOI_FILED", "RECTIFY"],
+    "RECTIFY": ["NOI_FILED", "VERIFIED"],
+    "NOI_FILED": ["ACKNOWLEDGED"],
+    "ACKNOWLEDGED": ["COMPLETED"],
+    "COMPLETED": [],
+}
+
+for s in NOI_EXCEPTION_STATES:
+    NOI_TRANSITIONS.setdefault(s, [])
+
+NOI_TERMINAL_STATES = ["COMPLETED", "REJECTED"]
 
 NOI_REDIS_PREFIX = "noi:case:"
 
@@ -101,9 +119,24 @@ class NOIAgent:
             return None
 
     async def update_noi_status(
-        self, case_id: str, new_status: str, notes: Optional[str] = None
+        self, case_id: str, new_status: str, notes: Optional[str] = None, force: bool = False
     ) -> bool:
-        """Update the NOI status of a case in Supabase + record timeline."""
+        """Update the NOI status of a case in Supabase + record timeline.
+
+        Validates transitions unless force=True (for external webhooks).
+        """
+        if not force and new_status not in NOI_EXCEPTION_STATES:
+            case = await self.get_case(case_id)
+            if case:
+                current = case.get("noi_status")
+                if current:
+                    allowed = NOI_TRANSITIONS.get(current, [])
+                    if new_status not in allowed:
+                        raise ValueError(
+                            f"Invalid NOI transition: {current} → {new_status}. "
+                            f"Allowed from {current}: {allowed or '(terminal state)'}"
+                        )
+
         if self._use_local_store():
             case = await self._local_get_case(case_id)
             if case:
@@ -215,6 +248,15 @@ class NOIAgent:
             loan_amount_str = case.get("loan_amount", "0")
             bank_name = case.get("bank_name", "Unknown")
             borrower = case.get("borrower_name", "Unknown")
+            declared_duty = case.get("stamp_duty_paid") or case.get("declared_stamp_duty")
+
+            bouncer = validate_stamp_duty(loan_amount_str, declared_duty)
+            if not bouncer["passed"]:
+                await self.update_noi_status(case_id, "MISMATCH", notes=bouncer["feedback"])
+                logger.warning("Bouncer rejected challan for %s: %s", case_id, bouncer["feedback"])
+                return {"success": False, "error": bouncer["feedback"], "bouncer": bouncer}
+
+            logger.info("Bouncer passed for %s: %s", case_id, bouncer["feedback"])
 
             result = await executor_agent.generate_noi_challan(
                 case_id=case_id,
@@ -312,11 +354,11 @@ class NOIAgent:
             return {"success": False, "error": f"Case {case_id} not found"}
 
         noi_status = case.get("noi_status", "")
-        if noi_status not in ("NOI_DROP_RECEIVED", "CHALLAN_PAID", "VERIFIED"):
+        if noi_status not in ("NOI_DROP_RECEIVED", "RECTIFY"):
             return {
                 "success": False,
                 "error": f"Cannot file NOI — current status is {noi_status}. "
-                         f"Requires CHALLAN_PAID, VERIFIED, or NOI_DROP_RECEIVED.",
+                         f"Requires NOI_DROP_RECEIVED or RECTIFY.",
             }
 
         try:
@@ -355,9 +397,17 @@ class NOIAgent:
             notes=f"Acknowledgment: {acknowledgment_number}",
         )
         if success:
+            await self.update_noi_status(
+                case_id, "COMPLETED",
+                notes=f"NOI completed — Acknowledgment #{acknowledgment_number}",
+            )
             await self._notify(
                 case_id, "ACKNOWLEDGED",
                 f"NOI acknowledged — Acknowledgment #{acknowledgment_number}. Case completed.",
+            )
+            await self._notify(
+                case_id, "COMPLETED",
+                f"NOI workflow completed for case {case_id}. All steps done.",
             )
         return {"success": success}
 

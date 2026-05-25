@@ -1,0 +1,673 @@
+{
+  "nodes": [
+    {
+      "id": "file:ag-platform/src/app/office/page.tsx",
+      "type": "file",
+      "name": "page.tsx",
+      "filePath": "ag-platform/src/app/office/page.tsx",
+      "summary": "Desktop-like office workspace with draggable windows for browser playground and notes, handling auth and session management.",
+      "tags": ["entry-point", "component", "workspace"],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:ag-platform/src/app/office/page.tsx:Office",
+      "type": "function",
+      "name": "Office",
+      "filePath": "ag-platform/src/app/office/page.tsx",
+      "lineRange": [27, 122],
+      "summary": "Main office workspace component managing window state, user auth check, and logout.",
+      "tags": ["component", "workspace", "auth"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:ag-platform/src/app/office/page.tsx:Window",
+      "type": "function",
+      "name": "Window",
+      "filePath": "ag-platform/src/app/office/page.tsx",
+      "lineRange": [136, 186],
+      "summary": "Draggable window container with focus and close handlers.",
+      "tags": ["component", "ui"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:ag-platform/src/app/office/page.tsx:BrowserApp",
+      "type": "function",
+      "name": "BrowserApp",
+      "filePath": "ag-platform/src/app/office/page.tsx",
+      "lineRange": [188, 295],
+      "summary": "Browser automation component using session-based screenshot polling and action dispatch.",
+      "tags": ["component", "browser", "automation"],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:ag-platform/src/components/admin/AdvisorCockpit.tsx",
+      "type": "file",
+      "name": "AdvisorCockpit.tsx",
+      "filePath": "ag-platform/src/components/admin/AdvisorCockpit.tsx",
+      "summary": "Case management dashboard for advisors with kanban-style status columns and case status transitions.",
+      "tags": ["component", "dashboard", "case-management"],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:ag-platform/src/components/admin/AdvisorCockpit.tsx:AdvisorCockpit",
+      "type": "function",
+      "name": "AdvisorCockpit",
+      "filePath": "ag-platform/src/components/admin/AdvisorCockpit.tsx",
+      "lineRange": [5, 210],
+      "summary": "Main advisor cockpit component fetching and displaying cases grouped by status with update handlers.",
+      "tags": ["component", "dashboard", "kanban"],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:ag-platform/src/components/admin/AdvisorCockpit.tsx:CaseCard",
+      "type": "function",
+      "name": "CaseCard",
+      "filePath": "ag-platform/src/components/admin/AdvisorCockpit.tsx",
+      "lineRange": [212, 273],
+      "summary": "Individual case card with loan amount display and status advancement button.",
+      "tags": ["component", "card", "case"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:ag-platform/src/components/admin/BrainstormHub.tsx",
+      "type": "file",
+      "name": "BrainstormHub.tsx",
+      "filePath": "ag-platform/src/components/admin/BrainstormHub.tsx",
+      "summary": "Real-time brainstorming chat hub using Supabase subscriptions and workforce integration.",
+      "tags": ["component", "chat", "realtime", "collaboration"],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:ag-platform/src/components/admin/BrainstormHub.tsx:BrainstormHub",
+      "type": "function",
+      "name": "BrainstormHub",
+      "filePath": "ag-platform/src/components/admin/BrainstormHub.tsx",
+      "lineRange": [15, 208],
+      "summary": "Real-time brainstorm message feed with send capability, Supabase channel subscriptions and workforce sender lookup.",
+      "tags": ["component", "chat", "realtime"],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:ag-platform/src/components/admin/voice/VyasaVoiceControl.tsx",
+      "type": "file",
+      "name": "VyasaVoiceControl.tsx",
+      "filePath": "ag-platform/src/components/admin/voice/VyasaVoiceControl.tsx",
+      "summary": "Voice recording and command processing interface using MediaRecorder API with transcription and action result display.",
+      "tags": ["component", "voice", "recording", "admin"],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:ag-platform/src/components/admin/voice/VyasaVoiceControl.tsx:VyasaVoiceControl",
+      "type": "function",
+      "name": "VyasaVoiceControl",
+      "filePath": "ag-platform/src/components/admin/voice/VyasaVoiceControl.tsx",
+      "lineRange": [11, 247],
+      "summary": "Full voice control UI with start/stop recording, audio processing, transcription, and command result display.",
+      "tags": ["component", "voice", "recording"],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:ag-platform/src/components/admin/WorkforceControl.tsx",
+      "type": "file",
+      "name": "WorkforceControl.tsx",
+      "filePath": "ag-platform/src/components/admin/WorkforceControl.tsx",
+      "summary": "Workforce management dashboard with real-time agent status via Supabase subscriptions and task assignment.",
+      "tags": ["component", "dashboard", "workforce", "admin"],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:ag-platform/src/components/admin/WorkforceControl.tsx:WorkforceControl",
+      "type": "function",
+      "name": "WorkforceControl",
+      "filePath": "ag-platform/src/components/admin/WorkforceControl.tsx",
+      "lineRange": [22, 222],
+      "summary": "Workforce control panel displaying AI agents and human staff with real-time status updates and task assignment flow.",
+      "tags": ["component", "workforce", "realtime"],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:ag-platform/src/components/ai/ClientEmailDrafting.tsx",
+      "type": "file",
+      "name": "ClientEmailDrafting.tsx",
+      "filePath": "ag-platform/src/components/ai/ClientEmailDrafting.tsx",
+      "summary": "AI-powered client email drafting tool with type selection, context input, draft generation, and send capability.",
+      "tags": ["component", "email", "ai", "drafting"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:ag-platform/src/components/ai/ClientEmailDrafting.tsx:ClientEmailDrafting",
+      "type": "function",
+      "name": "ClientEmailDrafting",
+      "filePath": "ag-platform/src/components/ai/ClientEmailDrafting.tsx",
+      "lineRange": [4, 113],
+      "summary": "Client email drafting UI with generate draft and send email handlers via API calls.",
+      "tags": ["component", "email", "ai"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:ag-platform/src/components/ai/ProjectBriefGenerator.tsx",
+      "type": "file",
+      "name": "ProjectBriefGenerator.tsx",
+      "filePath": "ag-platform/src/components/ai/ProjectBriefGenerator.tsx",
+      "summary": "AI project brief generator using Vercel AI SDK useCompletion for draft generation from structured form inputs.",
+      "tags": ["component", "ai", "project", "generator"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:ag-platform/src/components/ai/ProjectBriefGenerator.tsx:ProjectBriefGenerator",
+      "type": "function",
+      "name": "ProjectBriefGenerator",
+      "filePath": "ag-platform/src/components/ai/ProjectBriefGenerator.tsx",
+      "lineRange": [10, 143],
+      "summary": "Project brief generator form collecting deliverables, milestones, timeline and generating AI completion.",
+      "tags": ["component", "ai", "project"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:ag-platform/src/components/ai/SemanticProjectSearch.tsx",
+      "type": "file",
+      "name": "SemanticProjectSearch.tsx",
+      "filePath": "ag-platform/src/components/ai/SemanticProjectSearch.tsx",
+      "summary": "Semantic project search component with query input and similarity-based results display via API.",
+      "tags": ["component", "search", "ai", "semantic"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:ag-platform/src/components/ai/SmartTaskSuggestions.tsx",
+      "type": "file",
+      "name": "SmartTaskSuggestions.tsx",
+      "filePath": "ag-platform/src/components/ai/SmartTaskSuggestions.tsx",
+      "summary": "AI-powered task suggestion component generating tasks from a project brief with add-all capability.",
+      "tags": ["component", "ai", "tasks", "suggestions"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:ag-platform/src/components/applicant/ApplicantDashboard.tsx",
+      "type": "file",
+      "name": "ApplicantDashboard.tsx",
+      "filePath": "ag-platform/src/components/applicant/ApplicantDashboard.tsx",
+      "summary": "Applicant-facing case tracking dashboard with milestone progress indicators and case details.",
+      "tags": ["component", "dashboard", "applicant", "case-tracking"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:ag-platform/src/components/applicant/ApplicantDashboard.tsx:ApplicantDashboard",
+      "type": "function",
+      "name": "ApplicantDashboard",
+      "filePath": "ag-platform/src/components/applicant/ApplicantDashboard.tsx",
+      "lineRange": [5, 126],
+      "summary": "Applicant dashboard fetching active case and displaying status milestones and case details.",
+      "tags": ["component", "dashboard", "applicant"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:ag-platform/src/components/auth/LoginPage.tsx",
+      "type": "file",
+      "name": "LoginPage.tsx",
+      "filePath": "ag-platform/src/components/auth/LoginPage.tsx",
+      "summary": "Login page with role selection, email/password authentication via Supabase, and error handling.",
+      "tags": ["component", "auth", "login", "supabase"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:ag-platform/src/components/auth/ProtectedRoute.tsx",
+      "type": "file",
+      "name": "ProtectedRoute.tsx",
+      "filePath": "ag-platform/src/components/auth/ProtectedRoute.tsx",
+      "summary": "Route guard component checking auth store for user session and allowed roles, redirecting unauthorized users.",
+      "tags": ["component", "auth", "route-guard", "security"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:ag-platform/src/components/bank/BankPortal.tsx",
+      "type": "file",
+      "name": "BankPortal.tsx",
+      "filePath": "ag-platform/src/components/bank/BankPortal.tsx",
+      "summary": "Bank portal case listing with loading state and formatted case details including loan amounts.",
+      "tags": ["component", "bank", "cases", "portal"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:ag-platform/src/components/collaboration/ActivityFeed.tsx",
+      "type": "file",
+      "name": "ActivityFeed.tsx",
+      "filePath": "ag-platform/src/components/collaboration/ActivityFeed.tsx",
+      "summary": "Real-time activity feed component using custom hook with icon mapping and time-ago formatting.",
+      "tags": ["component", "activity", "feed", "collaboration"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:ag-platform/src/components/collaboration/CommentThread.tsx",
+      "type": "file",
+      "name": "CommentThread.tsx",
+      "filePath": "ag-platform/src/components/collaboration/CommentThread.tsx",
+      "summary": "Real-time comment thread with Supabase subscriptions, user email lookup, and threaded replies.",
+      "tags": ["component", "comments", "realtime", "collaboration"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:ag-platform/src/components/collaboration/LivePresence.tsx",
+      "type": "file",
+      "name": "LivePresence.tsx",
+      "filePath": "ag-platform/src/components/collaboration/LivePresence.tsx",
+      "summary": "Live presence indicator component displaying online users with avatars and count.",
+      "tags": ["component", "presence", "realtime", "collaboration"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:ag-platform/src/components/collaboration/NotificationBell.tsx",
+      "type": "file",
+      "name": "NotificationBell.tsx",
+      "filePath": "ag-platform/src/components/collaboration/NotificationBell.tsx",
+      "summary": "Notification bell component using custom hook with unread count badge and dropdown list.",
+      "tags": ["component", "notifications", "ui", "badge"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:ag-platform/src/components/collaboration/TaskBoard.tsx",
+      "type": "file",
+      "name": "TaskBoard.tsx",
+      "filePath": "ag-platform/src/components/collaboration/TaskBoard.tsx",
+      "summary": "Kanban-style task board with drag-and-drop status columns and real-time collaboration presence.",
+      "tags": ["component", "tasks", "kanban", "collaboration"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:ag-platform/src/components/collaboration/TaskBoard.tsx:TaskBoard",
+      "type": "function",
+      "name": "TaskBoard",
+      "filePath": "ag-platform/src/components/collaboration/TaskBoard.tsx",
+      "lineRange": [12, 112],
+      "summary": "Task board with column-based status grouping and inline task creation form.",
+      "tags": ["component", "tasks", "kanban"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:ag-platform/src/components/collaboration/TaskCard.tsx",
+      "type": "file",
+      "name": "TaskCard.tsx",
+      "filePath": "ag-platform/src/components/collaboration/TaskCard.tsx",
+      "summary": "Draggable task card component with assignee avatar and status badge.",
+      "tags": ["component", "tasks", "card", "ui"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:ag-platform/src/components/collaboration/TimeTracker.tsx",
+      "type": "file",
+      "name": "TimeTracker.tsx",
+      "filePath": "ag-platform/src/components/collaboration/TimeTracker.tsx",
+      "summary": "Time tracking component with clock-in/out, elapsed timer, and weekly hours summary.",
+      "tags": ["component", "time-tracking", "collaboration"],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:ag-platform/src/components/field/FieldApp.tsx",
+      "type": "file",
+      "name": "FieldApp.tsx",
+      "filePath": "ag-platform/src/components/field/FieldApp.tsx",
+      "summary": "Field agent mobile-style app with case navigation, document capture queue, and offline support.",
+      "tags": ["component", "field", "mobile", "offline"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:ag-platform/src/components/home/MarketingLanding.tsx",
+      "type": "file",
+      "name": "MarketingLanding.tsx",
+      "filePath": "ag-platform/src/components/home/MarketingLanding.tsx",
+      "summary": "Marketing landing page with hero, features, pricing tiers, and call-to-action sections.",
+      "tags": ["component", "landing", "marketing", "home"],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:ag-platform/src/components/LandingPage.tsx",
+      "type": "file",
+      "name": "LandingPage.tsx",
+      "filePath": "ag-platform/src/components/LandingPage.tsx",
+      "summary": "Main landing page with animated hero, feature grid, testimonials, and footer for AG Associates platform.",
+      "tags": ["component", "landing", "marketing", "hero"],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:ag-platform/src/components/privacy/policy-sections.tsx",
+      "type": "file",
+      "name": "policy-sections.tsx",
+      "filePath": "ag-platform/src/components/privacy/policy-sections.tsx",
+      "summary": "Privacy policy section components covering data collection, usage, GDPR rights, and security.",
+      "tags": ["component", "privacy", "legal", "gdpr"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:ag-platform/src/components/privacy/PrivacyPolicy.tsx",
+      "type": "file",
+      "name": "PrivacyPolicy.tsx",
+      "filePath": "ag-platform/src/components/privacy/PrivacyPolicy.tsx",
+      "summary": "Privacy policy page with collapsible sections and contact information.",
+      "tags": ["component", "privacy", "legal", "page"],
+      "complexity": "moderate"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:ag-platform/src/components/admin/AdvisorCockpit.tsx",
+      "target": "file:ag-platform/src/types/domain.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:ag-platform/src/components/admin/BrainstormHub.tsx",
+      "target": "file:ag-platform/src/lib/supabase.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:ag-platform/src/components/admin/BrainstormHub.tsx",
+      "target": "file:ag-platform/src/store/useAuthStore.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:ag-platform/src/components/admin/WorkforceControl.tsx",
+      "target": "file:ag-platform/src/components/admin/BrainstormHub.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:ag-platform/src/components/admin/WorkforceControl.tsx",
+      "target": "file:ag-platform/src/lib/supabase.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:ag-platform/src/components/applicant/ApplicantDashboard.tsx",
+      "target": "file:ag-platform/src/types/domain.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:ag-platform/src/components/auth/LoginPage.tsx",
+      "target": "file:ag-platform/src/lib/supabase.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:ag-platform/src/components/auth/ProtectedRoute.tsx",
+      "target": "file:ag-platform/src/store/useAuthStore.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:ag-platform/src/components/bank/BankPortal.tsx",
+      "target": "file:ag-platform/src/types/domain.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:ag-platform/src/components/collaboration/ActivityFeed.tsx",
+      "target": "file:ag-platform/src/hooks/useActivityFeed.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:ag-platform/src/components/collaboration/CommentThread.tsx",
+      "target": "file:ag-platform/src/hooks/useLivePresence.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:ag-platform/src/components/collaboration/LivePresence.tsx",
+      "target": "file:ag-platform/src/hooks/useLivePresence.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:ag-platform/src/components/collaboration/NotificationBell.tsx",
+      "target": "file:ag-platform/src/hooks/useNotifications.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:ag-platform/src/components/collaboration/TaskBoard.tsx",
+      "target": "file:ag-platform/src/components/collaboration/TaskCard.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:ag-platform/src/components/collaboration/TaskBoard.tsx",
+      "target": "file:ag-platform/src/hooks/useLivePresence.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:ag-platform/src/components/collaboration/TaskCard.tsx",
+      "target": "file:ag-platform/src/components/collaboration/TaskBoard.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:ag-platform/src/app/office/page.tsx",
+      "target": "function:ag-platform/src/app/office/page.tsx:Office",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-platform/src/app/office/page.tsx",
+      "target": "function:ag-platform/src/app/office/page.tsx:Window",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-platform/src/app/office/page.tsx",
+      "target": "function:ag-platform/src/app/office/page.tsx:BrowserApp",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-platform/src/app/office/page.tsx",
+      "target": "function:ag-platform/src/app/office/page.tsx:Office",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:ag-platform/src/components/admin/AdvisorCockpit.tsx",
+      "target": "function:ag-platform/src/components/admin/AdvisorCockpit.tsx:AdvisorCockpit",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-platform/src/components/admin/AdvisorCockpit.tsx",
+      "target": "function:ag-platform/src/components/admin/AdvisorCockpit.tsx:CaseCard",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-platform/src/components/admin/AdvisorCockpit.tsx",
+      "target": "function:ag-platform/src/components/admin/AdvisorCockpit.tsx:AdvisorCockpit",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:ag-platform/src/components/admin/BrainstormHub.tsx",
+      "target": "function:ag-platform/src/components/admin/BrainstormHub.tsx:BrainstormHub",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-platform/src/components/admin/BrainstormHub.tsx",
+      "target": "function:ag-platform/src/components/admin/BrainstormHub.tsx:BrainstormHub",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:ag-platform/src/components/admin/voice/VyasaVoiceControl.tsx",
+      "target": "function:ag-platform/src/components/admin/voice/VyasaVoiceControl.tsx:VyasaVoiceControl",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-platform/src/components/admin/voice/VyasaVoiceControl.tsx",
+      "target": "function:ag-platform/src/components/admin/voice/VyasaVoiceControl.tsx:VyasaVoiceControl",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:ag-platform/src/components/admin/WorkforceControl.tsx",
+      "target": "function:ag-platform/src/components/admin/WorkforceControl.tsx:WorkforceControl",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-platform/src/components/admin/WorkforceControl.tsx",
+      "target": "function:ag-platform/src/components/admin/WorkforceControl.tsx:WorkforceControl",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:ag-platform/src/components/ai/ClientEmailDrafting.tsx",
+      "target": "function:ag-platform/src/components/ai/ClientEmailDrafting.tsx:ClientEmailDrafting",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-platform/src/components/ai/ClientEmailDrafting.tsx",
+      "target": "function:ag-platform/src/components/ai/ClientEmailDrafting.tsx:ClientEmailDrafting",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:ag-platform/src/components/ai/ProjectBriefGenerator.tsx",
+      "target": "function:ag-platform/src/components/ai/ProjectBriefGenerator.tsx:ProjectBriefGenerator",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-platform/src/components/ai/ProjectBriefGenerator.tsx",
+      "target": "function:ag-platform/src/components/ai/ProjectBriefGenerator.tsx:ProjectBriefGenerator",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:ag-platform/src/components/ai/SemanticProjectSearch.tsx",
+      "target": "function:ag-platform/src/components/ai/SemanticProjectSearch.tsx:SemanticProjectSearch",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-platform/src/components/ai/SemanticProjectSearch.tsx",
+      "target": "function:ag-platform/src/components/ai/SemanticProjectSearch.tsx:SemanticProjectSearch",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:ag-platform/src/components/ai/SmartTaskSuggestions.tsx",
+      "target": "function:ag-platform/src/components/ai/SmartTaskSuggestions.tsx:SmartTaskSuggestions",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-platform/src/components/ai/SmartTaskSuggestions.tsx",
+      "target": "function:ag-platform/src/components/ai/SmartTaskSuggestions.tsx:SmartTaskSuggestions",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:ag-platform/src/components/applicant/ApplicantDashboard.tsx",
+      "target": "function:ag-platform/src/components/applicant/ApplicantDashboard.tsx:ApplicantDashboard",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-platform/src/components/applicant/ApplicantDashboard.tsx",
+      "target": "function:ag-platform/src/components/applicant/ApplicantDashboard.tsx:ApplicantDashboard",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:ag-platform/src/components/auth/LoginPage.tsx",
+      "target": "function:ag-platform/src/components/auth/LoginPage.tsx:LoginPage",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-platform/src/components/auth/LoginPage.tsx",
+      "target": "function:ag-platform/src/components/auth/LoginPage.tsx:LoginPage",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:ag-platform/src/components/collaboration/TaskBoard.tsx",
+      "target": "function:ag-platform/src/components/collaboration/TaskBoard.tsx:TaskBoard",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-platform/src/components/collaboration/TaskBoard.tsx",
+      "target": "function:ag-platform/src/components/collaboration/TaskBoard.tsx:TaskBoard",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:ag-platform/src/components/collaboration/TaskCard.tsx",
+      "target": "function:ag-platform/src/components/collaboration/TaskCard.tsx:TaskCard",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-platform/src/components/collaboration/TaskCard.tsx",
+      "target": "function:ag-platform/src/components/collaboration/TaskCard.tsx:TaskCard",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:ag-platform/src/components/admin/WorkforceControl.tsx",
+      "target": "file:ag-platform/src/components/admin/BrainstormHub.tsx",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    }
+  ]
+}

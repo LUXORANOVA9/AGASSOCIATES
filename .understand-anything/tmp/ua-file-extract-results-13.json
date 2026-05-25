@@ -1,0 +1,1225 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 22,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "prototype/noi-dashboard/index.html",
+      "language": "html",
+      "fileCategory": "markup",
+      "totalLines": 13,
+      "nonEmptyLines": 13,
+      "metrics": {}
+    },
+    {
+      "path": "prototype/noi-dashboard/package.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 24,
+      "nonEmptyLines": 24,
+      "sections": [
+        {
+          "heading": "name",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "private",
+          "level": 1,
+          "line": 3
+        },
+        {
+          "heading": "version",
+          "level": 1,
+          "line": 4
+        },
+        {
+          "heading": "type",
+          "level": 1,
+          "line": 5
+        },
+        {
+          "heading": "scripts",
+          "level": 1,
+          "line": 6
+        },
+        {
+          "heading": "dependencies",
+          "level": 1,
+          "line": 11
+        },
+        {
+          "heading": "devDependencies",
+          "level": 1,
+          "line": 15
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 7
+      }
+    },
+    {
+      "path": "prototype/noi-dashboard/postcss.config.js",
+      "language": "javascript",
+      "fileCategory": "code",
+      "totalLines": 6,
+      "nonEmptyLines": 6,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "prototype/noi-dashboard/src/App.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 439,
+      "nonEmptyLines": 401,
+      "functions": [
+        {
+          "name": "roleHasPermission",
+          "startLine": 36,
+          "endLine": 45,
+          "params": [
+            "role",
+            "perm"
+          ]
+        },
+        {
+          "name": "roleColor",
+          "startLine": 47,
+          "endLine": 49,
+          "params": [
+            "role"
+          ]
+        },
+        {
+          "name": "formatTime",
+          "startLine": 84,
+          "endLine": 92,
+          "params": [
+            "iso"
+          ]
+        },
+        {
+          "name": "PriorityBadge",
+          "startLine": 94,
+          "endLine": 97,
+          "params": [
+            "{ p }"
+          ]
+        },
+        {
+          "name": "RoleSwitcher",
+          "startLine": 99,
+          "endLine": 112,
+          "params": [
+            "{ roles, current, onChange }"
+          ]
+        },
+        {
+          "name": "RbacSidebar",
+          "startLine": 116,
+          "endLine": 178,
+          "params": [
+            "{ role, staff, onRoleChange }"
+          ]
+        },
+        {
+          "name": "PipelineSection",
+          "startLine": 180,
+          "endLine": 251,
+          "params": [
+            "{ cases, role }"
+          ]
+        },
+        {
+          "name": "OrgChartPanel",
+          "startLine": 253,
+          "endLine": 287,
+          "params": [
+            "{ staff, role }"
+          ]
+        },
+        {
+          "name": "AutomationPanel",
+          "startLine": 289,
+          "endLine": 318,
+          "params": [
+            "{ role }"
+          ]
+        },
+        {
+          "name": "RbacDashboard",
+          "startLine": 320,
+          "endLine": 375,
+          "params": [
+            "{ initialRole }"
+          ]
+        },
+        {
+          "name": "Switcher",
+          "startLine": 378,
+          "endLine": 413,
+          "params": [
+            "{ variant, setVariant }"
+          ]
+        },
+        {
+          "name": "App",
+          "startLine": 416,
+          "endLine": 439,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "App",
+          "line": 416,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "roleHasPermission",
+          "callee": "allowed.some",
+          "lineNumber": 38
+        },
+        {
+          "caller": "roleHasPermission",
+          "callee": "a.endsWith",
+          "lineNumber": 39
+        },
+        {
+          "caller": "roleHasPermission",
+          "callee": "a.split",
+          "lineNumber": 40
+        },
+        {
+          "caller": "roleHasPermission",
+          "callee": "perm.startsWith",
+          "lineNumber": 41
+        },
+        {
+          "caller": "roleColor",
+          "callee": "ROLE_HIERARCHY[role].color.split",
+          "lineNumber": 48
+        },
+        {
+          "caller": "formatTime",
+          "callee": "now.getTime",
+          "lineNumber": 86
+        },
+        {
+          "caller": "formatTime",
+          "callee": "d.getTime",
+          "lineNumber": 86
+        },
+        {
+          "caller": "formatTime",
+          "callee": "Math.floor",
+          "lineNumber": 87
+        },
+        {
+          "caller": "formatTime",
+          "callee": "Math.floor",
+          "lineNumber": 90
+        },
+        {
+          "caller": "RoleSwitcher",
+          "callee": "roles.map",
+          "lineNumber": 102
+        },
+        {
+          "caller": "RoleSwitcher",
+          "callee": "onChange",
+          "lineNumber": 105
+        },
+        {
+          "caller": "RbacSidebar",
+          "callee": "roleHasPermission",
+          "lineNumber": 125
+        },
+        {
+          "caller": "RbacSidebar",
+          "callee": "staff.map",
+          "lineNumber": 128
+        },
+        {
+          "caller": "RbacSidebar",
+          "callee": "roleHasPermission",
+          "lineNumber": 147
+        },
+        {
+          "caller": "RbacSidebar",
+          "callee": "roleColor",
+          "lineNumber": 160
+        },
+        {
+          "caller": "RbacSidebar",
+          "callee": "['case', 'noi', 'comms', 'rpa', 'reports'].map",
+          "lineNumber": 165
+        },
+        {
+          "caller": "RbacSidebar",
+          "callee": "roleHasPermission",
+          "lineNumber": 166
+        },
+        {
+          "caller": "RbacSidebar",
+          "callee": "ROLE_PERMISSIONS[role].some",
+          "lineNumber": 166
+        },
+        {
+          "caller": "RbacSidebar",
+          "callee": "p.startsWith",
+          "lineNumber": 166
+        },
+        {
+          "caller": "PipelineSection",
+          "callee": "roleHasPermission",
+          "lineNumber": 181
+        },
+        {
+          "caller": "PipelineSection",
+          "callee": "roleHasPermission",
+          "lineNumber": 181
+        },
+        {
+          "caller": "PipelineSection",
+          "callee": "(stepOrder as AutomationStep[]).map",
+          "lineNumber": 189
+        },
+        {
+          "caller": "PipelineSection",
+          "callee": "cases.filter",
+          "lineNumber": 190
+        },
+        {
+          "caller": "PipelineSection",
+          "callee": "roleHasPermission",
+          "lineNumber": 192
+        },
+        {
+          "caller": "PipelineSection",
+          "callee": "roleHasPermission",
+          "lineNumber": 193
+        },
+        {
+          "caller": "PipelineSection",
+          "callee": "roleHasPermission",
+          "lineNumber": 194
+        },
+        {
+          "caller": "PipelineSection",
+          "callee": "roleHasPermission",
+          "lineNumber": 195
+        },
+        {
+          "caller": "PipelineSection",
+          "callee": "roleHasPermission",
+          "lineNumber": 196
+        },
+        {
+          "caller": "PipelineSection",
+          "callee": "roleHasPermission",
+          "lineNumber": 197
+        },
+        {
+          "caller": "PipelineSection",
+          "callee": "colCases.map",
+          "lineNumber": 217
+        },
+        {
+          "caller": "PipelineSection",
+          "callee": "formatTime",
+          "lineNumber": 226
+        },
+        {
+          "caller": "PipelineSection",
+          "callee": "stepActions[step].map",
+          "lineNumber": 232
+        },
+        {
+          "caller": "OrgChartPanel",
+          "callee": "roleHasPermission",
+          "lineNumber": 254
+        },
+        {
+          "caller": "OrgChartPanel",
+          "callee": "[...staff].sort",
+          "lineNumber": 256
+        },
+        {
+          "caller": "OrgChartPanel",
+          "callee": "sorted.map",
+          "lineNumber": 262
+        },
+        {
+          "caller": "OrgChartPanel",
+          "callee": "info.color.replace",
+          "lineNumber": 272
+        },
+        {
+          "caller": "OrgChartPanel",
+          "callee": "s.name.split(' ').map(w => w[0]).join('').slice",
+          "lineNumber": 274
+        },
+        {
+          "caller": "OrgChartPanel",
+          "callee": "s.name.split(' ').map(w => w[0]).join",
+          "lineNumber": 274
+        },
+        {
+          "caller": "OrgChartPanel",
+          "callee": "s.name.split(' ').map",
+          "lineNumber": 274
+        },
+        {
+          "caller": "OrgChartPanel",
+          "callee": "s.name.split",
+          "lineNumber": 274
+        },
+        {
+          "caller": "AutomationPanel",
+          "callee": "agents.map",
+          "lineNumber": 302
+        },
+        {
+          "caller": "AutomationPanel",
+          "callee": "roleHasPermission",
+          "lineNumber": 303
+        },
+        {
+          "caller": "AutomationPanel",
+          "callee": "roleHasPermission",
+          "lineNumber": 303
+        },
+        {
+          "caller": "RbacDashboard",
+          "callee": "useState",
+          "lineNumber": 321
+        },
+        {
+          "caller": "RbacDashboard",
+          "callee": "roleHasPermission",
+          "lineNumber": 336
+        },
+        {
+          "caller": "RbacDashboard",
+          "callee": "roleHasPermission",
+          "lineNumber": 339
+        },
+        {
+          "caller": "RbacDashboard",
+          "callee": "ROLE_PERMISSIONS[role].slice(0, 8).map",
+          "lineNumber": 355
+        },
+        {
+          "caller": "RbacDashboard",
+          "callee": "ROLE_PERMISSIONS[role].slice",
+          "lineNumber": 355
+        },
+        {
+          "caller": "RbacDashboard",
+          "callee": "p.split",
+          "lineNumber": 356
+        },
+        {
+          "caller": "Switcher",
+          "callee": "variants.findIndex",
+          "lineNumber": 384
+        },
+        {
+          "caller": "Switcher",
+          "callee": "useCallback",
+          "lineNumber": 386
+        },
+        {
+          "caller": "Switcher",
+          "callee": "setVariant",
+          "lineNumber": 388
+        },
+        {
+          "caller": "Switcher",
+          "callee": "useEffect",
+          "lineNumber": 391
+        },
+        {
+          "caller": "handler",
+          "callee": "cycle",
+          "lineNumber": 395
+        },
+        {
+          "caller": "handler",
+          "callee": "cycle",
+          "lineNumber": 396
+        },
+        {
+          "caller": "Switcher",
+          "callee": "window.addEventListener",
+          "lineNumber": 398
+        },
+        {
+          "caller": "Switcher",
+          "callee": "window.removeEventListener",
+          "lineNumber": 399
+        },
+        {
+          "caller": "Switcher",
+          "callee": "cycle",
+          "lineNumber": 404
+        },
+        {
+          "caller": "Switcher",
+          "callee": "variants.find",
+          "lineNumber": 407
+        },
+        {
+          "caller": "Switcher",
+          "callee": "cycle",
+          "lineNumber": 408
+        },
+        {
+          "caller": "App",
+          "callee": "useState",
+          "lineNumber": 417
+        },
+        {
+          "caller": "App",
+          "callee": "new URLSearchParams(window.location.search).get",
+          "lineNumber": 419
+        },
+        {
+          "caller": "App",
+          "callee": "['D', 'E', 'F'].includes",
+          "lineNumber": 420
+        },
+        {
+          "caller": "App",
+          "callee": "useEffect",
+          "lineNumber": 425
+        },
+        {
+          "caller": "App",
+          "callee": "url.searchParams.set",
+          "lineNumber": 427
+        },
+        {
+          "caller": "App",
+          "callee": "window.history.replaceState",
+          "lineNumber": 428
+        },
+        {
+          "caller": "App",
+          "callee": "url.toString",
+          "lineNumber": 428
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 12,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "prototype/noi-dashboard/src/index.css",
+      "language": "css",
+      "fileCategory": "markup",
+      "totalLines": 53,
+      "nonEmptyLines": 48,
+      "metrics": {}
+    },
+    {
+      "path": "prototype/noi-dashboard/src/main.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 10,
+      "nonEmptyLines": 9,
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "prototype/noi-dashboard/tailwind.config.js",
+      "language": "javascript",
+      "fileCategory": "code",
+      "totalLines": 15,
+      "nonEmptyLines": 15,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "prototype/noi-dashboard/vite.config.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 6,
+      "nonEmptyLines": 5,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "RAG_AND_MEMORY_GUIDELINES.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 97,
+      "nonEmptyLines": 77,
+      "sections": [
+        {
+          "heading": "RAG and Memory Systems Guidelines",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "When to Use",
+          "level": 2,
+          "line": 12
+        },
+        {
+          "heading": "Process",
+          "level": 2,
+          "line": 20
+        },
+        {
+          "heading": "Step 1: Choose the Right Memory Architecture",
+          "level": 3,
+          "line": 22
+        },
+        {
+          "heading": "Step 2: Design the RAG Pipeline",
+          "level": 3,
+          "line": 38
+        },
+        {
+          "heading": "Step 3: Prevent Context Bloat",
+          "level": 3,
+          "line": 46
+        },
+        {
+          "heading": "Step 4: Handle Retrieval Failures Gracefully",
+          "level": 3,
+          "line": 53
+        },
+        {
+          "heading": "Step 5: Measure and Optimize",
+          "level": 3,
+          "line": 60
+        },
+        {
+          "heading": "Common Rationalizations (and Rebuttals)",
+          "level": 2,
+          "line": 70
+        },
+        {
+          "heading": "Red Flags 🚩",
+          "level": 2,
+          "line": 81
+        },
+        {
+          "heading": "Verification Checklist",
+          "level": 2,
+          "line": 91
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 11
+      }
+    },
+    {
+      "path": "README.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 365,
+      "nonEmptyLines": 287,
+      "sections": [
+        {
+          "heading": "👤 The Founder",
+          "level": 2,
+          "line": 36
+        },
+        {
+          "heading": "📖 About",
+          "level": 2,
+          "line": 54
+        },
+        {
+          "heading": "Core Practice Areas",
+          "level": 3,
+          "line": 62
+        },
+        {
+          "heading": "The Problem We're Solving",
+          "level": 3,
+          "line": 73
+        },
+        {
+          "heading": "🏗 Architecture",
+          "level": 2,
+          "line": 85
+        },
+        {
+          "heading": "Tech Stack & The G-Stack Advantage",
+          "level": 3,
+          "line": 120
+        },
+        {
+          "heading": "🤖 The AI \"Agentic\" Workforce",
+          "level": 2,
+          "line": 138
+        },
+        {
+          "heading": "📋 Key Modules",
+          "level": 2,
+          "line": 155
+        },
+        {
+          "heading": "🔍 Agent 1 (Intake Bot) API Gateway",
+          "level": 3,
+          "line": 157
+        },
+        {
+          "heading": "📱 Mobile PWA (Field Executives)",
+          "level": 3,
+          "line": 163
+        },
+        {
+          "heading": "⏱ Time Tracking & Billing Engine",
+          "level": 3,
+          "line": 168
+        },
+        {
+          "heading": "🏦 Bank Portal (Isolated Views)",
+          "level": 3,
+          "line": 173
+        },
+        {
+          "heading": "💬 Client Portal & Notifications",
+          "level": 3,
+          "line": 178
+        },
+        {
+          "heading": "📊 Case Management",
+          "level": 3,
+          "line": 183
+        },
+        {
+          "heading": "📁 Repository Structure",
+          "level": 2,
+          "line": 190
+        },
+        {
+          "heading": "🚀 Quick Start",
+          "level": 2,
+          "line": 239
+        },
+        {
+          "heading": "Prerequisites",
+          "level": 3,
+          "line": 241
+        },
+        {
+          "heading": "AI Pipeline",
+          "level": 3,
+          "line": 248
+        },
+        {
+          "heading": "Collaboration Platform",
+          "level": 3,
+          "line": 267
+        },
+        {
+          "heading": "⚙️ Environment Variables",
+          "level": 2,
+          "line": 278
+        },
+        {
+          "heading": "🗺 Roadmap",
+          "level": 2,
+          "line": 288
+        },
+        {
+          "heading": "Phase 1: Internal Automation (72-Hour Sprint)",
+          "level": 3,
+          "line": 290
+        },
+        {
+          "heading": "Phase 2: Field Operations",
+          "level": 3,
+          "line": 300
+        },
+        {
+          "heading": "Phase 3: White-Label SaaS",
+          "level": 3,
+          "line": 306
+        },
+        {
+          "heading": "🔒 Security",
+          "level": 2,
+          "line": 314
+        },
+        {
+          "heading": "🤝 Contributing",
+          "level": 2,
+          "line": 326
+        },
+        {
+          "heading": "AI Agent Playbooks",
+          "level": 3,
+          "line": 330
+        },
+        {
+          "heading": "Engineering Guidelines",
+          "level": 3,
+          "line": 342
+        },
+        {
+          "heading": "📜 License",
+          "level": 2,
+          "line": 353
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 29
+      }
+    },
+    {
+      "path": "REFACTORING_GUIDELINES.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 64,
+      "nonEmptyLines": 50,
+      "sections": [
+        {
+          "heading": "Refactoring Guidelines",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "When to Use",
+          "level": 2,
+          "line": 10
+        },
+        {
+          "heading": "Process",
+          "level": 2,
+          "line": 18
+        },
+        {
+          "heading": "Step 1: Establish a Safety Net",
+          "level": 3,
+          "line": 20
+        },
+        {
+          "heading": "Step 2: Refactor in Micro-Steps",
+          "level": 3,
+          "line": 26
+        },
+        {
+          "heading": "Step 3: One Thing at a Time",
+          "level": 3,
+          "line": 33
+        },
+        {
+          "heading": "Step 4: Verify No Behavior Change",
+          "level": 3,
+          "line": 41
+        },
+        {
+          "heading": "Common Rationalizations (and Rebuttals)",
+          "level": 2,
+          "line": 49
+        },
+        {
+          "heading": "Verification Checklist",
+          "level": 2,
+          "line": 59
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 9
+      }
+    },
+    {
+      "path": "render.yaml",
+      "language": "yaml",
+      "fileCategory": "config",
+      "totalLines": 52,
+      "nonEmptyLines": 49,
+      "sections": [
+        {
+          "heading": "services",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "databases",
+          "level": 1,
+          "line": 47
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 2
+      }
+    },
+    {
+      "path": "scripts/backup.sh",
+      "language": "shell",
+      "fileCategory": "script",
+      "totalLines": 62,
+      "nonEmptyLines": 50,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "scripts/bootstrap-vps.sh",
+      "language": "shell",
+      "fileCategory": "script",
+      "totalLines": 113,
+      "nonEmptyLines": 98,
+      "functions": [
+        {
+          "name": "log",
+          "startLine": 13,
+          "endLine": 13,
+          "params": []
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "scripts/provision.sh",
+      "language": "shell",
+      "fileCategory": "script",
+      "totalLines": 267,
+      "nonEmptyLines": 246,
+      "functions": [
+        {
+          "name": "log",
+          "startLine": 56,
+          "endLine": 56,
+          "params": []
+        },
+        {
+          "name": "die",
+          "startLine": 57,
+          "endLine": 57,
+          "params": []
+        },
+        {
+          "name": "cleanup",
+          "startLine": 58,
+          "endLine": 58,
+          "params": []
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 3,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "scripts/setup-runner.sh",
+      "language": "shell",
+      "fileCategory": "script",
+      "totalLines": 86,
+      "nonEmptyLines": 75,
+      "functions": [
+        {
+          "name": "log",
+          "startLine": 21,
+          "endLine": 21,
+          "params": []
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "scripts/setup-telegram-bot.sh",
+      "language": "shell",
+      "fileCategory": "script",
+      "totalLines": 53,
+      "nonEmptyLines": 47,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "SECURITY.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 49,
+      "nonEmptyLines": 33,
+      "sections": [
+        {
+          "heading": "Security Policy",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Supported Versions",
+          "level": 2,
+          "line": 3
+        },
+        {
+          "heading": "Reporting a Vulnerability",
+          "level": 2,
+          "line": 9
+        },
+        {
+          "heading": "What to include",
+          "level": 3,
+          "line": 15
+        },
+        {
+          "heading": "Response timeline",
+          "level": 3,
+          "line": 22
+        },
+        {
+          "heading": "Scope",
+          "level": 3,
+          "line": 30
+        },
+        {
+          "heading": "Out of scope",
+          "level": 3,
+          "line": 38
+        },
+        {
+          "heading": "Security Measures",
+          "level": 2,
+          "line": 43
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 8
+      }
+    },
+    {
+      "path": "tasks/lessons.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 35,
+      "nonEmptyLines": 18,
+      "sections": [
+        {
+          "heading": "Lessons Learned",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Bug Patterns",
+          "level": 2,
+          "line": 3
+        },
+        {
+          "heading": "Process Patterns",
+          "level": 2,
+          "line": 15
+        },
+        {
+          "heading": "Production Patterns",
+          "level": 2,
+          "line": 25
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 4
+      }
+    },
+    {
+      "path": "tasks/todo.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 30,
+      "nonEmptyLines": 26,
+      "sections": [
+        {
+          "heading": "Task Tracking",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Completed ✅",
+          "level": 2,
+          "line": 3
+        },
+        {
+          "heading": "Next Up 📋",
+          "level": 2,
+          "line": 22
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 3
+      }
+    },
+    {
+      "path": "TDD_GUIDELINES.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 78,
+      "nonEmptyLines": 60,
+      "sections": [
+        {
+          "heading": "Test-Driven Development (TDD) Guidelines",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "When to Use",
+          "level": 2,
+          "line": 12
+        },
+        {
+          "heading": "Process",
+          "level": 2,
+          "line": 19
+        },
+        {
+          "heading": "Step 1: Write a Failing Test (Red)",
+          "level": 3,
+          "line": 21
+        },
+        {
+          "heading": "Step 2: Write Minimum Code (Green)",
+          "level": 3,
+          "line": 29
+        },
+        {
+          "heading": "Step 3: Refactor (Refactor)",
+          "level": 3,
+          "line": 35
+        },
+        {
+          "heading": "Step 4: Repeat for Each Behavior",
+          "level": 3,
+          "line": 41
+        },
+        {
+          "heading": "Step 5: Coverage Sanity Check",
+          "level": 3,
+          "line": 45
+        },
+        {
+          "heading": "Common Rationalizations (and Rebuttals)",
+          "level": 2,
+          "line": 52
+        },
+        {
+          "heading": "Red Flags 🚩",
+          "level": 2,
+          "line": 63
+        },
+        {
+          "heading": "Verification Checklist",
+          "level": 2,
+          "line": 72
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 11
+      }
+    },
+    {
+      "path": "turbo.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 37,
+      "nonEmptyLines": 37,
+      "sections": [
+        {
+          "heading": "$schema",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "ui",
+          "level": 1,
+          "line": 3
+        },
+        {
+          "heading": "tasks",
+          "level": 1,
+          "line": 4
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 3
+      }
+    }
+  ]
+}

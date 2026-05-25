@@ -1,0 +1,31 @@
+{
+  "projectRoot": "/home/luxor9/AGASSOCIATES",
+  "batchFiles": [
+    {"path": "ag-associates-ai/backend/executor_agent.py", "language": "python", "sizeLines": 111, "fileCategory": "code"},
+    {"path": "ag-associates-ai/backend/igr_executor.py", "language": "python", "sizeLines": 123, "fileCategory": "code"},
+    {"path": "ag-associates-ai/backend/fee_calculator.py", "language": "python", "sizeLines": 93, "fileCategory": "code"},
+    {"path": "ag-associates-ai/backend/template_manager.py", "language": "python", "sizeLines": 97, "fileCategory": "code"},
+    {"path": "ag-associates-ai/backend/lic_manager.py", "language": "python", "sizeLines": 83, "fileCategory": "code"},
+    {"path": "ag-associates-ai/backend/main.py", "language": "python", "sizeLines": 116, "fileCategory": "code"},
+    {"path": "ag-associates-ai/backend/nesl_client.py", "language": "python", "sizeLines": 129, "fileCategory": "code"},
+    {"path": "ag-associates-ai/backend/noi_pipeline.py", "language": "python", "sizeLines": 121, "fileCategory": "code"},
+    {"path": "ag-associates-ai/backend/noi_automation.py", "language": "python", "sizeLines": 88, "fileCategory": "code"},
+    {"path": "ag-associates-ai/backend/pdf_generator.py", "language": "python", "sizeLines": 76, "fileCategory": "code"},
+    {"path": "ag-associates-ai/backend/rag_engine.py", "language": "python", "sizeLines": 118, "fileCategory": "code"},
+    {"path": "ag-associates-ai/backend/search_agent.py", "language": "python", "sizeLines": 66, "fileCategory": "code"},
+    {"path": "ag-associates-ai/backend/websocket_manager.py", "language": "python", "sizeLines": 74, "fileCategory": "code"},
+    {"path": "ag-associates-ai/backend/config.py", "language": "python", "sizeLines": 145, "fileCategory": "code"},
+    {"path": "ag-associates-ai/backend/requirements.txt", "language": "txt", "sizeLines": 42, "fileCategory": "code"},
+    {"path": "ag-associates-ai/backend/test_db.py", "language": "python", "sizeLines": 10, "fileCategory": "code"},
+    {"path": "ag-associates-ai/backend/models.py", "language": "python", "sizeLines": 108, "fileCategory": "code"},
+    {"path": "ag-associates-ai/backend/email_intake.py", "language": "python", "sizeLines": 92, "fileCategory": "code"},
+    {"path": "ag-associates-ai/backend/gras_client.py", "language": "python", "sizeLines": 101, "fileCategory": "code"},
+    {"path": "ag-associates-ai/backend/notifications.py", "language": "python", "sizeLines": 35, "fileCategory": "code"},
+    {"path": "ag-associates-ai/backend/database.py", "language": "python", "sizeLines": 90, "fileCategory": "code"},
+    {"path": "ag-associates-ai/backend/tasks.py", "language": "python", "sizeLines": 88, "fileCategory": "code"},
+    {"path": "ag-associates-ai/backend/README.md", "language": "markdown", "sizeLines": 43, "fileCategory": "docs"},
+    {"path": "ag-associates-ai/backend/CHANGELOG.md", "language": "markdown", "sizeLines": 42, "fileCategory": "docs"},
+    {"path": "ag-associates-ai/backend/docs/supabase.md", "language": "markdown", "sizeLines": 43, "fileCategory": "docs"}
+  ],
+  "batchImportData": {"ag-associates-ai/backend/executor_agent.py": [], "ag-associates-ai/backend/igr_executor.py": [], "ag-associates-ai/backend/fee_calculator.py": [], "ag-associates-ai/backend/template_manager.py": [], "ag-associates-ai/backend/lic_manager.py": [], "ag-associates-ai/backend/main.py": [], "ag-associates-ai/backend/nesl_client.py": [], "ag-associates-ai/backend/noi_pipeline.py": [], "ag-associates-ai/backend/noi_automation.py": [], "ag-associates-ai/backend/pdf_generator.py": [], "ag-associates-ai/backend/rag_engine.py": [], "ag-associates-ai/backend/search_agent.py": [], "ag-associates-ai/backend/websocket_manager.py": [], "ag-associates-ai/backend/config.py": [], "ag-associates-ai/backend/requirements.txt": [], "ag-associates-ai/backend/test_db.py": [], "ag-associates-ai/backend/models.py": [], "ag-associates-ai/backend/email_intake.py": [], "ag-associates-ai/backend/gras_client.py": [], "ag-associates-ai/backend/notifications.py": [], "ag-associates-ai/backend/database.py": [], "ag-associates-ai/backend/tasks.py": [], "ag-associates-ai/backend/README.md": [], "ag-associates-ai/backend/CHANGELOG.md": [], "ag-associates-ai/backend/docs/supabase.md": []}
+}

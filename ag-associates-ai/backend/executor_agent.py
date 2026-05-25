@@ -8,6 +8,10 @@ from typing import Dict, Any, Optional
 from playwright.async_api import async_playwright
 import logging
 
+from circuit_breaker import get_breaker, CircuitState
+from hitl_queue import hitl_queue
+from selector_config import get_selector
+
 logger = logging.getLogger(__name__)
 
 class GrasRPAExecutor:
@@ -30,20 +34,41 @@ class GrasRPAExecutor:
 
     def _load_selectors(self):
         """Load GRAS portal selectors from env vars with defaults."""
-        self.sel = {
-            "pay_without_reg": os.environ.get("GRAS_SEL_PAY_WO_REG", "text=Pay Without Registration"),
-            "department_input": os.environ.get("GRAS_SEL_DEPT", "input[name='department']"),
-            "purpose_select": os.environ.get("GRAS_SEL_PURPOSE", "select[name='purpose']"),
-            "stamp_duty_input": os.environ.get("GRAS_SEL_STAMP_DUTY", "input[name='stamp_duty_amount']"),
-            "payee_name_input": os.environ.get("GRAS_SEL_PAYEE", "input[name='payee_name']"),
-            "property_address_input": os.environ.get("GRAS_SEL_PROP_ADDR", "input[name='property_address']"),
-            "generate_otp_button": os.environ.get("GRAS_SEL_GEN_OTP", "button[id='generate_otp']"),
-            "otp_input": os.environ.get("GRAS_SEL_OTP_INPUT", "input[id='otp_input']"),
-            "otp_verify_button": os.environ.get("GRAS_SEL_OTP_VERIFY", "button[id='verify_otp']"),
-            "submit_button": os.environ.get("GRAS_SEL_SUBMIT", "button[id='submit_challan']"),
-            "success_indicator": os.environ.get("GRAS_SEL_SUCCESS", "div.success-challan-generated"),
-            "grn_span": os.environ.get("GRAS_SEL_GRN", "span#grn_number"),
+        self._sel_defaults = {
+            "pay_without_reg": "text=Pay Without Registration",
+            "department_input": "input[name='department']",
+            "purpose_select": "select[name='purpose']",
+            "stamp_duty_input": "input[name='stamp_duty_amount']",
+            "payee_name_input": "input[name='payee_name']",
+            "property_address_input": "input[name='property_address']",
+            "generate_otp_button": "button[id='generate_otp']",
+            "otp_input": "input[id='otp_input']",
+            "otp_verify_button": "button[id='verify_otp']",
+            "submit_button": "button[id='submit_challan']",
+            "success_indicator": "div.success-challan-generated",
+            "grn_span": "span#grn_number",
         }
+        self.sel = dict(self._sel_defaults)
+        for k in self.sel:
+            self.sel[k] = get_selector("gras", k, self.sel[k])
+
+    async def _check_breaker(self, case_id: str, portal: str) -> bool:
+        breaker = get_breaker(portal)
+        state = await breaker.state()
+        if state == CircuitState.CLOSED:
+            return True
+        can_pass = await breaker.can_pass()
+        if can_pass:
+            return True
+        await hitl_queue.add_task(
+            portal=portal,
+            case_id=case_id,
+            action="rpa_automation",
+            payload={"reason": f"Circuit breaker {state.value} for {portal}"},
+            reason=f"Circuit breaker {state.value} — RPA blocked for {portal} portal. Manual intervention required.",
+        )
+        logger.warning("HITL task queued for %s/%s — breaker %s", portal, case_id, state.value)
+        return False
 
     async def generate_mtr6_challan(self, case_id: str, extracted_data: Dict[str, Any]) -> Dict[str, Any]:
         """
@@ -51,6 +76,9 @@ class GrasRPAExecutor:
         Completely eliminates human data entry typos.
         """
         logger.info(f"🚀 [EXECUTOR] Starting GRAS RPA for case: {case_id}")
+
+        if not await self._check_breaker(case_id, "gras"):
+            return {"success": False, "error": "GRAS circuit breaker OPEN — task queued for human review", "hitl": True, "case_id": case_id}
         
         # 1. We trust the input strictly (Validated by Agent 3: The Bouncer)
         tenant_name = extracted_data.get('tenant_name')
@@ -85,7 +113,7 @@ class GrasRPAExecutor:
                 logger.info("🌐 [EXECUTOR] Navigating to GRAS Portal...")
                 await page.goto(self.portal_url)
 
-                await page.click(self.sel["pay_without_reg"])
+                await self._hide_overlays_and_click_pay_without_reg(page)
                 await page.fill(self.sel["department_input"], "Inspector General of Registration")
                 await page.fill(self.sel["stamp_duty_input"], str(stamp_duty))
                 await page.fill(self.sel["payee_name_input"], tenant_name)
@@ -108,6 +136,8 @@ class GrasRPAExecutor:
                 await page.wait_for_selector(self.sel["success_indicator"])
                 grn_number = await page.inner_text(self.sel["grn_span"])
 
+                await get_breaker("gras").record_success()
+
                 return {
                     "success": True,
                     "grn_number": grn_number,
@@ -117,6 +147,7 @@ class GrasRPAExecutor:
 
         except Exception as e:
             logger.error(f"❌ [EXECUTOR] RPA Pipeline crashed: {str(e)}")
+            await get_breaker("gras").record_failure(str(e))
             return {"success": False, "error": str(e)}
         finally:
             if browser is not None:
@@ -169,6 +200,9 @@ class GrasRPAExecutor:
         """
         logger.info(f"🚀 [EXECUTOR] Starting NOI challan for case: {case_id}")
 
+        if not await self._check_breaker(case_id, "gras"):
+            return {"success": False, "error": "GRAS circuit breaker OPEN — task queued for human review", "hitl": True, "case_id": case_id}
+
         import re as regex
         cleaned = regex.sub(r'[^\d.]', '', loan_amount)
         if cleaned.count('.') > 1:
@@ -196,7 +230,7 @@ class GrasRPAExecutor:
                 logger.info("🌐 [EXECUTOR] Navigating to GRAS Portal for NOI...")
                 await page.goto(self.portal_url)
 
-                await page.click(self.sel["pay_without_reg"])
+                await self._hide_overlays_and_click_pay_without_reg(page)
                 await page.fill(self.sel["department_input"], "Inspector General of Registration")
                 await page.select_option(self.sel["purpose_select"], "Intimation Mortgage")
                 await page.fill(self.sel["stamp_duty_input"], str(stamp_duty))
@@ -217,6 +251,8 @@ class GrasRPAExecutor:
                 await self._publish_otp_request(case_id, "gras")
                 await self._store_challan_result(case_id, grn, stamp_duty)
 
+                await get_breaker("gras").record_success()
+
                 return {
                     "success": True,
                     "grn_number": grn,
@@ -228,6 +264,7 @@ class GrasRPAExecutor:
 
         except Exception as e:
             logger.error(f"❌ [EXECUTOR] NOI Challan failed: {str(e)}")
+            await get_breaker("gras").record_failure(str(e))
             return {"success": False, "error": str(e)}
         finally:
             if browser is not None:
@@ -235,6 +272,22 @@ class GrasRPAExecutor:
                     await browser.close()
                 except Exception:
                     pass
+
+    async def _hide_overlays_and_click_pay_without_reg(self, page):
+        """Hide #dis / #logindiv overlays that intercept pointer-events, then click."""
+        await page.evaluate("""
+            () => {
+                const selectors = ['#dis', '#logindiv', '.modal-backdrop', '.overlay'];
+                selectors.forEach(sel => {
+                    document.querySelectorAll(sel).forEach(el => {
+                        el.style.setProperty('display', 'none', 'important');
+                        el.style.setProperty('pointer-events', 'none', 'important');
+                    });
+                });
+            }
+        """)
+        await page.wait_for_timeout(500)
+        await page.locator(self.sel["pay_without_reg"]).first.click(force=True)
 
     async def _publish_otp_request(self, case_id: str, portal: str):
         """Publish OTP request to Redis for Telegram bot to handle."""

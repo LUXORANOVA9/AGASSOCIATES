@@ -7,46 +7,8 @@ from typing import Any, Optional
 from langsmith import traceable
 
 from .state import AgentState
+from .stamp_duty import extract_numeric, duration_to_months
 from .utils import record_activity
-
-
-def _extract_numeric(val: Any) -> Optional[float]:
-    """Extract a numeric value from strings like '₹25,000 per month' or '11 months'."""
-    if val is None:
-        return None
-    try:
-        cleaned = re.sub(r'[^\d.]', '', str(val))
-        return float(cleaned) if cleaned else None
-    except ValueError:
-        return None
-
-
-def _duration_to_months(duration_str: str) -> int:
-    """Parse a duration string into integer months."""
-    if not duration_str:
-        return 0
-
-    # Matches "1.5 years", "6 months", "1yr", etc.
-    tokens = re.findall(r'(\d+(?:\.\d+)?)\s*([a-zA-Z]*)', duration_str.lower())
-    if tokens:
-        total = 0.0
-        for val_str, unit in tokens:
-            val = float(val_str)
-            if 'year' in unit or 'yr' in unit:
-                total += val * 12
-            else:
-                # Assume months if unit is 'month', 'mo', or unspecified
-                total += val
-        return int(round(total))
-
-    # Fallback: any number, treated as years if "year"/"yr" appears anywhere
-    nums = re.findall(r'(\d+(?:\.\d+)?)', duration_str)
-    if not nums:
-        return 0
-    val = float(nums[0])
-    if any(u in duration_str.lower() for u in ['year', 'yr']):
-        return int(round(val * 12))
-    return int(round(val))
 
 
 @traceable(name="Bouncer_Math_Validator")
@@ -61,9 +23,9 @@ def bouncer_node(state: AgentState) -> AgentState:
         state['timestamps']['bouncer_end'] = datetime.now().isoformat()
         return state
 
-    rent = _extract_numeric(state.get('rent_amount'))
-    months = _duration_to_months(state.get('agreement_duration', ''))
-    paid = _extract_numeric(state.get('stamp_duty_paid'))
+    rent = extract_numeric(state.get('rent_amount'))
+    months = duration_to_months(state.get('agreement_duration', ''))
+    paid = extract_numeric(state.get('stamp_duty_paid'))
 
     if rent is None or months == 0 or paid is None:
         error_msg = (

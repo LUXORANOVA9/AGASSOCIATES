@@ -1,0 +1,31 @@
+{
+  "projectRoot": "/home/luxor9/AGASSOCIATES",
+  "batchFiles": [
+    {"path": ".bolt/mcp.json", "language": "json", "sizeLines": 7, "fileCategory": "config"},
+    {"path": ".changeset/config.json", "language": "json", "sizeLines": 11, "fileCategory": "config"},
+    {"path": ".devcontainer/devcontainer.json", "language": "json", "sizeLines": 4, "fileCategory": "config"},
+    {"path": ".env.example", "language": "example", "sizeLines": 103, "fileCategory": "code"},
+    {"path": ".github/actions/setup/action.yml", "language": "yaml", "sizeLines": 29, "fileCategory": "infra"},
+    {"path": ".github/workflows/ci.yml", "language": "yaml", "sizeLines": 39, "fileCategory": "infra"},
+    {"path": ".github/workflows/codeql.yml", "language": "yaml", "sizeLines": 83, "fileCategory": "infra"},
+    {"path": ".github/workflows/deploy.yml", "language": "yaml", "sizeLines": 87, "fileCategory": "infra"},
+    {"path": ".github/workflows/main.yml", "language": "yaml", "sizeLines": 39, "fileCategory": "infra"},
+    {"path": ".github/workflows/nextjs.yml", "language": "yaml", "sizeLines": 99, "fileCategory": "infra"},
+    {"path": ".github/workflows/preview.yml", "language": "yaml", "sizeLines": 18, "fileCategory": "infra"},
+    {"path": ".github/workflows/release.yml", "language": "yaml", "sizeLines": 38, "fileCategory": "infra"},
+    {"path": ".github/workflows/test-checkout.yml", "language": "yaml", "sizeLines": 7, "fileCategory": "infra"},
+    {"path": ".github/workflows/test-permissions.yml", "language": "yaml", "sizeLines": 7, "fileCategory": "infra"},
+    {"path": ".github/workflows/test-simple.yml", "language": "yaml", "sizeLines": 4, "fileCategory": "infra"},
+    {"path": ".github/workflows/test-runner.yml", "language": "yaml", "sizeLines": 7, "fileCategory": "infra"},
+    {"path": ".github/workflows/test.yml", "language": "yaml", "sizeLines": 9, "fileCategory": "infra"},
+    {"path": ".lintstagedrc.json", "language": "json", "sizeLines": 9, "fileCategory": "config"},
+    {"path": ".pre-commit-config.yaml", "language": "yaml", "sizeLines": 27, "fileCategory": "config"},
+    {"path": "CNAME", "language": "txt", "sizeLines": 1, "fileCategory": "config"},
+    {"path": "Caddyfile", "language": "unknown", "sizeLines": 52, "fileCategory": "infra"},
+    {"path": "CONTEXT.md", "language": "markdown", "sizeLines": 73, "fileCategory": "docs"},
+    {"path": "CONTRIBUTING.md", "language": "markdown", "sizeLines": 38, "fileCategory": "docs"},
+    {"path": "CLAUDE.md", "language": "markdown", "sizeLines": 123, "fileCategory": "docs"},
+    {"path": "CULTURE.md", "language": "markdown", "sizeLines": 38, "fileCategory": "docs"}
+  ],
+  "batchImportData": {".bolt/mcp.json": [], ".changeset/config.json": [], ".devcontainer/devcontainer.json": [], ".env.example": [], ".github/actions/setup/action.yml": [], ".github/workflows/ci.yml": [], ".github/workflows/codeql.yml": [], ".github/workflows/deploy.yml": [], ".github/workflows/main.yml": [], ".github/workflows/nextjs.yml": [], ".github/workflows/preview.yml": [], ".github/workflows/release.yml": [], ".github/workflows/test-checkout.yml": [], ".github/workflows/test-permissions.yml": [], ".github/workflows/test-simple.yml": [], ".github/workflows/test-runner.yml": [], ".github/workflows/test.yml": [], ".lintstagedrc.json": [], ".pre-commit-config.yaml": [], "CNAME": [], "Caddyfile": [], "CONTEXT.md": [], "CONTRIBUTING.md": [], "CLAUDE.md": [], "CULTURE.md": []}
+}

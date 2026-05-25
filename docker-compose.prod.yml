@@ -26,6 +26,7 @@ services:
       N8N_BASIC_AUTH_PASSWORD_HASH: ${N8N_BASIC_AUTH_PASSWORD_HASH}
     volumes:
       - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - ./landing:/srv/landing:ro
       - ./clerk-docs/dist:/srv/docs:ro
       - caddy_data:/data
       - caddy_config:/config
@@ -36,6 +37,11 @@ services:
       - intake-api
       - telegram-bot
       - n8n
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:2019/config/"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
     networks: [ag_net]
 
   postgres:
@@ -101,6 +107,7 @@ services:
       ENVIRONMENT: ${ENVIRONMENT:-production}
       LLM_MOCK_MODE: ${LLM_MOCK_MODE:-false}
       SENTRY_DSN: ${SENTRY_DSN:-}
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-fallback-dummy-key-for-init-only}
       # NeSL / IGR e-filing
       NESL_API_KEY: ${NESL_API_KEY:-}
       NESL_API_BASE_URL: ${NESL_API_BASE_URL:-https://api.nesl.co.in/v1}
@@ -136,6 +143,12 @@ services:
     environment:
       NEXT_PUBLIC_API_URL: https://api.${DOMAIN}
     depends_on: [ai-backend]
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/"]
+      interval: 30s
+      timeout: 5s
+      start_period: 15s
+      retries: 3
     networks: [ag_net]
 
   ag-platform:
@@ -158,6 +171,12 @@ services:
       RESEND_API_KEY: ${RESEND_API_KEY}
     depends_on:
       postgres: { condition: service_healthy }
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/api/health"]
+      interval: 30s
+      timeout: 5s
+      start_period: 15s
+      retries: 3
     networks: [ag_net]
 
   n8n:
@@ -181,6 +200,12 @@ services:
       - n8n_data:/home/node/.n8n
     depends_on:
       postgres: { condition: service_healthy }
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "http://localhost:5678/healthz"]
+      interval: 30s
+      timeout: 5s
+      start_period: 20s
+      retries: 3
     networks: [ag_net]
 
   # ── NOI Automation Services ──────────────────────────────────────────
@@ -201,6 +226,12 @@ services:
       SUPABASE_SERVICE_ROLE_KEY: ${SUPABASE_SERVICE_ROLE_KEY}
     depends_on:
       redis: { condition: service_healthy }
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3002/health"]
+      interval: 30s
+      timeout: 5s
+      start_period: 10s
+      retries: 3
     networks: [ag_net]
 
   telegram-bot:
@@ -213,8 +244,17 @@ services:
       TELEGRAM_BOT_TOKEN: ${TELEGRAM_BOT_TOKEN}
       REDIS_URL: redis://:${REDIS_PASSWORD}@redis:6379
       TELEGRAM_BOT_PORT: 3003
+      AISHA_API_URL: http://ai-backend:8000/api/aisha/chat
+      N8N_WEBHOOK_KEY: ${N8N_WEBHOOK_KEY}
     depends_on:
       redis: { condition: service_healthy }
+      ai-backend: { condition: service_healthy }
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3003/health"]
+      interval: 30s
+      timeout: 5s
+      start_period: 10s
+      retries: 3
     networks: [ag_net]
 
   email-intake:
@@ -238,6 +278,12 @@ services:
       EMAIL_INTAKE_PORT: 3004
     depends_on:
       redis: { condition: service_healthy }
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3004/health"]
+      interval: 30s
+      timeout: 5s
+      start_period: 10s
+      retries: 3
     networks: [ag_net]
 
 volumes:

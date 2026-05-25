@@ -1,0 +1,16 @@
+{
+  "fixedSectionOk": true,
+  "nodesRecovered": 4,
+  "edgesRestored": 8,
+  "crossBatchEdgesAdded": 0,
+  "typesRemapped": 0,
+  "complexityRemapped": 0,
+  "notes": [
+    "4 duplicates out of 511 input (0.78%) is negligible — well under the 30% concern threshold.",
+    "4 function nodes recovered for SemanticProjectSearch, SmartTaskSuggestions, LoginPage, TaskCard with 8 contains/exports edges restored (weight 1.0).",
+    "128 imports edges in graph cover all 187 importMap relationships — 61 from batch analysis + 67 recovered by merge script. No gaps found.",
+    "Minor: TaskCard.tsx also exports SortableTask (line 32) which has no function node — not a dropped edge issue since no edges referenced it.",
+    "Graph final state: 511 nodes, 581 edges (75 net increase from output: 4 nodes + 8 edges restored, plus 67 import edges from merge script recovery).",
+    "No type or complexity remapping needed."
+  ]
+}

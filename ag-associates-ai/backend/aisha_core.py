@@ -49,7 +49,7 @@ categorize the user's message into exactly ONE of these intents:
                 that doesn't fit the above.
 
 Respond with ONLY a JSON object:
-    {"intent": "<intent_name>", "reasoning": "<why>"}"""
+    {{"intent": "<intent_name>", "reasoning": "<why>"}}"""
 
 
 def classify_intent(message: str) -> str:
@@ -67,7 +67,7 @@ def classify_intent(message: str) -> str:
         llm = ChatOpenAI(
             model=LLM_MODEL_NAME,
             openai_api_base=LLM_BASE_URL,
-            openai_api_key=os.environ.get("LLM_API_KEY", "not-needed"),
+            openai_api_key=os.environ.get("LLM_API_KEY", "") or os.environ.get("OPENAI_API_KEY", ""),
             temperature=0,
         )
         prompt = ChatPromptTemplate.from_messages([
@@ -109,18 +109,22 @@ Current time: {current_time}"""
 
 def _general_chat(message: str, context_messages: List[Dict[str, str]]) -> Dict[str, Any]:
     """Handle general conversation using LLM with conversation history."""
-    llm = ChatOpenAI(
-        model=LLM_MODEL_NAME,
-        openai_api_base=LLM_BASE_URL,
-        openai_api_key=os.environ.get("LLM_API_KEY", "not-needed"),
-        temperature=0.7,
-    )
+    try:
+        llm = ChatOpenAI(
+            model=LLM_MODEL_NAME,
+            openai_api_base=LLM_BASE_URL,
+            openai_api_key=os.environ.get("LLM_API_KEY", "") or os.environ.get("OPENAI_API_KEY", ""),
+            temperature=0.7,
+        )
+    except Exception as exc:
+        logger.warning(f"Cannot initialise LLM for general chat, falling back: {exc}")
+        return {"success": True, "response": "Aisha is warming up. Could you ask again in a moment?"}
 
     prompt = ChatPromptTemplate.from_messages([
         ("system", _GENERAL_SYSTEM_PROMPT.format(
             current_time=datetime.now().isoformat()
         )),
-        *[{"role": m["role"], "content": m["content"]} for m in context_messages[-10:]],
+        *[{"role": m["role"], "content": m["content"].replace("{", "{{").replace("}", "}}")} for m in context_messages[-10:]],
         ("human", "{message}"),
     ])
 
@@ -131,7 +135,7 @@ def _general_chat(message: str, context_messages: List[Dict[str, str]]) -> Dict[
         return {"success": True, "response": text}
     except Exception as exc:
         logger.error(f"General chat failed: {exc}")
-        return {"success": False, "response": f"I encountered an error: {exc}"}
+        return {"success": True, "response": "Aisha is warming up. Could you ask again in a moment?"}
 
 
 # ── Legal drafting mode ──────────────────────────────────────────────────
@@ -299,12 +303,16 @@ def _admin_command(message: str, context_messages: List[Dict[str, str]]) -> Dict
         except Exception as exc:
             logger.warning(f"Tool {tool_name} failed, falling back to LLM: {exc}")
 
-    llm = ChatOpenAI(
-        model=LLM_MODEL_NAME,
-        openai_api_base=LLM_BASE_URL,
-        openai_api_key=os.environ.get("LLM_API_KEY", "not-needed"),
-        temperature=0.3,
-    )
+    try:
+        llm = ChatOpenAI(
+            model=LLM_MODEL_NAME,
+            openai_api_base=LLM_BASE_URL,
+            openai_api_key=os.environ.get("LLM_API_KEY", "") or os.environ.get("OPENAI_API_KEY", ""),
+            temperature=0.3,
+        )
+    except Exception as exc:
+        logger.warning(f"Cannot initialise LLM for admin command: {exc}")
+        return {"success": True, "response": "Aisha's admin module is warming up. Could you ask again in a moment?"}
 
     tools_summary = "\n".join(
         f"  • {d.name}: {d.description}"
@@ -314,7 +322,7 @@ def _admin_command(message: str, context_messages: List[Dict[str, str]]) -> Dict
         ("system", _ADMIN_SYSTEM_PROMPT.format(
             current_time=datetime.now().isoformat()
         ) + f"\n\nTools available:\n{tools_summary}"),
-        *[{"role": m["role"], "content": m["content"]} for m in context_messages[-5:]],
+        *[{"role": m["role"], "content": m["content"].replace("{", "{{").replace("}", "}}")} for m in context_messages[-5:]],
         ("human", "{message}"),
     ])
 
@@ -325,4 +333,4 @@ def _admin_command(message: str, context_messages: List[Dict[str, str]]) -> Dict
         return {"success": True, "response": text}
     except Exception as exc:
         logger.error(f"Admin command failed: {exc}")
-        return {"success": False, "response": f"I encountered an error: {exc}"}
+        return {"success": True, "response": "Aisha's admin module is warming up. Could you ask again in a moment?"}

@@ -55,6 +55,11 @@ NOI_TEMPLATES = {
         "emoji": "📨",
         "priority": "info",
     },
+    "RECTIFY": {
+        "title": "🔄 Rectification Needed",
+        "emoji": "🔄",
+        "priority": "warning",
+    },
     "NOI_FILED": {
         "title": "📝 NOI Filed",
         "emoji": "📝",

@@ -1,0 +1,933 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 5,
+  "filesSkipped": [
+    "ag-associates-ai/backend/agents/horseman.py",
+    "ag-associates-ai/backend/agents/legal_assistant.py",
+    "ag-associates-ai/backend/agents/main.py",
+    "ag-associates-ai/backend/agents/monitor.py",
+    "ag-associates-ai/backend/agents/sarah.py",
+    "ag-associates-ai/backend/agents/scheduler.py",
+    "ag-associates-ai/backend/agents/scribe.py",
+    "ag-associates-ai/backend/agents/task_manager.py",
+    "ag-associates-ai/backend/agents/teacher.py",
+    "ag-associates-ai/backend/agents/telegram_agent.py",
+    "ag-associates-ai/backend/agents/ticketing.py",
+    "ag-associates-ai/backend/agents/tinker.py",
+    "ag-associates-ai/backend/agents/translator.py",
+    "ag-associates-ai/backend/agents/vigil.py",
+    "ag-associates-ai/backend/agents/welcome.py",
+    "ag-associates-ai/backend/agents/writer.py",
+    "ag-associates-ai/backend/agents/xerox.py",
+    "ag-associates-ai/backend/cron.py",
+    "ag-associates-ai/backend/docker-compose.yml",
+    "ag-associates-ai/backend/docs/architecture.md"
+  ],
+  "results": [
+    {
+      "path": "ag-associates-ai/backend/agents/aisha.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 107,
+      "nonEmptyLines": 90,
+      "functions": [
+        {
+          "name": "aisha_intake_node",
+          "startLine": 50,
+          "endLine": 107,
+          "params": [
+            "state"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "aisha_intake_node",
+          "line": 49,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "aisha_intake_node",
+          "callee": "print",
+          "lineNumber": 52
+        },
+        {
+          "caller": "aisha_intake_node",
+          "callee": "datetime.now().isoformat",
+          "lineNumber": 54
+        },
+        {
+          "caller": "aisha_intake_node",
+          "callee": "datetime.now",
+          "lineNumber": 54
+        },
+        {
+          "caller": "aisha_intake_node",
+          "callee": "ChatOpenAI",
+          "lineNumber": 57
+        },
+        {
+          "caller": "aisha_intake_node",
+          "callee": "os.environ.get",
+          "lineNumber": 60
+        },
+        {
+          "caller": "aisha_intake_node",
+          "callee": "ChatPromptTemplate.from_messages",
+          "lineNumber": 64
+        },
+        {
+          "caller": "aisha_intake_node",
+          "callee": "JsonOutputParser",
+          "lineNumber": 69
+        },
+        {
+          "caller": "aisha_intake_node",
+          "callee": "invoke_llm_with_retry",
+          "lineNumber": 72
+        },
+        {
+          "caller": "aisha_intake_node",
+          "callee": "isinstance",
+          "lineNumber": 74
+        },
+        {
+          "caller": "aisha_intake_node",
+          "callee": "result.get",
+          "lineNumber": 76
+        },
+        {
+          "caller": "aisha_intake_node",
+          "callee": "result.get",
+          "lineNumber": 77
+        },
+        {
+          "caller": "aisha_intake_node",
+          "callee": "result.get",
+          "lineNumber": 78
+        },
+        {
+          "caller": "aisha_intake_node",
+          "callee": "result.get",
+          "lineNumber": 79
+        },
+        {
+          "caller": "aisha_intake_node",
+          "callee": "result.get",
+          "lineNumber": 80
+        },
+        {
+          "caller": "aisha_intake_node",
+          "callee": "result.get",
+          "lineNumber": 81
+        },
+        {
+          "caller": "aisha_intake_node",
+          "callee": "result.get",
+          "lineNumber": 82
+        },
+        {
+          "caller": "aisha_intake_node",
+          "callee": "print",
+          "lineNumber": 84
+        },
+        {
+          "caller": "aisha_intake_node",
+          "callee": "len",
+          "lineNumber": 84
+        },
+        {
+          "caller": "aisha_intake_node",
+          "callee": "result.values",
+          "lineNumber": 84
+        },
+        {
+          "caller": "aisha_intake_node",
+          "callee": "record_activity",
+          "lineNumber": 85
+        },
+        {
+          "caller": "aisha_intake_node",
+          "callee": "len",
+          "lineNumber": 88
+        },
+        {
+          "caller": "aisha_intake_node",
+          "callee": "result.values",
+          "lineNumber": 88
+        },
+        {
+          "caller": "aisha_intake_node",
+          "callee": "state.get",
+          "lineNumber": 89
+        },
+        {
+          "caller": "aisha_intake_node",
+          "callee": "state.get",
+          "lineNumber": 90
+        },
+        {
+          "caller": "aisha_intake_node",
+          "callee": "ValueError",
+          "lineNumber": 93
+        },
+        {
+          "caller": "aisha_intake_node",
+          "callee": "str",
+          "lineNumber": 96
+        },
+        {
+          "caller": "aisha_intake_node",
+          "callee": "print",
+          "lineNumber": 97
+        },
+        {
+          "caller": "aisha_intake_node",
+          "callee": "state['errors'].append",
+          "lineNumber": 98
+        },
+        {
+          "caller": "aisha_intake_node",
+          "callee": "record_activity",
+          "lineNumber": 100
+        },
+        {
+          "caller": "aisha_intake_node",
+          "callee": "state.get",
+          "lineNumber": 103
+        },
+        {
+          "caller": "aisha_intake_node",
+          "callee": "datetime.now().isoformat",
+          "lineNumber": 106
+        },
+        {
+          "caller": "aisha_intake_node",
+          "callee": "datetime.now",
+          "lineNumber": 106
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "ag-associates-ai/backend/agents/auditor.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 116,
+      "nonEmptyLines": 95,
+      "functions": [
+        {
+          "name": "auditor_node",
+          "startLine": 47,
+          "endLine": 116,
+          "params": [
+            "state"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "auditor_node",
+          "line": 47,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "auditor_node",
+          "callee": "print",
+          "lineNumber": 49
+        },
+        {
+          "caller": "auditor_node",
+          "callee": "datetime.now().isoformat",
+          "lineNumber": 51
+        },
+        {
+          "caller": "auditor_node",
+          "callee": "datetime.now",
+          "lineNumber": 51
+        },
+        {
+          "caller": "auditor_node",
+          "callee": "state.get",
+          "lineNumber": 54
+        },
+        {
+          "caller": "auditor_node",
+          "callee": "ValueError",
+          "lineNumber": 55
+        },
+        {
+          "caller": "auditor_node",
+          "callee": "ChatOpenAI",
+          "lineNumber": 57
+        },
+        {
+          "caller": "auditor_node",
+          "callee": "os.environ.get",
+          "lineNumber": 60
+        },
+        {
+          "caller": "auditor_node",
+          "callee": "ChatPromptTemplate.from_messages",
+          "lineNumber": 64
+        },
+        {
+          "caller": "auditor_node",
+          "callee": "JsonOutputParser",
+          "lineNumber": 76
+        },
+        {
+          "caller": "auditor_node",
+          "callee": "json.dumps",
+          "lineNumber": 79
+        },
+        {
+          "caller": "auditor_node",
+          "callee": "invoke_llm_with_retry",
+          "lineNumber": 80
+        },
+        {
+          "caller": "auditor_node",
+          "callee": "result.get",
+          "lineNumber": 85
+        },
+        {
+          "caller": "auditor_node",
+          "callee": "result.get",
+          "lineNumber": 86
+        },
+        {
+          "caller": "auditor_node",
+          "callee": "result.get",
+          "lineNumber": 88
+        },
+        {
+          "caller": "auditor_node",
+          "callee": "result.get",
+          "lineNumber": 89
+        },
+        {
+          "caller": "auditor_node",
+          "callee": "print",
+          "lineNumber": 91
+        },
+        {
+          "caller": "auditor_node",
+          "callee": "print",
+          "lineNumber": 92
+        },
+        {
+          "caller": "auditor_node",
+          "callee": "record_activity",
+          "lineNumber": 93
+        },
+        {
+          "caller": "auditor_node",
+          "callee": "len",
+          "lineNumber": 97
+        },
+        {
+          "caller": "auditor_node",
+          "callee": "state.get",
+          "lineNumber": 99
+        },
+        {
+          "caller": "auditor_node",
+          "callee": "print",
+          "lineNumber": 103
+        },
+        {
+          "caller": "auditor_node",
+          "callee": "len",
+          "lineNumber": 103
+        },
+        {
+          "caller": "auditor_node",
+          "callee": "print",
+          "lineNumber": 105
+        },
+        {
+          "caller": "auditor_node",
+          "callee": "str",
+          "lineNumber": 109
+        },
+        {
+          "caller": "auditor_node",
+          "callee": "print",
+          "lineNumber": 110
+        },
+        {
+          "caller": "auditor_node",
+          "callee": "state['errors'].append",
+          "lineNumber": 111
+        },
+        {
+          "caller": "auditor_node",
+          "callee": "str",
+          "lineNumber": 113
+        },
+        {
+          "caller": "auditor_node",
+          "callee": "datetime.now().isoformat",
+          "lineNumber": 115
+        },
+        {
+          "caller": "auditor_node",
+          "callee": "datetime.now",
+          "lineNumber": 115
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "ag-associates-ai/backend/agents/bouncer.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 107,
+      "nonEmptyLines": 90,
+      "functions": [
+        {
+          "name": "_extract_numeric",
+          "startLine": 13,
+          "endLine": 21,
+          "params": [
+            "val"
+          ]
+        },
+        {
+          "name": "_duration_to_months",
+          "startLine": 24,
+          "endLine": 49,
+          "params": [
+            "duration_str"
+          ]
+        },
+        {
+          "name": "bouncer_node",
+          "startLine": 53,
+          "endLine": 107,
+          "params": [
+            "state"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "_extract_numeric",
+          "line": 13,
+          "isDefault": false
+        },
+        {
+          "name": "_duration_to_months",
+          "line": 24,
+          "isDefault": false
+        },
+        {
+          "name": "bouncer_node",
+          "line": 52,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "_extract_numeric",
+          "callee": "re.sub",
+          "lineNumber": 18
+        },
+        {
+          "caller": "_extract_numeric",
+          "callee": "str",
+          "lineNumber": 18
+        },
+        {
+          "caller": "_extract_numeric",
+          "callee": "float",
+          "lineNumber": 19
+        },
+        {
+          "caller": "_duration_to_months",
+          "callee": "re.findall",
+          "lineNumber": 30
+        },
+        {
+          "caller": "_duration_to_months",
+          "callee": "duration_str.lower",
+          "lineNumber": 30
+        },
+        {
+          "caller": "_duration_to_months",
+          "callee": "float",
+          "lineNumber": 34
+        },
+        {
+          "caller": "_duration_to_months",
+          "callee": "int",
+          "lineNumber": 40
+        },
+        {
+          "caller": "_duration_to_months",
+          "callee": "round",
+          "lineNumber": 40
+        },
+        {
+          "caller": "_duration_to_months",
+          "callee": "re.findall",
+          "lineNumber": 43
+        },
+        {
+          "caller": "_duration_to_months",
+          "callee": "float",
+          "lineNumber": 46
+        },
+        {
+          "caller": "_duration_to_months",
+          "callee": "any",
+          "lineNumber": 47
+        },
+        {
+          "caller": "_duration_to_months",
+          "callee": "duration_str.lower",
+          "lineNumber": 47
+        },
+        {
+          "caller": "_duration_to_months",
+          "callee": "int",
+          "lineNumber": 48
+        },
+        {
+          "caller": "_duration_to_months",
+          "callee": "round",
+          "lineNumber": 48
+        },
+        {
+          "caller": "_duration_to_months",
+          "callee": "int",
+          "lineNumber": 49
+        },
+        {
+          "caller": "_duration_to_months",
+          "callee": "round",
+          "lineNumber": 49
+        },
+        {
+          "caller": "bouncer_node",
+          "callee": "print",
+          "lineNumber": 55
+        },
+        {
+          "caller": "bouncer_node",
+          "callee": "datetime.now().isoformat",
+          "lineNumber": 57
+        },
+        {
+          "caller": "bouncer_node",
+          "callee": "datetime.now",
+          "lineNumber": 57
+        },
+        {
+          "caller": "_finish",
+          "callee": "datetime.now().isoformat",
+          "lineNumber": 61
+        },
+        {
+          "caller": "_finish",
+          "callee": "datetime.now",
+          "lineNumber": 61
+        },
+        {
+          "caller": "bouncer_node",
+          "callee": "_extract_numeric",
+          "lineNumber": 64
+        },
+        {
+          "caller": "bouncer_node",
+          "callee": "state.get",
+          "lineNumber": 64
+        },
+        {
+          "caller": "bouncer_node",
+          "callee": "_duration_to_months",
+          "lineNumber": 65
+        },
+        {
+          "caller": "bouncer_node",
+          "callee": "state.get",
+          "lineNumber": 65
+        },
+        {
+          "caller": "bouncer_node",
+          "callee": "_extract_numeric",
+          "lineNumber": 66
+        },
+        {
+          "caller": "bouncer_node",
+          "callee": "state.get",
+          "lineNumber": 66
+        },
+        {
+          "caller": "bouncer_node",
+          "callee": "print",
+          "lineNumber": 73
+        },
+        {
+          "caller": "bouncer_node",
+          "callee": "state['errors'].append",
+          "lineNumber": 74
+        },
+        {
+          "caller": "bouncer_node",
+          "callee": "_finish",
+          "lineNumber": 76
+        },
+        {
+          "caller": "bouncer_node",
+          "callee": "abs",
+          "lineNumber": 80
+        },
+        {
+          "caller": "bouncer_node",
+          "callee": "print",
+          "lineNumber": 82
+        },
+        {
+          "caller": "bouncer_node",
+          "callee": "record_activity",
+          "lineNumber": 83
+        },
+        {
+          "caller": "bouncer_node",
+          "callee": "state.get",
+          "lineNumber": 87
+        },
+        {
+          "caller": "bouncer_node",
+          "callee": "print",
+          "lineNumber": 95
+        },
+        {
+          "caller": "bouncer_node",
+          "callee": "state['errors'].append",
+          "lineNumber": 96
+        },
+        {
+          "caller": "bouncer_node",
+          "callee": "record_activity",
+          "lineNumber": 98
+        },
+        {
+          "caller": "bouncer_node",
+          "callee": "state.get",
+          "lineNumber": 103
+        },
+        {
+          "caller": "bouncer_node",
+          "callee": "_finish",
+          "lineNumber": 107
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 3,
+        "functionCount": 3,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "ag-associates-ai/backend/agents/db.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 76,
+      "nonEmptyLines": 60,
+      "functions": [
+        {
+          "name": "get_db_connection",
+          "startLine": 15,
+          "endLine": 19,
+          "params": []
+        },
+        {
+          "name": "_get_embedding_model",
+          "startLine": 28,
+          "endLine": 40,
+          "params": []
+        },
+        {
+          "name": "generate_embedding",
+          "startLine": 43,
+          "endLine": 49,
+          "params": [
+            "text"
+          ]
+        },
+        {
+          "name": "similarity_search",
+          "startLine": 52,
+          "endLine": 76,
+          "params": [
+            "query",
+            "limit"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "get_db_connection",
+          "line": 15,
+          "isDefault": false
+        },
+        {
+          "name": "_get_embedding_model",
+          "line": 28,
+          "isDefault": false
+        },
+        {
+          "name": "generate_embedding",
+          "line": 43,
+          "isDefault": false
+        },
+        {
+          "name": "similarity_search",
+          "line": 52,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "get_db_connection",
+          "callee": "psycopg2.connect",
+          "lineNumber": 17
+        },
+        {
+          "caller": "get_db_connection",
+          "callee": "get_database_url",
+          "lineNumber": 17
+        },
+        {
+          "caller": "get_db_connection",
+          "callee": "register_vector",
+          "lineNumber": 18
+        },
+        {
+          "caller": "_get_embedding_model",
+          "callee": "SentenceTransformer",
+          "lineNumber": 33
+        },
+        {
+          "caller": "_get_embedding_model",
+          "callee": "logger.warning",
+          "lineNumber": 35
+        },
+        {
+          "caller": "generate_embedding",
+          "callee": "_get_embedding_model",
+          "lineNumber": 45
+        },
+        {
+          "caller": "generate_embedding",
+          "callee": "model.encode",
+          "lineNumber": 48
+        },
+        {
+          "caller": "generate_embedding",
+          "callee": "embedding.tolist",
+          "lineNumber": 49
+        },
+        {
+          "caller": "similarity_search",
+          "callee": "generate_embedding",
+          "lineNumber": 54
+        },
+        {
+          "caller": "similarity_search",
+          "callee": "get_db_connection",
+          "lineNumber": 56
+        },
+        {
+          "caller": "similarity_search",
+          "callee": "conn.cursor",
+          "lineNumber": 58
+        },
+        {
+          "caller": "similarity_search",
+          "callee": "cur.execute",
+          "lineNumber": 60
+        },
+        {
+          "caller": "similarity_search",
+          "callee": "cur.fetchall",
+          "lineNumber": 70
+        },
+        {
+          "caller": "similarity_search",
+          "callee": "cur.close",
+          "lineNumber": 72
+        },
+        {
+          "caller": "similarity_search",
+          "callee": "conn.close",
+          "lineNumber": 74
+        },
+        {
+          "caller": "similarity_search",
+          "callee": "dict",
+          "lineNumber": 76
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 4,
+        "functionCount": 4,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "ag-associates-ai/backend/Dockerfile",
+      "language": "dockerfile",
+      "fileCategory": "infra",
+      "totalLines": 53,
+      "nonEmptyLines": 44,
+      "services": [
+        {
+          "name": "builder",
+          "image": "python:3.11-slim-bookworm",
+          "ports": [],
+          "startLine": 2,
+          "endLine": 15
+        },
+        {
+          "name": "python",
+          "image": "python:3.11-slim-bookworm",
+          "ports": [
+            8000
+          ],
+          "startLine": 16,
+          "endLine": 54
+        }
+      ],
+      "steps": [
+        {
+          "name": "FROM python:3.11-slim-bookworm AS builder",
+          "startLine": 2,
+          "endLine": 2
+        },
+        {
+          "name": "WORKDIR /app",
+          "startLine": 3,
+          "endLine": 3
+        },
+        {
+          "name": "ENV PATH=/root/.local/bin:$PATH \\",
+          "startLine": 4,
+          "endLine": 4
+        },
+        {
+          "name": "RUN apt-get update \\",
+          "startLine": 6,
+          "endLine": 6
+        },
+        {
+          "name": "COPY requirements.prod.txt .",
+          "startLine": 10,
+          "endLine": 10
+        },
+        {
+          "name": "RUN pip install --user --no-cache-dir -r requirements.prod.txt",
+          "startLine": 11,
+          "endLine": 11
+        },
+        {
+          "name": "RUN python -m playwright install chromium",
+          "startLine": 13,
+          "endLine": 13
+        },
+        {
+          "name": "FROM python:3.11-slim-bookworm",
+          "startLine": 16,
+          "endLine": 16
+        },
+        {
+          "name": "WORKDIR /app",
+          "startLine": 17,
+          "endLine": 17
+        },
+        {
+          "name": "RUN groupadd -r appuser && useradd -r -g appuser appuser",
+          "startLine": 20,
+          "endLine": 20
+        },
+        {
+          "name": "RUN apt-get update \\",
+          "startLine": 23,
+          "endLine": 23
+        },
+        {
+          "name": "COPY --from=builder --chown=appuser:appuser /root/.local /home/ap",
+          "startLine": 34,
+          "endLine": 34
+        },
+        {
+          "name": "COPY --from=builder --chown=appuser:appuser /opt/ms-playwright /o",
+          "startLine": 35,
+          "endLine": 35
+        },
+        {
+          "name": "ENV PATH=/home/appuser/.local/bin:$PATH \\",
+          "startLine": 37,
+          "endLine": 37
+        },
+        {
+          "name": "COPY --chown=appuser:appuser . .",
+          "startLine": 44,
+          "endLine": 44
+        },
+        {
+          "name": "RUN mkdir -p /app/output /app/temp_audio && chown -R appuser:app",
+          "startLine": 45,
+          "endLine": 45
+        },
+        {
+          "name": "USER appuser",
+          "startLine": 47,
+          "endLine": 47
+        },
+        {
+          "name": "EXPOSE 8000",
+          "startLine": 48,
+          "endLine": 48
+        },
+        {
+          "name": "HEALTHCHECK --interval=30s --timeout=5s --start-period=20s --retries=3 \\",
+          "startLine": 50,
+          "endLine": 50
+        },
+        {
+          "name": "CMD [\"sh\", \"-c\", \"uvicorn main:app --host 0.0.0.0 --port 8000 --",
+          "startLine": 53,
+          "endLine": 53
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "serviceCount": 2,
+        "stepCount": 20
+      }
+    }
+  ]
+}

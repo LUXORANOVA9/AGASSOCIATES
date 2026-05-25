@@ -1,5 +1,5 @@
 {
-	email {$ACME_EMAIL}
+	email rajkhemani24@gmail.com
 	servers {
 		trusted_proxies static private_ranges
 	}
@@ -45,6 +45,20 @@ n8n.{$DOMAIN} {
 		{$N8N_BASIC_AUTH_USER} {$N8N_BASIC_AUTH_PASSWORD_HASH}
 	}
 	reverse_proxy n8n:5678
+}
+
+# Landing page — premium hub served at root domain
+{$DOMAIN} {
+	encode zstd gzip
+	root * /srv/landing
+	try_files {path} {path}/ /index.html
+	file_server
+	header Cache-Control "public, max-age=3600"
+
+	@health path /health
+	handle @health {
+		respond "ok" 200
+	}
 }
 
 # Clerk-style docs site — pure static, served by Caddy directly from a mounted dir

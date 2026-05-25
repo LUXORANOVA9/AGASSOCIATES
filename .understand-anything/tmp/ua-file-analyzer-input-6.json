@@ -1,0 +1,31 @@
+{
+  "projectRoot": "/home/luxor9/AGASSOCIATES",
+  "batchFiles": [
+    {"path": "ag-platform/apps/mobile/eas.json", "language": "json", "sizeLines": 25, "fileCategory": "config"},
+    {"path": "ag-platform/apps/mobile/global.css", "language": "css", "sizeLines": 3, "fileCategory": "markup"},
+    {"path": "ag-platform/apps/mobile/hooks/useAuth.ts", "language": "typescript", "sizeLines": 44, "fileCategory": "code"},
+    {"path": "ag-platform/apps/mobile/hooks/useCase.ts", "language": "typescript", "sizeLines": 45, "fileCategory": "code"},
+    {"path": "ag-platform/apps/mobile/hooks/useCases.ts", "language": "typescript", "sizeLines": 45, "fileCategory": "code"},
+    {"path": "ag-platform/apps/mobile/hooks/useDocumentCapture.ts", "language": "typescript", "sizeLines": 96, "fileCategory": "code"},
+    {"path": "ag-platform/apps/mobile/hooks/useMutationQueue.ts", "language": "typescript", "sizeLines": 98, "fileCategory": "code"},
+    {"path": "ag-platform/apps/mobile/hooks/useOnDutyTracker.ts", "language": "typescript", "sizeLines": 101, "fileCategory": "code"},
+    {"path": "ag-platform/apps/mobile/hooks/useOnlineStatus.ts", "language": "typescript", "sizeLines": 13, "fileCategory": "code"},
+    {"path": "ag-platform/apps/mobile/hooks/usePushRegistration.ts", "language": "typescript", "sizeLines": 71, "fileCategory": "code"},
+    {"path": "ag-platform/apps/mobile/hooks/useRealtimeCases.ts", "language": "typescript", "sizeLines": 39, "fileCategory": "code"},
+    {"path": "ag-platform/apps/mobile/hooks/useStatusUpdate.ts", "language": "typescript", "sizeLines": 81, "fileCategory": "code"},
+    {"path": "ag-platform/apps/mobile/hooks/useTodayActivity.ts", "language": "typescript", "sizeLines": 31, "fileCategory": "code"},
+    {"path": "ag-platform/apps/mobile/lib/env.ts", "language": "typescript", "sizeLines": 32, "fileCategory": "code"},
+    {"path": "ag-platform/apps/mobile/lib/notifications.ts", "language": "typescript", "sizeLines": 17, "fileCategory": "code"},
+    {"path": "ag-platform/apps/mobile/lib/queryClient.ts", "language": "typescript", "sizeLines": 27, "fileCategory": "code"},
+    {"path": "ag-platform/apps/mobile/lib/queue/drain.ts", "language": "typescript", "sizeLines": 59, "fileCategory": "code"},
+    {"path": "ag-platform/apps/mobile/lib/queue/types.ts", "language": "typescript", "sizeLines": 61, "fileCategory": "code"},
+    {"path": "ag-platform/apps/mobile/lib/sentry.ts", "language": "typescript", "sizeLines": 14, "fileCategory": "code"},
+    {"path": "ag-platform/apps/mobile/lib/stores/useAuthStore.ts", "language": "typescript", "sizeLines": 85, "fileCategory": "code"},
+    {"path": "ag-platform/apps/mobile/lib/stores/useDutyStore.ts", "language": "typescript", "sizeLines": 30, "fileCategory": "code"},
+    {"path": "ag-platform/apps/mobile/lib/stores/useQueueStore.ts", "language": "typescript", "sizeLines": 53, "fileCategory": "code"},
+    {"path": "ag-platform/apps/mobile/lib/supabase.ts", "language": "typescript", "sizeLines": 18, "fileCategory": "code"},
+    {"path": "ag-platform/apps/mobile/metro.config.js", "language": "javascript", "sizeLines": 19, "fileCategory": "code"},
+    {"path": "ag-platform/apps/mobile/package.json", "language": "json", "sizeLines": 64, "fileCategory": "config"}
+  ],
+  "batchImportData": {}
+}

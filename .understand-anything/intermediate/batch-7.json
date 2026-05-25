@@ -1,0 +1,731 @@
+{
+  "nodes": [
+    {
+      "id": "document:ag-platform/apps/mobile/README.md",
+      "type": "document",
+      "name": "README.md",
+      "filePath": "ag-platform/apps/mobile/README.md",
+      "summary": "Documentation for the AG Associates mobile field app covering setup instructions, environment variables, and enforced architectural rules for the Expo React Native project.",
+      "tags": ["documentation", "mobile", "field-app", "setup"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:ag-platform/apps/mobile/services/cases.ts",
+      "type": "file",
+      "name": "cases.ts",
+      "filePath": "ag-platform/apps/mobile/services/cases.ts",
+      "summary": "Case status update service that persists status transitions to Supabase with idempotent retry handling and auth/permission error classification.",
+      "tags": ["service", "api-handler", "supabase", "offline-queue"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:ag-platform/apps/mobile/services/cases.ts:applyStatusUpdate",
+      "type": "function",
+      "name": "applyStatusUpdate",
+      "filePath": "ag-platform/apps/mobile/services/cases.ts",
+      "lineRange": [13, 56],
+      "summary": "Applies a case status mutation by inserting an audit log and updating the case row, handling unique violation idempotency and auth error classification.",
+      "tags": ["service", "status-update", "idempotent"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:ag-platform/apps/mobile/services/devices.ts",
+      "type": "file",
+      "name": "devices.ts",
+      "filePath": "ag-platform/apps/mobile/services/devices.ts",
+      "summary": "Device push token management service for registering and revoking Expo push notification tokens via Supabase upsert.",
+      "tags": ["service", "notification", "device", "push-token"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:ag-platform/apps/mobile/services/devices.ts:upsertPushToken",
+      "type": "function",
+      "name": "upsertPushToken",
+      "filePath": "ag-platform/apps/mobile/services/devices.ts",
+      "lineRange": [6, 13],
+      "summary": "Registers or updates a device push token keyed on user_id and device_id for cross-reinstall deduplication.",
+      "tags": ["notification", "registration", "supabase"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:ag-platform/apps/mobile/services/devices.ts:revokePushToken",
+      "type": "function",
+      "name": "revokePushToken",
+      "filePath": "ag-platform/apps/mobile/services/devices.ts",
+      "lineRange": [15, 21],
+      "summary": "Revokes a device push token by setting revoked_at timestamp, preventing future notifications to that device.",
+      "tags": ["notification", "revocation", "supabase"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:ag-platform/apps/mobile/services/documents.ts",
+      "type": "file",
+      "name": "documents.ts",
+      "filePath": "ag-platform/apps/mobile/services/documents.ts",
+      "summary": "Document upload service using TUS resumable protocol to Supabase Storage with client-event-id idempotency for reliable offline queue processing.",
+      "tags": ["service", "upload", "document", "tus", "offline-queue"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:ag-platform/apps/mobile/services/documents.ts:applyDocumentUpload",
+      "type": "function",
+      "name": "applyDocumentUpload",
+      "filePath": "ag-platform/apps/mobile/services/documents.ts",
+      "lineRange": [17, 89],
+      "summary": "Two-phase document upload: TUS resumable PUT to Supabase Storage, then metadata insert with unique violation idempotency and staged file cleanup.",
+      "tags": ["upload", "document", "tus", "idempotent"],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:ag-platform/apps/mobile/services/documents.ts:uploadViaTus",
+      "type": "function",
+      "name": "uploadViaTus",
+      "filePath": "ag-platform/apps/mobile/services/documents.ts",
+      "lineRange": [98, 130],
+      "summary": "Internal helper that performs a TUS resumable upload from a local file URI to Supabase Storage with retry delays and chunked transfer.",
+      "tags": ["upload", "tus", "helper"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:ag-platform/apps/mobile/services/field.ts",
+      "type": "file",
+      "name": "field.ts",
+      "filePath": "ag-platform/apps/mobile/services/field.ts",
+      "summary": "Field activity log batch flusher that inserts rows into Supabase with unique violation tolerance for offline queue replay safety.",
+      "tags": ["service", "data-pipeline", "supabase", "offline-queue"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:ag-platform/apps/mobile/services/field.ts:flushActivityBatch",
+      "type": "function",
+      "name": "flushActivityBatch",
+      "filePath": "ag-platform/apps/mobile/services/field.ts",
+      "lineRange": [7, 18],
+      "summary": "Batch-inserts field activity log rows to Supabase, silently ignoring unique violations for idempotent retry support.",
+      "tags": ["data-pipeline", "batch", "supabase"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:ag-platform/apps/mobile/tailwind.config.js",
+      "type": "file",
+      "name": "tailwind.config.js",
+      "filePath": "ag-platform/apps/mobile/tailwind.config.js",
+      "summary": "Tailwind CSS configuration for the Expo mobile app defining content file paths for class scanning.",
+      "tags": ["configuration", "styling", "build-system"],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:ag-platform/apps/mobile/tsconfig.json",
+      "type": "config",
+      "name": "tsconfig.json",
+      "filePath": "ag-platform/apps/mobile/tsconfig.json",
+      "summary": "TypeScript compiler configuration for the Expo mobile app with strict mode and path aliases.",
+      "tags": ["configuration", "typescript", "build-system"],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:ag-platform/ARCHITECTURE.md",
+      "type": "document",
+      "name": "ARCHITECTURE.md",
+      "filePath": "ag-platform/ARCHITECTURE.md",
+      "summary": "Comprehensive architecture document covering the core data model, case lifecycle state machine, India-ready tech stack, multi-tenancy model, and monorepo folder structure.",
+      "tags": ["documentation", "architecture", "overview", "design"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "service:ag-platform/Dockerfile",
+      "type": "service",
+      "name": "Dockerfile",
+      "filePath": "ag-platform/Dockerfile",
+      "summary": "Multi-stage Docker build producing a production Node.js image with dependency caching, Vite build optimization, and health check configuration.",
+      "tags": ["containerization", "infrastructure", "deployment", "multi-stage"],
+      "complexity": "moderate",
+      "languageNotes": "Multi-stage builds separate dependency installation (deps), application build (builder), and production runtime (runner) for minimal final image size."
+    },
+    {
+      "id": "service:ag-platform/Dockerfile:deps",
+      "type": "service",
+      "name": "deps",
+      "filePath": "ag-platform/Dockerfile",
+      "summary": "First build stage that installs all npm dependencies including monorepo packages for downstream caching.",
+      "tags": ["containerization", "dependencies", "build-stage"],
+      "complexity": "simple"
+    },
+    {
+      "id": "service:ag-platform/Dockerfile:builder",
+      "type": "service",
+      "name": "builder",
+      "filePath": "ag-platform/Dockerfile",
+      "summary": "Build stage that compiles the application using Vite with environment-specific build arguments.",
+      "tags": ["containerization", "build", "vite"],
+      "complexity": "simple"
+    },
+    {
+      "id": "service:ag-platform/Dockerfile:runner",
+      "type": "service",
+      "name": "runner",
+      "filePath": "ag-platform/Dockerfile",
+      "summary": "Production runtime stage with non-root user, health checks, and minimal production-only artifacts.",
+      "tags": ["containerization", "runtime", "production"],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:ag-platform/docs/AUTH_ARCHITECTURE.md",
+      "type": "document",
+      "name": "AUTH_ARCHITECTURE.md",
+      "filePath": "ag-platform/docs/AUTH_ARCHITECTURE.md",
+      "summary": "Authentication and authorization architecture documentation covering passwordless magic links, Supabase JWT custom claims injection, and PostgreSQL row-level security policies.",
+      "tags": ["documentation", "security", "authentication", "authorization"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:ag-platform/index.html",
+      "type": "file",
+      "name": "index.html",
+      "filePath": "ag-platform/index.html",
+      "summary": "Root HTML entry point for the AG platform web application with standard document shell and root div.",
+      "tags": ["entry-point", "markup", "html"],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:ag-platform/package.json",
+      "type": "config",
+      "name": "package.json",
+      "filePath": "ag-platform/package.json",
+      "summary": "Root package.json for the ag-platform Turborepo monorepo defining workspace packages, shared scripts, and common dependencies.",
+      "tags": ["configuration", "monorepo", "build-system", "turborepo"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "config:ag-platform/packages/ai/package.json",
+      "type": "config",
+      "name": "package.json",
+      "filePath": "ag-platform/packages/ai/package.json",
+      "summary": "Package configuration for the AI package with Google GenAI SDK and Supabase dependencies.",
+      "tags": ["configuration", "ai", "package", "genai"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:ag-platform/packages/ai/src/gemini.ts",
+      "type": "file",
+      "name": "gemini.ts",
+      "filePath": "ag-platform/packages/ai/src/gemini.ts",
+      "summary": "Google Gemini AI integration providing model factory functions, embedding support, Supabase client singleton, and organization token quota checking.",
+      "tags": ["ai", "gemini", "service", "embedding"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:ag-platform/packages/ai/src/gemini.ts:getSupabaseClient",
+      "type": "function",
+      "name": "getSupabaseClient",
+      "filePath": "ag-platform/packages/ai/src/gemini.ts",
+      "lineRange": [14, 25],
+      "summary": "Lazily creates and caches a Supabase client singleton using environment variables for URL and service/anonymous keys.",
+      "tags": ["supabase", "singleton", "utility"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:ag-platform/packages/ai/src/gemini.ts:checkOrgTokenQuota",
+      "type": "function",
+      "name": "checkOrgTokenQuota",
+      "filePath": "ag-platform/packages/ai/src/gemini.ts",
+      "lineRange": [27, 38],
+      "summary": "Checks an organization's AI token usage against its limit, throwing an error if quota is exceeded.",
+      "tags": ["quota", "rate-limit", "ai", "validation"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:ag-platform/packages/ai/src/index.ts",
+      "type": "file",
+      "name": "index.ts",
+      "filePath": "ag-platform/packages/ai/src/index.ts",
+      "summary": "Barrel file re-exporting the AI package's public API including Gemini model factories and legal prompt templates.",
+      "tags": ["entry-point", "barrel", "exports"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:ag-platform/packages/ai/src/prompts/legal.ts",
+      "type": "file",
+      "name": "legal.ts",
+      "filePath": "ag-platform/packages/ai/src/prompts/legal.ts",
+      "summary": "System prompt templates for legal AI features including brief generation, document vetting, invoice extraction, and document summarization.",
+      "tags": ["prompts", "legal", "ai", "template"],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:ag-platform/packages/ai/tsconfig.json",
+      "type": "config",
+      "name": "tsconfig.json",
+      "filePath": "ag-platform/packages/ai/tsconfig.json",
+      "summary": "TypeScript compiler configuration for the AI package with ESNext module and JSX support.",
+      "tags": ["configuration", "typescript", "build-system"],
+      "complexity": "simple"
+    },
+    {
+      "id": "table:ag-platform/packages/db/migrations/001_ag_initial_schema.sql",
+      "type": "table",
+      "name": "001_ag_initial_schema.sql",
+      "filePath": "ag-platform/packages/db/migrations/001_ag_initial_schema.sql",
+      "summary": "Initial database schema migration defining the core data model with banks, organizations, profiles, cases, disbursements, and case_timeline tables with foreign key relationships.",
+      "tags": ["database", "migration", "schema-definition", "sql"],
+      "complexity": "complex"
+    },
+    {
+      "id": "table:ag-platform/packages/db/migrations/002_pgvector_templates.sql",
+      "type": "table",
+      "name": "002_pgvector_templates.sql",
+      "filePath": "ag-platform/packages/db/migrations/002_pgvector_templates.sql",
+      "summary": "SQL migration adding the legal_templates table with pgvector embedding column and ivfflat index for semantic search over legal documents.",
+      "tags": ["database", "migration", "vector-search", "pgvector"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "config:ag-platform/packages/db/package.json",
+      "type": "config",
+      "name": "package.json",
+      "filePath": "ag-platform/packages/db/package.json",
+      "summary": "Package configuration for the database package with pg and pgvector dependencies.",
+      "tags": ["configuration", "database", "package", "postgres"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:ag-platform/packages/db/src/index.ts",
+      "type": "file",
+      "name": "index.ts",
+      "filePath": "ag-platform/packages/db/src/index.ts",
+      "summary": "Database connection pool singleton using pg Pool with SSL support and automatic connection string assembly from environment variables.",
+      "tags": ["database", "service", "pool", "postgres"],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:ag-platform/packages/db/tsconfig.json",
+      "type": "config",
+      "name": "tsconfig.json",
+      "filePath": "ag-platform/packages/db/tsconfig.json",
+      "summary": "TypeScript compiler configuration for the database package.",
+      "tags": ["configuration", "typescript", "build-system"],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:ag-platform/packages/types/package.json",
+      "type": "config",
+      "name": "package.json",
+      "filePath": "ag-platform/packages/types/package.json",
+      "summary": "Package configuration for shared TypeScript type definitions used across the monorepo.",
+      "tags": ["configuration", "types", "package"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:ag-platform/packages/types/src/domain.ts",
+      "type": "file",
+      "name": "domain.ts",
+      "filePath": "ag-platform/packages/types/src/domain.ts",
+      "summary": "Core domain type definitions including enums for user roles and case types, interfaces for bank, case, and disbursement entities.",
+      "tags": ["type-definition", "domain", "types", "enums"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:ag-platform/packages/types/src/field-app.ts",
+      "type": "file",
+      "name": "field-app.ts",
+      "filePath": "ag-platform/packages/types/src/field-app.ts",
+      "summary": "Field app TypeScript type definitions for database rows and insert payloads covering documents, case audit logs, field activity logs, and device push tokens.",
+      "tags": ["type-definition", "types", "mobile", "database"],
+      "complexity": "moderate"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:ag-platform/apps/mobile/services/cases.ts",
+      "target": "file:ag-platform/apps/mobile/lib/queue/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:ag-platform/apps/mobile/services/cases.ts",
+      "target": "file:ag-platform/apps/mobile/lib/supabase.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:ag-platform/apps/mobile/services/devices.ts",
+      "target": "file:ag-platform/apps/mobile/lib/supabase.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:ag-platform/apps/mobile/services/documents.ts",
+      "target": "file:ag-platform/apps/mobile/lib/env.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:ag-platform/apps/mobile/services/documents.ts",
+      "target": "file:ag-platform/apps/mobile/lib/queue/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:ag-platform/apps/mobile/services/documents.ts",
+      "target": "file:ag-platform/apps/mobile/lib/supabase.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:ag-platform/apps/mobile/services/field.ts",
+      "target": "file:ag-platform/apps/mobile/lib/supabase.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:ag-platform/packages/ai/src/index.ts",
+      "target": "file:ag-platform/packages/ai/src/gemini.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:ag-platform/packages/ai/src/index.ts",
+      "target": "file:ag-platform/packages/ai/src/prompts/legal.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:ag-platform/apps/mobile/services/cases.ts",
+      "target": "function:ag-platform/apps/mobile/services/cases.ts:applyStatusUpdate",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-platform/apps/mobile/services/devices.ts",
+      "target": "function:ag-platform/apps/mobile/services/devices.ts:upsertPushToken",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-platform/apps/mobile/services/devices.ts",
+      "target": "function:ag-platform/apps/mobile/services/devices.ts:revokePushToken",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-platform/apps/mobile/services/documents.ts",
+      "target": "function:ag-platform/apps/mobile/services/documents.ts:applyDocumentUpload",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-platform/apps/mobile/services/documents.ts",
+      "target": "function:ag-platform/apps/mobile/services/documents.ts:uploadViaTus",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-platform/apps/mobile/services/field.ts",
+      "target": "function:ag-platform/apps/mobile/services/field.ts:flushActivityBatch",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-platform/packages/ai/src/gemini.ts",
+      "target": "function:ag-platform/packages/ai/src/gemini.ts:getSupabaseClient",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-platform/packages/ai/src/gemini.ts",
+      "target": "function:ag-platform/packages/ai/src/gemini.ts:checkOrgTokenQuota",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "service:ag-platform/Dockerfile",
+      "target": "service:ag-platform/Dockerfile:deps",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "service:ag-platform/Dockerfile",
+      "target": "service:ag-platform/Dockerfile:builder",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "service:ag-platform/Dockerfile",
+      "target": "service:ag-platform/Dockerfile:runner",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-platform/apps/mobile/services/cases.ts",
+      "target": "function:ag-platform/apps/mobile/services/cases.ts:applyStatusUpdate",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:ag-platform/apps/mobile/services/devices.ts",
+      "target": "function:ag-platform/apps/mobile/services/devices.ts:upsertPushToken",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:ag-platform/apps/mobile/services/devices.ts",
+      "target": "function:ag-platform/apps/mobile/services/devices.ts:revokePushToken",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:ag-platform/apps/mobile/services/documents.ts",
+      "target": "function:ag-platform/apps/mobile/services/documents.ts:applyDocumentUpload",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:ag-platform/apps/mobile/services/field.ts",
+      "target": "function:ag-platform/apps/mobile/services/field.ts:flushActivityBatch",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:ag-platform/packages/ai/src/gemini.ts",
+      "target": "function:ag-platform/packages/ai/src/gemini.ts:getSupabaseClient",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:ag-platform/packages/ai/src/gemini.ts",
+      "target": "function:ag-platform/packages/ai/src/gemini.ts:checkOrgTokenQuota",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "config:ag-platform/apps/mobile/tsconfig.json",
+      "target": "file:ag-platform/apps/mobile/services/cases.ts",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:ag-platform/apps/mobile/tsconfig.json",
+      "target": "file:ag-platform/apps/mobile/services/devices.ts",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:ag-platform/apps/mobile/tsconfig.json",
+      "target": "file:ag-platform/apps/mobile/services/documents.ts",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:ag-platform/apps/mobile/tsconfig.json",
+      "target": "file:ag-platform/apps/mobile/services/field.ts",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:ag-platform/packages/ai/tsconfig.json",
+      "target": "file:ag-platform/packages/ai/src/gemini.ts",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:ag-platform/packages/ai/tsconfig.json",
+      "target": "file:ag-platform/packages/ai/src/index.ts",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:ag-platform/packages/ai/tsconfig.json",
+      "target": "file:ag-platform/packages/ai/src/prompts/legal.ts",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:ag-platform/packages/ai/package.json",
+      "target": "file:ag-platform/packages/ai/src/index.ts",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:ag-platform/packages/db/tsconfig.json",
+      "target": "file:ag-platform/packages/db/src/index.ts",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:ag-platform/packages/db/package.json",
+      "target": "file:ag-platform/packages/db/src/index.ts",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:ag-platform/packages/types/package.json",
+      "target": "file:ag-platform/packages/types/src/domain.ts",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:ag-platform/packages/types/package.json",
+      "target": "file:ag-platform/packages/types/src/field-app.ts",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "document:ag-platform/apps/mobile/README.md",
+      "target": "file:ag-platform/apps/mobile/services/cases.ts",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:ag-platform/apps/mobile/README.md",
+      "target": "file:ag-platform/apps/mobile/services/documents.ts",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:ag-platform/apps/mobile/README.md",
+      "target": "file:ag-platform/apps/mobile/services/field.ts",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:ag-platform/ARCHITECTURE.md",
+      "target": "file:ag-platform/packages/types/src/domain.ts",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:ag-platform/ARCHITECTURE.md",
+      "target": "table:ag-platform/packages/db/migrations/001_ag_initial_schema.sql",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:ag-platform/ARCHITECTURE.md",
+      "target": "config:ag-platform/package.json",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:ag-platform/docs/AUTH_ARCHITECTURE.md",
+      "target": "file:ag-platform/packages/ai/src/gemini.ts",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "service:ag-platform/Dockerfile",
+      "target": "file:ag-platform/packages/ai/src/index.ts",
+      "type": "deploys",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "service:ag-platform/Dockerfile",
+      "target": "file:ag-platform/packages/db/src/index.ts",
+      "type": "deploys",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "service:ag-platform/Dockerfile",
+      "target": "file:ag-platform/packages/types/src/domain.ts",
+      "type": "deploys",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "service:ag-platform/Dockerfile",
+      "target": "file:ag-platform/packages/types/src/field-app.ts",
+      "type": "deploys",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "config:ag-platform/package.json",
+      "target": "file:ag-platform/packages/ai/src/index.ts",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:ag-platform/package.json",
+      "target": "file:ag-platform/packages/db/src/index.ts",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:ag-platform/package.json",
+      "target": "file:ag-platform/packages/types/src/domain.ts",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:ag-platform/package.json",
+      "target": "file:ag-platform/packages/types/src/field-app.ts",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "service:ag-platform/Dockerfile:builder",
+      "target": "service:ag-platform/Dockerfile:deps",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "service:ag-platform/Dockerfile:runner",
+      "target": "service:ag-platform/Dockerfile:builder",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    }
+  ]
+}

@@ -1,0 +1,900 @@
+{
+  "nodes": [
+    {
+      "id": "file:ag-associates-ai/backend/executor_agent.py",
+      "type": "file",
+      "name": "executor_agent.py",
+      "filePath": "ag-associates-ai/backend/executor_agent.py",
+      "summary": "Orchestrates RPA-based challan generation for MTR-6 (rent) and NOI (loan) using Playwright browser automation with the GRAS portal, handling OTP verification via Redis pub/sub.",
+      "tags": ["rpa", "browser-automation", "challan", "gras"],
+      "complexity": "complex"
+    },
+    {
+      "id": "class:ag-associates-ai/backend/executor_agent.py:GrasRPAExecutor",
+      "type": "class",
+      "name": "GrasRPAExecutor",
+      "filePath": "ag-associates-ai/backend/executor_agent.py",
+      "lineRange": [13, 270],
+      "summary": "Manages GRAS portal browser automation for generating MTR-6 rent challans and NOI loan challans with OTP-based authentication via Redis.",
+      "tags": ["rpa", "browser-automation", "challan"],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:ag-associates-ai/backend/igr_executor.py",
+      "type": "file",
+      "name": "igr_executor.py",
+      "filePath": "ag-associates-ai/backend/igr_executor.py",
+      "summary": "Handles RPA-based NOI document filing on the IGR portal using Playwright, including document upload, OTP verification, and filing result storage.",
+      "tags": ["rpa", "browser-automation", "noi", "igr"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:ag-associates-ai/backend/igr_executor.py:IgrRpaExecutor",
+      "type": "class",
+      "name": "IgrRpaExecutor",
+      "filePath": "ag-associates-ai/backend/igr_executor.py",
+      "lineRange": [24, 225],
+      "summary": "Automates NOI document filing on the IGR portal with Playwright, handling login, document upload, OTP authentication, and filing status verification.",
+      "tags": ["rpa", "browser-automation", "noi", "filing"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:ag-associates-ai/backend/main.py",
+      "type": "file",
+      "name": "main.py",
+      "filePath": "ag-associates-ai/backend/main.py",
+      "summary": "FastAPI application entry point exposing REST webhooks for WhatsApp, Aisha chat/SMS/voice, NESL property registration execution, NOI workflow management, agreement generation, and system health endpoints.",
+      "tags": ["entry-point", "api-handler", "webhook", "fastapi"],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:ag-associates-ai/backend/main.py:whatsapp_webhook",
+      "type": "function",
+      "name": "whatsapp_webhook",
+      "filePath": "ag-associates-ai/backend/main.py",
+      "lineRange": [82, 117],
+      "summary": "Handles incoming WhatsApp messages via n8n webhook, processes the message content asynchronously, and returns a response.",
+      "tags": ["webhook", "whatsapp", "api-handler"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:ag-associates-ai/backend/main.py:generate_agreement",
+      "type": "function",
+      "name": "generate_agreement",
+      "filePath": "ag-associates-ai/backend/main.py",
+      "lineRange": [125, 156],
+      "summary": "Generates a legal agreement PDF from a message using async processing and returns the generated document.",
+      "tags": ["agreement", "pdf-generation", "api-handler"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:ag-associates-ai/backend/main.py:dashboard_status",
+      "type": "function",
+      "name": "dashboard_status",
+      "filePath": "ag-associates-ai/backend/main.py",
+      "lineRange": [197, 221],
+      "summary": "Returns system dashboard status including database connectivity and recent activity metrics.",
+      "tags": ["monitoring", "dashboard", "api-handler"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:ag-associates-ai/backend/main.py:list_templates",
+      "type": "function",
+      "name": "list_templates",
+      "filePath": "ag-associates-ai/backend/main.py",
+      "lineRange": [225, 249],
+      "summary": "Queries and returns available document templates filtered by type and language from the database.",
+      "tags": ["templates", "database", "api-handler"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:ag-associates-ai/backend/main.py:aisha_chat",
+      "type": "function",
+      "name": "aisha_chat",
+      "filePath": "ag-associates-ai/backend/main.py",
+      "lineRange": [271, 297],
+      "summary": "Processes chat messages for the Aisha AI assistant, routing to the async processing pipeline and returning the response.",
+      "tags": ["chat", "ai-assistant", "api-handler"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:ag-associates-ai/backend/main.py:aisha_sms_webhook",
+      "type": "function",
+      "name": "aisha_sms_webhook",
+      "filePath": "ag-associates-ai/backend/main.py",
+      "lineRange": [301, 327],
+      "summary": "Receives incoming SMS messages via Twilio webhook, processes them through the Aisha AI pipeline, and returns TwiML response.",
+      "tags": ["webhook", "sms", "twilio"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:ag-associates-ai/backend/main.py:aisha_voice_call_webhook",
+      "type": "function",
+      "name": "aisha_voice_call_webhook",
+      "filePath": "ag-associates-ai/backend/main.py",
+      "lineRange": [331, 374],
+      "summary": "Handles Twilio voice call webhooks, processing speech recognition results through the Aisha AI pipeline and returning TwiML responses.",
+      "tags": ["webhook", "voice", "twilio"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:ag-associates-ai/backend/main.py:_escape_twiml",
+      "type": "function",
+      "name": "_escape_twiml",
+      "filePath": "ag-associates-ai/backend/main.py",
+      "lineRange": [377, 379],
+      "summary": "Escapes special XML characters in text for safe TwiML response generation.",
+      "tags": ["utility", "twilio", "xml-escaping"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:ag-associates-ai/backend/main.py:aisha_voice_text",
+      "type": "function",
+      "name": "aisha_voice_text",
+      "filePath": "ag-associates-ai/backend/main.py",
+      "lineRange": [383, 417],
+      "summary": "Converts text to speech using Azure Cognitive Services, processing payload through the Aisha AI pipeline and returning base64-encoded audio.",
+      "tags": ["api-handler", "tts", "voice"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:ag-associates-ai/backend/main.py:aisha_chat_stream",
+      "type": "function",
+      "name": "aisha_chat_stream",
+      "filePath": "ag-associates-ai/backend/main.py",
+      "lineRange": [423, 439],
+      "summary": "Streams chat conversation messages via SSE for real-time chat updates.",
+      "tags": ["streaming", "chat", "sse"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:ag-associates-ai/backend/main.py:unified_chat",
+      "type": "function",
+      "name": "unified_chat",
+      "filePath": "ag-associates-ai/backend/main.py",
+      "lineRange": [453, 467],
+      "summary": "Unified chat endpoint that processes messages across platforms and routes to the appropriate AI handler.",
+      "tags": ["chat", "api-handler", "unified"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:ag-associates-ai/backend/main.py:_verify_n8n_key",
+      "type": "function",
+      "name": "_verify_n8n_key",
+      "filePath": "ag-associates-ai/backend/main.py",
+      "lineRange": [167, 171],
+      "summary": "Verifies the n8n webhook API key using constant-time comparison for request authentication.",
+      "tags": ["security", "authentication", "utility"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:ag-associates-ai/backend/main.py:n8n_intake_webhook",
+      "type": "function",
+      "name": "n8n_intake_webhook",
+      "filePath": "ag-associates-ai/backend/main.py",
+      "lineRange": [175, 182],
+      "summary": "Intake webhook for n8n workflow triggers, forwarding payloads to the processing pipeline after key verification.",
+      "tags": ["webhook", "n8n", "intake"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:ag-associates-ai/backend/main.py:_get_nesl_client",
+      "type": "function",
+      "name": "_get_nesl_client",
+      "filePath": "ag-associates-ai/backend/main.py",
+      "lineRange": [476, 480],
+      "summary": "Factory function that creates and returns a configured NESL client instance.",
+      "tags": ["factory", "nesl", "utility"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:ag-associates-ai/backend/main.py:nesl_execute",
+      "type": "function",
+      "name": "nesl_execute",
+      "filePath": "ag-associates-ai/backend/main.py",
+      "lineRange": [491, 524],
+      "summary": "Executes property registration transactions through the NESL system, returning transaction ID and filing reference.",
+      "tags": ["api-handler", "nesl", "registration"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:ag-associates-ai/backend/main.py:noi_seed",
+      "type": "function",
+      "name": "noi_seed",
+      "filePath": "ag-associates-ai/backend/main.py",
+      "lineRange": [558, 568],
+      "summary": "Seeds a new NOI case into the pipeline for processing and status tracking.",
+      "tags": ["noi", "seeding", "api-handler"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:ag-associates-ai/backend/main.py:noi_workflow",
+      "type": "function",
+      "name": "noi_workflow",
+      "filePath": "ag-associates-ai/backend/main.py",
+      "lineRange": [572, 592],
+      "summary": "Manages NOI workflow actions including filing, status checks, and acknowledgment updates.",
+      "tags": ["noi", "workflow", "api-handler"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:ag-associates-ai/backend/main.py:noi_status",
+      "type": "function",
+      "name": "noi_status",
+      "filePath": "ag-associates-ai/backend/main.py",
+      "lineRange": [595, 616],
+      "summary": "Queries and returns the current status and details of a specific NOI case.",
+      "tags": ["noi", "status", "api-handler"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:ag-associates-ai/backend/main.py:noi_webhook",
+      "type": "function",
+      "name": "noi_webhook",
+      "filePath": "ag-associates-ai/backend/main.py",
+      "lineRange": [619, 650],
+      "summary": "External webhook receiver that updates NOI case status from external systems (e.g., IGR portal callback).",
+      "tags": ["webhook", "noi", "callback"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:ag-associates-ai/backend/nesl_client.py",
+      "type": "file",
+      "name": "nesl_client.py",
+      "filePath": "ag-associates-ai/backend/nesl_client.py",
+      "summary": "Client for the NESL (National E-Services) property registration system supporting API, RPA, and mock execution modes with transaction ID generation and filing reference tracking.",
+      "tags": ["nesl", "api-client", "property-registration"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:ag-associates-ai/backend/nesl_client.py:NeslClient",
+      "type": "class",
+      "name": "NeslClient",
+      "filePath": "ag-associates-ai/backend/nesl_client.py",
+      "lineRange": [23, 232],
+      "summary": "Provides multi-mode NESL execution (API, RPA, mock) for property registration with access token management, transaction IDs, and filing reference generation.",
+      "tags": ["nesl", "api-client", "multi-mode"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:ag-associates-ai/backend/pdf_generator.py",
+      "type": "file",
+      "name": "pdf_generator.py",
+      "filePath": "ag-associates-ai/backend/pdf_generator.py",
+      "summary": "Generates formatted PDF legal agreements using ReportLab with custom styles, markdown content parsing, and structured document layout.",
+      "tags": ["pdf-generation", "reportlab", "document"],
+      "complexity": "complex"
+    },
+    {
+      "id": "class:ag-associates-ai/backend/pdf_generator.py:AgreementPDFGenerator",
+      "type": "class",
+      "name": "AgreementPDFGenerator",
+      "filePath": "ag-associates-ai/backend/pdf_generator.py",
+      "lineRange": [26, 219],
+      "summary": "Builds PDF agreements using ReportLab with custom styles, markdown-to-flowable parsing, and structured document generation.",
+      "tags": ["pdf-generation", "reportlab", "document"],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:ag-associates-ai/backend/pdf_generator.py:convert_to_pdf",
+      "type": "function",
+      "name": "convert_to_pdf",
+      "filePath": "ag-associates-ai/backend/pdf_generator.py",
+      "lineRange": [222, 238],
+      "summary": "Converts markdown content to a PDF file by delegating to AgreementPDFGenerator and saving the result.",
+      "tags": ["pdf-generation", "utility", "conversion"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:ag-associates-ai/backend/config.py",
+      "type": "file",
+      "name": "config.py",
+      "filePath": "ag-associates-ai/backend/config.py",
+      "summary": "Centralized configuration loading from environment variables for database URLs, API keys, Redis, Twilio, and Supabase settings.",
+      "tags": ["configuration", "environment", "settings"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:ag-associates-ai/backend/config.py:_env_bool",
+      "type": "function",
+      "name": "_env_bool",
+      "filePath": "ag-associates-ai/backend/config.py",
+      "lineRange": [7, 11],
+      "summary": "Parses an environment variable as a boolean value with a default fallback.",
+      "tags": ["utility", "environment", "parsing"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:ag-associates-ai/backend/config.py:_env_list",
+      "type": "function",
+      "name": "_env_list",
+      "filePath": "ag-associates-ai/backend/config.py",
+      "lineRange": [14, 16],
+      "summary": "Parses an environment variable as a comma-separated list with a default fallback.",
+      "tags": ["utility", "environment", "parsing"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:ag-associates-ai/backend/config.py:get_database_url",
+      "type": "function",
+      "name": "get_database_url",
+      "filePath": "ag-associates-ai/backend/config.py",
+      "lineRange": [52, 53],
+      "summary": "Returns the database connection URL from environment configuration.",
+      "tags": ["utility", "database", "configuration"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:ag-associates-ai/backend/requirements.txt",
+      "type": "file",
+      "name": "requirements.txt",
+      "filePath": "ag-associates-ai/backend/requirements.txt",
+      "summary": "Python dependency manifest listing required packages for the backend including FastAPI, Playwright, ReportLab, database drivers, and AI/ML libraries.",
+      "tags": ["dependencies", "python", "manifest"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:ag-associates-ai/backend/fee_calculator.py",
+      "type": "file",
+      "name": "fee_calculator.py",
+      "filePath": "ag-associates-ai/backend/fee_calculator.py",
+      "summary": "Stamp duty and registration fee calculation logic for property transactions based on property value and type.",
+      "tags": ["fee-calculation", "property", "financial"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:ag-associates-ai/backend/template_manager.py",
+      "type": "file",
+      "name": "template_manager.py",
+      "filePath": "ag-associates-ai/backend/template_manager.py",
+      "summary": "Manages document templates for generating legal agreements, notices, and correspondence with variable substitution.",
+      "tags": ["templates", "documents", "rendering"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:ag-associates-ai/backend/lic_manager.py",
+      "type": "file",
+      "name": "lic_manager.py",
+      "filePath": "ag-associates-ai/backend/lic_manager.py",
+      "summary": "License management utilities for professional licensing workflows including validation and renewal tracking.",
+      "tags": ["licensing", "validation", "workflow"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:ag-associates-ai/backend/noi_pipeline.py",
+      "type": "file",
+      "name": "noi_pipeline.py",
+      "filePath": "ag-associates-ai/backend/noi_pipeline.py",
+      "summary": "NOI (Notice of Intimation) processing pipeline orchestrating the end-to-end workflow from intake to filing and status tracking.",
+      "tags": ["noi", "pipeline", "workflow"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:ag-associates-ai/backend/noi_automation.py",
+      "type": "file",
+      "name": "noi_automation.py",
+      "filePath": "ag-associates-ai/backend/noi_automation.py",
+      "summary": "Automated NOI workflow handling including scheduled status checks, retry logic, and notification triggers.",
+      "tags": ["noi", "automation", "scheduling"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:ag-associates-ai/backend/rag_engine.py",
+      "type": "file",
+      "name": "rag_engine.py",
+      "filePath": "ag-associates-ai/backend/rag_engine.py",
+      "summary": "Retrieval-Augmented Generation engine for answering legal queries using vector search on document embeddings.",
+      "tags": ["rag", "vector-search", "ai"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:ag-associates-ai/backend/search_agent.py",
+      "type": "file",
+      "name": "search_agent.py",
+      "filePath": "ag-associates-ai/backend/search_agent.py",
+      "summary": "Search agent coordinating across document stores and external APIs for comprehensive information retrieval.",
+      "tags": ["search", "agent", "retrieval"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:ag-associates-ai/backend/websocket_manager.py",
+      "type": "file",
+      "name": "websocket_manager.py",
+      "filePath": "ag-associates-ai/backend/websocket_manager.py",
+      "summary": "WebSocket connection manager for real-time bidirectional communication with frontend clients.",
+      "tags": ["websocket", "realtime", "communication"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:ag-associates-ai/backend/test_db.py",
+      "type": "file",
+      "name": "test_db.py",
+      "filePath": "ag-associates-ai/backend/test_db.py",
+      "summary": "Database connectivity test script for verifying database configuration and connection parameters.",
+      "tags": ["database", "test", "utility"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:ag-associates-ai/backend/models.py",
+      "type": "file",
+      "name": "models.py",
+      "filePath": "ag-associates-ai/backend/models.py",
+      "summary": "Pydantic and SQLAlchemy data models defining database entities, request schemas, and response types.",
+      "tags": ["data-model", "pydantic", "sqlalchemy"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:ag-associates-ai/backend/email_intake.py",
+      "type": "file",
+      "name": "email_intake.py",
+      "filePath": "ag-associates-ai/backend/email_intake.py",
+      "summary": "Email ingestion service that monitors and processes incoming emails for automated case creation and routing.",
+      "tags": ["email", "intake", "automation"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:ag-associates-ai/backend/gras_client.py",
+      "type": "file",
+      "name": "gras_client.py",
+      "filePath": "ag-associates-ai/backend/gras_client.py",
+      "summary": "Client library for interacting with the GRAS (Gujarat Registration Automation System) REST API.",
+      "tags": ["api-client", "gras", "property"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:ag-associates-ai/backend/notifications.py",
+      "type": "file",
+      "name": "notifications.py",
+      "filePath": "ag-associates-ai/backend/notifications.py",
+      "summary": "Notification dispatch service supporting SMS, email, and in-app alert delivery for system events.",
+      "tags": ["notifications", "sms", "email"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:ag-associates-ai/backend/database.py",
+      "type": "file",
+      "name": "database.py",
+      "filePath": "ag-associates-ai/backend/database.py",
+      "summary": "Database connection setup, session management, and query utilities using SQLAlchemy async patterns.",
+      "tags": ["database", "sqlalchemy", "session"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:ag-associates-ai/backend/tasks.py",
+      "type": "file",
+      "name": "tasks.py",
+      "filePath": "ag-associates-ai/backend/tasks.py",
+      "summary": "Background task definitions for async job processing including retry logic and scheduled execution.",
+      "tags": ["tasks", "background", "async"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:ag-associates-ai/backend/README.md",
+      "type": "document",
+      "name": "README.md",
+      "filePath": "ag-associates-ai/backend/README.md",
+      "summary": "Project overview documentation with setup instructions, API endpoint reference, and architecture guide for the backend service.",
+      "tags": ["documentation", "entry-point", "overview"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:ag-associates-ai/backend/CHANGELOG.md",
+      "type": "document",
+      "name": "CHANGELOG.md",
+      "filePath": "ag-associates-ai/backend/CHANGELOG.md",
+      "summary": "Version history and release notes tracking feature additions, bug fixes, and breaking changes across backend deployments.",
+      "tags": ["documentation", "changelog", "release-notes"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:ag-associates-ai/backend/docs/supabase.md",
+      "type": "document",
+      "name": "supabase.md",
+      "filePath": "ag-associates-ai/backend/docs/supabase.md",
+      "summary": "Technical guide for configuring and integrating Supabase for database, authentication, and storage services.",
+      "tags": ["documentation", "supabase", "database"],
+      "complexity": "moderate"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:ag-associates-ai/backend/executor_agent.py",
+      "target": "class:ag-associates-ai/backend/executor_agent.py:GrasRPAExecutor",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-associates-ai/backend/executor_agent.py",
+      "target": "class:ag-associates-ai/backend/executor_agent.py:GrasRPAExecutor",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:ag-associates-ai/backend/igr_executor.py",
+      "target": "class:ag-associates-ai/backend/igr_executor.py:IgrRpaExecutor",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-associates-ai/backend/igr_executor.py",
+      "target": "class:ag-associates-ai/backend/igr_executor.py:IgrRpaExecutor",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:ag-associates-ai/backend/main.py",
+      "target": "function:ag-associates-ai/backend/main.py:whatsapp_webhook",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-associates-ai/backend/main.py",
+      "target": "function:ag-associates-ai/backend/main.py:whatsapp_webhook",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:ag-associates-ai/backend/main.py",
+      "target": "function:ag-associates-ai/backend/main.py:generate_agreement",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-associates-ai/backend/main.py",
+      "target": "function:ag-associates-ai/backend/main.py:generate_agreement",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:ag-associates-ai/backend/main.py",
+      "target": "function:ag-associates-ai/backend/main.py:dashboard_status",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-associates-ai/backend/main.py",
+      "target": "function:ag-associates-ai/backend/main.py:dashboard_status",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:ag-associates-ai/backend/main.py",
+      "target": "function:ag-associates-ai/backend/main.py:list_templates",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-associates-ai/backend/main.py",
+      "target": "function:ag-associates-ai/backend/main.py:list_templates",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:ag-associates-ai/backend/main.py",
+      "target": "function:ag-associates-ai/backend/main.py:aisha_chat",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-associates-ai/backend/main.py",
+      "target": "function:ag-associates-ai/backend/main.py:aisha_chat",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:ag-associates-ai/backend/main.py",
+      "target": "function:ag-associates-ai/backend/main.py:aisha_sms_webhook",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-associates-ai/backend/main.py",
+      "target": "function:ag-associates-ai/backend/main.py:aisha_sms_webhook",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:ag-associates-ai/backend/main.py",
+      "target": "function:ag-associates-ai/backend/main.py:aisha_voice_call_webhook",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-associates-ai/backend/main.py",
+      "target": "function:ag-associates-ai/backend/main.py:aisha_voice_call_webhook",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:ag-associates-ai/backend/main.py",
+      "target": "function:ag-associates-ai/backend/main.py:_escape_twiml",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-associates-ai/backend/main.py",
+      "target": "function:ag-associates-ai/backend/main.py:_escape_twiml",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:ag-associates-ai/backend/main.py",
+      "target": "function:ag-associates-ai/backend/main.py:aisha_voice_text",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-associates-ai/backend/main.py",
+      "target": "function:ag-associates-ai/backend/main.py:aisha_voice_text",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:ag-associates-ai/backend/main.py",
+      "target": "function:ag-associates-ai/backend/main.py:aisha_chat_stream",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-associates-ai/backend/main.py",
+      "target": "function:ag-associates-ai/backend/main.py:aisha_chat_stream",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:ag-associates-ai/backend/main.py",
+      "target": "function:ag-associates-ai/backend/main.py:unified_chat",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-associates-ai/backend/main.py",
+      "target": "function:ag-associates-ai/backend/main.py:unified_chat",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:ag-associates-ai/backend/main.py",
+      "target": "function:ag-associates-ai/backend/main.py:_verify_n8n_key",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-associates-ai/backend/main.py",
+      "target": "function:ag-associates-ai/backend/main.py:_verify_n8n_key",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:ag-associates-ai/backend/main.py",
+      "target": "function:ag-associates-ai/backend/main.py:n8n_intake_webhook",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-associates-ai/backend/main.py",
+      "target": "function:ag-associates-ai/backend/main.py:n8n_intake_webhook",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:ag-associates-ai/backend/main.py",
+      "target": "function:ag-associates-ai/backend/main.py:_get_nesl_client",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-associates-ai/backend/main.py",
+      "target": "function:ag-associates-ai/backend/main.py:_get_nesl_client",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:ag-associates-ai/backend/main.py",
+      "target": "function:ag-associates-ai/backend/main.py:nesl_execute",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-associates-ai/backend/main.py",
+      "target": "function:ag-associates-ai/backend/main.py:nesl_execute",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:ag-associates-ai/backend/main.py",
+      "target": "function:ag-associates-ai/backend/main.py:noi_seed",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-associates-ai/backend/main.py",
+      "target": "function:ag-associates-ai/backend/main.py:noi_seed",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:ag-associates-ai/backend/main.py",
+      "target": "function:ag-associates-ai/backend/main.py:noi_workflow",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-associates-ai/backend/main.py",
+      "target": "function:ag-associates-ai/backend/main.py:noi_workflow",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:ag-associates-ai/backend/main.py",
+      "target": "function:ag-associates-ai/backend/main.py:noi_status",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-associates-ai/backend/main.py",
+      "target": "function:ag-associates-ai/backend/main.py:noi_status",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:ag-associates-ai/backend/main.py",
+      "target": "function:ag-associates-ai/backend/main.py:noi_webhook",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-associates-ai/backend/main.py",
+      "target": "function:ag-associates-ai/backend/main.py:noi_webhook",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:ag-associates-ai/backend/nesl_client.py",
+      "target": "class:ag-associates-ai/backend/nesl_client.py:NeslClient",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-associates-ai/backend/nesl_client.py",
+      "target": "class:ag-associates-ai/backend/nesl_client.py:NeslClient",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:ag-associates-ai/backend/pdf_generator.py",
+      "target": "class:ag-associates-ai/backend/pdf_generator.py:AgreementPDFGenerator",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-associates-ai/backend/pdf_generator.py",
+      "target": "class:ag-associates-ai/backend/pdf_generator.py:AgreementPDFGenerator",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:ag-associates-ai/backend/pdf_generator.py",
+      "target": "function:ag-associates-ai/backend/pdf_generator.py:convert_to_pdf",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-associates-ai/backend/pdf_generator.py",
+      "target": "function:ag-associates-ai/backend/pdf_generator.py:convert_to_pdf",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:ag-associates-ai/backend/config.py",
+      "target": "function:ag-associates-ai/backend/config.py:_env_bool",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-associates-ai/backend/config.py",
+      "target": "function:ag-associates-ai/backend/config.py:_env_bool",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:ag-associates-ai/backend/config.py",
+      "target": "function:ag-associates-ai/backend/config.py:_env_list",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-associates-ai/backend/config.py",
+      "target": "function:ag-associates-ai/backend/config.py:_env_list",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:ag-associates-ai/backend/config.py",
+      "target": "function:ag-associates-ai/backend/config.py:get_database_url",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-associates-ai/backend/config.py",
+      "target": "function:ag-associates-ai/backend/config.py:get_database_url",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "document:ag-associates-ai/backend/README.md",
+      "target": "file:ag-associates-ai/backend/main.py",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:ag-associates-ai/backend/CHANGELOG.md",
+      "target": "file:ag-associates-ai/backend/main.py",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:ag-associates-ai/backend/docs/supabase.md",
+      "target": "file:ag-associates-ai/backend/config.py",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    }
+  ]
+}

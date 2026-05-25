@@ -1,0 +1,875 @@
+{
+  "nodes": [
+    {
+      "id": "file:ag-platform/apps/mobile/app/(app)/activity.tsx",
+      "type": "file",
+      "name": "activity.tsx",
+      "filePath": "ag-platform/apps/mobile/app/(app)/activity.tsx",
+      "summary": "Expo Router screen showing the officer's daily activity log with on-duty status toggle and breadcrumb trail.",
+      "tags": ["screen", "activity", "mobile"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:ag-platform/apps/mobile/app/(app)/activity.tsx:Activity",
+      "type": "function",
+      "name": "Activity",
+      "filePath": "ag-platform/apps/mobile/app/(app)/activity.tsx",
+      "lineRange": [7, 40],
+      "summary": "Default-exported screen component rendering today's activity feed with on-duty toggle.",
+      "tags": ["screen", "component", "activity"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:ag-platform/apps/mobile/app/(app)/cases/[caseId].tsx",
+      "type": "file",
+      "name": "[caseId].tsx",
+      "filePath": "ag-platform/apps/mobile/app/(app)/cases/[caseId].tsx",
+      "summary": "Dynamic route screen displaying case detail with documents, status updates, and header info.",
+      "tags": ["screen", "case-detail", "mobile"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:ag-platform/apps/mobile/app/(app)/cases/[caseId].tsx:CaseDetail",
+      "type": "function",
+      "name": "CaseDetail",
+      "filePath": "ag-platform/apps/mobile/app/(app)/cases/[caseId].tsx",
+      "lineRange": [17, 94],
+      "summary": "Default-exported screen component loading case details, documents, and status update UI.",
+      "tags": ["screen", "component", "case-detail"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:ag-platform/apps/mobile/app/(app)/dashboard.tsx",
+      "type": "file",
+      "name": "dashboard.tsx",
+      "filePath": "ag-platform/apps/mobile/app/(app)/dashboard.tsx",
+      "summary": "Expo Router dashboard screen showing assigned cases list with realtime updates and pull-to-refresh.",
+      "tags": ["screen", "dashboard", "mobile"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:ag-platform/apps/mobile/app/(app)/dashboard.tsx:Dashboard",
+      "type": "function",
+      "name": "Dashboard",
+      "filePath": "ag-platform/apps/mobile/app/(app)/dashboard.tsx",
+      "lineRange": [11, 76],
+      "summary": "Default-exported dashboard component displaying assigned cases with realtime updates and navigation.",
+      "tags": ["screen", "component", "dashboard"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:ag-platform/apps/mobile/app/(app)/debug/queue.tsx",
+      "type": "file",
+      "name": "queue.tsx",
+      "filePath": "ag-platform/apps/mobile/app/(app)/debug/queue.tsx",
+      "summary": "Debug screen for inspecting the offline mutation queue state.",
+      "tags": ["screen", "debug", "mobile"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:ag-platform/apps/mobile/app/(app)/debug/queue.tsx:QueueDebug",
+      "type": "function",
+      "name": "QueueDebug",
+      "filePath": "ag-platform/apps/mobile/app/(app)/debug/queue.tsx",
+      "lineRange": [7, 52],
+      "summary": "Default-exported debug screen rendering queued mutation items with raw JSON inspection.",
+      "tags": ["screen", "component", "debug"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:ag-platform/apps/mobile/app/(app)/scanner.tsx",
+      "type": "file",
+      "name": "scanner.tsx",
+      "filePath": "ag-platform/apps/mobile/app/(app)/scanner.tsx",
+      "summary": "Document scanner screen with camera capture, case selection, and upload queue management.",
+      "tags": ["screen", "scanner", "mobile"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:ag-platform/apps/mobile/app/(app)/scanner.tsx:Scanner",
+      "type": "function",
+      "name": "Scanner",
+      "filePath": "ag-platform/apps/mobile/app/(app)/scanner.tsx",
+      "lineRange": [18, 52],
+      "summary": "Default-exported scanner component handling camera capture and document upload.",
+      "tags": ["screen", "component", "scanner"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:ag-platform/apps/mobile/app/(app)/scanner.tsx:CaseSelector",
+      "type": "function",
+      "name": "CaseSelector",
+      "filePath": "ag-platform/apps/mobile/app/(app)/scanner.tsx",
+      "lineRange": [60, 107],
+      "summary": "Inline helper component rendering a list of selectable cases for associating scanned documents.",
+      "tags": ["component", "selector", "cases"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:ag-platform/apps/mobile/app/(app)/settings.tsx",
+      "type": "file",
+      "name": "settings.tsx",
+      "filePath": "ag-platform/apps/mobile/app/(app)/settings.tsx",
+      "summary": "Settings screen with user profile info, sign-out action, and reusable section/row layout components.",
+      "tags": ["screen", "settings", "mobile"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:ag-platform/apps/mobile/app/(app)/settings.tsx:Settings",
+      "type": "function",
+      "name": "Settings",
+      "filePath": "ag-platform/apps/mobile/app/(app)/settings.tsx",
+      "lineRange": [6, 69],
+      "summary": "Default-exported settings screen showing user email and sign-out button.",
+      "tags": ["screen", "component", "settings"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:ag-platform/apps/mobile/app/(app)/settings.tsx:Section",
+      "type": "function",
+      "name": "Section",
+      "filePath": "ag-platform/apps/mobile/app/(app)/settings.tsx",
+      "lineRange": [71, 86],
+      "summary": "Reusable layout component rendering a titled section container with children.",
+      "tags": ["component", "layout", "ui"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:ag-platform/apps/mobile/app/index.tsx",
+      "type": "file",
+      "name": "index.tsx",
+      "filePath": "ag-platform/apps/mobile/app/index.tsx",
+      "summary": "App entry-point redirect screen checking auth state and navigating to login or dashboard.",
+      "tags": ["entry-point", "screen", "auth"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:ag-platform/apps/mobile/app/index.tsx:Index",
+      "type": "function",
+      "name": "Index",
+      "filePath": "ag-platform/apps/mobile/app/index.tsx",
+      "lineRange": [7, 21],
+      "summary": "Default-exported index component redirecting authenticated users to dashboard or unauthenticated to login.",
+      "tags": ["entry-point", "component", "auth"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:ag-platform/apps/mobile/app/login.tsx",
+      "type": "file",
+      "name": "login.tsx",
+      "filePath": "ag-platform/apps/mobile/app/login.tsx",
+      "summary": "Login screen with magic link email authentication flow.",
+      "tags": ["screen", "login", "auth"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:ag-platform/apps/mobile/app/login.tsx:Login",
+      "type": "function",
+      "name": "Login",
+      "filePath": "ag-platform/apps/mobile/app/login.tsx",
+      "lineRange": [14, 87],
+      "summary": "Default-exported login component handling email input and magic link submission.",
+      "tags": ["screen", "component", "login"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:ag-platform/apps/mobile/app/privacy.tsx",
+      "type": "file",
+      "name": "privacy.tsx",
+      "filePath": "ag-platform/apps/mobile/app/privacy.tsx",
+      "summary": "Privacy policy screen with links to external policy documents and a back navigation button.",
+      "tags": ["screen", "privacy", "mobile"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:ag-platform/apps/mobile/app/privacy.tsx:PrivacyScreen",
+      "type": "function",
+      "name": "PrivacyScreen",
+      "filePath": "ag-platform/apps/mobile/app/privacy.tsx",
+      "lineRange": [8, 45],
+      "summary": "Default-exported privacy screen with external links and back navigation.",
+      "tags": ["screen", "component", "privacy"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:ag-platform/apps/mobile/babel.config.js",
+      "type": "file",
+      "name": "babel.config.js",
+      "filePath": "ag-platform/apps/mobile/babel.config.js",
+      "summary": "Babel configuration for the React Native Expo mobile app.",
+      "tags": ["configuration", "babel", "build-system"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:ag-platform/apps/mobile/components/activity/ActivityToggle.tsx",
+      "type": "file",
+      "name": "ActivityToggle.tsx",
+      "filePath": "ag-platform/apps/mobile/components/activity/ActivityToggle.tsx",
+      "summary": "On-duty status toggle component with clock-in/out times and real-time duration display.",
+      "tags": ["component", "activity", "status"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:ag-platform/apps/mobile/components/activity/ActivityToggle.tsx:ActivityToggle",
+      "type": "function",
+      "name": "ActivityToggle",
+      "filePath": "ag-platform/apps/mobile/components/activity/ActivityToggle.tsx",
+      "lineRange": [4, 53],
+      "summary": "Named-exported component toggling officer on-duty state with formatted time display.",
+      "tags": ["component", "status", "activity"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:ag-platform/apps/mobile/components/activity/RouteMap.tsx",
+      "type": "file",
+      "name": "RouteMap.tsx",
+      "filePath": "ag-platform/apps/mobile/components/activity/RouteMap.tsx",
+      "summary": "Breadcrumb trail component rendering a sequence of location checkpoints with timestamps.",
+      "tags": ["component", "map", "activity"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:ag-platform/apps/mobile/components/activity/RouteMap.tsx:RouteMap",
+      "type": "function",
+      "name": "RouteMap",
+      "filePath": "ag-platform/apps/mobile/components/activity/RouteMap.tsx",
+      "lineRange": [14, 70],
+      "summary": "Named-exported component rendering breadcrumb trail from geolocation checkpoints.",
+      "tags": ["component", "map", "activity"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:ag-platform/apps/mobile/components/cases/CaseDetailHeader.tsx",
+      "type": "file",
+      "name": "CaseDetailHeader.tsx",
+      "filePath": "ag-platform/apps/mobile/components/cases/CaseDetailHeader.tsx",
+      "summary": "Header component displaying case metadata including bank name, case type, status badge, and assigned date.",
+      "tags": ["component", "case-detail", "header"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:ag-platform/apps/mobile/components/cases/CaseDetailHeader.tsx:CaseDetailHeader",
+      "type": "function",
+      "name": "CaseDetailHeader",
+      "filePath": "ag-platform/apps/mobile/components/cases/CaseDetailHeader.tsx",
+      "lineRange": [19, 44],
+      "summary": "Named-exported header component rendering bank name, case type, status badge, and assignment timestamp.",
+      "tags": ["component", "case-detail", "header"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:ag-platform/apps/mobile/components/cases/CaseDocuments.tsx",
+      "type": "file",
+      "name": "CaseDocuments.tsx",
+      "filePath": "ag-platform/apps/mobile/components/cases/CaseDocuments.tsx",
+      "summary": "Document list component displaying uploaded case documents with file names, sizes, and upload dates.",
+      "tags": ["component", "documents", "case-detail"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:ag-platform/apps/mobile/components/cases/CaseDocuments.tsx:CaseDocuments",
+      "type": "function",
+      "name": "CaseDocuments",
+      "filePath": "ag-platform/apps/mobile/components/cases/CaseDocuments.tsx",
+      "lineRange": [9, 35],
+      "summary": "Named-exported component rendering a list of uploaded documents with formatted sizes and timestamps.",
+      "tags": ["component", "documents", "case-detail"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:ag-platform/apps/mobile/components/cases/CaseListItem.tsx",
+      "type": "file",
+      "name": "CaseListItem.tsx",
+      "filePath": "ag-platform/apps/mobile/components/cases/CaseListItem.tsx",
+      "summary": "Case list item component showing case number, bank, type, status badge, and relative time.",
+      "tags": ["component", "cases", "list"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:ag-platform/apps/mobile/components/cases/CaseListItem.tsx:CaseListItem",
+      "type": "function",
+      "name": "CaseListItem",
+      "filePath": "ag-platform/apps/mobile/components/cases/CaseListItem.tsx",
+      "lineRange": [22, 55],
+      "summary": "Named-exported component rendering a pressable case row with details and relative time.",
+      "tags": ["component", "cases", "list"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:ag-platform/apps/mobile/components/cases/CaseListItem.tsx:formatRelative",
+      "type": "function",
+      "name": "formatRelative",
+      "filePath": "ag-platform/apps/mobile/components/cases/CaseListItem.tsx",
+      "lineRange": [57, 66],
+      "summary": "Helper formatting an ISO timestamp into a human-readable relative time string.",
+      "tags": ["utility", "date", "formatting"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:ag-platform/apps/mobile/components/scanner/CameraButton.tsx",
+      "type": "file",
+      "name": "CameraButton.tsx",
+      "filePath": "ag-platform/apps/mobile/components/scanner/CameraButton.tsx",
+      "summary": "Camera capture button with busy/disabled states for document scanning.",
+      "tags": ["component", "scanner", "camera"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:ag-platform/apps/mobile/components/scanner/CameraButton.tsx:CameraButton",
+      "type": "function",
+      "name": "CameraButton",
+      "filePath": "ag-platform/apps/mobile/components/scanner/CameraButton.tsx",
+      "lineRange": [9, 37],
+      "summary": "Named-exported camera button handling busy and disabled states during document capture.",
+      "tags": ["component", "scanner", "camera"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:ag-platform/apps/mobile/components/scanner/UploadQueueList.tsx",
+      "type": "file",
+      "name": "UploadQueueList.tsx",
+      "filePath": "ag-platform/apps/mobile/components/scanner/UploadQueueList.tsx",
+      "summary": "Upload queue list component showing pending document uploads with retry capability.",
+      "tags": ["component", "scanner", "upload"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:ag-platform/apps/mobile/components/scanner/UploadQueueList.tsx:UploadQueueList",
+      "type": "function",
+      "name": "UploadQueueList",
+      "filePath": "ag-platform/apps/mobile/components/scanner/UploadQueueList.tsx",
+      "lineRange": [14, 29],
+      "summary": "Named-exported component rendering a list of queued upload items with status indicators.",
+      "tags": ["component", "upload", "queue"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:ag-platform/apps/mobile/components/scanner/UploadQueueList.tsx:Row",
+      "type": "function",
+      "name": "Row",
+      "filePath": "ag-platform/apps/mobile/components/scanner/UploadQueueList.tsx",
+      "lineRange": [31, 50],
+      "summary": "Inline helper component rendering a single upload queue row with progress and retry.",
+      "tags": ["component", "row", "upload"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:ag-platform/apps/mobile/components/status/StatusBoard.tsx",
+      "type": "file",
+      "name": "StatusBoard.tsx",
+      "filePath": "ag-platform/apps/mobile/components/status/StatusBoard.tsx",
+      "summary": "Status selection board component allowing officers to update case status.",
+      "tags": ["component", "status", "cases"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:ag-platform/apps/mobile/components/status/StatusBoard.tsx:StatusBoard",
+      "type": "function",
+      "name": "StatusBoard",
+      "filePath": "ag-platform/apps/mobile/components/status/StatusBoard.tsx",
+      "lineRange": [30, 44],
+      "summary": "Named-exported component rendering a grid of status options for case state updates.",
+      "tags": ["component", "status", "selector"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:ag-platform/apps/mobile/components/status/StatusButton.tsx",
+      "type": "file",
+      "name": "StatusButton.tsx",
+      "filePath": "ag-platform/apps/mobile/components/status/StatusButton.tsx",
+      "summary": "Individual status button component with active state highlighting.",
+      "tags": ["component", "status", "button"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:ag-platform/apps/mobile/components/status/StatusButton.tsx:StatusButton",
+      "type": "function",
+      "name": "StatusButton",
+      "filePath": "ag-platform/apps/mobile/components/status/StatusButton.tsx",
+      "lineRange": [11, 39],
+      "summary": "Named-exported pressable button with active/inactive styling for status selection.",
+      "tags": ["component", "status", "button"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:ag-platform/apps/mobile/components/system/OfflineIndicator.tsx",
+      "type": "file",
+      "name": "OfflineIndicator.tsx",
+      "filePath": "ag-platform/apps/mobile/components/system/OfflineIndicator.tsx",
+      "summary": "Offline status banner showing connectivity state and pending queue count.",
+      "tags": ["component", "offline", "status"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:ag-platform/apps/mobile/components/system/OfflineIndicator.tsx:OfflineIndicator",
+      "type": "function",
+      "name": "OfflineIndicator",
+      "filePath": "ag-platform/apps/mobile/components/system/OfflineIndicator.tsx",
+      "lineRange": [7, 31],
+      "summary": "Named-exported banner component displaying connectivity status and queued item count.",
+      "tags": ["component", "offline", "status"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:ag-platform/apps/mobile/components/ui/EmptyState.tsx",
+      "type": "file",
+      "name": "EmptyState.tsx",
+      "filePath": "ag-platform/apps/mobile/components/ui/EmptyState.tsx",
+      "summary": "Reusable empty state UI component with title, message, and optional action button.",
+      "tags": ["component", "ui", "empty-state"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:ag-platform/apps/mobile/components/ui/EmptyState.tsx:EmptyState",
+      "type": "function",
+      "name": "EmptyState",
+      "filePath": "ag-platform/apps/mobile/components/ui/EmptyState.tsx",
+      "lineRange": [9, 35],
+      "summary": "Named-exported empty state display with title, message, and optional action.",
+      "tags": ["component", "ui", "empty-state"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:ag-platform/apps/mobile/components/ui/ErrorBoundary.tsx",
+      "type": "file",
+      "name": "ErrorBoundary.tsx",
+      "filePath": "ag-platform/apps/mobile/components/ui/ErrorBoundary.tsx",
+      "summary": "React class-based error boundary catching rendering errors and showing a reset fallback.",
+      "tags": ["component", "error-boundary", "ui"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:ag-platform/apps/mobile/components/ui/ErrorBoundary.tsx:ErrorBoundary",
+      "type": "class",
+      "name": "ErrorBoundary",
+      "filePath": "ag-platform/apps/mobile/components/ui/ErrorBoundary.tsx",
+      "lineRange": [12, 63],
+      "summary": "Named-exported React error boundary class with getDerivedStateFromError and componentDidCatch lifecycle methods.",
+      "tags": ["component", "error-boundary", "ui"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:ag-platform/apps/mobile/components/ui/ErrorState.tsx",
+      "type": "file",
+      "name": "ErrorState.tsx",
+      "filePath": "ag-platform/apps/mobile/components/ui/ErrorState.tsx",
+      "summary": "Reusable error state UI component with customizable title, message, and retry action.",
+      "tags": ["component", "ui", "error-state"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:ag-platform/apps/mobile/components/ui/ErrorState.tsx:ErrorState",
+      "type": "function",
+      "name": "ErrorState",
+      "filePath": "ag-platform/apps/mobile/components/ui/ErrorState.tsx",
+      "lineRange": [9, 35],
+      "summary": "Named-exported error state display with customizable message and retry callback.",
+      "tags": ["component", "ui", "error-state"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:ag-platform/apps/mobile/components/ui/index.ts",
+      "type": "file",
+      "name": "index.ts",
+      "filePath": "ag-platform/apps/mobile/components/ui/index.ts",
+      "summary": "Barrel file re-exporting UI components: ErrorBoundary, Skeleton, EmptyState, and ErrorState.",
+      "tags": ["barrel", "ui", "exports"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:ag-platform/apps/mobile/components/ui/Skeleton.tsx",
+      "type": "file",
+      "name": "Skeleton.tsx",
+      "filePath": "ag-platform/apps/mobile/components/ui/Skeleton.tsx",
+      "summary": "Animated skeleton loading placeholder components for content loading states.",
+      "tags": ["component", "ui", "loading"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:ag-platform/apps/mobile/components/ui/Skeleton.tsx:Skeleton",
+      "type": "function",
+      "name": "Skeleton",
+      "filePath": "ag-platform/apps/mobile/components/ui/Skeleton.tsx",
+      "lineRange": [8, 38],
+      "summary": "Named-exported animated skeleton placeholder using React Native Animated API.",
+      "tags": ["component", "ui", "loading"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:ag-platform/apps/mobile/components/ui/Skeleton.tsx:SkeletonList",
+      "type": "function",
+      "name": "SkeletonList",
+      "filePath": "ag-platform/apps/mobile/components/ui/Skeleton.tsx",
+      "lineRange": [40, 55],
+      "summary": "Named-exported component rendering a configurable list of skeleton rows.",
+      "tags": ["component", "ui", "loading"],
+      "complexity": "simple"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:ag-platform/apps/mobile/app/(app)/activity.tsx",
+      "target": "function:ag-platform/apps/mobile/app/(app)/activity.tsx:Activity",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-platform/apps/mobile/app/(app)/activity.tsx",
+      "target": "function:ag-platform/apps/mobile/app/(app)/activity.tsx:Activity",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:ag-platform/apps/mobile/app/(app)/cases/[caseId].tsx",
+      "target": "function:ag-platform/apps/mobile/app/(app)/cases/[caseId].tsx:CaseDetail",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-platform/apps/mobile/app/(app)/cases/[caseId].tsx",
+      "target": "function:ag-platform/apps/mobile/app/(app)/cases/[caseId].tsx:CaseDetail",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:ag-platform/apps/mobile/app/(app)/dashboard.tsx",
+      "target": "function:ag-platform/apps/mobile/app/(app)/dashboard.tsx:Dashboard",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-platform/apps/mobile/app/(app)/dashboard.tsx",
+      "target": "function:ag-platform/apps/mobile/app/(app)/dashboard.tsx:Dashboard",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:ag-platform/apps/mobile/app/(app)/debug/queue.tsx",
+      "target": "function:ag-platform/apps/mobile/app/(app)/debug/queue.tsx:QueueDebug",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-platform/apps/mobile/app/(app)/debug/queue.tsx",
+      "target": "function:ag-platform/apps/mobile/app/(app)/debug/queue.tsx:QueueDebug",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:ag-platform/apps/mobile/app/(app)/scanner.tsx",
+      "target": "function:ag-platform/apps/mobile/app/(app)/scanner.tsx:Scanner",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-platform/apps/mobile/app/(app)/scanner.tsx",
+      "target": "function:ag-platform/apps/mobile/app/(app)/scanner.tsx:Scanner",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:ag-platform/apps/mobile/app/(app)/scanner.tsx",
+      "target": "function:ag-platform/apps/mobile/app/(app)/scanner.tsx:CaseSelector",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-platform/apps/mobile/app/(app)/settings.tsx",
+      "target": "function:ag-platform/apps/mobile/app/(app)/settings.tsx:Settings",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-platform/apps/mobile/app/(app)/settings.tsx",
+      "target": "function:ag-platform/apps/mobile/app/(app)/settings.tsx:Settings",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:ag-platform/apps/mobile/app/(app)/settings.tsx",
+      "target": "function:ag-platform/apps/mobile/app/(app)/settings.tsx:Section",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-platform/apps/mobile/app/index.tsx",
+      "target": "function:ag-platform/apps/mobile/app/index.tsx:Index",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-platform/apps/mobile/app/index.tsx",
+      "target": "function:ag-platform/apps/mobile/app/index.tsx:Index",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:ag-platform/apps/mobile/app/login.tsx",
+      "target": "function:ag-platform/apps/mobile/app/login.tsx:Login",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-platform/apps/mobile/app/login.tsx",
+      "target": "function:ag-platform/apps/mobile/app/login.tsx:Login",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:ag-platform/apps/mobile/app/privacy.tsx",
+      "target": "function:ag-platform/apps/mobile/app/privacy.tsx:PrivacyScreen",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-platform/apps/mobile/app/privacy.tsx",
+      "target": "function:ag-platform/apps/mobile/app/privacy.tsx:PrivacyScreen",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:ag-platform/apps/mobile/components/activity/ActivityToggle.tsx",
+      "target": "function:ag-platform/apps/mobile/components/activity/ActivityToggle.tsx:ActivityToggle",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-platform/apps/mobile/components/activity/ActivityToggle.tsx",
+      "target": "function:ag-platform/apps/mobile/components/activity/ActivityToggle.tsx:ActivityToggle",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:ag-platform/apps/mobile/components/activity/RouteMap.tsx",
+      "target": "function:ag-platform/apps/mobile/components/activity/RouteMap.tsx:RouteMap",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-platform/apps/mobile/components/activity/RouteMap.tsx",
+      "target": "function:ag-platform/apps/mobile/components/activity/RouteMap.tsx:RouteMap",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:ag-platform/apps/mobile/components/cases/CaseDetailHeader.tsx",
+      "target": "function:ag-platform/apps/mobile/components/cases/CaseDetailHeader.tsx:CaseDetailHeader",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-platform/apps/mobile/components/cases/CaseDetailHeader.tsx",
+      "target": "function:ag-platform/apps/mobile/components/cases/CaseDetailHeader.tsx:CaseDetailHeader",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:ag-platform/apps/mobile/components/cases/CaseDocuments.tsx",
+      "target": "function:ag-platform/apps/mobile/components/cases/CaseDocuments.tsx:CaseDocuments",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-platform/apps/mobile/components/cases/CaseDocuments.tsx",
+      "target": "function:ag-platform/apps/mobile/components/cases/CaseDocuments.tsx:CaseDocuments",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:ag-platform/apps/mobile/components/cases/CaseListItem.tsx",
+      "target": "function:ag-platform/apps/mobile/components/cases/CaseListItem.tsx:CaseListItem",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-platform/apps/mobile/components/cases/CaseListItem.tsx",
+      "target": "function:ag-platform/apps/mobile/components/cases/CaseListItem.tsx:CaseListItem",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:ag-platform/apps/mobile/components/cases/CaseListItem.tsx",
+      "target": "function:ag-platform/apps/mobile/components/cases/CaseListItem.tsx:formatRelative",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-platform/apps/mobile/components/scanner/CameraButton.tsx",
+      "target": "function:ag-platform/apps/mobile/components/scanner/CameraButton.tsx:CameraButton",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-platform/apps/mobile/components/scanner/CameraButton.tsx",
+      "target": "function:ag-platform/apps/mobile/components/scanner/CameraButton.tsx:CameraButton",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:ag-platform/apps/mobile/components/scanner/UploadQueueList.tsx",
+      "target": "function:ag-platform/apps/mobile/components/scanner/UploadQueueList.tsx:UploadQueueList",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-platform/apps/mobile/components/scanner/UploadQueueList.tsx",
+      "target": "function:ag-platform/apps/mobile/components/scanner/UploadQueueList.tsx:UploadQueueList",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:ag-platform/apps/mobile/components/scanner/UploadQueueList.tsx",
+      "target": "function:ag-platform/apps/mobile/components/scanner/UploadQueueList.tsx:Row",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-platform/apps/mobile/components/status/StatusBoard.tsx",
+      "target": "function:ag-platform/apps/mobile/components/status/StatusBoard.tsx:StatusBoard",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-platform/apps/mobile/components/status/StatusBoard.tsx",
+      "target": "function:ag-platform/apps/mobile/components/status/StatusBoard.tsx:StatusBoard",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:ag-platform/apps/mobile/components/status/StatusButton.tsx",
+      "target": "function:ag-platform/apps/mobile/components/status/StatusButton.tsx:StatusButton",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-platform/apps/mobile/components/status/StatusButton.tsx",
+      "target": "function:ag-platform/apps/mobile/components/status/StatusButton.tsx:StatusButton",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:ag-platform/apps/mobile/components/system/OfflineIndicator.tsx",
+      "target": "function:ag-platform/apps/mobile/components/system/OfflineIndicator.tsx:OfflineIndicator",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-platform/apps/mobile/components/system/OfflineIndicator.tsx",
+      "target": "function:ag-platform/apps/mobile/components/system/OfflineIndicator.tsx:OfflineIndicator",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:ag-platform/apps/mobile/components/ui/EmptyState.tsx",
+      "target": "function:ag-platform/apps/mobile/components/ui/EmptyState.tsx:EmptyState",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-platform/apps/mobile/components/ui/EmptyState.tsx",
+      "target": "function:ag-platform/apps/mobile/components/ui/EmptyState.tsx:EmptyState",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:ag-platform/apps/mobile/components/ui/ErrorBoundary.tsx",
+      "target": "class:ag-platform/apps/mobile/components/ui/ErrorBoundary.tsx:ErrorBoundary",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-platform/apps/mobile/components/ui/ErrorBoundary.tsx",
+      "target": "class:ag-platform/apps/mobile/components/ui/ErrorBoundary.tsx:ErrorBoundary",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:ag-platform/apps/mobile/components/ui/ErrorState.tsx",
+      "target": "function:ag-platform/apps/mobile/components/ui/ErrorState.tsx:ErrorState",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-platform/apps/mobile/components/ui/ErrorState.tsx",
+      "target": "function:ag-platform/apps/mobile/components/ui/ErrorState.tsx:ErrorState",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:ag-platform/apps/mobile/components/ui/Skeleton.tsx",
+      "target": "function:ag-platform/apps/mobile/components/ui/Skeleton.tsx:Skeleton",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-platform/apps/mobile/components/ui/Skeleton.tsx",
+      "target": "function:ag-platform/apps/mobile/components/ui/Skeleton.tsx:Skeleton",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:ag-platform/apps/mobile/components/ui/Skeleton.tsx",
+      "target": "function:ag-platform/apps/mobile/components/ui/Skeleton.tsx:SkeletonList",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:ag-platform/apps/mobile/components/ui/Skeleton.tsx",
+      "target": "function:ag-platform/apps/mobile/components/ui/Skeleton.tsx:SkeletonList",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    }
+  ]
+}

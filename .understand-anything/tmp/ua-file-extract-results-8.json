@@ -1,0 +1,2446 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 25,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "ag-platform/packages/types/src/index.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 3,
+      "nonEmptyLines": 3,
+      "metrics": {
+        "importCount": 3,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "ag-platform/packages/types/src/storage.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 33,
+      "nonEmptyLines": 31,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "ag-platform/packages/types/tsconfig.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 12,
+      "nonEmptyLines": 12,
+      "sections": [
+        {
+          "heading": "compilerOptions",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "include",
+          "level": 1,
+          "line": 11
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 2
+      }
+    },
+    {
+      "path": "ag-platform/packages/ui/package.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 15,
+      "nonEmptyLines": 15,
+      "sections": [
+        {
+          "heading": "name",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "version",
+          "level": 1,
+          "line": 3
+        },
+        {
+          "heading": "private",
+          "level": 1,
+          "line": 4
+        },
+        {
+          "heading": "main",
+          "level": 1,
+          "line": 5
+        },
+        {
+          "heading": "exports",
+          "level": 1,
+          "line": 6
+        },
+        {
+          "heading": "peerDependencies",
+          "level": 1,
+          "line": 7
+        },
+        {
+          "heading": "devDependencies",
+          "level": 1,
+          "line": 11
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 7
+      }
+    },
+    {
+      "path": "ag-platform/packages/ui/src/index.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 59,
+      "nonEmptyLines": 52,
+      "functions": [
+        {
+          "name": "Button",
+          "startLine": 7,
+          "endLine": 25,
+          "params": [
+            "{\n  children,\n  variant = 'default',\n  className = '',\n  ...props\n}"
+          ]
+        },
+        {
+          "name": "Card",
+          "startLine": 29,
+          "endLine": 35,
+          "params": [
+            "{ children, className = '' }"
+          ]
+        },
+        {
+          "name": "Badge",
+          "startLine": 39,
+          "endLine": 59,
+          "params": [
+            "{\n  children,\n  variant = 'default',\n}"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "Button",
+          "line": 7,
+          "isDefault": false
+        },
+        {
+          "name": "Card",
+          "line": 29,
+          "isDefault": false
+        },
+        {
+          "name": "Badge",
+          "line": 39,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 3,
+        "functionCount": 3,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "ag-platform/packages/ui/tsconfig.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 12,
+      "nonEmptyLines": 12,
+      "sections": [
+        {
+          "heading": "compilerOptions",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "include",
+          "level": 1,
+          "line": 11
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 2
+      }
+    },
+    {
+      "path": "ag-platform/postcss.config.js",
+      "language": "javascript",
+      "fileCategory": "code",
+      "totalLines": 6,
+      "nonEmptyLines": 6,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "ag-platform/README.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 1,
+      "nonEmptyLines": 0,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 0
+      }
+    },
+    {
+      "path": "ag-platform/render.yaml",
+      "language": "yaml",
+      "fileCategory": "config",
+      "totalLines": 9,
+      "nonEmptyLines": 9,
+      "sections": [
+        {
+          "heading": "services",
+          "level": 1,
+          "line": 1
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 1
+      }
+    },
+    {
+      "path": "ag-platform/SECURITY.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 21,
+      "nonEmptyLines": 15,
+      "sections": [
+        {
+          "heading": "Security Policy",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Supported Versions",
+          "level": 2,
+          "line": 3
+        },
+        {
+          "heading": "Reporting a Vulnerability",
+          "level": 2,
+          "line": 15
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 3
+      }
+    },
+    {
+      "path": "ag-platform/server.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 118,
+      "nonEmptyLines": 99,
+      "functions": [
+        {
+          "name": "runMigrations",
+          "startLine": 22,
+          "endLine": 31,
+          "params": []
+        },
+        {
+          "name": "startServer",
+          "startLine": 33,
+          "endLine": 116,
+          "params": []
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "runMigrations",
+          "callee": "path.join",
+          "lineNumber": 24
+        },
+        {
+          "caller": "runMigrations",
+          "callee": "process.cwd",
+          "lineNumber": 24
+        },
+        {
+          "caller": "runMigrations",
+          "callee": "fs.readFileSync",
+          "lineNumber": 25
+        },
+        {
+          "caller": "runMigrations",
+          "callee": "pool.query",
+          "lineNumber": 26
+        },
+        {
+          "caller": "runMigrations",
+          "callee": "console.log",
+          "lineNumber": 27
+        },
+        {
+          "caller": "runMigrations",
+          "callee": "console.error",
+          "lineNumber": 29
+        },
+        {
+          "caller": "startServer",
+          "callee": "express",
+          "lineNumber": 34
+        },
+        {
+          "caller": "startServer",
+          "callee": "parseInt",
+          "lineNumber": 35
+        },
+        {
+          "caller": "startServer",
+          "callee": "runMigrations",
+          "lineNumber": 37
+        },
+        {
+          "caller": "startServer",
+          "callee": "app.set",
+          "lineNumber": 40
+        },
+        {
+          "caller": "startServer",
+          "callee": "app.use",
+          "lineNumber": 42
+        },
+        {
+          "caller": "startServer",
+          "callee": "cors",
+          "lineNumber": 42
+        },
+        {
+          "caller": "startServer",
+          "callee": "app.use",
+          "lineNumber": 43
+        },
+        {
+          "caller": "startServer",
+          "callee": "express.json",
+          "lineNumber": 43
+        },
+        {
+          "caller": "startServer",
+          "callee": "app.use",
+          "lineNumber": 46
+        },
+        {
+          "caller": "startServer",
+          "callee": "crypto.randomUUID",
+          "lineNumber": 47
+        },
+        {
+          "caller": "startServer",
+          "callee": "res.setHeader",
+          "lineNumber": 48
+        },
+        {
+          "caller": "startServer",
+          "callee": "next",
+          "lineNumber": 49
+        },
+        {
+          "caller": "startServer",
+          "callee": "rateLimit",
+          "lineNumber": 53
+        },
+        {
+          "caller": "startServer",
+          "callee": "app.get",
+          "lineNumber": 61
+        },
+        {
+          "caller": "startServer",
+          "callee": "pool.query",
+          "lineNumber": 64
+        },
+        {
+          "caller": "startServer",
+          "callee": "console.error",
+          "lineNumber": 69
+        },
+        {
+          "caller": "startServer",
+          "callee": "res.json",
+          "lineNumber": 72
+        },
+        {
+          "caller": "startServer",
+          "callee": "app.use",
+          "lineNumber": 75
+        },
+        {
+          "caller": "startServer",
+          "callee": "app.use",
+          "lineNumber": 76
+        },
+        {
+          "caller": "startServer",
+          "callee": "app.use",
+          "lineNumber": 78
+        },
+        {
+          "caller": "startServer",
+          "callee": "createViteServer",
+          "lineNumber": 82
+        },
+        {
+          "caller": "startServer",
+          "callee": "app.use",
+          "lineNumber": 86
+        },
+        {
+          "caller": "startServer",
+          "callee": "path.join",
+          "lineNumber": 89
+        },
+        {
+          "caller": "startServer",
+          "callee": "process.cwd",
+          "lineNumber": 89
+        },
+        {
+          "caller": "startServer",
+          "callee": "app.use",
+          "lineNumber": 90
+        },
+        {
+          "caller": "startServer",
+          "callee": "express.static",
+          "lineNumber": 90
+        },
+        {
+          "caller": "startServer",
+          "callee": "app.get",
+          "lineNumber": 92
+        },
+        {
+          "caller": "startServer",
+          "callee": "res.sendFile",
+          "lineNumber": 93
+        },
+        {
+          "caller": "startServer",
+          "callee": "path.join",
+          "lineNumber": 93
+        },
+        {
+          "caller": "startServer",
+          "callee": "app.use",
+          "lineNumber": 98
+        },
+        {
+          "caller": "startServer",
+          "callee": "console.error",
+          "lineNumber": 99
+        },
+        {
+          "caller": "startServer",
+          "callee": "res.status(statusCode).json",
+          "lineNumber": 104
+        },
+        {
+          "caller": "startServer",
+          "callee": "res.status",
+          "lineNumber": 104
+        },
+        {
+          "caller": "startServer",
+          "callee": "app.listen",
+          "lineNumber": 113
+        },
+        {
+          "caller": "startServer",
+          "callee": "console.log",
+          "lineNumber": 114
+        }
+      ],
+      "metrics": {
+        "importCount": 4,
+        "exportCount": 0,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "ag-platform/services/intake-api/Dockerfile",
+      "language": "dockerfile",
+      "fileCategory": "infra",
+      "totalLines": 30,
+      "nonEmptyLines": 23,
+      "services": [
+        {
+          "name": "deps",
+          "image": "node:22-alpine",
+          "ports": [],
+          "startLine": 1,
+          "endLine": 5
+        },
+        {
+          "name": "builder",
+          "image": "node:22-alpine",
+          "ports": [],
+          "startLine": 6,
+          "endLine": 11
+        },
+        {
+          "name": "runner",
+          "image": "node:22-alpine",
+          "ports": [
+            3002
+          ],
+          "startLine": 12,
+          "endLine": 31
+        }
+      ],
+      "steps": [
+        {
+          "name": "FROM node:22-alpine AS deps",
+          "startLine": 1,
+          "endLine": 1
+        },
+        {
+          "name": "WORKDIR /app",
+          "startLine": 2,
+          "endLine": 2
+        },
+        {
+          "name": "COPY package.json ./",
+          "startLine": 3,
+          "endLine": 3
+        },
+        {
+          "name": "RUN npm install --omit=dev",
+          "startLine": 4,
+          "endLine": 4
+        },
+        {
+          "name": "FROM node:22-alpine AS builder",
+          "startLine": 6,
+          "endLine": 6
+        },
+        {
+          "name": "WORKDIR /app",
+          "startLine": 7,
+          "endLine": 7
+        },
+        {
+          "name": "COPY package.json tsconfig.json ./",
+          "startLine": 8,
+          "endLine": 8
+        },
+        {
+          "name": "COPY src ./src",
+          "startLine": 9,
+          "endLine": 9
+        },
+        {
+          "name": "RUN npm install && npm run build",
+          "startLine": 10,
+          "endLine": 10
+        },
+        {
+          "name": "FROM node:22-alpine AS runner",
+          "startLine": 12,
+          "endLine": 12
+        },
+        {
+          "name": "WORKDIR /app",
+          "startLine": 13,
+          "endLine": 13
+        },
+        {
+          "name": "ENV NODE_ENV=production \\",
+          "startLine": 14,
+          "endLine": 14
+        },
+        {
+          "name": "RUN addgroup -S appgroup -g 1001 \\",
+          "startLine": 17,
+          "endLine": 17
+        },
+        {
+          "name": "COPY --from=builder --chown=appuser:appgroup /app/dist ./dist",
+          "startLine": 20,
+          "endLine": 20
+        },
+        {
+          "name": "COPY --from=deps --chown=appuser:appgroup /app/node_modules ./nod",
+          "startLine": 21,
+          "endLine": 21
+        },
+        {
+          "name": "COPY --from=builder --chown=appuser:appgroup /app/package.json ./",
+          "startLine": 22,
+          "endLine": 22
+        },
+        {
+          "name": "USER appuser",
+          "startLine": 24,
+          "endLine": 24
+        },
+        {
+          "name": "EXPOSE 3002",
+          "startLine": 25,
+          "endLine": 25
+        },
+        {
+          "name": "HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \\",
+          "startLine": 27,
+          "endLine": 27
+        },
+        {
+          "name": "CMD [\"node\", \"dist/server.js\"]",
+          "startLine": 30,
+          "endLine": 30
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "serviceCount": 3,
+        "stepCount": 20
+      }
+    },
+    {
+      "path": "ag-platform/services/intake-api/package.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 28,
+      "nonEmptyLines": 28,
+      "sections": [
+        {
+          "heading": "name",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "version",
+          "level": 1,
+          "line": 3
+        },
+        {
+          "heading": "description",
+          "level": 1,
+          "line": 4
+        },
+        {
+          "heading": "main",
+          "level": 1,
+          "line": 5
+        },
+        {
+          "heading": "scripts",
+          "level": 1,
+          "line": 6
+        },
+        {
+          "heading": "dependencies",
+          "level": 1,
+          "line": 11
+        },
+        {
+          "heading": "devDependencies",
+          "level": 1,
+          "line": 23
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 7
+      }
+    },
+    {
+      "path": "ag-platform/services/intake-api/src/routes/dashboard.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 63,
+      "nonEmptyLines": 56,
+      "functions": [
+        {
+          "name": "fetchNOIDataFromDB",
+          "startLine": 7,
+          "endLine": 19,
+          "params": [
+            "orgId"
+          ]
+        },
+        {
+          "name": "dashboardRoutes",
+          "startLine": 21,
+          "endLine": 63,
+          "params": [
+            "fastify"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "dashboardRoutes",
+          "line": 21,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "fetchNOIDataFromDB",
+          "callee": "setTimeout",
+          "lineNumber": 9
+        },
+        {
+          "caller": "fetchNOIDataFromDB",
+          "callee": "resolve",
+          "lineNumber": 10
+        },
+        {
+          "caller": "dashboardRoutes",
+          "callee": "fastify.withTypeProvider<ZodTypeProvider>().get",
+          "lineNumber": 22
+        },
+        {
+          "caller": "dashboardRoutes",
+          "callee": "fastify.withTypeProvider",
+          "lineNumber": 22
+        },
+        {
+          "caller": "dashboardRoutes",
+          "callee": "z.object",
+          "lineNumber": 26
+        },
+        {
+          "caller": "dashboardRoutes",
+          "callee": "z.string().uuid",
+          "lineNumber": 27
+        },
+        {
+          "caller": "dashboardRoutes",
+          "callee": "z.string",
+          "lineNumber": 27
+        },
+        {
+          "caller": "dashboardRoutes",
+          "callee": "getCachedNOIDashboard",
+          "lineNumber": 36
+        },
+        {
+          "caller": "dashboardRoutes",
+          "callee": "fastify.log.info",
+          "lineNumber": 39
+        },
+        {
+          "caller": "dashboardRoutes",
+          "callee": "fastify.log.info",
+          "lineNumber": 47
+        },
+        {
+          "caller": "dashboardRoutes",
+          "callee": "fetchNOIDataFromDB",
+          "lineNumber": 48
+        },
+        {
+          "caller": "dashboardRoutes",
+          "callee": "cacheNOIDashboard",
+          "lineNumber": 51
+        },
+        {
+          "caller": "dashboardRoutes",
+          "callee": "fastify.log.error",
+          "lineNumber": 58
+        },
+        {
+          "caller": "dashboardRoutes",
+          "callee": "reply.code(500).send",
+          "lineNumber": 59
+        },
+        {
+          "caller": "dashboardRoutes",
+          "callee": "reply.code",
+          "lineNumber": 59
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "ag-platform/services/intake-api/src/routes/webhook.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 178,
+      "nonEmptyLines": 157,
+      "functions": [
+        {
+          "name": "webhookRoutes",
+          "startLine": 8,
+          "endLine": 178,
+          "params": [
+            "fastify"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "webhookRoutes",
+          "line": 8,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "webhookRoutes",
+          "callee": "fastify.withTypeProvider",
+          "lineNumber": 9
+        },
+        {
+          "caller": "webhookRoutes",
+          "callee": "typedFastify.post",
+          "lineNumber": 12
+        },
+        {
+          "caller": "webhookRoutes",
+          "callee": "fastify.log.info",
+          "lineNumber": 22
+        },
+        {
+          "caller": "webhookRoutes",
+          "callee": "getOrganizationByBank",
+          "lineNumber": 25
+        },
+        {
+          "caller": "webhookRoutes",
+          "callee": "reply.status(404).send",
+          "lineNumber": 28
+        },
+        {
+          "caller": "webhookRoutes",
+          "callee": "reply.status",
+          "lineNumber": 28
+        },
+        {
+          "caller": "webhookRoutes",
+          "callee": "createCase",
+          "lineNumber": 32
+        },
+        {
+          "caller": "webhookRoutes",
+          "callee": "invalidateNOICache",
+          "lineNumber": 41
+        },
+        {
+          "caller": "webhookRoutes",
+          "callee": "reply.status(200).send",
+          "lineNumber": 43
+        },
+        {
+          "caller": "webhookRoutes",
+          "callee": "reply.status",
+          "lineNumber": 43
+        },
+        {
+          "caller": "webhookRoutes",
+          "callee": "new Date().toISOString",
+          "lineNumber": 48
+        },
+        {
+          "caller": "webhookRoutes",
+          "callee": "typedFastify.post",
+          "lineNumber": 56
+        },
+        {
+          "caller": "webhookRoutes",
+          "callee": "z.object",
+          "lineNumber": 60
+        },
+        {
+          "caller": "webhookRoutes",
+          "callee": "z.string().uuid",
+          "lineNumber": 61
+        },
+        {
+          "caller": "webhookRoutes",
+          "callee": "z.string",
+          "lineNumber": 61
+        },
+        {
+          "caller": "webhookRoutes",
+          "callee": "z.string().min(4).max",
+          "lineNumber": 62
+        },
+        {
+          "caller": "webhookRoutes",
+          "callee": "z.string().min",
+          "lineNumber": 62
+        },
+        {
+          "caller": "webhookRoutes",
+          "callee": "z.string",
+          "lineNumber": 62
+        },
+        {
+          "caller": "webhookRoutes",
+          "callee": "z.string",
+          "lineNumber": 63
+        },
+        {
+          "caller": "webhookRoutes",
+          "callee": "fastify.log.info",
+          "lineNumber": 70
+        },
+        {
+          "caller": "webhookRoutes",
+          "callee": "redisClient.setEx",
+          "lineNumber": 74
+        },
+        {
+          "caller": "webhookRoutes",
+          "callee": "reply.status(200).send",
+          "lineNumber": 76
+        },
+        {
+          "caller": "webhookRoutes",
+          "callee": "reply.status",
+          "lineNumber": 76
+        },
+        {
+          "caller": "webhookRoutes",
+          "callee": "typedFastify.post",
+          "lineNumber": 82
+        },
+        {
+          "caller": "webhookRoutes",
+          "callee": "z.object",
+          "lineNumber": 86
+        },
+        {
+          "caller": "webhookRoutes",
+          "callee": "z.string",
+          "lineNumber": 87
+        },
+        {
+          "caller": "webhookRoutes",
+          "callee": "z.string().optional",
+          "lineNumber": 88
+        },
+        {
+          "caller": "webhookRoutes",
+          "callee": "z.string",
+          "lineNumber": 88
+        },
+        {
+          "caller": "webhookRoutes",
+          "callee": "z.string().optional",
+          "lineNumber": 89
+        },
+        {
+          "caller": "webhookRoutes",
+          "callee": "z.string",
+          "lineNumber": 89
+        },
+        {
+          "caller": "webhookRoutes",
+          "callee": "fastify.log.info",
+          "lineNumber": 95
+        },
+        {
+          "caller": "webhookRoutes",
+          "callee": "text.slice",
+          "lineNumber": 95
+        },
+        {
+          "caller": "webhookRoutes",
+          "callee": "text.match",
+          "lineNumber": 98
+        },
+        {
+          "caller": "webhookRoutes",
+          "callee": "reply.status(200).send",
+          "lineNumber": 100
+        },
+        {
+          "caller": "webhookRoutes",
+          "callee": "reply.status",
+          "lineNumber": 100
+        },
+        {
+          "caller": "webhookRoutes",
+          "callee": "Object.entries",
+          "lineNumber": 113
+        },
+        {
+          "caller": "webhookRoutes",
+          "callee": "pattern.test",
+          "lineNumber": 114
+        },
+        {
+          "caller": "webhookRoutes",
+          "callee": "redisClient.rPush",
+          "lineNumber": 122
+        },
+        {
+          "caller": "webhookRoutes",
+          "callee": "JSON.stringify",
+          "lineNumber": 124
+        },
+        {
+          "caller": "webhookRoutes",
+          "callee": "new Date().toISOString",
+          "lineNumber": 127
+        },
+        {
+          "caller": "webhookRoutes",
+          "callee": "text.slice",
+          "lineNumber": 128
+        },
+        {
+          "caller": "webhookRoutes",
+          "callee": "redisClient.expire",
+          "lineNumber": 131
+        },
+        {
+          "caller": "webhookRoutes",
+          "callee": "redisClient.rPush",
+          "lineNumber": 135
+        },
+        {
+          "caller": "webhookRoutes",
+          "callee": "JSON.stringify",
+          "lineNumber": 137
+        },
+        {
+          "caller": "webhookRoutes",
+          "callee": "new Date().toISOString",
+          "lineNumber": 140
+        },
+        {
+          "caller": "webhookRoutes",
+          "callee": "text.slice",
+          "lineNumber": 141
+        },
+        {
+          "caller": "webhookRoutes",
+          "callee": "redisClient.expire",
+          "lineNumber": 144
+        },
+        {
+          "caller": "webhookRoutes",
+          "callee": "redisClient.publish",
+          "lineNumber": 148
+        },
+        {
+          "caller": "webhookRoutes",
+          "callee": "JSON.stringify",
+          "lineNumber": 148
+        },
+        {
+          "caller": "webhookRoutes",
+          "callee": "reply.status(200).send",
+          "lineNumber": 154
+        },
+        {
+          "caller": "webhookRoutes",
+          "callee": "reply.status",
+          "lineNumber": 154
+        },
+        {
+          "caller": "webhookRoutes",
+          "callee": "fastify.setErrorHandler",
+          "lineNumber": 163
+        },
+        {
+          "caller": "webhookRoutes",
+          "callee": "reply.status(400).send",
+          "lineNumber": 165
+        },
+        {
+          "caller": "webhookRoutes",
+          "callee": "reply.status",
+          "lineNumber": 165
+        },
+        {
+          "caller": "webhookRoutes",
+          "callee": "fastify.log.error",
+          "lineNumber": 172
+        },
+        {
+          "caller": "webhookRoutes",
+          "callee": "reply.status(500).send",
+          "lineNumber": 173
+        },
+        {
+          "caller": "webhookRoutes",
+          "callee": "reply.status",
+          "lineNumber": 173
+        }
+      ],
+      "metrics": {
+        "importCount": 3,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "ag-platform/services/intake-api/src/schemas/intake.schema.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 19,
+      "nonEmptyLines": 16,
+      "exports": [
+        {
+          "name": "bankNames",
+          "line": 3,
+          "isDefault": false
+        },
+        {
+          "name": "intakePayloadSchema",
+          "line": 5,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 2,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "ag-platform/services/intake-api/src/server.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 60,
+      "nonEmptyLines": 50,
+      "functions": [
+        {
+          "name": "start",
+          "startLine": 27,
+          "endLine": 58,
+          "params": []
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "start",
+          "callee": "fastify.register",
+          "lineNumber": 29
+        },
+        {
+          "caller": "start",
+          "callee": "connectRedis",
+          "lineNumber": 32
+        },
+        {
+          "caller": "start",
+          "callee": "fastify.register",
+          "lineNumber": 35
+        },
+        {
+          "caller": "start",
+          "callee": "fastify.register",
+          "lineNumber": 36
+        },
+        {
+          "caller": "start",
+          "callee": "fastify.get",
+          "lineNumber": 39
+        },
+        {
+          "caller": "start",
+          "callee": "import",
+          "lineNumber": 42
+        },
+        {
+          "caller": "start",
+          "callee": "redisClient.ping",
+          "lineNumber": 43
+        },
+        {
+          "caller": "start",
+          "callee": "fastify.log.error",
+          "lineNumber": 46
+        },
+        {
+          "caller": "start",
+          "callee": "reply.code(503).send",
+          "lineNumber": 47
+        },
+        {
+          "caller": "start",
+          "callee": "reply.code",
+          "lineNumber": 47
+        },
+        {
+          "caller": "start",
+          "callee": "Number",
+          "lineNumber": 51
+        },
+        {
+          "caller": "start",
+          "callee": "Number.isInteger",
+          "lineNumber": 52
+        },
+        {
+          "caller": "start",
+          "callee": "fastify.listen",
+          "lineNumber": 53
+        },
+        {
+          "caller": "start",
+          "callee": "fastify.log.error",
+          "lineNumber": 55
+        },
+        {
+          "caller": "start",
+          "callee": "process.exit",
+          "lineNumber": 56
+        }
+      ],
+      "metrics": {
+        "importCount": 3,
+        "exportCount": 0,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "ag-platform/services/intake-api/src/services/redis.service.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 47,
+      "nonEmptyLines": 39,
+      "functions": [
+        {
+          "name": "connectRedis",
+          "startLine": 13,
+          "endLine": 17,
+          "params": []
+        },
+        {
+          "name": "getCachedNOIDashboard",
+          "startLine": 22,
+          "endLine": 30,
+          "params": [
+            "orgId"
+          ]
+        },
+        {
+          "name": "cacheNOIDashboard",
+          "startLine": 32,
+          "endLine": 38,
+          "params": [
+            "orgId",
+            "data"
+          ]
+        },
+        {
+          "name": "invalidateNOICache",
+          "startLine": 40,
+          "endLine": 47,
+          "params": [
+            "orgId"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "redisClient",
+          "line": 6,
+          "isDefault": false
+        },
+        {
+          "name": "connectRedis",
+          "line": 13,
+          "isDefault": false
+        },
+        {
+          "name": "getCachedNOIDashboard",
+          "line": 22,
+          "isDefault": false
+        },
+        {
+          "name": "cacheNOIDashboard",
+          "line": 32,
+          "isDefault": false
+        },
+        {
+          "name": "invalidateNOICache",
+          "line": 40,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "connectRedis",
+          "callee": "redisClient.connect",
+          "lineNumber": 15
+        },
+        {
+          "caller": "getCachedNOIDashboard",
+          "callee": "redisClient.get",
+          "lineNumber": 24
+        },
+        {
+          "caller": "getCachedNOIDashboard",
+          "callee": "JSON.parse",
+          "lineNumber": 25
+        },
+        {
+          "caller": "getCachedNOIDashboard",
+          "callee": "logger.error",
+          "lineNumber": 27
+        },
+        {
+          "caller": "cacheNOIDashboard",
+          "callee": "redisClient.setEx",
+          "lineNumber": 34
+        },
+        {
+          "caller": "cacheNOIDashboard",
+          "callee": "JSON.stringify",
+          "lineNumber": 34
+        },
+        {
+          "caller": "cacheNOIDashboard",
+          "callee": "logger.error",
+          "lineNumber": 36
+        },
+        {
+          "caller": "invalidateNOICache",
+          "callee": "redisClient.del",
+          "lineNumber": 42
+        },
+        {
+          "caller": "invalidateNOICache",
+          "callee": "logger.info",
+          "lineNumber": 43
+        },
+        {
+          "caller": "invalidateNOICache",
+          "callee": "logger.error",
+          "lineNumber": 45
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 5,
+        "functionCount": 4,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "ag-platform/services/intake-api/src/services/supabase.service.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 53,
+      "nonEmptyLines": 44,
+      "functions": [
+        {
+          "name": "createCase",
+          "startLine": 28,
+          "endLine": 37,
+          "params": [
+            "params"
+          ]
+        },
+        {
+          "name": "getOrganizationByBank",
+          "startLine": 39,
+          "endLine": 53,
+          "params": [
+            "bankName"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "supabase",
+          "line": 18,
+          "isDefault": false
+        },
+        {
+          "name": "createCase",
+          "line": 28,
+          "isDefault": false
+        },
+        {
+          "name": "getOrganizationByBank",
+          "line": 39,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "createCase",
+          "callee": "supabase\n    .from('cases')\n    .insert([params])\n    .select()\n    .single",
+          "lineNumber": 29
+        },
+        {
+          "caller": "createCase",
+          "callee": "supabase\n    .from('cases')\n    .insert([params])\n    .select",
+          "lineNumber": 29
+        },
+        {
+          "caller": "createCase",
+          "callee": "supabase\n    .from('cases')\n    .insert",
+          "lineNumber": 29
+        },
+        {
+          "caller": "createCase",
+          "callee": "supabase\n    .from",
+          "lineNumber": 29
+        },
+        {
+          "caller": "getOrganizationByBank",
+          "callee": "supabase\n    .from('organizations')\n    .select('id')\n    .eq('name', bankName)\n    .single",
+          "lineNumber": 42
+        },
+        {
+          "caller": "getOrganizationByBank",
+          "callee": "supabase\n    .from('organizations')\n    .select('id')\n    .eq",
+          "lineNumber": 42
+        },
+        {
+          "caller": "getOrganizationByBank",
+          "callee": "supabase\n    .from('organizations')\n    .select",
+          "lineNumber": 42
+        },
+        {
+          "caller": "getOrganizationByBank",
+          "callee": "supabase\n    .from",
+          "lineNumber": 42
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 3,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "ag-platform/services/intake-api/tsconfig.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 15,
+      "nonEmptyLines": 15,
+      "sections": [
+        {
+          "heading": "compilerOptions",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "include",
+          "level": 1,
+          "line": 14
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 2
+      }
+    },
+    {
+      "path": "ag-platform/src/App.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 122,
+      "nonEmptyLines": 108,
+      "functions": [
+        {
+          "name": "Navigation",
+          "startLine": 16,
+          "endLine": 62,
+          "params": []
+        },
+        {
+          "name": "App",
+          "startLine": 64,
+          "endLine": 120,
+          "params": []
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "Navigation",
+          "callee": "useLocation",
+          "lineNumber": 17
+        },
+        {
+          "caller": "Navigation",
+          "callee": "useAuthStore",
+          "lineNumber": 18
+        },
+        {
+          "caller": "getLinkStyle",
+          "callee": "location.pathname.startsWith",
+          "lineNumber": 21
+        },
+        {
+          "caller": "Navigation",
+          "callee": "getLinkStyle",
+          "lineNumber": 39
+        },
+        {
+          "caller": "Navigation",
+          "callee": "getLinkStyle",
+          "lineNumber": 42
+        },
+        {
+          "caller": "Navigation",
+          "callee": "getLinkStyle",
+          "lineNumber": 45
+        },
+        {
+          "caller": "Navigation",
+          "callee": "getLinkStyle",
+          "lineNumber": 48
+        },
+        {
+          "caller": "Navigation",
+          "callee": "signOut",
+          "lineNumber": 53
+        },
+        {
+          "caller": "App",
+          "callee": "useAuthStore",
+          "lineNumber": 65
+        },
+        {
+          "caller": "App",
+          "callee": "useEffect",
+          "lineNumber": 67
+        },
+        {
+          "caller": "App",
+          "callee": "initializeAuth",
+          "lineNumber": 68
+        }
+      ],
+      "metrics": {
+        "importCount": 11,
+        "exportCount": 0,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "ag-platform/src/app/admin/voice/page.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 194,
+      "nonEmptyLines": 176,
+      "functions": [
+        {
+          "name": "AdminVoiceConsole",
+          "startLine": 16,
+          "endLine": 194,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "AdminVoiceConsole",
+          "line": 16,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "AdminVoiceConsole",
+          "callee": "useState",
+          "lineNumber": 17
+        },
+        {
+          "caller": "AdminVoiceConsole",
+          "callee": "useState",
+          "lineNumber": 18
+        },
+        {
+          "caller": "AdminVoiceConsole",
+          "callee": "useState",
+          "lineNumber": 19
+        },
+        {
+          "caller": "AdminVoiceConsole",
+          "callee": "useState",
+          "lineNumber": 20
+        },
+        {
+          "caller": "AdminVoiceConsole",
+          "callee": "useState",
+          "lineNumber": 21
+        },
+        {
+          "caller": "AdminVoiceConsole",
+          "callee": "useState",
+          "lineNumber": 22
+        },
+        {
+          "caller": "AdminVoiceConsole",
+          "callee": "useRef",
+          "lineNumber": 23
+        },
+        {
+          "caller": "AdminVoiceConsole",
+          "callee": "useRef",
+          "lineNumber": 24
+        },
+        {
+          "caller": "AdminVoiceConsole",
+          "callee": "useCallback",
+          "lineNumber": 26
+        },
+        {
+          "caller": "AdminVoiceConsole",
+          "callee": "useCallback",
+          "lineNumber": 31
+        },
+        {
+          "caller": "AdminVoiceConsole",
+          "callee": "setError",
+          "lineNumber": 33
+        },
+        {
+          "caller": "AdminVoiceConsole",
+          "callee": "fetch",
+          "lineNumber": 35
+        },
+        {
+          "caller": "AdminVoiceConsole",
+          "callee": "authHeaders",
+          "lineNumber": 35
+        },
+        {
+          "caller": "AdminVoiceConsole",
+          "callee": "setTools",
+          "lineNumber": 37
+        },
+        {
+          "caller": "AdminVoiceConsole",
+          "callee": "res.json",
+          "lineNumber": 37
+        },
+        {
+          "caller": "AdminVoiceConsole",
+          "callee": "setError",
+          "lineNumber": 39
+        },
+        {
+          "caller": "AdminVoiceConsole",
+          "callee": "useEffect",
+          "lineNumber": 43
+        },
+        {
+          "caller": "AdminVoiceConsole",
+          "callee": "loadTools",
+          "lineNumber": 43
+        },
+        {
+          "caller": "startRecording",
+          "callee": "setError",
+          "lineNumber": 46
+        },
+        {
+          "caller": "startRecording",
+          "callee": "navigator.mediaDevices.getUserMedia",
+          "lineNumber": 48
+        },
+        {
+          "caller": "startRecording",
+          "callee": "chunksRef.current.push",
+          "lineNumber": 51
+        },
+        {
+          "caller": "startRecording",
+          "callee": "stream.getTracks().forEach",
+          "lineNumber": 52
+        },
+        {
+          "caller": "startRecording",
+          "callee": "stream.getTracks",
+          "lineNumber": 52
+        },
+        {
+          "caller": "startRecording",
+          "callee": "t.stop",
+          "lineNumber": 52
+        },
+        {
+          "caller": "startRecording",
+          "callee": "recorder.start",
+          "lineNumber": 53
+        },
+        {
+          "caller": "startRecording",
+          "callee": "setRecording",
+          "lineNumber": 55
+        },
+        {
+          "caller": "startRecording",
+          "callee": "setError",
+          "lineNumber": 57
+        },
+        {
+          "caller": "stopAndSend",
+          "callee": "setRecording",
+          "lineNumber": 64
+        },
+        {
+          "caller": "stopAndSend",
+          "callee": "setBusy",
+          "lineNumber": 65
+        },
+        {
+          "caller": "stopAndSend",
+          "callee": "recorder.addEventListener",
+          "lineNumber": 68
+        },
+        {
+          "caller": "stopAndSend",
+          "callee": "resolve",
+          "lineNumber": 68
+        },
+        {
+          "caller": "stopAndSend",
+          "callee": "recorder.stop",
+          "lineNumber": 70
+        },
+        {
+          "caller": "stopAndSend",
+          "callee": "form.append",
+          "lineNumber": 75
+        },
+        {
+          "caller": "stopAndSend",
+          "callee": "fetch",
+          "lineNumber": 76
+        },
+        {
+          "caller": "stopAndSend",
+          "callee": "authHeaders",
+          "lineNumber": 78
+        },
+        {
+          "caller": "stopAndSend",
+          "callee": "res.text",
+          "lineNumber": 81
+        },
+        {
+          "caller": "stopAndSend",
+          "callee": "res.json",
+          "lineNumber": 82
+        },
+        {
+          "caller": "stopAndSend",
+          "callee": "setHistory",
+          "lineNumber": 83
+        },
+        {
+          "caller": "stopAndSend",
+          "callee": "[result, ...h].slice",
+          "lineNumber": 83
+        },
+        {
+          "caller": "stopAndSend",
+          "callee": "setError",
+          "lineNumber": 85
+        },
+        {
+          "caller": "stopAndSend",
+          "callee": "setBusy",
+          "lineNumber": 87
+        },
+        {
+          "caller": "confirm",
+          "callee": "setBusy",
+          "lineNumber": 92
+        },
+        {
+          "caller": "confirm",
+          "callee": "fetch",
+          "lineNumber": 94
+        },
+        {
+          "caller": "confirm",
+          "callee": "authHeaders",
+          "lineNumber": 96
+        },
+        {
+          "caller": "confirm",
+          "callee": "res.text",
+          "lineNumber": 98
+        },
+        {
+          "caller": "confirm",
+          "callee": "res.json",
+          "lineNumber": 99
+        },
+        {
+          "caller": "confirm",
+          "callee": "setHistory",
+          "lineNumber": 100
+        },
+        {
+          "caller": "confirm",
+          "callee": "h.map",
+          "lineNumber": 100
+        },
+        {
+          "caller": "confirm",
+          "callee": "setError",
+          "lineNumber": 102
+        },
+        {
+          "caller": "confirm",
+          "callee": "setBusy",
+          "lineNumber": 104
+        },
+        {
+          "caller": "AdminVoiceConsole",
+          "callee": "setAdminKey",
+          "lineNumber": 124
+        },
+        {
+          "caller": "AdminVoiceConsole",
+          "callee": "tools.map",
+          "lineNumber": 151
+        },
+        {
+          "caller": "AdminVoiceConsole",
+          "callee": "riskColor",
+          "lineNumber": 155
+        },
+        {
+          "caller": "AdminVoiceConsole",
+          "callee": "history.map",
+          "lineNumber": 167
+        },
+        {
+          "caller": "AdminVoiceConsole",
+          "callee": "r.command_id.slice",
+          "lineNumber": 170
+        },
+        {
+          "caller": "AdminVoiceConsole",
+          "callee": "JSON.stringify",
+          "lineNumber": 175
+        },
+        {
+          "caller": "AdminVoiceConsole",
+          "callee": "confirm",
+          "lineNumber": 178
+        },
+        {
+          "caller": "AdminVoiceConsole",
+          "callee": "JSON.stringify",
+          "lineNumber": 185
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "ag-platform/src/app/admin/workforce/page.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 281,
+      "nonEmptyLines": 258,
+      "functions": [
+        {
+          "name": "WorkforceConsole",
+          "startLine": 32,
+          "endLine": 281,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "WorkforceConsole",
+          "line": 32,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "WorkforceConsole",
+          "callee": "useState",
+          "lineNumber": 33
+        },
+        {
+          "caller": "WorkforceConsole",
+          "callee": "useState",
+          "lineNumber": 34
+        },
+        {
+          "caller": "WorkforceConsole",
+          "callee": "useState",
+          "lineNumber": 35
+        },
+        {
+          "caller": "WorkforceConsole",
+          "callee": "useState",
+          "lineNumber": 36
+        },
+        {
+          "caller": "WorkforceConsole",
+          "callee": "useState",
+          "lineNumber": 37
+        },
+        {
+          "caller": "WorkforceConsole",
+          "callee": "useState",
+          "lineNumber": 38
+        },
+        {
+          "caller": "WorkforceConsole",
+          "callee": "useState",
+          "lineNumber": 39
+        },
+        {
+          "caller": "WorkforceConsole",
+          "callee": "useState",
+          "lineNumber": 40
+        },
+        {
+          "caller": "WorkforceConsole",
+          "callee": "useState",
+          "lineNumber": 41
+        },
+        {
+          "caller": "WorkforceConsole",
+          "callee": "useState",
+          "lineNumber": 42
+        },
+        {
+          "caller": "WorkforceConsole",
+          "callee": "useCallback",
+          "lineNumber": 44
+        },
+        {
+          "caller": "WorkforceConsole",
+          "callee": "useCallback",
+          "lineNumber": 46
+        },
+        {
+          "caller": "WorkforceConsole",
+          "callee": "setErr",
+          "lineNumber": 48
+        },
+        {
+          "caller": "WorkforceConsole",
+          "callee": "setBusy",
+          "lineNumber": 48
+        },
+        {
+          "caller": "WorkforceConsole",
+          "callee": "Promise.all",
+          "lineNumber": 50
+        },
+        {
+          "caller": "WorkforceConsole",
+          "callee": "fetch(`${API_BASE}/workforce/matrix`, { headers: headers() }).then",
+          "lineNumber": 51
+        },
+        {
+          "caller": "WorkforceConsole",
+          "callee": "fetch",
+          "lineNumber": 51
+        },
+        {
+          "caller": "WorkforceConsole",
+          "callee": "headers",
+          "lineNumber": 51
+        },
+        {
+          "caller": "WorkforceConsole",
+          "callee": "r.json",
+          "lineNumber": 51
+        },
+        {
+          "caller": "WorkforceConsole",
+          "callee": "fetch(`${API_BASE}/workforce/activity?limit=50`, { headers: headers() }).then",
+          "lineNumber": 52
+        },
+        {
+          "caller": "WorkforceConsole",
+          "callee": "fetch",
+          "lineNumber": 52
+        },
+        {
+          "caller": "WorkforceConsole",
+          "callee": "headers",
+          "lineNumber": 52
+        },
+        {
+          "caller": "WorkforceConsole",
+          "callee": "r.json",
+          "lineNumber": 52
+        },
+        {
+          "caller": "WorkforceConsole",
+          "callee": "fetch(`${API_BASE}/workforce/summary`, { headers: headers() }).then",
+          "lineNumber": 53
+        },
+        {
+          "caller": "WorkforceConsole",
+          "callee": "fetch",
+          "lineNumber": 53
+        },
+        {
+          "caller": "WorkforceConsole",
+          "callee": "headers",
+          "lineNumber": 53
+        },
+        {
+          "caller": "WorkforceConsole",
+          "callee": "r.json",
+          "lineNumber": 53
+        },
+        {
+          "caller": "WorkforceConsole",
+          "callee": "setStaff",
+          "lineNumber": 55
+        },
+        {
+          "caller": "WorkforceConsole",
+          "callee": "setCaps",
+          "lineNumber": 55
+        },
+        {
+          "caller": "WorkforceConsole",
+          "callee": "setGrants",
+          "lineNumber": 56
+        },
+        {
+          "caller": "WorkforceConsole",
+          "callee": "m.grants.map",
+          "lineNumber": 56
+        },
+        {
+          "caller": "WorkforceConsole",
+          "callee": "setActivity",
+          "lineNumber": 57
+        },
+        {
+          "caller": "WorkforceConsole",
+          "callee": "setSummary",
+          "lineNumber": 57
+        },
+        {
+          "caller": "WorkforceConsole",
+          "callee": "setErr",
+          "lineNumber": 59
+        },
+        {
+          "caller": "WorkforceConsole",
+          "callee": "setBusy",
+          "lineNumber": 61
+        },
+        {
+          "caller": "WorkforceConsole",
+          "callee": "useEffect",
+          "lineNumber": 65
+        },
+        {
+          "caller": "WorkforceConsole",
+          "callee": "reloadAll",
+          "lineNumber": 65
+        },
+        {
+          "caller": "WorkforceConsole",
+          "callee": "useEffect",
+          "lineNumber": 66
+        },
+        {
+          "caller": "WorkforceConsole",
+          "callee": "setInterval",
+          "lineNumber": 68
+        },
+        {
+          "caller": "WorkforceConsole",
+          "callee": "fetch(`${API_BASE}/workforce/activity?limit=50`, { headers: headers() })\n        .then((r) => r.json()).then(setActivity).catch",
+          "lineNumber": 69
+        },
+        {
+          "caller": "WorkforceConsole",
+          "callee": "fetch(`${API_BASE}/workforce/activity?limit=50`, { headers: headers() })\n        .then((r) => r.json()).then",
+          "lineNumber": 69
+        },
+        {
+          "caller": "WorkforceConsole",
+          "callee": "fetch(`${API_BASE}/workforce/activity?limit=50`, { headers: headers() })\n        .then",
+          "lineNumber": 69
+        },
+        {
+          "caller": "WorkforceConsole",
+          "callee": "fetch",
+          "lineNumber": 69
+        },
+        {
+          "caller": "WorkforceConsole",
+          "callee": "headers",
+          "lineNumber": 69
+        },
+        {
+          "caller": "WorkforceConsole",
+          "callee": "r.json",
+          "lineNumber": 70
+        },
+        {
+          "caller": "WorkforceConsole",
+          "callee": "clearInterval",
+          "lineNumber": 72
+        },
+        {
+          "caller": "toggle",
+          "callee": "setGrants",
+          "lineNumber": 77
+        },
+        {
+          "caller": "toggle",
+          "callee": "grants.set",
+          "lineNumber": 77
+        },
+        {
+          "caller": "toggle",
+          "callee": "fetch",
+          "lineNumber": 78
+        },
+        {
+          "caller": "toggle",
+          "callee": "headers",
+          "lineNumber": 80
+        },
+        {
+          "caller": "toggle",
+          "callee": "JSON.stringify",
+          "lineNumber": 81
+        },
+        {
+          "caller": "setState",
+          "callee": "fetch",
+          "lineNumber": 86
+        },
+        {
+          "caller": "setState",
+          "callee": "headers",
+          "lineNumber": 87
+        },
+        {
+          "caller": "setState",
+          "callee": "JSON.stringify",
+          "lineNumber": 88
+        },
+        {
+          "caller": "setState",
+          "callee": "reloadAll",
+          "lineNumber": 90
+        },
+        {
+          "caller": "openTimeline",
+          "callee": "setTimeline",
+          "lineNumber": 94
+        },
+        {
+          "caller": "openTimeline",
+          "callee": "fetch",
+          "lineNumber": 96
+        },
+        {
+          "caller": "openTimeline",
+          "callee": "headers",
+          "lineNumber": 96
+        },
+        {
+          "caller": "openTimeline",
+          "callee": "r.json",
+          "lineNumber": 97
+        },
+        {
+          "caller": "openTimeline",
+          "callee": "setTimeline",
+          "lineNumber": 98
+        },
+        {
+          "caller": "openTimeline",
+          "callee": "setErr",
+          "lineNumber": 100
+        },
+        {
+          "caller": "playAudio",
+          "callee": "fetch",
+          "lineNumber": 106
+        },
+        {
+          "caller": "playAudio",
+          "callee": "headers",
+          "lineNumber": 106
+        },
+        {
+          "caller": "playAudio",
+          "callee": "r.json",
+          "lineNumber": 108
+        },
+        {
+          "caller": "playAudio",
+          "callee": "setAudioUrl",
+          "lineNumber": 109
+        },
+        {
+          "caller": "playAudio",
+          "callee": "setErr",
+          "lineNumber": 111
+        },
+        {
+          "caller": "WorkforceConsole",
+          "callee": "setKey",
+          "lineNumber": 129
+        },
+        {
+          "caller": "WorkforceConsole",
+          "callee": "summary.anomalies.map",
+          "lineNumber": 138
+        },
+        {
+          "caller": "WorkforceConsole",
+          "callee": "summary.staff_by_state.map",
+          "lineNumber": 148
+        },
+        {
+          "caller": "WorkforceConsole",
+          "callee": "summary.activity_24h_by_source.map",
+          "lineNumber": 154
+        },
+        {
+          "caller": "WorkforceConsole",
+          "callee": "staff.map",
+          "lineNumber": 166
+        },
+        {
+          "caller": "WorkforceConsole",
+          "callee": "dot",
+          "lineNumber": 168
+        },
+        {
+          "caller": "WorkforceConsole",
+          "callee": "setState",
+          "lineNumber": 173
+        },
+        {
+          "caller": "WorkforceConsole",
+          "callee": "staff.map",
+          "lineNumber": 188
+        },
+        {
+          "caller": "WorkforceConsole",
+          "callee": "caps.map",
+          "lineNumber": 194
+        },
+        {
+          "caller": "WorkforceConsole",
+          "callee": "riskColor",
+          "lineNumber": 199
+        },
+        {
+          "caller": "WorkforceConsole",
+          "callee": "staff.map",
+          "lineNumber": 202
+        },
+        {
+          "caller": "WorkforceConsole",
+          "callee": "grants.get",
+          "lineNumber": 204
+        },
+        {
+          "caller": "WorkforceConsole",
+          "callee": "toggle",
+          "lineNumber": 207
+        },
+        {
+          "caller": "WorkforceConsole",
+          "callee": "activity.map",
+          "lineNumber": 221
+        },
+        {
+          "caller": "WorkforceConsole",
+          "callee": "new Date(a.occurred_at).toLocaleTimeString",
+          "lineNumber": 223
+        },
+        {
+          "caller": "WorkforceConsole",
+          "callee": "playAudio",
+          "lineNumber": 227
+        },
+        {
+          "caller": "WorkforceConsole",
+          "callee": "openTimeline",
+          "lineNumber": 233
+        },
+        {
+          "caller": "WorkforceConsole",
+          "callee": "setTimeline",
+          "lineNumber": 244
+        },
+        {
+          "caller": "WorkforceConsole",
+          "callee": "e.stopPropagation",
+          "lineNumber": 246
+        },
+        {
+          "caller": "WorkforceConsole",
+          "callee": "setTimeline",
+          "lineNumber": 250
+        },
+        {
+          "caller": "WorkforceConsole",
+          "callee": "timeline.entries.map",
+          "lineNumber": 253
+        },
+        {
+          "caller": "WorkforceConsole",
+          "callee": "new Date(e.occurred_at).toLocaleString",
+          "lineNumber": 255
+        },
+        {
+          "caller": "WorkforceConsole",
+          "callee": "setAudioUrl",
+          "lineNumber": 266
+        },
+        {
+          "caller": "WorkforceConsole",
+          "callee": "e.stopPropagation",
+          "lineNumber": 268
+        },
+        {
+          "caller": "WorkforceConsole",
+          "callee": "audioUrl.command_id.slice",
+          "lineNumber": 270
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "ag-platform/src/app/login/page.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 74,
+      "nonEmptyLines": 68,
+      "functions": [
+        {
+          "name": "LoginPage",
+          "startLine": 7,
+          "endLine": 74,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "LoginPage",
+          "line": 7,
+          "isDefault": true
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "ag-platform/src/app/my-cases/page.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 62,
+      "nonEmptyLines": 54,
+      "functions": [
+        {
+          "name": "MobileFieldExecutivePWA",
+          "startLine": 6,
+          "endLine": 62,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "MobileFieldExecutivePWA",
+          "line": 6,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "MobileFieldExecutivePWA",
+          "callee": "[1, 2, 3].map",
+          "lineNumber": 36
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    }
+  ]
+}

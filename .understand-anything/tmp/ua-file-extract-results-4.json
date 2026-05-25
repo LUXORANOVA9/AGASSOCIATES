@@ -1,0 +1,45 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 1,
+  "filesSkipped": [
+    "ag-associates-ai/backend/utils/__init__.py",
+    "ag-associates-ai/backend/models/__init__.py",
+    "ag-associates-ai/backend/routes/__init__.py",
+    "ag-associates-ai/backend/services/__init__.py",
+    "ag-associates-ai/backend/n8n_webhook.py",
+    "ag-associates-ai/backend/bot.py",
+    "ag-associates-ai/backend/payment/payment_intent.py",
+    "ag-associates-ai/backend/payment/payment_router.py",
+    "ag-associates-ai/backend/payment/webhook.py",
+    "ag-associates-ai/backend/payment/models.py",
+    "ag-associates-ai/backend/routes/documents.py",
+    "ag-associates-ai/backend/routes/auth.py",
+    "ag-associates-ai/backend/routes/cases.py",
+    "ag-associates-ai/backend/routes/health.py",
+    "ag-associates-ai/backend/routes/noi.py",
+    "ag-associates-ai/backend/routes/automation.py",
+    "ag-associates-ai/backend/routes/search.py",
+    "ag-associates-ai/backend/routes/routing.py",
+    "ag-associates-ai/backend/frontend/src/vite-env.d.ts",
+    "ag-associates-ai/backend/frontend/eslint.config.js",
+    "ag-associates-ai/backend/frontend/.gitignore",
+    "ag-associates-ai/backend/frontend/public/vite.svg",
+    "ag-associates-ai/backend/docs/setup.md",
+    "ag-associates-ai/backend/docs/agents.md"
+  ],
+  "results": [
+    {
+      "path": "ag-associates-ai/backend/agents/__init__.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 24,
+      "nonEmptyLines": 20,
+      "metrics": {
+        "importCount": 3,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    }
+  ]
+}

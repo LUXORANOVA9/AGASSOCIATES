@@ -1,0 +1,1299 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 25,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "ag-platform/apps/mobile/app/(app)/activity.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 40,
+      "nonEmptyLines": 38,
+      "functions": [
+        {
+          "name": "Activity",
+          "startLine": 7,
+          "endLine": 40,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "Activity",
+          "line": 7,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "Activity",
+          "callee": "useTodayActivity",
+          "lineNumber": 8
+        },
+        {
+          "caller": "Activity",
+          "callee": "refetch",
+          "lineNumber": 22
+        }
+      ],
+      "metrics": {
+        "importCount": 4,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "ag-platform/apps/mobile/app/(app)/cases/[caseId].tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 94,
+      "nonEmptyLines": 89,
+      "functions": [
+        {
+          "name": "CaseDetail",
+          "startLine": 17,
+          "endLine": 94,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "CaseDetail",
+          "line": 17,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "CaseDetail",
+          "callee": "useLocalSearchParams",
+          "lineNumber": 18
+        },
+        {
+          "caller": "CaseDetail",
+          "callee": "useCase",
+          "lineNumber": 21
+        },
+        {
+          "caller": "CaseDetail",
+          "callee": "useCaseDocuments",
+          "lineNumber": 22
+        },
+        {
+          "caller": "CaseDetail",
+          "callee": "useStatusUpdate",
+          "lineNumber": 23
+        },
+        {
+          "caller": "CaseDetail",
+          "callee": "caseQuery.refetch",
+          "lineNumber": 45
+        },
+        {
+          "caller": "CaseDetail",
+          "callee": "enqueueStatus",
+          "lineNumber": 68
+        },
+        {
+          "caller": "CaseDetail",
+          "callee": "docsQuery.refetch",
+          "lineNumber": 85
+        }
+      ],
+      "metrics": {
+        "importCount": 6,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "ag-platform/apps/mobile/app/(app)/dashboard.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 76,
+      "nonEmptyLines": 72,
+      "functions": [
+        {
+          "name": "Dashboard",
+          "startLine": 11,
+          "endLine": 76,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "Dashboard",
+          "line": 11,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "Dashboard",
+          "callee": "useRouter",
+          "lineNumber": 12
+        },
+        {
+          "caller": "Dashboard",
+          "callee": "useAssignedCases",
+          "lineNumber": 13
+        },
+        {
+          "caller": "Dashboard",
+          "callee": "useRealtimeCases",
+          "lineNumber": 14
+        },
+        {
+          "caller": "Dashboard",
+          "callee": "useCallback",
+          "lineNumber": 16
+        },
+        {
+          "caller": "Dashboard",
+          "callee": "router.push",
+          "lineNumber": 17
+        },
+        {
+          "caller": "Dashboard",
+          "callee": "refetch",
+          "lineNumber": 34
+        },
+        {
+          "caller": "Dashboard",
+          "callee": "refetch",
+          "lineNumber": 45
+        },
+        {
+          "caller": "Dashboard",
+          "callee": "onItemPress",
+          "lineNumber": 64
+        },
+        {
+          "caller": "Dashboard",
+          "callee": "refetch",
+          "lineNumber": 70
+        }
+      ],
+      "metrics": {
+        "importCount": 4,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "ag-platform/apps/mobile/app/(app)/debug/queue.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 52,
+      "nonEmptyLines": 50,
+      "functions": [
+        {
+          "name": "QueueDebug",
+          "startLine": 7,
+          "endLine": 52,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "QueueDebug",
+          "line": 7,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "QueueDebug",
+          "callee": "useQueueStore",
+          "lineNumber": 8
+        },
+        {
+          "caller": "QueueDebug",
+          "callee": "useQueueStore",
+          "lineNumber": 9
+        },
+        {
+          "caller": "QueueDebug",
+          "callee": "items.map",
+          "lineNumber": 17
+        },
+        {
+          "caller": "QueueDebug",
+          "callee": "item.eventId.slice",
+          "lineNumber": 23
+        },
+        {
+          "caller": "QueueDebug",
+          "callee": "JSON.stringify",
+          "lineNumber": 32
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "ag-platform/apps/mobile/app/(app)/scanner.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 108,
+      "nonEmptyLines": 103,
+      "functions": [
+        {
+          "name": "Scanner",
+          "startLine": 18,
+          "endLine": 52,
+          "params": []
+        },
+        {
+          "name": "CaseSelector",
+          "startLine": 60,
+          "endLine": 107,
+          "params": [
+            "{ casesQuery, activeCaseId, onSelect }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "Scanner",
+          "line": 18,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "Scanner",
+          "callee": "useAssignedCases",
+          "lineNumber": 19
+        },
+        {
+          "caller": "Scanner",
+          "callee": "useState",
+          "lineNumber": 20
+        },
+        {
+          "caller": "Scanner",
+          "callee": "useDocumentCapture",
+          "lineNumber": 21
+        },
+        {
+          "caller": "Scanner",
+          "callee": "useQueueStore",
+          "lineNumber": 22
+        },
+        {
+          "caller": "Scanner",
+          "callee": "capture",
+          "lineNumber": 37
+        },
+        {
+          "caller": "CaseSelector",
+          "callee": "casesQuery.refetch",
+          "lineNumber": 66
+        },
+        {
+          "caller": "CaseSelector",
+          "callee": "cases.map",
+          "lineNumber": 84
+        },
+        {
+          "caller": "CaseSelector",
+          "callee": "onSelect",
+          "lineNumber": 87
+        }
+      ],
+      "metrics": {
+        "importCount": 6,
+        "exportCount": 1,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "ag-platform/apps/mobile/app/(app)/settings.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 95,
+      "nonEmptyLines": 88,
+      "functions": [
+        {
+          "name": "Settings",
+          "startLine": 6,
+          "endLine": 69,
+          "params": []
+        },
+        {
+          "name": "Section",
+          "startLine": 71,
+          "endLine": 86,
+          "params": [
+            "{\n    title,\n    children,\n}"
+          ]
+        },
+        {
+          "name": "Row",
+          "startLine": 88,
+          "endLine": 95,
+          "params": [
+            "{ label, value }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "Settings",
+          "line": 6,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "Settings",
+          "callee": "useRouter",
+          "lineNumber": 7
+        },
+        {
+          "caller": "Settings",
+          "callee": "useAuth",
+          "lineNumber": 8
+        },
+        {
+          "caller": "Settings",
+          "callee": "signOut",
+          "lineNumber": 57
+        },
+        {
+          "caller": "Settings",
+          "callee": "router.replace",
+          "lineNumber": 58
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 3,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "ag-platform/apps/mobile/app/index.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 21,
+      "nonEmptyLines": 19,
+      "functions": [
+        {
+          "name": "Index",
+          "startLine": 7,
+          "endLine": 21,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "Index",
+          "line": 7,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "Index",
+          "callee": "useAuthStore",
+          "lineNumber": 8
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "ag-platform/apps/mobile/app/login.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 87,
+      "nonEmptyLines": 82,
+      "functions": [
+        {
+          "name": "Login",
+          "startLine": 14,
+          "endLine": 87,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "Login",
+          "line": 14,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "Login",
+          "callee": "useState",
+          "lineNumber": 15
+        },
+        {
+          "caller": "Login",
+          "callee": "useSendMagicLink",
+          "lineNumber": 16
+        },
+        {
+          "caller": "submit",
+          "callee": "email.trim().toLowerCase",
+          "lineNumber": 19
+        },
+        {
+          "caller": "submit",
+          "callee": "email.trim",
+          "lineNumber": 19
+        },
+        {
+          "caller": "submit",
+          "callee": "send",
+          "lineNumber": 24
+        },
+        {
+          "caller": "submit",
+          "callee": "Linking.createURL",
+          "lineNumber": 24
+        },
+        {
+          "caller": "Login",
+          "callee": "email.trim",
+          "lineNumber": 68
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "ag-platform/apps/mobile/app/privacy.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 45,
+      "nonEmptyLines": 43,
+      "functions": [
+        {
+          "name": "PrivacyScreen",
+          "startLine": 8,
+          "endLine": 45,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "PrivacyScreen",
+          "line": 8,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "PrivacyScreen",
+          "callee": "useRouter",
+          "lineNumber": 9
+        },
+        {
+          "caller": "PrivacyScreen",
+          "callee": "Linking.openURL",
+          "lineNumber": 26
+        },
+        {
+          "caller": "PrivacyScreen",
+          "callee": "router.back",
+          "lineNumber": 35
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "ag-platform/apps/mobile/babel.config.js",
+      "language": "javascript",
+      "fileCategory": "code",
+      "totalLines": 10,
+      "nonEmptyLines": 10,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "ag-platform/apps/mobile/components/activity/ActivityToggle.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 61,
+      "nonEmptyLines": 58,
+      "functions": [
+        {
+          "name": "ActivityToggle",
+          "startLine": 4,
+          "endLine": 53,
+          "params": []
+        },
+        {
+          "name": "formatTime",
+          "startLine": 55,
+          "endLine": 61,
+          "params": [
+            "iso"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "ActivityToggle",
+          "line": 4,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "ActivityToggle",
+          "callee": "useDutyStore",
+          "lineNumber": 5
+        },
+        {
+          "caller": "ActivityToggle",
+          "callee": "useDutyStore",
+          "lineNumber": 6
+        },
+        {
+          "caller": "ActivityToggle",
+          "callee": "useDutyStore",
+          "lineNumber": 7
+        },
+        {
+          "caller": "ActivityToggle",
+          "callee": "toggle",
+          "lineNumber": 11
+        },
+        {
+          "caller": "ActivityToggle",
+          "callee": "formatTime",
+          "lineNumber": 33
+        },
+        {
+          "caller": "formatTime",
+          "callee": "new Date(iso).toLocaleTimeString",
+          "lineNumber": 57
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "ag-platform/apps/mobile/components/activity/RouteMap.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 70,
+      "nonEmptyLines": 65,
+      "functions": [
+        {
+          "name": "RouteMap",
+          "startLine": 14,
+          "endLine": 70,
+          "params": [
+            "{ breadcrumbs }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "RouteMap",
+          "line": 14,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "RouteMap",
+          "callee": "useMemo",
+          "lineNumber": 15
+        },
+        {
+          "caller": "RouteMap",
+          "callee": "breadcrumbs.map",
+          "lineNumber": 17
+        },
+        {
+          "caller": "RouteMap",
+          "callee": "Number",
+          "lineNumber": 18
+        },
+        {
+          "caller": "RouteMap",
+          "callee": "Number",
+          "lineNumber": 19
+        },
+        {
+          "caller": "RouteMap",
+          "callee": "new Date(\n                        breadcrumbs[breadcrumbs.length - 1]!.recorded_at,\n                    ).toLocaleTimeString",
+          "lineNumber": 63
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "ag-platform/apps/mobile/components/cases/CaseDetailHeader.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 44,
+      "nonEmptyLines": 41,
+      "functions": [
+        {
+          "name": "CaseDetailHeader",
+          "startLine": 19,
+          "endLine": 44,
+          "params": [
+            "{\n    bankName,\n    caseType,\n    status,\n    assignedAt,\n}"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "CaseDetailHeader",
+          "line": 19,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "CaseDetailHeader",
+          "callee": "new Date(assignedAt).toLocaleString",
+          "lineNumber": 39
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "ag-platform/apps/mobile/components/cases/CaseDocuments.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 42,
+      "nonEmptyLines": 39,
+      "functions": [
+        {
+          "name": "CaseDocuments",
+          "startLine": 9,
+          "endLine": 35,
+          "params": [
+            "{ documents }"
+          ]
+        },
+        {
+          "name": "formatSize",
+          "startLine": 37,
+          "endLine": 42,
+          "params": [
+            "bytes"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "CaseDocuments",
+          "line": 9,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "CaseDocuments",
+          "callee": "documents.map",
+          "lineNumber": 20
+        },
+        {
+          "caller": "CaseDocuments",
+          "callee": "doc.storage_path.split('/').pop",
+          "lineNumber": 26
+        },
+        {
+          "caller": "CaseDocuments",
+          "callee": "doc.storage_path.split",
+          "lineNumber": 26
+        },
+        {
+          "caller": "CaseDocuments",
+          "callee": "formatSize",
+          "lineNumber": 29
+        },
+        {
+          "caller": "CaseDocuments",
+          "callee": "new Date(doc.created_at).toLocaleString",
+          "lineNumber": 29
+        },
+        {
+          "caller": "formatSize",
+          "callee": "Math.round",
+          "lineNumber": 40
+        },
+        {
+          "caller": "formatSize",
+          "callee": "(bytes / (1024 * 1024)).toFixed",
+          "lineNumber": 41
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "ag-platform/apps/mobile/components/cases/CaseListItem.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 66,
+      "nonEmptyLines": 62,
+      "functions": [
+        {
+          "name": "CaseListItem",
+          "startLine": 22,
+          "endLine": 55,
+          "params": [
+            "{\n    caseNumber,\n    bankName,\n    caseType,\n    status,\n    assignedAt,\n    onPress,\n}"
+          ]
+        },
+        {
+          "name": "formatRelative",
+          "startLine": 57,
+          "endLine": 66,
+          "params": [
+            "iso"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "CaseListItem",
+          "line": 22,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "CaseListItem",
+          "callee": "formatRelative",
+          "lineNumber": 50
+        },
+        {
+          "caller": "formatRelative",
+          "callee": "new Date(iso).getTime",
+          "lineNumber": 58
+        },
+        {
+          "caller": "formatRelative",
+          "callee": "Math.floor",
+          "lineNumber": 59
+        },
+        {
+          "caller": "formatRelative",
+          "callee": "Date.now",
+          "lineNumber": 59
+        },
+        {
+          "caller": "formatRelative",
+          "callee": "Math.floor",
+          "lineNumber": 62
+        },
+        {
+          "caller": "formatRelative",
+          "callee": "Math.floor",
+          "lineNumber": 64
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "ag-platform/apps/mobile/components/scanner/CameraButton.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 37,
+      "nonEmptyLines": 35,
+      "functions": [
+        {
+          "name": "CameraButton",
+          "startLine": 9,
+          "endLine": 37,
+          "params": [
+            "{ busy, disabled, onPress }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "CameraButton",
+          "line": 9,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "ag-platform/apps/mobile/components/scanner/UploadQueueList.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 59,
+      "nonEmptyLines": 54,
+      "functions": [
+        {
+          "name": "UploadQueueList",
+          "startLine": 14,
+          "endLine": 29,
+          "params": [
+            "{ items }"
+          ]
+        },
+        {
+          "name": "Row",
+          "startLine": 31,
+          "endLine": 50,
+          "params": [
+            "{ item }"
+          ]
+        },
+        {
+          "name": "describe",
+          "startLine": 52,
+          "endLine": 59,
+          "params": [
+            "m"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "UploadQueueList",
+          "line": 14,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "UploadQueueList",
+          "callee": "items.map",
+          "lineNumber": 24
+        },
+        {
+          "caller": "Row",
+          "callee": "describe",
+          "lineNumber": 33
+        },
+        {
+          "caller": "describe",
+          "callee": "m.payload.caseId.slice",
+          "lineNumber": 57
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 3,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "ag-platform/apps/mobile/components/status/StatusBoard.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 44,
+      "nonEmptyLines": 39,
+      "functions": [
+        {
+          "name": "StatusBoard",
+          "startLine": 30,
+          "endLine": 44,
+          "params": [
+            "{ current, onSelect }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "StatusBoard",
+          "line": 30,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "StatusBoard",
+          "callee": "SPECS.map",
+          "lineNumber": 33
+        },
+        {
+          "caller": "StatusBoard",
+          "callee": "onSelect",
+          "lineNumber": 39
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "ag-platform/apps/mobile/components/status/StatusButton.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 39,
+      "nonEmptyLines": 37,
+      "functions": [
+        {
+          "name": "StatusButton",
+          "startLine": 11,
+          "endLine": 39,
+          "params": [
+            "{ label, active, onPress }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "StatusButton",
+          "line": 11,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "ag-platform/apps/mobile/components/system/OfflineIndicator.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 31,
+      "nonEmptyLines": 27,
+      "functions": [
+        {
+          "name": "OfflineIndicator",
+          "startLine": 7,
+          "endLine": 31,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "OfflineIndicator",
+          "line": 7,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "OfflineIndicator",
+          "callee": "useOnlineStatus",
+          "lineNumber": 8
+        },
+        {
+          "caller": "OfflineIndicator",
+          "callee": "useQueueStore",
+          "lineNumber": 9
+        },
+        {
+          "caller": "OfflineIndicator",
+          "callee": "s.items.filter",
+          "lineNumber": 10
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "ag-platform/apps/mobile/components/ui/EmptyState.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 35,
+      "nonEmptyLines": 33,
+      "functions": [
+        {
+          "name": "EmptyState",
+          "startLine": 9,
+          "endLine": 35,
+          "params": [
+            "{ title, message, action }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "EmptyState",
+          "line": 9,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "ag-platform/apps/mobile/components/ui/ErrorBoundary.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 63,
+      "nonEmptyLines": 56,
+      "classes": [
+        {
+          "name": "ErrorBoundary",
+          "startLine": 12,
+          "endLine": 63,
+          "methods": [
+            "getDerivedStateFromError",
+            "componentDidCatch",
+            "render"
+          ],
+          "properties": [
+            "state",
+            "reset"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "ErrorBoundary",
+          "line": 12,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "componentDidCatch",
+          "callee": "console.error",
+          "lineNumber": 21
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "ag-platform/apps/mobile/components/ui/ErrorState.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 35,
+      "nonEmptyLines": 33,
+      "functions": [
+        {
+          "name": "ErrorState",
+          "startLine": 9,
+          "endLine": 35,
+          "params": [
+            "{\n    title = \"Couldn't load\",\n    message = 'Check your connection and try again.',\n    onRetry,\n}"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "ErrorState",
+          "line": 9,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "ag-platform/apps/mobile/components/ui/index.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 4,
+      "nonEmptyLines": 4,
+      "exports": [
+        {
+          "name": "ErrorBoundary",
+          "line": 1,
+          "isDefault": false
+        },
+        {
+          "name": "Skeleton",
+          "line": 2,
+          "isDefault": false
+        },
+        {
+          "name": "SkeletonList",
+          "line": 2,
+          "isDefault": false
+        },
+        {
+          "name": "EmptyState",
+          "line": 3,
+          "isDefault": false
+        },
+        {
+          "name": "ErrorState",
+          "line": 4,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 5,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "ag-platform/apps/mobile/components/ui/Skeleton.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 55,
+      "nonEmptyLines": 50,
+      "functions": [
+        {
+          "name": "Skeleton",
+          "startLine": 8,
+          "endLine": 38,
+          "params": [
+            "{ className = '' }"
+          ]
+        },
+        {
+          "name": "SkeletonList",
+          "startLine": 40,
+          "endLine": 55,
+          "params": [
+            "{ rows = 3 }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "Skeleton",
+          "line": 8,
+          "isDefault": false
+        },
+        {
+          "name": "SkeletonList",
+          "line": 40,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "Skeleton",
+          "callee": "useRef",
+          "lineNumber": 9
+        },
+        {
+          "caller": "Skeleton",
+          "callee": "useEffect",
+          "lineNumber": 11
+        },
+        {
+          "caller": "Skeleton",
+          "callee": "Animated.loop",
+          "lineNumber": 12
+        },
+        {
+          "caller": "Skeleton",
+          "callee": "Animated.sequence",
+          "lineNumber": 13
+        },
+        {
+          "caller": "Skeleton",
+          "callee": "Animated.timing",
+          "lineNumber": 14
+        },
+        {
+          "caller": "Skeleton",
+          "callee": "Animated.timing",
+          "lineNumber": 19
+        },
+        {
+          "caller": "Skeleton",
+          "callee": "loop.start",
+          "lineNumber": 26
+        },
+        {
+          "caller": "Skeleton",
+          "callee": "loop.stop",
+          "lineNumber": 27
+        },
+        {
+          "caller": "SkeletonList",
+          "callee": "Array.from({ length: rows }).map",
+          "lineNumber": 43
+        },
+        {
+          "caller": "SkeletonList",
+          "callee": "Array.from",
+          "lineNumber": 43
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 2,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    }
+  ]
+}

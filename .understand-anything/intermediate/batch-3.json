@@ -1,0 +1,230 @@
+{
+  "nodes": [
+    {
+      "id": "document:ag-associates-ai/backend/frontend/README.md",
+      "type": "document",
+      "name": "README.md",
+      "filePath": "ag-associates-ai/backend/frontend/README.md",
+      "summary": "Documentation for the frontend application covering setup, development, and usage instructions.",
+      "tags": ["documentation", "entry-point", "frontend"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:ag-associates-ai/backend/frontend/src/App.tsx",
+      "type": "file",
+      "name": "App.tsx",
+      "filePath": "ag-associates-ai/backend/frontend/src/App.tsx",
+      "summary": "Root React component defining the application layout with routing and page structure.",
+      "tags": ["component", "entry-point", "router"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:ag-associates-ai/backend/frontend/src/main.tsx",
+      "type": "file",
+      "name": "main.tsx",
+      "filePath": "ag-associates-ai/backend/frontend/src/main.tsx",
+      "summary": "Application entry point that mounts the React app into the DOM.",
+      "tags": ["entry-point", "bootstrap"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:ag-associates-ai/backend/frontend/src/index.css",
+      "type": "file",
+      "name": "index.css",
+      "filePath": "ag-associates-ai/backend/frontend/src/index.css",
+      "summary": "Global CSS styles for the frontend application including base resets and utility classes.",
+      "tags": ["stylesheet", "global-styles"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:ag-associates-ai/backend/frontend/src/pages/Dashboard.tsx",
+      "type": "file",
+      "name": "Dashboard.tsx",
+      "filePath": "ag-associates-ai/backend/frontend/src/pages/Dashboard.tsx",
+      "summary": "Dashboard page component displaying key metrics, case summaries, and status overview.",
+      "tags": ["component", "page", "dashboard"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:ag-associates-ai/backend/frontend/src/pages/Cases.tsx",
+      "type": "file",
+      "name": "Cases.tsx",
+      "filePath": "ag-associates-ai/backend/frontend/src/pages/Cases.tsx",
+      "summary": "Cases listing page component with filtering, sorting, and case management capabilities.",
+      "tags": ["component", "page", "list"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:ag-associates-ai/backend/frontend/src/pages/Settings.tsx",
+      "type": "file",
+      "name": "Settings.tsx",
+      "filePath": "ag-associates-ai/backend/frontend/src/pages/Settings.tsx",
+      "summary": "Settings page component for user preferences and application configuration.",
+      "tags": ["component", "page", "configuration"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:ag-associates-ai/backend/frontend/src/pages/CaseDetail.tsx",
+      "type": "file",
+      "name": "CaseDetail.tsx",
+      "filePath": "ag-associates-ai/backend/frontend/src/pages/CaseDetail.tsx",
+      "summary": "Individual case detail page showing full case information, timeline, and actions.",
+      "tags": ["component", "page", "detail"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:ag-associates-ai/backend/frontend/src/components/Layout.tsx",
+      "type": "file",
+      "name": "Layout.tsx",
+      "filePath": "ag-associates-ai/backend/frontend/src/components/Layout.tsx",
+      "summary": "Shared layout component providing navigation sidebar, header, and main content area.",
+      "tags": ["component", "layout", "navigation"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:ag-associates-ai/backend/frontend/src/components/StatsCard.tsx",
+      "type": "file",
+      "name": "StatsCard.tsx",
+      "filePath": "ag-associates-ai/backend/frontend/src/components/StatsCard.tsx",
+      "summary": "Reusable statistics card component for displaying metric values with labels and icons.",
+      "tags": ["component", "ui", "statistics"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:ag-associates-ai/backend/frontend/src/components/CaseList.tsx",
+      "type": "file",
+      "name": "CaseList.tsx",
+      "filePath": "ag-associates-ai/backend/frontend/src/components/CaseList.tsx",
+      "summary": "Reusable case list component rendering a table or card layout of legal cases.",
+      "tags": ["component", "ui", "list"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:ag-associates-ai/backend/frontend/src/components/CaseTimeline.tsx",
+      "type": "file",
+      "name": "CaseTimeline.tsx",
+      "filePath": "ag-associates-ai/backend/frontend/src/components/CaseTimeline.tsx",
+      "summary": "Timeline component displaying chronological case events and status changes.",
+      "tags": ["component", "ui", "timeline"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:ag-associates-ai/backend/frontend/src/components/BotStatus.tsx",
+      "type": "file",
+      "name": "BotStatus.tsx",
+      "filePath": "ag-associates-ai/backend/frontend/src/components/BotStatus.tsx",
+      "summary": "Status indicator component showing bot/agent online status and activity information.",
+      "tags": ["component", "ui", "status"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:ag-associates-ai/backend/frontend/src/components/DashboardSkeleton.tsx",
+      "type": "file",
+      "name": "DashboardSkeleton.tsx",
+      "filePath": "ag-associates-ai/backend/frontend/src/components/DashboardSkeleton.tsx",
+      "summary": "Loading skeleton component for the dashboard to improve perceived performance.",
+      "tags": ["component", "ui", "loading"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:ag-associates-ai/backend/frontend/src/api/index.ts",
+      "type": "file",
+      "name": "index.ts",
+      "filePath": "ag-associates-ai/backend/frontend/src/api/index.ts",
+      "summary": "API client barrel file exporting configured HTTP client and base request utilities.",
+      "tags": ["barrel", "api-client", "entry-point"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:ag-associates-ai/backend/frontend/src/api/cases.ts",
+      "type": "file",
+      "name": "cases.ts",
+      "filePath": "ag-associates-ai/backend/frontend/src/api/cases.ts",
+      "summary": "API module providing case-related endpoint functions for CRUD operations.",
+      "tags": ["api-handler", "crud", "service"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:ag-associates-ai/backend/frontend/src/hooks/useCases.ts",
+      "type": "file",
+      "name": "useCases.ts",
+      "filePath": "ag-associates-ai/backend/frontend/src/hooks/useCases.ts",
+      "summary": "React hook encapsulating case data fetching, caching, and state management logic.",
+      "tags": ["hook", "data-fetching", "state-management"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:ag-associates-ai/backend/frontend/src/hooks/useSocket.ts",
+      "type": "file",
+      "name": "useSocket.ts",
+      "filePath": "ag-associates-ai/backend/frontend/src/hooks/useSocket.ts",
+      "summary": "React hook managing WebSocket connection for real-time updates from the backend.",
+      "tags": ["hook", "websocket", "realtime"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:ag-associates-ai/backend/frontend/src/hooks/useAuth.ts",
+      "type": "file",
+      "name": "useAuth.ts",
+      "filePath": "ag-associates-ai/backend/frontend/src/hooks/useAuth.ts",
+      "summary": "React hook providing authentication state, login, logout, and token management.",
+      "tags": ["hook", "authentication", "security"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:ag-associates-ai/backend/frontend/src/types/index.ts",
+      "type": "file",
+      "name": "index.ts",
+      "filePath": "ag-associates-ai/backend/frontend/src/types/index.ts",
+      "summary": "TypeScript type definitions barrel file exporting interfaces and types for the frontend.",
+      "tags": ["type-definition", "barrel", "entry-point"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:ag-associates-ai/backend/frontend/src/data/sampleData.ts",
+      "type": "file",
+      "name": "sampleData.ts",
+      "filePath": "ag-associates-ai/backend/frontend/src/data/sampleData.ts",
+      "summary": "Mock data module providing sample cases, users, and activity for development and testing.",
+      "tags": ["data", "mock", "development"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:ag-associates-ai/backend/frontend/vite.config.ts",
+      "type": "file",
+      "name": "vite.config.ts",
+      "filePath": "ag-associates-ai/backend/frontend/vite.config.ts",
+      "summary": "Vite build tool configuration with React plugin, dev server settings, and build options.",
+      "tags": ["configuration", "build-system", "bundler"],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:ag-associates-ai/backend/frontend/tsconfig.json",
+      "type": "config",
+      "name": "tsconfig.json",
+      "filePath": "ag-associates-ai/backend/frontend/tsconfig.json",
+      "summary": "TypeScript compiler configuration for the frontend application with strict type checking.",
+      "tags": ["configuration", "typescript", "build-system"],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:ag-associates-ai/backend/frontend/tsconfig.node.json",
+      "type": "config",
+      "name": "tsconfig.node.json",
+      "filePath": "ag-associates-ai/backend/frontend/tsconfig.node.json",
+      "summary": "TypeScript configuration for Node.js tooling files like Vite config.",
+      "tags": ["configuration", "typescript", "build-system"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:ag-associates-ai/backend/frontend/index.html",
+      "type": "file",
+      "name": "index.html",
+      "filePath": "ag-associates-ai/backend/frontend/index.html",
+      "summary": "HTML entry point for the Vite-powered React application with root mount element.",
+      "tags": ["markup", "entry-point", "bootstrap"],
+      "complexity": "simple"
+    }
+  ],
+  "edges": []
+}

@@ -13,8 +13,9 @@ End-to-end process: bank emails client documents + advance payment → extract s
 
 ### NOI Status
 Sub-process state machine within a case, stored in `noi_status` column on the `cases` table:
-`DOCUMENTS_RECEIVED → CHALLAN_GENERATED → CHALLAN_PAID → VERIFIED → NOI_DROP_RECEIVED → RECTIFY (if needed) → NOI_FILED → ACKNOWLEDGED → COMPLETED`
+`DOCUMENTS_RECEIVED → CHALLAN_GENERATED → CHALLAN_PAID → VERIFIED → NOI_DROP_RECEIVED → [RECTIFY if mismatch] → NOI_FILED → ACKNOWLEDGED → COMPLETED`
 Exception states: `MISMATCH`, `REJECTED`.
+Transitions are validated at the application layer by `NOI_TRANSITIONS` in `noi_agent.py`. External webhooks bypass validation via `force=True`.
 
 ### Case Status
 Primary case lifecycle (12 states, stored in `case_status` column):
@@ -91,7 +92,7 @@ Listens for NOI status transitions. Drafts and sends emails for missing docs, ch
 - `docs.{$DOMAIN}` → static files
 
 ### CI/CD
-Push to main → GitHub Actions builds 6 Docker images → GHCR → SSH deploy → `docker compose pull && up -d`.
+`deploy.yml` — triggered on `push to main` or manual dispatch. Builds 6 Docker images in matrix on GitHub-hosted runner → pushes to GHCR → self-hosted runner pulls and deploys via `docker compose pull && up -d`. All 10 services have health checks with `depends_on: condition: service_healthy` chains ensuring ordered startup.
 
 ## Governance
 
@@ -116,4 +117,4 @@ Python `Role` enum (int, 20–100) at `backend/auth/rbac.py`. Permission inherit
 | **CLERK** | 40 | `case.view_assigned`, `noi.view_progress`, `comms.view_log`, `reports.view_dashboard` |
 | **BANK_VIEWER** | 20 | `case.view_assigned` — read-only assigned cases |
 
-40+ granular Permission constants across 6 domains: CASE, NOI, COMMS, RPA, REPORTS, FIRM. FastAPI `AuthContext` dependency gates endpoints via `require_permission()`. Supabase RLS policies use matching Postgres ENUM.
+26 Permission constants across 6 domains: CASE (7), NOI (6), COMMS (3), RPA (3), REPORTS (3), FIRM (4). FastAPI `require_permission()` dependency gates NOI endpoints via `AuthContext` (built from OAuth session cookie + Supabase `profiles.role` lookup). See `backend/auth/deps.py`. Supabase RLS policies use matching Postgres ENUM on `profiles.role`.
