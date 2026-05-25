@@ -25,7 +25,7 @@ docker compose -f "$COMPOSE_FILE" --env-file "$ENV_FILE" up -d --remove-orphans
 
 echo "=== 4. Wait for health ==="
 for i in $(seq 1 12); do
-    if curl -sf http://127.0.0.1/health > /dev/null 2>&1; then
+    if curl -sf http://127.0.0.1:8000/health > /dev/null 2>&1; then
         echo "   API healthy after ${i}0s"
         break
     fi

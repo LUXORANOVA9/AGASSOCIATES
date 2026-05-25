@@ -54,11 +54,6 @@ n8n.{$DOMAIN} {
 	try_files {path} {path}/ /index.html
 	file_server
 	header Cache-Control "public, max-age=3600"
-
-	@health path /health
-	handle @health {
-		respond "ok" 200
-	}
 }
 
 # Clerk-style docs site — pure static, served by Caddy directly from a mounted dir
