@@ -10,7 +10,7 @@ permissions:
 jobs:
   deploy:
     name: Deploy Stack
-    runs-on: ag-prod-runner
+    runs-on: ag-prod-runner-v2
     steps:
       - run: |
           set -e
