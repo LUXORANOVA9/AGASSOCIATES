@@ -16,6 +16,7 @@ Voice messages are transcribed via Groq Whisper before being sent to Aisha.
 
 import os
 import json
+import io
 import logging
 import asyncio
 import sys
@@ -43,6 +44,11 @@ LLM_BASE_URL = os.environ.get("LLM_BASE_URL", "https://api.groq.com/openai/v1")
 OTP_TTL_SECONDS = 300  # 5 min
 SMS_INCOMING_KEY = "sms:incoming"
 AUTOFORWARD_SET_KEY = "otp_autoforward"
+
+TTSService = None  # lazy import edge-tts
+
+# Track which chats want voice replies
+_voice_mode_chats: set[int] = set()
 
 redis_client: Optional[aioredis.Redis] = None
 
@@ -217,7 +223,7 @@ async def _transcribe_voice(audio_bytes: bytes, filename: str = "voice.ogg") -> 
 
 
 async def voice_handler(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
-    """Handle voice messages — transcribe then forward to Aisha."""
+    """Handle voice messages — transcribe then forward to Aisha, reply with text + voice."""
     chat_id = update.effective_chat.id
     if not _is_aisha_mode(chat_id):
         return
@@ -248,6 +254,11 @@ async def voice_handler(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
                 await update.message.reply_text(chunk, parse_mode="HTML")
         else:
             await update.message.reply_text(response, parse_mode="HTML")
+
+        if chat_id in _voice_mode_chats:
+            audio = await _synthesize_speech(response)
+            if audio:
+                await update.message.reply_voice(voice=io.BytesIO(audio))
     else:
         await update.message.reply_text("❌ Aisha is unavailable right now. Please try again later.")
 
@@ -411,6 +422,50 @@ async def _sms_listener(app: Application):
             await asyncio.sleep(5)
 
 
+async def _synthesize_speech(text: str) -> Optional[bytes]:
+    """Synthesize text to speech using edge-tts (free, female Indian English voice)."""
+    global TTSService
+    if TTSService is None:
+        try:
+            import edge_tts
+            TTSService = edge_tts
+        except ImportError:
+            logger.warning("edge-tts not installed, voice replies disabled")
+            return None
+
+    try:
+        communicate = TTSService.Communicate(text, voice="en-IN-NeerjaNeural")
+        audio = b""
+        async for chunk in communicate.stream():
+            if chunk["type"] == "audio":
+                audio += chunk["data"]
+        return audio if audio else None
+    except Exception as e:
+        logger.error("TTS synthesis failed: %s", e)
+        return None
+
+
+async def voicemode_command(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
+    """Toggle voice replies — Aisha speaks back when you send voice messages."""
+    chat_id = update.effective_chat.id
+    if chat_id in _voice_mode_chats:
+        _voice_mode_chats.discard(chat_id)
+        await update.message.reply_text(
+            "🔇 **Voice replies disabled.**\n\n"
+            "Aisha will reply with text only.",
+            parse_mode="HTML",
+        )
+    else:
+        _voice_mode_chats.add(chat_id)
+        await update.message.reply_text(
+            "🔊 **Voice replies enabled!** 🎤\n\n"
+            "When you send a voice message, Aisha will reply with text + "
+            "a spoken voice message using a female Indian English voice.\n\n"
+            "Send /voicemode again to disable.",
+            parse_mode="HTML",
+        )
+
+
 # ── Callback handler ────────────────────────────────────────────────────
 
 async def button_callback(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
@@ -566,6 +621,7 @@ def main():
     app.add_handler(CommandHandler("aisha", aisha_command))
     app.add_handler(CommandHandler("otp", request_otp))
     app.add_handler(CommandHandler("autootp", autootp_command))
+    app.add_handler(CommandHandler("voicemode", voicemode_command))
     app.add_handler(CommandHandler("status", status_handler))
     app.add_handler(CommandHandler("cancel", cancel))
 
