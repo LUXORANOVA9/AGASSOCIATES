@@ -9,7 +9,7 @@ on:
         required: false
         type: string
       ref:
-        description: 'Branch/ref to deploy (default: current branch)'
+        description: 'Branch/ref to deploy (default: main)'
         required: false
         type: string
 
@@ -19,29 +19,43 @@ permissions:
 jobs:
   deploy:
     name: Deploy Stack
-    runs-on: ag-prod-runner-v2
+    runs-on: [self-hosted, linux, x64]
     environment: production
     steps:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          ref: ${{ inputs.ref || github.ref_name }}
+          ref: ${{ inputs.ref || 'main' }}
+          fetch-depth: 1
 
-      - name: Deploy with docker-compose
+      - name: Sync to /srv/ag/repo and deploy
         run: |
           set -e
-          cd /home/luxor9/AGASSOCIATES
+          REPO_DIR="/srv/ag/repo"
+          ENV_FILE="/srv/ag/.env"
+          COMPOSE_FILE="$REPO_DIR/docker-compose.prod.yml"
+          BRANCH="${{ inputs.ref || 'main' }}"
+
+          echo "==> Syncing to $REPO_DIR"
+          sudo rsync -a --delete --exclude=.git --exclude=node_modules \
+            "$GITHUB_WORKSPACE/" "$REPO_DIR/"
+
+          cd "$REPO_DIR"
+          git config --global --add safe.directory "$REPO_DIR" 2>/dev/null || true
+
+          echo "==> Checking out $BRANCH"
           git fetch origin
-          git checkout --force "${{ inputs.ref || github.ref_name }}"
-          git pull origin "${{ inputs.ref || github.ref_name }}"
+          git checkout --force "$BRANCH"
+          git pull origin "$BRANCH"
 
           if [ -n "${{ inputs.service }}" ]; then
-            echo "Building service: ${{ inputs.service }}"
-            docker compose -f docker-compose.prod.yml --env-file /srv/ag/.env build "${{ inputs.service }}"
-            docker compose -f docker-compose.prod.yml --env-file /srv/ag/.env up -d --remove-orphans "${{ inputs.service }}"
+            echo "==> Building service: ${{ inputs.service }}"
+            docker compose -f "$COMPOSE_FILE" --env-file "$ENV_FILE" build "${{ inputs.service }}"
+            docker compose -f "$COMPOSE_FILE" --env-file "$ENV_FILE" up -d --remove-orphans "${{ inputs.service }}"
           else
-            docker compose -f docker-compose.prod.yml --env-file /srv/ag/.env build
-            docker compose -f docker-compose.prod.yml --env-file /srv/ag/.env up -d --remove-orphans
+            echo "==> Building all services"
+            docker compose -f "$COMPOSE_FILE" --env-file "$ENV_FILE" build
+            docker compose -f "$COMPOSE_FILE" --env-file "$ENV_FILE" up -d --remove-orphans
           fi
 
       - name: Wait for health
@@ -74,6 +88,6 @@ jobs:
         run: |
           echo "## Deployment Complete" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "- **Branch:** ${{ inputs.ref || github.ref_name }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Branch:** ${{ inputs.ref || 'main' }}" >> $GITHUB_STEP_SUMMARY
           echo "- **Service:** ${{ inputs.service || 'all' }}" >> $GITHUB_STEP_SUMMARY
           echo "- **SHA:** $(git rev-parse --short HEAD)" >> $GITHUB_STEP_SUMMARY

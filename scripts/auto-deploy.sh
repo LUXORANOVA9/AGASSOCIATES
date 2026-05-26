@@ -4,7 +4,7 @@ set -euo pipefail
 # AG Associates — one-command deploy + smoke test
 # Usage: sudo bash scripts/auto-deploy.sh [service]
 SERVICE="${1:-}"
-REPO_DIR="/home/luxor9/AGASSOCIATES"
+REPO_DIR="/srv/ag/repo"
 ENV_FILE="/srv/ag/.env"
 COMPOSE_FILE="$REPO_DIR/docker-compose.prod.yml"
 
