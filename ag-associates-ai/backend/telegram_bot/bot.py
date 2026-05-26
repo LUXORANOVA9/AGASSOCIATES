@@ -1,22 +1,25 @@
-"""Telegram Bot — OTP bridge + Aisha chat interface + Voice support.
+"""Telegram Bot — OTP bridge + Aisha AI chat + Voice mode + Auto-forward.
 
-Staff commands:
-  /start       — Register staff handle
+Commands:
+  /start       — Register staff, show all features
+  /help        — Show this command list
+  /aisha       — Toggle Aisha chat mode (text msgs go to Aisha)
+  /aisha <msg> — Ask Aisha directly (one-off)
   /otp         — Request next available OTP (FIFO)
-  /otp gras    — Request OTP for GRAS portal
-  /otp igr     — Request OTP for IGR portal
+  /otp gras    — Request OTP for specific portal
+  /autootp     — Auto-forward ALL incoming OTPs to this chat/group
+  /voicemode   — Toggle spoken voice replies (TTS)
   /status      — Show pending OTP requests
-  /cancel      — Cancel my pending request
-  /aisha       — Toggle Aisha chat mode
-  /aisha <msg> — Send a message to Aisha directly
+  /cancel      — Cancel my pending OTP request
 
-In chat mode, all text and voice messages are forwarded to Aisha.
-Voice messages are transcribed via Groq Whisper before being sent to Aisha.
+Voice messages are transcribed via Groq Whisper, sent to Aisha,
+and replied with text + optional spoken voice (when voice mode on).
 """
 
 import os
 import json
 import io
+import signal
 import logging
 import asyncio
 import sys
@@ -41,26 +44,23 @@ AISHA_API_KEY = os.environ.get("N8N_WEBHOOK_KEY", "")
 LLM_API_KEY = os.environ.get("LLM_API_KEY", "")
 LLM_BASE_URL = os.environ.get("LLM_BASE_URL", "https://api.groq.com/openai/v1")
 
-OTP_TTL_SECONDS = 300  # 5 min
+OTP_TTL_SECONDS = 300
 SMS_INCOMING_KEY = "sms:incoming"
 AUTOFORWARD_SET_KEY = "otp_autoforward"
+STAFF_SET_KEY = "otp_staff_registered"
 
-TTSService = None  # lazy import edge-tts
+TTSService = None
 
-# Track which chats want voice replies
 _voice_mode_chats: set[int] = set()
-
+_aisha_chat_modes: set[int] = set()
 redis_client: Optional[aioredis.Redis] = None
 
-# Track which chats are in Aisha mode
-_aisha_chat_modes: set[int] = set()
 
+# ── Helpers ──────────────────────────────────────────────────────────────
 
 def _is_aisha_mode(chat_id: int) -> bool:
     return chat_id in _aisha_chat_modes
 
-
-# ── Redis helpers ────────────────────────────────────────────────────────
 
 async def get_redis() -> aioredis.Redis:
     global redis_client
@@ -80,35 +80,53 @@ def _staff_key(chat_id: int) -> str:
     return f"otp_staff:{chat_id}"
 
 
-def _aisha_mode_key(chat_id: int) -> str:
-    return f"aisha_mode:{chat_id}"
-
-
 def _autoforward_key() -> str:
     return AUTOFORWARD_SET_KEY
 
 
+def _portal_label(portal: str) -> str:
+    labels = {
+        "idbi": "IDBI Bank", "icici": "ICICI Bank", "hdfc": "HDFC Bank",
+        "axis": "Axis Bank", "sbi": "SBI Bank",
+        "gras": "GRAS", "igr": "IGR", "cersai": "CERSAI", "noc": "NOC",
+    }
+    return labels.get(portal, portal.upper())
+
+
 BANK_PATTERNS = {
-    "idbi": r"\bIDBI\b",
-    "icici": r"\bICICI\b",
-    "hdfc": r"\bHDFC\b",
-    "axis": r"\bAxis\b",
-    "sbi": r"\bSBI\b",
+    "idbi": r"\bIDBI\b", "icici": r"\bICICI\b",
+    "hdfc": r"\bHDFC\b", "axis": r"\bAxis\b", "sbi": r"\bSBI\b",
 }
-
 PORTAL_MAP = {
-    "gras": r"\bGRAS\b",
-    "igr": r"\bIGR\b",
-    "cersai": r"\bCERSAI\b",
-    "sbi": r"\bSBI\b",
-    "noc": r"\bNOC\b",
+    "gras": r"\bGRAS\b", "igr": r"\bIGR\b",
+    "cersai": r"\bCERSAI\b", "sbi": r"\bSBI\b", "noc": r"\bNOC\b",
 }
 
 
-# ── Aisha chat handler ───────────────────────────────────────────────────
+# ── Send helpers ─────────────────────────────────────────────────────────
+
+async def _send_text(update: Update, text: str, parse_mode: str = "HTML"):
+    """Send text, splitting if >4000 chars."""
+    if len(text) > 4000:
+        for i in range(0, len(text), 4000):
+            await update.message.reply_text(text[i:i + 4000], parse_mode=parse_mode)
+    else:
+        await update.message.reply_text(text, parse_mode=parse_mode)
+
+
+async def _reply_with_voice(update: Update, text: str, ctx: ContextTypes.DEFAULT_TYPE):
+    """Send text reply + optional TTS voice reply if voice mode on."""
+    chat_id = update.effective_chat.id
+    await _send_text(update, text)
+    if chat_id in _voice_mode_chats:
+        audio = await _synthesize_speech(text)
+        if audio:
+            await update.message.reply_voice(voice=io.BytesIO(audio))
+
+
+# ── Aisha API ────────────────────────────────────────────────────────────
 
 async def _call_aisha_api(message: str, chat_id: int, username: str) -> Optional[str]:
-    """Call the unified Aisha API and return the response text."""
     import httpx
     try:
         async with httpx.AsyncClient(timeout=30.0) as client:
@@ -123,147 +141,54 @@ async def _call_aisha_api(message: str, chat_id: int, username: str) -> Optional
                 headers={"x-api-key": AISHA_API_KEY} if AISHA_API_KEY else {},
             )
             resp.raise_for_status()
-            data = resp.json()
-            return data.get("response")
+            return resp.json().get("response")
     except httpx.HTTPStatusError as e:
-        logger.error(f"Aisha API returned {e.response.status_code}: {e.response.text[:200]}")
+        logger.error(f"Aisha API {e.response.status_code}: {e.response.text[:200]}")
         return None
     except Exception as e:
         logger.error(f"Aisha API call failed: {e}")
         return None
 
 
-async def aisha_command(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
-    """Toggle Aisha mode or send a message to Aisha."""
+async def _call_aisha_and_reply(update: Update, text: str, ctx: ContextTypes.DEFAULT_TYPE):
+    """Call Aisha and reply with text + optional voice."""
     chat_id = update.effective_chat.id
-    args = ctx.args
-
-    if args:
-        text = " ".join(args)
-        username = update.effective_user.username or str(chat_id)
-        await update.message.reply_text("🤖 Thinking...")
-        response = await _call_aisha_api(text, chat_id, username)
-        if response:
-            await update.message.reply_text(response, parse_mode="HTML")
-        else:
-            await update.message.reply_text("❌ Sorry, I couldn't reach Aisha right now. Try again later.")
-        return
-
-    if chat_id in _aisha_chat_modes:
-        _aisha_chat_modes.discard(chat_id)
-        await update.message.reply_text(
-            "🚫 **Aisha mode disabled.**\n\nYour messages will no longer be forwarded to Aisha.\n"
-            "Use /aisha to enable again, or /otp for OTP requests.",
-            parse_mode="HTML",
-        )
-    else:
-        _aisha_chat_modes.add(chat_id)
-        await update.message.reply_text(
-            "✅ **Aisha mode enabled!** 🤖\n\n"
-            "I'll forward your messages to Aisha, your AI Chief of Staff.\n\n"
-            "You can ask about:\n"
-            "• Case status & progress\n"
-            "• Draft legal documents\n"
-            "• NOI workflow & challans\n"
-            "• General firm operations\n\n"
-            "Send /aisha to disable this mode.\n"
-            "Use /otp for OTP requests.",
-            parse_mode="HTML",
-        )
-
-
-async def aisha_message_handler(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
-    """Handle non-command messages in Aisha chat mode."""
-    chat_id = update.effective_chat.id
-    if not _is_aisha_mode(chat_id):
-        return
-
-    text = update.message.text
-    if not text:
-        return
-
     username = update.effective_user.username or str(chat_id)
     await update.message.reply_chat_action("typing")
     response = await _call_aisha_api(text, chat_id, username)
-
-    # Split long messages
     if response:
-        if len(response) > 4000:
-            for i in range(0, len(response), 4000):
-                chunk = response[i:i + 4000]
-                await update.message.reply_text(chunk, parse_mode="HTML")
-        else:
-            await update.message.reply_text(response, parse_mode="HTML")
+        await _reply_with_voice(update, response, ctx)
     else:
         await update.message.reply_text("❌ Aisha is unavailable right now. Please try again later.")
 
 
-# ── Voice message handler ────────────────────────────────────────────────
+# ── Command: /help ───────────────────────────────────────────────────────
 
-async def _transcribe_voice(audio_bytes: bytes, filename: str = "voice.ogg") -> Optional[str]:
-    """Transcribe voice audio using Groq Whisper API."""
-    import httpx
-    try:
-        async with httpx.AsyncClient(timeout=60.0) as client:
-            files = {"file": (filename, audio_bytes, "audio/ogg")}
-            data = {"model": "whisper-large-v3", "language": "en"}
-            resp = await client.post(
-                f"{LLM_BASE_URL}/audio/transcriptions",
-                files=files,
-                data=data,
-                headers={"Authorization": f"Bearer {LLM_API_KEY}"},
-            )
-            if resp.status_code != 200:
-                logger.error("Whisper API error %s: %s", resp.status_code, resp.text[:200])
-                return None
-            return resp.json().get("text", "").strip()
-    except Exception as e:
-        logger.error("Voice transcription failed: %s", e)
-        return None
+async def help_command(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
+    cmds = [
+        ("/start", "Register staff handle, show all features"),
+        ("/help", "Show this help"),
+        ("/aisha", "Toggle Aisha chat mode"),
+        ("/aisha <msg>", "Ask Aisha a one-off question"),
+        ("/voicemode", "Toggle spoken voice replies (TTS)"),
+        ("/otp", "Request next available OTP"),
+        ("/otp gras", "Request OTP for GRAS portal"),
+        ("/otp igr", "Request OTP for IGR portal"),
+        ("/autootp", "Auto-forward all OTPs to this chat"),
+        ("/status", "Show pending OTP requests"),
+        ("/cancel", "Cancel my pending OTP request"),
+    ]
+    lines = [f"<b>{cmd}</b> — {desc}" for cmd, desc in cmds]
+    await update.message.reply_text(
+        "🤖 <b>AG Associates Bot Commands</b>\n\n" + "\n".join(lines) +
+        "\n\n<i>Send a voice message to talk to Aisha hands-free.</i>",
+        parse_mode="HTML",
+    )
 
 
-async def voice_handler(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
-    """Handle voice messages — transcribe then forward to Aisha, reply with text + voice."""
-    chat_id = update.effective_chat.id
-    if not _is_aisha_mode(chat_id):
-        return
-
-    voice = update.message.voice
-    if not voice:
-        return
-
-    await update.message.reply_chat_action("typing")
-
-    voice_file = await ctx.bot.get_file(voice.file_id)
-    audio_bytes = await voice_file.download_as_bytearray()
-
-    transcribed = await _transcribe_voice(bytes(audio_bytes))
-    if not transcribed:
-        await update.message.reply_text("🎙️ Sorry, I couldn't understand your voice message. Please try again or type your message.")
-        return
-
-    await update.message.reply_text(f"🎙️ <i>Heard:</i> {transcribed}", parse_mode="HTML")
-
-    username = update.effective_user.username or str(chat_id)
-    response = await _call_aisha_api(transcribed, chat_id, username)
-
-    if response:
-        if len(response) > 4000:
-            for i in range(0, len(response), 4000):
-                chunk = response[i:i + 4000]
-                await update.message.reply_text(chunk, parse_mode="HTML")
-        else:
-            await update.message.reply_text(response, parse_mode="HTML")
-
-        if chat_id in _voice_mode_chats:
-            audio = await _synthesize_speech(response)
-            if audio:
-                await update.message.reply_voice(voice=io.BytesIO(audio))
-    else:
-        await update.message.reply_text("❌ Aisha is unavailable right now. Please try again later.")
+# ── Command: /start ──────────────────────────────────────────────────────
 
 async def start(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
-    """Register staff member and link to their chat."""
     chat_id = update.effective_chat.id
     username = update.effective_user.username or str(chat_id)
     r = await get_redis()
@@ -272,44 +197,178 @@ async def start(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
         "username": username,
         "registered_at": datetime.now(timezone.utc).isoformat(),
     })
+    await r.sadd(STAFF_SET_KEY, str(chat_id))
 
     kb = [
         [InlineKeyboardButton("🤖 Chat with Aisha", callback_data="aisha_toggle")],
-        [InlineKeyboardButton("🔐 Request OTP", callback_data="otp_menu")],
+        [InlineKeyboardButton("🔊 Voice Mode", callback_data="voice_toggle")],
+        [InlineKeyboardButton("🔐 OTP Menu", callback_data="otp_menu")],
+        [InlineKeyboardButton("🔄 Auto-Forward", callback_data="autootp_toggle")],
+        [InlineKeyboardButton("❓ Help", callback_data="help")],
     ]
     await update.message.reply_text(
-        f"✅ Registered as <b>{username}</b>\n\n"
+        f"✅ Registered <b>{username}</b>\n\n"
         "<b>Commands:</b>\n"
-        "/aisha — Chat with Aisha (toggle mode)\n"
-        "/aisha &lt;message&gt; — Ask Aisha directly\n"
-        "/otp — Request next available OTP\n"
-        "/otp gras — Request GRAS OTP\n"
-        "/otp igr — Request IGR OTP\n"
-        "/autootp — Auto-forward ALL OTPs here\n"
+        "/aisha — Chat with Aisha (toggle)\n"
+        "/aisha &lt;msg&gt; — Ask Aisha directly\n"
+        "/voicemode — Toggle spoken voice replies\n"
+        "/otp — Request OTP\n"
+        "/autootp — Auto-forward OTPs here\n"
         "/status — View pending OTP requests\n"
-        "/cancel — Cancel my OTP request\n\n"
-        "<i>In Aisha mode, all messages go to Aisha automatically.</i>",
+        "/cancel — Cancel OTP request\n"
+        "/help — Show all commands\n\n"
+        "<i>Send a voice message anytime to talk to Aisha.</i>",
         parse_mode="HTML",
         reply_markup=InlineKeyboardMarkup(kb),
     )
 
 
+# ── Command: /aisha ──────────────────────────────────────────────────────
+
+async def aisha_command(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
+    chat_id = update.effective_chat.id
+    args = ctx.args
+
+    if args:
+        text = " ".join(args)
+        await update.message.reply_text("🤖 Thinking...")
+        await _call_aisha_and_reply(update, text, ctx)
+        return
+
+    if chat_id in _aisha_chat_modes:
+        _aisha_chat_modes.discard(chat_id)
+        await update.message.reply_text(
+            "🚫 **Aisha mode disabled.**\n\nUse /aisha to re-enable.",
+            parse_mode="HTML",
+        )
+    else:
+        _aisha_chat_modes.add(chat_id)
+        await update.message.reply_text(
+            "✅ **Aisha mode enabled!** 🤖\n\n"
+            "All messages will be forwarded to Aisha.\n"
+            "Send /aisha again to disable.\n"
+            "Use /voicemode for spoken replies.",
+            parse_mode="HTML",
+        )
+
+
+# ── Message handler: text → Aisha ───────────────────────────────────────
+
+async def aisha_message_handler(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
+    chat_id = update.effective_chat.id
+    if not _is_aisha_mode(chat_id):
+        return
+    text = update.message.text
+    if not text:
+        return
+    await _call_aisha_and_reply(update, text, ctx)
+
+
+# ── Voice handler ────────────────────────────────────────────────────────
+
+async def _transcribe_voice(audio_bytes: bytes, filename: str = "voice.ogg") -> Optional[str]:
+    import httpx
+    try:
+        async with httpx.AsyncClient(timeout=60.0) as client:
+            files = {"file": (filename, audio_bytes, "audio/ogg")}
+            data = {"model": "whisper-large-v3", "language": "en"}
+            resp = await client.post(
+                f"{LLM_BASE_URL}/audio/transcriptions",
+                files=files, data=data,
+                headers={"Authorization": f"Bearer {LLM_API_KEY}"},
+            )
+            if resp.status_code != 200:
+                logger.error("Whisper error %s: %s", resp.status_code, resp.text[:200])
+                return None
+            return resp.json().get("text", "").strip()
+    except Exception as e:
+        logger.error("Voice transcription failed: %s", e)
+        return None
+
+
+async def voice_handler(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
+    """Handle voice messages — always routes to Aisha (no /aisha toggle needed)."""
+    voice = update.message.voice
+    if not voice:
+        return
+
+    chat_id = update.effective_chat.id
+    await update.message.reply_chat_action("typing")
+
+    voice_file = await ctx.bot.get_file(voice.file_id)
+    audio_bytes = await voice_file.download_as_bytearray()
+
+    transcribed = await _transcribe_voice(bytes(audio_bytes))
+    if not transcribed:
+        await update.message.reply_text("🎙️ Sorry, couldn't understand that. Please try again or type.")
+        return
+
+    await update.message.reply_text(f"🎙️ <i>Heard:</i> {transcribed}", parse_mode="HTML")
+    await _call_aisha_and_reply(update, transcribed, ctx)
+
+
+# ── TTS ──────────────────────────────────────────────────────────────────
+
+async def _synthesize_speech(text: str) -> Optional[bytes]:
+    global TTSService
+    if TTSService is None:
+        try:
+            import edge_tts
+            TTSService = edge_tts
+        except ImportError:
+            logger.warning("edge-tts not installed")
+            return None
+    try:
+        communicate = TTSService.Communicate(text, voice="en-IN-NeerjaNeural")
+        audio = b""
+        async for chunk in communicate.stream():
+            if chunk["type"] == "audio":
+                audio += chunk["data"]
+        return audio if audio else None
+    except Exception as e:
+        logger.error("TTS failed: %s", e)
+        return None
+
+
+# ── Command: /voicemode ─────────────────────────────────────────────────
+
+async def voicemode_command(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
+    chat_id = update.effective_chat.id
+    if chat_id in _voice_mode_chats:
+        _voice_mode_chats.discard(chat_id)
+        await update.message.reply_text(
+            "🔇 **Voice replies disabled.**\n\nText replies only.",
+            parse_mode="HTML",
+        )
+    else:
+        _voice_mode_chats.add(chat_id)
+        await update.message.reply_text(
+            "🔊 **Voice replies enabled!** 🎤\n\n"
+            "Aisha will reply with text + spoken voice.\n"
+            "Works for both typed and voice messages.\n"
+            "Send /voicemode again to disable.",
+            parse_mode="HTML",
+        )
+
+
+# ── OTP commands ─────────────────────────────────────────────────────────
+
 async def request_otp(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
     chat_id = update.effective_chat.id
     args = ctx.args
     portal = args[0].lower() if args else "any"
+    valid = ("any", "gras", "igr", "cersai", "sbi", "noc")
 
-    if portal not in ("any", "gras", "igr", "cersai", "sbi", "noc"):
+    if portal not in valid:
         await update.message.reply_text(
             f"❌ Unknown portal: <b>{portal}</b>\n"
-            "Supported: gras, igr, cersai, sbi, noc (or no argument for any)",
+            f"Supported: {', '.join(valid)}",
             parse_mode="HTML",
         )
         return
 
     r = await get_redis()
     key = _pending_key(portal)
-
     await r.rpush(key, json.dumps({
         "chat_id": chat_id,
         "portal": portal,
@@ -317,91 +376,123 @@ async def request_otp(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
         "status": "waiting",
     }))
     await r.expire(key, OTP_TTL_SECONDS)
-
     await update.message.reply_text(
-        f"⏳ <b>OTP requested</b> for portal: <b>{portal}</b>\n"
-        "Waiting for SMS... You'll receive the code here automatically.",
+        f"⏳ <b>OTP requested</b> for: <b>{portal}</b>\n"
+        "You'll receive it here automatically.",
         parse_mode="HTML",
     )
-    logger.info("OTP requested by %s for portal %s", chat_id, portal)
 
 
 async def status_handler(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
     chat_id = update.effective_chat.id
     r = await get_redis()
-
     lines = []
     for portal in ("any", "gras", "igr", "cersai"):
         key = _pending_key(portal)
-        queue = await r.lrange(key, 0, -1)
-        for item in queue:
+        for item in await r.lrange(key, 0, -1):
             try:
                 data = json.loads(item)
                 if int(data["chat_id"]) == chat_id:
-                    lines.append(f"• <b>{portal}</b> — requested {data['requested_at'][:19]}")
+                    lines.append(f"• <b>{portal}</b> @ {data['requested_at'][:19]}")
             except (json.JSONDecodeError, KeyError):
                 continue
-
     if not lines:
-        await update.message.reply_text("📭 No pending OTP requests from you.")
+        await update.message.reply_text("📭 No pending OTP requests.")
     else:
-        await update.message.reply_text(
-            "📋 <b>Your pending requests:</b>\n" + "\n".join(lines),
-            parse_mode="HTML",
-        )
+        await update.message.reply_text("📋 <b>Your pending requests:</b>\n" + "\n".join(lines), parse_mode="HTML")
 
 
 async def cancel(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
     chat_id = update.effective_chat.id
     r = await get_redis()
     removed = 0
-
     for portal in ("any", "gras", "igr", "cersai", "sbi"):
         key = _pending_key(portal)
-        queue = await r.lrange(key, 0, -1)
-        for item in queue:
+        for item in await r.lrange(key, 0, -1):
             try:
-                data = json.loads(item)
-                if int(data["chat_id"]) == chat_id:
+                if int(json.loads(item)["chat_id"]) == chat_id:
                     await r.lrem(key, 1, item)
                     removed += 1
-            except (json.JSONDecodeError, KeyError):
+            except (json.JSONDecodeError, KeyError, ValueError):
                 continue
-
     if removed:
-        await update.message.reply_text(f"✅ Cancelled <b>{removed}</b> pending request(s).", parse_mode="HTML")
+        await update.message.reply_text(f"✅ Cancelled <b>{removed}</b> request(s).", parse_mode="HTML")
     else:
         await update.message.reply_text("📭 No pending requests to cancel.")
 
 
 async def autootp_command(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
-    """Toggle auto-forward of all incoming OTPs to this chat or group."""
     chat_id = update.effective_chat.id
     r = await get_redis()
     is_enabled = await r.sismember(_autoforward_key(), str(chat_id))
     if is_enabled:
         await r.srem(_autoforward_key(), str(chat_id))
         await update.message.reply_text(
-            "🚫 **Auto-OTP forwarding disabled.**\n\n"
-            "OTPs will only be delivered when you explicitly request them via /otp.",
+            "🚫 **Auto-OTP forwarding disabled.**\n\nUse /otp for manual requests.",
             parse_mode="HTML",
         )
     else:
         await r.sadd(_autoforward_key(), str(chat_id))
-        chat_type = "group" if update.effective_chat.type in ("group", "supergroup") else "chat"
+        kind = "group" if update.effective_chat.type in ("group", "supergroup") else "chat"
         await update.message.reply_text(
             f"✅ **Auto-OTP forwarding enabled!** 🔄\n\n"
-            f"All incoming OTP codes from **IDBI Bank**, **ICICI Bank**, and other "
-            f"portals will be forwarded to this {chat_type} automatically.\n\n"
+            f"All OTPs from IDBI, ICICI, GRAS, IGR, etc.\n"
+            f"will be forwarded to this {kind} automatically.\n\n"
             f"Send /autootp again to disable.",
             parse_mode="HTML",
         )
 
 
-# ── Background SMS listener (Redis BLPOP) ─────────────────────────────
+# ── Callback handler ────────────────────────────────────────────────────
+
+async def button_callback(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
+    query = update.callback_query
+    await query.answer()
+    chat_id = update.effective_chat.id
+
+    if query.data == "aisha_toggle":
+        if chat_id in _aisha_chat_modes:
+            _aisha_chat_modes.discard(chat_id)
+            await query.edit_message_text("🚫 Aisha mode disabled.")
+        else:
+            _aisha_chat_modes.add(chat_id)
+            await query.edit_message_text("✅ Aisha mode enabled! Send any message.")
+
+    elif query.data == "voice_toggle":
+        if chat_id in _voice_mode_chats:
+            _voice_mode_chats.discard(chat_id)
+            await query.edit_message_text("🔇 Voice replies disabled.")
+        else:
+            _voice_mode_chats.add(chat_id)
+            await query.edit_message_text("🔊 Voice replies enabled! Send voice or text.")
+
+    elif query.data == "autootp_toggle":
+        import json as _json
+        r = await get_redis()
+        is_on = await r.sismember(_autoforward_key(), str(chat_id))
+        if is_on:
+            await r.srem(_autoforward_key(), str(chat_id))
+            await query.edit_message_text("🚫 Auto-OTP disabled.")
+        else:
+            await r.sadd(_autoforward_key(), str(chat_id))
+            await query.edit_message_text("✅ Auto-OTP enabled! OTPs forwarded here.")
+
+    elif query.data == "otp_menu":
+        await query.edit_message_text(
+            "🔐 **Request an OTP**\n\n"
+            "Use /otp &lt;portal&gt;\n\n"
+            "Portals: gras, igr, cersai, sbi, noc\n\n"
+            "Or enable /autootp to auto-forward all.",
+            parse_mode="HTML",
+        )
+
+    elif query.data == "help":
+        await help_command(update, ctx)
+
+
+# ── Background SMS listener ─────────────────────────────────────────────
 
 async def _sms_listener(app: Application):
-    """Continuously polls Redis for incoming SMS from the FastAPI ingest endpoint."""
     r = await get_redis()
     while True:
         try:
@@ -418,92 +509,22 @@ async def _sms_listener(app: Application):
         except (asyncio.TimeoutError, TypeError):
             continue
         except Exception as e:
-            logger.error("SMS listener error: %s", e)
+            logger.error("SMS listener: %s", e)
             await asyncio.sleep(5)
 
 
-async def _synthesize_speech(text: str) -> Optional[bytes]:
-    """Synthesize text to speech using edge-tts (free, female Indian English voice)."""
-    global TTSService
-    if TTSService is None:
-        try:
-            import edge_tts
-            TTSService = edge_tts
-        except ImportError:
-            logger.warning("edge-tts not installed, voice replies disabled")
-            return None
-
-    try:
-        communicate = TTSService.Communicate(text, voice="en-IN-NeerjaNeural")
-        audio = b""
-        async for chunk in communicate.stream():
-            if chunk["type"] == "audio":
-                audio += chunk["data"]
-        return audio if audio else None
-    except Exception as e:
-        logger.error("TTS synthesis failed: %s", e)
-        return None
-
-
-async def voicemode_command(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
-    """Toggle voice replies — Aisha speaks back when you send voice messages."""
-    chat_id = update.effective_chat.id
-    if chat_id in _voice_mode_chats:
-        _voice_mode_chats.discard(chat_id)
-        await update.message.reply_text(
-            "🔇 **Voice replies disabled.**\n\n"
-            "Aisha will reply with text only.",
-            parse_mode="HTML",
-        )
-    else:
-        _voice_mode_chats.add(chat_id)
-        await update.message.reply_text(
-            "🔊 **Voice replies enabled!** 🎤\n\n"
-            "When you send a voice message, Aisha will reply with text + "
-            "a spoken voice message using a female Indian English voice.\n\n"
-            "Send /voicemode again to disable.",
-            parse_mode="HTML",
-        )
-
-
-# ── Callback handler ────────────────────────────────────────────────────
-
-async def button_callback(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
-    query = update.callback_query
-    await query.answer()
-
-    if query.data == "aisha_toggle":
-        chat_id = update.effective_chat.id
-        if chat_id in _aisha_chat_modes:
-            _aisha_chat_modes.discard(chat_id)
-            await query.edit_message_text("🚫 Aisha mode disabled.")
-        else:
-            _aisha_chat_modes.add(chat_id)
-            await query.edit_message_text(
-                "✅ **Aisha mode enabled!** Send any message to chat with Aisha.",
-                parse_mode="HTML",
-            )
-    elif query.data == "otp_menu":
-        await query.edit_message_text(
-            "🔐 Use /otp <portal> to request an OTP.\n\n"
-            "Example: /otp gras\n\n"
-            "Available portals: gras, igr, cersai, sbi, noc",
-            parse_mode="HTML",
-        )
-
-
-# ── OTP delivery (called by AI agent / SMS webhook) ─────────────────────
+# ── OTP delivery ────────────────────────────────────────────────────────
 
 async def deliver_otp(chat_id: int, portal: str, otp_code: str, app: Application):
+    label = _portal_label(portal)
     try:
         await app.bot.send_message(
             chat_id=chat_id,
-            text=f"🔐 <b>OTP for {portal.upper()}</b>\n\n"
-                 f"<code>{otp_code}</code>\n\n"
-                 f"Expires in 5 minutes. Enter this on the {portal.upper()} portal.",
+            text=f"🔐 <b>OTP for {label}</b>\n\n<code>{otp_code}</code>\n\n"
+                 f"Expires in 5 minutes.",
             parse_mode="HTML",
         )
-        logger.info("OTP %s delivered to chat %s for portal %s", otp_code[:4] + "***", chat_id, portal)
+        logger.info("OTP %s delivered to %s for %s", otp_code[:4] + "***", chat_id, label)
         return True
     except Exception as e:
         logger.error("Failed to deliver OTP to %s: %s", chat_id, e)
@@ -520,59 +541,44 @@ async def process_incoming_sms(sms_text: str, sender: str, app: Application):
         return False
     otp_code = otp_match.group(1)
 
-    detected_portal = "any"
-    all_patterns = {**PORTAL_MAP, **BANK_PATTERNS}
-    for portal, pattern in all_patterns.items():
+    detected = "any"
+    for portal, pattern in {**PORTAL_MAP, **BANK_PATTERNS}.items():
         if re.search(pattern, sms_text, re.IGNORECASE):
-            detected_portal = portal
+            detected = portal
             break
 
-    for portal_key in (detected_portal, "any"):
-        key = _pending_key(portal_key)
-        queue_len = await r.llen(key)
-        if queue_len == 0:
-            continue
-
+    for pk in (detected, "any"):
+        key = _pending_key(pk)
         raw = await r.lpop(key)
         if raw is None:
             continue
-
         try:
             req = json.loads(raw)
-            chat_id = int(req["chat_id"])
-            await deliver_otp(chat_id, detected_portal, otp_code, app)
+            await deliver_otp(int(req["chat_id"]), detected, otp_code, app)
             return True
         except (json.JSONDecodeError, KeyError, ValueError) as e:
-            logger.error("Invalid OTP request entry: %s", e)
+            logger.error("Invalid OTP request: %s", e)
             continue
 
-    # ── No pending request matched — check auto-forward staff ──
     autoforward_ids = await r.smembers(_autoforward_key())
     if autoforward_ids:
-        label = detected_portal.upper() if detected_portal != "any" else "BANK"
-        for chat_id_str in autoforward_ids:
+        label = _portal_label(detected) if detected != "any" else "BANK"
+        for cid_str in autoforward_ids:
             try:
-                chat_id = int(chat_id_str)
-                await deliver_otp(chat_id, label, otp_code, app)
-            except (ValueError, TypeError) as e:
-                logger.warning("Invalid auto-forward chat_id %s: %s", chat_id_str, e)
-        logger.info("OTP %s auto-forwarded to %d staff", otp_code[:4] + "***", len(autoforward_ids))
+                await deliver_otp(int(cid_str), label, otp_code, app)
+            except (ValueError, TypeError):
+                continue
+        logger.info("OTP auto-forwarded to %d chats", len(autoforward_ids))
         return True
 
-    orphan_key = "otp_orphans"
-    await r.rpush(orphan_key, json.dumps({
-        "otp": otp_code,
-        "portal": detected_portal,
+    await r.rpush("otp_orphans", json.dumps({
+        "otp": otp_code, "portal": detected,
         "received_at": datetime.now(timezone.utc).isoformat(),
-        "sender": sender,
-        "sms_preview": sms_text[:100],
+        "sender": sender, "sms_preview": sms_text[:100],
     }))
-    await r.expire(orphan_key, 600)
-    logger.info("No pending request for OTP %s — stored as orphan", otp_code[:4] + "***")
+    await r.expire("otp_orphans", 600)
     return False
 
-
-# ── Webhook endpoint for SMS ingestion ───────────────────────────────────
 
 async def sms_webhook_handler(request_body: dict, app: Application):
     sms_text = request_body.get("text") or request_body.get("Body") or ""
@@ -583,21 +589,21 @@ async def sms_webhook_handler(request_body: dict, app: Application):
 # ── Health endpoint ──────────────────────────────────────────────────────
 
 def run_health_check():
-    """Run health check in a separate thread to avoid blocking asyncio."""
-    import http.server
-    import socketserver
-    import threading
+    import http.server, socketserver, threading
 
-    class HealthHandler(http.server.BaseHTTPRequestHandler):
+    class H(http.server.BaseHTTPRequestHandler):
         def do_GET(self):
             self.send_response(200)
             self.end_headers()
-            self.wfile.write(b'{"status":"ok"}')
+            status = json.dumps({
+                "status": "ok",
+                "aisha_mode_chats": len(_aisha_chat_modes),
+                "voice_mode_chats": len(_voice_mode_chats),
+            }).encode()
+            self.wfile.write(status)
+        def log_message(self, *a): pass
 
-        def log_message(self, format, *args):
-            pass
-
-    httpd = socketserver.TCPServer(("0.0.0.0", BOT_PORT), HealthHandler)
+    httpd = socketserver.TCPServer(("0.0.0.0", BOT_PORT), H)
     httpd.serve_forever()
 
 
@@ -618,6 +624,7 @@ def main():
     app = Application.builder().token(TELEGRAM_BOT_TOKEN).post_init(post_init).build()
 
     app.add_handler(CommandHandler("start", start))
+    app.add_handler(CommandHandler("help", help_command))
     app.add_handler(CommandHandler("aisha", aisha_command))
     app.add_handler(CommandHandler("otp", request_otp))
     app.add_handler(CommandHandler("autootp", autootp_command))
@@ -634,11 +641,11 @@ def main():
     webhook_url = os.environ.get("TELEGRAM_WEBHOOK_URL", "")
     if webhook_url:
         app.bot.set_webhook(url=webhook_url)
-        logger.info("Telegram webhook set to %s", webhook_url)
+        logger.info("Webhook set to %s", webhook_url)
     else:
-        logger.info("No webhook URL set — starting polling mode")
+        logger.info("Polling mode")
 
-    logger.info("Telegram Bot started — Aisha mode available")
+    logger.info("AG Telegram Bot started")
     app.run_polling(allowed_updates=["message", "callback_query", "voice"])
 
 
