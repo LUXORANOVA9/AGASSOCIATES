@@ -34,19 +34,10 @@ jobs:
           REPO_DIR="/srv/ag/repo"
           ENV_FILE="/srv/ag/.env"
           COMPOSE_FILE="$REPO_DIR/docker-compose.prod.yml"
-          BRANCH="${{ inputs.ref || 'main' }}"
 
           echo "==> Syncing to $REPO_DIR"
           rsync -a --delete --exclude=.git --exclude=node_modules --exclude=__pycache__ \
             "$GITHUB_WORKSPACE/" "$REPO_DIR/"
-
-          cd "$REPO_DIR"
-          git config --global --add safe.directory "$REPO_DIR" 2>/dev/null || true
-
-          echo "==> Checking out $BRANCH"
-          git fetch origin
-          git checkout --force "$BRANCH"
-          git pull origin "$BRANCH"
 
           if [ -n "${{ inputs.service }}" ]; then
             echo "==> Building service: ${{ inputs.service }}"
