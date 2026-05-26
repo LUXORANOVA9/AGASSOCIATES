@@ -23,7 +23,7 @@ jobs:
     environment: production
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
         with:
           ref: ${{ inputs.ref || 'main' }}
           fetch-depth: 1
@@ -37,7 +37,7 @@ jobs:
           BRANCH="${{ inputs.ref || 'main' }}"
 
           echo "==> Syncing to $REPO_DIR"
-          sudo rsync -a --delete --exclude=.git --exclude=node_modules \
+          rsync -a --delete --exclude=.git --exclude=node_modules --exclude=__pycache__ \
             "$GITHUB_WORKSPACE/" "$REPO_DIR/"
 
           cd "$REPO_DIR"
@@ -58,31 +58,36 @@ jobs:
             docker compose -f "$COMPOSE_FILE" --env-file "$ENV_FILE" up -d --remove-orphans
           fi
 
-      - name: Wait for health
+      - name: Wait for containers to be healthy
         run: |
           for i in $(seq 1 12); do
-            if curl -sf http://127.0.0.1:8000/health > /dev/null 2>&1; then
-              echo "API healthy after ${i}0s"
+            STATUS=$(docker inspect --format='{{.State.Health.Status}}' ag_ai_backend 2>/dev/null)
+            if [ "$STATUS" = "healthy" ]; then
+              echo "Backend healthy after ${i}0s"
+              docker inspect --format='{{.Name}} {{.State.Health.Status}}' ag_caddy ag_ai_backend ag_telegram_bot ag_postgres ag_redis
               exit 0
             fi
-            echo "Waiting... ($((i*10))s)"
+            echo "Waiting... ($((i*10))s) (status: $STATUS)"
             sleep 10
           done
-          echo "API not healthy"
+          echo "Backend not healthy"
+          docker ps --format 'table {{.Names}}\t{{.Status}}'
           exit 1
 
-      - name: Smoke test — Aisha chat
+      - name: Smoke test — Aisha chat (via Docker network)
         run: |
           echo -n "Aisha: "
-          AISHA=$(curl -s -X POST http://127.0.0.1:8000/api/aisha/chat \
+          AISHA=$(docker run --rm --network ag-prod_ag_net \
+            curlimages/curl:latest -s -X POST http://ai-backend:8000/api/aisha/chat \
             -H "Content-Type: application/json" \
-            -d '{"message":"hello","user_id":"smoke_test","chat_id":"smoke"}')
+            -d '{"message":"hello","user_id":"smoke_test","chat_id":"smoke"}' 2>/dev/null)
           echo "$AISHA" | python3 -c "import sys,json; print(json.load(sys.stdin).get('response','')[:80])"
 
-      - name: Smoke test — Health endpoint
+      - name: Smoke test — API health (via Docker network)
         run: |
           echo -n "Health: "
-          curl -sf http://127.0.0.1:8000/health && echo " OK"
+          docker run --rm --network ag-prod_ag_net \
+            curlimages/curl:latest -sf http://ai-backend:8000/health 2>/dev/null && echo " OK"
 
       - name: Deploy summary
         run: |
