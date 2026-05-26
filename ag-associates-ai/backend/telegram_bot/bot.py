@@ -6,6 +6,8 @@ Commands:
   /aisha       — Toggle Aisha chat mode (text msgs → Aisha)
   /aisha <msg> — Ask Aisha directly
   /voicemode   — Toggle spoken voice replies (TTS)
+  /hindi       — Toggle Hindi voice (hi-IN-SwaraNeural)
+  /audit       — Upload Excel for financial audit
   /otp         — Request next available OTP
   /otp gras    — Request OTP for specific portal
   /autootp     — Auto-forward ALL incoming OTPs here
@@ -61,6 +63,7 @@ RATE_LIMIT_SECONDS = 10
 _ratelimit: dict[int, float] = {}
 _voice_mode_chats: set[int] = set()
 _aisha_chat_modes: set[int] = set()
+_hindi_chats: set[int] = set()
 redis_client: Optional[aioredis.Redis] = None
 TTSService = None
 
@@ -135,7 +138,8 @@ async def _reply_with_voice(update: Update, text: str, ctx: ContextTypes.DEFAULT
     chat_id = update.effective_chat.id
     await _send_text(update, text)
     if chat_id in _voice_mode_chats:
-        audio = await _synthesize_speech(text)
+        lang = "hi" if chat_id in _hindi_chats else "en"
+        audio = await _synthesize_speech(text, lang)
         if audio:
             await update.message.reply_voice(voice=io.BytesIO(audio))
 
@@ -217,7 +221,7 @@ async def document_handler(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
 
 # ── TTS ──────────────────────────────────────────────────────────────────
 
-async def _synthesize_speech(text: str) -> Optional[bytes]:
+async def _synthesize_speech(text: str, lang: str = "en") -> Optional[bytes]:
     global TTSService
     if TTSService is None:
         try:
@@ -225,8 +229,9 @@ async def _synthesize_speech(text: str) -> Optional[bytes]:
             TTSService = edge_tts
         except ImportError:
             return None
+    voice = "hi-IN-SwaraNeural" if lang == "hi" else "en-IN-NeerjaNeural"
     try:
-        c = TTSService.Communicate(text, voice="en-IN-NeerjaNeural")
+        c = TTSService.Communicate(text, voice=voice)
         audio = b""
         async for chunk in c.stream():
             if chunk["type"] == "audio":
@@ -333,18 +338,20 @@ async def start(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
 
     kb = InlineKeyboardMarkup([
         [InlineKeyboardButton("🤖 Chat with Aisha", callback_data="aisha_toggle"),
-         InlineKeyboardButton("🔊 Voice Mode", callback_data="voice_toggle")],
-        [InlineKeyboardButton("🔐 Request OTP", callback_data="otp_menu"),
-         InlineKeyboardButton("🔄 Auto-Forward", callback_data="autootp_toggle")],
-        [InlineKeyboardButton("📋 Claim OTP", callback_data="claim"),
-         InlineKeyboardButton("📜 History", callback_data="history")],
-        [InlineKeyboardButton("❓ Help", callback_data="help")],
+         InlineKeyboardButton("🔊 Voice", callback_data="voice_toggle")],
+        [InlineKeyboardButton("🇮🇳 Hindi Voice", callback_data="hindi_toggle"),
+         InlineKeyboardButton("🔄 Auto-OTP", callback_data="autootp_toggle")],
+        [InlineKeyboardButton("🔐 OTP Menu", callback_data="otp_menu"),
+         InlineKeyboardButton("📋 Claim", callback_data="claim")],
+        [InlineKeyboardButton("📜 History", callback_data="history"),
+         InlineKeyboardButton("❓ Help", callback_data="help")],
     ])
     await update.message.reply_text(
         f"✅ Registered <b>{user}</b>\n\n"
         "<b>Key commands:</b>\n"
         "/aisha — Chat with assistant\n"
         "/voicemode — Spoken replies (TTS)\n"
+        "/hindi — Hindi voice (Swara)\n"
         "/otp — Request OTP\n"
         "/autootp — Auto-forward OTPs here\n"
         "/claim — Claim orphan OTPs\n"
@@ -360,12 +367,14 @@ async def help_command(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
         ("/help", "This help"),
         ("/aisha [msg]", "Toggle Aisha mode or ask one-off"),
         ("/voicemode", "Toggle spoken TTS replies"),
+        ("/hindi", "Toggle Hindi voice (Swara)"),
         ("/otp [portal]", "Request OTP (gras/igr/cersai/sbi/noc)"),
         ("/autootp", "Auto-forward all OTPs here"),
         ("/claim", "Claim orphan OTPs"),
         ("/history", "Recent OTP history"),
         ("/status", "Pending OTP requests"),
         ("/cancel", "Cancel OTP request"),
+        ("/audit", "Upload Excel for financial audit"),
     ]
     lines = [f"<b>{c}</b> — {d}" for c, d in cmds]
     await update.message.reply_text(
@@ -396,6 +405,22 @@ async def voicemode_command(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
     else:
         _voice_mode_chats.add(cid)
         await update.message.reply_text("🔊 Voice replies on! Aisha speaks back.")
+
+
+async def hindi_command(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
+    cid = update.effective_chat.id
+    if cid in _hindi_chats:
+        _hindi_chats.discard(cid)
+        await update.message.reply_text("🇮🇳 Hindi voice off. Using English voice.")
+    else:
+        _hindi_chats.add(cid)
+        await update.message.reply_text(
+            "🇮🇳 <b>Hindi voice on!</b> 🎤\n\n"
+            "Aisha will speak in <b>Hindi</b> (female voice).\n"
+            "Voice messages will auto-detect language.\n\n"
+            "Send /hindi again to switch back to English.",
+            parse_mode="HTML",
+        )
 
 
 async def request_otp(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
@@ -546,7 +571,7 @@ async def voice_handler(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
             resp = await client.post(
                 f"{LLM_BASE_URL}/audio/transcriptions",
                 files={"file": ("voice.ogg", bytes(audio), "audio/ogg")},
-                data={"model": "whisper-large-v3", "language": "en"},
+                data={"model": "whisper-large-v3"},
                 headers={"Authorization": f"Bearer {LLM_API_KEY}"},
             )
             if resp.status_code != 200:
@@ -588,6 +613,14 @@ async def button_callback(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
         else:
             _voice_mode_chats.add(cid)
             await q.edit_message_text("🔊 Voice replies on! Aisha speaks back.")
+
+    elif q.data == "hindi_toggle":
+        if cid in _hindi_chats:
+            _hindi_chats.discard(cid)
+            await q.edit_message_text("🇮🇳 Hindi voice off. Using English voice.")
+        else:
+            _hindi_chats.add(cid)
+            await q.edit_message_text("🇮🇳 Hindi voice on! Swara (female Hindi) voice.")
 
     elif q.data == "autootp_toggle":
         r = await get_redis()
@@ -746,6 +779,7 @@ def main():
     app.add_handler(CommandHandler("help", help_command))
     app.add_handler(CommandHandler("aisha", aisha_command))
     app.add_handler(CommandHandler("voicemode", voicemode_command))
+    app.add_handler(CommandHandler("hindi", hindi_command))
     app.add_handler(CommandHandler("otp", request_otp))
     app.add_handler(CommandHandler("autootp", autootp_command))
     app.add_handler(CommandHandler("claim", claim_command))
