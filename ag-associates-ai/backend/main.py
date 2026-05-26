@@ -12,7 +12,7 @@ import redis.asyncio as aioredis
 sentry_sdk = None
 if importlib.util.find_spec("sentry_sdk"):
     import sentry_sdk
-from fastapi import FastAPI, Header, HTTPException, status, Response, Request, Depends
+from fastapi import FastAPI, Header, HTTPException, status, Response, Request, Depends, Cookie
 from fastapi.middleware.cors import CORSMiddleware
 from typing import Dict, Any, Optional
 from pydantic import BaseModel, Field
@@ -277,29 +277,46 @@ class AishaChatResponse(BaseModel):
 @app.post("/api/aisha/chat", tags=["Aisha"])
 async def aisha_chat(
     request: AishaChatRequest,
-    auth: AuthContext = Depends(require_permission("aisha.chat")),
     x_api_key: Optional[str] = Header(default=None, alias="x-api-key"),
     x_user_id: Optional[str] = Header(default=None, alias="x-user-id"),
+    ag_session: Optional[str] = Cookie(default=None, alias="ag_session"),
 ):
     """
     General Aisha chat endpoint for web/mobile/API clients.
     Routes to the appropriate handler based on intent classification.
     Supports conversation continuity via conversation_id.
-    """
-    if x_api_key:
-        _verify_n8n_key(x_api_key)
 
-    import asyncio
+    Auth: either x-api-key header (service-to-service) or ag_session cookie (web).
+    """
     import hashlib
 
-    identity = x_user_id or request.platform_identity or f"api_{hashlib.md5((x_api_key or '').encode()).hexdigest()[:8]}"
+    identity = None
+    display_name = request.display_name or ""
+
+    # 1. API key takes priority (Telegram bot, n8n, etc.)
+    if x_api_key:
+        _verify_n8n_key(x_api_key)
+        identity = x_user_id or request.platform_identity or f"api_{hashlib.md5(x_api_key.encode()).hexdigest()[:8]}"
+    # 2. Session cookie (web dashboard users)
+    elif ag_session:
+        from auth.google_oauth import _decode_session
+        try:
+            user = _decode_session(ag_session)
+            identity = user.get("sub", "")
+            display_name = display_name or user.get("name", identity)
+        except Exception as exc:
+            raise HTTPException(status_code=401, detail=f"invalid session: {exc}")
+    else:
+        raise HTTPException(status_code=401, detail="not signed in")
+
+    import asyncio
 
     result = await asyncio.to_thread(
         aisha_handle_message,
         request.message,
         platform=request.platform or "web",
         platform_identity=identity,
-        display_name=request.display_name,
+        display_name=display_name,
         conversation_id=request.conversation_id,
     )
     return AishaChatResponse(**result)
