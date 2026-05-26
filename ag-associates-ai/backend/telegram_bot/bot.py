@@ -41,6 +41,8 @@ LLM_API_KEY = os.environ.get("LLM_API_KEY", "")
 LLM_BASE_URL = os.environ.get("LLM_BASE_URL", "https://api.groq.com/openai/v1")
 
 OTP_TTL_SECONDS = 300  # 5 min
+SMS_INCOMING_KEY = "sms:incoming"
+AUTOFORWARD_SET_KEY = "otp_autoforward"
 
 redis_client: Optional[aioredis.Redis] = None
 
@@ -74,6 +76,27 @@ def _staff_key(chat_id: int) -> str:
 
 def _aisha_mode_key(chat_id: int) -> str:
     return f"aisha_mode:{chat_id}"
+
+
+def _autoforward_key() -> str:
+    return AUTOFORWARD_SET_KEY
+
+
+BANK_PATTERNS = {
+    "idbi": r"\bIDBI\b",
+    "icici": r"\bICICI\b",
+    "hdfc": r"\bHDFC\b",
+    "axis": r"\bAxis\b",
+    "sbi": r"\bSBI\b",
+}
+
+PORTAL_MAP = {
+    "gras": r"\bGRAS\b",
+    "igr": r"\bIGR\b",
+    "cersai": r"\bCERSAI\b",
+    "sbi": r"\bSBI\b",
+    "noc": r"\bNOC\b",
+}
 
 
 # ── Aisha chat handler ───────────────────────────────────────────────────
@@ -251,6 +274,7 @@ async def start(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
         "/otp — Request next available OTP\n"
         "/otp gras — Request GRAS OTP\n"
         "/otp igr — Request IGR OTP\n"
+        "/autootp — Auto-forward ALL OTPs here\n"
         "/status — View pending OTP requests\n"
         "/cancel — Cancel my OTP request\n\n"
         "<i>In Aisha mode, all messages go to Aisha automatically.</i>",
@@ -339,6 +363,53 @@ async def cancel(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
         await update.message.reply_text("📭 No pending requests to cancel.")
 
 
+async def autootp_command(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
+    """Toggle auto-forward of all incoming OTPs to this chat."""
+    chat_id = update.effective_chat.id
+    r = await get_redis()
+    is_enabled = await r.sismember(_autoforward_key(), str(chat_id))
+    if is_enabled:
+        await r.srem(_autoforward_key(), str(chat_id))
+        await update.message.reply_text(
+            "🚫 **Auto-OTP forwarding disabled.**\n\n"
+            "OTPs will only be delivered when you explicitly request them via /otp.",
+            parse_mode="HTML",
+        )
+    else:
+        await r.sadd(_autoforward_key(), str(chat_id))
+        await update.message.reply_text(
+            "✅ **Auto-OTP forwarding enabled!** 🔄\n\n"
+            "All incoming OTP codes from **IDBI Bank**, **ICICI Bank**, and other "
+            "portals will be forwarded to this chat automatically — no need to /otp first.\n\n"
+            "Send /autootp again to disable.",
+            parse_mode="HTML",
+        )
+
+
+# ── Background SMS listener (Redis BLPOP) ─────────────────────────────
+
+async def _sms_listener(app: Application):
+    """Continuously polls Redis for incoming SMS from the FastAPI ingest endpoint."""
+    r = await get_redis()
+    while True:
+        try:
+            result = await r.blpop(SMS_INCOMING_KEY, timeout=30)
+            if result is None:
+                continue
+            _, raw = result
+            data = json.loads(raw)
+            await process_incoming_sms(
+                sms_text=data.get("text", ""),
+                sender=data.get("from", "unknown"),
+                app=app,
+            )
+        except (asyncio.TimeoutError, TypeError):
+            continue
+        except Exception as e:
+            logger.error("SMS listener error: %s", e)
+            await asyncio.sleep(5)
+
+
 # ── Callback handler ────────────────────────────────────────────────────
 
 async def button_callback(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
@@ -393,15 +464,9 @@ async def process_incoming_sms(sms_text: str, sender: str, app: Application):
         return False
     otp_code = otp_match.group(1)
 
-    portal_map = {
-        'gras': r'\bGRAS\b',
-        'igr': r'\bIGR\b',
-        'cersai': r'\bCERSAI\b',
-        'sbi': r'\bSBI\b',
-        'noc': r'\bNOC\b',
-    }
     detected_portal = "any"
-    for portal, pattern in portal_map.items():
+    all_patterns = {**PORTAL_MAP, **BANK_PATTERNS}
+    for portal, pattern in all_patterns.items():
         if re.search(pattern, sms_text, re.IGNORECASE):
             detected_portal = portal
             break
@@ -424,6 +489,19 @@ async def process_incoming_sms(sms_text: str, sender: str, app: Application):
         except (json.JSONDecodeError, KeyError, ValueError) as e:
             logger.error("Invalid OTP request entry: %s", e)
             continue
+
+    # ── No pending request matched — check auto-forward staff ──
+    autoforward_ids = await r.smembers(_autoforward_key())
+    if autoforward_ids:
+        label = detected_portal.upper() if detected_portal != "any" else "BANK"
+        for chat_id_str in autoforward_ids:
+            try:
+                chat_id = int(chat_id_str)
+                await deliver_otp(chat_id, label, otp_code, app)
+            except (ValueError, TypeError) as e:
+                logger.warning("Invalid auto-forward chat_id %s: %s", chat_id_str, e)
+        logger.info("OTP %s auto-forwarded to %d staff", otp_code[:4] + "***", len(autoforward_ids))
+        return True
 
     orphan_key = "otp_orphans"
     await r.rpush(orphan_key, json.dumps({
@@ -478,11 +556,15 @@ def main():
     health_thread = threading.Thread(target=run_health_check, daemon=True)
     health_thread.start()
 
-    app = Application.builder().token(TELEGRAM_BOT_TOKEN).build()
+    async def post_init(app: Application):
+        asyncio.create_task(_sms_listener(app))
+
+    app = Application.builder().token(TELEGRAM_BOT_TOKEN).post_init(post_init).build()
 
     app.add_handler(CommandHandler("start", start))
     app.add_handler(CommandHandler("aisha", aisha_command))
     app.add_handler(CommandHandler("otp", request_otp))
+    app.add_handler(CommandHandler("autootp", autootp_command))
     app.add_handler(CommandHandler("status", status_handler))
     app.add_handler(CommandHandler("cancel", cancel))
 

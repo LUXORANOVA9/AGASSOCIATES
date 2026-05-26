@@ -1,8 +1,12 @@
 import os
-import secrets
+import os
+import re
 import json
 import base64
+import secrets
 import importlib.util
+from datetime import datetime, timezone
+import redis.asyncio as aioredis
 
 # Dynamic import to silence IDE warnings when module is not in the system path
 sentry_sdk = None
@@ -418,6 +422,76 @@ async def aisha_voice_text(payload: Dict[str, Any], auth: AuthContext = Depends(
     return {
         **result,
         "audio_base64": base64.b64encode(audio).decode() if audio else None,
+    }
+
+
+@app.post("/api/sms/ingest", tags=["SMS"])
+async def sms_ingest(request: Request):
+    """
+    Generic SMS ingestion endpoint for Android SMS Forwarder apps.
+    Accepts JSON or form-encoded POST. Pushes to Redis for Telegram bot to process.
+
+    Expected formats:
+      JSON:  {"from": "+9198...", "text": "Your OTP for IDBI is 123456"}
+      Form:  From=+9198...&Body=Your OTP for IDBI is 123456
+      Form:  sender=+9198...&message=Your OTP for IDBI is 123456
+
+    The Telegram bot (running in a separate process) picks up the SMS via
+    Redis BLPOP and delivers OTPs to staff with auto-forward enabled.
+    """
+    body = {}
+    content_type = (request.headers.get("content-type") or "").lower()
+
+    if "application/json" in content_type:
+        body = await request.json()
+    elif "application/x-www-form-urlencoded" in content_type:
+        form = await request.form()
+        body = dict(form)
+    else:
+        try:
+            body = await request.json()
+        except Exception:
+            try:
+                form = await request.form()
+                body = dict(form)
+            except Exception:
+                return {"status": "error", "message": "Unsupported content-type. Use JSON or form-encoded."}
+
+    sms_from = (
+        body.get("from") or body.get("From")
+        or body.get("sender") or body.get("Sender")
+        or "unknown"
+    )
+    sms_text = (
+        body.get("text") or body.get("Text")
+        or body.get("body") or body.get("Body")
+        or body.get("message") or body.get("Message")
+        or ""
+    ).strip()
+
+    if not sms_text:
+        return {"status": "error", "message": "No SMS text provided"}
+
+    redis_url = os.environ.get("REDIS_URL", "redis://localhost:6379")
+    redis_password = os.environ.get("REDIS_PASSWORD", "")
+    r = aioredis.from_url(redis_url, password=redis_password, decode_responses=True)
+
+    payload = json.dumps({
+        "from": sms_from,
+        "text": sms_text,
+        "received_at": datetime.now(timezone.utc).isoformat(),
+    })
+
+    await r.rpush("sms:incoming", payload)
+    await r.expire("sms:incoming", 86400)
+    await r.aclose()
+
+    otp_detected = bool(re.search(r'\b(\d{4,8})\b', sms_text))
+
+    return {
+        "status": "ok",
+        "otp_detected": otp_detected,
+        "from": sms_from,
     }
 
 
