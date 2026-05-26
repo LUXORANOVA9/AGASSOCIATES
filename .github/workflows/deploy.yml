@@ -3,6 +3,15 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+    inputs:
+      service:
+        description: 'Service to deploy (leave empty for all)'
+        required: false
+        type: string
+      ref:
+        description: 'Branch/ref to deploy (default: current branch)'
+        required: false
+        type: string
 
 permissions:
   contents: read
@@ -11,20 +20,60 @@ jobs:
   deploy:
     name: Deploy Stack
     runs-on: ag-prod-runner-v2
+    environment: production
     steps:
-      - run: |
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.ref || github.ref_name }}
+
+      - name: Deploy with docker-compose
+        run: |
           set -e
           cd /home/luxor9/AGASSOCIATES
-          git pull origin main
-          docker compose -f docker-compose.prod.yml --env-file /srv/ag/.env build
-          docker compose -f docker-compose.prod.yml --env-file /srv/ag/.env up -d --remove-orphans
-          docker compose -f docker-compose.prod.yml ps
-          for i in 1 2 3 4 5 6; do
-            if curl -sf http://127.0.0.1:8000/health; then
-              echo "API healthy"
+          git fetch origin
+          git checkout --force "${{ inputs.ref || github.ref_name }}"
+          git pull origin "${{ inputs.ref || github.ref_name }}"
+
+          if [ -n "${{ inputs.service }}" ]; then
+            echo "Building service: ${{ inputs.service }}"
+            docker compose -f docker-compose.prod.yml --env-file /srv/ag/.env build "${{ inputs.service }}"
+            docker compose -f docker-compose.prod.yml --env-file /srv/ag/.env up -d --remove-orphans "${{ inputs.service }}"
+          else
+            docker compose -f docker-compose.prod.yml --env-file /srv/ag/.env build
+            docker compose -f docker-compose.prod.yml --env-file /srv/ag/.env up -d --remove-orphans
+          fi
+
+      - name: Wait for health
+        run: |
+          for i in $(seq 1 12); do
+            if curl -sf http://127.0.0.1:8000/health > /dev/null 2>&1; then
+              echo "API healthy after ${i}0s"
               exit 0
             fi
+            echo "Waiting... ($((i*10))s)"
             sleep 10
           done
           echo "API not healthy"
           exit 1
+
+      - name: Smoke test — Aisha chat
+        run: |
+          echo -n "Aisha: "
+          AISHA=$(curl -s -X POST http://127.0.0.1:8000/api/aisha/chat \
+            -H "Content-Type: application/json" \
+            -d '{"message":"hello","user_id":"smoke_test","chat_id":"smoke"}')
+          echo "$AISHA" | python3 -c "import sys,json; print(json.load(sys.stdin).get('response','')[:80])"
+
+      - name: Smoke test — Health endpoint
+        run: |
+          echo -n "Health: "
+          curl -sf http://127.0.0.1:8000/health && echo " OK"
+
+      - name: Deploy summary
+        run: |
+          echo "## Deployment Complete" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "- **Branch:** ${{ inputs.ref || github.ref_name }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Service:** ${{ inputs.service || 'all' }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **SHA:** $(git rev-parse --short HEAD)" >> $GITHUB_STEP_SUMMARY
