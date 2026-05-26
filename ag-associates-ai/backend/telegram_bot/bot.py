@@ -364,7 +364,7 @@ async def cancel(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
 
 
 async def autootp_command(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
-    """Toggle auto-forward of all incoming OTPs to this chat."""
+    """Toggle auto-forward of all incoming OTPs to this chat or group."""
     chat_id = update.effective_chat.id
     r = await get_redis()
     is_enabled = await r.sismember(_autoforward_key(), str(chat_id))
@@ -377,11 +377,12 @@ async def autootp_command(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
         )
     else:
         await r.sadd(_autoforward_key(), str(chat_id))
+        chat_type = "group" if update.effective_chat.type in ("group", "supergroup") else "chat"
         await update.message.reply_text(
-            "✅ **Auto-OTP forwarding enabled!** 🔄\n\n"
-            "All incoming OTP codes from **IDBI Bank**, **ICICI Bank**, and other "
-            "portals will be forwarded to this chat automatically — no need to /otp first.\n\n"
-            "Send /autootp again to disable.",
+            f"✅ **Auto-OTP forwarding enabled!** 🔄\n\n"
+            f"All incoming OTP codes from **IDBI Bank**, **ICICI Bank**, and other "
+            f"portals will be forwarded to this {chat_type} automatically.\n\n"
+            f"Send /autootp again to disable.",
             parse_mode="HTML",
         )
 
