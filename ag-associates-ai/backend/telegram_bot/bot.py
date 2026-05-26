@@ -173,6 +173,48 @@ async def _call_aisha_and_reply(update: Update, text: str, ctx: ContextTypes.DEF
         await update.message.reply_text("❌ Aisha is unavailable. Try later.")
 
 
+# ── Excel audit ──────────────────────────────────────────────────────────
+
+async def audit_command(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
+    await update.message.reply_text(
+        "📊 <b>Financial Auditor</b>\n\n"
+        "Send me an Excel file (.xlsx) and I'll analyze it:\n"
+        "• Bank statements → transactions, balances, anomalies\n"
+        "• Balance sheets → A=L+E check, ratios\n"
+        "• Profit & Loss → margins, trends\n"
+        "• Any financial sheet → numeric summary\n\n"
+        "Just upload the file or forward it here.",
+        parse_mode="HTML",
+    )
+
+
+async def document_handler(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
+    doc = update.message.document
+    if not doc:
+        return
+    if not doc.file_name or not doc.file_name.lower().endswith((".xlsx", ".xls")):
+        await update.message.reply_text("Please send an .xlsx or .xls file.")
+        return
+
+    await update.message.reply_chat_action("typing")
+    await update.message.reply_text("📊 Analyzing...")
+
+    f = await ctx.bot.get_file(doc.file_id)
+    file_bytes = await f.download_as_bytearray()
+
+    try:
+        from finance_auditor import audit_excel
+        report = audit_excel(bytes(file_bytes), doc.file_name)
+        if len(report) > 4000:
+            for i in range(0, len(report), 4000):
+                await update.message.reply_text(report[i:i + 4000], parse_mode="HTML")
+        else:
+            await update.message.reply_text(report, parse_mode="HTML")
+    except Exception as e:
+        logger.error("Audit error: %s", e)
+        await update.message.reply_text(f"❌ Audit failed: {e}")
+
+
 # ── TTS ──────────────────────────────────────────────────────────────────
 
 async def _synthesize_speech(text: str) -> Optional[bytes]:
@@ -710,7 +752,9 @@ def main():
     app.add_handler(CommandHandler("history", history_command))
     app.add_handler(CommandHandler("status", status_handler))
     app.add_handler(CommandHandler("cancel", cancel))
+    app.add_handler(CommandHandler("audit", audit_command))
 
+    app.add_handler(MessageHandler(filters.Document.ALL, document_handler))
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, aisha_message_handler))
     app.add_handler(MessageHandler(filters.VOICE, voice_handler))
     app.add_handler(CallbackQueryHandler(button_callback))
