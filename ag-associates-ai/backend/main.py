@@ -16,6 +16,7 @@ from playground import playground_router, session_manager as _playground_sm
 from pydantic import BaseModel
 from controller_agent import UnifiedController
 from agents import process_rental_request
+from telegram_bot import TELEGRAM_BOT_TOKEN
 
 
 
@@ -196,6 +197,77 @@ async def unified_chat(request: UnifiedChatRequest):
         import logging
         logging.getLogger(__name__).error(f"Unified Controller error: {e}")
         raise HTTPException(status_code=500, detail=str(e))
+
+
+# ============================================================================
+# TELEGRAM BOT WEBHOOK (OTP from staff)
+# ============================================================================
+
+import asyncio
+import redis.asyncio as aioredis
+
+_REDIS_URL = os.environ.get("REDIS_URL", "redis://localhost:6379")
+
+
+@app.post("/api/telegram/webhook")
+async def telegram_webhook(payload: dict):
+    """Receive Telegram bot updates (staff OTP replies).
+
+    Expected format:
+        {
+            "message": {
+                "chat": {"id": 12345},
+                "text": "123456",
+                "reply_to_message": {"text": "..."}  // optional
+            },
+            ...
+        }
+    """
+    message = payload.get("message") or {}
+    chat_id = str(message.get("chat", {}).get("id", ""))
+    text = (message.get("text") or "").strip()
+
+    if not chat_id or not text:
+        return {"ok": False, "reason": "missing chat_id or text"}
+
+    # Look up the pending case for this chat
+    key = f"otp_waiting:{chat_id}"
+    try:
+        r = aioredis.from_url(_REDIS_URL)
+        case_id = await r.get(key)
+        if not case_id:
+            await r.aclose()
+            return {"ok": False, "reason": "no pending OTP request for this chat"}
+        case_id = case_id.decode("utf-8")
+
+        # Store the OTP where the Executor expects it
+        otp_key = f"otp:{case_id}"
+        await r.setEx(otp_key, 300, text)
+        await r.delete(key)
+        await r.aclose()
+
+        logger.info(f"Telegram OTP received for case {case_id}")
+        return {"ok": True, "case_id": case_id}
+    except Exception as exc:
+        logger.error(f"Telegram webhook error: {exc}")
+        return {"ok": False, "reason": str(exc)}
+
+
+@app.post("/api/telegram/setup-webhook")
+async def setup_telegram_webhook():
+    """Configure the Telegram bot to send updates to this server."""
+    if not TELEGRAM_BOT_TOKEN:
+        return {"ok": False, "reason": "TELEGRAM_BOT_TOKEN not set"}
+
+    from telegram_bot import set_webhook
+
+    host = os.environ.get("TELEGRAM_WEBHOOK_HOST", "")
+    if not host:
+        return {"ok": False, "reason": "TELEGRAM_WEBHOOK_HOST not set"}
+
+    webhook_url = f"{host.rstrip('/')}/api/telegram/webhook"
+    ok = set_webhook(webhook_url)
+    return {"ok": ok, "webhook_url": webhook_url}
 
 
 if __name__ == "__main__":

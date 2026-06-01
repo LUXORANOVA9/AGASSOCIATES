@@ -106,31 +106,53 @@ class GrasRPAExecutor:
 
     async def wait_for_otp(self, case_id: str, timeout_seconds: int = 120) -> Optional[str]:
         """
-        Asynchronously waits for an OTP to arrive in Redis (sent via Node.js webhook).
-        This completely removes the need for staff to manually enter OTPs.
-        Returns the OTP string, or None on timeout.
+        Notifies staff via Telegram that an OTP is needed, then waits for it
+        to arrive in Redis. Returns the OTP string, or None on timeout.
         """
         import redis.asyncio as redis
         import os
 
-        # Connect to Redis (assuming REDIS_URL is in environment)
-        r = redis.from_url(os.getenv("REDIS_URL", "redis://localhost:6379"))
+        REDIS_URL = os.getenv("REDIS_URL", "redis://localhost:6379")
+        CHAT_ID = os.getenv("TELEGRAM_CHAT_ID", "")
 
         otp_key = f"otp:{case_id}"
         start_time = asyncio.get_event_loop().time()
 
         logger.info(f"⏳ [EXECUTOR] Polling Redis for OTP key: {otp_key}")
 
+        r = redis.from_url(REDIS_URL)
         try:
+            # Store pending state so Telegram webhook can map reply → case
+            if CHAT_ID:
+                otp_waiting_key = f"otp_waiting:{CHAT_ID}"
+                await r.setEx(otp_waiting_key, timeout_seconds + 30, case_id)
+
+                # Notify staff via Telegram
+                from telegram_bot import send_otp_request
+                sent = send_otp_request(case_id)
+                if sent:
+                    logger.info(f"📲 [EXECUTOR] Sent Telegram OTP request for case {case_id}")
+                else:
+                    logger.warning("⚠️ [EXECUTOR] Telegram notification failed (OTP will still work if webhook posts directly)")
+
             while (asyncio.get_event_loop().time() - start_time) < timeout_seconds:
                 otp_code = await r.get(otp_key)
                 if otp_code:
-                    # Delete the key once consumed to avoid reuse
                     await r.delete(otp_key)
+                    if CHAT_ID:
+                        await r.delete(f"otp_waiting:{CHAT_ID}")
+                    logger.info(f"✅ [EXECUTOR] OTP received for case {case_id}")
+                    from telegram_bot import send_otp_received
+                    send_otp_received(case_id)
                     return otp_code.decode('utf-8')
 
-                await asyncio.sleep(2)  # Poll every 2 seconds
+                await asyncio.sleep(2)
 
+            logger.warning(f"⏰ [EXECUTOR] OTP timeout for case {case_id}")
+            if CHAT_ID:
+                await r.delete(f"otp_waiting:{CHAT_ID}")
+            from telegram_bot import send_otp_timeout
+            send_otp_timeout(case_id)
             return None
         finally:
             try:
