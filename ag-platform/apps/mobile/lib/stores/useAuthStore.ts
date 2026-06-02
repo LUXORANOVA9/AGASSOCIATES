@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { zustandMmkvStorage } from '../storage/zustandAdapter';
 import type { Session, User } from '@supabase/supabase-js';
 import type { DbUserRole } from '@ag/types';
 import { supabase } from '../supabase';
@@ -73,9 +73,10 @@ export const useAuthStore = create<AuthState>()(
         }),
         {
             name: 'ag-mobile-auth-v1',
-            storage: createJSONStorage(() => AsyncStorage),
+            storage: createJSONStorage(() => zustandMmkvStorage),
             // Only persist non-sensitive scaffolding so the UI can render an
-            // optimistic shell before Supabase rehydrates the real session.
+            // optimistic shell before Supabase rehydrates the real session
+            // from encrypted MMKV (see lib/storage/supabaseAdapter.ts).
             partialize: (state) => ({
                 role: state.role,
                 orgId: state.orgId,

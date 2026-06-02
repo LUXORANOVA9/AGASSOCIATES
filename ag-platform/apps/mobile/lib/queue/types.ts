@@ -1,7 +1,7 @@
 // Single source of truth for the offline mutation queue. Every write the
 // mobile app performs goes through this funnel so we get:
 //   1. Optimistic UI (immediate cache mutation)
-//   2. AsyncStorage persistence across cold starts
+//   2. Sync MMKV persistence across cold starts (OS-kill-safe)
 //   3. FIFO replay when NetInfo flips to connected
 //   4. Server-side idempotency via client_event_id UNIQUE constraints
 //      (see migration 20260518000000_field_app.sql)
