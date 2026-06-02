@@ -1,6 +1,11 @@
-"""Telegram bot service for OTP notifications to offline staff.
+"""Telegram Bot — OTP bridge + notification utilities.
 
-Pattern follows voice/whatsapp.py — thin HTTP wrapper around the Bot API.
+This package provides:
+1. Standalone bot service (bot.py) — full Telegram bot with commands, OTP delivery, voice, NOI management
+2. Lightweight notification utilities (below) — thin wrappers for executor_agent.py notifications
+
+Usage:
+    from telegram_bot import TELEGRAM_BOT_TOKEN, send_otp_request
 """
 
 import logging
@@ -48,7 +53,7 @@ def send_message(text: str, chat_id: Optional[str] = None) -> bool:
 def send_otp_request(case_id: str) -> bool:
     """Notify staff that an OTP is needed for a case."""
     text = (
-        f"🔐 *OTP Required*\n"
+        f"\U0001f510 *OTP Required*\n"
         f"Case: `{case_id}`\n\n"
         f"Reply with the OTP code to proceed."
     )
@@ -58,7 +63,7 @@ def send_otp_request(case_id: str) -> bool:
 def send_otp_received(case_id: str) -> bool:
     """Confirm to staff that the OTP was received and used."""
     text = (
-        f"✅ *OTP Received*\n"
+        f"\u2705 *OTP Received*\n"
         f"Case: `{case_id}`\n\n"
         f"The OTP has been submitted. Continuing processing."
     )
@@ -68,7 +73,7 @@ def send_otp_received(case_id: str) -> bool:
 def send_otp_timeout(case_id: str) -> bool:
     """Notify staff that the OTP wait timed out."""
     text = (
-        f"⏰ *OTP Timeout*\n"
+        f"\u23f0 *OTP Timeout*\n"
         f"Case: `{case_id}`\n\n"
         f"Timed out waiting for OTP. The system will retry."
     )
@@ -91,3 +96,10 @@ def set_webhook(url: str) -> bool:
     except Exception as exc:
         logger.error("Telegram setWebhook failed: %s", exc)
         return False
+
+
+__all__ = [
+    "TELEGRAM_BOT_TOKEN", "TELEGRAM_CHAT_ID", "TELEGRAM_WEBHOOK_SECRET",
+    "configured", "send_message", "send_otp_request", "send_otp_received",
+    "send_otp_timeout", "set_webhook",
+]

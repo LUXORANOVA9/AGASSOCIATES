@@ -41,6 +41,16 @@ htmlcov/
 *.tmp
 *~
 
+# Agent tooling
+.claude/
+.remember/
+.understand-anything/
+.abacus.donotdelete
+
+# Archive leftovers
+*.zip
+/tmp/
+
 # OS
 .DS_Store
 Thumbs.db

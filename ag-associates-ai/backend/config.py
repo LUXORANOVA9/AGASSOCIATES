@@ -45,14 +45,27 @@ LOG_LEVEL = os.getenv("LOG_LEVEL", "INFO").upper()
 # Supabase Auth Configuration
 SUPABASE_JWT_SECRET = os.getenv("SUPABASE_JWT_SECRET", "")
 
-# NeSL mock filing
+# NeSL filing
 NESL_MOCK_DELAY_SEC = float(os.getenv("NESL_MOCK_DELAY_SEC", "3"))
+NESL_USE_MOCK = _env_bool("NESL_USE_MOCK", default=True)
+NESL_API_BASE_URL = os.getenv("NESL_API_BASE_URL", "")
+NESL_API_KEY = os.getenv("NESL_API_KEY", "")
+NESL_CLIENT_ID = os.getenv("NESL_CLIENT_ID", "")
+NESL_CLIENT_SECRET = os.getenv("NESL_CLIENT_SECRET", "")
+NESL_REQUEST_TIMEOUT_SEC = float(os.getenv("NESL_REQUEST_TIMEOUT_SEC", "30"))
 
-# Telegram Bot (OTP notifications to offline staff)
+# Telegram Bot Configuration
 TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN", "")
 TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID", "")
 TELEGRAM_WEBHOOK_SECRET = os.getenv("TELEGRAM_WEBHOOK_SECRET", "")
 TELEGRAM_WEBHOOK_HOST = os.getenv("TELEGRAM_WEBHOOK_HOST", "")
+
+# IGR Portal Configuration
+IGR_PORTAL_USERNAME = os.getenv("IGR_PORTAL_USERNAME", "")
+IGR_PORTAL_PASSWORD = os.getenv("IGR_PORTAL_PASSWORD", "")
+
+# GRAS Portal Configuration
+GRAS_PORTAL_URL = os.getenv("GRAS_PORTAL_URL", "https://gras.mahakosh.gov.in/echallan/")
 
 
 def get_database_url():

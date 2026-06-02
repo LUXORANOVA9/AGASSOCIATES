@@ -1,0 +1,6 @@
+{
+  "name": "AGOS",
+  "description": "AGOS (AG Operations System): Your Digital Workforce for Legal, Banking & Operations Management.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

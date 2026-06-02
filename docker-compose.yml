@@ -71,5 +71,24 @@ services:
     depends_on:
       - backend
 
+  telegram-bot:
+    build:
+      context: ./ag-associates-ai/backend/telegram_bot
+    container_name: luxor9_telegram_bot
+    restart: always
+    environment:
+      TELEGRAM_BOT_TOKEN: ${TELEGRAM_BOT_TOKEN}
+      REDIS_URL: redis://:${REDIS_PASSWORD}@redis:6379
+      TELEGRAM_BOT_PORT: 3003
+      AISHA_API_URL: http://backend:8000/api/aisha/chat
+      N8N_WEBHOOK_KEY: ${N8N_WEBHOOK_KEY}
+      LLM_API_KEY: ${LLM_API_KEY}
+      LLM_BASE_URL: https://api.groq.com/openai/v1
+    ports:
+      - "3003:3003"
+    depends_on:
+      - redis
+      - backend
+
 volumes:
   pgdata:
