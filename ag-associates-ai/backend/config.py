@@ -38,7 +38,7 @@ PDF_ENABLED = _env_bool("PDF_ENABLED", default=False)
 
 # API Configuration
 API_HOST = os.getenv("API_HOST", "0.0.0.0")
-API_PORT = int(os.getenv("API_PORT", "8001"))
+API_PORT = int(os.getenv("API_PORT", "8000"))
 CORS_ALLOWED_ORIGINS = _env_list("CORS_ALLOWED_ORIGINS", "")
 LOG_LEVEL = os.getenv("LOG_LEVEL", "INFO").upper()
 

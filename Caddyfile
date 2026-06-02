@@ -8,7 +8,7 @@
 # AG Platform — LegalTech case management (Vite SPA + Express)
 app.{$DOMAIN} {
 	encode zstd gzip
-	reverse_proxy ag-platform:3000 {
+	reverse_proxy ag-platform:3001 {
 		health_uri /api/health
 		health_interval 30s
 	}

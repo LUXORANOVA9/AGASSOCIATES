@@ -10,11 +10,11 @@ const connectionString =
     ? `postgres://${process.env.DB_POSTGRESDB_USER}:${process.env.DB_POSTGRESDB_PASSWORD}@${process.env.DB_POSTGRESDB_HOST}/${process.env.DB_POSTGRESDB_DATABASE}`
     : undefined);
 
+const connect_ssl = process.env.DB_SSL === "true" ? { rejectUnauthorized: false } : false;
+
 export const pool = new Pool({
   connectionString,
-  ssl: {
-    rejectUnauthorized: false
-  }
+  ssl: connect_ssl,
 });
 
 pool.on('error', (err) => {

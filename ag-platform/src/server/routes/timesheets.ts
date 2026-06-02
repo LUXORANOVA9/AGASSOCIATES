@@ -1,10 +1,28 @@
 import express from 'express';
+import jwt from 'jsonwebtoken';
 import { pool } from '../db.ts';
 import { calculateBillableFee } from '../../lib/billing.ts';
 
 const router = express.Router();
+const DEV_USER_ID = '28a4eb7d-162c-4161-817d-20c30ffa5f46';
+const SUPABASE_JWT_SECRET = process.env.SUPABASE_JWT_SECRET || '';
 
-// Get timesheets for a case or organization
+function setUser(req: express.Request) {
+  if (!SUPABASE_JWT_SECRET) {
+    (req as any).user = { sub: DEV_USER_ID, role: 'admin', email: 'dev@local' };
+    return;
+  }
+  const authHeader = req.headers.authorization;
+  if (authHeader?.startsWith('Bearer ')) {
+    try {
+      const decoded = jwt.verify(authHeader.slice(7), SUPABASE_JWT_SECRET, { algorithms: ['HS256'] }) as any;
+      (req as any).user = { sub: decoded.sub || DEV_USER_ID, role: decoded.app_metadata?.role || 'applicant', email: decoded.email };
+    } catch { /* ignore */ }
+  }
+}
+
+router.use('/timesheets', (req, _res, next) => { setUser(req); next(); });
+
 router.get('/timesheets', async (req, res) => {
   try {
     const { case_id, org_id } = req.query;

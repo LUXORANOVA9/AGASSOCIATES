@@ -1,6 +1,8 @@
 import os
 import secrets
 import importlib.util
+from dotenv import load_dotenv
+load_dotenv()
 
 # Dynamic import to silence IDE warnings when module is not in the system path
 sentry_sdk = None
@@ -211,24 +213,30 @@ _REDIS_URL = os.environ.get("REDIS_URL", "redis://localhost:6379")
 
 @app.post("/api/telegram/webhook")
 async def telegram_webhook(payload: dict):
-    """Receive Telegram bot updates (staff OTP replies).
-
-    Expected format:
-        {
-            "message": {
-                "chat": {"id": 12345},
-                "text": "123456",
-                "reply_to_message": {"text": "..."}  // optional
-            },
-            ...
-        }
-    """
+    """Receive Telegram bot updates (staff OTP replies or /start command)."""
     message = payload.get("message") or {}
     chat_id = str(message.get("chat", {}).get("id", ""))
     text = (message.get("text") or "").strip()
+    from_user = message.get("from", {})
 
     if not chat_id or not text:
         return {"ok": False, "reason": "missing chat_id or text"}
+
+    # /start command — echo chat info back to user
+    if text == "/start":
+        msg = (
+            f"👋 Hello! I'm Ayesha.\n\n"
+            f"Your chat ID: `{chat_id}`\n"
+            f"Username: @{from_user.get('username', 'N/A')}\n"
+            f"Name: {from_user.get('first_name', '')} {from_user.get('last_name', '')}\n\n"
+            f"Send this chat ID to the admin to complete setup."
+        )
+        from telegram_bot import TELEGRAM_BOT_TOKEN
+        import httpx
+        url = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage"
+        async with httpx.AsyncClient(timeout=10.0) as client:
+            await client.post(url, json={"chat_id": int(chat_id), "text": msg, "parse_mode": "Markdown"})
+        return {"ok": True, "handled": "/start"}
 
     # Look up the pending case for this chat
     key = f"otp_waiting:{chat_id}"
@@ -240,7 +248,6 @@ async def telegram_webhook(payload: dict):
             return {"ok": False, "reason": "no pending OTP request for this chat"}
         case_id = case_id.decode("utf-8")
 
-        # Store the OTP where the Executor expects it
         otp_key = f"otp:{case_id}"
         await r.setEx(otp_key, 300, text)
         await r.delete(key)
@@ -251,6 +258,39 @@ async def telegram_webhook(payload: dict):
     except Exception as exc:
         logger.error(f"Telegram webhook error: {exc}")
         return {"ok": False, "reason": str(exc)}
+
+
+@app.get("/api/telegram/get-chat-id")
+async def get_telegram_chat_id():
+    """Poll Telegram for recent messages to discover the chat ID.
+    Useful for initial setup before webhook is registered.
+    """
+    from telegram_bot import TELEGRAM_BOT_TOKEN
+    import httpx
+    url = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/getUpdates"
+    async with httpx.AsyncClient(timeout=10.0) as client:
+        resp = await client.get(url)
+        data = resp.json()
+    if not data.get("ok"):
+        return {"ok": False, "reason": "Telegram API error"}
+    updates = data.get("result", [])
+    if not updates:
+        return {"ok": False, "reason": "No updates found. Message @ag_associates_bot with /start first."}
+    seen = {}
+    for upd in updates:
+        msg = upd.get("message") or {}
+        chat = msg.get("chat") or {}
+        cid = chat.get("id")
+        if cid:
+            seen[cid] = {
+                "chat_id": str(cid),
+                "type": chat.get("type"),
+                "title": chat.get("title"),
+                "username": chat.get("username"),
+                "first_name": chat.get("first_name"),
+                "last_message": (msg.get("text") or "")[:100],
+            }
+    return {"ok": True, "chats": list(seen.values())}
 
 
 @app.post("/api/telegram/setup-webhook")

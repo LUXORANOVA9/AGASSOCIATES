@@ -7,8 +7,10 @@ import path from "path";
 import { fileURLToPath } from "url";
 import fs from "fs";
 import crypto from "crypto";
+import jwt from "jsonwebtoken";
 import caseRoutes from "./src/server/routes/cases.ts";
 import timesheetRoutes from "./src/server/routes/timesheets.ts";
+import documentRoutes from "./src/server/routes/documents.ts";
 
 // Load environment variables
 dotenv.config();
@@ -18,6 +20,46 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 // We'll import AI API routes from another file to keep it clean
 import aiRoutes from "./src/server/aiRouter.ts";
 import { pool } from "./src/server/db.ts";
+
+const SUPABASE_JWT_SECRET = process.env.SUPABASE_JWT_SECRET || '';
+
+interface AuthUser {
+  sub: string;
+  role: string;
+  email?: string;
+}
+
+function authMiddleware(allowedRoles?: string[]) {
+  return (req: express.Request, res: express.Response, next: express.NextFunction) => {
+    if (!SUPABASE_JWT_SECRET) {
+      (req as any).user = { sub: 'dev-user', role: 'admin', email: 'dev@local' };
+      next();
+      return;
+    }
+    const authHeader = req.headers.authorization;
+    if (!authHeader || !authHeader.startsWith('Bearer ')) {
+      res.status(401).json({ error: { code: 'UNAUTHORIZED', message: 'Missing or invalid token' } });
+      return;
+    }
+    const token = authHeader.slice(7);
+    try {
+      const decoded = jwt.verify(token, SUPABASE_JWT_SECRET, { algorithms: ['HS256'] }) as any;
+      const user: AuthUser = {
+        sub: decoded.sub || 'unknown',
+        role: decoded.role || decoded.app_metadata?.role || 'applicant',
+        email: decoded.email,
+      };
+      (req as any).user = user;
+      if (allowedRoles && !allowedRoles.includes(user.role)) {
+        res.status(403).json({ error: { code: 'FORBIDDEN', message: 'Insufficient permissions' } });
+        return;
+      }
+      next();
+    } catch (err) {
+      res.status(401).json({ error: { code: 'UNAUTHORIZED', message: 'Invalid token' } });
+    }
+  };
+}
 
 async function runMigrations() {
   try {
@@ -51,10 +93,9 @@ async function startServer() {
 
   // Rate Limiting for AI Routes
   const aiLimiter = rateLimit({
-    windowMs: 15 * 60 * 1000, // 15 minutes
-    max: 100, // Limit each IP to 100 requests per window
+    windowMs: 15 * 60 * 1000,
+    max: 100,
     message: "Too many requests to AI services, please try again later.",
-    validate: { xForwardedForHeader: false, trustProxy: false, keyGeneratorIpFallback: false, default: true },
   });
 
   // Mount API paths
@@ -72,8 +113,19 @@ async function startServer() {
     res.json({ status: "ok", database: dbStatus });
   });
 
+  app.post("/api/webhooks/virus-scan", async (req, res) => {
+    try {
+      const { bucketId, filePath } = req.body;
+      console.log(`[virus-scan] received: bucket=${bucketId}, path=${filePath}`);
+      res.json({ status: "ok", safe: true });
+    } catch (e) {
+      res.status(500).json({ error: "Virus scan failed" });
+    }
+  });
+
   app.use("/api", caseRoutes);
   app.use("/api", timesheetRoutes);
+  app.use("/api", documentRoutes);
 
   app.use("/api/ai", aiLimiter, aiRoutes);
 

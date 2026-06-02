@@ -1,6 +1,13 @@
 # Dependencies
 node_modules/
 
+# Build outputs
+dist/
+build/
+.next/
+out/
+*.tsbuildinfo
+
 # Python
 __pycache__/
 *.pyc
@@ -12,15 +19,6 @@ venv/
 .venv/
 .ENV
 .ENV.local
-
-# Build outputs
-dist/
-build/
-.next/
-out/
-*.tsbuildinfo
-
-# Environment
 .env
 .env.local
 .env.*

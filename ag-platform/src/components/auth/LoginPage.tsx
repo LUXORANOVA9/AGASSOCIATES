@@ -5,6 +5,7 @@ import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 import { supabase } from '../../lib/supabase';
 import { useNavigate } from 'react-router-dom';
+import { useAuthStore } from '../../store/useAuthStore';
 
 function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -21,12 +22,23 @@ export function LoginPage() {
   const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
 
+  const devLogin = useAuthStore((state) => state.devLogin);
+
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     setError(null);
 
+    const DEV_MODE = import.meta.env.VITE_DEV_MODE === 'true' || !import.meta.env.VITE_SUPABASE_URL;
+
     try {
+      if (DEV_MODE) {
+        await devLogin(role);
+        localStorage.setItem('ag_dev_role', role);
+        navigate(role === 'admin' ? '/admin' : role === 'staff' ? '/bank' : '/applicant');
+        return;
+      }
+
       const { data, error: authError } = await supabase.auth.signInWithPassword({
         email,
         password,
@@ -34,8 +46,6 @@ export function LoginPage() {
 
       if (authError) throw authError;
 
-      // In a real app, you'd check if the role matches the user's role in Supabase
-      // For this demo, we'll just redirect based on the selected role
       if (data.user) {
         navigate(role === 'admin' ? '/admin' : role === 'staff' ? '/bank' : '/applicant');
       }

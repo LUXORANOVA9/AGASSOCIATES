@@ -37,6 +37,15 @@ services:
     restart: always
     env_file:
       - .env
+    environment:
+      DATABASE_HOST: db
+      REDIS_URL: redis://:${REDIS_PASSWORD}@redis:6379
+      N8N_WEBHOOK_KEY: ${N8N_WEBHOOK_KEY}
+      VOICE_ADMIN_KEY: ${VOICE_ADMIN_KEY}
+      TELEGRAM_BOT_TOKEN: ${TELEGRAM_BOT_TOKEN}
+      TELEGRAM_CHAT_ID: ${TELEGRAM_CHAT_ID}
+      TELEGRAM_WEBHOOK_HOST: ${TELEGRAM_WEBHOOK_HOST}
+      ENVIRONMENT: ${ENVIRONMENT:-development}
     ports:
       - "8000:8000"
     depends_on:
@@ -55,8 +64,10 @@ services:
     restart: always
     env_file:
       - .env
+    environment:
+      PORT: 3001
     ports:
-      - "3000:3000"
+      - "3001:3001"
     depends_on:
       - backend
 

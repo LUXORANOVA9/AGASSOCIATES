@@ -1,7 +1,7 @@
 services:
   # FastAPI Backend (Docker)
   - type: web
-    name: luxor9-backend
+    name: ag-backend
     runtime: docker
     dockerContext: ./ag-associates-ai/backend
     dockerfilePath: ./ag-associates-ai/backend/Dockerfile
@@ -9,44 +9,67 @@ services:
     plan: standard
     healthCheckPath: /health
     envVars:
-      - key: DATABASE_URL
+      - key: DATABASE_HOST
         fromDatabase:
-          name: luxor9-db
-          property: connectionString
+          name: ag-db
+          property: host
+      - key: DATABASE_PORT
+        fromDatabase:
+          name: ag-db
+          property: port
+      - key: DATABASE_NAME
+        fromDatabase:
+          name: ag-db
+          property: database
+      - key: DATABASE_USER
+        fromDatabase:
+          name: ag-db
+          property: user
+      - key: DATABASE_PASSWORD
+        fromDatabase:
+          name: ag-db
+          property: password
       - key: REDIS_URL
         fromService:
           type: redis
-          name: luxor9-redis
+          name: ag-redis
           property: connectionString
-      - key: AWS_ACCESS_KEY_ID
-        sync: false
-      - key: AWS_SECRET_ACCESS_KEY
-        sync: false
+      - key: LLM_BASE_URL
+        value: https://generativelanguage.googleapis.com/v1beta/openai
+      - key: LLM_MODEL_NAME
+        value: gemini-2.0-flash
+      - key: PDF_ENABLED
+        value: "true"
+      - key: ENVIRONMENT
+        value: production
 
-  # Next.js / Vite Frontend (Docker)
+  # AG Platform (Express + Vite)
   - type: web
-    name: luxor9-frontend
+    name: ag-platform
     runtime: docker
     dockerContext: ./ag-platform
     dockerfilePath: ./ag-platform/Dockerfile
     region: singapore
     plan: standard
+    healthCheckPath: /api/health
     envVars:
-      - key: NEXT_PUBLIC_API_URL
+      - key: VITE_API_BASE_URL
+        value: /api
+      - key: AI_BACKEND_URL
         fromService:
           type: web
-          name: luxor9-backend
-          property: url
+          name: ag-backend
+          property: hostport
 
   # Redis Cache
   - type: redis
-    name: luxor9-redis
+    name: ag-redis
     region: singapore
     plan: free
 
 databases:
-  # PostgreSQL DB (Render Native - Supports pgvector natively with pg 15)
-  - name: luxor9-db
+  - name: ag-db
     region: singapore
     plan: standard
-    postgresMajorVersion: "15"
+    postgresMajorVersion: "16"
+    databaseName: ag_platform
