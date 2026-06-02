@@ -1,0 +1,17 @@
+name: Install SSH Deploy Key
+on: workflow_dispatch
+jobs:
+  install-key:
+    runs-on: self-hosted
+    steps:
+      - name: Add public key to authorized_keys
+        run: |
+          set -e
+          mkdir -p ~deploy/.ssh
+          echo 'ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEopV2TByo/IsqZFactZQg2w7d03ttz5oH20wz8eIuhH opencode-deploy-key' >> ~deploy/.ssh/authorized_keys
+          sort -u ~deploy/.ssh/authorized_keys -o ~deploy/.ssh/authorized_keys
+          chmod 600 ~deploy/.ssh/authorized_keys
+          chown -R deploy:deploy ~deploy/.ssh
+          echo "Key installed successfully"
+          echo "Authorized keys:"
+          cat ~deploy/.ssh/authorized_keys
