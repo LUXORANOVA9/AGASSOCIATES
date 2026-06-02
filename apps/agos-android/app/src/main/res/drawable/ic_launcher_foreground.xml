@@ -1,0 +1,35 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- Outer concentric circular radar representing monitor scope -->
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#10B981"
+        android:strokeWidth="2"
+        android:pathData="M 54,24 A 30,30 0 1,1 53.9,24 Z" />
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#3B82F6"
+        android:strokeWidth="1.5"
+        android:strokeLineCap="round"
+        android:pathData="M 54,14 A 40,40 0 1,1 53.9,14 Z" />
+    <!-- Deploy symbol (Triangle rocket with central energy core) -->
+    <path
+        android:fillColor="#10B981"
+        android:pathData="M 54,34 L 72,66 L 54,58 L 36,66 Z" />
+    <!-- Dynamic horizontal pulses -->
+    <path
+        android:fillColor="#3B82F6"
+        android:pathData="M 46,72 L 62,72"
+        android:strokeWidth="2.5"
+        android:strokeColor="#3B82F6"
+        android:strokeLineCap="round"/>
+    <path
+        android:fillColor="#6366F1"
+        android:pathData="M 50,78 L 58,78"
+        android:strokeWidth="2"
+        android:strokeColor="#6366F1"
+        android:strokeLineCap="round"/>
+</vector>

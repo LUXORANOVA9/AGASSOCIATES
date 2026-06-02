@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Send, AlertCircle, Loader2 } from 'lucide-react';
+import { Send, AlertCircle, Loader2, History, X } from 'lucide-react';
 import { Case, CaseStatus } from '../../types/domain';
 
 export function AdvisorCockpit() {
@@ -211,7 +211,18 @@ export function AdvisorCockpit() {
 
 function CaseCard({ kase, onUpdateStatus }: { kase: Case, onUpdateStatus: (id: string, status: CaseStatus) => void }) {
   const isUrgent = kase.sla_deadline && new Date(kase.sla_deadline) < new Date();
-  
+  const [timeline, setTimeline] = useState<any[]>([]);
+  const [showTimeline, setShowTimeline] = useState(false);
+
+  useEffect(() => {
+    if (showTimeline) {
+      fetch(`/api/cases/${kase.id}/timeline`)
+        .then(r => r.ok ? r.json() : [])
+        .then(setTimeline)
+        .catch(() => setTimeline([]));
+    }
+  }, [showTimeline, kase.id]);
+
   const handleNextStatus = () => {
     let nextStatus = kase.status;
     switch(kase.status) {
@@ -259,6 +270,14 @@ function CaseCard({ kase, onUpdateStatus }: { kase: Case, onUpdateStatus: (id: s
         <span className="text-xs text-slate-500 line-clamp-1">{kase.status.replace(/_/g, ' ')}</span>
         <div className="flex gap-2">
           <button 
+            onClick={() => setShowTimeline(!showTimeline)}
+            className="text-slate-400 hover:text-slate-600 p-1.5 rounded-md transition" 
+            aria-label="View timeline"
+            title="View Timeline"
+          >
+            {showTimeline ? <X size={14} /> : <History size={14} />}
+          </button>
+          <button 
             onClick={handleNextStatus}
             className="bg-indigo-600 hover:bg-indigo-700 text-white p-1.5 rounded-md transition focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" 
             aria-label={`Advance status for ${kase.borrower_name}`}
@@ -268,6 +287,21 @@ function CaseCard({ kase, onUpdateStatus }: { kase: Case, onUpdateStatus: (id: s
           </button>
         </div>
       </footer>
+      {showTimeline && timeline.length > 0 && (
+        <div className="mt-3 pt-3 border-t border-slate-100 space-y-2">
+          <p className="text-xs font-semibold text-slate-600 uppercase tracking-wider">Activity Log</p>
+          {timeline.map((entry: any, i: number) => (
+            <div key={entry.id || i} className="flex items-start gap-2 text-xs text-slate-600">
+              <span className="w-2 h-2 rounded-full bg-indigo-400 mt-1 shrink-0" />
+              <div>
+                <span className="font-medium">{entry.status_from?.replace(/_/g, ' ')} → {entry.status_to?.replace(/_/g, ' ')}</span>
+                {entry.notes && <p className="text-slate-400">{entry.notes}</p>}
+                <p className="text-slate-400">{entry.created_at ? new Date(entry.created_at).toLocaleString() : ''}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
     </article>
   );
 }

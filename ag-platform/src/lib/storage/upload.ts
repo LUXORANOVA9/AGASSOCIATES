@@ -50,13 +50,31 @@ export async function uploadFileResumable(
       },
       onSuccess: async function () {
         try {
-          // 2. Trigger Virus Scan web hook (Placeholder)
+          // 2. Trigger Virus Scan web hook
           await fetch("/api/webhooks/virus-scan", {
             method: "POST",
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ bucketId, filePath }),
           }).catch(() => console.log("Virus scan webhook failed/ignored"));
 
-          // 3. Generate Thumbnail (Placeholder, handled asynchronously by edge func usually)
+          // 3. Register document in platform database (links to case)
+          if (projectId) {
+            await fetch(`/api/cases/${projectId}/documents`, {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${session.session.access_token}`,
+              },
+              body: JSON.stringify({
+                name: file.name,
+                storage_path: filePath,
+                bucket_id: bucketId,
+                content_type: file.type,
+                size_bytes: file.size,
+                org_id: organizationId,
+              }),
+            }).catch(() => console.log("Document registration in platform DB skipped"));
+          }
 
           // 4. Create DB Reference & Handle Versioning
           let version = 1;

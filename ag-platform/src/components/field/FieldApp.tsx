@@ -9,12 +9,18 @@ interface QueueItem {
   status: 'pending' | 'syncing' | 'completed';
 }
 
+interface CaseOption {
+  id: string;
+  case_number: string;
+  borrower_name: string;
+}
+
 export const FieldApp: React.FC = () => {
   const [isOnline, setIsOnline] = useState(navigator.onLine);
   const [queue, setQueue] = useState<QueueItem[]>([]);
   const [selectedCaseId, setSelectedCaseId] = useState('');
+  const [cases, setCases] = useState<CaseOption[]>([]);
 
-  // Setup online/offline listeners
   useEffect(() => {
     const handleOnline = () => setIsOnline(true);
     const handleOffline = () => setIsOnline(false);
@@ -22,11 +28,17 @@ export const FieldApp: React.FC = () => {
     window.addEventListener('online', handleOnline);
     window.addEventListener('offline', handleOffline);
     
-    // Load queue from localStorage
     const savedQueue = localStorage.getItem('field_offline_queue');
     if (savedQueue) {
       setQueue(JSON.parse(savedQueue));
     }
+
+    fetch('/api/cases')
+      .then(r => r.json())
+      .then(data => {
+        if (Array.isArray(data)) setCases(data);
+      })
+      .catch(() => {});
 
     return () => {
       window.removeEventListener('online', handleOnline);
@@ -34,12 +46,10 @@ export const FieldApp: React.FC = () => {
     };
   }, []);
 
-  // Save queue to localStorage whenever it changes
   useEffect(() => {
     localStorage.setItem('field_offline_queue', JSON.stringify(queue));
   }, [queue]);
 
-  // Attempt sync when coming online
   useEffect(() => {
     if (isOnline && queue.some(item => item.status === 'pending')) {
       syncQueue();
@@ -68,7 +78,6 @@ export const FieldApp: React.FC = () => {
       setQueue(prev => [...prev, newItem]);
       
       if (isOnline) {
-        // Just triggering effect
         setTimeout(syncQueue, 100);
       }
     };
@@ -89,13 +98,12 @@ export const FieldApp: React.FC = () => {
         // Mark as completed
         setQueue(prev => prev.map(q => q.id === item.id ? { ...q, status: 'completed' } : q));
         
-        // Optionally update case state to "DOCUMENTS_COLLECTED"
         if (isOnline) {
             try {
                 await fetch(`/api/cases/${item.caseId}/status`, {
                     method: 'PUT',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ status: 'DOCUMENTS_COLLECTED', notes: 'Documents synced from field app' })
+                    body: JSON.stringify({ status: 'DOCUMENT_COLLECTION', notes: 'Documents synced from field app' })
                 });
             } catch (e) {
                 console.error("Failed to update case status via sync");
@@ -133,9 +141,9 @@ export const FieldApp: React.FC = () => {
           onChange={(e) => setSelectedCaseId(e.target.value)}
         >
           <option value="">-- Select Case --</option>
-          <option value="AGA-2024-00123">AGA-2024-00123 (Rahul Patil)</option>
-          <option value="AGA-2024-00124">AGA-2024-00124 (Sneha Sharma)</option>
-          <option value="AGA-2024-00125">AGA-2024-00125 (Amit Desai)</option>
+          {cases.map(c => (
+            <option key={c.id} value={c.id}>{c.case_number} ({c.borrower_name})</option>
+          ))}
         </select>
       </div>
 

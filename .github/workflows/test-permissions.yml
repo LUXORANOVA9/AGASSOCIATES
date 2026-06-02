@@ -1,0 +1,8 @@
+name: Test Permissions
+on: workflow_dispatch
+permissions: write-all
+jobs:
+  test:
+    runs-on: self-hosted
+    steps:
+    - run: echo "permissions OK"

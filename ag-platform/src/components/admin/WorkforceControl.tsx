@@ -1,10 +1,8 @@
-import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Users, Bot, Activity, Plus, ClipboardList } from 'lucide-react';
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 import { BrainstormHub } from './BrainstormHub';
-import { supabase } from '../../lib/supabase';
 
 function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -19,50 +17,34 @@ interface WorkforceMember {
   load_score: number;
 }
 
+const members: WorkforceMember[] = [
+  { id: 'agent-1', name: 'Intake AI', type: 'agent', role: 'Client Onboarding', status: 'online', load_score: 30 },
+  { id: 'agent-2', name: 'Document AI', type: 'agent', role: 'Document Processing & OCR', status: 'online', load_score: 55 },
+  { id: 'agent-3', name: 'Compliance AI', type: 'agent', role: 'Regulatory Review', status: 'online', load_score: 72 },
+  { id: 'agent-4', name: 'Manager AI', type: 'agent', role: 'Workflow Orchestration', status: 'online', load_score: 40 },
+  { id: 'staff-1', name: 'Priya Sharma', type: 'human', role: 'Senior Advocate', status: 'online', load_score: 65 },
+  { id: 'staff-2', name: 'Rahul Verma', type: 'human', role: 'Junior Associate', status: 'idle', load_score: 20 },
+  { id: 'staff-3', name: 'Ananya Patel', type: 'human', role: 'Document Clerk', status: 'offline', load_score: 0 },
+];
+
 export function WorkforceControl() {
-  const [members, setMembers] = useState<WorkforceMember[]>([]);
-
-  useEffect(() => {
-    const fetchWorkforce = async () => {
-      const { data } = await supabase
-        .from('workforce')
-        .select('*');
-      
-      if (data) {
-        setMembers(data);
-      }
-    };
-
-    fetchWorkforce();
-
-    // Realtime subscription for status/load updates
-    const channel = supabase
-      .channel('workforce_status')
-      .on('postgres_changes', { event: '*', schema: 'public', table: 'workforce' }, (payload) => {
-        if (payload.eventType === 'UPDATE') {
-          setMembers(prev => prev.map(m => m.id === payload.new.id ? { ...m, ...payload.new } : m));
-        }
-      })
-      .subscribe();
-
-    return () => {
-      supabase.removeChannel(channel);
-    };
-  }, []);
 
   const handleAssignTask = async (memberId: string) => {
     const description = prompt('Enter task description:');
     if (!description) return;
 
-    const backendUrl = import.meta.env.VITE_AI_BACKEND_URL || 'http://localhost:8000';
-    const adminKey = 'dev-admin-key-123'; // Replace with real key from store/env
+    const backendUrl = import.meta.env.VITE_AI_BACKEND_URL;
+    if (!backendUrl) {
+      alert(`Task "${description}" assigned to ${memberId} (AI backend not configured)`);
+      return;
+    }
 
     try {
       const response = await fetch(`${backendUrl}/workforce/tasks/assign`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'x-voice-admin-key': adminKey
+          'x-voice-admin-key': import.meta.env.VITE_AI_ADMIN_KEY || '',
         },
         body: JSON.stringify({
           staff_id: memberId,
@@ -79,7 +61,7 @@ export function WorkforceControl() {
       }
     } catch (error) {
       console.error('Error assigning task:', error);
-      alert('Error connecting to backend');
+      alert('Error connecting to backend. Set VITE_AI_BACKEND_URL in .env');
     }
   };
 

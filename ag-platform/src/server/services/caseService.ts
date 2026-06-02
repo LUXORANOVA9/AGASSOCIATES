@@ -33,12 +33,23 @@ export const CaseService = {
     return res.rows[0];
   },
 
+  async getCaseTimeline(id: string): Promise<any[]> {
+    const res = await pool.query(
+      'SELECT * FROM case_timeline WHERE case_id = $1 ORDER BY created_at DESC',
+      [id]
+    );
+    return res.rows;
+  },
+
   async updateStatus(id: string, status: CaseStatus, userId: string, notes?: string): Promise<void> {
     const client = await pool.connect();
     try {
       await client.query('BEGIN');
       
       const currentCase = await client.query('SELECT status FROM cases WHERE id = $1', [id]);
+      if (!currentCase.rows[0]) {
+        throw new Error('Case not found');
+      }
       const oldStatus = currentCase.rows[0].status;
 
       await client.query('UPDATE cases SET status = $1 WHERE id = $2', [status, id]);

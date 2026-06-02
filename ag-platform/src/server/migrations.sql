@@ -13,14 +13,32 @@ END $$;
 
 -- CASE TYPES ENUM
 DO $$ BEGIN
-    CREATE TYPE case_type AS ENUM (
-        'TITLE_SEARCH', 'LEGAL_VETTING', 'CTC', 'PROPERTY_REGISTRATION', 
-        'MORTGAGE_REGISTRATION', 'INTIMATION_MORTGAGE', 'FRANKING', 
-        'BALANCE_TRANSFER', 'PUBLIC_NOTICE', 'POWER_OF_ATTORNEY', 
-        'LEAVE_AND_LICENSE', 'GIFT_DEED', 'MARKET_VALUATION'
-    );
+CREATE TYPE case_type AS ENUM (
+    'TITLE_SEARCH',
+    'LEGAL_VETTING',
+    'CTC',
+    'PROPERTY_REGISTRATION',
+    'MORTGAGE_REGISTRATION',
+    'INTIMATION_MORTGAGE',
+    'FRANKING',
+    'BALANCE_TRANSFER',
+    'PUBLIC_NOTICE',
+    'POWER_OF_ATTORNEY',
+    'LEAVE_AND_LICENSE',
+    'GIFT_DEED',
+    'MARKET_VALUATION'
+);
 EXCEPTION
     WHEN duplicate_object THEN null;
+END $$;
+
+-- Extend case_type enum with financial types (runs on existing DB too)
+DO $$ BEGIN
+    ALTER TYPE case_type ADD VALUE IF NOT EXISTS 'HOME_LOAN';
+    ALTER TYPE case_type ADD VALUE IF NOT EXISTS 'LOAN_AGAINST_PROPERTY';
+    ALTER TYPE case_type ADD VALUE IF NOT EXISTS 'MACHINERY_LOAN';
+    ALTER TYPE case_type ADD VALUE IF NOT EXISTS 'PROJECT_LOAN';
+EXCEPTION WHEN others THEN null;
 END $$;
 
 -- CASE STATUS ENUM
@@ -130,6 +148,42 @@ CREATE TABLE IF NOT EXISTS timesheets (
     created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );
 
+-- DOCUMENTS (files linked to cases)
+CREATE TABLE IF NOT EXISTS documents (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    case_id UUID REFERENCES cases(id) ON DELETE CASCADE NOT NULL,
+    org_id UUID REFERENCES organizations(id) NOT NULL,
+    uploader_id UUID REFERENCES profiles(id),
+    name TEXT NOT NULL,
+    storage_path TEXT NOT NULL,
+    bucket_id TEXT NOT NULL DEFAULT 'case-documents',
+    content_type TEXT,
+    size_bytes BIGINT DEFAULT 0,
+    category TEXT,
+    version_number INTEGER DEFAULT 1,
+    parent_file_id UUID REFERENCES documents(id),
+    uploaded_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+
+CREATE INDEX IF NOT EXISTS idx_documents_case_id ON documents(case_id);
+CREATE INDEX IF NOT EXISTS idx_documents_org_id ON documents(org_id);
+
+-- FILES (Supabase mirror for storage uploads)
+CREATE TABLE IF NOT EXISTS files (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    organization_id UUID REFERENCES organizations(id),
+    project_id UUID,
+    uploader_id TEXT,
+    name TEXT NOT NULL,
+    storage_path TEXT NOT NULL,
+    bucket_id TEXT NOT NULL DEFAULT 'case-documents',
+    size_bytes BIGINT DEFAULT 0,
+    content_type TEXT,
+    version_number INTEGER DEFAULT 1,
+    parent_file_id UUID,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+
 -- TRIGGERS for updated_at
 CREATE OR REPLACE FUNCTION update_updated_at_column()
 RETURNS TRIGGER AS $$
@@ -143,16 +197,16 @@ DROP TRIGGER IF EXISTS update_cases_updated_at ON cases;
 CREATE TRIGGER update_cases_updated_at BEFORE UPDATE ON cases FOR EACH ROW EXECUTE PROCEDURE update_updated_at_column();
 
 -- SEED DATA
-INSERT INTO organizations (name) VALUES ('AG Associates HQs') ON CONFLICT DO NOTHING;
+INSERT INTO organizations (id, name) VALUES ('7f45dc5f-6bef-4fae-b46a-a2306e69936d', 'AG Associates HQs') ON CONFLICT DO NOTHING;
 
-INSERT INTO banks (name, short_code, type) VALUES 
-('HDFC Bank', 'HDFC', 'BANK'),
-('ICICI Bank', 'ICICI', 'BANK'),
-('State Bank of India', 'SBI', 'BANK'),
-('LIC Housing Finance', 'LICHFL', 'NBFC')
+INSERT INTO banks (id, name, short_code, type) VALUES 
+('7407ac8f-0cb7-434e-994c-4329a11939a7', 'HDFC Bank', 'HDFC', 'BANK'),
+('2a32c22f-e7a2-487c-b9de-2bfd51455080', 'ICICI Bank', 'ICICI', 'BANK'),
+('f4bfbc33-985d-4368-9b95-85c9bb6bf77f', 'State Bank of India', 'SBI', 'BANK'),
+('acb64097-628f-45e9-8d66-88c21d410dee', 'LIC Housing Finance', 'LICHFL', 'NBFC')
 ON CONFLICT (short_code) DO NOTHING;
 
--- Create a internal principal profile
-INSERT INTO profiles (full_name, role, org_id) 
-SELECT 'Head Advocate', 'PRINCIPAL', id FROM organizations LIMIT 1
+-- Create a internal principal profile (fixed ID for dev consistency)
+INSERT INTO profiles (id, full_name, role, org_id) 
+SELECT '28a4eb7d-162c-4161-817d-20c30ffa5f46', 'Head Advocate', 'PRINCIPAL', id FROM organizations LIMIT 1
 ON CONFLICT DO NOTHING;

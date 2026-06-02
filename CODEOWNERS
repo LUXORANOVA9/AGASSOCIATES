@@ -1,0 +1,28 @@
+# AG ASSOCIATES — Code Ownership
+# Each line is a file pattern followed by one or more owners.
+# Learn more: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+
+# Default owner for everything
+* @LUXORANOVA9
+
+# AI Pipeline (Python backend)
+/ag-associates-ai/backend/       @LUXORANOVA9
+
+# AI Dashboard (Next.js frontend)
+/ag-associates-ai/frontend/      @LUXORANOVA9
+
+# Platform (TypeScript Turborepo)
+/ag-platform/                    @LUXORANOVA9
+
+# Intake API
+/ag-platform/services/intake-api/ @LUXORANOVA9
+
+# Documentation + ADRs
+/docs/                           @LUXORANOVA9
+
+# Prototypes
+/prototype/                      @LUXORANOVA9
+
+# CI/CD, governance, build config
+/.github/                        @LUXORANOVA9
+/Makefile                        @LUXORANOVA9
