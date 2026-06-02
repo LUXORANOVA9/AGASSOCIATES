@@ -21,7 +21,7 @@ permissions:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_OWNER: luxoranova9
+  IMAGE_OWNER: rajkhemani
 
 jobs:
   build-and-push:
