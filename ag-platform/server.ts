@@ -54,7 +54,7 @@ async function startServer() {
     windowMs: 15 * 60 * 1000, // 15 minutes
     max: 100, // Limit each IP to 100 requests per window
     message: "Too many requests to AI services, please try again later.",
-    validate: { xForwardedForHeader: false, trustProxy: false, keyGeneratorIpFallback: false, default: true },
+    validate: { xForwardedForHeader: false, trustProxy: false, default: true },
   });
 
   // Mount API paths

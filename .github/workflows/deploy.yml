@@ -69,16 +69,22 @@ jobs:
         run: |
           echo -n "Aisha: "
           AISHA=$(docker run --rm --network ag-prod_ag_net \
-            curlimages/curl:latest -s -X POST http://ai-backend:8000/api/aisha/chat \
+            curlimages/curl:latest -sS -X POST http://ai-backend:8000/api/aisha/chat \
             -H "Content-Type: application/json" \
-            -d '{"message":"hello","user_id":"smoke_test","chat_id":"smoke"}' 2>/dev/null)
+            -d '{"message":"hello","user_id":"smoke_test","chat_id":"smoke"}')
           echo "$AISHA" | python3 -c "import sys,json; print(json.load(sys.stdin).get('response','')[:80])"
 
       - name: Smoke test — API health (via Docker network)
         run: |
+          set -euo pipefail
           echo -n "Health: "
-          docker run --rm --network ag-prod_ag_net \
-            curlimages/curl:latest -sf http://ai-backend:8000/health 2>/dev/null && echo " OK"
+          # `-sf` makes curl fail on HTTP errors and silence progress. Capture
+          # the response body and assert on it, so a connect failure OR a
+          # non-200 response both fail this step.
+          BODY=$(docker run --rm --network ag-prod_ag_net \
+            curlimages/curl:latest -sf http://ai-backend:8000/health)
+          echo "$BODY"
+          echo "$BODY" | python3 -c "import sys,json; d=json.load(sys.stdin); assert d.get('status')=='ok', d"
 
       - name: Deploy summary
         run: |

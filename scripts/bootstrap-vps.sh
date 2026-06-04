@@ -77,12 +77,23 @@ if [[ ! -f "$SRV_DIR/.env" ]]; then
 fi
 
 log "7/8 Installing GitHub Actions self-hosted runner"
+# The deploy workflow (.github/workflows/deploy.yml) runs on a
+# `runs-on: [self-hosted, linux, x64]` runner installed on THIS VPS.
+# If the runner is missing, every push to main will sit queued forever
+# with "no matching runner". Fail the bootstrap loudly so this gets
+# fixed at install time, not three hours into debugging a stuck deploy.
 if [[ -z "${GH_PAT:-}" ]]; then
-  echo ">>> WARNING: GH_PAT not set. Skipping self-hosted runner setup."
-  echo ">>> To set up later: sudo -u $DEPLOY_USER bash $SRV_DIR/repo/scripts/setup-runner.sh <github-pat>"
-else
-  bash "$SRV_DIR/repo/scripts/setup-runner.sh" "$GH_PAT" "$DEPLOY_USER"
+  echo ">>> FATAL: GH_PAT is not set." >&2
+  echo ">>>" >&2
+  echo ">>> The .github/workflows/deploy.yml workflow runs on a self-hosted" >&2
+  echo ">>> runner installed on this VPS. Without that runner, every push to" >&2
+  echo ">>> main will queue indefinitely with 'no matching runner available'." >&2
+  echo ">>>" >&2
+  echo ">>> Re-run with:  curl -fsSL .../bootstrap-vps.sh | sudo GH_PAT=<github-pat-with-repo-scope> bash -s" >&2
+  echo ">>> Or set it up after bootstrap:  sudo -u $DEPLOY_USER bash $SRV_DIR/repo/scripts/setup-runner.sh <github-pat>" >&2
+  exit 1
 fi
+bash "$SRV_DIR/repo/scripts/setup-runner.sh" "$GH_PAT" "$DEPLOY_USER"
 
 log "8/8 Pre-pulling base images to warm the layer cache"
 sudo -u "$DEPLOY_USER" docker pull caddy:2-alpine || true
