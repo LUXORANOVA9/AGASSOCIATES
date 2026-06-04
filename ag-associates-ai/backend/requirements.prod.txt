@@ -26,6 +26,10 @@ langsmith>=0.3.0
 # Workflow engine
 langgraph>=1.0.0
 
+# CrewAI (high-level orchestrator over the LangGraph pipeline; the
+# 4 agents of the Intake Crew per design.md §2)
+crewai>=0.80.0
+
 # Stripe payment
 stripe>=11.0.0
 

@@ -9,6 +9,7 @@ import fs from "fs";
 import crypto from "crypto";
 import caseRoutes from "./src/server/routes/cases.ts";
 import timesheetRoutes from "./src/server/routes/timesheets.ts";
+import teamRoutes from "./src/server/routes/team.ts";
 
 // Load environment variables
 dotenv.config();
@@ -74,6 +75,7 @@ async function startServer() {
 
   app.use("/api", caseRoutes);
   app.use("/api", timesheetRoutes);
+  app.use("/api", teamRoutes);
 
   app.use("/api/ai", aiLimiter, aiRoutes);
 

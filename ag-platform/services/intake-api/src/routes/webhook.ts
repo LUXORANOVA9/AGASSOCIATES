@@ -3,7 +3,8 @@ import { ZodTypeProvider } from 'fastify-type-provider-zod';
 import { z } from 'zod';
 import { intakePayloadSchema } from '../schemas/intake.schema';
 import { invalidateNOICache, redisClient } from '../services/redis.service';
-import { createCase, getOrganizationByBank } from '../services/supabase.service';
+import { createCase, findOnDutyStaff, getOrganizationByBank } from '../services/supabase.service';
+import { broadcastOtp } from '../services/telegram.service';
 
 export default async function webhookRoutes(fastify: FastifyInstance) {
   const typedFastify = fastify.withTypeProvider<ZodTypeProvider>();
@@ -78,7 +79,11 @@ export default async function webhookRoutes(fastify: FastifyInstance) {
   );
 
   // 3. SMS Webhook (for OTP Bridge)
-  // Receives incoming SMS from Android Forwarder / Twilio / SMS Gateway
+  // Receives incoming SMS from Android Forwarder / Twilio / SMS Gateway.
+  // The optional org_id lets the SMS Forwarder app scope the broadcast to
+  // one firm. If absent, intake-api logs a warning and the OTP is still
+  // pushed to Redis for the Telegram bot to claim — but no Telegram push
+  // is performed (broadcast-to-all-orgs is a privacy footgun).
   typedFastify.post(
     '/sms-incoming',
     {
@@ -87,12 +92,14 @@ export default async function webhookRoutes(fastify: FastifyInstance) {
           text: z.string(),
           from: z.string().optional(),
           sent_timestamp: z.string().optional(),
+          org_id: z.string().uuid().optional(),
+          bank_id: z.string().uuid().optional(),
         }),
       },
     },
     async (request, reply) => {
-      const { text, from } = request.body;
-      fastify.log.info({ from, preview: text.slice(0, 60) }, 'SMS received');
+      const { text, from, org_id, bank_id } = request.body;
+      fastify.log.info({ from, preview: text.slice(0, 60), org_id }, 'SMS received');
 
       // Parse OTP code (4-8 digits)
       const otpMatch = text.match(/\b(\d{4,8})\b/);
@@ -151,10 +158,43 @@ export default async function webhookRoutes(fastify: FastifyInstance) {
         sender: from || 'unknown',
       }));
 
+      // Push to on-duty staff via Telegram (only if org_id was provided).
+      // Without org_id, the staff are unscoped — refuse to broadcast.
+      let pushResults: { ok: number; failed: number; total: number } = { ok: 0, failed: 0, total: 0 };
+      if (org_id) {
+        try {
+          const staff = await findOnDutyStaff(org_id, bank_id ?? null);
+          if (staff.length > 0) {
+            const results = await broadcastOtp(staff, otpCode, detectedPortal, text);
+            pushResults = {
+              ok: results.filter((r) => r.ok).length,
+              failed: results.filter((r) => !r.ok).length,
+              total: results.length,
+            };
+            fastify.log.info(
+              { org_id, pushResults },
+              'OTP pushed to on-duty staff via Telegram'
+            );
+          } else {
+            fastify.log.warn(
+              { org_id },
+              'No on-duty staff with Telegram binding for org; OTP is in Redis only'
+            );
+          }
+        } catch (err) {
+          fastify.log.error({ err, org_id }, 'Failed to push OTP to staff');
+        }
+      } else {
+        fastify.log.warn(
+          'SMS Forwarder did not include org_id; OTP is in Redis only (no Telegram push)'
+        );
+      }
+
       return reply.status(200).send({
         status: 'success',
         otp: otpCode,
         portal: detectedPortal,
+        push: pushResults,
       });
     }
   );
