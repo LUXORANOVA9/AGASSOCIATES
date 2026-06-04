@@ -16,10 +16,13 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     name: 'AG Associates Field',
     slug: 'ag-associates-field',
     version: '0.1.0',
+    runtimeVersion: { policy: 'appVersion' },
     orientation: 'portrait',
     icon: './assets/icon.png',
     scheme: 'agfield',
     userInterfaceStyle: 'automatic',
+    privacy: 'unlisted',
+    primaryColor: '#4f46e5',
     splash: {
         image: './assets/splash.png',
         resizeMode: 'contain',
@@ -28,6 +31,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     ios: {
         supportsTablet: false,
         bundleIdentifier: 'com.agassociates.field',
+        buildNumber: '1',
         infoPlist: {
             NSCameraUsageDescription:
                 'AG Associates uses the camera to capture property documents in the field.',
@@ -35,10 +39,12 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
                 'AG Associates tags case status updates and document captures with your location while you are on duty.',
             NSPhotoLibraryUsageDescription:
                 'Optional: select existing photos as document evidence.',
+            ITSAppUsesNonExemptEncryption: false,
         },
     },
     android: {
         package: 'com.agassociates.field',
+        versionCode: 1,
         adaptiveIcon: {
             foregroundImage: './assets/adaptive-icon.png',
             backgroundColor: '#0f172a',
@@ -48,6 +54,14 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
             'ACCESS_FINE_LOCATION',
             'ACCESS_COARSE_LOCATION',
             'POST_NOTIFICATIONS',
+        ],
+        // Block obvious data exfil paths. The mobile app never needs to
+        // read external storage, write contacts, or read the call log.
+        blockedPermissions: [
+            'READ_CONTACTS',
+            'WRITE_CONTACTS',
+            'READ_CALL_LOG',
+            'WRITE_CALL_LOG',
         ],
     },
     plugins: [
@@ -79,4 +93,8 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
             // populated by `eas init`
         },
     },
+    updates: {
+        url: 'https://u.expo.dev/__EAS_PROJECT_ID__',
+    },
+    assetBundlePatterns: ['**/*'],
 });

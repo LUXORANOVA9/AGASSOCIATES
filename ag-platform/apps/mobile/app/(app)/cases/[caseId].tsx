@@ -9,12 +9,13 @@ import {
     EmptyState,
     ErrorState,
     SkeletonList,
+    withErrorBoundary,
 } from '../../../components/ui';
 
 // Thin orchestrator. Body is sectioned: header, status board, documents list.
 // Each section is its own component so it stays under the 200-line ceiling
 // and so reordering doesn't ripple through.
-export default function CaseDetail() {
+function CaseDetail() {
     const params = useLocalSearchParams<{ caseId: string }>();
     const caseId = typeof params.caseId === 'string' ? params.caseId : undefined;
 
@@ -92,3 +93,5 @@ export default function CaseDetail() {
         </ScrollView>
     );
 }
+
+export default withErrorBoundary(CaseDetail);

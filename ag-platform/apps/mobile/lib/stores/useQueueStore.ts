@@ -5,6 +5,7 @@ import type { Mutation, MutationStatus } from '../queue/types';
 
 interface QueueState {
     items: Mutation[];
+    lastFlushedAt: string | null;
     enqueue: (m: Mutation) => void;
     markStatus: (
         eventId: string,
@@ -12,6 +13,7 @@ interface QueueState {
         patch?: { lastError?: string; attempts?: number },
     ) => void;
     remove: (eventId: string) => void;
+    markFlushed: () => void;
     clearCompleted: () => void;
     reset: () => void;
 }
@@ -20,6 +22,7 @@ export const useQueueStore = create<QueueState>()(
     persist(
         (set) => ({
             items: [],
+            lastFlushedAt: null,
             enqueue: (m) =>
                 set((s) =>
                     s.items.some((x) => x.eventId === m.eventId)
@@ -41,9 +44,10 @@ export const useQueueStore = create<QueueState>()(
                 })),
             remove: (eventId) =>
                 set((s) => ({ items: s.items.filter((i) => i.eventId !== eventId) })),
+            markFlushed: () => set({ lastFlushedAt: new Date().toISOString() }),
             clearCompleted: () =>
                 set((s) => ({ items: s.items.filter((i) => i.status !== 'in_flight') })),
-            reset: () => set({ items: [] }),
+            reset: () => set({ items: [], lastFlushedAt: null }),
         }),
         {
             name: 'ag-mobile-mutation-queue-v1',

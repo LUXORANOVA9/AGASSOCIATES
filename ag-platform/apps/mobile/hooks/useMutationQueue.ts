@@ -19,6 +19,7 @@ export function useMutationQueue() {
     const enqueue = useQueueStore((s) => s.enqueue);
     const markStatus = useQueueStore((s) => s.markStatus);
     const remove = useQueueStore((s) => s.remove);
+    const markFlushed = useQueueStore((s) => s.markFlushed);
     const items = useQueueStore((s) => s.items);
     const online = useOnlineStatus();
     const queryClient = useQueryClient();
@@ -46,6 +47,7 @@ export function useMutationQueue() {
                     markStatus(eventId, 'in_flight', { attempts }),
                 onSuccess: (eventId) => {
                     remove(eventId);
+                    markFlushed();
                     queryClient.invalidateQueries({ queryKey: ['cases'] });
                     queryClient.invalidateQueries({ queryKey: ['case'] });
                     queryClient.invalidateQueries({ queryKey: ['case-documents'] });
@@ -67,7 +69,7 @@ export function useMutationQueue() {
         } finally {
             draining.current = false;
         }
-    }, [online, markStatus, remove, queryClient]);
+    }, [online, markStatus, remove, markFlushed, queryClient]);
 
     // Keep drainRef current so the retry timer always calls the latest closure.
     useEffect(() => {

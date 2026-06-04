@@ -4,11 +4,16 @@ import { useRouter } from 'expo-router';
 import { useAssignedCases } from '../../hooks/useCases';
 import { useRealtimeCases } from '../../hooks/useRealtimeCases';
 import { CaseListItem } from '../../components/cases/CaseListItem';
-import { EmptyState, ErrorState, SkeletonList } from '../../components/ui';
+import {
+    EmptyState,
+    ErrorState,
+    SkeletonList,
+    withErrorBoundary,
+} from '../../components/ui';
 
 // Thin orchestrator: subscribe to realtime, wire query state to UI primitives,
 // render the list. All business logic lives in hooks/, all UI in components/.
-export default function Dashboard() {
+function Dashboard() {
     const router = useRouter();
     const { data, isPending, isError, refetch, isRefetching } = useAssignedCases();
     useRealtimeCases();
@@ -74,3 +79,5 @@ export default function Dashboard() {
         />
     );
 }
+
+export default withErrorBoundary(Dashboard);

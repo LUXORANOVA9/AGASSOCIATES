@@ -1,12 +1,23 @@
-import { Pressable, ScrollView, Text, View } from 'react-native';
+import { Pressable, ScrollView, Switch, Text, View } from 'react-native';
 import { Link, useRouter } from 'expo-router';
-import { useAuth } from '../../hooks/useAuth';
 import Constants from 'expo-constants';
+import { useAuth } from '../../hooks/useAuth';
+import { useQueueStore } from '../../lib/stores/useQueueStore';
+import { usePreferencesStore } from '../../lib/stores/usePreferencesStore';
+import { withErrorBoundary } from '../../components/ui';
 
-export default function Settings() {
+function Settings() {
     const router = useRouter();
     const { user, role, orgId, signOut } = useAuth();
     const version = Constants.expoConfig?.version ?? '0.0.0';
+    const lastFlushedAt = useQueueStore((s) => s.lastFlushedAt);
+    const pendingCount = useQueueStore(
+        (s) => s.items.filter((i) => i.status !== 'failed').length,
+    );
+    const diagnosticsEnabled = usePreferencesStore((s) => s.diagnosticsEnabled);
+    const setDiagnosticsEnabled = usePreferencesStore(
+        (s) => s.setDiagnosticsEnabled,
+    );
 
     return (
         <ScrollView className="flex-1 bg-slate-50">
@@ -15,6 +26,11 @@ export default function Settings() {
                     <Row label="Email" value={user?.email ?? '—'} />
                     <Row label="Role" value={role ?? '—'} />
                     <Row label="Organization" value={orgId ?? '—'} />
+                </Section>
+
+                <Section title="Sync">
+                    <Row label="Last synced" value={formatRelative(lastFlushedAt)} />
+                    <Row label="Pending writes" value={String(pendingCount)} />
                 </Section>
 
                 <Section title="Tools">
@@ -41,8 +57,23 @@ export default function Settings() {
                     )}
                 </Section>
 
-                <Section title="About">
-                    <Row label="App version" value={version} />
+                <Section title="Privacy">
+                    <View className="flex-row justify-between items-center py-2">
+                        <View className="flex-1 pr-3">
+                            <Text className="text-sm text-slate-900 font-medium">
+                                Send diagnostic data
+                            </Text>
+                            <Text className="text-xs text-slate-500 mt-0.5">
+                                Anonymous crash reports help us fix bugs. Takes effect
+                                next launch.
+                            </Text>
+                        </View>
+                        <Switch
+                            value={diagnosticsEnabled}
+                            onValueChange={setDiagnosticsEnabled}
+                            accessibilityLabel="Toggle diagnostic data"
+                        />
+                    </View>
                     <Link href="/privacy" asChild>
                         <Pressable className="py-3">
                             <Text className="text-indigo-700 text-sm">
@@ -50,6 +81,10 @@ export default function Settings() {
                             </Text>
                         </Pressable>
                     </Link>
+                </Section>
+
+                <Section title="About">
+                    <Row label="App version" value={version} />
                 </Section>
 
                 <Pressable
@@ -93,3 +128,15 @@ function Row({ label, value }: { label: string; value: string }) {
         </View>
     );
 }
+
+function formatRelative(iso: string | null): string {
+    if (!iso) return 'Never';
+    const diffMin = Math.floor((Date.now() - new Date(iso).getTime()) / 60_000);
+    if (diffMin < 1) return 'just now';
+    if (diffMin < 60) return `${diffMin}m ago`;
+    const diffHr = Math.floor(diffMin / 60);
+    if (diffHr < 24) return `${diffHr}h ago`;
+    return new Date(iso).toLocaleDateString();
+}
+
+export default withErrorBoundary(Settings);

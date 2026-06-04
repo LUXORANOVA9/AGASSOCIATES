@@ -2,15 +2,17 @@ import { Redirect, Stack } from 'expo-router';
 import { ActivityIndicator, View } from 'react-native';
 import { useAuthStore } from '../../lib/stores/useAuthStore';
 import { useMutationQueue } from '../../hooks/useMutationQueue';
+import { useNotificationDeepLink } from '../../hooks/useNotificationDeepLink';
 import { useOnDutyTracker } from '../../hooks/useOnDutyTracker';
 import { usePushRegistration } from '../../hooks/usePushRegistration';
 import { OfflineIndicator } from '../../components/system/OfflineIndicator';
 
 // Auth guard for everything under /(app). Mounts the singletons that need
 // to be active for the entire authenticated session:
-//   - useMutationQueue:   FIFO drain on reconnect
-//   - useOnDutyTracker:   GPS sampling while toggled on duty
-//   - usePushRegistration: register Expo push token on signed-in launch
+//   - useMutationQueue:        FIFO drain on reconnect
+//   - useOnDutyTracker:        GPS sampling while toggled on duty
+//   - usePushRegistration:     register Expo push token on signed-in launch
+//   - useNotificationDeepLink: tap a push → /cases/[id]
 export default function AppLayout() {
     const { initialised, user } = useAuthStore((s) => ({
         initialised: s.initialised,
@@ -20,6 +22,7 @@ export default function AppLayout() {
     useMutationQueue();
     useOnDutyTracker();
     usePushRegistration();
+    useNotificationDeepLink();
 
     if (!initialised) {
         return (
