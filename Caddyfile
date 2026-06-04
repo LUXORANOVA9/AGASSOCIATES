@@ -5,13 +5,30 @@
 	}
 }
 
-# AG Platform — LegalTech case management (Vite SPA + Express)
+# AG Platform — LegalTech case management (Vite SPA + Express).
+# The main product is served at the root domain. The legacy `app.` subdomain
+# is preserved as a 301 redirect for backwards compatibility (any existing
+# bookmarks, links, or OAuth callback URLs).
 app.{$DOMAIN} {
+	encode zstd gzip
+	redir https://{$DOMAIN}{uri} permanent
+}
+
+# Root domain — the full AG Platform app (Vite SPA + Express API under /api/*).
+# Caddy reverse-proxies everything to ag-platform:3000; Express handles SPA
+# routing (production `*all` → dist/index.html) and the /api/* JSON routes.
+{$DOMAIN} {
 	encode zstd gzip
 	reverse_proxy ag-platform:3000 {
 		health_uri /api/health
 		health_interval 30s
 	}
+}
+
+# www. — redirect to bare domain (SEO convention, prevents duplicate content).
+www.{$DOMAIN} {
+	encode zstd gzip
+	redir https://{$DOMAIN}{uri} permanent
 }
 
 # AI Dashboard — Next.js status / workflow viewer
@@ -45,15 +62,6 @@ n8n.{$DOMAIN} {
 		{$N8N_BASIC_AUTH_USER} {$N8N_BASIC_AUTH_PASSWORD_HASH}
 	}
 	reverse_proxy n8n:5678
-}
-
-# Landing page — premium hub served at root domain
-{$DOMAIN} {
-	encode zstd gzip
-	root * /srv/landing
-	try_files {path} {path}/ /index.html
-	file_server
-	header Cache-Control "public, max-age=3600"
 }
 
 # Clerk-style docs site — pure static, served by Caddy directly from a mounted dir
