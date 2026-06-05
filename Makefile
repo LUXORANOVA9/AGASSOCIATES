@@ -147,16 +147,20 @@ otp-test-bg:
 		echo 'intake-api already up on :3002 — running test directly'; \
 		bash scripts/test-otp-routing.sh; \
 	else \
-		echo 'Starting intake-api in background with TELEGRAM_DRY_RUN=1...'; \
+		echo 'Starting intake-api in background with TELEGRAM_DRY_RUN=1 + USE_LOCAL_PG=1...'; \
 		cd $(INTAKE_API_DIR) && \
 			TELEGRAM_DRY_RUN=1 \
+			USE_LOCAL_PG=1 \
+			SUPABASE_URL=https://stub.local \
+			SUPABASE_SERVICE_ROLE_KEY=stub-key-for-local-smoke-test \
 			REDIS_URL=redis://127.0.0.1:6379 \
-			INTAKE_PORT=3002 \
+			PORT=3002 \
+			DATABASE_URL='postgres://postgres:Luxoranova%409@127.0.0.1:5432/postgres' \
 			npm run dev > $(INTAKE_API_LOG) 2>&1 & \
 			echo $$! > $(INTAKE_API_PID); \
 		echo "intake-api started, pid=$$(cat $(INTAKE_API_PID))"; \
-		echo 'Waiting 12s for cold start...'; \
-		sleep 12; \
+		echo 'Waiting 25s for cold start (ts-node-dev compile + Redis connect)...'; \
+		sleep 25; \
 		bash scripts/test-otp-routing.sh; \
 		RC=$$?; \
 		echo 'Tearing down intake-api (pid='$$(cat $(INTAKE_API_PID))')...'; \
