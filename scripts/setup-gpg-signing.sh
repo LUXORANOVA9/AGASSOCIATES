@@ -23,7 +23,7 @@
 set -euo pipefail
 
 GPG_NAME='Aditya Gade'
-GPG_EMAIL='aditya@agassociates.in'
+GPG_EMAIL='admin@advadiityagade.com'
 GPG_UID="$GPG_NAME <$GPG_EMAIL>"
 REPO_ROOT="$(git rev-parse --show-toplevel 2>/dev/null || pwd)"
 PUBKEY_OUT="$REPO_ROOT/scripts/.gpg-public-key.asc"

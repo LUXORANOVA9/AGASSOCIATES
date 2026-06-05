@@ -177,10 +177,12 @@ otp: otp-test-bg
 #
 # Pre-flight:  Ubuntu with gnupg installed (sudo apt install -y gnupg)
 # Usage:       make gpg-setup
-# What it does: generates a new ed25519 GPG key, configures git,
-#               exports the public key to scripts/.gpg-public-key.asc,
-#               runs a throwaway sign+verify test, prints the
-#               GitHub UI step that must be done manually.
+# What it does: generates a new ed25519 GPG key with UID
+#               'Aditya Gade <admin@advadiityagade.com>',
+#               configures git, exports the public key to
+#               scripts/.gpg-public-key.asc, runs a throwaway
+#               sign+verify test, prints the GitHub UI step
+#               that must be done manually.
 #
 # This script is idempotent — re-running it does nothing if the key
 # already exists. The ONLY step it cannot automate is the browser
