@@ -5,7 +5,12 @@
   "private": true,
   "scripts": {
     "build": "echo 'Root build step' && cd ag-platform && npm install && npm run build && cd ../ag-associates-ai/frontend && npm install && npm run build",
-    "deploy": "echo 'Deploying'"
+    "deploy": "echo 'Deploying'",
+    "otp:test": "bash scripts/test-otp-routing.sh",
+    "otp:test:bg": "make otp-test-bg",
+    "otp:e2e": "bash scripts/smoke-test-e2e.sh",
+    "otp:seed": "tsx scripts/seed-team-test.ts",
+    "otp:article-codes": "echo 'Luxoranova@9' | sudo -S -u postgres psql -d postgres -f scripts/update-article-codes.sql"
   },
   "workspaces": [
     "ag-platform",

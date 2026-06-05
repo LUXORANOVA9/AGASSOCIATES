@@ -1,6 +1,7 @@
 .PHONY: help install lint type-check test build dev clean ci format pre-commit deploy preview \
         python-lint python-format python-test python-install python-check \
-        platform-lint platform-type-check platform-test platform-build platform-install
+        platform-lint platform-type-check platform-test platform-build platform-install \
+        otp-test otp-test-bg otp-e2e otp-article-codes otp
 
 SHELL := /bin/bash
 
@@ -19,6 +20,10 @@ help:
 	@echo '  make deploy          Deploy to production VPS'
 	@echo '  make pre-commit      Run pre-commit hooks'
 	@echo '  make preview         Create preview deployment'
+	@echo '  make otp-test        Run OTP routing smoke test (intake-api must be up on :3002)'
+	@echo '  make otp-test-bg     Auto-start intake-api, run test, tear down (full one-shot)'
+	@echo '  make otp-e2e         Run full pipeline e2e test (bank letter → CrewAI → OTP)'
+	@echo '  make otp-article-codes  Apply scripts/update-article-codes.sql to local Postgres'
 	@echo ''
 	@echo 'Subsystem commands:'
 	@echo '  make python-{install,lint,format,check,test}'
@@ -114,5 +119,56 @@ noi-prototype:
 
 noi-prototype-build:
 	cd prototype/noi-dashboard && npm run build
+
+# ── OTP routing smoke tests (intake-api + team_members + Redis) ──
+#
+# Pre-flight:  Postgres (127.0.0.1:5432) + Redis (127.0.0.1:6379) running locally
+# Usage:       make otp-test         # OTP routing only (faster, requires intake-api on :3002)
+#              make otp-test-bg      # auto-start intake-api in bg, run test, tear down
+#              make otp-e2e          # full pipeline (intake-api + ag-associates-ai)
+#              make otp-article-codes # apply scripts/update-article-codes.sql to local DB
+
+INTAKE_API_DIR := ag-platform/services/intake-api
+INTAKE_API_LOG := /tmp/intake-api.log
+INTAKE_API_PID := /tmp/intake-api.pid
+
+otp-article-codes:
+	@echo 'Applying scripts/update-article-codes.sql to local Postgres...'
+	@echo 'Luxoranova@9' | sudo -S -u postgres psql -d postgres \
+		-f scripts/update-article-codes.sql
+
+otp-test:
+	@bash scripts/test-otp-routing.sh
+
+otp-test-bg:
+	@if curl -sSf http://127.0.0.1:3002/health >/dev/null 2>&1; then \
+		echo 'intake-api already up on :3002 — running test directly'; \
+		bash scripts/test-otp-routing.sh; \
+	else \
+		echo 'Starting intake-api in background with TELEGRAM_DRY_RUN=1...'; \
+		cd $(INTAKE_API_DIR) && \
+			TELEGRAM_DRY_RUN=1 \
+			REDIS_URL=redis://127.0.0.1:6379 \
+			INTAKE_PORT=3002 \
+			npm run dev > $(INTAKE_API_LOG) 2>&1 & \
+			echo $$! > $(INTAKE_API_PID); \
+		echo "intake-api started, pid=$$(cat $(INTAKE_API_PID))"; \
+		echo 'Waiting 12s for cold start...'; \
+		sleep 12; \
+		bash scripts/test-otp-routing.sh; \
+		RC=$$?; \
+		echo 'Tearing down intake-api (pid='$$(cat $(INTAKE_API_PID))')...'; \
+		kill $$(cat $(INTAKE_API_PID)) 2>/dev/null || true; \
+		rm -f $(INTAKE_API_PID); \
+		echo 'tail of intake-api log:'; \
+		tail -10 $(INTAKE_API_LOG); \
+		exit $$RC; \
+	fi
+
+otp-e2e:
+	@bash scripts/smoke-test-e2e.sh
+
+# Convenience: 'make otp' runs the bg variant
+otp: otp-test-bg
 
 .DEFAULT_GOAL := help
