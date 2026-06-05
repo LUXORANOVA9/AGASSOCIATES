@@ -12,14 +12,23 @@ Grant **SMS + Notifications** permission when asked.
 
 ## Step 2 — Add ONE forwarder
 
+Open the app. Bottom tab bar:
+
+1. Tap **发送通道** (Send Channel) / or the gear icon tab
+2. Tap **Webhook** from the list
+3. Fill in:
+
 | Field | Value |
 |-------|-------|
-| **Method** | GET |
-| **URL** | `https://intake.agassociates.in/api/v1/webhook/sms-incoming?sender={sms.sender}&text={sms.body}&time={sms.time}` |
+| **Method** | **GET** (dropdown at top) |
+| **URL** / **WebServer** | `https://intake.agassociates.in/api/v1/webhook/sms-incoming` |
+| **webParams** | (leave empty) |
 
-That's it. **No body template. No Content-Type. No org_id.** The app fills `{sms.sender}`, `{sms.body}` etc. automatically.
+Tap ✔ **Save** (top-right).
 
-Tap the toggle to enable.
+4. Go to **转发规则** (Forwarding Rules) tab → tap **+** → select **SMS** → tick this Webhook channel → Save → enable the toggle.
+
+That's it. **No body template. No Content-Type. No org_id.** The app auto-appends `from`, `content`, `timestamp` as query params.
 
 ## Step 3 — Test
 

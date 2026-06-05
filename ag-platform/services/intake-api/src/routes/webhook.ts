@@ -210,14 +210,22 @@ export default async function webhookRoutes(fastify: FastifyInstance) {
   );
 
   // GET /sms-incoming — query params (pppscn/SmsForwarder single-URL mode)
-  // URL format:
+  //
+  // Accepts two naming conventions for parameters:
+  //   {sms.sender} style —  ?sender=...&text=...&time=...
+  //   pppscn auto-append — ?from=...&content=...&timestamp=...  (webParams empty)
+  //
+  // URL examples:
   //   https://intake.agassociates.in/api/v1/webhook/sms-incoming?sender={sms.sender}&text={sms.body}&time={sms.time}
+  //   https://intake.agassociates.in/api/v1/webhook/sms-incoming  (auto-appends from, content, timestamp)
   fastify.get('/sms-incoming', async (request, reply) => {
-    const { text, sender, time, org_id, bank_id } = request.query as Record<string, string | undefined>;
+    const q = request.query as Record<string, string | undefined>;
+    const text = q.text || q.content;
+    const sender = q.sender || q.from;
     if (!text) {
-      return reply.status(400).send({ error: 'text param is required' });
+      return reply.status(400).send({ error: 'text or content param is required' });
     }
-    const result = await handleSmsIncoming(text, sender, org_id, bank_id, fastify);
+    const result = await handleSmsIncoming(text, sender, q.org_id, q.bank_id, fastify);
     return reply.status(200).send(result);
   });
 
