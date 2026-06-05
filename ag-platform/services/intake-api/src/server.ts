@@ -5,6 +5,7 @@ import { serializerCompiler, validatorCompiler, ZodTypeProvider } from 'fastify-
 import { connectRedis } from './services/redis.service';
 import webhookRoutes from './routes/webhook';
 import dashboardRoutes from './routes/dashboard';
+import adminRoutes from './routes/admin';
 
 dotenv.config();
 
@@ -34,6 +35,7 @@ async function start() {
     // Register Routes
     await fastify.register(webhookRoutes, { prefix: '/api/v1/webhook' });
     await fastify.register(dashboardRoutes, { prefix: '/api/v1/dashboard' });
+    await fastify.register(adminRoutes, { prefix: '/api/v1/admin' });
 
     // Health Check (verifies Redis connectivity)
     fastify.get('/health', async (_req, reply) => {

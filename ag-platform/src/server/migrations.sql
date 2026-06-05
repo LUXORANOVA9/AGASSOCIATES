@@ -380,3 +380,17 @@ CREATE TRIGGER update_case_article_codes_updated_at
     BEFORE UPDATE ON case_article_codes
     FOR EACH ROW
     EXECUTE PROCEDURE update_updated_at_column();
+
+-- ============================================================================
+-- 004_telegram_group_id.sql
+--
+-- Adds a column to organizations so each org can have its own Telegram
+-- group ops room. Phase 1 uses the TELEGRAM_GROUP_ID env var (single org);
+-- Phase 2 reads this column per org so the bot routes incoming OTPs to
+-- the correct group when multiple orgs share one bot.
+-- ============================================================================
+
+ALTER TABLE organizations ADD COLUMN IF NOT EXISTS telegram_group_id TEXT;
+
+-- Seed: AG Associates group ID (set this to the actual group chat ID)
+-- UPDATE organizations SET telegram_group_id = 'CHANGE_ME' WHERE name = 'AG Associates HQs';

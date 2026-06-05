@@ -93,6 +93,35 @@ router.delete("/team/:memberId", async (req, res) => {
   }
 });
 
+router.get("/team/member-by-token/:token", async (req, res) => {
+  try {
+    const { token } = req.params;
+    const member = await TeamService.getInviteByToken(token);
+    if (!member) {
+      return res.status(404).json({ error: "Token invalid or expired" });
+    }
+    res.json(member);
+  } catch (err: any) {
+    res.status(err.status ?? 500).json({ error: err.message });
+  }
+});
+
+router.get("/team/by-telegram-id/:chatId", async (req, res) => {
+  try {
+    const { chatId } = req.params;
+    if (!chatId) {
+      return res.status(400).json({ error: "chatId param required" });
+    }
+    const member = await TeamService.findByTelegramChatId(chatId);
+    if (!member) {
+      return res.status(404).json({ error: "No active member with this chat ID" });
+    }
+    res.json(member);
+  } catch (err: any) {
+    res.status(err.status ?? 500).json({ error: err.message });
+  }
+});
+
 router.get("/team/on-duty", async (req, res) => {
   try {
     const orgId = String(req.query.orgId ?? "");

@@ -52,12 +52,16 @@ AISHA_API_KEY = os.environ.get("N8N_WEBHOOK_KEY", "")
 LLM_API_KEY = os.environ.get("LLM_API_KEY", "")
 LLM_BASE_URL = os.environ.get("LLM_BASE_URL", "https://api.groq.com/openai/v1")
 
+AG_PLATFORM_URL = os.environ.get("AG_PLATFORM_PUBLIC_URL", "http://localhost:3000")
+TELEGRAM_GROUP_ID = os.environ.get("TELEGRAM_GROUP_ID", "")
+
 OTP_TTL_SECONDS = 300
 SMS_INCOMING_KEY = "sms:incoming"
 AUTOFORWARD_SET_KEY = "otp_autoforward"
 STAFF_SET_KEY = "otp_staff_registered"
 OTP_HISTORY_KEY = "otp_history"
 ORPHAN_KEY = "otp_orphans"
+OTP_GROUP_POST_PREFIX = "otp_group_post"
 
 RATE_LIMIT_SECONDS = 10
 _ratelimit: dict[int, float] = {}
@@ -335,6 +339,29 @@ async def start(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
         "registered_at": datetime.now(timezone.utc).isoformat(),
     })
     await r.sadd(STAFF_SET_KEY, str(cid))
+
+    # Bridge to Express: persist chat_id for Claim verification
+    if ctx.args and len(ctx.args) > 0:
+        token = ctx.args[0]
+        import httpx
+        try:
+            async with httpx.AsyncClient(timeout=10) as client:
+                base_url = AG_PLATFORM_URL.rstrip("/")
+                mr = await client.get(f"{base_url}/api/team/member-by-token/{token}")
+                if mr.status_code == 200:
+                    member = mr.json()
+                    bind_resp = await client.post(
+                        f"{base_url}/api/team/telegram-bind",
+                        json={
+                            "memberId": member.get("member_id") or member["id"],
+                            "chatId": str(cid),
+                            "username": user,
+                        },
+                    )
+                    if bind_resp.status_code == 200:
+                        logger.info("Telegram bound for %s (%s)", user, cid)
+        except Exception as e:
+            logger.error("Telegram bind bridge failed: %s", e)
 
     kb = InlineKeyboardMarkup([
         [InlineKeyboardButton("🤖 Chat with Aisha", callback_data="aisha_toggle"),
@@ -681,6 +708,114 @@ async def error_handler(update: Optional[Update], ctx: ContextTypes.DEFAULT_TYPE
         pass
 
 
+# ── Group OTP callbacks (Claim / Pass) ──────────────────────────────────
+
+async def group_otp_callback(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
+    """Handle Claim/Pass inline buttons in the group ops room."""
+    q = update.callback_query
+    await q.answer()
+    group_id = q.message.chat_id
+    msg_id = q.message.message_id
+
+    r = await get_redis()
+    key = f"{OTP_GROUP_POST_PREFIX}:{group_id}:{msg_id}"
+    raw = await r.get(key)
+    if not raw:
+        await q.answer("This OTP has expired or already been processed.")
+        return
+
+    otp_data = json.loads(raw)
+    label = _portal_label(otp_data.get("portal", "?"))
+    claimant = update.effective_user
+
+    if q.data == "gclaim":
+        if otp_data.get("claimed_by"):
+            name = otp_data["claimed_by"]["username"]
+            await q.answer(f"Already claimed by @{name}")
+            return
+
+        import httpx
+        try:
+            async with httpx.AsyncClient(timeout=10) as client:
+                base_url = AG_PLATFORM_URL.rstrip("/")
+                resp = await client.get(f"{base_url}/api/team/by-telegram-id/{claimant.id}")
+                if resp.status_code != 200:
+                    await q.answer("❌ You're not registered staff. /start the bot first.")
+                    return
+                staff = resp.json()
+        except Exception as e:
+            logger.error("Staff verification error: %s", e)
+            await q.answer("❌ Staff verification unavailable. Try again.")
+            return
+
+        cid = claimant.id
+        try:
+            await ctx.bot.send_message(
+                chat_id=cid,
+                text=(
+                    f"🔐 <b>OTP for {label}</b>\n\n"
+                    f"<code>{otp_data['otp_code']}</code>\n\n"
+                    f"Claimed from the group ops room.",
+                ),
+                parse_mode="HTML",
+            )
+        except Exception as e:
+            logger.error("DM failed for %s: %s", cid, e)
+            await q.answer("❌ Can't DM you. Start the bot in private chat first.")
+            return
+
+        username = claimant.username or f"user_{claimant.id}"
+        otp_data["claimed_by"] = {
+            "chat_id": cid,
+            "username": username,
+            "ts": datetime.now(timezone.utc).isoformat(),
+        }
+        await r.set(key, json.dumps(otp_data), ex=OTP_TTL_SECONDS)
+
+        try:
+            await q.edit_message_text(
+                text=(
+                    f"🔐 <b>OTP Incoming</b>\n\n"
+                    f"<b>Portal:</b> {label}\n"
+                    f"<b>Code:</b> <code>{otp_data['otp_code']}</code>\n"
+                    f"<b>From:</b> {otp_data['sender']}\n"
+                    f"<b>Arrived:</b> {otp_data.get('ts', '')[-13:-7]}\n\n"
+                    f"✅ <b>Claimed by @{username}</b> — sent privately."
+                ),
+                parse_mode="HTML",
+            )
+        except Exception as e:
+            logger.error("Group message update failed: %s", e)
+
+        await q.answer(f"✅ OTP sent to your DM, @{username}!")
+
+    elif q.data == "gpass":
+        username = claimant.username or f"user_{claimant.id}"
+        pass_list = otp_data.get("passed_by", [])
+        if any(p["chat_id"] == claimant.id for p in pass_list):
+            await q.answer("You already passed on this OTP.")
+            return
+        pass_list.append({
+            "chat_id": claimant.id,
+            "username": username,
+            "ts": datetime.now(timezone.utc).isoformat(),
+        })
+        otp_data["passed_by"] = pass_list
+        await r.set(key, json.dumps(otp_data), ex=OTP_TTL_SECONDS)
+
+        await q.answer(f"⏭️ Passed by @{username}")
+        pass_count = len(pass_list)
+        try:
+            await q.edit_message_reply_markup(
+                reply_markup=InlineKeyboardMarkup([
+                    [InlineKeyboardButton("💰 Claim", callback_data="gclaim"),
+                     InlineKeyboardButton(f"⏭️ Pass ({pass_count})", callback_data="gpass")]
+                ])
+            )
+        except Exception as e:
+            logger.error("Group message markup update failed: %s", e)
+
+
 # ── Job queue ────────────────────────────────────────────────────────────
 
 async def cleanup_orphans(ctx: Optional[ContextTypes.DEFAULT_TYPE] = None):
@@ -720,6 +855,72 @@ async def _sms_listener(app: Application):
         except Exception as e:
             logger.error("SMS listener error: %s", e)
             await asyncio.sleep(5)
+
+
+async def _group_otp_listener(app: Application):
+    """Subscribe to otp:incoming pub/sub, post arrivals to the configured Telegram group ops room."""
+    group_id = TELEGRAM_GROUP_ID
+    if not group_id:
+        logger.info("TELEGRAM_GROUP_ID not set — group ops room disabled")
+        return
+
+    # Dedicated Redis connection for pub/sub (can't share with regular ops)
+    url = REDIS_URL
+    if REDIS_PASSWORD and "redis://" in url:
+        url = url.replace("redis://", f"redis://:{REDIS_PASSWORD}@")
+    sub_client = aioredis.from_url(url, decode_responses=True)
+    pubsub = sub_client.pubsub()
+    await pubsub.subscribe("otp:incoming")
+    logger.info("Group OTP listener subscribed to otp:incoming")
+
+    try:
+        async for message in pubsub.listen():
+            if message["type"] != "message":
+                continue
+            try:
+                data = json.loads(message["data"])
+                otp_code = data.get("otp", "")
+                portal = data.get("portal", "unknown")
+                sender = data.get("sender", "unknown")
+
+                label = _portal_label(portal)
+                kb = InlineKeyboardMarkup([
+                    [InlineKeyboardButton("💰 Claim", callback_data="gclaim"),
+                     InlineKeyboardButton("⏭️ Pass", callback_data="gpass")]
+                ])
+
+                msg = await app.bot.send_message(
+                    chat_id=int(group_id),
+                    text=(
+                        f"🔐 <b>OTP Incoming</b>\n\n"
+                        f"<b>Portal:</b> {label}\n"
+                        f"<b>Code:</b> <code>{otp_code}</code>\n"
+                        f"<b>From:</b> {sender}\n"
+                        f"<b>Arrived:</b> {datetime.now(timezone.utc).strftime('%H:%M:%S')}"
+                    ),
+                    parse_mode="HTML",
+                    reply_markup=kb,
+                )
+
+                r = await get_redis()
+                otp_data = {
+                    "org_id": data.get("org_id"),
+                    "bank_id": data.get("bank_id"),
+                    "portal": portal,
+                    "otp_code": otp_code,
+                    "sender": sender,
+                    "ts": datetime.now(timezone.utc).isoformat(),
+                    "claimed_by": None,
+                    "passed_by": [],
+                }
+                key = f"{OTP_GROUP_POST_PREFIX}:{group_id}:{msg.message_id}"
+                await r.set(key, json.dumps(otp_data), ex=OTP_TTL_SECONDS)
+
+            except Exception as e:
+                logger.error("Group OTP post error: %s", e)
+    finally:
+        await pubsub.unsubscribe("otp:incoming")
+        await sub_client.close()
 
 
 async def _cleanup_loop(app: Application):
@@ -765,6 +966,7 @@ def main():
 
     async def post_init(app: Application):
         asyncio.create_task(_sms_listener(app))
+        asyncio.create_task(_group_otp_listener(app))
         asyncio.create_task(_cleanup_loop(app))
         webhook_url = os.environ.get("TELEGRAM_WEBHOOK_URL", "")
         if webhook_url:
@@ -791,6 +993,7 @@ def main():
     app.add_handler(MessageHandler(filters.Document.ALL, document_handler))
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, aisha_message_handler))
     app.add_handler(MessageHandler(filters.VOICE, voice_handler))
+    app.add_handler(CallbackQueryHandler(group_otp_callback, pattern="^(gclaim|gpass)$"))
     app.add_handler(CallbackQueryHandler(button_callback))
 
     app.add_error_handler(error_handler)

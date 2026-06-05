@@ -169,6 +169,17 @@ export class TeamService {
     return result.rows[0];
   }
 
+  static async findByTelegramChatId(chatId: string): Promise<TeamMember | null> {
+    const result = await pool.query<TeamMember>(
+      `SELECT * FROM team_members
+       WHERE telegram_chat_id = $1
+         AND seat_status = 'ACTIVE'
+       LIMIT 1`,
+      [chatId]
+    );
+    return result.rows[0] ?? null;
+  }
+
   static async findOnDutyStaff(
     orgId: string,
     bankId: string | null
