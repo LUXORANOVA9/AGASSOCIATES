@@ -36,10 +36,9 @@ Have someone SMS you. You'll see a `200 OK` notification. Done.
 
 ## What happens next
 
-- OTP appears in the Telegram group ops room within 3 seconds
-- Any on-duty staff taps **[💰 Claim]** → OTP is DM'd privately
-- Staff member pastes it into the portal
-- **You don't do anything else**
+- OTP appears **directly in the Telegram group** within 3 seconds — no buttons, no claiming
+- Staff reads it from the group and pastes it into the portal immediately
+- Bank OTPs expire in ~30s, so every second counts
 
 ## Registration
 
