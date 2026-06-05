@@ -248,6 +248,8 @@ services:
       N8N_WEBHOOK_KEY: ${N8N_WEBHOOK_KEY}
       LLM_API_KEY: ${LLM_API_KEY}
       LLM_BASE_URL: https://api.groq.com/openai/v1
+      AG_PLATFORM_PUBLIC_URL: ${AG_PLATFORM_PUBLIC_URL:-http://ag-platform:3000}
+      TELEGRAM_GROUP_ID: ${TELEGRAM_GROUP_ID}
     depends_on:
       redis: { condition: service_healthy }
       ai-backend: { condition: service_healthy }
