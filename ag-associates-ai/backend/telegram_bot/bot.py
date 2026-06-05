@@ -94,7 +94,7 @@ async def get_redis() -> aioredis.Redis:
         url = REDIS_URL
         if REDIS_PASSWORD and "redis://" in url:
             url = url.replace("redis://", f"redis://:{REDIS_PASSWORD}@")
-        redis_client = aioredis.from_url(url, decode_responses=True)
+        redis_client = aioredis.from_url(url, decode_responses=True, socket_timeout=None)
     return redis_client
 
 
@@ -766,7 +766,7 @@ async def _group_otp_listener(app: Application):
     url = REDIS_URL
     if REDIS_PASSWORD and "redis://" in url:
         url = url.replace("redis://", f"redis://:{REDIS_PASSWORD}@")
-    sub_client = aioredis.from_url(url, decode_responses=True)
+    sub_client = aioredis.from_url(url, decode_responses=True, socket_timeout=None)
     pubsub = sub_client.pubsub()
     await pubsub.subscribe("otp:incoming")
     logger.info("Group OTP listener subscribed to otp:incoming (direct-post mode)")
