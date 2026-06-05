@@ -49,6 +49,22 @@ export async function pushOtpToStaff(
     'Reply /claim to use it. Pass with /pass.',
   ].join('\n');
 
+  // TELEGRAM_DRY_RUN=1 logs the message to stdout and returns ok=true
+  // without hitting api.telegram.org. Use this for the local smoke test
+  // and any CI environment where no real bot/chat is wired.
+  if (process.env.TELEGRAM_DRY_RUN === '1') {
+    console.log(JSON.stringify({
+      dry_run: true,
+      chat_id: staff.telegram_chat_id,
+      text,
+    }, null, 2));
+    return {
+      staff_id: staff.id,
+      chat_id: staff.telegram_chat_id,
+      ok: true,
+    };
+  }
+
   try {
     const res = await fetch(`${TELEGRAM_API}${token}/sendMessage`, {
       method: 'POST',
