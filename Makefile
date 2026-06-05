@@ -1,7 +1,8 @@
 .PHONY: help install lint type-check test build dev clean ci format pre-commit deploy preview \
         python-lint python-format python-test python-install python-check \
         platform-lint platform-type-check platform-test platform-build platform-install \
-        otp-test otp-test-bg otp-e2e otp-article-codes otp
+        otp-test otp-test-bg otp-e2e otp-article-codes otp \
+        gpg-setup
 
 SHELL := /bin/bash
 
@@ -24,6 +25,7 @@ help:
 	@echo '  make otp-test-bg     Auto-start intake-api, run test, tear down (full one-shot)'
 	@echo '  make otp-e2e         Run full pipeline e2e test (bank letter → CrewAI → OTP)'
 	@echo '  make otp-article-codes  Apply scripts/update-article-codes.sql to local Postgres'
+	@echo '  make gpg-setup        One-shot GPG signing setup (generates key, configures git, prints GitHub UI step)'
 	@echo ''
 	@echo 'Subsystem commands:'
 	@echo '  make python-{install,lint,format,check,test}'
@@ -170,5 +172,22 @@ otp-e2e:
 
 # Convenience: 'make otp' runs the bg variant
 otp: otp-test-bg
+
+# ── One-shot GPG signing setup ────────────────────────────────
+#
+# Pre-flight:  Ubuntu with gnupg installed (sudo apt install -y gnupg)
+# Usage:       make gpg-setup
+# What it does: generates a new ed25519 GPG key, configures git,
+#               exports the public key to scripts/.gpg-public-key.asc,
+#               runs a throwaway sign+verify test, prints the
+#               GitHub UI step that must be done manually.
+#
+# This script is idempotent — re-running it does nothing if the key
+# already exists. The ONLY step it cannot automate is the browser
+# upload at https://github.com/settings/keys → GPG keys section.
+
+.PHONY: gpg-setup
+gpg-setup:
+	@bash scripts/setup-gpg-signing.sh
 
 .DEFAULT_GOAL := help

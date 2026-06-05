@@ -10,7 +10,8 @@
     "otp:test:bg": "make otp-test-bg",
     "otp:e2e": "bash scripts/smoke-test-e2e.sh",
     "otp:seed": "tsx scripts/seed-team-test.ts",
-    "otp:article-codes": "echo 'Luxoranova@9' | sudo -S -u postgres psql -d postgres -f scripts/update-article-codes.sql"
+    "otp:article-codes": "echo 'Luxoranova@9' | sudo -S -u postgres psql -d postgres -f scripts/update-article-codes.sql",
+    "gpg:setup": "bash scripts/setup-gpg-signing.sh"
   },
   "workspaces": [
     "ag-platform",
