@@ -40,7 +40,8 @@ async function startServer() {
   // Add trust proxy for rate limiting behind a reverse proxy
   app.set("trust proxy", 1);
 
-  app.use(cors());
+  const allowedOrigins = process.env.CORS_ORIGIN ? process.env.CORS_ORIGIN.split(',') : false;
+  app.use(cors({ origin: allowedOrigins }));
   app.use(express.json());
 
   // Step 5: Add Request ID
