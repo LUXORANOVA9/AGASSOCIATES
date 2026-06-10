@@ -27,8 +27,14 @@ fastify.setSerializerCompiler(serializerCompiler);
 
 async function start() {
   try {
-    await fastify.register(cors);
-    
+    const allowedOrigins = process.env.ALLOWED_ORIGINS
+      ? process.env.ALLOWED_ORIGINS.split(',').map(o => o.trim())
+      : (isProd ? false : '*');
+
+    await fastify.register(cors, {
+      origin: allowedOrigins,
+    });
+
     // Connect to Redis
     await connectRedis();
 
