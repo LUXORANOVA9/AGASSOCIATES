@@ -21,7 +21,7 @@ DATABASE_HOST = os.getenv("DATABASE_HOST", "localhost")
 DATABASE_PORT = os.getenv("DATABASE_PORT", "5432")
 DATABASE_NAME = os.getenv("DATABASE_NAME", "legal_templates_db")
 DATABASE_USER = os.getenv("DATABASE_USER", "ag_admin")
-DATABASE_PASSWORD = os.getenv("DATABASE_PASSWORD", "secure_password_123")
+DATABASE_PASSWORD = os.getenv("DATABASE_PASSWORD", "")
 
 # vLLM/LLM Configuration
 LLM_BASE_URL = os.getenv("LLM_BASE_URL", "http://localhost:8000/v1")
