@@ -144,6 +144,49 @@ def parse_email_message(msg_bytes: bytes) -> Optional[dict]:
     }
 
 
+
+def parse_email_message(msg_bytes: bytes) -> Optional[dict]:
+    """Parse raw email bytes into a structured dict if it is a bank email."""
+    msg = email.message_from_bytes(msg_bytes)
+    sender = decode_str(msg.get("From", ""))
+    subject = decode_str(msg.get("Subject", ""))
+    date_str = decode_str(msg.get("Date", ""))
+
+    # Extract sender email
+    sender_match = re.search(r'<([^>]+@[^>]+)>', sender) or re.search(r'([\w.-]+@[\w.-]+)', sender)
+    sender_email = sender_match.group(1) if sender_match else sender
+
+    if not is_bank_email(sender_email):
+        return None
+
+    # Extract body
+    body = ""
+    if msg.is_multipart():
+        for part in msg.walk():
+            if part.get_content_type() == "text/plain":
+                try:
+                    body += part.get_payload(decode=True).decode("utf-8", errors="replace")
+                except Exception:
+                    pass
+            elif part.get_content_type() == "text/html":
+                try:
+                    body += part.get_payload(decode=True).decode("utf-8", errors="replace")
+                except Exception:
+                    pass
+    else:
+        try:
+            body = msg.get_payload(decode=True).decode("utf-8", errors="replace")
+        except Exception:
+            body = str(msg.get_payload())
+
+    return {
+        "sender": sender_email,
+        "subject": subject,
+        "date": date_str,
+        "body": body[:5000],  # truncate for LLM
+    }
+
+
 async def fetch_new_emails() -> list[dict]:
     """Connect to IMAP and fetch unseen emails from known bank senders."""
     if not IMAP_USER or not IMAP_PASS:
