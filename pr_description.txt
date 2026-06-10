@@ -1,0 +1,11 @@
+🎯 What
+Replaced the placeholder email `contact@advaditya.com` in `ContactSection.tsx` with the correct AG Associates primary contact email, `aditya@agassociates.in`. Also removed the corresponding TODO comment and set the `placeholder` flag to `false`.
+
+💡 Why
+It resolves a tracked code health issue and ensures the correct contact information is displayed on the platform for user interaction. Removing the TODO keeps the codebase clean.
+
+✅ Verification
+Ran `npm run lint`, `npx tsc --noEmit` and `npm run build` in the `ag-associates-ai/frontend` directory to ensure no syntax errors, type errors, or build issues were introduced. The modifications strictly change static string content.
+
+✨ Result
+The contact section now correctly references `aditya@agassociates.in`, improving the accuracy and maintainability of the frontend component without introducing any behavioral regressions.
