@@ -40,12 +40,16 @@ async function startServer() {
   // Add trust proxy for rate limiting behind a reverse proxy
   app.set("trust proxy", 1);
 
-  app.use(cors());
+  const allowedOrigins = process.env.CORS_ORIGIN ? process.env.CORS_ORIGIN.split(',') : false;
+  app.use(cors({ origin: allowedOrigins }));
   app.use(express.json());
 
   // Step 5: Add Request ID
   app.use((req, res, next) => {
-    req.headers['x-request-id'] = req.headers['x-request-id'] || crypto.randomUUID();
+    const array = new Uint8Array(16);
+    crypto.getRandomValues(array);
+    const uuid = Array.from(array).map(b => b.toString(16).padStart(2, '0')).join('');
+    req.headers['x-request-id'] = req.headers['x-request-id'] || uuid;
     res.setHeader('X-Request-ID', req.headers['x-request-id']);
     next();
   });
