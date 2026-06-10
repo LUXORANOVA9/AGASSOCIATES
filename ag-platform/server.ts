@@ -45,7 +45,7 @@ async function startServer() {
 
   // Step 5: Add Request ID
   app.use((req, res, next) => {
-    req.headers['x-request-id'] = req.headers['x-request-id'] || crypto.randomUUID();
+    req.headers['x-request-id'] = req.headers['x-request-id'] || Buffer.from(crypto.getRandomValues(new Uint8Array(16))).toString('hex');
     res.setHeader('X-Request-ID', req.headers['x-request-id']);
     next();
   });
