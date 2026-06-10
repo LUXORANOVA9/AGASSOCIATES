@@ -1,0 +1,5 @@
+🧪 [Add tests for s3 presigned URL generation exception handling]
+
+🎯 **What:** Missing exception handling tests for S3 URL generation in `utils/s3.py`.
+📊 **Coverage:** Tests now cover happy paths and `ClientError` exceptions raising `HTTPException` for both upload and download URLs.
+✨ **Result:** Improved test coverage and reliability for S3 secure links.
