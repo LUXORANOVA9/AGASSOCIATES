@@ -10,14 +10,12 @@ Flow:
 """
 
 import os
-import json
 import logging
 import asyncio
 import imaplib
 import email
 import re
 from email.header import decode_header
-from datetime import datetime, timezone
 from typing import Optional
 
 import httpx
@@ -119,51 +117,60 @@ async def fetch_new_emails() -> list[dict]:
         _, data = mail.search(None, "UNSEEN")
         seen_uids = set()
 
-        for num in data[0].split():
-            if not num:
-                continue
-            _, msg_data = mail.fetch(num, "(RFC822)")
-            for response_part in msg_data:
-                if isinstance(response_part, tuple):
-                    msg = email.message_from_bytes(response_part[1])
-                    sender = decode_str(msg.get("From", ""))
-                    subject = decode_str(msg.get("Subject", ""))
-                    date_str = decode_str(msg.get("Date", ""))
+        nums = [num for num in data[0].split() if num]
+        if not nums:
+            return []
 
-                    # Extract sender email
-                    sender_match = re.search(r'<([^>]+@[^>]+)>', sender) or re.search(r'([\w.-]+@[\w.-]+)', sender)
-                    sender_email = sender_match.group(1) if sender_match else sender
+        fetch_query = b','.join(nums)
+        _, msg_data = mail.fetch(fetch_query, "(RFC822)")
 
-                    if not is_bank_email(sender_email):
-                        continue
+        for response_part in msg_data:
+            if isinstance(response_part, tuple):
+                num_match = re.match(rb'^(\d+)', response_part[0])
+                if num_match:
+                    num = num_match.group(1)
+                else:
+                    continue # Could not determine uid
 
-                    # Extract body
-                    body = ""
-                    if msg.is_multipart():
-                        for part in msg.walk():
-                            if part.get_content_type() == "text/plain":
-                                try:
-                                    body += part.get_payload(decode=True).decode("utf-8", errors="replace")
-                                except Exception:
-                                    pass
-                            elif part.get_content_type() == "text/html":
-                                try:
-                                    body += part.get_payload(decode=True).decode("utf-8", errors="replace")
-                                except Exception:
-                                    pass
-                    else:
-                        try:
-                            body = msg.get_payload(decode=True).decode("utf-8", errors="replace")
-                        except Exception:
-                            body = str(msg.get_payload())
+                msg = email.message_from_bytes(response_part[1])
+                sender = decode_str(msg.get("From", ""))
+                subject = decode_str(msg.get("Subject", ""))
+                date_str = decode_str(msg.get("Date", ""))
 
-                    seen_uids.add(num)
-                    emails_raw.append({
-                        "sender": sender_email,
-                        "subject": subject,
-                        "date": date_str,
-                        "body": body[:5000],  # truncate for LLM
-                    })
+                # Extract sender email
+                sender_match = re.search(r'<([^>]+@[^>]+)>', sender) or re.search(r'([\w.-]+@[\w.-]+)', sender)
+                sender_email = sender_match.group(1) if sender_match else sender
+
+                if not is_bank_email(sender_email):
+                    continue
+
+                # Extract body
+                body = ""
+                if msg.is_multipart():
+                    for part in msg.walk():
+                        if part.get_content_type() == "text/plain":
+                            try:
+                                body += part.get_payload(decode=True).decode("utf-8", errors="replace")
+                            except Exception:
+                                pass
+                        elif part.get_content_type() == "text/html":
+                            try:
+                                body += part.get_payload(decode=True).decode("utf-8", errors="replace")
+                            except Exception:
+                                pass
+                else:
+                    try:
+                        body = msg.get_payload(decode=True).decode("utf-8", errors="replace")
+                    except Exception:
+                        body = str(msg.get_payload())
+
+                seen_uids.add(num.decode('utf-8', errors='replace') if isinstance(num, bytes) else str(num))
+                emails_raw.append({
+                    "sender": sender_email,
+                    "subject": subject,
+                    "date": date_str,
+                    "body": body[:5000],  # truncate for LLM
+                })
 
         return list(seen_uids)
 
@@ -195,20 +202,20 @@ Email content:
             resp = await client.post(
                 f"{LLM_BASE_URL}/chat/completions",
                 json={
-                    "model": LLM_MODEL,
-                    "messages": [
-                        {
-                            "role": "system",
-                            "content": "You extract structured loan sanction data from bank emails. "
-                                       "Return JSON only with fields: borrower_name, loan_amount, bank_name, "
-                                       "loan_ref_number, property_address, property_city, case_type, confidence, raw_summary. "
-                                       "Use INTIMATION_MORTGAGE as default case_type. "
-                                       "Set confidence low (0.3-0.5) if unsure about any field."
-                        },
-                        {"role": "user", "content": prompt},
-                    ],
-                    "temperature": 0.1,
-                    "max_tokens": 500,
+                "model": LLM_MODEL,
+                "messages": [
+                    {
+                        "role": "system",
+                        "content": "You extract structured loan sanction data from bank emails. "
+                                   "Return JSON only with fields: borrower_name, loan_amount, bank_name, "
+                                   "loan_ref_number, property_address, property_city, case_type, confidence, raw_summary. "
+                                   "Use INTIMATION_MORTGAGE as default case_type. "
+                                   "Set confidence low (0.3-0.5) if unsure about any field."
+                    },
+                    {"role": "user", "content": prompt},
+                ],
+                "temperature": 0.1,
+                "max_tokens": 500,
                 },
                 headers={"Authorization": f"Bearer {LLM_API_KEY}"},
             )
@@ -242,23 +249,23 @@ async def create_case(extract: LoanSanctionExtract, sender_email: str) -> Option
             resp = await client.post(
                 f"{SUPABASE_URL}/rest/v1/cases",
                 json={
-                    "case_type": extract.case_type,
-                    "status": "PENDING_INTAKE",
-                    "bank_name": extract.bank_name,
-                    "borrower_name": extract.borrower_name,
-                    "loan_amount": extract.loan_amount,
-                    "loan_ref": extract.loan_ref_number or "",
-                    "property_address": extract.property_address or "",
-                    "property_city": extract.property_city or "",
-                    "source": "email_intake",
-                    "source_email": sender_email,
-                    "metadata": extract.model_dump_json(),
+                "case_type": extract.case_type,
+                "status": "PENDING_INTAKE",
+                "bank_name": extract.bank_name,
+                "borrower_name": extract.borrower_name,
+                "loan_amount": extract.loan_amount,
+                "loan_ref": extract.loan_ref_number or "",
+                "property_address": extract.property_address or "",
+                "property_city": extract.property_city or "",
+                "source": "email_intake",
+                "source_email": sender_email,
+                "metadata": extract.model_dump_json(),
                 },
                 headers={
-                    "apikey": SUPABASE_SERVICE_KEY,
-                    "Authorization": f"Bearer {SUPABASE_SERVICE_KEY}",
-                    "Content-Type": "application/json",
-                    "Prefer": "return=representation",
+                "apikey": SUPABASE_SERVICE_KEY,
+                "Authorization": f"Bearer {SUPABASE_SERVICE_KEY}",
+                "Content-Type": "application/json",
+                "Prefer": "return=representation",
                 },
             )
             resp.raise_for_status()
