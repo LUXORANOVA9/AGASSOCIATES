@@ -543,16 +543,18 @@ async def cancel(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
     cid = update.effective_chat.id
     r = await get_redis()
     removed = 0
+    pipe = r.pipeline()
     for portal in ("any", "gras", "igr", "cersai", "sbi"):
         key = _pending_key(portal)
         for item in await r.lrange(key, 0, -1):
             try:
                 if int(json.loads(item)["chat_id"]) == cid:
-                    await r.lrem(key, 1, item)
+                    pipe.lrem(key, 1, item)
                     removed += 1
             except (json.JSONDecodeError, KeyError, ValueError):
                 continue
     if removed:
+        await pipe.execute()
         await update.message.reply_text(f"✅ Cancelled {removed} request(s).")
     else:
         await update.message.reply_text("📭 Nothing to cancel.")
