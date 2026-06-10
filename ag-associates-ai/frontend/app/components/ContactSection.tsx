@@ -25,9 +25,9 @@ const contactLinks = [
     icon: Linkedin,
     label: 'LinkedIn',
     value: 'Adv. Aditya Gade',
-    href: null,
+    href: 'https://www.linkedin.com/in/adv-aditya-gade-5ab69813a',
     primary: false,
-    placeholder: true, // TODO: set real LinkedIn URL
+    placeholder: false,
   },
 ];
 
