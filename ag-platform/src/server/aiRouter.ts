@@ -5,6 +5,7 @@ import { createClient } from "@supabase/supabase-js";
 import { Resend } from "resend";
 import { z } from "zod";
 import dotenv from "dotenv";
+import escapeHtml from "escape-html";
 
 dotenv.config();
 
@@ -143,7 +144,7 @@ router.post("/send-email", async (req, res) => {
       from: 'AgAssociates <noreply@resend.dev>', // requires verified domain in prod
       to: [to],
       subject: subject,
-      html: body.replace(/\n/g, '<br/>')
+      html: escapeHtml(body).replace(/\n/g, '<br/>')
     });
 
     if (error) {
